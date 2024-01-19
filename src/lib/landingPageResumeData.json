@@ -1,0 +1,232 @@
+{
+    "templateSections": {
+        "clean": {
+            "contact": {
+                "show": true,
+                "email": true,
+                "phone": true,
+                "website": true
+            },
+            "label": {
+                "show": true
+            },
+            "summary": {
+                "show": true
+            },
+            "skills": {
+                "show": true
+            },
+            "experience": {
+                "show": true,
+                "startDate": true,
+                "summary": true,
+                "highlights": true
+            },
+            "education": {
+                "show": true,
+                "startDate": true,
+                "gpa": true,
+                "courses": true
+            },
+            "interests": {
+                "show": false
+            },
+            "languages": {
+                "show": true,
+                "fluency": false
+            },
+            "projects": {
+                "show": false,
+                "highlights": true
+            }
+        },
+        "modern": {
+            "label": {
+                "show": true
+            },
+            "contact": {
+                "show": true,
+                "email": true,
+                "phone": true,
+                "website": true
+            },
+            "summary": {
+                "show": true
+            },
+            "skills": {
+                "show": true
+            },
+            "experience": {
+                "show": true,
+                "startDate": true,
+                "summary": true,
+                "highlights": true
+            },
+            "education": {
+                "show": true,
+                "startDate": false,
+                "gpa": true,
+                "courses": false
+            },
+            "interests": {
+                "show": true
+            },
+            "languages": {
+                "show": true,
+                "fluency": false
+            },
+            "projects": {
+                "show": false,
+                "highlights": true
+            }
+        }
+    },
+    "template": "",
+    "picture": {
+        "url": ""
+    },
+    "label": "Software Engineer",
+    "summary": "Enthusiastic individual seeking a software engineering position. I have a good knowledge of coding and programming languages. I enjoy working on computers and solving problems. I am a team player and always strive to meet deadlines",
+    "contact": {
+        "name": "Nikita Johnson",
+        "email": "NikitaJohnson@Mail.com",
+        "phone": "(123) 456-7890",
+        "website": "https://MyAIResumes.com",
+        "location": {
+            "address": "123 Main St",
+            "postalCode": "12345",
+            "city": "Anytown",
+            "countryCode": "US",
+            "region": "Somewhere"
+        },
+        "profiles": [
+            {
+                "network": "LinkedIn",
+                "username": "yourname",
+                "url": "https://www.linkedin.com/in/johndoe"
+            },
+            {
+                "network": "GitHub",
+                "username": "yourname",
+                "url": "https://github.com/yourname"
+            }
+        ]
+    },
+    "projects": [
+        {
+            "name": "Project 1",
+            "link": "https://projectlink.com",
+            "demo": "https://projectdemo.com",
+            "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        },
+        {
+            "name": "Project 2",
+            "link": "https://projectlink.com",
+            "demo": "https://projectdemo.com",
+            "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        },
+        {
+            "name": "Project 3",
+            "link": "https://projectlink.com",
+            "demo": "https://projectdemo.com",
+            "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        },
+        {
+            "name": "Project 4",
+            "link": "https://projectlink.com",
+            "demo": "https://projectdemo.com",
+            "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        }
+    ],
+    "work": [
+        {
+            "company": "ABC Company",
+            "position": "Job Title",
+            "website": "https://abc.com",
+            "startDate": "10-18-2019",
+            "endDate": "current",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo condimentum magna, id placerat velit iaculis nec. Morbi aliquam luctus mi, at dictum ligula congue ut. Fusce mattis tellus id magna semper efficitur. Nullam consectetur venenatis consectetur. Cras pretium posuere urna, et dictum quam bibendum in.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        },
+        {
+            "company": "XYZ Inc.",
+            "position": "Job Title",
+            "website": "https://xyz.com",
+            "startDate": "10-10-2018",
+            "endDate": "10-10-2019",
+            "summary": "Enthusiastic individual seeking a software engineering position. I have a good knowledge of coding and programming languages. I enjoy working on computers and solving problems. I am a team player and always strive to meet deadlines.",
+            "highlights": [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Etiam ultrices est nec sem sagittis, non egestas purus eleifend."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "Massachusetts Institute of Technology",
+            "area": "Computer Science and Engineering",
+            "studyType": "Bachelor's Degree",
+            "startDate": "10-18-2016",
+            "endDate": "10-18-2020",
+            "gpa": "",
+            "courses": ["Highlight1", "Highlight2", "Highlight3"]
+        }
+    ],
+    "skills": [
+        {
+            "name": "have created programs using several coding languages",
+            "level": "Advanced",
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
+        },
+        {
+            "name": "have worked in team environments before",
+            "level": "Advanced",
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
+        },
+        {
+            "name": "hard worker",
+            "level": "Advanced",
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
+        }
+    ],
+    "languages": [
+        {
+            "language": "Language 1",
+            "fluency": "Native"
+        },
+        {
+            "language": "Language 2",
+            "fluency": "Intermediate"
+        }
+    ],
+    "interests": [
+        {
+            "name": "Rock Climbing",
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
+        },
+        {
+            "name": "Volunteering",
+            "keywords": ["Keyword 1", "Keyword 2", "Keyword 3"]
+        }
+    ],
+    "custom": []
+}

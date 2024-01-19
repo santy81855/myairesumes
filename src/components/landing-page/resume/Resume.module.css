@@ -1,0 +1,238 @@
+.resumeContainer {
+    width: 100%;
+    aspect-ratio: 8.5/11;
+    border-radius: var(--border-radius-small);
+    position: relative;
+}
+
+.resume {
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+    color: #333;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    margin: 0em;
+    padding-inline: 0em;
+    padding-block: 0em;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.verticalBlock {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 30%;
+    background-color: #323b4c;
+    row-gap: 2em;
+    align-items: center;
+    justify-content: flex-start;
+    border-top-left-radius: var(--border-radius-small);
+    border-bottom-left-radius: var(--border-radius-small);
+}
+
+.verticalBlockSection {
+    color: white;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: flex-end;
+    margin-block-start: 0em;
+}
+
+.verticalBlockSection .container {
+    display: flex;
+    flex-direction: column;
+    padding-block-start: 1em;
+    padding-inline-end: 1em;
+    row-gap: 1em;
+}
+
+.imageContainer {
+    background-image: url("../../../../public/images/landing-page/resume-headshot.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 80%;
+    aspect-ratio: 1/1;
+    margin-block-start: 2em;
+    border-radius: 50%;
+}
+
+.contactSection {
+    padding-block-start: 1em;
+}
+
+.contactInfoEntry {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.contactInfoEntry p {
+    font-size: 85%;
+}
+
+.contactInfoEntry h3 {
+    margin-block-end: 0.5em;
+}
+
+.horizontalLine {
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: white;
+    margin-block-start: 0.5em;
+    margin-block-end: 0;
+}
+
+.rightContainer {
+    width: 70%;
+}
+
+.rightSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-inline: 2em;
+}
+
+.rightSection .container {
+    display: flex;
+    flex-direction: column;
+    padding-block-start: 1em;
+    row-gap: 2em;
+}
+
+.rightSection h2 {
+    color: #323b4c;
+}
+
+.rightSection p {
+    color: #323b4c;
+    font-size: 85%;
+}
+
+.headerSection {
+    padding-block-start: 4em;
+}
+
+.headerSection h1 {
+    color: #323b4c;
+    font-size: 350%;
+    margin: 0;
+    margin-block-end: 0em;
+}
+
+.headerSection h2 {
+    color: #323b4c;
+    font-size: 200%;
+    margin: 0;
+    margin-block-end: 0.5em;
+    font-weight: 100;
+}
+
+.rightSection .horizontalLine {
+    background-color: #323b4c;
+}
+
+.summarySection {
+    min-height: 3em;
+}
+
+.experienceSection {
+    padding-block-start: 3em;
+}
+
+.jobProgressBarContainer {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+}
+
+.jobProgressBar {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.jobProgressBar .circle {
+    width: 30%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 0.1em solid #323b4c;
+}
+
+.jobProgressBar .line {
+    height: 100%;
+    width: 1px;
+    background-color: #323b4c;
+}
+
+.jobContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+}
+
+.resumeContainer h4 {
+    font-weight: 200;
+    margin-block: 0;
+}
+
+.resumeContainer h2 {
+    margin-block: 0;
+}
+
+.resumeContainer h3 {
+    margin-block: 0;
+}
+
+.resumeContainer p {
+    margin-block: 0;
+}
+
+.resumeContainer ul {
+    margin-block: 0;
+    padding-left: 3em;
+}
+
+.resumeContainer li {
+    font-size: 85%;
+}
+
+.resumeContainer .horizontalList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.resumeContainer .horizontalList li {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.skillsSection {
+    padding-block-start: 3em;
+}
+
+.skillsSection ul {
+    margin-block-start: 1em;
+}
+
+.skillsSection li {
+    margin-block-end: 0.5em;
+}
