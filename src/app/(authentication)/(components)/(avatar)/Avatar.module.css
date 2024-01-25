@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 0;
+}
+
+.imageContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: var(--padding-block-medium);
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+}
+
+.nameContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.name {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.lastName {
+    font-size: 1.5rem;
+}

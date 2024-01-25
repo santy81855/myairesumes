@@ -1,0 +1,8 @@
+.container {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: white;
+}
