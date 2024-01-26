@@ -5,7 +5,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Navbar from "@/components/nav/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
-const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "My AI Resumes",
