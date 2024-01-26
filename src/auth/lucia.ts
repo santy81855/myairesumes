@@ -1,75 +1,37 @@
-// auth/lucia.ts
-import { KeySchema, LuciaErrorConstructor, lucia } from "lucia";
+import { lucia } from "lucia";
 import { nextjs_future } from "lucia/middleware";
+import { prisma } from "@lucia-auth/adapter-prisma";
+import { PrismaClient } from ".prisma/client";
+import { google } from "@lucia-auth/oauth/providers";
 
-// expect error (see next section)
-export const auth = lucia({
-    env: "DEV", // "PROD" if deployed to HTTPS
-    middleware: nextjs_future(), // NOT nextjs()
+const client = new PrismaClient();
+
+const auth = lucia({
+    env: process.env.NODE_ENV === "development" ? "DEV" : "PROD",
+    middleware: nextjs_future(),
     sessionCookie: {
         expires: false,
     },
-    adapter: {
-        user: function (
-            E: LuciaErrorConstructor
-        ): Readonly<
-            {
-                getSessionAndUser?:
-                    | ((
-                          sessionId: string
-                      ) => Promise<[any, any] | [null, null]>)
-                    | undefined;
-            } & Readonly<{
-                getSession: (sessionId: string) => Promise<any>;
-                getSessionsByUserId: (userId: string) => Promise<any[]>;
-                setSession: (session: any) => Promise<void>;
-                updateSession: (
-                    sessionId: string,
-                    partialSession: Partial<any>
-                ) => Promise<void>;
-                deleteSession: (sessionId: string) => Promise<void>;
-                deleteSessionsByUserId: (userId: string) => Promise<void>;
-            }> &
-                Readonly<{
-                    getUser: (userId: string) => Promise<any>;
-                    setUser: (
-                        user: any,
-                        key: KeySchema | null
-                    ) => Promise<void>;
-                    updateUser: (
-                        userId: string,
-                        partialUser: Partial<any>
-                    ) => Promise<void>;
-                    deleteUser: (userId: string) => Promise<void>;
-                    getKey: (keyId: string) => Promise<KeySchema | null>;
-                    getKeysByUserId: (userId: string) => Promise<KeySchema[]>;
-                    setKey: (key: KeySchema) => Promise<void>;
-                    updateKey: (
-                        keyId: string,
-                        partialKey: Partial<KeySchema>
-                    ) => Promise<void>;
-                    deleteKey: (keyId: string) => Promise<void>;
-                    deleteKeysByUserId: (userId: string) => Promise<void>;
-                }>
-        > {
-            throw new Error("Function not implemented.");
-        },
-        session: function (
-            E: LuciaErrorConstructor
-        ): Readonly<{
-            getSession: (sessionId: string) => Promise<any>;
-            getSessionsByUserId: (userId: string) => Promise<any[]>;
-            setSession: (session: any) => Promise<void>;
-            updateSession: (
-                sessionId: string,
-                partialSession: Partial<any>
-            ) => Promise<void>;
-            deleteSession: (sessionId: string) => Promise<void>;
-            deleteSessionsByUserId: (userId: string) => Promise<void>;
-        }> {
-            throw new Error("Function not implemented.");
-        },
+    adapter: prisma(client),
+    getUserAttributes: (data) => {
+        return {
+            first_name: data.first_name,
+            last_name: data.last_name,
+            email: data.email,
+            email_verified: data.email_verified,
+        };
     },
 });
 
-export type Auth = typeof auth;
+const googleAuth = google(auth, {
+    clientId: process.env.GOOGLE_CLIENT_ID || "",
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    redirectUri: process.env.GOOGLE_REDIRECT_URI || "",
+    scope: [
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "openid",
+    ],
+});
+
+export { auth, googleAuth };

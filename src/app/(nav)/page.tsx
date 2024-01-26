@@ -3,7 +3,10 @@ import styles from "./page.module.css";
 import Resume from "@/components/landing-page/resume/Resume";
 import Title from "@/components/landing-page/title/Title";
 
+import { getPageSession } from "@/lib/session";
+
 export default function Home() {
+    const session = getPageSession();
     return (
         <main className={styles.main}>
             <section className={styles.heroSectionContainer}>
