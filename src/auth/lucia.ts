@@ -1,7 +1,7 @@
 import { lucia } from "lucia";
 import { nextjs_future } from "lucia/middleware";
 import { prisma } from "@lucia-auth/adapter-prisma";
-import { PrismaClient } from ".prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { google } from "@lucia-auth/oauth/providers";
 
 const client = new PrismaClient();
