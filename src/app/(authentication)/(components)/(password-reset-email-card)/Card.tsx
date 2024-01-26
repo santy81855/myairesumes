@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
+import axios from "axios";
 
 type CardProps = {
     session: any;
@@ -14,20 +15,28 @@ const Card = ({ session }: CardProps) => {
     const hasSearched = searchParams.get("email");
     const [email, setEmail] = useState("");
 
-    const submitPressed = async () => {
+    const submitPressed = async (e: any) => {
+        e.preventDefault();
+        if (email === "") {
+            toast.warning("Please enter your email.");
+            return;
+        }
         const formData = new FormData();
         formData.append("email", email);
-        const response = await fetch("/api/password-reset", {
-            method: "POST",
-            body: formData,
-            redirect: "manual",
-        });
-        console.log(response);
-        if (response.status === 0) {
-            toast.success("Password reset link sent.");
-        } else {
-            toast.success("hello");
-        }
+        axios
+            .post("/api/password-reset", formData)
+            .then((response) => {
+                toast.success("Password reset link sent.");
+            })
+            .catch((error) => {
+                if (error.response.status === 400) {
+                    toast.warning(
+                        "That email is not registered to an account."
+                    );
+                    return;
+                }
+                toast.warning("An unknown error occurred.");
+            });
     };
     return (
         <form className={styles.container} onSubmit={submitPressed}>

@@ -7,16 +7,6 @@ import type { NextRequest } from "next/server";
 export const POST = async (request: NextRequest) => {
     const formData = await request.formData();
     const email = formData.get("email") as string;
-    if (!email) {
-        return new Response(
-            JSON.stringify({
-                error: "Email is required",
-            }),
-            {
-                status: 422,
-            }
-        );
-    }
     try {
         // get user from database
         const storedUser = await prisma.user.findUnique({
@@ -27,7 +17,7 @@ export const POST = async (request: NextRequest) => {
         if (!storedUser) {
             return new Response(
                 JSON.stringify({
-                    error: "User does not exist",
+                    error: "That email is not registered to an account.",
                 }),
                 {
                     status: 400,
@@ -43,7 +33,14 @@ export const POST = async (request: NextRequest) => {
             first_name: first,
             last_name: last,
         });
-        return new Response();
+        return new Response(
+            JSON.stringify({
+                message: "Password reset link sent.",
+            }),
+            {
+                status: 200,
+            }
+        );
     } catch (e) {
         return new Response(
             JSON.stringify({

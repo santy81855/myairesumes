@@ -5,10 +5,12 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Form = () => {
     const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
     const submitPressed = async (event: any) => {
@@ -20,19 +22,18 @@ const Form = () => {
         const formData = new FormData();
         formData.append("email", emailAddress);
         formData.append("password", password);
-        const response = await fetch("/api/sign-in", {
-            method: "POST",
-            body: formData,
-            redirect: "manual",
-        });
-
-        if (response.status === 0) {
-            // redirected
-            // when using `redirect: "manual"`, response status 0 is returned
-            return router.refresh();
-        } else {
-            toast.warning("Invalid credentials.");
-        }
+        axios
+            .post("/api/sign-in", formData)
+            .then((response) => {
+                return router.refresh();
+            })
+            .catch((error) => {
+                if (error.response.status === 400) {
+                    toast.warning("Incorrect username or password.");
+                    return;
+                }
+                toast.warning("An unknown error occurred.");
+            });
     };
 
     return (

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 type CardProps = {
     session: any;
@@ -23,16 +24,15 @@ const Card = ({ session, token }: CardProps) => {
         }
         const formData = new FormData();
         formData.append("password", password);
-        const response = await fetch(`/api/password-reset/${token}`, {
-            method: "POST",
-            body: formData,
-            redirect: "manual",
-        });
-
-        if (response.status === 0) {
-            toast.success("Password reset successfully.");
-            return router.push("/");
-        }
+        axios
+            .post(`/api/password-reset/${token}`, formData)
+            .then((response) => {
+                toast.success("Password reset successfully.");
+                return router.refresh();
+            })
+            .catch((error) => {
+                toast.warning("Invalid or expired password reset link.");
+            });
     };
     return (
         <>

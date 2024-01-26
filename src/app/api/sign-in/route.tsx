@@ -9,17 +9,6 @@ export const POST = async (request: NextRequest) => {
     const formData = await request.formData();
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    // basic check
-    if (email === null || password === null) {
-        return NextResponse.json(
-            {
-                error: "Incomplete Fields.",
-            },
-            {
-                status: 400,
-            }
-        );
-    }
     try {
         // find user by key
         // and validate password

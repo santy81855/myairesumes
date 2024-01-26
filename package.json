@@ -13,6 +13,7 @@
         "@lucia-auth/adapter-prisma": "^3.0.2",
         "@lucia-auth/oauth": "^3.5.2",
         "@prisma/client": "^5.8.1",
+        "axios": "^1.6.7",
         "framer-motion": "^11.0.3",
         "lucia": "^2.7.6",
         "next": "14.0.4",

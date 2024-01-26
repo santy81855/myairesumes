@@ -12,7 +12,7 @@ export const POST = async (request: NextRequest) => {
             status: 401,
         });
     }
-    if (session.user.emailVerified) {
+    if (session.user.email_verified) {
         return new Response(
             JSON.stringify({
                 error: "Email already verified",
@@ -33,7 +33,14 @@ export const POST = async (request: NextRequest) => {
             first_name: first,
             last_name: last,
         });
-        return new Response();
+        return new Response(
+            JSON.stringify({
+                message: "Email verification link sent",
+            }),
+            {
+                status: 200,
+            }
+        );
     } catch {
         return new Response(
             JSON.stringify({

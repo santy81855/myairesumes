@@ -1,7 +1,8 @@
 "use client";
 import styles from "./Card.module.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 type CardProps = {
     session: any;
@@ -9,16 +10,14 @@ type CardProps = {
 
 const Card = ({ session }: CardProps) => {
     const resendClicked = async () => {
-        const formData = new FormData();
-        const response = await fetch("/api/email-verification", {
-            method: "POST",
-            body: formData,
-            redirect: "manual",
-        });
-
-        if (response.status === 0) {
-            toast.success("Email verification link sent.");
-        }
+        axios
+            .post("/api/email-verification")
+            .then((response) => {
+                toast.success("Email verification link sent.");
+            })
+            .catch((error) => {
+                toast.warning("An unknown error occurred.");
+            });
     };
     return (
         <section className={styles.container}>

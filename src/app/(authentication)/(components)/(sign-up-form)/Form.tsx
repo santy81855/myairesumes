@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Form = () => {
     const [page, setPage] = useState(0);
@@ -59,19 +60,20 @@ const Form = () => {
         formData.append("password", password);
         formData.append("firstName", firstName);
         formData.append("lastName", lastName);
-        const response = await fetch("/api/sign-up", {
-            method: "POST",
-            body: formData,
-            redirect: "manual",
-        });
-
-        if (response.status === 0) {
-            // redirected
-            // when using `redirect: "manual"`, response status 0 is returned
-            return router.refresh();
-        } else {
-            toast.warning("Error creating account.");
-        }
+        axios
+            .post("/api/sign-up", formData)
+            .then((response) => {
+                return router.refresh();
+            })
+            .catch((error) => {
+                if (error.response.data.error === "Email already exists.") {
+                    toast.warning(
+                        "This email is already linked to an account."
+                    );
+                } else {
+                    toast.warning("Error creating account.");
+                }
+            });
     };
 
     return (

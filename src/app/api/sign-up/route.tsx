@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { generateEmailVerificationToken } from "@/auth/token";
 import { sendEmailVerificationLink } from "@/auth/email";
+import { Prisma } from "@prisma/client";
 
 export const POST = async (request: NextRequest) => {
     const formData = await request.formData();
@@ -11,22 +12,6 @@ export const POST = async (request: NextRequest) => {
     const firstName = formData.get("firstName") as string;
     const lastName = formData.get("lastName") as string;
     const password = formData.get("password") as string;
-    // basic check
-    if (
-        email === null ||
-        password === null ||
-        firstName === null ||
-        lastName === null
-    ) {
-        return NextResponse.json(
-            {
-                error: "Incomplete Fields.",
-            },
-            {
-                status: 400,
-            }
-        );
-    }
     try {
         const user = await auth.createUser({
             key: {
@@ -63,7 +48,18 @@ export const POST = async (request: NextRequest) => {
     } catch (e) {
         // this part depends on the database you're using
         // check for unique constraint error in user table
-        console.log(e);
+        if (e instanceof Prisma.PrismaClientKnownRequestError) {
+            if (e.code === "P2002") {
+                return NextResponse.json(
+                    {
+                        error: "Email already exists.",
+                    },
+                    {
+                        status: 400,
+                    }
+                );
+            }
+        }
         return NextResponse.json(
             {
                 error: "An unknown error occurred",

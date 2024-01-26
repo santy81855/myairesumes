@@ -15,24 +15,13 @@ export const POST = async (
 ) => {
     const formData = await request.formData();
     const password = formData.get("password") as string;
-    if (!password) {
-        return new Response(
-            JSON.stringify({
-                error: "Password is required",
-            }),
-            {
-                status: 400,
-            }
-        );
-    }
     try {
         const { token } = params;
         const userId = await validatePasswordResetToken(token);
         let user = await auth.getUser(userId);
-        console.log("USER = : ", user);
         await auth.invalidateAllUserSessions(user.userId);
         await auth.updateKeyPassword("email", user.email, password);
-        if (!user.emailVerified) {
+        if (!user.email_verified) {
             user = await auth.updateUserAttributes(user.userId, {
                 email_verified: true,
             });
