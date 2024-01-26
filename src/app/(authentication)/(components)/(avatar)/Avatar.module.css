@@ -17,6 +17,13 @@
     height: 100%;
 }
 
+.rowContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .image {
     width: 100px;
     height: 100px;

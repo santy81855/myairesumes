@@ -1,13 +1,10 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Button from "@/app/(authentication)/(components)/(sign-out-button)/Button";
-import { auth } from "@/auth/lucia";
-import * as context from "next/headers";
+import { getPageSession } from "@/lib/session";
 
 const Navbar = async () => {
-    const authRequest = auth.handleRequest("GET", context);
-    const session = await authRequest.validate();
-    console.log(session);
+    const session = await getPageSession();
     return (
         <nav className={styles.navContainer}>
             <section className={styles.textContainer}>

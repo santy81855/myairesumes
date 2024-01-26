@@ -1,13 +1,13 @@
-import { redirect } from "next/navigation";
 import styles from "./page.module.css";
-import Card from "../(components)/(email-verification-card)/Card";
+import Card from "../(components)/(password-reset-email-card)/Card";
 import { getPageSession } from "@/lib/session";
+import { redirect } from "next/navigation";
 
-const Page = async () => {
+const PasswordResetPage = async () => {
     const session = await getPageSession();
-    if (!session) redirect("/sign-in");
-    if (session.user.email_verified) redirect("/");
-
+    if (session) {
+        redirect("/");
+    }
     return (
         <main className={styles.pageContainer}>
             <Card session={session} />
@@ -15,4 +15,4 @@ const Page = async () => {
     );
 };
 
-export default Page;
+export default PasswordResetPage;

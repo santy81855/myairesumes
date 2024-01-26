@@ -2,6 +2,7 @@
 import styles from "./Avatar.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 const variants = {
     enter: (direction: number) => {
@@ -58,9 +59,8 @@ const Avatar = () => {
         <section className={styles.container}>
             <AnimatePresence>
                 <div className={styles.imageContainer}>
-                    <motion.img
+                    <motion.div
                         key={page}
-                        src={images[imageIndex]}
                         custom={direction}
                         variants={variants}
                         initial="enter"
@@ -74,14 +74,22 @@ const Avatar = () => {
                             },
                             opacity: { duration: 0.2 },
                         }}
-                        className={styles.image}
-                    />
-                    <div className={styles.nameContainer}>
-                        <p className={styles.name}>{names[imageIndex]}</p>
-                        <p className={styles.lastName}>
-                            {lastNames[imageIndex]}
-                        </p>
-                    </div>
+                        className={styles.rowContainer}
+                    >
+                        <Image
+                            src={images[imageIndex]}
+                            alt="Resume Image"
+                            width={200}
+                            height={200}
+                            className={styles.image}
+                        />
+                        <div className={styles.nameContainer}>
+                            <p className={styles.name}>{names[imageIndex]}</p>
+                            <p className={styles.lastName}>
+                                {lastNames[imageIndex]}
+                            </p>
+                        </div>
+                    </motion.div>
                 </div>
             </AnimatePresence>
         </section>

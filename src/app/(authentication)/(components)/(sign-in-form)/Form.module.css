@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     height: 100%;
     gap: var(--gap-medium);
+    padding-block-start: 6rem;
 }
 
 .form h1 {
@@ -137,4 +138,14 @@
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     color: white;
+}
+
+.forgotPassword {
+    width: 100%;
+    display: flex;
+    font-size: var(--font-size-small);
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-small);
+    margin-block-start: var(--padding-block-small);
 }

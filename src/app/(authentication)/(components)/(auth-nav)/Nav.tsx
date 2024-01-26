@@ -7,8 +7,14 @@ const Navbar = async () => {
         <nav className={styles.navContainer}>
             <section className={styles.textContainer}>
                 <div className={styles.navItem}>
-                    <Link href="/">
-                        <p className={styles.companyName}>MyAIResumes</p>
+                    <Link href="/" className={styles.logoContainer}>
+                        <Image
+                            src="/images/logos/logo512.png"
+                            alt="Logo"
+                            width={40}
+                            height={40}
+                        />
+                        <p className={styles.companyName}>MyAiResumes</p>
                     </Link>
                 </div>
                 <div className={styles.navItem}>

@@ -21,6 +21,7 @@ model User {
     auth_session   Session[]
     key            Key[]
     email_token    EmailVerificationToken[]
+    password_token PasswordResetToken[]
 }
 
 model Session {
@@ -43,6 +44,15 @@ model Key {
 }
 
 model EmailVerificationToken {
+    id      String @id @unique
+    user_id String
+    expires BigInt
+    user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+    @@index([user_id])
+}
+
+model PasswordResetToken {
     id      String @id @unique
     user_id String
     expires BigInt

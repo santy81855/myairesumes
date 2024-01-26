@@ -1,9 +1,12 @@
+import { Inter, Montserrat } from "next/font/google";
 import Navbar from "./(components)/(auth-nav)/Nav";
 
 export const metadata = {
     title: "Sign In",
     description: "Sign in to your account",
 };
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
     children,
@@ -12,7 +15,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body>{children}</body>
+            <body className={inter.className}>
+                <Navbar />
+                {children}
+            </body>
         </html>
     );
 }

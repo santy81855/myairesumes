@@ -11,7 +11,6 @@ export const POST = async (request: NextRequest) => {
     const password = formData.get("password") as string;
     // basic check
     if (email === null || password === null) {
-        console.log("error 1");
         return NextResponse.json(
             {
                 error: "Incomplete Fields.",

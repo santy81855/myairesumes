@@ -49,8 +49,11 @@ const Form = () => {
     };
 
     const submitPressed = async (event: any) => {
-        console.log("here");
         event.preventDefault();
+        if (firstName === "" || lastName === "") {
+            toast.warning("Please enter your first and last name.");
+            return;
+        }
         const formData = new FormData();
         formData.append("email", emailAddress);
         formData.append("password", password);
@@ -167,11 +170,7 @@ const Form = () => {
                                 }}
                             />
                         </section>
-                        <button
-                            type="submit"
-                            className={styles.nextButton}
-                            disabled={firstName === "" || lastName === ""}
-                        >
+                        <button type="submit" className={styles.nextButton}>
                             Submit
                         </button>
                     </>

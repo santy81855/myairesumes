@@ -7,11 +7,9 @@ interface EmailTemplateProps {
     url: string;
 }
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
-    firstName,
-    lastName,
-    url,
-}) => (
+export const EmailVerificationTemplate: React.FC<
+    Readonly<EmailTemplateProps>
+> = ({ firstName, lastName, url }) => (
     <div>
         <h1>
             Dear {firstName} {lastName},
@@ -28,7 +26,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             Note: If you did not sign up for MyAiResumes, please ignore this
             email.
         </p>
-        <p>Verification link expires in 10 minutes.</p>
+        <p>Verification link expires in 2 hours.</p>
         <br />
         <p>Thank you for choosing MyAiResumes,</p>
         <p>MyAiResumes Team</p>

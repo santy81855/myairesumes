@@ -7,19 +7,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 
 const Form = () => {
-    const [page, setPage] = useState(0);
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
     const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const router = useRouter();
 
     const submitPressed = async (event: any) => {
         event.preventDefault();
+        if (emailAddress === "" || password === "") {
+            toast.warning("Please enter your email and password.");
+            return;
+        }
         const formData = new FormData();
-        formData.append("firstName", firstName);
-        formData.append("lastName", lastName);
         formData.append("email", emailAddress);
         formData.append("password", password);
         const response = await fetch("/api/sign-in", {
@@ -86,13 +84,12 @@ const Form = () => {
                     />
                 </section>
 
-                <button
-                    type="submit"
-                    className={styles.nextButton}
-                    disabled={emailAddress === "" || password === ""}
-                >
+                <button type="submit" className={styles.nextButton}>
                     Submit
                 </button>
+                <Link href="/password-reset" className={styles.forgotPassword}>
+                    Forgot Password?
+                </Link>
             </form>
         </>
     );

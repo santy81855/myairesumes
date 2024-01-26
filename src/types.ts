@@ -4,4 +4,5 @@ export type EmailData = {
     lastName: string;
     subject: string;
     url: string;
+    type: string;
 };

@@ -47,18 +47,13 @@ export const POST = async (request: NextRequest) => {
         });
         const authRequest = auth.handleRequest(request.method, context);
         authRequest.setSession(session);
-
-        console.log("before");
         const token = await generateEmailVerificationToken(session.user.userId);
-        console.log("after2");
         await sendEmailVerificationLink({
             email,
             token,
             first_name: firstName,
             last_name: lastName,
         });
-        console.log("after2");
-
         return new Response(null, {
             status: 302,
             headers: {
@@ -68,7 +63,6 @@ export const POST = async (request: NextRequest) => {
     } catch (e) {
         // this part depends on the database you're using
         // check for unique constraint error in user table
-        console.log("after3");
         console.log(e);
         return NextResponse.json(
             {

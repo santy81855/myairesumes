@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 const SignUpPage = async () => {
     const session = await getPageSession();
     if (session) {
-        console.log(session);
         if (!session.user.email_verified) {
             redirect("/email-verification");
         }
