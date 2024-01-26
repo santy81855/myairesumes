@@ -153,6 +153,8 @@
 .loadingBackground {
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     position: absolute;
     backdrop-filter: blur(5px);
     background-color: rgba(var(--accent-blue), 0.5);
