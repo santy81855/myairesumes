@@ -36,6 +36,7 @@ const Form = () => {
                     return;
                 }
                 toast.warning("An unknown error occurred.");
+                setIsLoading(false);
             });
     };
 
