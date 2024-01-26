@@ -43,7 +43,7 @@ const Card = ({ session }: CardProps) => {
                 link.
             </p>
             <section className={styles.resendContainer}>
-                <p>Didn't receive an email?</p>
+                <p>Didn&apos;t receive an email?</p>
                 <button onClick={resendClicked}>Resend Email</button>
             </section>
         </section>
