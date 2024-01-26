@@ -1,5 +1,6 @@
 import { Inter, Montserrat } from "next/font/google";
 import Navbar from "./(components)/(auth-nav)/Nav";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
     title: "Sign In",
@@ -17,6 +18,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <Navbar />
+                <ToastContainer />
                 {children}
             </body>
         </html>

@@ -2,10 +2,11 @@
 import styles from "./Form.module.css";
 import Link from "next/link";
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Spincube from "@/components/loaders/Spincube/Spincube";
 
 const Form = () => {
     const [emailAddress, setEmailAddress] = useState("");
@@ -19,6 +20,7 @@ const Form = () => {
             toast.warning("Please enter your email and password.");
             return;
         }
+        setIsLoading(true);
         const formData = new FormData();
         formData.append("email", emailAddress);
         formData.append("password", password);
@@ -30,6 +32,7 @@ const Form = () => {
             .catch((error) => {
                 if (error.response.status === 400) {
                     toast.warning("Incorrect username or password.");
+                    setIsLoading(false);
                     return;
                 }
                 toast.warning("An unknown error occurred.");
@@ -38,6 +41,13 @@ const Form = () => {
 
     return (
         <>
+            {isLoading && (
+                <section className={styles.loadingBackground}>
+                    <div className={styles.loaderContainer}>
+                        <Spincube />
+                    </div>
+                </section>
+            )}
             <section className={styles.optionsContainer}>
                 <Link
                     href="/sign-up"

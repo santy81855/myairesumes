@@ -2,12 +2,14 @@
 import styles from "./Form.module.css";
 import Link from "next/link";
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Spincube from "@/components/loaders/Spincube/Spincube";
 
 const Form = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [page, setPage] = useState(0);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -55,6 +57,7 @@ const Form = () => {
             toast.warning("Please enter your first and last name.");
             return;
         }
+        setIsLoading(true);
         const formData = new FormData();
         formData.append("email", emailAddress);
         formData.append("password", password);
@@ -66,18 +69,27 @@ const Form = () => {
                 return router.refresh();
             })
             .catch((error) => {
-                if (error.response.data.error === "Email already exists.") {
+                if (error.response.status === 400) {
+                    console.log(error.response);
                     toast.warning(
                         "This email is already linked to an account."
                     );
                 } else {
                     toast.warning("Error creating account.");
                 }
+                setIsLoading(false);
             });
     };
 
     return (
         <>
+            {isLoading && (
+                <section className={styles.loadingBackground}>
+                    <div className={styles.loaderContainer}>
+                        <Spincube />
+                    </div>
+                </section>
+            )}
             <section className={styles.optionsContainer}>
                 <Link
                     href="/sign-up"

@@ -2,19 +2,29 @@
 import styles from "./Button.module.css";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import React, { useState } from "react";
+import Spinner from "@/components/loaders/Spinner/Spinner";
 
 const Button = () => {
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
     const signOutPressed = async () => {
+        setIsLoading(true);
         axios.post("/api/sign-out").then((response) => {
-            return router.push("/sign-in");
+            router.refresh();
         });
     };
 
     return (
-        <button className={styles.container} onClick={signOutPressed}>
-            Logout
-        </button>
+        <>
+            {isLoading ? (
+                <Spinner />
+            ) : (
+                <button className={styles.container} onClick={signOutPressed}>
+                    Logout
+                </button>
+            )}
+        </>
     );
 };
 

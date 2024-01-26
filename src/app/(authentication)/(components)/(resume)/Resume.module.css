@@ -1,0 +1,105 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+}
+
+.imageContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.resume {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-medium);
+    padding-block: var(--padding-block-large);
+    border: 1px solid lightgrey;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.staticResume {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-medium);
+    padding-block: var(--padding-block-large);
+    position: absolute;
+    border: 1px solid lightgrey;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.staticResumeSlanted {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-medium);
+    padding-block: var(--padding-block-large);
+    position: absolute;
+    border: 1px solid lightgrey;
+    border-radius: var(--border-radius-xsmall);
+    transform: rotate(-1.5deg);
+}
+.staticResumeSlanted2 {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-medium);
+    padding-block: var(--padding-block-large);
+    position: absolute;
+    border: 1px solid lightgrey;
+    border-radius: var(--border-radius-xsmall);
+    transform: rotate(-3deg);
+}
+
+.rowContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+}
+
+.nameContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.name {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.lastName {
+    font-size: 1.5rem;
+}
