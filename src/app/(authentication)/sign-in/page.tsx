@@ -8,7 +8,13 @@ import { redirect } from "next/navigation";
 
 const SignInPage = async () => {
     const session = await getPageSession();
-    if (session) redirect("/");
+    if (session) {
+        console.log(session);
+        if (!session.user.email_verified) {
+            redirect("/email-verification");
+        }
+        redirect("/");
+    }
     return (
         <main className={styles.pageContainer}>
             <Card authType="sign-in" />

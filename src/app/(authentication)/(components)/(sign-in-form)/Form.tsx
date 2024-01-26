@@ -15,41 +15,6 @@ const Form = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const router = useRouter();
 
-    const nextButtonPressed = () => {
-        var validEmail = true;
-        var matchingPasswords = true;
-        if (isValidEmail(emailAddress) === false) {
-            validEmail = false;
-        }
-        if (
-            password !== confirmPassword ||
-            password === "" ||
-            confirmPassword === ""
-        ) {
-            matchingPasswords = false;
-        }
-        if (validEmail === false && matchingPasswords === true) {
-            toast.warning("Please use a valid email address.");
-        }
-        if (validEmail === true && matchingPasswords === false) {
-            toast.warning("Passwords do not match.");
-        }
-        if (validEmail === false && matchingPasswords === false) {
-            toast.warning(
-                "Please use a valid email address and matching passwords."
-            );
-        }
-        if (validEmail === true && matchingPasswords === true) {
-            setPage(1);
-        }
-    };
-
-    const isValidEmail = (email: string) => {
-        return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
-    };
-
-    const googleClicked = () => {};
-
     const submitPressed = async (event: any) => {
         event.preventDefault();
         const formData = new FormData();
@@ -90,13 +55,9 @@ const Form = () => {
             </section>
             <form className={styles.form} onSubmit={submitPressed}>
                 <h1>Sign In</h1>
-                <button
-                    type="button"
-                    className={styles.socialButton}
-                    onClick={googleClicked}
-                >
+                <Link href="/sign-in/google" className={styles.socialButton}>
                     <i className="fa-brands fa-google"></i>Sign In with Google
-                </button>
+                </Link>
                 <div className={styles.divider}>
                     <div className={styles.line}></div>
                     <p>or</p>

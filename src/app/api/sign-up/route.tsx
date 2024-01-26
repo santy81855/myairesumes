@@ -1,8 +1,9 @@
 import { auth } from "@/auth/lucia";
 import * as context from "next/headers";
 import { NextResponse } from "next/server";
-
 import type { NextRequest } from "next/server";
+import { generateEmailVerificationToken } from "@/auth/token";
+import { sendEmailVerificationLink } from "@/auth/email";
 
 export const POST = async (request: NextRequest) => {
     const formData = await request.formData();
@@ -10,7 +11,6 @@ export const POST = async (request: NextRequest) => {
     const firstName = formData.get("firstName") as string;
     const lastName = formData.get("lastName") as string;
     const password = formData.get("password") as string;
-    console.log("here");
     // basic check
     if (
         email === null ||
@@ -38,6 +38,7 @@ export const POST = async (request: NextRequest) => {
                 first_name: firstName,
                 last_name: lastName,
                 email,
+                email_verified: false,
             },
         });
         const session = await auth.createSession({
@@ -46,15 +47,28 @@ export const POST = async (request: NextRequest) => {
         });
         const authRequest = auth.handleRequest(request.method, context);
         authRequest.setSession(session);
+
+        console.log("before");
+        const token = await generateEmailVerificationToken(session.user.userId);
+        console.log("after2");
+        await sendEmailVerificationLink({
+            email,
+            token,
+            first_name: firstName,
+            last_name: lastName,
+        });
+        console.log("after2");
+
         return new Response(null, {
             status: 302,
             headers: {
-                Location: "/", // redirect to profile page
+                Location: "/email-verification", // redirect to profile page
             },
         });
     } catch (e) {
         // this part depends on the database you're using
         // check for unique constraint error in user table
+        console.log("after3");
         console.log(e);
         return NextResponse.json(
             {

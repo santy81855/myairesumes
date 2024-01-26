@@ -48,14 +48,15 @@ const Form = () => {
         return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
     };
 
-    const googleClicked = () => {};
-
     const submitPressed = async (event: any) => {
+        console.log("here");
         event.preventDefault();
         const formData = new FormData();
         formData.append("email", emailAddress);
         formData.append("password", password);
-        const response = await fetch("/api/sign-in", {
+        formData.append("firstName", firstName);
+        formData.append("lastName", lastName);
+        const response = await fetch("/api/sign-up", {
             method: "POST",
             body: formData,
             redirect: "manual",
@@ -88,13 +89,9 @@ const Form = () => {
             </section>
             <form className={styles.form} onSubmit={submitPressed}>
                 <h1>Sign Up</h1>
-                <button
-                    type="button"
-                    className={styles.socialButton}
-                    onClick={googleClicked}
-                >
+                <Link href="/sign-in/google" className={styles.socialButton}>
                     <i className="fa-brands fa-google"></i>Sign Up with Google
-                </button>
+                </Link>
                 <div className={styles.divider}>
                     <div className={styles.line}></div>
                     <p>or</p>
