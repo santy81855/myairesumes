@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import styles from "./page.module.css";
-import Card from "../(components)/(email-verification-card)/Card";
+import Card from "@/components/authentication/email-verification-card/Card";
 import { getPageSession } from "@/lib/session";
 
 const Page = async () => {

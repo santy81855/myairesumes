@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import Card from "../../(components)/(password-reset-card)/Card";
+import Card from "@/components/authentication/password-reset-card/Card";
 import { getPageSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 

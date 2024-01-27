@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
-import Button from "@/app/(authentication)/(components)/(sign-out-button)/Button";
+import Button from "@/components/authentication/sign-out-button/Button";
 import { getPageSession } from "@/lib/session";
 
 const Navbar = async () => {

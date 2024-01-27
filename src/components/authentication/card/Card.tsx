@@ -1,7 +1,7 @@
 import styles from "./Card.module.css";
-import Resume from "../(resume)/Resume";
-import SignUpForm from "../(sign-up-form)/Form";
-import SignInForm from "../(sign-in-form)/Form";
+import Resume from "@/components/authentication/resume/Resume";
+import SignUpForm from "@/components/authentication/sign-up-form/Form";
+import SignInForm from "@/components/authentication/sign-in-form/Form";
 import Link from "next/link";
 
 type CardProps = {

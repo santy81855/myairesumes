@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { ToastContainer } from "react-toastify";
 
+import { Inter, Montserrat, Poppins } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
+const poppins = Poppins({
+    subsets: ["latin"],
+    weight: "300",
+});
 
 export const metadata: Metadata = {
     title: "My AI Resumes",
@@ -18,7 +23,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={poppins.className}>
                 <ToastContainer />
                 {children}
             </body>
