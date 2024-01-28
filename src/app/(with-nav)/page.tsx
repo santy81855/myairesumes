@@ -5,11 +5,7 @@ import Title from "@/components/landing-page/title/Title";
 import Blur from "@/components/landing-page/color-blur/Blur";
 import HeroImage from "@/components/landing-page/hero-image/HeroImage";
 
-import { getPageSession } from "@/lib/session";
-
 export default function Home() {
-    const session = getPageSession();
-
     const resume = (
         <section className={styles.heroResume}>
             <Resume />

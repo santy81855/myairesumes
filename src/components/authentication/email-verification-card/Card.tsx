@@ -2,28 +2,22 @@
 import styles from "./Card.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import React, { useState } from "react";
 import Spincube from "@/components/loaders/Spincube/Spincube";
+import { resendEmailVerification } from "@/actions/authentication";
 
-type CardProps = {
-    session: any;
-};
-
-const Card = ({ session }: CardProps) => {
+const Card = () => {
     const [isLoading, setIsLoading] = useState(false);
     const resendClicked = async () => {
         setIsLoading(true);
-        axios
-            .post("/api/email-verification")
-            .then((response) => {
-                toast.success("Email verification link sent.");
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                toast.warning("An unknown error occurred.");
-                setIsLoading(false);
-            });
+        const response = await resendEmailVerification();
+        if (response.success) {
+            toast.success("Email verification link sent.");
+            setIsLoading(false);
+        } else if (response.error) {
+            toast.warning(response.error);
+            setIsLoading(false);
+        }
     };
     return (
         <section className={styles.container}>

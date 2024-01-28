@@ -1,16 +1,16 @@
 import { redirect } from "next/navigation";
 import styles from "./page.module.css";
 import Card from "@/components/authentication/email-verification-card/Card";
-import { getPageSession } from "@/lib/session";
+import { validateRequest } from "@/lib/auth";
 
 const Page = async () => {
-    const session = await getPageSession();
+    const { user, session } = await validateRequest();
     if (!session) redirect("/sign-in");
-    if (session.user.email_verified) redirect("/");
+    if (user.emailVerified) redirect("/");
 
     return (
         <main className={styles.pageContainer}>
-            <Card session={session} />
+            <Card />
         </main>
     );
 };

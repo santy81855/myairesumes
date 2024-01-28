@@ -4,14 +4,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import axios from "axios";
 import Spincube from "@/components/loaders/Spincube/Spincube";
+import { sendPasswordResetEmail } from "@/actions/authentication";
 
-type CardProps = {
-    session: any;
-};
-
-const Card = ({ session }: CardProps) => {
+const Card = () => {
     const searchParams = useSearchParams();
     const hasSearched = searchParams.get("email");
     const [email, setEmail] = useState("");
@@ -26,6 +22,16 @@ const Card = ({ session }: CardProps) => {
         setIsLoading(true);
         const formData = new FormData();
         formData.append("email", email);
+        const response = await sendPasswordResetEmail(formData);
+        if (response.error) {
+            toast.warning(response.error);
+            setIsLoading(false);
+            return;
+        } else {
+            toast.success("Password reset link sent.");
+            setIsLoading(false);
+        }
+        /*
         axios
             .post("/api/password-reset", formData)
             .then((response) => {
@@ -42,6 +48,7 @@ const Card = ({ session }: CardProps) => {
                 }
                 toast.warning("An unknown error occurred.");
             });
+        */
     };
     return (
         <form className={styles.container} onSubmit={submitPressed}>

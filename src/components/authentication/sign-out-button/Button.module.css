@@ -1,3 +1,9 @@
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
     background-color: transparent;
     border: none;

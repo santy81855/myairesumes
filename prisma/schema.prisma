@@ -12,51 +12,42 @@ datasource db {
 }
 
 model User {
-    id             String                   @id @unique
-    first_name     String?
-    last_name      String?
+    id             String                   @id @unique @default(cuid())
+    firstName      String?
+    lastName       String?
     email          String                   @unique
-    password       String?
-    email_verified Boolean                  @default(false)
-    auth_session   Session[]
-    key            Key[]
-    email_token    EmailVerificationToken[]
-    password_token PasswordResetToken[]
+    accountType    String                   @default("password")
+    hashedPassword String?
+    emailVerified  Boolean                  @default(false)
+    authSession    Session[]
+    emailToken     EmailVerificationToken[]
+    passwordToken  PasswordResetToken[]
 }
 
 model Session {
-    id             String @id @unique
-    user_id        String
-    active_expires BigInt
-    idle_expires   BigInt
-    user           User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+    id        String   @id @unique @default(cuid())
+    userId    String
+    expiresAt DateTime
+    user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 
-    @@index([user_id])
-}
-
-model Key {
-    id              String  @id @unique
-    hashed_password String?
-    user_id         String
-    user            User    @relation(references: [id], fields: [user_id], onDelete: Cascade)
-
-    @@index([user_id])
+    @@index([userId])
 }
 
 model EmailVerificationToken {
-    id      String @id @unique
-    user_id String
-    expires BigInt
-    user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+    id        String   @id @unique @default(cuid())
+    userId    String
+    email     String
+    expiresAt DateTime
+    user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 
-    @@index([user_id])
+    @@index([userId])
 }
 
 model PasswordResetToken {
-    id      String @id @unique
-    user_id String
-    expires BigInt
-    user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+    id        String   @id @unique @default(cuid())
+    userId    String
+    expiresAt DateTime
+    user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 
-    @@index([user_id])
+    @@index([userId])
 }
