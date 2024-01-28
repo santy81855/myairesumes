@@ -3,6 +3,7 @@
     background-color: #191f31;
     border-top-left-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
+    position: relative;
 }
 
 .imageContainer {
@@ -27,7 +28,7 @@ image ratio: 1.5
     background-position: center;
     position: absolute;
     z-index: -1;
-    transform: translateY(-12rem) rotate(215deg);
+    transform: translateY(0rem) rotate(215deg);
 }
 
 .image {
@@ -37,12 +38,11 @@ image ratio: 1.5
     object-position: center;
 }
 
-.resumeContainer {
+.carouselContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-block-start: 0rem;
-    background-color: red;
+    margin-top: 10rem;
 }

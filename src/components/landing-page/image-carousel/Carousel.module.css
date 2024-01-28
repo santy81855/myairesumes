@@ -3,25 +3,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 100%;
     height: 100%;
     position: relative;
     z-index: 0;
+    background-color: red;
 }
 
-.buttonContainer {
-    display: flex;
-    gap: var(--gap-medium);
-}
-
-.button {
-    color: black;
-}
-
-.image {
+.resume {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
-    width: 400px;
+    border-radius: 12px;
+    width: 450px;
 }

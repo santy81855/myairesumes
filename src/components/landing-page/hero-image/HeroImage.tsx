@@ -15,7 +15,7 @@ const HeroImage = () => {
                     height={3264}
                     className={styles.image}
                 />
-                <section className={styles.resumeContainer}>
+                <section className={styles.carouselContainer}>
                     <Carousel />
                 </section>
             </section>
