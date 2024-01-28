@@ -4,15 +4,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import Spincube from "@/components/loaders/Spincube/Spincube";
+import { resetPassword } from "@/actions/authentication";
 
 type CardProps = {
-    session: any;
     token: string;
 };
 
-const Card = ({ session, token }: CardProps) => {
+const Card = ({ token }: CardProps) => {
     const router = useRouter();
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -27,16 +26,12 @@ const Card = ({ session, token }: CardProps) => {
         setIsLoading(true);
         const formData = new FormData();
         formData.append("password", password);
-        axios
-            .post(`/api/password-reset/${token}`, formData)
-            .then((response) => {
-                toast.success("Password reset successfully.");
-                return router.refresh();
-            })
-            .catch((error) => {
-                toast.warning("Invalid or expired password reset link.");
-                setIsLoading(false);
-            });
+        const response = await resetPassword(formData, token);
+        if (response.error) {
+            toast.warning(response.error);
+            setIsLoading(false);
+            return;
+        }
     };
     return (
         <>

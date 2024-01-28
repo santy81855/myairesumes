@@ -1,18 +1,21 @@
 "use client";
 import styles from "./Button.module.css";
-import { useRouter } from "next/navigation";
-import axios from "axios";
 import React, { useState } from "react";
 import Spinner from "@/components/loaders/Spinner/Spinner";
+import { signout } from "@/actions/authentication";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Button = () => {
-    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const signOutPressed = async () => {
         setIsLoading(true);
-        axios.post("/api/sign-out").then((response) => {
-            router.refresh();
-        });
+        const response = await signout();
+        if (response.error) {
+            toast.warning(response.error);
+            setIsLoading(false);
+            return;
+        }
     };
 
     return (
@@ -20,9 +23,18 @@ const Button = () => {
             {isLoading ? (
                 <Spinner />
             ) : (
-                <button className={styles.container} onClick={signOutPressed}>
-                    Logout
-                </button>
+                <form
+                    onSubmit={signOutPressed}
+                    className={styles.buttonContainer}
+                >
+                    <button
+                        type="submit"
+                        className={styles.container}
+                        onClick={signOutPressed}
+                    >
+                        Logout
+                    </button>
+                </form>
             )}
         </>
     );

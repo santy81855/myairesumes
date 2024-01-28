@@ -1,5 +1,5 @@
 .main {
-    height: calc(100% - var(--nav-height));
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -9,47 +9,27 @@
     overflow-x: hidden;
 }
 
-.heroSectionContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.heroSectionContainer::after {
-    content: "";
-    width: 200%;
-    height: 225%;
-    top: -150%;
-    left: -100%;
-    background-color: var(--accent-color);
-    position: absolute;
-    z-index: -1;
-    transform: rotate(-8deg);
-    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
-}
-
 .heroSection {
     width: 100%;
+    height: 100%;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-block-start: 8rem;
     align-items: center;
-    gap: var(--gap-small);
-    max-width: var(--max-width);
-    padding-block-start: var(--padding-block-xlarge);
-    padding-block-end: var(--padding-block-large);
-    padding-inline: var(--padding-inline-xlarge);
+    background-image: url("/images/icons/noise-light.png");
+    background-repeat: repeat;
+    position: relative;
 }
 
 .heroSectionText {
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--gap-large);
+    padding-inline: var(--padding-inline-large);
+    padding-block-end: 22rem;
 }
 
 .heroResume {

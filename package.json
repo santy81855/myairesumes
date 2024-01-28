@@ -10,13 +10,15 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.5.1",
-        "@lucia-auth/adapter-prisma": "^3.0.2",
-        "@lucia-auth/oauth": "^3.5.2",
+        "@lucia-auth/adapter-prisma": "^4.0.0",
         "@prisma/client": "^5.8.1",
+        "arctic": "^1.1.0",
         "axios": "^1.6.7",
+        "bcrypt": "^5.1.1",
         "framer-motion": "^11.0.3",
-        "lucia": "^2.7.6",
+        "lucia": "^3.0.1",
         "next": "14.0.4",
+        "oslo": "^1.0.2",
         "prisma": "^5.8.1",
         "react": "^18",
         "react-dom": "^18",
@@ -25,6 +27,7 @@
         "resend": "^3.1.0"
     },
     "devDependencies": {
+        "@types/bcrypt": "^5.0.2",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

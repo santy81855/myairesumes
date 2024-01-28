@@ -5,8 +5,8 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import Spincube from "@/components/loaders/Spincube/Spincube";
+import { signup } from "@/actions/authentication";
 
 const Form = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -58,26 +58,17 @@ const Form = () => {
             return;
         }
         setIsLoading(true);
-        const formData = new FormData();
+        const formData = new FormData(event.target);
         formData.append("email", emailAddress);
         formData.append("password", password);
         formData.append("firstName", firstName);
         formData.append("lastName", lastName);
-        axios
-            .post("/api/sign-up", formData)
-            .then((response) => {
-                return router.refresh();
-            })
-            .catch((error) => {
-                if (error.response.status === 400) {
-                    toast.warning(
-                        "This email is already linked to an account."
-                    );
-                } else {
-                    toast.warning("Error creating account.");
-                }
-                setIsLoading(false);
-            });
+        const response = await signup(formData);
+        if (response.error) {
+            toast.warning(response.error);
+            setIsLoading(false);
+            return;
+        }
     };
 
     return (

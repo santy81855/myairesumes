@@ -4,15 +4,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/navigation";
-import axios from "axios";
 import Spincube from "@/components/loaders/Spincube/Spincube";
+import { signin } from "@/actions/authentication";
 
 const Form = () => {
     const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const router = useRouter();
 
     const submitPressed = async (event: any) => {
         event.preventDefault();
@@ -24,20 +22,12 @@ const Form = () => {
         const formData = new FormData();
         formData.append("email", emailAddress);
         formData.append("password", password);
-        axios
-            .post("/api/sign-in", formData)
-            .then((response) => {
-                return router.refresh();
-            })
-            .catch((error) => {
-                if (error.response.status === 400) {
-                    toast.warning("Incorrect username or password.");
-                    setIsLoading(false);
-                    return;
-                }
-                toast.warning("An unknown error occurred.");
-                setIsLoading(false);
-            });
+        const response = await signin(formData);
+        if (response.error) {
+            toast.warning(response.error);
+            setIsLoading(false);
+            return;
+        }
     };
 
     return (
