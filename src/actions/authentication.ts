@@ -237,7 +237,6 @@ export async function signup(formData: FormData): Promise<ActionResult> {
             );
         }
     } catch (e) {
-        console.log(e);
         return {
             error: "An unknown error occurred.",
         };

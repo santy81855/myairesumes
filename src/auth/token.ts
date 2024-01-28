@@ -67,14 +67,12 @@ export const validatePasswordResetToken = async (token: string) => {
 };
 
 export const generatePasswordResetToken = async (userId: string) => {
-    console.log("generating password reset token");
     // delete all tokens for a certain userid using prisma
     await prisma.passwordResetToken.deleteMany({
         where: {
             userId: userId,
         },
     });
-    console.log("deleted all tokens");
     // insert token to database
     const token = await prisma.passwordResetToken.create({
         data: {
