@@ -36,7 +36,13 @@ const Carousel = () => {
         });
     };
 
-    const images = [<Resume />, <Resume />, <Resume />, <Resume />, <Resume />];
+    const images = [
+        <Resume key={"resume1"} />,
+        <Resume key={"resume2"} />,
+        <Resume key={"resume3"} />,
+        <Resume key={"resume4"} />,
+        <Resume key={"resume5"} />,
+    ];
 
     const positions = ["center", "left1", "left", "right", "right1"];
 

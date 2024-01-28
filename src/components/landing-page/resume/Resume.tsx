@@ -3,7 +3,11 @@ import styles from "./Resume.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import resumeData from "@lib/landingPageResumeData.json";
 
-const Resume = () => {
+type props = {
+    key: string;
+};
+
+const Resume = ({ key }: props) => {
     const [divSize, setDivSize] = useState({ width: 0, height: 0 });
     const templateRef = useRef(null);
     const education = resumeData.education;
@@ -198,7 +202,7 @@ const Resume = () => {
     };
 
     return (
-        <section className={styles.resumeContainer}>
+        <section key={key} className={styles.resumeContainer}>
             <section className={styles.resume} ref={templateRef}>
                 <section className={styles.content}>
                     <div className={styles.verticalBlock}>
