@@ -1,0 +1,48 @@
+.imageSection {
+    width: 100%;
+    background-color: #191f31;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+
+.imageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-block-start: -22rem;
+}
+
+/*
+image ratio: 1.5
+*/
+
+.stars {
+    width: 500px;
+    height: 500px;
+    background-image: url("/images/icons/stars.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: absolute;
+    z-index: -1;
+    transform: translateY(-12rem) rotate(215deg);
+}
+
+.image {
+    width: 350px;
+    height: 525px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.resumeContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-block-start: 0rem;
+    background-color: red;
+}
