@@ -13,6 +13,7 @@ export default function Home() {
                 <section className={styles.heroSectionText}>
                     <Title />
                 </section>
+
                 <Blur />
                 <HeroImage />
             </section>

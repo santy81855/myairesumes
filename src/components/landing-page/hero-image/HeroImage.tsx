@@ -1,6 +1,6 @@
 import styles from "./HeroImage.module.css";
 import Image from "next/image";
-import Carousel from "@/components/landing-page/image-carousel/Carousel";
+import ResumeTicker from "@/components/landing-page/resume-ticker/ResumeTicker";
 
 const HeroImage = () => {
     return (
@@ -14,10 +14,15 @@ const HeroImage = () => {
                     height={3264}
                     className={styles.image}
                 />
-                <section className={styles.carouselContainer}>
-                    <Carousel />
-                </section>
+                <Image
+                    src="/images/landing-page/landing-page-main.png"
+                    alt="Hero Image"
+                    width={4896}
+                    height={3264}
+                    className={styles.imageSticker}
+                />
             </section>
+            <ResumeTicker />
         </section>
     );
 };
