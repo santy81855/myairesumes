@@ -5,10 +5,16 @@ import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 const ResumeTicker = () => {
-    type props = { text: string; backgroundColor: string; color: string };
-    const Card = ({ text, backgroundColor, color }: props) => {
+    type props = {
+        text: string;
+        backgroundColor: string;
+        color: string;
+        key: string;
+    };
+    const Card = ({ text, backgroundColor, color, key }: props) => {
         return (
             <div
+                key={key}
                 className={`${styles.card} ${montserrat.className}`}
                 style={{ backgroundColor }}
             >
@@ -24,6 +30,7 @@ const ResumeTicker = () => {
             text="TAILOR MADE RESUMES"
             backgroundColor="#44d3f3"
             color="black"
+            key="card1"
         />,
         <Resume key={"resume2"} />,
         <Resume key={"resume3"} />,
@@ -31,6 +38,7 @@ const ResumeTicker = () => {
             text="EXPRESS YOURSELF"
             backgroundColor="#f122c8"
             color="white"
+            key="card2"
         />,
         <Resume key={"resume4"} />,
         <Resume key={"resume5"} />,
