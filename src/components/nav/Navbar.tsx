@@ -22,6 +22,9 @@ const Navbar = async () => {
                             <Link href="/dashboard">
                                 <p className={styles.navLink}>Dashboard</p>
                             </Link>
+                            <Link href="/account">
+                                <p className={styles.navLink}>Account</p>
+                            </Link>
                             <Button />
                         </>
                     ) : (

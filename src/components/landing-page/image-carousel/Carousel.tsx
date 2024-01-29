@@ -48,10 +48,10 @@ const Carousel = () => {
 
     const imageVariants = {
         center: { x: "0%", scale: 1, zIndex: 5 },
-        left1: { x: "-70%", scale: 0.7, zIndex: 3 },
-        left: { x: "-110%", scale: 0.5, zIndex: 2 },
-        right: { x: "110%", scale: 0.5, zIndex: 1 },
-        right1: { x: "70%", scale: 0.7, zIndex: 3 },
+        left1: { x: "-70%", scale: 0.9, zIndex: 3 },
+        left: { x: "-110%", scale: 0.7, zIndex: 2 },
+        right: { x: "110%", scale: 0.7, zIndex: 1 },
+        right1: { x: "70%", scale: 0.9, zIndex: 3 },
     };
     return (
         <div className={styles.container}>
@@ -62,7 +62,10 @@ const Carousel = () => {
                     initial="center"
                     animate={positions[positionIndexes[index]]}
                     variants={imageVariants}
-                    transition={{ duration: 2 }}
+                    transition={{
+                        duration: 2,
+                        ease: "easeInOut",
+                    }}
                     style={{ position: "absolute" }}
                 >
                     {image}
