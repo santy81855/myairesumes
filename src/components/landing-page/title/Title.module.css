@@ -73,3 +73,9 @@
     background-position: center;
     transform: scaleX(-1) rotate(-45deg) translate(140%, 200%);
 }
+
+@media screen and (max-width: 630px) {
+    .squiggleArrow {
+        display: none;
+    }
+}

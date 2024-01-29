@@ -1,12 +1,14 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Button from "@/components/authentication/sign-out-button/Button";
-import { lucia, validateRequest } from "@/lib/auth";
+import Menu from "@/components/nav/mobile/Menu";
+import { validateRequest } from "@/lib/auth";
 
 const Navbar = async () => {
     const { session, user } = await validateRequest();
     return (
         <nav className={styles.navContainer}>
+            <Menu session={session} />
             <section className={styles.textContainer}>
                 <div className={styles.navItem}>
                     <Link href="/">
@@ -23,9 +25,10 @@ const Navbar = async () => {
                                 <p className={styles.navLink}>Dashboard</p>
                             </Link>
                             <Link href="/account">
-                                <p className={styles.navLink}>Account</p>
+                                <i
+                                    className={`${styles.accountLink} fa-solid fa-user`}
+                                ></i>
                             </Link>
-                            <Button />
                         </>
                     ) : (
                         <>
