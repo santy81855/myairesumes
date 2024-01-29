@@ -1,4 +1,5 @@
-import { auth } from "@/auth/lucia";
+import { lucia } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import { validateEmailVerificationToken } from "@/auth/token";
 
 import type { NextRequest } from "next/server";
@@ -16,16 +17,24 @@ export const GET = async (
     const { token } = params;
     try {
         const userId = await validateEmailVerificationToken(token);
-        const user = await auth.getUser(userId);
-        await auth.invalidateAllUserSessions(user.userId);
-        await auth.updateUserAttributes(user.userId, {
-            email_verified: true, // `Number(true)` if stored as an integer
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
         });
-        const session = await auth.createSession({
-            userId: user.userId,
-            attributes: {},
+        // invalidate all sessions for the user
+        await lucia.invalidateUserSessions(userId);
+        await prisma.user.update({
+            where: {
+                id: userId,
+            },
+            data: {
+                emailVerified: true,
+            },
         });
-        const sessionCookie = auth.createSessionCookie(session);
+        // log the user in and return them to the homepage
+        const session = await lucia.createSession(userId, {});
+        const sessionCookie = lucia.createSessionCookie(session.id);
         return new Response(null, {
             status: 302,
             headers: {

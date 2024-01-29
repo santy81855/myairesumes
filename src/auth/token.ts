@@ -1,37 +1,30 @@
-import { generateRandomString, isWithinExpiration } from "lucia/utils";
 import { prisma } from "@/lib/prisma";
+import { TimeSpan, createDate } from "oslo";
+import { isWithinExpirationDate } from "oslo";
 
-const EXPIRES_IN = 1000 * 60 * 60 * 2; // 2 hours
-
-export const generateEmailVerificationToken = async (userId: string) => {
-    // get all tokens for a certain userid using prisma
-    const storedUserTokens = await prisma.emailVerificationToken.findMany({
+export const generateEmailVerificationToken = async (
+    userId: string,
+    email: string
+) => {
+    // delete all tokens for a certain userid using prisma
+    await prisma.emailVerificationToken.deleteMany({
         where: {
-            user_id: userId,
+            userId: userId,
         },
     });
-    if (storedUserTokens.length > 0) {
-        const reusableStoredToken = storedUserTokens.find((token) => {
-            // check if expiration is within 1 hour
-            // and reuse the token if true
-            return isWithinExpiration(Number(token.expires) - EXPIRES_IN / 2);
-        });
-        if (reusableStoredToken) return reusableStoredToken.id;
-    }
-    const token = generateRandomString(63);
     // insert token to database
-    await prisma.emailVerificationToken.create({
+    const token = await prisma.emailVerificationToken.create({
         data: {
-            id: token,
-            expires: new Date().getTime() + EXPIRES_IN,
-            user_id: userId,
+            expiresAt: createDate(new TimeSpan(2, "h")),
+            userId: userId,
+            email,
         },
     });
-    return token;
+    if (!token) return null;
+    return token.id;
 };
 
 export const validateEmailVerificationToken = async (token: string) => {
-    // do the above but using prisma
     const storedToken = await prisma.$transaction(async (trx) => {
         const storedToken = await trx.emailVerificationToken.findUnique({
             where: {
@@ -41,63 +34,52 @@ export const validateEmailVerificationToken = async (token: string) => {
         if (!storedToken) throw new Error("Invalid token");
         await trx.emailVerificationToken.deleteMany({
             where: {
-                user_id: storedToken.user_id,
+                userId: storedToken.userId,
             },
         });
         return storedToken;
     });
-    const tokenExpires = Number(storedToken.expires); // bigint => number conversion
-    if (!isWithinExpiration(tokenExpires)) {
+    if (!isWithinExpirationDate(storedToken.expiresAt)) {
         throw new Error("Expired token");
     }
-    return storedToken.user_id;
+    return storedToken.userId;
 };
 
 export const validatePasswordResetToken = async (token: string) => {
-    // do the above but using prisma
     const storedToken = await prisma.$transaction(async (trx) => {
         const storedToken = await trx.passwordResetToken.findUnique({
             where: {
                 id: token,
             },
         });
-        if (!storedToken) throw new Error("Invalid token");
+        if (!storedToken) return null;
         await trx.passwordResetToken.deleteMany({
             where: {
-                user_id: storedToken.user_id,
+                userId: storedToken.userId,
             },
         });
         return storedToken;
     });
-    const tokenExpires = Number(storedToken.expires); // bigint => number conversion
-    if (!isWithinExpiration(tokenExpires)) {
-        throw new Error("Expired token");
+    if (!storedToken || !isWithinExpirationDate(storedToken.expiresAt)) {
+        return null;
     }
-    return storedToken.user_id;
+    return storedToken.userId;
 };
 
 export const generatePasswordResetToken = async (userId: string) => {
-    const storedUserTokens = await prisma.passwordResetToken.findMany({
+    // delete all tokens for a certain userid using prisma
+    await prisma.passwordResetToken.deleteMany({
         where: {
-            user_id: userId,
+            userId: userId,
         },
     });
-    if (storedUserTokens.length > 0) {
-        const reusableStoredToken = storedUserTokens.find((token) => {
-            // check if expiration is within 1 hour
-            // and reuse the token if true
-            return isWithinExpiration(Number(token.expires) - EXPIRES_IN / 2);
-        });
-        if (reusableStoredToken) return reusableStoredToken.id;
-    }
-    const token = generateRandomString(63);
     // insert token to database
-    await prisma.passwordResetToken.create({
+    const token = await prisma.passwordResetToken.create({
         data: {
-            id: token,
-            expires: new Date().getTime() + EXPIRES_IN,
-            user_id: userId,
+            expiresAt: createDate(new TimeSpan(2, "h")),
+            userId,
         },
     });
-    return token;
+    if (!token) return null;
+    return token.id;
 };

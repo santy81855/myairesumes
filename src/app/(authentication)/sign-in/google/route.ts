@@ -1,21 +1,28 @@
-import { googleAuth } from "@/auth/lucia";
-import * as context from "next/headers";
+import { google } from "@/lib/auth";
+import { generateState, generateCodeVerifier } from "arctic";
+import { cookies } from "next/headers";
 
-import type { NextRequest } from "next/server";
-
-export const GET = async (request: NextRequest) => {
-    const [url, state] = await googleAuth.getAuthorizationUrl();
-    // store state
-    context.cookies().set("google_oauth_state", state, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+export async function GET(): Promise<Response> {
+    const state = generateState();
+    const codeVerifier = generateCodeVerifier();
+    const url = await google.createAuthorizationURL(state, codeVerifier, {
+        scopes: ["profile", "email"],
+    });
+    cookies().set("google_oauth_state", state, {
         path: "/",
-        maxAge: 60 * 60,
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        maxAge: 60 * 10,
+        sameSite: "lax",
     });
-    return new Response(null, {
-        status: 302,
-        headers: {
-            Location: url.toString(),
-        },
+    // store code verifier as cookie
+    cookies().set("code_verifier", codeVerifier, {
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        maxAge: 60 * 10,
+        sameSite: "lax",
     });
-};
+
+    return Response.redirect(url);
+}

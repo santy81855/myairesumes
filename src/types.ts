@@ -6,3 +6,7 @@ export type EmailData = {
     url: string;
     type: string;
 };
+
+export type ActionResult = {
+    error: string | null;
+};

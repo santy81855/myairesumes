@@ -1,5 +1,5 @@
 import { Inter, Montserrat } from "next/font/google";
-import Navbar from "./(components)/(auth-nav)/Nav";
+import Navbar from "@/components/authentication/auth-nav/Nav";
 import { ToastContainer } from "react-toastify";
 import "../globals.css";
 

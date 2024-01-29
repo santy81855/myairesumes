@@ -1,16 +1,16 @@
 import styles from "./page.module.css";
-import Card from "../(components)/(password-reset-email-card)/Card";
-import { getPageSession } from "@/lib/session";
+import Card from "@/components/authentication/password-reset-email-card/Card";
+import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 const PasswordResetPage = async () => {
-    const session = await getPageSession();
+    const { session } = await validateRequest();
     if (session) {
         redirect("/");
     }
     return (
         <main className={styles.pageContainer}>
-            <Card session={session} />
+            <Card />
         </main>
     );
 };

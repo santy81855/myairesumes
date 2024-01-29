@@ -1,0 +1,33 @@
+.tickerContainer {
+    width: 100%;
+    margin-block-start: -8rem;
+    z-index: 1;
+    background-color: #191f31;
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    width: 400px;
+    height: 300px;
+    border-radius: var(--border-radius-small);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-inline: var(--padding-inline-medium);
+}
+
+.card .body {
+    width: 100%;
+    font-size: var(--font-size-x3large);
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .tickerContainer {
+        margin-block-start: 0rem;
+    }
+}

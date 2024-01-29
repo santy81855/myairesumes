@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { ToastContainer } from "react-toastify";
-
+import Navbar from "@/components/nav/Navbar";
 import { Inter, Montserrat, Poppins } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -24,7 +23,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={poppins.className}>
-                <ToastContainer />
+                <Navbar />
                 {children}
             </body>
         </html>

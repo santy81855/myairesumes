@@ -1,16 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
+import { validateRequest } from "@/lib/auth";
 import styles from "./page.module.css";
-import Card from "../(components)/(card)/Card";
-import { getPageSession } from "@/lib/session";
+import Card from "@/components/authentication/card/Card";
 import { redirect } from "next/navigation";
 
 const SignUpPage = async () => {
-    const session = await getPageSession();
+    const { session } = await validateRequest();
     if (session) {
-        if (!session.user.email_verified) {
-            redirect("/email-verification");
-        }
         redirect("/");
     }
     return (
