@@ -15,6 +15,7 @@
     justify-content: center;
     align-items: center;
     background-color: white;
+    border: 1px solid lightgray;
     border-radius: 12px;
     width: 450px;
 }
