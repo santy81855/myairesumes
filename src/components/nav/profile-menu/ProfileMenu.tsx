@@ -2,7 +2,7 @@
 import styles from "./ProfileMenu.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { signout } from "@/actions/authentication";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,6 +25,28 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [width, setWidth] = useState(calculateWidth(user.firstName.length));
     const [height, setHeight] = useState(300);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (state) setState(false);
+        };
+
+        // Attach the event listener
+        // get the element with id landingPage
+        const landingPage = document.getElementById("landingPage");
+        if (!landingPage) return;
+        landingPage.addEventListener("scroll", handleScroll);
+        window.addEventListener("resize", handleScroll);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            const landingPage = document.getElementById("landingPage");
+            if (!landingPage) return;
+            landingPage.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleScroll);
+        };
+    }, [state]);
+
     const itemVariants = {
         closed: {
             opacity: 0,
@@ -34,7 +56,7 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
     const sideVariants = {
         closed: {
             transition: {
-                staggerChildren: 0.1,
+                staggerChildren: 0,
                 staggerDirection: -1,
             },
         },
@@ -80,7 +102,7 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                             borderRadius: "50%",
                             top: -70,
                             transform: "translateX(50%)",
-                            transition: { delay: 0.6, duration: 0.3 },
+                            transition: { duration: 0.3 },
                         }}
                         className={styles.aside}
                     >
