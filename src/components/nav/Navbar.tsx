@@ -10,12 +10,18 @@ const Navbar = async () => {
         <nav className={styles.navContainer}>
             <Menu session={session} />
             <section className={styles.textContainer}>
-                <div className={styles.navItem}>
+                <div
+                    className={styles.navItem}
+                    style={{ alignItems: session ? "flex-end" : "center" }}
+                >
                     <Link href="/">
                         <p className={styles.companyName}>MyAIResumes</p>
                     </Link>
                 </div>
-                <div className={styles.navItem}>
+                <div
+                    className={styles.navItem}
+                    style={{ alignItems: session ? "flex-end" : "center" }}
+                >
                     <Link href="/">
                         <p className={styles.navLink}>Home</p>
                     </Link>

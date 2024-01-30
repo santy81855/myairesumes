@@ -12,16 +12,6 @@ const Menu = ({ session }: MenuProps) => {
     const [state, setState] = useState(false);
     return (
         <section className={styles.container}>
-            {state && (
-                <button
-                    className={styles.dropdownButton}
-                    onClick={() => {
-                        setState(!state);
-                    }}
-                >
-                    &times;
-                </button>
-            )}
             <Link href="/">
                 <p className={styles.name}>MyAIResumes</p>
             </Link>
@@ -29,7 +19,7 @@ const Menu = ({ session }: MenuProps) => {
                 className={styles.menuButton}
                 onClick={() => setState(!state)}
             >
-                &#9776;
+                <i className="fa-solid fa-bars"></i>
             </button>
             <Dropdown
                 state={state}

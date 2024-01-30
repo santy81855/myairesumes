@@ -68,6 +68,16 @@ const Dropdown = ({ links, state, setState }: MenuProps) => {
                             exit="closed"
                             variants={sideVariants}
                         >
+                            {state && (
+                                <motion.button
+                                    onClick={() => setState(false)}
+                                    whileHover={{ scale: 1.1 }}
+                                    variants={itemVariants}
+                                    className={styles.dropdownButton}
+                                >
+                                    <i className="fas fa-times"></i>
+                                </motion.button>
+                            )}
                             {links.map(({ name, to, id }) => {
                                 return id === "sign-out" ? (
                                     isLoading ? (
