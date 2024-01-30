@@ -2,6 +2,8 @@
 import ProfileMenu from "@/components/nav/profile-menu/ProfileMenu";
 import { useState } from "react";
 import HamburgerButton from "@/components/hamburger-menu/HamburgerButton";
+import { motion } from "framer-motion";
+import styles from "./ProfileButton.module.css";
 
 type Props = {
     session: any;
@@ -15,16 +17,20 @@ const ProfileButton = ({ session, user }: Props) => {
     };
     return (
         <>
-            <HamburgerButton
-                isOpen={showMenu}
-                onClick={() => setShowMenu(!showMenu)}
-                strokeWidth="3"
-                color="white"
-                lineProps={{ strokeLinecap: "round" }}
-                transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                width="24"
-                height="20"
-            />
+            <motion.button
+                className={styles.button}
+                onClick={handleClick}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{
+                    backgroundColor: "white",
+                }}
+            >
+                {showMenu ? (
+                    <i className="fas fa-times"></i>
+                ) : (
+                    <i className="fa-solid fa-user"></i>
+                )}
+            </motion.button>
             <ProfileMenu
                 session={session}
                 user={user}

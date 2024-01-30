@@ -8,7 +8,7 @@ const Navbar = async () => {
     const { session, user } = await validateRequest();
     return (
         <nav className={styles.navContainer}>
-            <Menu session={session} />
+            <Menu session={session} user={user} />
             <section className={styles.textContainer}>
                 <div
                     className={styles.navItem}

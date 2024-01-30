@@ -36,12 +36,14 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
         const landingPage = document.getElementById("landingPage");
         if (!landingPage) return;
         landingPage.addEventListener("scroll", handleScroll);
+        window.addEventListener("resize", handleScroll);
 
         // Clean up the event listener when the component unmounts
         return () => {
             const landingPage = document.getElementById("landingPage");
             if (!landingPage) return;
             landingPage.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleScroll);
         };
     }, [state]);
 

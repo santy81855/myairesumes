@@ -3,25 +3,37 @@ import styles from "./Menu.module.css";
 import Dropdown from "@/components/nav/mobile/Dropdown/Dropdown";
 import { useState } from "react";
 import Link from "next/link";
+import HamburgerButton from "@/components/hamburger-menu/HamburgerButton";
 
 type MenuProps = {
     session: any;
+    user: any;
 };
 
-const Menu = ({ session }: MenuProps) => {
+const Menu = ({ session, user }: MenuProps) => {
     const [state, setState] = useState(false);
     return (
         <section className={styles.container}>
             <Link href="/">
                 <p className={styles.name}>MyAIResumes</p>
             </Link>
-            <button
-                className={styles.menuButton}
+            <div
+                className={styles.buttonContainer}
                 onClick={() => setState(!state)}
             >
-                <i className="fa-solid fa-bars"></i>
-            </button>
+                <HamburgerButton
+                    isOpen={state}
+                    strokeWidth="1.5"
+                    color="black"
+                    lineProps={{ strokeLinecap: "round" }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                    width="16"
+                    height="12"
+                />
+            </div>
             <Dropdown
+                session={session}
+                user={user}
                 state={state}
                 setState={setState}
                 links={
@@ -37,11 +49,6 @@ const Menu = ({ session }: MenuProps) => {
                                   name: "Account",
                                   to: "/account",
                                   id: "account",
-                              },
-                              {
-                                  name: "Sign Out",
-                                  to: "/api/auth/signout",
-                                  id: "sign-out",
                               },
                           ]
                         : [
