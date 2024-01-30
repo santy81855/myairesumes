@@ -17,6 +17,7 @@ type MenuProps = {
 
 const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
     const [isLoading, setIsLoading] = useState(false);
+    const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
     const [width, setWidth] = useState(250);
     const [height, setHeight] = useState(300);
 
@@ -24,6 +25,14 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
         const handleScroll = () => {
             if (state) setState(false);
         };
+        const buttonElement = document.getElementById("mobileMenuButton");
+        if (buttonElement) {
+            const boundingBox = buttonElement.getBoundingClientRect();
+            setButtonPosition({
+                top: boundingBox.top + window.scrollY,
+                right: boundingBox.right + window.scrollX,
+            });
+        }
 
         // Attach the event listener
         // get the element with id landingPage
@@ -78,27 +87,31 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
                     <motion.aside
                         initial={{
                             width: 50,
-                            height: 50,
+                            height: 30,
                             borderRadius: "50%",
-                            left: "50%",
-                            transform: "translateX(-50%)",
-                            top: -70,
+                            left: buttonPosition.right,
+                            transform: "translateX(-100%)",
+                            top: buttonPosition.top,
+                            zIndex: -1,
                         }}
                         animate={{
                             width: width,
                             height: height,
                             borderRadius: "15px",
-                            left: "50%",
-                            transform: "translateX(-50%)",
+                            left: buttonPosition.right,
+                            transform: "translateX(-100%)",
                             top: 70,
                             transition: { duration: 0.3 },
+                            zIndex: 1,
                         }}
                         exit={{
-                            height: 50,
                             width: 50,
+                            height: 30,
                             borderRadius: "50%",
-                            top: -70,
+                            top: buttonPosition.top,
+                            left: buttonPosition.right,
                             transition: { duration: 0.3 },
+                            zIndex: -1,
                         }}
                         className={styles.aside}
                     >

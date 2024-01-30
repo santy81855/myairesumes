@@ -18,6 +18,7 @@ const Menu = ({ session, user }: MenuProps) => {
                 <p className={styles.name}>MyAIResumes</p>
             </Link>
             <div
+                id="mobileMenuButton"
                 className={styles.buttonContainer}
                 onClick={() => setState(!state)}
             >
