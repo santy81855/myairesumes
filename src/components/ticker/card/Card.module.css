@@ -1,0 +1,14 @@
+.card {
+    border-radius: var(--border-radius-small);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-inline: var(--padding-inline-medium);
+}
+
+.card .body {
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}

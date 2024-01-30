@@ -6,13 +6,13 @@ const HeroImage = () => {
     return (
         <section className={styles.imageSection}>
             <section className={styles.imageContainer}>
-                <div className={styles.stars}></div>
                 <Image
                     src="/images/landing-page/landing-page-main.png"
                     alt="Hero Image"
                     width={4896}
                     height={3264}
                     className={styles.image}
+                    priority={true}
                 />
                 <Image
                     src="/images/landing-page/landing-page-main.png"
@@ -20,9 +20,11 @@ const HeroImage = () => {
                     width={4896}
                     height={3264}
                     className={styles.imageSticker}
+                    priority={true}
                 />
             </section>
             <ResumeTicker />
+            <div className={styles.stars}></div>
         </section>
     );
 };

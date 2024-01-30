@@ -1,7 +1,8 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
-import Button from "@/components/authentication/sign-out-button/Button";
 import Menu from "@/components/nav/mobile/Menu";
+import ProfileButton from "@/components/authentication/profile-button/ProfileButton";
+import ProfileMenu from "./profile-menu/ProfileMenu";
 import { validateRequest } from "@/lib/auth";
 
 const Navbar = async () => {
@@ -30,11 +31,7 @@ const Navbar = async () => {
                             <Link href="/dashboard">
                                 <p className={styles.navLink}>Dashboard</p>
                             </Link>
-                            <Link href="/account">
-                                <i
-                                    className={`${styles.accountLink} fa-solid fa-user`}
-                                ></i>
-                            </Link>
+                            <ProfileButton session={session} user={user} />
                         </>
                     ) : (
                         <>

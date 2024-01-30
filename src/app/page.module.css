@@ -27,7 +27,7 @@
     align-items: center;
     padding-inline: var(--padding-inline-large);
     padding-block-start: 2rem;
-    padding-block-end: 15rem;
+    padding-block-end: 25rem;
 }
 
 .heroResume {
@@ -41,6 +41,12 @@
     align-items: center;
     max-width: 750px;
     position: relative;
+}
+
+.section {
+    width: 100%;
+    min-height: 1000px;
+    background-color: #191f31;
 }
 
 @media screen and (max-width: 768px) {

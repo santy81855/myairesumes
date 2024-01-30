@@ -13,10 +13,10 @@ export default function Home() {
                 <section className={styles.heroSectionText}>
                     <Title />
                 </section>
-
                 <Blur />
                 <HeroImage />
             </section>
+            <section className={styles.section}>hey</section>
         </main>
     );
 }
