@@ -2,14 +2,13 @@ import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Menu from "@/components/nav/mobile/Menu";
 import ProfileButton from "@/components/authentication/profile-button/ProfileButton";
-import ProfileMenu from "./profile-menu/ProfileMenu";
 import { validateRequest } from "@/lib/auth";
 
 const Navbar = async () => {
     const { session, user } = await validateRequest();
     return (
         <nav className={styles.navContainer}>
-            <Menu session={session} />
+            <Menu session={session} user={user} />
             <section className={styles.textContainer}>
                 <div
                     className={styles.navItem}

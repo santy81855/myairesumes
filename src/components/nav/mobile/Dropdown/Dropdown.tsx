@@ -2,19 +2,45 @@
 import styles from "./Dropdown.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { signout } from "@/actions/authentication";
-import React, { useState } from "react";
-import Spinner from "@/components/loaders/Spinner/Spinner";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "@/components/loaders/Spinner/Spinner";
 
 type MenuProps = {
+    session: any;
+    user: any;
     links: { name: string; to: string; id: string }[];
     state: boolean;
     setState: (state: boolean) => void;
 };
 
-const Dropdown = ({ links, state, setState }: MenuProps) => {
+const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
     const [isLoading, setIsLoading] = useState(false);
+    const [width, setWidth] = useState(250);
+    const [height, setHeight] = useState(300);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (state) setState(false);
+        };
+
+        // Attach the event listener
+        // get the element with id landingPage
+        const landingPage = document.getElementById("landingPage");
+        if (!landingPage) return;
+        landingPage.addEventListener("scroll", handleScroll);
+        window.addEventListener("resize", handleScroll);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            const landingPage = document.getElementById("landingPage");
+            if (!landingPage) return;
+            landingPage.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleScroll);
+        };
+    }, [state]);
+
     const itemVariants = {
         closed: {
             opacity: 0,
@@ -24,7 +50,7 @@ const Dropdown = ({ links, state, setState }: MenuProps) => {
     const sideVariants = {
         closed: {
             transition: {
-                staggerChildren: 0.2,
+                staggerChildren: 0,
                 staggerDirection: -1,
             },
         },
@@ -45,65 +71,88 @@ const Dropdown = ({ links, state, setState }: MenuProps) => {
             return;
         }
     };
-
     return (
         <section className={styles.container}>
             <AnimatePresence>
                 {state && (
                     <motion.aside
-                        initial={{ width: 0 }}
+                        initial={{
+                            width: 50,
+                            height: 50,
+                            borderRadius: "50%",
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            top: -70,
+                        }}
                         animate={{
-                            width: "100%",
+                            width: width,
+                            height: height,
+                            borderRadius: "15px",
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            top: 70,
+                            transition: { duration: 0.3 },
                         }}
                         exit={{
-                            width: 0,
-                            transition: { delay: 0.7, duration: 0.3 },
+                            height: 50,
+                            width: 50,
+                            borderRadius: "50%",
+                            top: -70,
+                            transition: { duration: 0.3 },
                         }}
                         className={styles.aside}
                     >
                         <motion.div
-                            className={styles.linkContainer}
+                            className={styles.menuContainer}
                             initial="closed"
                             animate="open"
                             exit="closed"
                             variants={sideVariants}
                         >
-                            {state && (
-                                <motion.button
-                                    onClick={() => setState(false)}
-                                    whileHover={{ scale: 1.1 }}
+                            <motion.div>
+                                <motion.p
+                                    className={styles.greeting}
                                     variants={itemVariants}
-                                    className={styles.dropdownButton}
                                 >
-                                    <i className="fas fa-times"></i>
-                                </motion.button>
-                            )}
-                            {links.map(({ name, to, id }) => {
-                                return id === "sign-out" ? (
-                                    isLoading ? (
-                                        <Spinner />
-                                    ) : (
-                                        <motion.button
+                                    Hi{" "}
+                                    {user === null || user.firstName.length > 8
+                                        ? "there"
+                                        : user.firstName}
+                                    ,
+                                </motion.p>
+                                <motion.div
+                                    className={styles.bar}
+                                    variants={itemVariants}
+                                />
+                            </motion.div>
+                            <motion.div className={styles.menuItemContainer}>
+                                {links.map(({ name, to, id }) => {
+                                    return (
+                                        <motion.a
                                             key={id}
-                                            onClick={signoutPressed}
+                                            href={to}
                                             whileHover={{ scale: 1.1 }}
                                             variants={itemVariants}
-                                            className={styles.signOutButton}
                                         >
                                             {name}
+                                        </motion.a>
+                                    );
+                                })}
+                                {isLoading ? (
+                                    <Spinner />
+                                ) : (
+                                    session && (
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            variants={itemVariants}
+                                            className={styles.signOutButton}
+                                            onClick={signoutPressed}
+                                        >
+                                            Log Out
                                         </motion.button>
                                     )
-                                ) : (
-                                    <motion.a
-                                        key={id}
-                                        href={to}
-                                        whileHover={{ scale: 1.1 }}
-                                        variants={itemVariants}
-                                    >
-                                        {name}
-                                    </motion.a>
-                                );
-                            })}
+                                )}
+                            </motion.div>
                         </motion.div>
                     </motion.aside>
                 )}

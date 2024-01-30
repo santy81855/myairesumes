@@ -7,7 +7,7 @@ import Navbar from "@/components/nav/Navbar";
 
 export default function Home() {
     return (
-        <main className={styles.main}>
+        <main id="landingPage" className={styles.main}>
             <section className={styles.heroSection}>
                 <Navbar />
                 <section className={styles.heroSectionText}>
