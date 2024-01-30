@@ -15,6 +15,7 @@ const ResumeTicker = () => {
             height="300px"
             width="400px"
             fontSize=" var(--font-size-x3large)"
+            key={"card1"}
         />,
         <Resume key={"resume2"} />,
         <Resume key={"resume3"} />,
@@ -25,6 +26,7 @@ const ResumeTicker = () => {
             height="300px"
             width="400px"
             fontSize=" var(--font-size-x3large)"
+            key={"card2"}
         />,
         <Resume key={"resume4"} />,
         <Resume key={"resume5"} />,
@@ -38,6 +40,7 @@ const ResumeTicker = () => {
             height="200px"
             width="300px"
             fontSize=" var(--font-size-x2large)"
+            key={"card3"}
         />,
         <Resume key={"resume1"} />,
         <Resume key={"resume2"} />,
@@ -49,6 +52,7 @@ const ResumeTicker = () => {
             height="200px"
             width="300px"
             fontSize=" var(--font-size-x2large)"
+            key={"card4"}
         />,
         <Resume key={"resume4"} />,
         <Resume key={"resume5"} />,
