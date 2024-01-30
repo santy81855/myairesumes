@@ -22,22 +22,6 @@
     padding-inline-start: var(--padding-inline-small);
 }
 
-.dropdownButton {
-    position: absolute;
-    top: 1.5rem;
-    right: 3rem;
-    z-index: 1000;
-    background-color: transparent;
-    border: none;
-    font-size: var(--font-size-x2large);
-    cursor: pointer;
-    color: white;
-}
-
-.dropdownButton:hover {
-    transform: scale(1.1);
-}
-
 .menuButton {
     background-color: white;
     border-radius: var(--border-radius);
@@ -45,6 +29,9 @@
     border: none;
     padding-block: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (min-width: 450px) {

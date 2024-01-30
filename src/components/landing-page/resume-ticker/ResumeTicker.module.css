@@ -5,25 +5,23 @@
     background-color: #191f31;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
-.card {
-    width: 400px;
-    height: 300px;
-    border-radius: var(--border-radius-small);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-inline: var(--padding-inline-medium);
-}
-
-.card .body {
-    width: 100%;
-    font-size: var(--font-size-x3large);
+.bigText {
+    position: absolute;
+    top: 0px;
+    left: 2rem;
+    margin-top: -4.7rem;
+    font-size: 5rem;
     font-weight: bold;
-    text-align: center;
-    color: white;
+    color: #191f31;
+}
+
+@media screen and (max-width: 1500px) {
+    .bigText {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 768px) {

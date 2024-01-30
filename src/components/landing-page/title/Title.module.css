@@ -30,11 +30,11 @@
 
 .linkContainer {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: var(--gap-medium);
-    padding-block-start: var(--padding-block-medium);
+    padding-block-start: var(--padding-block-large);
     padding-inline: var(--padding-inline-medium);
 }
 
@@ -51,6 +51,8 @@
     padding-inline: var(--padding-inline-medium);
     border-radius: var(--border-radius);
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+    width: 12rem;
+    height: 3rem;
 }
 
 .linkLeft {
@@ -71,7 +73,30 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    transform: scaleX(-1) rotate(-45deg) translate(140%, 200%);
+    transform: scaleX(-1) rotate(-50deg) translate(130%, 215%);
+}
+
+@media screen and (min-width: 768px) {
+    .title {
+        font-size: var(--font-size-x3large);
+    }
+    .subtitle {
+        font-size: var(--font-size-medium);
+    }
+    .squiggleArrow {
+        transform: scaleX(-1) rotate(-50deg) translate(130%, 285%);
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .linkContainer {
+        flex-direction: column;
+        gap: var(--gap-medium);
+    }
+
+    .squiggleArrow {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 630px) {
