@@ -53,14 +53,16 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
     const itemVariants = {
         closed: {
             opacity: 0,
+            transition: {
+                duration: 0.1,
+            },
         },
         open: { opacity: 1 },
     };
     const sideVariants = {
         closed: {
             transition: {
-                staggerChildren: 0,
-                staggerDirection: -1,
+                duration: 0,
             },
         },
         open: {
@@ -105,11 +107,11 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
                             zIndex: 1,
                         }}
                         exit={{
-                            width: 50,
-                            height: 30,
+                            width: 10,
+                            height: 10,
                             borderRadius: "50%",
                             top: buttonPosition.top,
-                            left: buttonPosition.right,
+                            left: buttonPosition.right - 10,
                             transition: { duration: 0.3 },
                             zIndex: -1,
                         }}
