@@ -2,7 +2,6 @@ import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Menu from "@/components/nav/mobile/Menu";
 import ProfileButton from "@/components/authentication/profile-button/ProfileButton";
-import ProfileMenu from "./profile-menu/ProfileMenu";
 import { validateRequest } from "@/lib/auth";
 
 const Navbar = async () => {

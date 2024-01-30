@@ -2,7 +2,7 @@
 import styles from "./Dropdown.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { signout } from "@/actions/authentication";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Spinner from "@/components/loaders/Spinner/Spinner";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +15,25 @@ type MenuProps = {
 
 const Dropdown = ({ links, state, setState }: MenuProps) => {
     const [isLoading, setIsLoading] = useState(false);
+    useEffect(() => {
+        const handleScroll = () => {
+            if (state) setState(false);
+        };
+
+        // Attach the event listener
+        // get the element with id landingPage
+        const landingPage = document.getElementById("landingPage");
+        if (!landingPage) return;
+        landingPage.addEventListener("scroll", handleScroll);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            const landingPage = document.getElementById("landingPage");
+            if (!landingPage) return;
+            landingPage.removeEventListener("scroll", handleScroll);
+        };
+    }, [state]);
+
     const itemVariants = {
         closed: {
             opacity: 0,
@@ -60,6 +79,7 @@ const Dropdown = ({ links, state, setState }: MenuProps) => {
                             transition: { delay: 0.7, duration: 0.3 },
                         }}
                         className={styles.aside}
+                        onClick={() => setState(false)}
                     >
                         <motion.div
                             className={styles.linkContainer}

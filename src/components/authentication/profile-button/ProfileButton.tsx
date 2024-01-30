@@ -1,7 +1,7 @@
 "use client";
-import styles from "./ProfileButton.module.css";
 import ProfileMenu from "@/components/nav/profile-menu/ProfileMenu";
 import { useState } from "react";
+import HamburgerButton from "@/components/hamburger-menu/HamburgerButton";
 
 type Props = {
     session: any;
@@ -15,9 +15,16 @@ const ProfileButton = ({ session, user }: Props) => {
     };
     return (
         <>
-            <button className={styles.button} onClick={handleClick}>
-                <i className={`${styles.icon} fa-solid fa-user`}></i>
-            </button>
+            <HamburgerButton
+                isOpen={showMenu}
+                onClick={() => setShowMenu(!showMenu)}
+                strokeWidth="3"
+                color="white"
+                lineProps={{ strokeLinecap: "round" }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                width="24"
+                height="20"
+            />
             <ProfileMenu
                 session={session}
                 user={user}
