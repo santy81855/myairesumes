@@ -30,7 +30,9 @@ const TickerWrapper = ({
                 <div
                     key={index}
                     style={{
-                        backgroundColor: backgroundColors[index],
+                        backgroundColor: backgroundColor
+                            ? backgroundColor
+                            : backgroundColors[index % backgroundColors.length],
                         ...styling,
                     }}
                 >

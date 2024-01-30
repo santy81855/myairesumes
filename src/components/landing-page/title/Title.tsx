@@ -7,27 +7,27 @@ const Title = () => {
         <section className={styles.textContainer}>
             <p className={styles.description}>AI Resume Builder</p>
             <h1 className={styles.title}>
-                Effortlessly Craft Tailored Resumes for Every Job - Outshine
-                with Ease!
+                Writing Resumes Just Got Easier - Create a Resume so Fast it
+                will Feel Like Magic
             </h1>
             <p className={styles.subtitle}>
                 Harness the power of artificial intelligence to tailor your
-                resume uniquely for each job, significantly enhancing your
-                prospects of landing the job.
+                resume and cover letter uniquely for each job, significantly
+                enhancing your prospects of landing the job.
             </p>
             <section className={styles.linkContainer}>
                 <Link
                     href="/sign-up"
                     className={`${styles.linkLeft} ${styles.link}`}
                 >
-                    <p>Get Started</p>
+                    <p>Create Cover Letter</p>
                     <i className="fa-solid fa-arrow-right"></i>
                 </Link>
                 <Link
                     href="/sign-up"
                     className={`${styles.linkRight} ${styles.link}`}
                 >
-                    <p>Learn More</p>
+                    <p>Create Resume</p>
                     <i className="fa-solid fa-arrow-right"></i>
                 </Link>
             </section>
