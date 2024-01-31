@@ -25,12 +25,20 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [width, setWidth] = useState(calculateWidth(user.firstName.length));
     const [height, setHeight] = useState(300);
+    const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
 
     useEffect(() => {
         const handleScroll = () => {
             if (state) setState(false);
         };
-
+        const buttonElement = document.getElementById("profileButton");
+        if (buttonElement) {
+            const boundingBox = buttonElement.getBoundingClientRect();
+            setButtonPosition({
+                top: boundingBox.top + window.scrollY,
+                right: boundingBox.right + window.scrollX,
+            });
+        }
         // Attach the event listener
         // get the element with id landingPage
         const landingPage = document.getElementById("landingPage");
@@ -86,23 +94,29 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                             width: 50,
                             height: 50,
                             borderRadius: "50%",
-                            top: -70,
+                            left: buttonPosition.right,
+                            transform: "translateX(-100%)",
+                            top: buttonPosition.top,
+                            zIndex: -1,
                         }}
                         animate={{
                             width: width,
                             height: height,
                             borderRadius: "15px",
+                            left: buttonPosition.right,
                             transform: "translateX(-100%)",
                             top: 70,
+                            zIndex: 1,
                             transition: { duration: 0.3 },
                         }}
                         exit={{
-                            height: 50,
-                            width: 50,
+                            height: 5,
+                            width: 5,
                             borderRadius: "50%",
-                            top: -70,
-                            transform: "translateX(50%)",
+                            top: buttonPosition.top + 10,
+                            left: buttonPosition.right - 10,
                             transition: { duration: 0.3 },
+                            zIndex: -1,
                         }}
                         className={styles.aside}
                     >
