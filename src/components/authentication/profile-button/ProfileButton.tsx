@@ -18,6 +18,7 @@ const ProfileButton = ({ session, user }: Props) => {
     return (
         <>
             <motion.button
+                id="profileButton"
                 className={styles.button}
                 onClick={handleClick}
                 whileHover={{ scale: 1.1 }}
