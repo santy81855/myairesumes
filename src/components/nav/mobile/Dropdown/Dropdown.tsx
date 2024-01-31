@@ -16,9 +16,19 @@ type MenuProps = {
 };
 
 const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
+    const calculateWidth = (length: number) => {
+        // if a length of 200 allows around 8 letters, then we can calculate the width of the menu while giving a buffer of 20px
+        const buffer = 20;
+        if (length > 7) {
+            return 200 + buffer;
+        }
+        return 200;
+    };
     const [isLoading, setIsLoading] = useState(false);
     const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
-    const [width, setWidth] = useState(250);
+    const [width, setWidth] = useState(
+        user !== null ? calculateWidth(user.firstName.length) : 200
+    );
     const [height, setHeight] = useState(300);
 
     useEffect(() => {
