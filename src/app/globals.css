@@ -48,7 +48,7 @@ body {
 }
 
 body {
-    background-color: rgb(var(--background-color-rgb));
+    background-color: lightgrey;
     color: var(--text-color-rgb);
     position: relative;
     display: flex;

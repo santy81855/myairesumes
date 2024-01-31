@@ -1,4 +1,5 @@
 "use server";
+import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
 import { lucia, validateRequest } from "@/lib/auth";
 import { cookies } from "next/headers";
@@ -195,6 +196,11 @@ export async function signup(formData: FormData): Promise<ActionResult> {
                 };
             }
         } else {
+            // get a stripe customer id
+            const customer = await stripe.customers.create({
+                email,
+                name: `${firstName} ${lastName}`,
+            });
             // if user doesn't exist, create a new user
             const user = await prisma.user.create({
                 data: {
@@ -203,6 +209,7 @@ export async function signup(formData: FormData): Promise<ActionResult> {
                     lastName,
                     hashedPassword: hashedPassword,
                     accountType: "password",
+                    stripeCustomerId: customer.id,
                 },
             });
             if (!user) {
