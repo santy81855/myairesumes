@@ -5,17 +5,22 @@ import ProfileButton from "@/components/nav/profile-button/ProfileButton";
 import { validateRequest } from "@/lib/auth";
 
 type NavbarProps = {
-    landingPage?: boolean;
+    style?: object;
+    isAuth?: boolean;
 };
 
-const Navbar = async ({ landingPage }: NavbarProps) => {
+const Navbar = async ({ style, isAuth }: NavbarProps) => {
     const { session, user } = await validateRequest();
-    const extraStyle = landingPage
-        ? { backgroundColor: "transparent", color: "white" }
-        : {};
+    const extraStyle = style ? style : {};
+    const authPage = isAuth ? false : true;
     return (
         <nav className={styles.navContainer} style={extraStyle}>
-            <Menu session={session} user={user} landingPage={landingPage} />
+            <Menu
+                session={session}
+                user={user}
+                style={extraStyle}
+                isAuth={isAuth}
+            />
             <section className={styles.textContainer}>
                 <div
                     className={styles.navItem}
@@ -32,7 +37,7 @@ const Navbar = async ({ landingPage }: NavbarProps) => {
                     <Link href="/">
                         <p className={styles.navLink}>Home</p>
                     </Link>
-                    {session ? (
+                    {session && (
                         <>
                             <Link href="/dashboard">
                                 <p className={styles.navLink}>Dashboard</p>
@@ -40,17 +45,16 @@ const Navbar = async ({ landingPage }: NavbarProps) => {
                             <ProfileButton
                                 session={session}
                                 user={user}
-                                landingPage={landingPage}
+                                style={extraStyle}
                             />
                         </>
-                    ) : (
-                        <>
-                            <Link href="/sign-up">
-                                <p className={styles.reportButton}>
-                                    Create a Resume
-                                </p>
-                            </Link>
-                        </>
+                    )}
+                    {!session && authPage && (
+                        <Link href="/sign-up">
+                            <p className={styles.reportButton}>
+                                Create a Resume
+                            </p>
+                        </Link>
                     )}
                 </div>
             </section>

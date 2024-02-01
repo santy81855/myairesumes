@@ -210,6 +210,7 @@ export async function signup(formData: FormData): Promise<ActionResult> {
                     hashedPassword: hashedPassword,
                     accountType: "password",
                     stripeCustomerId: customer.id,
+                    basicInfo: {},
                 },
             });
             if (!user) {

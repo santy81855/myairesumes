@@ -8,12 +8,29 @@ import HamburgerButton from "@/components/hamburger-menu/HamburgerButton";
 type MenuProps = {
     session: any;
     user: any;
-    landingPage?: boolean;
+    style?: object;
+    isAuth?: boolean;
 };
 
-const Menu = ({ session, user, landingPage }: MenuProps) => {
+const Menu = ({ session, user, style, isAuth }: MenuProps) => {
     const [state, setState] = useState(false);
-    const extraStyle = landingPage ? { color: "white" } : {};
+    const extraStyle = style ? style : {};
+    const menuLinks = [];
+    if (session) {
+        menuLinks.push(
+            { name: "Home", to: "/", id: "home" },
+            { name: "Dashboard", to: "/dashboard", id: "dashboard" },
+            { name: "Profile", to: "/profile", id: "profile" }
+        );
+    } else if (!session && !isAuth) {
+        menuLinks.push(
+            { name: "Home", to: "/", id: "home" },
+            { name: "Create a Resume", to: "/sign-up", id: "sign-up" }
+        );
+    } else if (!session && isAuth) {
+        menuLinks.push({ name: "Home", to: "/", id: "home" });
+    }
+
     return (
         <section className={styles.container}>
             <Link href="/">
@@ -41,30 +58,7 @@ const Menu = ({ session, user, landingPage }: MenuProps) => {
                 user={user}
                 state={state}
                 setState={setState}
-                links={
-                    session
-                        ? [
-                              { name: "Home", to: "/", id: "home" },
-                              {
-                                  name: "Dashboard",
-                                  to: "/dashboard",
-                                  id: "dashboard",
-                              },
-                              {
-                                  name: "Profile",
-                                  to: "/profile",
-                                  id: "profile",
-                              },
-                          ]
-                        : [
-                              { name: "Home", to: "/", id: "home" },
-                              {
-                                  name: "Create a Resume",
-                                  to: "/sign-up",
-                                  id: "sign-up",
-                              },
-                          ]
-                }
+                links={menuLinks}
             />
         </section>
     );

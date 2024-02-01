@@ -7,15 +7,15 @@ import styles from "./ProfileButton.module.css";
 type Props = {
     session: any;
     user: any;
-    landingPage?: boolean;
+    style?: object;
 };
 
-const ProfileButton = ({ session, user, landingPage }: Props) => {
+const ProfileButton = ({ session, user, style }: Props) => {
     const [showMenu, setShowMenu] = useState(false);
     const handleClick = () => {
         setShowMenu(!showMenu);
     };
-    const extraStyles = landingPage ? { color: "white" } : {};
+    const extraStyles = style ? style : {};
     return (
         <>
             <motion.button
