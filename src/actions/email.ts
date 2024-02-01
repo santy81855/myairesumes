@@ -1,10 +1,10 @@
 "use server";
-import { EmailData } from "@/types";
+import { AuthEmailData } from "@/types";
 import axios from "axios";
 
-export async function send(data: EmailData) {
+export async function send(data: AuthEmailData) {
     const { email, firstName, lastName, subject, url, type } = data;
-    axios
+    await axios
         .post(`${process.env.APP_DOMAIN}/api/send`, {
             email,
             firstName,

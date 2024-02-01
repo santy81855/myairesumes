@@ -3,6 +3,57 @@ import { getStripeSession, stripe } from "@/lib/stripe";
 import { validateRequest } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { revalidateTag } from "next/cache";
+
+export async function cancelSubscription() {
+    "use server";
+    const { user } = await validateRequest();
+    if (!user) {
+        return {
+            error: "Please create an account.",
+        };
+    }
+    const existingUser = await prisma.user.findUnique({
+        where: {
+            email: user.email,
+        },
+    });
+    if (!existingUser) {
+        return {
+            error: "Please create an account.",
+        };
+    }
+    if (!existingUser.stripeCustomerId) {
+        return {
+            error: "No subscription to cancel.",
+        };
+    }
+    const subscriptions = await stripe.subscriptions.list({
+        customer: existingUser.stripeCustomerId,
+    });
+    if (!subscriptions) {
+        return {
+            error: "Error fetching subscriptions.",
+        };
+    }
+    if (subscriptions.data.length === 0) {
+        return {
+            error: "No subscription to cancel.",
+        };
+    }
+    const canceledSubscription = await stripe.subscriptions.cancel(
+        subscriptions.data[0].id
+    );
+    if (!canceledSubscription) {
+        return {
+            error: "Error canceling subscription.",
+        };
+    }
+    revalidateTag("subscription");
+    return {
+        success: "Successfully canceled subscription.",
+    };
+}
 
 export async function createSubscription() {
     "use server";
@@ -50,7 +101,7 @@ export async function createSubscription() {
         }
     }
     const subscriptionUrl = await getStripeSession({
-        priceId: process.env.AI_RESUME_PRO_KEY!,
+        priceId: process.env.PRO_KEY!,
         domainUrl: process.env.APP_DOMAIN!,
         customerId: existingUser.stripeCustomerId as string,
     });
@@ -59,6 +110,6 @@ export async function createSubscription() {
             error: "Error generating checkout session.",
         };
     }
-
+    revalidateTag("subscription");
     return redirect(subscriptionUrl);
 }

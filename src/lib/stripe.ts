@@ -16,6 +16,7 @@ export const getStripeSession = async ({
 }) => {
     const session = await stripe.checkout.sessions.create({
         customer: customerId,
+        allow_promotion_codes: true,
         billing_address_collection: "auto",
         line_items: [
             {

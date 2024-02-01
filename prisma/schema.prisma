@@ -20,6 +20,8 @@ model User {
     hashedPassword   String?
     emailVerified    Boolean                  @default(false)
     stripeCustomerId String?                  @unique
+    status           String                   @default("free") // options are free, pro, and grace
+    gracePeriodEnd   DateTime?
     authSession      Session[]
     emailToken       EmailVerificationToken[]
     passwordToken    PasswordResetToken[]
@@ -56,7 +58,7 @@ model PasswordResetToken {
 
 model Subscription {
     stripeSubscriptionId String   @id @unique
-    invterval            String
+    interval             String
     status               String
     planId               String
     currentPeriodStart   Int
