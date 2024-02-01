@@ -8,8 +8,6 @@ const relevantEvents = new Set([
     "checkout.session.completed",
     "customer.subscription.updated",
     "customer.subscription.deleted",
-    "customer.subscription.paused",
-    "customer.subscription.resumed",
     "invoice.payment_failed",
 ]);
 

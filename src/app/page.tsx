@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "./page.module.css";
 import Title from "@/components/landing-page/title/Title";
 import Blur from "@/components/landing-page/color-blur/Blur";
@@ -9,7 +8,7 @@ export default function Home() {
     return (
         <main id="landingPage" className={styles.main}>
             <section className={styles.heroSection}>
-                <Navbar />
+                <Navbar landingPage={true} />
                 <section className={styles.heroSectionText}>
                     <Title />
                 </section>

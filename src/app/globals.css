@@ -6,7 +6,7 @@
     --border-radius-small: 10px;
     --border-radius-xsmall: 5px;
     --background-color-rgb: 255, 255, 255;
-    --accent-color: #00bbf9;
+    --accent-color: #b4a5ff;
     --accent-blue: 164, 179, 222;
     --accent-pink: 184, 170, 219;
     --text-color-rgb: 41, 41, 41;
@@ -48,7 +48,7 @@ body {
 }
 
 body {
-    background-color: lightgrey;
+    background-color: rgb(var(--background-color-rgb));
     color: var(--text-color-rgb);
     position: relative;
     display: flex;

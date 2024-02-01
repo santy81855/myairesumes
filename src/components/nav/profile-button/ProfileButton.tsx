@@ -1,24 +1,26 @@
 "use client";
 import ProfileMenu from "@/components/nav/profile-menu/ProfileMenu";
 import { useState } from "react";
-import HamburgerButton from "@/components/hamburger-menu/HamburgerButton";
 import { motion } from "framer-motion";
 import styles from "./ProfileButton.module.css";
 
 type Props = {
     session: any;
     user: any;
+    landingPage?: boolean;
 };
 
-const ProfileButton = ({ session, user }: Props) => {
+const ProfileButton = ({ session, user, landingPage }: Props) => {
     const [showMenu, setShowMenu] = useState(false);
     const handleClick = () => {
         setShowMenu(!showMenu);
     };
+    const extraStyles = landingPage ? { color: "white" } : {};
     return (
         <>
             <motion.button
                 id="profileButton"
+                style={extraStyles}
                 className={styles.button}
                 onClick={handleClick}
                 whileHover={{ scale: 1.1 }}

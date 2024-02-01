@@ -145,7 +145,7 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                             </motion.div>
                             <motion.div className={styles.menuItemContainer}>
                                 <motion.a
-                                    href={"/account"}
+                                    href={"/profile"}
                                     whileHover={{ scale: 1.05 }}
                                     variants={itemVariants}
                                     className={styles.menuItem}
@@ -153,7 +153,7 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                                     Profile
                                 </motion.a>
                                 <motion.a
-                                    href={"/account"}
+                                    href={"/profile"}
                                     whileHover={{ scale: 1.05 }}
                                     variants={itemVariants}
                                     className={styles.menuItem}

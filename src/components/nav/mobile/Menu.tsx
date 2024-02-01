@@ -8,14 +8,18 @@ import HamburgerButton from "@/components/hamburger-menu/HamburgerButton";
 type MenuProps = {
     session: any;
     user: any;
+    landingPage?: boolean;
 };
 
-const Menu = ({ session, user }: MenuProps) => {
+const Menu = ({ session, user, landingPage }: MenuProps) => {
     const [state, setState] = useState(false);
+    const extraStyle = landingPage ? { color: "white" } : {};
     return (
         <section className={styles.container}>
             <Link href="/">
-                <p className={styles.name}>MyAIResumes</p>
+                <p className={styles.name} style={extraStyle}>
+                    MyAIResumes
+                </p>
             </Link>
             <div
                 id="mobileMenuButton"
@@ -47,9 +51,9 @@ const Menu = ({ session, user }: MenuProps) => {
                                   id: "dashboard",
                               },
                               {
-                                  name: "Account",
-                                  to: "/account",
-                                  id: "account",
+                                  name: "Profile",
+                                  to: "/profile",
+                                  id: "profile",
                               },
                           ]
                         : [

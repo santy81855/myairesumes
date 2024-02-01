@@ -7,6 +7,7 @@
     align-items: center;
     padding-inline: var(--padding-inline-xlarge);
     z-index: 10;
+    color: black;
 }
 
 .textContainer {
@@ -23,7 +24,6 @@
 .companyName {
     font-size: var(--font-size-medium);
     font-weight: bold;
-    color: white;
 }
 
 .navItem {
@@ -39,7 +39,6 @@
 .navLink {
     font-size: var(--font-size-small);
     font-weight: bold;
-    color: white;
 }
 
 .reportButton {

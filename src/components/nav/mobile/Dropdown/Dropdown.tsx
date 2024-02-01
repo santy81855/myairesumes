@@ -158,6 +158,7 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
                                             href={to}
                                             whileHover={{ scale: 1.1 }}
                                             variants={itemVariants}
+                                            className={styles.menuItem}
                                         >
                                             {name}
                                         </motion.a>
