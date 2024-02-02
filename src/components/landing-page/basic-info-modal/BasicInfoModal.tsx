@@ -10,7 +10,7 @@ const BasicInfoModal = () => {
                 <h1 className={styles.title}>Welcome to My AI Resumes</h1>
                 <p className={styles.text}>
                     To get started on your personalized resumes and cover
-                    letters, we'd love to learn a bit more about you.
+                    letters, we&apos;d love to learn a bit more about you.
                 </p>
                 <p className={styles.text}>
                     Click below to store some basic details to kickstart the

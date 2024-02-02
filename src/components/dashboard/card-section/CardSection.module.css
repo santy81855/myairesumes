@@ -6,5 +6,4 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: var(--gap-medium);
     grid-template-areas: "jobs resumes cover-letters";
-    margin-inline-end: auto;
 }

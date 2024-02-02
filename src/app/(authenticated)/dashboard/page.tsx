@@ -3,6 +3,7 @@ import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
 import CardSection from "@/components/dashboard/card-section/CardSection";
+import Profile from "@/components/dashboard/profile/Profile";
 
 const Page = async ({
     params,
@@ -38,7 +39,12 @@ const Page = async ({
                     {currentUser.firstName} {currentUser.lastName}
                 </p>
             </section>
-            <CardSection />
+            <div className={styles.profileCardContainer}>
+                <CardSection currentUser={currentUser} key="dashBoardCards" />
+            </div>
+            {menuSection === "profile" && (
+                <Profile currentUser={currentUser} key="profileSection" />
+            )}
         </main>
     );
 };

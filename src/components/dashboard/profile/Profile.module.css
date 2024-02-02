@@ -1,0 +1,128 @@
+.container {
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin-inline-end: auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--gap-medium);
+    grid-template-areas: "profile work";
+}
+
+.profileSection {
+    grid-area: profile;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    border-radius: var(--border-radius-small);
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-block-medium);
+}
+
+.workSection {
+    grid-area: work;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: var(--border-radius-small);
+}
+
+.profileSectionContent {
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-medium);
+}
+
+.title {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+}
+
+.profileImage {
+    z-index: 1;
+
+    width: 100%;
+    max-width: 130px;
+    aspect-ratio: 1/1;
+}
+
+.label {
+    font-size: var(--font-size-small);
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+    color: #797979;
+}
+
+.name {
+    font-size: var(--font-size-medium);
+    font-weight: 600;
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contactInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-block-start: var(--padding-block-small);
+}
+
+.label {
+    font-size: var(--font-size-small);
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+    color: #797979;
+}
+
+.item {
+    font-size: var(--font-size-medium);
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+    padding-block-end: var(--padding-block-small);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas: "profile" "work";
+    }
+    .profileSection {
+        padding-inline: var(--padding-block-large);
+        padding-block: var(--padding-block-large);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .item {
+        font-size: var(--font-size-small);
+    }
+    .profileSection {
+        padding-inline: var(--padding-block-medium);
+        padding-block: var(--padding-block-medium);
+    }
+}

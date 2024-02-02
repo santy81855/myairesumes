@@ -11,7 +11,7 @@
     position: relative;
     z-index: 0;
     padding-inline: var(--padding-inline-xlarge);
-    padding-block: var(--padding-block-medium);
+    padding-block: var(--padding-block-large);
     overflow-x: hidden;
     gap: var(--padding-block-large);
 }
@@ -56,4 +56,28 @@
     font-size: var(--font-size-small);
     width: 100%;
     text-align: left;
+}
+
+.profileCardContainer {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .profileCardContainer {
+        display: none;
+    }
+
+    .main {
+        padding-inline: var(--padding-inline-large);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .profileCardContainer {
+        display: none;
+    }
+
+    .main {
+        padding-inline: var(--padding-inline-medium);
+    }
 }

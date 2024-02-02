@@ -12,21 +12,25 @@ datasource db {
 }
 
 model User {
-    id               String                   @id @unique @default(cuid())
-    firstName        String?
-    lastName         String?
-    email            String                   @unique
-    accountType      String                   @default("password")
-    hashedPassword   String?
-    emailVerified    Boolean                  @default(false)
-    stripeCustomerId String?                  @unique
-    status           String                   @default("free") // options are free, pro, and grace
-    gracePeriodEnd   DateTime?
-    basicInfo        Json?
-    authSession      Session[]
-    emailToken       EmailVerificationToken[]
-    passwordToken    PasswordResetToken[]
-    subscription     Subscription?
+    id                 String                   @id @unique @default(cuid())
+    firstName          String?
+    lastName           String?
+    email              String                   @unique
+    accountType        String                   @default("password")
+    hashedPassword     String?
+    emailVerified      Boolean                  @default(false)
+    stripeCustomerId   String?                  @unique
+    status             String                   @default("free") // options are free, pro, and grace
+    gracePeriodEnd     DateTime?
+    basicInfo          Json?
+    numberJobs         Int                      @default(0)
+    numberResumes      Int                      @default(0)
+    numberCoverLetters Int                      @default(0)
+    imageUrl           String                   @default("")
+    authSession        Session[]
+    emailToken         EmailVerificationToken[]
+    passwordToken      PasswordResetToken[]
+    subscription       Subscription?
 }
 
 model Session {
