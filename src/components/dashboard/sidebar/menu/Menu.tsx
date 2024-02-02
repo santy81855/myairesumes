@@ -5,6 +5,7 @@ import { signout } from "@/actions/authentication";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import Spinner from "@/components/loaders/Spinner/Spinner";
 
 const Menu = () => {
@@ -24,14 +25,10 @@ const Menu = () => {
     };
 
     const handleMenuClick = (section: string) => {
-        router.replace(`?/menu=${section}`);
+        router.replace(`?menu=${section}`);
     };
 
-    return isLoading ? (
-        <div style={{ margin: "auto" }}>
-            <Spinner />
-        </div>
-    ) : (
+    return (
         <section className={styles.menu}>
             <p className={styles.name}>MAGIC RESUME</p>
             <button
@@ -79,6 +76,7 @@ const Menu = () => {
             <button className={styles.menuItem} onClick={signoutPressed}>
                 Logout
             </button>
+            {isLoading && <LoadingScreen />}
         </section>
     );
 };

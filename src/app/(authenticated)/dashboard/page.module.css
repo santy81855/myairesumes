@@ -17,22 +17,19 @@
 }
 
 .largeHeading {
-    font-size: 12rem;
+    font-size: 15rem;
     font-weight: 900;
-    color: #f3f3f3;
+    color: #e5e5e5;
     position: absolute;
-    top: -40px;
     left: 0;
     z-index: 0;
 }
-.largeHeading2 {
-    font-size: 12rem;
-    font-weight: 900;
-    color: #f3f3f3;
-    position: absolute;
-    top: calc(12rem - 40px);
-    left: 0;
-    z-index: 0;
+.topHeading {
+    top: -1rem;
+}
+
+.bottomHeading {
+    top: calc(15rem - 1rem);
 }
 
 .titleSection {

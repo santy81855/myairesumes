@@ -40,3 +40,12 @@
 .button:hover {
     background-color: #8a6fbf;
 }
+
+.logo {
+    width: 8rem;
+    height: 8rem;
+}
+
+.logo svg {
+    fill: #a183cf;
+}

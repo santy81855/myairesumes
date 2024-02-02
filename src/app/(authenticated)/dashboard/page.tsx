@@ -31,8 +31,12 @@ const Page = async ({
 
     return (
         <main className={styles.main}>
-            <p className={styles.largeHeading}>DASH</p>
-            <p className={styles.largeHeading2}>BOARD</p>
+            <p className={`${styles.topHeading} ${styles.largeHeading}`}>
+                DASH
+            </p>
+            <p className={`${styles.bottomHeading} ${styles.largeHeading}`}>
+                BOARD
+            </p>
             <section className={styles.titleSection}>
                 <h1 className={styles.pageHeading}>Dashboard</h1>
                 <p className={styles.subHeading}>
