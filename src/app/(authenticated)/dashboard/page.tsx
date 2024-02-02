@@ -2,8 +2,15 @@ import styles from "./page.module.css";
 import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
+import CardSection from "@/components/dashboard/card-section/CardSection";
 
-const Page = async () => {
+const Page = async ({
+    params,
+    searchParams,
+}: {
+    params: { slug: string };
+    searchParams?: { [key: string]: string | string[] | undefined };
+}) => {
     const { user } = await validateRequest();
     if (!user) {
         redirect("/sign-in");
@@ -19,16 +26,19 @@ const Page = async () => {
     if (!currentUser) {
         redirect("/sign-in");
     }
+    const menuSection = searchParams?.menu || "";
 
     return (
         <main className={styles.main}>
-            <p className={styles.largeHeading}>DASHBOARD</p>
+            <p className={styles.largeHeading}>DASH</p>
+            <p className={styles.largeHeading2}>BOARD</p>
             <section className={styles.titleSection}>
                 <h1 className={styles.pageHeading}>Dashboard</h1>
                 <p className={styles.subHeading}>
                     {currentUser.firstName} {currentUser.lastName}
                 </p>
             </section>
+            <CardSection />
         </main>
     );
 };

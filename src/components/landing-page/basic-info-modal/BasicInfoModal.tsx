@@ -16,7 +16,7 @@ const BasicInfoModal = () => {
                     Click below to store some basic details to kickstart the
                     process!
                 </p>
-                <Link href="/dashboard/profile" className={styles.button}>
+                <Link href="/dashboard?menu=profile" className={styles.button}>
                     <p>Get Started</p>
                 </Link>
             </section>
