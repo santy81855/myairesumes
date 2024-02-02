@@ -1,0 +1,50 @@
+.menu {
+    margin-block-start: var(--padding-block-x2large);
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+}
+
+.name {
+    font-size: var(--font-size-medium);
+    font-weight: 700;
+    color: white;
+    width: 100%;
+    text-align: left;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-small);
+}
+
+.menuItem {
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    color: white;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-small);
+    font-size: var(--font-size-small);
+    background-color: transparent;
+    border: none;
+}
+
+.active {
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+    background-color: rgb(98, 98, 98, 0.5);
+    border: none;
+    color: white;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-small);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    font-size: var(--font-size-small);
+}
+
+.menuItem:hover {
+    background-color: rgb(98, 98, 98, 0.5);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    color: white;
+}

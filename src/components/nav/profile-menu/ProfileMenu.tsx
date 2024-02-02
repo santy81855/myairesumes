@@ -5,6 +5,7 @@ import { signout } from "@/actions/authentication";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "@/components/loaders/Spinner/Spinner";
 
 type Props = {
     session: any;
@@ -160,14 +161,17 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                                 >
                                     Upgrade
                                 </motion.a>
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    variants={itemVariants}
-                                    className={styles.signOutButton}
-                                    onClick={signoutPressed}
-                                >
-                                    Log Out
-                                </motion.button>
+                                {isLoading && <Spinner />}
+                                {!isLoading && (
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        variants={itemVariants}
+                                        className={styles.signOutButton}
+                                        onClick={signoutPressed}
+                                    >
+                                        Log Out
+                                    </motion.button>
+                                )}
                             </motion.div>
                         </motion.div>
                     </motion.aside>

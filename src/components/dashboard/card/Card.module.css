@@ -28,7 +28,7 @@
 
 .number {
     position: absolute;
-    font-size: var(--font-size-x2large);
+    font-size: var(--font-size-xlarge);
     font-weight: bold;
     color: white;
     margin-inline-start: auto;
