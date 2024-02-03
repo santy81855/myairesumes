@@ -42,13 +42,11 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
             const menu = document.getElementById("mobilePopupMenu");
             if (!menu) return;
             if (!menu.contains(e.target as Node)) {
-                console.log("here");
                 const button = document.getElementById("mobileMenuButton");
                 if (!button) {
                     return;
                 }
                 if (!button.contains(e.target as Node)) {
-                    console.log(button);
                     setState(false);
                     return;
                 }

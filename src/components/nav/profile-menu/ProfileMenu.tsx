@@ -44,7 +44,6 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                     return;
                 }
                 if (!profileButton.contains(e.target as Node)) {
-                    console.log(profileButton);
                     setState(false);
                     return;
                 }

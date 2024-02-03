@@ -21,7 +21,6 @@ export default async function Home() {
     } else {
         currentUser = await res.json();
     }
-    console.log(currentUser);
     // if this is the first time the user is logging in, bring up a modal to redirect them to where they can fill out their basic info
     const showModal = currentUser && !currentUser.basicInfo;
 

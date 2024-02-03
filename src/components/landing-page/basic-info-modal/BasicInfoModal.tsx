@@ -10,7 +10,6 @@ type BasicInfoModalProps = {
 
 const BasicInfoModal = ({ currentUser }: BasicInfoModalProps) => {
     const updateBasicInfo = initializeUserBasicInfo.bind(null, currentUser);
-    console.log(currentUser);
     return (
         <StaticModal>
             <section className={styles.modalContent}>

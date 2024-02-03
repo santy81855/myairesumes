@@ -47,7 +47,11 @@ const Page = async ({
                 <CardSection currentUser={currentUser} key="dashBoardCards" />
             </div>
             {menuSection === "profile" && (
-                <Profile currentUser={currentUser} key="profileSection" />
+                <Profile
+                    currentUser={currentUser}
+                    searchParams={searchParams}
+                    key="profileSection"
+                />
             )}
         </main>
     );

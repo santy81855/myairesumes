@@ -11,6 +11,7 @@
     padding-block: var(--padding-block-medium);
     padding-inline: var(--padding-block-medium);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    gap: var(--padding-block-medium);
 }
 
 .profileSectionContent {
@@ -19,7 +20,7 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     gap: var(--padding-block-medium);
 }
@@ -30,7 +31,6 @@
     z-index: 1;
     width: 100%;
     text-align: left;
-    margin-block-end: var(--padding-block-medium);
 }
 
 .profileImage {
@@ -49,6 +49,19 @@
     color: #797979;
 }
 
+.nameInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+.nameLabel {
+    text-align: center;
+}
+
 .name {
     font-size: var(--font-size-medium);
     font-weight: 600;
@@ -58,6 +71,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
 }
 
 .contactInfo {
@@ -68,23 +82,31 @@
     align-items: center;
     text-align: left;
     margin-block-start: var(--padding-block-small);
+    gap: var(--padding-block-small);
 }
 
-.label {
-    font-size: var(--font-size-small);
-    z-index: 1;
+.fieldContainer {
     width: 100%;
-    color: #797979;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.4rem;
 }
 
 .item {
-    font-size: var(--font-size-medium);
+    font-size: var(--font-size-small);
+    font-weight: bold;
     z-index: 1;
     width: 100%;
-    padding-block-end: var(--padding-block-small);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    height: 30px;
+    background-color: rgb(242, 242, 242);
+    border-radius: var(--border-radius-xsmall);
+    padding-block: var(--padding-block-small);
+    padding-inline-start: var(--padding-block-small);
 }
 
 .profileImagecontainer {
@@ -95,6 +117,38 @@
     align-items: center;
     gap: var(--padding-block-medium);
     z-index: 1;
+}
+
+.input {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e1e1e1;
+    border-radius: var(--border-radius-xsmall);
+    padding-inline-start: var(--padding-block-small);
+    font-size: var(--font-size-small);
+}
+
+.input:focus {
+    outline: none;
+    border: 1px solid #a183cf;
+}
+
+.submitButton {
+    width: 100%;
+    background-color: #a183cf;
+    color: white;
+    border-radius: var(--border-radius-small);
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitButton:hover {
+    background-color: #8a6fbf;
 }
 
 @media screen and (max-width: 900px) {

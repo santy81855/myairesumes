@@ -3,13 +3,71 @@ import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
-export const updateUser = async (id: string, data: any) => {
+export const updateUserContactInfo = async (user: any, formData: any) => {
     "use server";
+    const { id } = user;
+    const email = formData.get("email");
+    const phone = formData.get("phone");
+    const website = formData.get("website");
+    const name = formData.get("name");
+    const basicInfo = user.basicInfo;
+    const data = {
+        basicInfo: {
+            ...basicInfo,
+            name,
+            email,
+            phone,
+            website,
+        },
+    };
     const response = await prisma.user.update({
         where: { id },
         data,
     });
-    return response;
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return redirect("/dashboard?menu=profile");
+};
+
+export const addUserWorkInfo = async (user: any, formData: any) => {
+    "use server";
+    const { id } = user;
+    const company = formData.get("company");
+    const position = formData.get("position");
+    const startDate = formData.get("startDate");
+    const endDate = formData.get("endDate");
+    const currentEmployer = formData.get("currentEmployer");
+    const work = user.basicInfo.work;
+    const newWork = {
+        company,
+        position,
+        startDate,
+        endDate,
+        currentEmployer: currentEmployer === "on" ? true : false,
+    };
+    work.push(newWork);
+    const basicInfo = user.basicInfo;
+    const data = {
+        basicInfo: {
+            ...basicInfo,
+            work,
+        },
+    };
+    const response = await prisma.user.update({
+        where: { id },
+        data,
+    });
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return redirect("/dashboard?menu=profile");
 };
 
 export const initializeUserBasicInfo = async (user: any) => {
@@ -40,5 +98,5 @@ export const initializeUserBasicInfo = async (user: any) => {
         };
     }
     revalidateTag("currentUser");
-    return redirect("/dashboard?menu=profile");
+    return redirect("/dashboard?menu=profile&tutorial=true");
 };

@@ -47,6 +47,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 100%;
 }
 
 .position {
@@ -56,6 +57,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-block-start: var(--padding-block-small);
+    width: 100%;
 }
 
 .dateRange {
@@ -65,6 +67,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-block-start: var(--padding-block-medium);
+    width: 100%;
 }
 
 .addWorkButton {
@@ -92,4 +95,113 @@
     fill: rgb(22, 22, 22);
     width: 100%;
     height: 100%;
+}
+
+.addTitle {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: rgb(22, 22, 22);
+    margin-block-start: var(--padding-block-small);
+}
+
+.workInfoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: var(--padding-block-medium);
+}
+
+.workInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.workInfoHorizontal {
+    display: flex;
+    width: 100%;
+    gap: var(--padding-block-small);
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.toggleSwitch {
+    position: relative;
+    width: 75px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.label {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(22, 22, 22);
+    margin-block-end: var(--padding-block-small);
+}
+
+.dateInput {
+    width: 100%;
+    display: flex;
+    gap: var(--padding-block-small);
+}
+
+.input {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e1e1e1;
+    border-radius: var(--border-radius-xsmall);
+    padding-inline-start: var(--padding-block-small);
+    font-size: var(--font-size-small);
+}
+
+.input:focus {
+    outline: none;
+    border: 1px solid #a183cf;
+}
+
+.saveButton {
+    width: 100%;
+    background-color: #a183cf;
+    color: white;
+    border-radius: var(--border-radius-small);
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    margin-block-start: var(--padding-block-medium);
+}
+
+.saveButton:hover {
+    background-color: #8a6fbf;
+}
+
+.endDateTitle {
+    display: flex;
+    width: 100%;
+    gap: var(--padding-block-small);
+}
+
+@media screen and (max-width: 480px) {
+    .workGrid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    }
+    .workItem {
+        height: 120px;
+    }
+    .company {
+        font-size: var(--font-size-xsmall);
+    }
+    .position {
+        font-size: var(--font-size-xsmall);
+    }
+    .dateRange {
+        font-size: var(--font-size-xsmall);
+    }
+    .dateInput {
+        flex-direction: column;
+        gap: var(--padding-block-medium);
+    }
 }
