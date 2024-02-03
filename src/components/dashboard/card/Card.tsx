@@ -1,5 +1,5 @@
 import styles from "./Card.module.css";
-import Image from "next/image";
+import Link from "next/link";
 
 type CardProps = {
     title: string;
@@ -9,10 +9,11 @@ type CardProps = {
     key: string;
 };
 
-const Card = ({ title, number, url, gridArea, key }: CardProps) => {
+const Card = ({ title, number, url, gridArea }: CardProps) => {
     return (
-        <section
-            key={key}
+        <Link
+            href={`/dashboard?menu=${title.toLowerCase().split(" ").join("-")}`}
+            title={title}
             className={styles.container}
             style={{
                 gridArea,
@@ -23,7 +24,7 @@ const Card = ({ title, number, url, gridArea, key }: CardProps) => {
         >
             <h3 className={styles.title}>{title}</h3>
             <p className={styles.number}>{number}</p>
-        </section>
+        </Link>
     );
 };
 

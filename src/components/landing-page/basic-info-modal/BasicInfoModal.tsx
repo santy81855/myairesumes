@@ -2,8 +2,15 @@ import styles from "./BasicInfoModal.module.css";
 import StaticModal from "@/components/static-modal/StaticModal";
 import Link from "next/link";
 import { magicResumeLogo } from "@/components/icons/iconSVG";
+import { initializeUserBasicInfo } from "@/actions/user";
 
-const BasicInfoModal = () => {
+type BasicInfoModalProps = {
+    currentUser: any;
+};
+
+const BasicInfoModal = ({ currentUser }: BasicInfoModalProps) => {
+    const updateBasicInfo = initializeUserBasicInfo.bind(null, currentUser);
+    console.log(currentUser);
     return (
         <StaticModal>
             <section className={styles.modalContent}>
@@ -17,9 +24,11 @@ const BasicInfoModal = () => {
                     Click below to store some basic details to kickstart the
                     process!
                 </p>
-                <Link href="/dashboard?menu=profile" className={styles.button}>
-                    <p>Get Started</p>
-                </Link>
+                <form className={styles.form} action={updateBasicInfo}>
+                    <button type="submit" className={styles.button}>
+                        Get Started
+                    </button>
+                </form>
             </section>
         </StaticModal>
     );

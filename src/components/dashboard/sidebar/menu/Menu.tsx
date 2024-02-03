@@ -32,6 +32,7 @@ const Menu = () => {
         <section className={styles.menu}>
             <p className={styles.name}>MAGIC RESUME</p>
             <button
+                title="Profile"
                 className={
                     menuSection === "profile" ? styles.active : styles.menuItem
                 }
@@ -40,6 +41,7 @@ const Menu = () => {
                 Profile
             </button>
             <button
+                title="Account"
                 className={
                     menuSection === "account" ? styles.active : styles.menuItem
                 }
@@ -48,6 +50,7 @@ const Menu = () => {
                 Account
             </button>
             <button
+                title="Jobs"
                 className={
                     menuSection === "jobs" ? styles.active : styles.menuItem
                 }
@@ -56,6 +59,7 @@ const Menu = () => {
                 Jobs
             </button>
             <button
+                title="Resumes"
                 className={
                     menuSection === "resumes" ? styles.active : styles.menuItem
                 }
@@ -64,6 +68,7 @@ const Menu = () => {
                 Resumes
             </button>
             <button
+                title="Cover Letters"
                 className={
                     menuSection === "cover-letters"
                         ? styles.active
@@ -73,7 +78,11 @@ const Menu = () => {
             >
                 Cover Letters
             </button>
-            <button className={styles.menuItem} onClick={signoutPressed}>
+            <button
+                title="Logout"
+                className={styles.menuItem}
+                onClick={signoutPressed}
+            >
                 Logout
             </button>
             {isLoading && <LoadingScreen />}

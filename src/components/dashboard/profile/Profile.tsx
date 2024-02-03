@@ -1,5 +1,6 @@
 import styles from "./Profile.module.css";
-import Image from "next/image";
+import Contact from "./contact-info/Contact";
+import Work from "./work/Work";
 
 type ProfileProps = {
     currentUser: any;
@@ -14,31 +15,8 @@ const Profile = ({ currentUser }: ProfileProps) => {
 
     return (
         <section className={styles.container}>
-            <section className={styles.profileSection}>
-                <div className={styles.profileSectionContent}>
-                    <p className={styles.title}>Profile</p>
-                    <section
-                        className={styles.profileImage}
-                        style={{
-                            background: `url(${url})`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                        }}
-                    ></section>
-                    <section className={styles.nameInfo}>
-                        <p className={styles.name}>{name}</p>
-                    </section>
-                    <section className={styles.contactInfo}>
-                        <p className={styles.label}>email</p>
-                        <p className={styles.item}>{email}</p>
-                        <p className={styles.label}>phone</p>
-                        <p className={styles.item}>{phone}</p>
-                        <p className={styles.label}>website</p>
-                        <p className={styles.item}>{website}</p>
-                    </section>
-                </div>
-            </section>
-            <section className={styles.workSection}>work</section>
+            <Contact currentUser={currentUser} />
+            <Work currentUser={currentUser} />
         </section>
     );
 };

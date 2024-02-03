@@ -7,6 +7,7 @@
     padding: var(--padding-block-small);
     position: relative;
     cursor: pointer;
+    border: none;
 }
 
 .container:hover {
