@@ -28,6 +28,8 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                             name="company"
                             className={styles.input}
                             defaultValue=""
+                            required
+                            autoFocus
                         />
                     </section>
                     <section className={styles.workInfo}>
@@ -37,6 +39,7 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                             name="position"
                             className={styles.input}
                             defaultValue=""
+                            required
                         />
                     </section>
                     <section className={styles.workInfoHorizontal}>
@@ -53,6 +56,7 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                                 name="startDate"
                                 className={styles.input}
                                 defaultValue=""
+                                required
                             />
                         </section>
                         <section className={styles.workInfo}>
@@ -61,7 +65,6 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                                 type="date"
                                 name="endDate"
                                 className={styles.input}
-                                defaultValue=""
                             />
                         </section>
                     </section>

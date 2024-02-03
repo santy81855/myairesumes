@@ -42,6 +42,7 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                                 name="name"
                                 className={styles.input}
                                 defaultValue={name}
+                                autoFocus
                             />
                         ) : (
                             <p className={styles.name}>{name}</p>
