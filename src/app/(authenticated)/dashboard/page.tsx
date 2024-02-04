@@ -45,6 +45,7 @@ const Page = async ({
                     key="profileSection"
                 />
             )}
+            <div className={styles.circle}></div>
         </main>
     );
 };

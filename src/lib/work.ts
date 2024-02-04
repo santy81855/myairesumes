@@ -1,7 +1,5 @@
 export const sortObjectArrayByDateEnd = (arr: any[], sort: number) => {
-    console.log(arr);
     const newArr = [...arr];
-    console.log(newArr);
     newArr.sort((a, b) => {
         const dateA = getDateValue(a.endDate) as any;
         const dateB = getDateValue(b.endDate) as any;
@@ -12,7 +10,6 @@ export const sortObjectArrayByDateEnd = (arr: any[], sort: number) => {
             return dateA - dateB;
         }
     });
-    console.log(newArr);
     return newArr;
 };
 

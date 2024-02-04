@@ -32,6 +32,17 @@
     top: calc(15rem - 1rem);
 }
 
+.circle {
+    position: absolute;
+    width: max(110vw, 110vh);
+    height: max(110vw, 110vh);
+    border-radius: 50%;
+    background-color: #f4e9ff;
+    z-index: -1;
+
+    transform: translateY(-50%);
+}
+
 @media screen and (max-width: 768px) {
     .cardContainer {
         display: none;

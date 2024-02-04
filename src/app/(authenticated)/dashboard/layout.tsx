@@ -29,8 +29,8 @@ export default function RootLayout({
                     <div style={{ width: "100%", height: "100%" }}>
                         <Navbar
                             style={{
-                                backgroundColor: "#f5f5f5",
-                                color: "#a183cf",
+                                backgroundColor: "#f4e9ff",
+                                color: "black",
                             }}
                         />
                         {children}
