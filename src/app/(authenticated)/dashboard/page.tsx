@@ -2,8 +2,8 @@ import styles from "./page.module.css";
 import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
-import CardSection from "@/components/dashboard/card-section/CardSection";
 import Profile from "@/components/dashboard/profile/Profile";
+import TitleSection from "@/components/dashboard/title-section/TitleSection";
 
 const Page = async ({
     params,
@@ -37,15 +37,7 @@ const Page = async ({
             <p className={`${styles.bottomHeading} ${styles.largeHeading}`}>
                 BOARD
             </p>
-            <section className={styles.titleSection}>
-                <h1 className={styles.pageHeading}>Dashboard</h1>
-                <p className={styles.subHeading}>
-                    {currentUser.firstName} {currentUser.lastName}
-                </p>
-            </section>
-            <div className={styles.profileCardContainer}>
-                <CardSection currentUser={currentUser} key="dashBoardCards" />
-            </div>
+            <TitleSection currentUser={currentUser} />
             {menuSection === "profile" && (
                 <Profile
                     currentUser={currentUser}

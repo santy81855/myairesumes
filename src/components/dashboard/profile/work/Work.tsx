@@ -2,8 +2,14 @@ import styles from "./Work.module.css";
 import { plusIcon } from "@/components/icons/iconSVG";
 import Link from "next/link";
 import Toggle from "@/components/toggle/Toggle";
-import { addUserWorkInfo } from "@/actions/user";
+import {
+    addUserWorkInfo,
+    removeUserWorkInfo,
+    updateUserWorkInfo,
+} from "@/actions/user";
 import FormLoading from "@/components/form-loading/FormLoading";
+import { formatDateMonthYear } from "@/lib/date";
+import { sortObjectArrayByDateEnd } from "@/lib/work";
 
 type WorkProps = {
     currentUser: any;
@@ -12,22 +18,42 @@ type WorkProps = {
 
 const Work = ({ currentUser, searchParams }: WorkProps) => {
     const { basicInfo } = currentUser;
-    const work = basicInfo ? basicInfo.work : [];
-    const edit = searchParams?.workEdit || false;
-    const updateWorkInfo = addUserWorkInfo.bind(null, currentUser);
+    const work = basicInfo
+        ? sortObjectArrayByDateEnd(basicInfo.work, basicInfo.workOrder)
+        : [];
+    const edit = searchParams?.addJob || false;
+    const workId = edit ? parseInt(searchParams?.jobId as string, 10) : null;
+    const workBeingEdited =
+        (workId && work.find((job: any) => job.id === workId)) || null;
+    const addWorkInfo = addUserWorkInfo.bind(null, currentUser);
+    const removeWorkInfo = removeUserWorkInfo.bind(
+        null,
+        currentUser,
+        workId || -1
+    );
+    const updateWorkInfo = updateUserWorkInfo.bind(
+        null,
+        currentUser,
+        workId || -1
+    );
+
     return (
-        <form className={styles.workSection} action={updateWorkInfo}>
-            <p className={styles.title}>Work</p>
+        <form className={styles.workSection}>
+            <section className={styles.titleRow}>
+                <p className={styles.title}>Work</p>
+            </section>
             {edit ? (
                 <section className={styles.workInfoContainer}>
-                    <p className={styles.addTitle}>Add a Job</p>
+                    <p className={styles.addTitle}>
+                        {workId ? "Edit Job" : "Add a Job"}
+                    </p>
                     <section className={styles.workInfo}>
                         <p className={styles.label}>Company</p>
                         <input
                             type="text"
                             name="company"
                             className={styles.input}
-                            defaultValue=""
+                            defaultValue={workId ? workBeingEdited.company : ""}
                             required
                             autoFocus
                         />
@@ -38,14 +64,23 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                             type="text"
                             name="position"
                             className={styles.input}
-                            defaultValue=""
+                            defaultValue={
+                                workId ? workBeingEdited.position : ""
+                            }
                             required
                         />
                     </section>
                     <section className={styles.workInfoHorizontal}>
                         <p className={styles.label}>Current Employer</p>
                         <div className={styles.toggleSwitch}>
-                            <Toggle name="currentEmployer" />
+                            <Toggle
+                                name="currentEmployer"
+                                defaultChecked={
+                                    workId
+                                        ? workBeingEdited.currentEmployer
+                                        : false
+                                }
+                            />
                         </div>
                     </section>
                     <section className={styles.dateInput}>
@@ -55,7 +90,11 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                                 type="date"
                                 name="startDate"
                                 className={styles.input}
-                                defaultValue=""
+                                defaultValue={
+                                    workId
+                                        ? workBeingEdited.startDate
+                                        : new Date().toISOString().split("T")[0]
+                                }
                                 required
                             />
                         </section>
@@ -65,72 +104,98 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                                 type="date"
                                 name="endDate"
                                 className={styles.input}
+                                defaultValue={
+                                    workId
+                                        ? workBeingEdited.endDate.toLowerCase() ===
+                                          "present"
+                                            ? new Date()
+                                                  .toISOString()
+                                                  .split("T")[0]
+                                            : workBeingEdited.endDate
+                                        : new Date().toISOString().split("T")[0]
+                                }
+                                max={new Date().toISOString().split("T")[0]}
                             />
                         </section>
                     </section>
-                    <button className={styles.saveButton}>Save</button>
+                    <section className={styles.buttonContainer}>
+                        <Link
+                            href="/dashboard?menu=profile"
+                            className={styles.cancelButton}
+                        >
+                            cancel
+                        </Link>
+                        {workId ? (
+                            <section
+                                className={styles.horizontalButtonContainer}
+                            >
+                                <button
+                                    type="submit"
+                                    className={styles.removeButton}
+                                    formAction={removeWorkInfo}
+                                >
+                                    Remove
+                                </button>
+                                <button
+                                    type="submit"
+                                    className={styles.saveButton}
+                                    formAction={updateWorkInfo}
+                                >
+                                    Update
+                                </button>
+                            </section>
+                        ) : (
+                            <button
+                                type="submit"
+                                className={styles.saveButton}
+                                formAction={addWorkInfo}
+                            >
+                                Save
+                            </button>
+                        )}
+                    </section>
                 </section>
             ) : (
                 <section className={styles.workGrid}>
                     {work.map((job: any, index: number) => {
                         return (
                             <section className={styles.workItem} key={index}>
-                                <p className={styles.company}>{job.company}</p>
-                                <p className={styles.position}>
-                                    {job.position}
-                                </p>
-                                <section className={styles.dateRange}>
-                                    <p className={styles.startDate}>
-                                        {job.startDate}
-                                        {" - "}
+                                <section className={styles.workItemInfo}>
+                                    <p className={styles.company}>
+                                        {job.company}
                                     </p>
-                                    {job.currentEmployer ? (
-                                        <p className={styles.endDate}>
-                                            Present
+                                    <p className={styles.position}>
+                                        {job.position}
+                                    </p>
+                                    <section className={styles.dateRange}>
+                                        <p className={styles.startDate}>
+                                            {formatDateMonthYear(job.startDate)}
+                                            {" - "}
                                         </p>
-                                    ) : (
-                                        <p className={styles.endDate}>
-                                            {job.endDate}
-                                        </p>
-                                    )}
+                                        {job.currentEmployer ? (
+                                            <p className={styles.endDate}>
+                                                {job.endDate}
+                                            </p>
+                                        ) : (
+                                            <p className={styles.endDate}>
+                                                {formatDateMonthYear(
+                                                    job.endDate
+                                                )}
+                                            </p>
+                                        )}
+                                    </section>
                                 </section>
+                                <Link
+                                    className={styles.editButton}
+                                    href={`/dashboard?menu=profile&addJob=true&jobId=${job.id}`}
+                                >
+                                    Edit
+                                </Link>
                             </section>
                         );
                     })}
-                    <section className={styles.workItem}>
-                        <p className={styles.company}>Example Company Name</p>
-                        <p className={styles.position}>Example Position</p>
-                        <section className={styles.dateRange}>
-                            <p className={styles.startDate}>Jan 2020{" - "}</p>
-                            <p className={styles.endDate}>Present</p>
-                        </section>
-                    </section>
-                    <section className={styles.workItem}>
-                        <p className={styles.company}>Example Company Name</p>
-                        <p className={styles.position}>Example Position</p>
-                        <section className={styles.dateRange}>
-                            <p className={styles.startDate}>Jan 2020{" - "}</p>
-                            <p className={styles.endDate}>Present</p>
-                        </section>
-                    </section>
-                    <section className={styles.workItem}>
-                        <p className={styles.company}>Example Company Name</p>
-                        <p className={styles.position}>Example Position</p>
-                        <section className={styles.dateRange}>
-                            <p className={styles.startDate}>Jan 2020{" - "}</p>
-                            <p className={styles.endDate}>Present</p>
-                        </section>
-                    </section>
-                    <section className={styles.workItem}>
-                        <p className={styles.company}>Example Company Name</p>
-                        <p className={styles.position}>Example Position</p>
-                        <section className={styles.dateRange}>
-                            <p className={styles.startDate}>Jan 2020{" - "}</p>
-                            <p className={styles.endDate}>Present</p>
-                        </section>
-                    </section>
                     <Link
-                        href="/dashboard?menu=profile&workEdit=true"
+                        href="/dashboard?menu=profile&addJob=true"
                         className={styles.addWorkButton}
                     >
                         <div className={styles.svgContainer}>{plusIcon}</div>

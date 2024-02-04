@@ -29,7 +29,7 @@ export default function RootLayout({
                     <div style={{ width: "100%", height: "100%" }}>
                         <Navbar
                             style={{
-                                backgroundColor: "#eaeaea",
+                                backgroundColor: "#f5f5f5",
                                 color: "#a183cf",
                             }}
                         />

@@ -10,7 +10,6 @@ type ContactProps = {
 };
 
 const Contact = ({ currentUser, searchParams }: ContactProps) => {
-    //const [isLoading, setIsLoading] = useState(false);
     const { imageUrl, basicInfo, firstName, lastName, email } = currentUser;
     const url = imageUrl || "/images/icons/default-profile-picture.svg";
     const name = basicInfo ? basicInfo.name : `${firstName} ${lastName}`;
@@ -92,9 +91,17 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                 </section>
             </div>
             {edit ? (
-                <button type="submit" className={styles.submitButton}>
-                    Save
-                </button>
+                <section className={styles.buttonContainer}>
+                    <Link
+                        href="/dashboard?menu=profile"
+                        className={styles.cancelButton}
+                    >
+                        cancel
+                    </Link>
+                    <button type="submit" className={styles.submitButton}>
+                        Save
+                    </button>
+                </section>
             ) : (
                 <Link
                     href="/dashboard?menu=profile&profileEdit=true"
