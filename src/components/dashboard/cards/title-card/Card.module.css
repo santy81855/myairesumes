@@ -1,5 +1,5 @@
 .container {
-    border-radius: var(--border-radius-small);
+    border-radius: var(--border-radius-xsmall);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     display: flex;
     background-color: blue;

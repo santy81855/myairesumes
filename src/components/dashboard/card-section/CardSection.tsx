@@ -1,5 +1,5 @@
 import styles from "./CardSection.module.css";
-import Card from "@/components/dashboard/card/Card";
+import Card from "@/components/dashboard/cards/title-card/Card";
 
 type CardSectionProps = {
     currentUser: any;

@@ -6,7 +6,14 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
-import Spinner from "@/components/loaders/Spinner/Spinner";
+import {
+    profileIcon,
+    accountIcon,
+    jobIcon,
+    resumeIcon,
+    coverLetterIcon,
+    logoutIcon,
+} from "@/components/icons/iconSVG";
 
 const Menu = () => {
     const router = useRouter();
@@ -38,6 +45,7 @@ const Menu = () => {
                 }
                 onClick={() => handleMenuClick("profile")}
             >
+                <div className={styles.iconContainer}>{profileIcon}</div>
                 Profile
             </button>
             <button
@@ -47,6 +55,7 @@ const Menu = () => {
                 }
                 onClick={() => handleMenuClick("account")}
             >
+                <div className={styles.iconContainer}>{accountIcon}</div>
                 Account
             </button>
             <button
@@ -56,6 +65,7 @@ const Menu = () => {
                 }
                 onClick={() => handleMenuClick("jobs")}
             >
+                <div className={styles.iconContainer}>{jobIcon}</div>
                 Jobs
             </button>
             <button
@@ -65,6 +75,7 @@ const Menu = () => {
                 }
                 onClick={() => handleMenuClick("resumes")}
             >
+                <div className={styles.iconContainer}>{resumeIcon}</div>
                 Resumes
             </button>
             <button
@@ -76,6 +87,7 @@ const Menu = () => {
                 }
                 onClick={() => handleMenuClick("cover-letters")}
             >
+                <div className={styles.iconContainer}>{coverLetterIcon}</div>
                 Cover Letters
             </button>
             <button
@@ -83,6 +95,7 @@ const Menu = () => {
                 className={styles.menuItem}
                 onClick={signoutPressed}
             >
+                <div className={styles.iconContainer}>{logoutIcon}</div>
                 Logout
             </button>
             {isLoading && <LoadingScreen />}

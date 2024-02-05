@@ -1,19 +1,3 @@
-.profileSection {
-    grid-area: profile;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: white;
-    border-radius: var(--border-radius-small);
-    position: relative;
-    overflow: hidden;
-    padding-block: var(--padding-block-medium);
-    padding-inline: var(--padding-block-medium);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    gap: var(--padding-block-medium);
-}
-
 .profileSectionContent {
     width: 100%;
     height: 100%;
@@ -23,14 +7,7 @@
     justify-content: space-around;
     align-items: center;
     gap: var(--padding-block-medium);
-}
-
-.title {
-    font-size: var(--font-size-medium);
-    font-weight: bold;
-    z-index: 1;
-    width: 100%;
-    text-align: left;
+    background-color: transparent;
 }
 
 .profileImage {
@@ -117,16 +94,34 @@
     align-items: center;
     gap: var(--padding-block-medium);
     z-index: 1;
-    background-color: rgb(244, 233, 255, 0.7);
-    border-radius: var(--border-radius-small);
+    border-radius: var(--border-radius-xsmall);
     padding-block: var(--padding-block-medium);
+    position: relative;
+}
+
+.nameInputContainer {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+.nameInput {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-small);
 }
 
 .input {
     width: 100%;
     height: 30px;
     border: 1px solid #e1e1e1;
-    border-radius: var(--border-radius-xsmall);
+
     padding-inline-start: var(--padding-block-small);
     font-size: var(--font-size-small);
 }
@@ -140,7 +135,6 @@
     width: 100%;
     background-color: #a183cf;
     color: white;
-    border-radius: var(--border-radius-small);
     min-height: 40px;
     border: none;
     cursor: pointer;
@@ -165,7 +159,6 @@
     width: 100%;
     background-color: #eaeaea;
     color: rgb(22, 22, 22);
-    border-radius: var(--border-radius-small);
     height: 40px;
     border: none;
     cursor: pointer;

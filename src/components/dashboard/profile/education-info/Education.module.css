@@ -1,11 +1,11 @@
-.workGrid {
+.educationGrid {
     width: 100%;
     display: grid;
     gap: var(--gap-medium);
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
-.workItem {
+.educationItem {
     display: flex;
     border: 1px solid rgb(216, 216, 216, 0.5);
     height: 160px;
@@ -16,16 +16,15 @@
     padding-inline: var(--padding-block-medium);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     position: relative;
-    background-color: white;
 }
 
-.workItemInfo {
+.educationItemInfo {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.company {
+.schoolName {
     font-size: var(--font-size-small);
     font-weight: bold;
     color: rgb(22, 22, 22);
@@ -35,7 +34,7 @@
     width: 100%;
 }
 
-.position {
+.degreeType {
     font-size: var(--font-size-small);
     color: #9f9f9f;
     white-space: nowrap;
@@ -55,7 +54,7 @@
     width: 100%;
 }
 
-.addWorkButton {
+.addEducationButton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +65,7 @@
     cursor: pointer;
 }
 
-.addWorkButton:hover {
+.addEducationButton:hover {
     background-color: #d1d1d1;
 }
 
@@ -89,7 +88,7 @@
     margin-block-start: var(--padding-block-small);
 }
 
-.workInfoContainer {
+.educationInfoContainer {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -99,13 +98,13 @@
     gap: var(--padding-block-medium);
 }
 
-.workInfo {
+.educationInfo {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.workInfoHorizontal {
+.educationInfoHorizontal {
     display: flex;
     width: 100%;
     gap: var(--padding-block-small);
@@ -225,17 +224,25 @@
     background-color: #8a6fbf;
 }
 
+.degreeInfoInput {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
 @media screen and (max-width: 480px) {
-    .workGrid {
+    .educationGrid {
         grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     }
-    .workItem {
+    .educationItem {
         height: 150px;
     }
-    .company {
+    .schoolName {
         font-size: var(--font-size-xsmall);
     }
-    .position {
+    .degreeType {
         font-size: var(--font-size-xsmall);
     }
     .dateRange {

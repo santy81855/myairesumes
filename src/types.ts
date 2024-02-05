@@ -18,3 +18,11 @@ export type FailedPaymentEmailData = {
 export type ActionResult = {
     error: string | null;
 };
+
+export type paymentIntent = {
+    id: string;
+    amonut: number;
+    createdAt: string | number;
+    currency: string;
+    status: string;
+};

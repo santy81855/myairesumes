@@ -19,11 +19,12 @@
 .largeHeading {
     font-size: 15rem;
     font-weight: 900;
-    color: #e5e5e5;
+    color: #f5f5f5;
     position: absolute;
     left: 0;
     z-index: 0;
 }
+
 .topHeading {
     top: -1rem;
 }
@@ -42,6 +43,16 @@
 
     transform: translateY(-50%);
 }
+
+/* .circle {
+    position: absolute;
+    background-color: #f4e9ff;
+    z-index: -1;
+    top: 0rem;
+    width: 150%;
+    height: 150%;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+} */
 
 @media screen and (max-width: 768px) {
     .cardContainer {

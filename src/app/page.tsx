@@ -23,7 +23,8 @@ export default async function Home() {
             currentUser = await res.json();
         }
         // if this is the first time the user is logging in, bring up a modal to redirect them to where they can fill out their basic info
-        showModal = currentUser && !currentUser.basicInfo;
+        showModal =
+            currentUser && Object.keys(currentUser.basicInfo).length === 0;
     }
 
     return (

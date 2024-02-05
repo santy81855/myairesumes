@@ -2,8 +2,9 @@ import styles from "./page.module.css";
 import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
-import Profile from "@/components/dashboard/profile/Profile";
 import TitleSection from "@/components/dashboard/title-section/TitleSection";
+import Profile from "@/components/dashboard/profile/Profile";
+import Account from "@/components/dashboard/account/Account";
 
 const Page = async ({
     params,
@@ -27,6 +28,9 @@ const Page = async ({
     if (!currentUser) {
         redirect("/sign-in");
     }
+    if (searchParams && !("menu" in searchParams)) {
+        redirect("/dashboard?menu=profile");
+    }
     const menuSection = searchParams?.menu || "";
 
     return (
@@ -43,6 +47,13 @@ const Page = async ({
                     currentUser={currentUser}
                     searchParams={searchParams}
                     key="profileSection"
+                />
+            )}
+            {menuSection === "account" && (
+                <Account
+                    currentUser={currentUser}
+                    searchParams={searchParams}
+                    key="accountSection"
                 />
             )}
             <div className={styles.circle}></div>

@@ -4,6 +4,13 @@ import CancelButton from "@/components/subscription/cancel-subscription-button/C
 import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getSubscription } from "@/lib/subscription";
+import { getUser } from "@/lib/user";
+import {
+    getAllCustomerSessions,
+    getCustomerSubscriptions,
+    getStripePaymentDetails,
+} from "@/lib/stripe";
+import { updatePayment } from "@/actions/stripe";
 
 const Page = async () => {
     const { user } = await validateRequest();
@@ -18,10 +25,34 @@ const Page = async () => {
     } else {
         subscription = await res.json();
     }
+    const userRes = await getUser(user.id);
+    let currentUser;
+    if (!userRes.ok) {
+        currentUser = null;
+    } else {
+        currentUser = await userRes.json();
+    }
+
+    const data = await getAllCustomerSessions(currentUser.stripeCustomerId);
+    const subscriptionData = (await getCustomerSubscriptions(
+        currentUser.stripeCustomerId
+    )) as any;
+    console.log(subscriptionData);
+
+    if (subscriptionData) {
+        const paymentData = await getStripePaymentDetails(
+            subscriptionData.default_payment_method
+        );
+    }
+    const updatePaymentStripe = updatePayment.bind(
+        null,
+        currentUser.stripeCustomerId,
+        subscriptionData?.id
+    );
 
     return (
         <main className={styles.main}>
-            {!subscription ? (
+            {currentUser?.status === "free" ? (
                 <>
                     <p>BUY PLS</p>
                     <CheckoutButton />
@@ -30,6 +61,9 @@ const Page = async () => {
                 <>
                     <p>DONT CANCEL PLS</p>
                     <CancelButton />
+                    <form action={updatePaymentStripe}>
+                        <button type="submit">update</button>
+                    </form>
                 </>
             )}
         </main>

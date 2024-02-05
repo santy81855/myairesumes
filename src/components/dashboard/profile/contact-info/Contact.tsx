@@ -3,6 +3,7 @@ import styles from "./Contact.module.css";
 import { updateUserContactInfo } from "@/actions/user";
 import "react-toastify/dist/ReactToastify.css";
 import FormLoading from "@/components/form-loading/FormLoading";
+import Card from "@/components/dashboard/cards/dashboard-cards/Card";
 
 type ContactProps = {
     currentUser: any;
@@ -12,15 +13,16 @@ type ContactProps = {
 const Contact = ({ currentUser, searchParams }: ContactProps) => {
     const { imageUrl, basicInfo, firstName, lastName, email } = currentUser;
     const url = imageUrl || "/images/icons/default-profile-picture.svg";
-    const name = basicInfo ? basicInfo.name : `${firstName} ${lastName}`;
+    const first = basicInfo ? basicInfo.firstName : firstName;
+    const last = basicInfo ? basicInfo.lastName : lastName;
+    const profileEmail = basicInfo ? basicInfo.email : email;
     const phone = basicInfo ? basicInfo.phone : "";
     const website = basicInfo ? basicInfo.website : "";
     const edit = searchParams?.profileEdit || false;
     const updateBasicInfo = updateUserContactInfo.bind(null, currentUser);
 
     return (
-        <form className={styles.profileSection} action={updateBasicInfo}>
-            <p className={styles.title}>Profile</p>
+        <Card gridArea="profile" title="Profile">
             <div className={styles.profileSectionContent}>
                 <section className={styles.profileImagecontainer}>
                     <section
@@ -32,19 +34,42 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                         }}
                     ></section>
                     <section className={styles.nameInfo}>
-                        <p className={`${styles.label} ${styles.nameLabel}`}>
-                            name
-                        </p>
                         {edit ? (
-                            <input
-                                type="text"
-                                name="name"
-                                className={styles.input}
-                                defaultValue={name}
-                                autoFocus
-                            />
+                            <section className={styles.nameInputContainer}>
+                                <section className={styles.nameInput}>
+                                    <p className={styles.label}>first name</p>
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        className={styles.input}
+                                        defaultValue={first}
+                                        autoFocus
+                                        required
+                                    />
+                                </section>
+                                <section className={styles.nameInput}>
+                                    <p className={styles.label}>last name</p>
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        className={styles.input}
+                                        defaultValue={last}
+                                        autoFocus
+                                        required
+                                    />
+                                </section>
+                            </section>
                         ) : (
-                            <p className={styles.name}>{name}</p>
+                            <>
+                                <p
+                                    className={`${styles.label} ${styles.nameLabel}`}
+                                >
+                                    name
+                                </p>
+                                <p
+                                    className={styles.name}
+                                >{`${first} ${last}`}</p>
+                            </>
                         )}
                     </section>
                 </section>
@@ -56,10 +81,11 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                                 type="text"
                                 name="email"
                                 className={styles.input}
-                                defaultValue={email}
+                                defaultValue={profileEmail}
+                                required
                             />
                         ) : (
-                            <p className={styles.item}>{email}</p>
+                            <p className={styles.item}>{profileEmail}</p>
                         )}
                     </section>
                     <section className={styles.fieldContainer}>
@@ -70,6 +96,7 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                                 name="phone"
                                 className={styles.input}
                                 defaultValue={phone}
+                                required
                             />
                         ) : (
                             <p className={styles.item}>{phone}</p>
@@ -98,7 +125,11 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                     >
                         cancel
                     </Link>
-                    <button type="submit" className={styles.submitButton}>
+                    <button
+                        type="submit"
+                        className={styles.submitButton}
+                        formAction={updateBasicInfo}
+                    >
                         Save
                     </button>
                 </section>
@@ -112,7 +143,7 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                 </Link>
             )}
             <FormLoading />
-        </form>
+        </Card>
     );
 };
 

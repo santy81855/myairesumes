@@ -1,4 +1,4 @@
-import { stripe } from "@/lib/stripe";
+import { stripe, getCustomerSubscriptions } from "@/lib/stripe";
 import { headers } from "next/headers";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
@@ -34,6 +34,35 @@ export async function POST(req: Request) {
             // optimistically create subscription as soon as checkout session is completed
             case "checkout.session.completed":
                 session = event.data.object;
+                // check if this is a subscription or a payment update
+                if (session.mode === "setup") {
+                    // if it is a payment update, we need to update the subscription in the database
+                    const customerId = session.customer as string;
+                    subscription = (await getCustomerSubscriptions(
+                        customerId
+                    )) as Stripe.Subscription;
+                    if (!subscription)
+                        throw new Error("Subscription not found...");
+                    // get the payment method that was used in the session by first getting the setupIntent
+                    const setupIntent = await stripe.setupIntents.retrieve(
+                        session.setup_intent as string
+                    );
+                    if (!setupIntent)
+                        throw new Error("Setup intent not found...");
+
+                    // get the payment method from the setupIntent
+                    const paymentMethodId = setupIntent.payment_method
+                        ? (setupIntent.payment_method as string)
+                        : "";
+                    // if the payment method is not found, throw an error
+                    if (paymentMethodId === "")
+                        throw new Error("Payment method not found...");
+                    // update the payment method for the subscription
+                    await stripe.subscriptions.update(subscription.id, {
+                        default_payment_method: paymentMethodId,
+                    });
+                    return new Response(null, { status: 200 });
+                }
                 subscription = await stripe.subscriptions.retrieve(
                     session.subscription as string
                 );
@@ -159,7 +188,6 @@ export async function POST(req: Request) {
                 return new Response(null, { status: 200 });
         }
     } catch (error) {
-        console.log(error);
         return new Response(
             "Webhook handler failed. View logs to see the error.",
             {

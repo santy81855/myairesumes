@@ -10,6 +10,7 @@ const poppins = Poppins({
 });
 import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import Navbar from "@/components/nav/Navbar";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Dashboard",

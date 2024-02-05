@@ -1,114 +1,145 @@
-import styles from "./Work.module.css";
-import { plusIcon } from "@/components/icons/iconSVG";
+import styles from "./Education.module.css";
 import Link from "next/link";
 import Toggle from "@/components/toggle/Toggle";
 import {
-    addUserWorkInfo,
-    removeUserWorkInfo,
-    updateUserWorkInfo,
+    addUserEducationInfo,
+    removeUserEducationInfo,
+    updateUserEducationInfo,
 } from "@/actions/user";
 import FormLoading from "@/components/form-loading/FormLoading";
 import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
+import { plusIcon } from "@/components/icons/iconSVG";
 import Card from "@/components/dashboard/cards/dashboard-cards/Card";
 
-type WorkProps = {
+type EducationProps = {
     currentUser: any;
     searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-const Work = ({ currentUser, searchParams }: WorkProps) => {
+export const Education = ({ currentUser, searchParams }: EducationProps) => {
     const { basicInfo } = currentUser;
-    const work = basicInfo
-        ? sortObjectArrayByDateEnd(basicInfo.work, basicInfo.workOrder)
+    const education = basicInfo
+        ? sortObjectArrayByDateEnd(
+              basicInfo.education,
+              basicInfo.educationOrder
+          )
         : [];
-    const edit = searchParams?.addJob || false;
-    const workId = edit ? parseInt(searchParams?.jobId as string, 10) : null;
-    const workBeingEdited =
-        (workId && work.find((job: any) => job.id === workId)) || null;
-    const addWorkInfo = addUserWorkInfo.bind(null, currentUser);
-    const removeWorkInfo = removeUserWorkInfo.bind(
+    const edit = searchParams?.addEducation || false;
+    const educationId = edit
+        ? parseInt(searchParams?.educationId as string, 10)
+        : null;
+    const educationBeingEdited =
+        (educationId &&
+            education.find((education: any) => education.id === educationId)) ||
+        null;
+    const addEducationInfo = addUserEducationInfo.bind(null, currentUser);
+    const removeEducationInfo = removeUserEducationInfo.bind(
         null,
         currentUser,
-        workId || -1
+        educationId || -1
     );
-    const updateWorkInfo = updateUserWorkInfo.bind(
+    const updateEducationInfo = updateUserEducationInfo.bind(
         null,
         currentUser,
-        workId || -1
+        educationId || -1
     );
 
     return (
-        <Card gridArea="work" title="Work History">
+        <Card gridArea="education" title="Education History">
+            <section className={styles.titleRow}>
+                <p className={styles.title}>Education History</p>
+            </section>
             {edit ? (
-                <section className={styles.workInfoContainer}>
+                <section className={styles.educationInfoContainer}>
                     <p className={styles.addTitle}>
-                        {workId ? "Edit Job" : "Add a Job"}
+                        {educationId ? "Edit Degree" : "Add a Degree"}
                     </p>
-                    <section className={styles.workInfo}>
-                        <p className={styles.label}>Company</p>
+                    <section className={styles.educationInfo}>
+                        <p className={styles.label}>School Name</p>
                         <input
                             type="text"
-                            name="company"
+                            name="schoolName"
                             className={styles.input}
-                            defaultValue={workId ? workBeingEdited.company : ""}
+                            defaultValue={
+                                educationId
+                                    ? educationBeingEdited.schoolName
+                                    : ""
+                            }
                             required
                             autoFocus
                         />
                     </section>
-                    <section className={styles.workInfo}>
-                        <p className={styles.label}>Position</p>
-                        <input
-                            type="text"
-                            name="position"
-                            className={styles.input}
-                            defaultValue={
-                                workId ? workBeingEdited.position : ""
-                            }
-                            required
-                        />
+                    <section className={styles.degreeInfoInput}>
+                        <section className={styles.educationInfo}>
+                            <p className={styles.label}>Degree Type</p>
+                            <input
+                                type="text"
+                                name="degreeType"
+                                className={styles.input}
+                                defaultValue={
+                                    educationId
+                                        ? educationBeingEdited.degreeType
+                                        : ""
+                                }
+                                required
+                            />
+                        </section>
+                        <section className={styles.educationInfo}>
+                            <p className={styles.label}>Degree Field</p>
+                            <input
+                                type="text"
+                                name="degreeField"
+                                className={styles.input}
+                                defaultValue={
+                                    educationId
+                                        ? educationBeingEdited.degreeField
+                                        : ""
+                                }
+                            />
+                        </section>
                     </section>
-                    <section className={styles.workInfoHorizontal}>
-                        <p className={styles.label}>Current Employer</p>
+                    <section className={styles.educationInfoHorizontal}>
+                        <p className={styles.label}>Currently Enrolled</p>
                         <div className={styles.toggleSwitch}>
                             <Toggle
-                                name="currentEmployer"
+                                name="currentEnrollment"
                                 defaultChecked={
-                                    workId
-                                        ? workBeingEdited.currentEmployer
+                                    educationId
+                                        ? educationBeingEdited.currentEnrollment
                                         : false
                                 }
                             />
                         </div>
                     </section>
                     <section className={styles.dateInput}>
-                        <section className={styles.workInfo}>
+                        <section className={styles.educationInfo}>
                             <p className={styles.label}>Start Date</p>
                             <input
                                 type="date"
                                 name="startDate"
                                 className={styles.input}
                                 defaultValue={
-                                    workId
-                                        ? workBeingEdited.startDate
+                                    educationId
+                                        ? educationBeingEdited.startDate
                                         : new Date().toISOString().split("T")[0]
                                 }
                                 required
                             />
                         </section>
-                        <section className={styles.workInfo}>
+                        <section className={styles.educationInfo}>
                             <p className={styles.label}>End Date</p>
                             <input
                                 type="date"
                                 name="endDate"
                                 className={styles.input}
                                 defaultValue={
-                                    workId
-                                        ? workBeingEdited.endDate.toLowerCase() ===
+                                    educationId
+                                        ? educationBeingEdited.endDate.toLowerCase() ===
                                           "present"
                                             ? new Date()
                                                   .toISOString()
                                                   .split("T")[0]
-                                            : workBeingEdited.endDate
+                                            : educationBeingEdited.endDate
                                         : new Date().toISOString().split("T")[0]
                                 }
                                 max={new Date().toISOString().split("T")[0]}
@@ -122,21 +153,21 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                         >
                             cancel
                         </Link>
-                        {workId ? (
+                        {educationId ? (
                             <section
                                 className={styles.horizontalButtonContainer}
                             >
                                 <button
                                     type="submit"
                                     className={styles.removeButton}
-                                    formAction={removeWorkInfo}
+                                    formAction={removeEducationInfo}
                                 >
                                     Remove
                                 </button>
                                 <button
                                     type="submit"
                                     className={styles.saveButton}
-                                    formAction={updateWorkInfo}
+                                    formAction={updateEducationInfo}
                                 >
                                     Update
                                 </button>
@@ -145,7 +176,7 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                             <button
                                 type="submit"
                                 className={styles.saveButton}
-                                formAction={addWorkInfo}
+                                formAction={addEducationInfo}
                             >
                                 Save
                             </button>
@@ -153,30 +184,35 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                     </section>
                 </section>
             ) : (
-                <section className={styles.workGrid}>
-                    {work.map((job: any, index: number) => {
+                <section className={styles.educationGrid}>
+                    {education.map((education: any, index: number) => {
                         return (
-                            <section className={styles.workItem} key={index}>
-                                <section className={styles.workItemInfo}>
-                                    <p className={styles.company}>
-                                        {job.company}
+                            <section
+                                className={styles.educationItem}
+                                key={index}
+                            >
+                                <section className={styles.educationItemInfo}>
+                                    <p className={styles.schoolName}>
+                                        {education.schoolName}
                                     </p>
-                                    <p className={styles.position}>
-                                        {job.position}
+                                    <p className={styles.degreeType}>
+                                        {education.degreeType}
                                     </p>
                                     <section className={styles.dateRange}>
                                         <p className={styles.startDate}>
-                                            {formatDateMonthYear(job.startDate)}
+                                            {formatDateMonthYear(
+                                                education.startDate
+                                            )}
                                             {" - "}
                                         </p>
-                                        {job.currentEmployer ? (
+                                        {education.currentEnrollment ? (
                                             <p className={styles.endDate}>
-                                                {job.endDate}
+                                                {education.endDate}
                                             </p>
                                         ) : (
                                             <p className={styles.endDate}>
                                                 {formatDateMonthYear(
-                                                    job.endDate
+                                                    education.endDate
                                                 )}
                                             </p>
                                         )}
@@ -184,7 +220,7 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                                 </section>
                                 <Link
                                     className={styles.editButton}
-                                    href={`/dashboard?menu=profile&addJob=true&jobId=${job.id}`}
+                                    href={`/dashboard?menu=profile&addEducation=true&educationId=${education.id}`}
                                 >
                                     Edit
                                 </Link>
@@ -192,8 +228,8 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                         );
                     })}
                     <Link
-                        href="/dashboard?menu=profile&addJob=true"
-                        className={styles.addWorkButton}
+                        href="/dashboard?menu=profile&addEducation=true"
+                        className={styles.addEducationButton}
                     >
                         <div className={styles.svgContainer}>{plusIcon}</div>
                     </Link>
@@ -203,5 +239,3 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
         </Card>
     );
 };
-
-export default Work;

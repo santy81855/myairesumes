@@ -77,7 +77,6 @@ export const coverLetterIcon = (
             <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={1}
                 d="M10 9h4m-4 7h12m-12 4h12m-12 4h4m-6 5h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2"
             ></path>
             <circle cx={22} cy={9} r={0.5}></circle>
@@ -101,6 +100,71 @@ export const arrowRightIcon = (
 export const plusIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2"></path>
+    </svg>
+);
+
+export const checkIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+            fillRule="evenodd"
+            d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z"
+            clipRule="evenodd"
+        ></path>
+    </svg>
+);
+
+export const renewIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+        <path d="M12 10H6.78A11 11 0 0 1 27 16h2A13 13 0 0 0 6 7.68V4H4v8h8zm8 12h5.22A11 11 0 0 1 5 16H3a13 13 0 0 0 23 8.32V28h2v-8h-8z"></path>
+    </svg>
+);
+
+export const calendarIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <g fill="none">
+            <path
+                strokeWidth={1.5}
+                d="M2 12c0-3.771 0-5.657 1.172-6.828C4.343 4 6.229 4 10 4h4c3.771 0 5.657 0 6.828 1.172C22 6.343 22 8.229 22 12v2c0 3.771 0 5.657-1.172 6.828C19.657 22 17.771 22 14 22h-4c-3.771 0-5.657 0-6.828-1.172C2 19.657 2 17.771 2 14z"
+            ></path>
+            <path
+                strokeLinecap="round"
+                strokeWidth={1.5}
+                d="M7 4V2.5M17 4V2.5M2.5 9h19"
+            ></path>
+            <path d="M18 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0"></path>
+        </g>
+    </svg>
+);
+
+export const priceIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <g fill="none" strokeLinecap="round" strokeWidth={1.5}>
+            <path d="M15.39 15.39c.585-.587.664-1.457.176-1.946c-.488-.488-1.359-.409-1.945.177c-.585.586-1.456.665-1.944.177c-.488-.488-.409-1.359.177-1.944m3.535 3.535l.354.354m-.354-.354c-.4.401-.935.565-1.389.471m-2.5-4.36l.354.354m0 0c.331-.332.753-.5 1.146-.497m-4.393-.478a2 2 0 1 0-2-2"></path>
+            <path d="M16.137 4.728c-1.546-1.545-2.318-2.318-3.321-2.605c-1.003-.288-2.068-.042-4.197.45l-1.228.283c-1.792.413-2.688.62-3.302 1.233c-.613.614-.82 1.51-1.233 3.302l-.284 1.228c-.491 2.13-.737 3.194-.45 4.197c.288 1.003 1.061 1.775 2.606 3.32l1.83 1.83C9.248 20.657 10.592 22 12.262 22c1.671 0 3.015-1.344 5.704-4.033c2.69-2.69 4.034-4.034 4.034-5.705c0-1.342-.868-2.474-2.604-4.262"></path>
+        </g>
+    </svg>
+);
+
+export const debitCardIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <rect
+            width={416}
+            height={320}
+            x={48}
+            y={96}
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={32}
+            rx={56}
+            ry={56}
+        ></rect>
+        <path
+            fill="none"
+            strokeLinejoin="round"
+            strokeWidth={60}
+            d="M48 192h416M128 300h48v20h-48z"
+        ></path>
     </svg>
 );
 
