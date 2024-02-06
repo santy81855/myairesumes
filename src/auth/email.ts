@@ -25,7 +25,7 @@ export const sendEmailVerificationLink = async ({
         });
         return { success: "Email sent" };
     } catch (e) {
-        console.log("EEror: ", e);
+        console.log("there was an error");
         return { error: e };
     }
 };
