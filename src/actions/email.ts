@@ -18,6 +18,7 @@ export async function send(data: AuthEmailData) {
             return res;
         })
         .catch((err) => {
+            console.log("Email error: ", err);
             return err;
         });
 }
