@@ -13,6 +13,7 @@ import UpdateModal from "@/components/dashboard/account/update-payment-modal/Upd
 import UpgradeModal from "@/components/dashboard/account/upgrade-plan-modal/UpgradeModal";
 import DowngradeModal from "@/components/dashboard/account/downgrade-modal/DowngradeModal";
 import ReinstateModal from "@/components/dashboard/account/bill/reinstate-modal/ReintstateModal";
+import { UpdateUrl } from "@/lib/updateUrl";
 
 const Page = async ({
     params,
@@ -29,7 +30,13 @@ const Page = async ({
     const currentUser = await getUser(user.id);
     // if there is no menu query param, add it and set it to profile
     if (searchParams && !("menu" in searchParams)) {
-        redirect("/dashboard?menu=profile");
+        redirect(
+            UpdateUrl(
+                searchParams ? searchParams : {},
+                [{ key: "menu", value: "profile" }],
+                "/dashboard"
+            )
+        );
     }
     const menuSection = searchParams?.menu || "";
     const editPayment = searchParams?.editPayment || false;

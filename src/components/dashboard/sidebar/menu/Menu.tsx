@@ -32,7 +32,9 @@ const Menu = () => {
     };
 
     const handleMenuClick = (section: string) => {
-        router.replace(`?menu=${section}`);
+        if (section === "account")
+            router.replace(`?menu=account&invoicePage=1`);
+        else router.replace(`?menu=${section}`);
     };
 
     return (

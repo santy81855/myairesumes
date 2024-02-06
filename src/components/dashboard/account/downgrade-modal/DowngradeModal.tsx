@@ -19,11 +19,11 @@ const DowngradeModal = async () => {
     // get the current user
     const res = await getUser(user.id);
     const currentUser = await getUser(user.id);
-    const subscriptionData = (await getCustomerSubscription(
+    const subscriptionData = await getCustomerSubscription(
         currentUser.stripeCustomerId
-    )) as Stripe.Subscription;
+    );
     if (!subscriptionData) {
-        redirect("/dashboard?menu=account");
+        redirect("/dashboard?menu=account&invoicePage=1");
     }
     return (
         <StaticModal>
@@ -79,7 +79,7 @@ const DowngradeModal = async () => {
                 </p>
                 <form className={styles.form} action={cancelSubscription}>
                     <Link
-                        href="/dashboard?menu=account"
+                        href="/dashboard?menu=account&invoicePage=1"
                         className={styles.cancelButton}
                     >
                         Cancel

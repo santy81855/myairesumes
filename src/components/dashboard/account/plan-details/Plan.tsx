@@ -2,6 +2,7 @@ import styles from "./Plan.module.css";
 import Card from "@/components/dashboard/cards/dashboard-cards/Card";
 import Link from "next/link";
 import { getCustomerSubscription } from "@/lib/stripe";
+import { UpdateUrl } from "@/lib/updateUrl";
 
 type PlanProps = {
     currentUser: any;
@@ -18,8 +19,22 @@ const Plan = async ({ currentUser, searchParams }: PlanProps) => {
     const isActive =
         subscription && subscription.cancel_at_period_end === false;
     const manageLink = isActive
-        ? "dashboard?menu=account&downgradePlan=true"
-        : "dashboard?menu=account&reinstatePlan=true";
+        ? UpdateUrl(
+              searchParams ? searchParams : {},
+              [
+                  { key: "menu", value: "account" },
+                  { key: "downgradePlan", value: "true" },
+              ],
+              "/dashboard"
+          )
+        : UpdateUrl(
+              searchParams ? searchParams : {},
+              [
+                  { key: "menu", value: "account" },
+                  { key: "reinstatePlan", value: "true" },
+              ],
+              "/dashboard"
+          );
 
     return (
         <Card gridArea="plan" title="Plan Details">
@@ -49,7 +64,14 @@ const Plan = async ({ currentUser, searchParams }: PlanProps) => {
                     </section>
                     {status === "free" && (
                         <Link
-                            href="/dashboard?menu=account&upgradePlan=true"
+                            href={UpdateUrl(
+                                searchParams ? searchParams : {},
+                                [
+                                    { key: "menu", value: "account" },
+                                    { key: "upgradePlan", value: "true" },
+                                ],
+                                "/dashboard"
+                            )}
                             className={styles.upgradeButton}
                         >
                             Upgrade Plan

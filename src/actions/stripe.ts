@@ -52,10 +52,10 @@ export async function reinstateSubscription() {
         }
     );
     if (!reinstatedSubscription) {
-        return redirect("/dashboard?menu=account");
+        return redirect("/dashboard?menu=account&invoicePage=1");
     }
     revalidateTag("subscription");
-    return redirect("/dashboard?menu=account");
+    return redirect("/dashboard?menu=account&invoicePage=1");
 }
 
 export async function cancelSubscription() {
@@ -106,7 +106,7 @@ export async function cancelSubscription() {
         };
     }
     revalidateTag("subscription");
-    return redirect("/dashboard?menu=account");
+    return redirect("/dashboard?menu=account&invoicePage=1");
 }
 
 export async function createSubscription() {

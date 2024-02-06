@@ -67,7 +67,7 @@ const UpgradeModal = async () => {
                 </p>
                 <form className={styles.form} action={createSubscription}>
                     <Link
-                        href="/dashboard?menu=account"
+                        href="/dashboard?menu=account&invoicePage=1"
                         className={styles.cancelButton}
                     >
                         Cancel

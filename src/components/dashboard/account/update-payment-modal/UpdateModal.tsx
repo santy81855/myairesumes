@@ -21,7 +21,7 @@ const UpdateModal = async () => {
         currentUser.stripeCustomerId
     )) as Stripe.Subscription;
     if (!subscriptionData) {
-        redirect("/dashboard?menu=account");
+        redirect("/dashboard?menu=account&invoicePage=1");
     }
     const updatePaymentStripe = updatePayment.bind(
         null,
@@ -45,7 +45,7 @@ const UpdateModal = async () => {
                 </p>
                 <form className={styles.form} action={updatePaymentStripe}>
                     <Link
-                        href="/dashboard?menu=account"
+                        href="/dashboard?menu=account&invoicePage=1"
                         className={styles.cancelButton}
                     >
                         Cancel

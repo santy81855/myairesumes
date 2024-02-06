@@ -79,8 +79,8 @@ export const getStripeSessionUpdatePayment = async (
                 type: "update_payment",
             },
         },
-        success_url: `${domainUrl}/dashboard?menu=account`,
-        cancel_url: `${domainUrl}/dashboard?menu=account`,
+        success_url: `${domainUrl}/dashboard?menu=account&invoicePage=1`,
+        cancel_url: `${domainUrl}/dashboard?menu=account&invoicePage=1`,
     });
     if (!session) throw new Error("Error creating checkout session.");
     return session.url;

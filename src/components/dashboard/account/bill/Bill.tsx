@@ -12,6 +12,7 @@ import {
     debitCardIcon,
 } from "@/components/icons/iconSVG";
 import Link from "next/link";
+import { UpdateUrl } from "@/lib/updateUrl";
 
 type BillProps = {
     currentUser: any;
@@ -78,7 +79,14 @@ const Bill = async ({ currentUser, searchParams }: BillProps) => {
                         )}
                     </p>
                     <Link
-                        href="/dashboard?menu=account&reinstatePlan=true"
+                        href={UpdateUrl(
+                            searchParams ? searchParams : {},
+                            [
+                                { key: "menu", value: "account" },
+                                { key: "reinstatePlan", value: "true" },
+                            ],
+                            "/dashboard"
+                        )}
                         className={styles.renewButton}
                     >
                         Renew Subscription
@@ -113,7 +121,17 @@ const Bill = async ({ currentUser, searchParams }: BillProps) => {
                                 </div>
                                 <p className={styles.text}>Source</p>
                                 <Link
-                                    href="/dashboard?menu=account&editPayment=true"
+                                    href={UpdateUrl(
+                                        searchParams ? searchParams : {},
+                                        [
+                                            { key: "menu", value: "account" },
+                                            {
+                                                key: "editPayment",
+                                                value: "true",
+                                            },
+                                        ],
+                                        "/dashboard"
+                                    )}
                                     className={styles.updateLink}
                                 >
                                     (Update)
