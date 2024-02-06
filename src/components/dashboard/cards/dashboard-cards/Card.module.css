@@ -29,14 +29,3 @@
     margin-block-end: var(--padding-block-medium);
     z-index: 0;
 }
-
-.titleRow::after {
-    content: "";
-    position: absolute;
-    width: calc(100% + 200px);
-    height: calc(100% + 200px);
-    background-color: #f9efff;
-    top: -180px;
-    left: -100px;
-    z-index: -1;
-}
