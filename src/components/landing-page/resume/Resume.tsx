@@ -49,7 +49,7 @@ const Resume = ({ key }: props) => {
         };
 
         const res = d.toLocaleString("en-us", options);
-        return res === "Invalid Date" ? "Current" : res;
+        return d.toString();
     };
 
     const horizontalLine = <div className={styles.horizontalLine} />;
@@ -92,7 +92,7 @@ const Resume = ({ key }: props) => {
                 {horizontalLine}
                 {education.map((school, index) => (
                     <div key={index} className={styles.container}>
-                        <p>{getDate(school.endDate)}</p>
+                        <p>10-20-2020</p>
                         <h4>{school.area + " " + school.studyType}</h4>
                         <h4>{school.institution}</h4>
                     </div>
@@ -164,10 +164,7 @@ const Resume = ({ key }: props) => {
                                 <div className={styles.line}></div>
                             </div>
                             <div className={styles.jobContainer}>
-                                <h3>
-                                    {getDate(job.startDate) + " - "}
-                                    {getDate(job.endDate)}
-                                </h3>
+                                <h3>10-20-2020 - CUrrent</h3>
                                 <h4>{job.company}</h4>
                                 <h3>{job.position}</h3>
 

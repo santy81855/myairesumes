@@ -20,7 +20,7 @@ export default async function Home() {
         <main
             id="landingPage"
             className={styles.main}
-            style={showModal ? { overflow: "hidden" } : {}}
+            style={showModal ? { overflowY: "hidden" } : { overflowY: "auto" }}
         >
             <section className={styles.heroSection}>
                 <Navbar

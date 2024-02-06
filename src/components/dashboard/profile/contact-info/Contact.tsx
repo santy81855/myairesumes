@@ -39,6 +39,7 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                                 <section className={styles.nameInput}>
                                     <p className={styles.label}>first name</p>
                                     <input
+                                        aria-label="first name"
                                         type="text"
                                         name="firstName"
                                         className={styles.input}
@@ -50,6 +51,7 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                                 <section className={styles.nameInput}>
                                     <p className={styles.label}>last name</p>
                                     <input
+                                        aria-label="last name"
                                         type="text"
                                         name="lastName"
                                         className={styles.input}
@@ -78,6 +80,7 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                         <p className={styles.label}>email</p>
                         {edit ? (
                             <input
+                                aria-label="email"
                                 type="text"
                                 name="email"
                                 className={styles.input}
@@ -92,6 +95,7 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                         <p className={styles.label}>phone</p>
                         {edit ? (
                             <input
+                                aria-label="phone"
                                 type="text"
                                 name="phone"
                                 className={styles.input}
@@ -106,6 +110,7 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                         <p className={styles.label}>website</p>
                         {edit ? (
                             <input
+                                aria-label="website"
                                 type="text"
                                 name="website"
                                 className={styles.input}
