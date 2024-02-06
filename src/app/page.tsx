@@ -16,12 +16,7 @@ export default async function Home() {
         showModal = false;
     } else {
         // Fetch subscription status using a revalidateTag so that the page will revalidate when the subscription status changes
-        const res = await getUser(user.id);
-        if (!res.ok) {
-            currentUser = null;
-        } else {
-            currentUser = await res.json();
-        }
+        const currentUser = await getUser(user.id);
         // if this is the first time the user is logging in, bring up a modal to redirect them to where they can fill out their basic info
         showModal =
             currentUser && Object.keys(currentUser.basicInfo).length === 0;

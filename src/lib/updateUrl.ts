@@ -26,7 +26,6 @@ export const UpdateUrl = (
         }
     });
 
-    console.log(updatedUrl);
     // Remove the trailing "&" if it exists
     if (updatedUrl.endsWith("&")) {
         updatedUrl = updatedUrl.slice(0, -1);

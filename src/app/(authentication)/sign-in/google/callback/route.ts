@@ -87,6 +87,7 @@ export async function GET(request: Request): Promise<Response> {
                 accountType: "google",
                 emailVerified: true,
                 stripeCustomerId: customer.id,
+                basicInfo: {},
             },
         });
         if (!newUser) {
