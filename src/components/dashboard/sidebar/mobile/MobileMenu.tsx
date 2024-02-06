@@ -233,7 +233,7 @@ const MobileMenu = () => {
                                 <motion.p
                                     variants={word}
                                     initial="hidden"
-                                    animate="visiible"
+                                    animate="visible"
                                     className={styles.logoutText}
                                 >
                                     {"logout"

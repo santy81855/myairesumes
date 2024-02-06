@@ -132,6 +132,18 @@
     color: white;
 }
 
+.empty {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: var(--padding-block-small);
+}
+
+.empty p {
+    font-size: var(--font-size-small);
+}
+
 @media screen and (max-width: 564px) {
     .label {
         font-size: var(--font-size-xsmall);

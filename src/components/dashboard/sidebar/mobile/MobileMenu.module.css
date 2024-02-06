@@ -37,6 +37,7 @@
     padding-inline: var(--padding-inline-medium);
     align-items: center;
     gap: var(--padding-inline-small);
+    color: black;
 }
 
 .menuItem:hover {

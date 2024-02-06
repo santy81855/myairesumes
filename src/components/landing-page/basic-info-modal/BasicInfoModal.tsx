@@ -8,7 +8,7 @@ type BasicInfoModalProps = {
     currentUser: any;
 };
 
-const BasicInfoModal = ({ currentUser }: BasicInfoModalProps) => {
+const BasicInfoModal = async ({ currentUser }: BasicInfoModalProps) => {
     const updateBasicInfo = initializeUserBasicInfo.bind(null, currentUser);
     return (
         <StaticModal>

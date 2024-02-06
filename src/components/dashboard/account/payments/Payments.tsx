@@ -47,6 +47,11 @@ const Payments = async ({ currentUser, searchParams }: PaymentsProps) => {
 
     return (
         <Card gridArea="payments" title="Payment History">
+            {invoices && invoices.length === 0 && (
+                <section className={styles.empty}>
+                    <p>No payment history to display.</p>
+                </section>
+            )}
             <section className={styles.itemContainer}>
                 {paginatedInvoices.map((invoice: any, index: number) => (
                     <section key={index} className={styles.item}>

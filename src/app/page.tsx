@@ -10,17 +10,11 @@ import { redirect } from "next/navigation";
 
 export default async function Home() {
     const { user } = await validateRequest();
-    let showModal = false;
-    let currentUser;
-    if (!user) {
-        showModal = false;
-    } else {
-        // Fetch subscription status using a revalidateTag so that the page will revalidate when the subscription status changes
-        const currentUser = await getUser(user.id);
-        // if this is the first time the user is logging in, bring up a modal to redirect them to where they can fill out their basic info
-        showModal =
-            currentUser && Object.keys(currentUser.basicInfo).length === 0;
-    }
+    const currentUser = user ? await getUser(user.id) : null;
+    const showModal =
+        currentUser && Object.keys(currentUser.basicInfo).length === 0
+            ? true
+            : false;
 
     return (
         <main
