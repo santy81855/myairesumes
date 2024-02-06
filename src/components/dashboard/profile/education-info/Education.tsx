@@ -50,9 +50,6 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
             gridArea="education"
             title="Education History"
         >
-            <section className={styles.titleRow}>
-                <p className={styles.title}>Education History</p>
-            </section>
             {edit ? (
                 <section className={styles.educationInfoContainer}>
                     <p className={styles.addTitle}>
