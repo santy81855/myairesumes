@@ -7,7 +7,6 @@ import { Resend } from "resend";
 
 export async function send(data: AuthEmailData) {
     const { email, firstName, lastName, subject, url, type } = data;
-    console.log("APP DOMAIN: ", process.env.APP_DOMAIN);
     // convert the axios request below to a fetch request
     const resend = new Resend(process.env.RESEND_API_KEY);
     try {
@@ -45,9 +44,6 @@ export async function send(data: AuthEmailData) {
         });
         return { success: "Email sent" };
     } catch (error) {
-        console.log("ERROR");
-        console.log(error);
-        console.log("resend key: ", process.env.RESEND_API_KEY);
         return { error };
     }
 }
