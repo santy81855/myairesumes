@@ -12,7 +12,7 @@ export const sendEmailVerificationLink = async ({
     lastName: string;
 }) => {
     const url = `${process.env.VERIFICATION_URL_PREFIX}/${token}`;
-    console.log("EMAIL PREFIX URL: ", url);
+    console.log("EMAIL PREFIX URL is: ", url);
     const subject = "Verify your email address";
     try {
         await send({
