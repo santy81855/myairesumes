@@ -12,16 +12,24 @@ datasource db {
 }
 
 model User {
-    id             String                   @id @unique @default(cuid())
-    firstName      String?
-    lastName       String?
-    email          String                   @unique
-    accountType    String                   @default("password")
-    hashedPassword String?
-    emailVerified  Boolean                  @default(false)
-    authSession    Session[]
-    emailToken     EmailVerificationToken[]
-    passwordToken  PasswordResetToken[]
+    id                 String                   @id @unique @default(cuid())
+    firstName          String?
+    lastName           String?
+    email              String                   @unique
+    accountType        String                   @default("password")
+    hashedPassword     String?
+    emailVerified      Boolean                  @default(false)
+    stripeCustomerId   String?                  @unique
+    status             String                   @default("free") // options are free and pro
+    basicInfo          Json?
+    numberJobs         Int                      @default(0)
+    numberResumes      Int                      @default(0)
+    numberCoverLetters Int                      @default(0)
+    imageUrl           String                   @default("")
+    authSession        Session[]
+    emailToken         EmailVerificationToken[]
+    passwordToken      PasswordResetToken[]
+    subscription       Subscription?
 }
 
 model Session {
@@ -50,4 +58,17 @@ model PasswordResetToken {
     user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 
     @@index([userId])
+}
+
+model Subscription {
+    stripeSubscriptionId String   @id @unique
+    interval             String
+    status               String
+    planId               String
+    currentPeriodStart   Int
+    currentPeriodEnd     Int
+    createdAt            DateTime @default(now())
+    updatedAt            DateTime @updatedAt
+    user                 User     @relation(fields: [userId], references: [id])
+    userId               String   @unique
 }

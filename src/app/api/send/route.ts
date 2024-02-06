@@ -1,7 +1,7 @@
 import { EmailVerificationTemplate } from "@/components/email-templates/email-verification-template/EmailTemplate";
 import { PasswordResetTemplate } from "@/components/email-templates/password-reset-template/EmailTemplate";
+import { FailedPaymentTemplate } from "@/components/email-templates/payment-failed-template/EmailTemplate";
 import { Resend } from "resend";
-import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -26,6 +26,13 @@ export async function POST(request: Request) {
                 url: url,
             });
             from = "MyAiResumes <password-reset@myairesumes.com>";
+        }
+        if (type === "failed-payment") {
+            template = FailedPaymentTemplate({
+                firstName: firstName,
+                lastName: lastName,
+            });
+            from = "MyAiResumes <payments@myairesumes.com>";
         }
         const data = await resend.emails.send({
             from: from,

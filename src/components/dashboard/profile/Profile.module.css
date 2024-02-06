@@ -1,0 +1,17 @@
+.container {
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin-inline-end: auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--gap-medium);
+    grid-template-areas: "profile work" "education education";
+}
+
+@media screen and (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas: "profile" "work" "education";
+    }
+}

@@ -1,0 +1,38 @@
+.titleSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.pageHeading {
+    font-size: var(--font-size-large);
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+}
+
+.subHeading {
+    font-size: var(--font-size-small);
+    width: 100%;
+    text-align: left;
+}
+
+.cardContainer {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .cardContainer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .cardContainer {
+        display: none;
+    }
+}

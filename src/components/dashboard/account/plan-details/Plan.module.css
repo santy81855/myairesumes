@@ -1,0 +1,162 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-medium);
+    padding-block: var(--padding-block-small);
+    justify-content: center;
+    align-items: center;
+}
+
+.titleRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.managePlanContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
+}
+
+.title {
+    font-size: var(--font-size-medium);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.managePlanButton {
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    color: #d299ff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.descriptionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.priceContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.dollarSign {
+    font-size: var(--font-size-small);
+    font-weight: 700;
+}
+
+.price {
+    font-size: var(--font-size-large);
+}
+
+.description {
+    font-size: var(--font-size-small);
+    font-weight: 400;
+}
+
+.upgradeButton {
+    color: #d299ff;
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-small);
+    border: 1px solid #d299ff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upgradeButton:hover {
+    background-color: #d299ff;
+    color: white;
+}
+
+.itemContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+.itemRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+.itemTitle {
+    font-size: var(--font-size-small);
+    font-weight: 800;
+}
+
+.itemNumber {
+    font-size: var(--font-size-small);
+    font-weight: 400;
+}
+
+.progressBar {
+    width: 100%;
+    height: 10px;
+    background-color: #e1e1e1;
+    border-radius: 5px;
+    position: relative;
+}
+
+.full {
+    width: 100%;
+    height: 100%;
+    background-color: #d299ff;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .titleRow {
+        flex-direction: column;
+        gap: var(--padding-block-medium);
+        align-items: center;
+    }
+
+    .titleContainer {
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .upgradeButton {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .itemNumber {
+        font-size: var(--font-size-xsmall);
+    }
+}

@@ -78,15 +78,104 @@
     z-index: -1;
 }
 
-.blurBottom {
-    width: 100%;
-    height: 100%;
-    background-color: #d4f0f0;
+.blurMiddle::after {
+    content: "";
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    background-color: #a4c5ac;
     position: absolute;
     left: 0;
     top: 0;
-    transform: translate(0%, 10%);
-    opacity: 0.6;
+    opacity: 0.7;
     filter: blur(35px);
     z-index: -1;
+    animation: lavaLamp 15s infinite linear;
+}
+
+.blurMoving {
+    width: 100%;
+    height: 100%;
+    background-color: #a4c5ac;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    filter: blur(35px);
+    z-index: -1;
+    animation: colorChange 20s infinite linear;
+}
+
+@keyframes colorChange {
+    0% {
+        background-color: #a4c5ac;
+    }
+    25% {
+        background-color: #d0a883;
+    }
+    50% {
+        background-color: #a183cf;
+    }
+    75% {
+        background-color: #d4f0f0;
+    }
+    100% {
+        background-color: #a4c5ac;
+    }
+}
+
+@keyframes lavaLamp {
+    0% {
+        transform: translate(0, 50%);
+    }
+    25% {
+        transform: translate(-50%, 50%);
+    }
+    50% {
+        transform: translate(-100%, 50%);
+    }
+    75% {
+        transform: translate(-50%, 50%);
+    }
+    100% {
+        transform: translate(0, 50%);
+    }
+}
+
+@keyframes breathe {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/*keyframe for rotating animation*/
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* keyframe for hovering animation */
+@keyframes hover {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(0, 2rem);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }

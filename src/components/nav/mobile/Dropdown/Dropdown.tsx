@@ -33,7 +33,24 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (state) setState(false);
+            setState(false);
+        };
+        const handleResize = () => {
+            setState(false);
+        };
+        const handleClick = (e: any) => {
+            const menu = document.getElementById("mobilePopupMenu");
+            if (!menu) return;
+            if (!menu.contains(e.target as Node)) {
+                const button = document.getElementById("mobileMenuButton");
+                if (!button) {
+                    return;
+                }
+                if (!button.contains(e.target as Node)) {
+                    setState(false);
+                    return;
+                }
+            }
         };
         const buttonElement = document.getElementById("mobileMenuButton");
         if (buttonElement) {
@@ -46,17 +63,15 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
 
         // Attach the event listener
         // get the element with id landingPage
-        const landingPage = document.getElementById("landingPage");
-        if (!landingPage) return;
-        landingPage.addEventListener("scroll", handleScroll);
-        window.addEventListener("resize", handleScroll);
+        document.addEventListener("click", handleClick);
+        document.addEventListener("scroll", handleScroll);
+        window.addEventListener("resize", handleResize);
 
         // Clean up the event listener when the component unmounts
         return () => {
-            const landingPage = document.getElementById("landingPage");
-            if (!landingPage) return;
-            landingPage.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("resize", handleScroll);
+            document.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleResize);
+            document.removeEventListener("click", handleClick);
         };
     }, [state]);
 
@@ -93,7 +108,7 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
         }
     };
     return (
-        <section className={styles.container}>
+        <section id="mobilePopupMenu" className={styles.container}>
             <AnimatePresence>
                 {state && (
                     <motion.aside
@@ -109,7 +124,7 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
                         animate={{
                             width: width,
                             height: height,
-                            borderRadius: "15px",
+                            borderRadius: "5px",
                             left: buttonPosition.right,
                             transform: "translateX(-100%)",
                             top: 70,
@@ -158,6 +173,7 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
                                             href={to}
                                             whileHover={{ scale: 1.1 }}
                                             variants={itemVariants}
+                                            className={styles.menuItem}
                                         >
                                             {name}
                                         </motion.a>
