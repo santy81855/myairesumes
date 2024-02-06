@@ -7,7 +7,6 @@ import { Resend } from "resend";
 
 export async function send(data: AuthEmailData) {
     const { email, firstName, lastName, subject, url, type } = data;
-    // convert the axios request below to a fetch request
     const resend = new Resend(process.env.RESEND_API_KEY);
     try {
         var template;
