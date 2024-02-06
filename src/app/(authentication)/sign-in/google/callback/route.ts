@@ -2,6 +2,7 @@ import { google, lucia } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
+import { stripe } from "@/lib/stripe";
 
 export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);
@@ -73,6 +74,10 @@ export async function GET(request: Request): Promise<Response> {
                 },
             });
         }
+        const customer = await stripe.customers.create({
+            email: googleUser.email,
+            name: `${googleUser.given_name} ${googleUser.family_name}`,
+        });
         // create a new user
         const newUser = await prisma.user.create({
             data: {
@@ -81,6 +86,7 @@ export async function GET(request: Request): Promise<Response> {
                 lastName: googleUser.family_name,
                 accountType: "google",
                 emailVerified: true,
+                stripeCustomerId: customer.id,
             },
         });
         if (!newUser) {

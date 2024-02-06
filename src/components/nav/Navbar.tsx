@@ -1,14 +1,26 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Menu from "@/components/nav/mobile/Menu";
-import ProfileButton from "@/components/authentication/profile-button/ProfileButton";
+import ProfileButton from "@/components/nav/profile-button/ProfileButton";
 import { validateRequest } from "@/lib/auth";
 
-const Navbar = async () => {
+type NavbarProps = {
+    style?: object;
+    isAuth?: boolean;
+};
+
+const Navbar = async ({ style, isAuth }: NavbarProps) => {
     const { session, user } = await validateRequest();
+    const extraStyle = style ? style : {};
+    const authPage = isAuth ? false : true;
     return (
-        <nav className={styles.navContainer}>
-            <Menu session={session} user={user} />
+        <nav className={styles.navContainer} style={extraStyle}>
+            <Menu
+                session={session}
+                user={user}
+                style={extraStyle}
+                isAuth={isAuth}
+            />
             <section className={styles.textContainer}>
                 <div
                     className={styles.navItem}
@@ -25,21 +37,24 @@ const Navbar = async () => {
                     <Link href="/">
                         <p className={styles.navLink}>Home</p>
                     </Link>
-                    {session ? (
+                    {session && (
                         <>
                             <Link href="/dashboard">
                                 <p className={styles.navLink}>Dashboard</p>
                             </Link>
-                            <ProfileButton session={session} user={user} />
+                            <ProfileButton
+                                session={session}
+                                user={user}
+                                style={extraStyle}
+                            />
                         </>
-                    ) : (
-                        <>
-                            <Link href="/sign-up">
-                                <p className={styles.reportButton}>
-                                    Create a Resume
-                                </p>
-                            </Link>
-                        </>
+                    )}
+                    {!session && authPage && (
+                        <Link href="/sign-up">
+                            <p className={styles.reportButton}>
+                                Create a Resume
+                            </p>
+                        </Link>
                     )}
                 </div>
             </section>

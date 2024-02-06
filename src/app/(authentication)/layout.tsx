@@ -1,5 +1,5 @@
 import { Inter, Montserrat } from "next/font/google";
-import Navbar from "@/components/authentication/auth-nav/Nav";
+import Navbar from "@/components/nav/Navbar";
 import { ToastContainer } from "react-toastify";
 import "../globals.css";
 
@@ -18,8 +18,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Navbar />
                 <ToastContainer />
+                <Navbar
+                    style={{ backgroundColor: "white", color: "black" }}
+                    isAuth={true}
+                />
                 {children}
             </body>
         </html>

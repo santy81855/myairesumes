@@ -1,0 +1,140 @@
+.mobileSidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-block: var(--padding-block-medium);
+    gap: var(--padding-block-x2large);
+}
+
+.logo {
+    width: 3rem;
+    height: 3rem;
+}
+
+.logo svg {
+    fill: #a36bff;
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-medium);
+    border-radius: 50%;
+}
+
+.menuItem {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-start;
+    padding-inline: var(--padding-inline-medium);
+    align-items: center;
+    gap: var(--padding-inline-small);
+}
+
+.menuItem:hover {
+    background-color: #f5f5f5;
+}
+
+.menuItem svg:hover {
+    stroke: #a36bff;
+    transform: scale(1.05);
+}
+
+.menuItem svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: transparent;
+    stroke: #989898;
+    stroke-width: 1;
+}
+
+.active {
+    color: #a36bff;
+}
+
+.active svg {
+    stroke: #a36bff;
+}
+
+.logoutButton svg {
+    stroke: rgb(255, 167, 167);
+}
+
+.logoutButton svg:hover {
+    stroke: rgb(255, 167, 167);
+}
+
+.logoutText {
+    color: rgb(255, 167, 167);
+}
+
+.openButtonContainer {
+    width: 100%;
+    position: relative;
+    margin-block-start: 1rem;
+}
+
+.openMenuButton {
+    width: 4rem;
+    height: 4rem;
+    background-color: #a36bff;
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 25%;
+    z-index: 10;
+    cursor: pointer;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.openMenuButton svg {
+    width: 2rem;
+    height: 2rem;
+    fill: white;
+}
+
+.openMenuButton:hover {
+    background-color: #8e5ff7;
+}
+
+@media screen and (max-width: 450px) {
+    .openMenuButton {
+        width: 3rem;
+        height: 3rem;
+    }
+    .openMenuButton svg {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+}
+
+.wrapper {
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: white;
+        z-index: 100;
+    }
+}

@@ -1,0 +1,258 @@
+.educationGrid {
+    width: 100%;
+    display: grid;
+    gap: var(--gap-medium);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.educationItem {
+    display: flex;
+    border: 1px solid rgb(216, 216, 216, 0.5);
+    height: 160px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-block-medium);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.educationItemInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.schoolName {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(22, 22, 22);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.degreeType {
+    font-size: var(--font-size-small);
+    color: #9f9f9f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-block-start: var(--padding-block-small);
+    width: 100%;
+}
+
+.dateRange {
+    font-size: var(--font-size-small);
+    color: #9f9f9f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-block-start: var(--padding-block-medium);
+    width: 100%;
+}
+
+.addEducationButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eaeaea;
+    height: 160px;
+    border: none;
+
+    cursor: pointer;
+}
+
+.addEducationButton:hover {
+    background-color: #d1d1d1;
+}
+
+.svgContainer {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+}
+
+.svgContainer svg {
+    fill: rgb(22, 22, 22);
+    width: 100%;
+    height: 100%;
+}
+
+.addTitle {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: rgb(22, 22, 22);
+    margin-block-start: var(--padding-block-small);
+}
+
+.educationInfoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: var(--padding-block-medium);
+}
+
+.educationInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.educationInfoHorizontal {
+    display: flex;
+    width: 100%;
+    gap: var(--padding-block-small);
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.toggleSwitch {
+    position: relative;
+    width: 75px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.label {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(22, 22, 22);
+    margin-block-end: var(--padding-block-small);
+}
+
+.dateInput {
+    width: 100%;
+    display: flex;
+    gap: var(--padding-block-small);
+}
+
+.input {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e1e1e1;
+    border-radius: var(--border-radius-xsmall);
+    padding-inline-start: var(--padding-block-small);
+    font-size: var(--font-size-small);
+}
+
+.input:focus {
+    outline: none;
+    border: 1px solid #a183cf;
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+}
+
+.cancelButton {
+    width: 100%;
+    background-color: #eaeaea;
+    color: rgb(22, 22, 22);
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancelButton:hover {
+    background-color: #ffbcbc;
+}
+
+.saveButton {
+    width: 100%;
+    background-color: #a183cf;
+    color: white;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.saveButton:hover {
+    background-color: #8a6fbf;
+}
+
+.removeButton {
+    width: 100%;
+    background-color: #ffafaf;
+    color: white;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.removeButton:hover {
+    background-color: #dc8a8a;
+}
+
+.endDateTitle {
+    display: flex;
+    width: 100%;
+    gap: var(--padding-block-small);
+}
+
+.horizontalButtonContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--padding-block-small);
+}
+
+.editButton {
+    width: 100%;
+    background-color: #a183cf;
+    height: 30px;
+    font-size: var(--font-size-small);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.editButton:hover {
+    background-color: #8a6fbf;
+}
+
+.degreeInfoInput {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+@media screen and (max-width: 480px) {
+    .educationGrid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    }
+    .educationItem {
+        height: 150px;
+    }
+    .schoolName {
+        font-size: var(--font-size-xsmall);
+    }
+    .degreeType {
+        font-size: var(--font-size-xsmall);
+    }
+    .dateRange {
+        font-size: var(--font-size-xsmall);
+    }
+    .dateInput {
+        flex-direction: column;
+        gap: var(--padding-block-medium);
+    }
+    .horizontalButtonContainer {
+        flex-direction: column;
+    }
+}

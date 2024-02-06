@@ -5,6 +5,7 @@ import { signout } from "@/actions/authentication";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "@/components/loaders/Spinner/Spinner";
 
 type Props = {
     session: any;
@@ -31,6 +32,23 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
         const handleScroll = () => {
             if (state) setState(false);
         };
+        const handleResize = () => {
+            setState(false);
+        };
+        const handleClick = (e: any) => {
+            const menu = document.getElementById("profilePopupMenu");
+            if (!menu) return;
+            if (!menu.contains(e.target as Node)) {
+                const profileButton = document.getElementById("profileButton");
+                if (!profileButton) {
+                    return;
+                }
+                if (!profileButton.contains(e.target as Node)) {
+                    setState(false);
+                    return;
+                }
+            }
+        };
         const buttonElement = document.getElementById("profileButton");
         if (buttonElement) {
             const boundingBox = buttonElement.getBoundingClientRect();
@@ -41,23 +59,23 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
         }
         // Attach the event listener
         // get the element with id landingPage
-        const landingPage = document.getElementById("landingPage");
-        if (!landingPage) return;
-        landingPage.addEventListener("scroll", handleScroll);
-        window.addEventListener("resize", handleScroll);
+
+        document.addEventListener("click", handleClick);
+        document.addEventListener("scroll", handleScroll);
+        window.addEventListener("resize", handleResize);
 
         // Clean up the event listener when the component unmounts
         return () => {
-            const landingPage = document.getElementById("landingPage");
-            if (!landingPage) return;
-            landingPage.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("resize", handleScroll);
+            document.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleResize);
+            document.removeEventListener("click", handleClick);
         };
     }, [state]);
 
     const itemVariants = {
         closed: {
             opacity: 0,
+            transition: { duration: 0 },
         },
         open: { opacity: 1 },
     };
@@ -86,7 +104,7 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
         }
     };
     return (
-        <section className={styles.container}>
+        <section id="profilePopupMenu" className={styles.container}>
             <AnimatePresence>
                 {state && (
                     <motion.aside
@@ -102,7 +120,7 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                         animate={{
                             width: width,
                             height: height,
-                            borderRadius: "15px",
+                            borderRadius: "5px",
                             left: buttonPosition.right,
                             transform: "translateX(-100%)",
                             top: 70,
@@ -145,29 +163,32 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                             </motion.div>
                             <motion.div className={styles.menuItemContainer}>
                                 <motion.a
-                                    href={"/account"}
+                                    href={"/"}
                                     whileHover={{ scale: 1.05 }}
                                     variants={itemVariants}
                                     className={styles.menuItem}
                                 >
-                                    Profile
+                                    Home
                                 </motion.a>
                                 <motion.a
-                                    href={"/account"}
+                                    href={"/dashboard?menu=profile"}
                                     whileHover={{ scale: 1.05 }}
                                     variants={itemVariants}
                                     className={styles.menuItem}
                                 >
-                                    Upgrade
+                                    Dashboard
                                 </motion.a>
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    variants={itemVariants}
-                                    className={styles.signOutButton}
-                                    onClick={signoutPressed}
-                                >
-                                    Log Out
-                                </motion.button>
+                                {isLoading && <Spinner />}
+                                {!isLoading && (
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        variants={itemVariants}
+                                        className={styles.signOutButton}
+                                        onClick={signoutPressed}
+                                    >
+                                        Log Out
+                                    </motion.button>
+                                )}
                             </motion.div>
                         </motion.div>
                     </motion.aside>
