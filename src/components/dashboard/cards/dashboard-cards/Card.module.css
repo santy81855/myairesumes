@@ -27,6 +27,7 @@
     align-items: center;
     position: relative;
     margin-block-end: var(--padding-block-medium);
+    z-index: 0;
 }
 
 .titleRow::after {
