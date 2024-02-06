@@ -11,7 +11,7 @@
     gap: var(--padding-block-medium);
     position: relative;
     overflow: hidden;
-    z-index: 1;
+    z-index: 10;
 }
 
 .title {
@@ -27,5 +27,16 @@
     align-items: center;
     position: relative;
     margin-block-end: var(--padding-block-medium);
-    z-index: 0;
+    z-index: 1;
+}
+
+.titleRow::after {
+    content: "";
+    position: absolute;
+    width: calc(100% + 200px);
+    height: calc(100% + 200px);
+    background-color: #f9efff;
+    top: -180px;
+    left: -100px;
+    z-index: -1;
 }
