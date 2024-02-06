@@ -103,7 +103,7 @@
     opacity: 1;
     filter: blur(35px);
     z-index: -1;
-    animation: colorChange 20s infinite linear;
+    animation: colorChange 8s infinite linear;
 }
 
 @keyframes colorChange {
