@@ -5,14 +5,14 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     typescript: true,
 });
 
-export const getCustomerSubscriptions = async (customerId: string) => {
+export const getCustomerSubscription = async (customerId: string) => {
     const subscriptions = await stripe.subscriptions.list({
         customer: customerId,
     });
-    if (!subscriptions?.data) return [];
+    if (!subscriptions?.data) return null;
     // only return the first subscription in the array if there are at least 1 subscription
-    if (subscriptions.data.length === 0) return [];
-    return subscriptions.data[0];
+    if (subscriptions.data.length === 0) return null;
+    return subscriptions.data[0] as Stripe.Subscription;
 };
 
 export const getStripeCustomer = async (customerId: string) => {
@@ -25,6 +25,14 @@ export const getAllCustomerSessions = async (customerId: string) => {
         limit: 3,
     });
     return sessions.data;
+};
+
+export const getStripeCustomerInvoices = async (customerId: string) => {
+    const invoices = await stripe.invoices.list({
+        customer: customerId,
+        limit: 100,
+    });
+    return invoices.data;
 };
 
 export const getStripeSession = async ({
@@ -48,8 +56,8 @@ export const getStripeSession = async ({
             },
         ],
         mode: "subscription",
-        success_url: `${domainUrl}/subscription`,
-        cancel_url: `${domainUrl}/subscription`,
+        success_url: `${domainUrl}/dashboard?menu=account`,
+        cancel_url: `${domainUrl}/dashboard?menu=account`,
     });
     return session.url;
 };
@@ -71,8 +79,8 @@ export const getStripeSessionUpdatePayment = async (
                 type: "update_payment",
             },
         },
-        success_url: `${domainUrl}/subscription`,
-        cancel_url: `${domainUrl}/subscription`,
+        success_url: `${domainUrl}/dashboard?menu=account`,
+        cancel_url: `${domainUrl}/dashboard?menu=account`,
     });
     if (!session) throw new Error("Error creating checkout session.");
     return session.url;
@@ -80,5 +88,6 @@ export const getStripeSessionUpdatePayment = async (
 
 export const getStripePaymentDetails = async (paymentMethodId: string) => {
     const paymentMethod = await stripe.paymentMethods.retrieve(paymentMethodId);
+    if (!paymentMethod) throw new Error("Error getting payment method.");
     return paymentMethod;
 };

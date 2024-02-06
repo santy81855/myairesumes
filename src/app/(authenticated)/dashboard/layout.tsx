@@ -8,9 +8,6 @@ const poppins = Poppins({
     subsets: ["latin"],
     weight: "300",
 });
-import Sidebar from "@/components/dashboard/sidebar/Sidebar";
-import Navbar from "@/components/nav/Navbar";
-import styles from "./page.module.css";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Dashboard",
@@ -24,20 +21,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
-                <div style={{ display: "flex", width: "100%", height: "100%" }}>
-                    <Sidebar />
-                    <div style={{ width: "100%", height: "100%" }}>
-                        <Navbar
-                            style={{
-                                backgroundColor: "#f4e9ff",
-                                color: "black",
-                            }}
-                        />
-                        {children}
-                    </div>
-                </div>
-            </body>
+            <body className={inter.className}>{children}</body>
         </html>
     );
 }

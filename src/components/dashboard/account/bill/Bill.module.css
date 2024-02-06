@@ -98,6 +98,32 @@
     text-decoration: underline;
 }
 
+.cancelledContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    gap: var(--padding-block-medium);
+}
+
+.renewButton {
+    width: 100%;
+    background-color: #d299ff;
+    color: white;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.renewButton:hover {
+    background-color: #a183cf;
+}
+
 @media screen and (max-width: 480px) {
     .paymentInfo {
         flex-direction: column;

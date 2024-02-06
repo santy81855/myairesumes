@@ -1,7 +1,7 @@
 import styles from "./Bill.module.css";
 import Card from "@/components/dashboard/cards/dashboard-cards/Card";
 import {
-    getCustomerSubscriptions,
+    getCustomerSubscription,
     getStripePaymentDetails,
     getStripeSessionUpdatePayment,
 } from "@/lib/stripe";
@@ -20,20 +20,20 @@ type BillProps = {
 
 const Bill = async ({ currentUser, searchParams }: BillProps) => {
     const { status } = currentUser;
-    let upcomingBill = null;
-    let subscription = null;
-    let paymentDetails = null;
-    if (status !== "free") {
-        subscription = (await getCustomerSubscriptions(
-            currentUser.stripeCustomerId
-        )) as Stripe.Subscription;
-        if (subscription) {
-            paymentDetails = await getStripePaymentDetails(
-                subscription.default_payment_method as string
-            );
-            console.log("paymentDetails", paymentDetails);
-        }
-    }
+
+    const subscription =
+        status === "pro"
+            ? await getCustomerSubscription(currentUser.stripeCustomerId)
+            : null;
+    const isActive =
+        subscription && subscription.cancel_at_period_end === false;
+    const isCancelled =
+        subscription && subscription.cancel_at_period_end === true;
+    const paymentDetails = isActive
+        ? await getStripePaymentDetails(
+              subscription.default_payment_method as string
+          )
+        : null;
     let paymentInfo = null;
     if (paymentDetails) {
         const type = paymentDetails.type;
@@ -53,14 +53,39 @@ const Bill = async ({ currentUser, searchParams }: BillProps) => {
             paymentInfo = { name: "CashApp", info: cashapp.cashtag };
         }
     }
+    const subscriptionEndDate = isCancelled
+        ? (subscription.cancel_at as number)
+        : null;
 
     return (
         <Card gridArea="bill" title="Upcoming Bill">
-            {!subscription ? (
+            {!subscription && (
                 <p className={styles.noSubscriptionText}>
                     No upcoming bill. You are on the free plan.
                 </p>
-            ) : (
+            )}
+            {isCancelled && subscriptionEndDate && (
+                <section className={styles.cancelledContainer}>
+                    <p className={styles.noSubscriptionText}>
+                        No upcoming bill. Your subscription is set to end on{" "}
+                        {new Date(subscriptionEndDate * 1000).toLocaleString(
+                            "en-US",
+                            {
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric",
+                            }
+                        )}
+                    </p>
+                    <Link
+                        href="/dashboard?menu=account&reinstatePlan=true"
+                        className={styles.renewButton}
+                    >
+                        Renew Subscription
+                    </Link>
+                </section>
+            )}
+            {isActive && (
                 <section className={styles.container}>
                     <section className={styles.list}>
                         <section className={styles.itemContainer}>

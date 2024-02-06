@@ -3,7 +3,6 @@ import Plan from "./plan-details/Plan";
 import Bill from "./bill/Bill";
 import Upgrade from "./upgrade/Upgrade";
 import Payments from "./payments/Payments";
-import UpdateModal from "./update-payment-modal/UpdateModal";
 
 type AccountProps = {
     currentUser: any;
@@ -12,8 +11,6 @@ type AccountProps = {
 
 const Account = ({ currentUser, searchParams }: AccountProps) => {
     const { status } = currentUser;
-    // see if the editPayment is in the searchParams
-    const editPayment = searchParams?.editPayment || false;
     return (
         <main className={styles.container}>
             <Plan currentUser={currentUser} searchParams={searchParams} />
@@ -25,7 +22,6 @@ const Account = ({ currentUser, searchParams }: AccountProps) => {
                 />
             )}
             <Payments currentUser={currentUser} searchParams={searchParams} />
-            {editPayment && <UpdateModal currentUser={currentUser} />}
         </main>
     );
 };

@@ -24,10 +24,26 @@
     align-items: flex-start;
 }
 
+.managePlanContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
+}
+
 .title {
     font-size: var(--font-size-medium);
     font-weight: 700;
     color: var(--color-primary);
+}
+
+.managePlanButton {
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    color: #d299ff;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .descriptionContainer {

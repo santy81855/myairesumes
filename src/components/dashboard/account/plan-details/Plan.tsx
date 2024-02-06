@@ -1,21 +1,42 @@
 import styles from "./Plan.module.css";
 import Card from "@/components/dashboard/cards/dashboard-cards/Card";
 import Link from "next/link";
+import { getCustomerSubscription } from "@/lib/stripe";
 
 type PlanProps = {
     currentUser: any;
     searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-const Plan = ({ currentUser, searchParams }: PlanProps) => {
+const Plan = async ({ currentUser, searchParams }: PlanProps) => {
     const { status, numberJobs, numberResumes, numberCoverLetters } =
         currentUser;
+    const subscription =
+        status === "pro"
+            ? await getCustomerSubscription(currentUser.stripeCustomerId)
+            : null;
+    const isActive =
+        subscription && subscription.cancel_at_period_end === false;
+    const manageLink = isActive
+        ? "dashboard?menu=account&downgradePlan=true"
+        : "dashboard?menu=account&reinstatePlan=true";
+
     return (
         <Card gridArea="plan" title="Plan Details">
             <section className={styles.container}>
                 <section className={styles.titleRow}>
                     <section className={styles.titleContainer}>
-                        <p className={styles.title}>Ai Resume - {status}</p>
+                        <section className={styles.managePlanContainer}>
+                            <p className={styles.title}>Ai Resume - {status}</p>
+                            {subscription && (
+                                <Link
+                                    href={manageLink}
+                                    className={styles.managePlanButton}
+                                >
+                                    Manage
+                                </Link>
+                            )}
+                        </section>
                         <section className={styles.descriptionContainer}>
                             <section className={styles.priceContainer}>
                                 <p className={styles.dollarSign}>$</p>

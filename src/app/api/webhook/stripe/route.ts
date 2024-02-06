@@ -1,4 +1,4 @@
-import { stripe, getCustomerSubscriptions } from "@/lib/stripe";
+import { stripe, getCustomerSubscription } from "@/lib/stripe";
 import { headers } from "next/headers";
 import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
@@ -27,18 +27,17 @@ export async function POST(req: Request) {
         return new Response(null, { status: 200 });
 
     try {
-        let subscription: Stripe.Subscription;
-        let session: Stripe.Checkout.Session;
-        let invoice: Stripe.Invoice;
+        let invoice;
+        let subscription;
+        let session;
         switch (event.type) {
             // optimistically create subscription as soon as checkout session is completed
             case "checkout.session.completed":
-                session = event.data.object;
-                // check if this is a subscription or a payment update
+                session = event.data.object as Stripe.Checkout.Session;
+                // check if this is a subscription ("subscription") or a payment update ("setup")
                 if (session.mode === "setup") {
-                    // if it is a payment update, we need to update the subscription in the database
                     const customerId = session.customer as string;
-                    subscription = (await getCustomerSubscriptions(
+                    subscription = (await getCustomerSubscription(
                         customerId
                     )) as Stripe.Subscription;
                     if (!subscription)
@@ -49,60 +48,61 @@ export async function POST(req: Request) {
                     );
                     if (!setupIntent)
                         throw new Error("Setup intent not found...");
-
                     // get the payment method from the setupIntent
-                    const paymentMethodId = setupIntent.payment_method
-                        ? (setupIntent.payment_method as string)
-                        : "";
+                    const paymentMethodId = setupIntent.payment_method as
+                        | string
+                        | null;
                     // if the payment method is not found, throw an error
-                    if (paymentMethodId === "")
+                    if (!paymentMethodId)
                         throw new Error("Payment method not found...");
                     // update the payment method for the subscription
                     await stripe.subscriptions.update(subscription.id, {
                         default_payment_method: paymentMethodId,
                     });
-                    return new Response(null, { status: 200 });
-                }
-                subscription = await stripe.subscriptions.retrieve(
-                    session.subscription as string
-                );
-                if (!subscription) throw new Error("Subscription not found...");
-                const customerId = String(session.customer);
-                const user = await prisma.user.findUnique({
-                    where: {
-                        stripeCustomerId: customerId,
-                    },
-                });
+                } else if (session.mode === "subscription") {
+                    subscription = (await stripe.subscriptions.retrieve(
+                        session.subscription as string
+                    )) as Stripe.Subscription;
+                    if (!subscription)
+                        throw new Error("Subscription not found...");
+                    const customerId = String(session.customer);
+                    const user = await prisma.user.findUnique({
+                        where: {
+                            stripeCustomerId: customerId,
+                        },
+                    });
 
-                if (!user) throw new Error("User not found...");
-                // create a subscription in the database
-                const newSubscription = await prisma.subscription.create({
-                    data: {
-                        stripeSubscriptionId: subscription.id,
-                        userId: user.id,
-                        currentPeriodStart: subscription.current_period_start,
-                        currentPeriodEnd: subscription.current_period_end,
-                        status: subscription.status,
-                        planId: subscription.items.data[0].plan.id,
-                        interval: String(
-                            subscription.items.data[0].plan.interval
-                        ),
-                    },
-                });
-                if (!newSubscription)
-                    throw new Error("Error creating subscription...");
-                // Rather than waiting for the "customer.subscription.created" event, we can update the user's subscription status to "pro" here since we already checked that the subscription creation was successful.
-                await prisma.user.update({
-                    where: {
-                        stripeCustomerId: customerId,
-                    },
-                    data: {
-                        status: "pro",
-                    },
-                });
+                    if (!user) throw new Error("User not found...");
+                    // create a subscription in the database
+                    const newSubscription = await prisma.subscription.create({
+                        data: {
+                            stripeSubscriptionId: subscription.id,
+                            userId: user.id,
+                            currentPeriodStart:
+                                subscription.current_period_start,
+                            currentPeriodEnd: subscription.current_period_end,
+                            status: subscription.status,
+                            planId: subscription.items.data[0].plan.id,
+                            interval: String(
+                                subscription.items.data[0].plan.interval
+                            ),
+                        },
+                    });
+                    if (!newSubscription)
+                        throw new Error("Error creating subscription...");
+                    // Rather than waiting for the "customer.subscription.created" event, we can update the user's subscription status to "pro" here since we already checked that the subscription creation was successful.
+                    await prisma.user.update({
+                        where: {
+                            stripeCustomerId: customerId,
+                        },
+                        data: {
+                            status: "pro",
+                        },
+                    });
+                }
                 break;
             case "customer.subscription.updated":
-                subscription = event.data.object;
+                subscription = event.data.object as Stripe.Subscription;
                 // update the subscription in the database
                 await prisma.subscription.update({
                     where: {
@@ -121,7 +121,11 @@ export async function POST(req: Request) {
                 break;
             // The subscription was deleted from stripe
             case "customer.subscription.deleted":
-                subscription = event.data.object;
+                subscription = event.data.object as Stripe.Subscription;
+                // the subscription will only be deleted for 2 reasons:
+                // 1. The subscription was cancelled and the period ended
+                // 2. The payment for the subscription failed every attempt
+
                 // remove the subscription from the database
                 await prisma.subscription.delete({
                     where: {
@@ -137,7 +141,6 @@ export async function POST(req: Request) {
                         status: "free",
                     },
                 });
-
                 break;
             // The payment failed
             case "invoice.payment_failed":
@@ -149,28 +152,7 @@ export async function POST(req: Request) {
                     },
                 });
                 if (!failedPaymentUser) throw new Error("User not found...");
-                // only give the user a 7 day grace period if they are currently a pro user
-                // if they are not a pro user, there is nothing to do
-                if (failedPaymentUser.status === "free") {
-                    break;
-                }
-                await prisma.user.update({
-                    where: {
-                        stripeCustomerId: invoice.customer as string,
-                    },
-                    data: {
-                        gracePeriodEnd: new Date(
-                            new Date().getTime() + 7 * 24 * 60 * 60 * 1000
-                        ),
-                    },
-                });
-                // delete the user's subscription
-                await prisma.subscription.deleteMany({
-                    where: {
-                        userId: failedPaymentUser.id,
-                    },
-                });
-                // send the user an email
+                // send the user an email about the failed payment
                 const { email, firstName, lastName } = failedPaymentUser;
                 const response = await axios.post(
                     `${process.env.APP_DOMAIN}/api/send`,
