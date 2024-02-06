@@ -10,7 +10,7 @@ type UpgradeProps = {
 
 const Upgrade = ({ currentUser, searchParams }: UpgradeProps) => {
     return (
-        <Card gridArea="upgrade" title="Upgrade">
+        <Card key="upgrade-card" gridArea="upgrade" title="Upgrade">
             <section className={styles.container}>
                 <section className={styles.row}>
                     <section className={styles.column}>

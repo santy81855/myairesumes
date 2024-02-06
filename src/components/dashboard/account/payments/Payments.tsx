@@ -46,7 +46,7 @@ const Payments = async ({ currentUser, searchParams }: PaymentsProps) => {
     const prevPage = parseInt(invoicePage as string) - 1;
 
     return (
-        <Card gridArea="payments" title="Payment History">
+        <Card key="payments-card" gridArea="payments" title="Payment History">
             {invoices && invoices.length === 0 && (
                 <section className={styles.empty}>
                     <p>No payment history to display.</p>

@@ -37,7 +37,7 @@ const Plan = async ({ currentUser, searchParams }: PlanProps) => {
           );
 
     return (
-        <Card gridArea="plan" title="Plan Details">
+        <Card key="plan-card" gridArea="plan" title="Plan Details">
             <section className={styles.container}>
                 <section className={styles.titleRow}>
                     <section className={styles.titleContainer}>

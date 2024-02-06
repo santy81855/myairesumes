@@ -22,7 +22,7 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
     const updateBasicInfo = updateUserContactInfo.bind(null, currentUser);
 
     return (
-        <Card gridArea="profile" title="Profile">
+        <Card gridArea="profile" title="Profile" key="contact-card">
             <div className={styles.profileSectionContent}>
                 <section className={styles.profileImagecontainer}>
                     <section

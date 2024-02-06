@@ -45,7 +45,11 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
     );
 
     return (
-        <Card gridArea="education" title="Education History">
+        <Card
+            key="education-card"
+            gridArea="education"
+            title="Education History"
+        >
             <section className={styles.titleRow}>
                 <p className={styles.title}>Education History</p>
             </section>

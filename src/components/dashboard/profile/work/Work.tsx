@@ -38,7 +38,7 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
     );
 
     return (
-        <Card gridArea="work" title="Work History">
+        <Card key="work-card" gridArea="work" title="Work History">
             {edit ? (
                 <section className={styles.workInfoContainer}>
                     <p className={styles.addTitle}>

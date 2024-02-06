@@ -59,7 +59,7 @@ const Bill = async ({ currentUser, searchParams }: BillProps) => {
         : null;
 
     return (
-        <Card gridArea="bill" title="Upcoming Bill">
+        <Card key="bill-card" gridArea="bill" title="Upcoming Bill">
             {!subscription && (
                 <p className={styles.noSubscriptionText}>
                     No upcoming bill. You are on the free plan.
