@@ -14,6 +14,7 @@ export async function send(data: AuthEmailData) {
             type,
         })
         .then((res) => {
+            console.log("Email sent: ", res);
             return res;
         })
         .catch((err) => {
