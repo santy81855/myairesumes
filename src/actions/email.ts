@@ -43,6 +43,6 @@ export async function send(data: AuthEmailData) {
         });
         return { success: "Email sent" };
     } catch (error) {
-        return { error: "Error sending email" };
+        return { error: "Error sending email." };
     }
 }
