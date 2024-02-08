@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border-radius: var(--border-radius);
-    padding-block: var(--padding-block-large);
+
+    padding-block-start: var(--padding-block-large);
+    padding-block-end: var(--padding-block-small);
     width: 250px;
-    min-height: 400px;
+    min-height: 350px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(82, 82, 82, 0.533);
+
     position: relative;
     z-index: 1;
 }
@@ -20,6 +21,7 @@
     height: 100%;
     border-radius: var(--border-radius);
     overflow: hidden;
+    z-index: -1;
 }
 
 .angledRectangle {
@@ -78,6 +80,7 @@
     align-items: flex-start;
     padding-inline: var(--padding-inline-large);
     padding-block: var(--padding-block-small);
+    gap: var(--padding-block-small);
 }
 
 .priceContainer {
@@ -134,17 +137,70 @@
 .redIconContainer svg {
     width: 100%;
     height: 100%;
-    fill: #ff6c62;
+    fill: #ffc800;
 }
 
 .unlockedFeature {
     font-size: var(--font-size-small);
 }
 
+.currentPlanContainer {
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-inline: var(--padding-inline-large);
+    padding-block: var(--padding-block-small);
+}
+
 .currentPlan {
     width: 100%;
     font-size: var(--font-size-xsmall);
     text-align: left;
-    font-weight: 600;
-    margin-block-start: var(--padding-block-medium);
+    font-weight: 700;
+    padding-block: var(--padding-block-small);
+}
+
+.buttonContainer {
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-inline: var(--padding-inline-large);
+    padding-block: var(--padding-block-small);
+}
+
+.upgradeButton {
+    width: 100%;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-large);
+    border: none;
+    border-radius: var(--border-radius-xsmall);
+    color: white;
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upgradeButton::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: var(--border-radius-xsmall);
+    z-index: 1;
+}
+
+.upgradeButton:hover::after {
+    background-color: rgba(104, 104, 104, 0.344);
 }

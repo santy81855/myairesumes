@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Card.module.css";
 import { checkIcon } from "@/components/icons/iconSVG";
 
@@ -80,12 +81,24 @@ const Card = ({
                         );
                     })}
                 </section>
-                {isCurrentPlan && (
+            </section>
+            {isCurrentPlan ? (
+                <section className={styles.currentPlanContainer}>
                     <p className={styles.currentPlan}>
                         *You are currently subscribed to this plan.
                     </p>
-                )}
-            </section>
+                </section>
+            ) : (
+                <section className={styles.buttonContainer}>
+                    <Link
+                        href="/pricing"
+                        className={styles.upgradeButton}
+                        style={{ backgroundColor: accentColor }}
+                    >
+                        Upgrade
+                    </Link>
+                </section>
+            )}
         </main>
     );
 };

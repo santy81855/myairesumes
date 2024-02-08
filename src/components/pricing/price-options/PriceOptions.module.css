@@ -2,5 +2,77 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    padding-block-start: var(--padding-block-xlarge);
+    flex-wrap: wrap;
+    gap: var(--padding-block-xlarge);
+}
+/* 
+.cardBackground {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-inline: var(--padding-block-large);
+    padding-block: var(--padding-block-large);
+    background-color: white;
+} */
+
+.freeCard {
+    position: relative;
+}
+
+.specialCard {
+    margin-block-start: calc(-1 * var(--padding-block-xlarge));
+
+    position: relative;
+}
+/*
+.freeCard:before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    right: 0;
+    height: 30px;
+    width: 30px;
+    border-bottom-right-radius: 50%;
+    box-shadow: 0 20px 0 0 white;
+    background: transparent;
+}
+.specialCard:before {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    border-top-left-radius: 50%;
+    box-shadow: 0 -20px 0 0 white;
+    background: transparent;
+}
+
+.specialCard:after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    height: 30px;
+    width: 30px;
+    border-top-right-radius: 50%;
+    box-shadow: 0 -20px 0 0 white;
+    background: transparent;
+}
+.proCard:before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    border-bottom-left-radius: 50%;
+    box-shadow: 0 20px 0 0 white;
+    background: transparent;
+}
+*/
+.proCard {
+    position: relative;
 }

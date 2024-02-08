@@ -19,9 +19,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <ToastContainer />
-                <Navbar
-                    style={{ backgroundColor: "#3864FF", color: "white" }}
-                />
+                <Navbar style={{ backgroundColor: "white", color: "black" }} />
                 {children}
             </body>
         </html>
