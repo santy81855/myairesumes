@@ -10,6 +10,7 @@ type CardProps = {
     unlockedFeatures: string[];
     lockedFeatures: string[];
     rate?: string;
+    specialText?: string;
 };
 
 const Card = ({
@@ -21,6 +22,7 @@ const Card = ({
     isCurrentPlan,
     unlockedFeatures,
     lockedFeatures,
+    specialText,
 }: CardProps) => {
     return (
         <main
@@ -32,8 +34,15 @@ const Card = ({
                 className={styles.angledRectangle}
                 style={{ backgroundColor: accentColor }}
             >
-                {title}
+                <p>{title}</p>
             </div>
+            {specialText && (
+                <section className={styles.overflowHidden}>
+                    <div className={styles.specialMessage}>
+                        <p>{specialText}</p>
+                    </div>
+                </section>
+            )}
             <section className={styles.textContainer}>
                 <section className={styles.priceContainer}>
                     <p className={styles.price}>${price}</p>

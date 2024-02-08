@@ -57,6 +57,29 @@ const PriceOptions = () => {
                 lockedFeatures={freeLockedFeatures}
                 style={{ backgroundColor: "white", color: "black" }}
             />
+            <Card
+                key="proCardSpecial"
+                title="SPECIAL"
+                price="19.99"
+                rate="/6 months"
+                accentColor="#F0BD39"
+                isCurrentPlan={false}
+                unlockedFeatures={proAvailableFeatures}
+                lockedFeatures={[]}
+                style={{ backgroundColor: "#7963FF", color: "white" }}
+                specialText="Normally $30"
+            />
+            <Card
+                key="proCard"
+                title="PRO"
+                price="19.99"
+                rate="/month"
+                accentColor="#AD6CFF"
+                isCurrentPlan={false}
+                unlockedFeatures={proAvailableFeatures}
+                lockedFeatures={[]}
+                style={{ backgroundColor: "white", color: "black" }}
+            />
         </main>
     );
 };
