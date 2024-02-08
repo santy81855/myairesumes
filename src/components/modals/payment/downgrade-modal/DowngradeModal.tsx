@@ -11,7 +11,10 @@ import { getUser } from "@/lib/user";
 import FormLoading from "@/components/form-loading/FormLoading";
 import Form from "@/components/authentication/sign-up-form/Form";
 
-const DowngradeModal = async () => {
+type UpgradeModalProps = {
+    returnUrl: string;
+};
+const DowngradeModal = async ({ returnUrl }: UpgradeModalProps) => {
     const { user } = await validateRequest();
     if (!user) {
         redirect("/sign-in");
@@ -23,7 +26,7 @@ const DowngradeModal = async () => {
         currentUser.stripeCustomerId
     );
     if (!subscriptionData) {
-        redirect("/dashboard?menu=account&invoicePage=1");
+        redirect(returnUrl);
     }
     return (
         <StaticModal>
@@ -78,10 +81,7 @@ const DowngradeModal = async () => {
                     back.
                 </p>
                 <form className={styles.form} action={cancelSubscription}>
-                    <Link
-                        href="/dashboard?menu=account&invoicePage=1"
-                        className={styles.cancelButton}
-                    >
+                    <Link href={returnUrl} className={styles.cancelButton}>
                         Cancel
                     </Link>
                     <button type="submit" className={styles.button}>

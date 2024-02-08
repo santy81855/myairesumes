@@ -9,7 +9,10 @@ import Link from "next/link";
 import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/user";
 
-const UpdateModal = async () => {
+type UpgradeModalProps = {
+    returnUrl: string;
+};
+const UpdateModal = async ({ returnUrl }: UpgradeModalProps) => {
     const { user } = await validateRequest();
     if (!user) {
         redirect("/sign-in");
@@ -21,7 +24,7 @@ const UpdateModal = async () => {
         currentUser.stripeCustomerId
     )) as Stripe.Subscription;
     if (!subscriptionData) {
-        redirect("/dashboard?menu=account&invoicePage=1");
+        redirect(returnUrl);
     }
     const updatePaymentStripe = updatePayment.bind(
         null,
@@ -44,10 +47,7 @@ const UpdateModal = async () => {
                     back.
                 </p>
                 <form className={styles.form} action={updatePaymentStripe}>
-                    <Link
-                        href="/dashboard?menu=account&invoicePage=1"
-                        className={styles.cancelButton}
-                    >
+                    <Link href={returnUrl} className={styles.cancelButton}>
                         Cancel
                     </Link>
                     <button type="submit" className={styles.button}>

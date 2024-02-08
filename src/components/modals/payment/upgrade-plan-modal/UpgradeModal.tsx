@@ -1,6 +1,6 @@
-import styles from "./ReinstateModal.module.css";
+import styles from "./UpgradeModal.module.css";
 import StaticModal from "@/components/static-modal/StaticModal";
-import { reinstateSubscription } from "@/actions/stripe";
+import { createSubscription } from "@/actions/stripe";
 import { getCustomerSubscription } from "@/lib/stripe";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
@@ -10,7 +10,10 @@ import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/user";
 import FormLoading from "@/components/form-loading/FormLoading";
 
-const ReinstateModal = async () => {
+type UpgradeModalProps = {
+    returnUrl: string;
+};
+const UpgradeModal = async ({ returnUrl }: UpgradeModalProps) => {
     const { user } = await validateRequest();
     if (!user) {
         redirect("/sign-in");
@@ -21,11 +24,11 @@ const ReinstateModal = async () => {
         <StaticModal>
             <section className={styles.container}>
                 <div className={styles.iconContainer}>{unlockIcon}</div>
-                <h1 className={styles.title}>Reactivate Your Account</h1>
+                <h1 className={styles.title}>Unlock Your Account</h1>
                 <section className={styles.benefitsContainer}>
                     <p className={styles.subTitle}>
-                        Reactivate your subscription to stay on the{" "}
-                        <span>Pro</span> plan and keep access to:
+                        Upgrading to the <span>Pro</span> plan will give you
+                        access to:
                     </p>
                     <section className={styles.list}>
                         <section className={styles.listItem}>
@@ -58,25 +61,15 @@ const ReinstateModal = async () => {
                         </section>
                     </section>
                 </section>
-                <p className={styles.smallText}>
-                    Reactivating your subscription <span>will not</span> charge
-                    you anything right now.{" "}
-                </p>
-                <p className={styles.smallText}>
-                    It will simply reactivate your subscription, and you will be
-                    charged on your next billing date.
-                </p>
+
                 <p className={styles.text}>
                     Click <span className={styles.continueText}>Continue</span>{" "}
-                    to reactivate or click{" "}
+                    to upgrade or click{" "}
                     <span className={styles.cancelText}>Cancel</span> to go
                     back.
                 </p>
-                <form className={styles.form} action={reinstateSubscription}>
-                    <Link
-                        href="/dashboard?menu=account&invoicePage=1"
-                        className={styles.cancelButton}
-                    >
+                <form className={styles.form} action={createSubscription}>
+                    <Link href={returnUrl} className={styles.cancelButton}>
                         Cancel
                     </Link>
                     <button type="submit" className={styles.button}>
@@ -89,4 +82,4 @@ const ReinstateModal = async () => {
     );
 };
 
-export default ReinstateModal;
+export default UpgradeModal;

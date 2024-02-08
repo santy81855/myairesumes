@@ -3,8 +3,14 @@ import Card from "@/components/pricing/price-card/Card";
 import { getUser } from "@/lib/user";
 import { getCustomerSubscription } from "@/lib/stripe";
 import { validateRequest } from "@/lib/auth";
+import { UpdateUrl } from "@/lib/updateUrl";
+import Stripe from "stripe";
 
-const PriceOptions = async () => {
+type PriceOptionsProps = {
+    searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
     const freemiumFeatures = [
         "1 job",
         "1 resume",
@@ -24,8 +30,21 @@ const PriceOptions = async () => {
     const status = currentUser && currentUser.status;
     const subscription =
         status && status === "pro"
-            ? await getCustomerSubscription(currentUser.stripeCustomerId)
+            ? ((await getCustomerSubscription(
+                  currentUser.stripeCustomerId
+              )) as Stripe.Subscription)
             : null;
+    if (subscription)
+        console.log(subscription.items.data[0].plan.interval_count);
+    const isPro =
+        subscription && subscription.items.data[0].plan.interval_count === 1
+            ? true
+            : false;
+    const isSpecial =
+        subscription && subscription.items.data[0].plan.interval_count === 6
+            ? true
+            : false;
+
     const isActive =
         subscription && subscription.cancel_at_period_end === false;
     const isCancelled =
@@ -52,24 +71,34 @@ const PriceOptions = async () => {
                     price="19.99"
                     rate="/6 months"
                     accentColor="#FDCA40"
-                    isCurrentPlan={subscription !== null}
+                    isCurrentPlan={isSpecial}
                     unlockedFeatures={proAvailableFeatures}
                     lockedFeatures={[]}
                     style={{ backgroundColor: "#1E3888", color: "white" }}
                     specialText="Normally $30"
+                    url={UpdateUrl(
+                        searchParams ? searchParams : {},
+                        [{ key: "special", value: "true" }],
+                        "/pricing"
+                    )}
                 />
             </div>
             <div className={`${styles.proCard} ${styles.cardBackground}`}>
                 <Card
                     key="proCard"
                     title="PRO"
-                    price="19.99"
+                    price="4.99"
                     rate="/month"
                     accentColor="#D35269"
-                    isCurrentPlan={subscription !== null}
+                    isCurrentPlan={isPro}
                     unlockedFeatures={proAvailableFeatures}
                     lockedFeatures={[]}
                     style={{ backgroundColor: "white", color: "black" }}
+                    url={UpdateUrl(
+                        searchParams ? searchParams : {},
+                        [{ key: "pro", value: "true" }],
+                        "/pricing"
+                    )}
                 />
             </div>
         </main>

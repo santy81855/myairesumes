@@ -9,10 +9,10 @@ import DashboardWrapper from "@/components/dashboard/dashboard-wrapper/Dashboard
 import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import Navbar from "@/components/nav/Navbar";
 import StaticModal from "@/components/static-modal/StaticModal";
-import UpdateModal from "@/components/dashboard/account/update-payment-modal/UpdateModal";
-import UpgradeModal from "@/components/dashboard/account/upgrade-plan-modal/UpgradeModal";
-import DowngradeModal from "@/components/dashboard/account/downgrade-modal/DowngradeModal";
-import ReinstateModal from "@/components/dashboard/account/bill/reinstate-modal/ReintstateModal";
+import UpdateModal from "@/components/modals/payment/update-payment-modal/UpdateModal";
+import UpgradeModal from "@/components/modals/payment/upgrade-plan-modal/UpgradeModal";
+import DowngradeModal from "@/components/modals/payment/downgrade-modal/DowngradeModal";
+import ReinstateModal from "@/components/modals/payment/reinstate-modal/ReintstateModal";
 import { UpdateUrl } from "@/lib/updateUrl";
 
 const Page = async ({
@@ -85,22 +85,22 @@ const Page = async ({
             </section>
             {editPayment && (
                 <StaticModal>
-                    <UpdateModal />
+                    <UpdateModal returnUrl="/dashboard?menu=account&invoicePage=1" />
                 </StaticModal>
             )}
             {upgradePlan && (
                 <StaticModal>
-                    <UpgradeModal />
+                    <UpgradeModal returnUrl="/dashboard?menu=account&invoicePage=1" />
                 </StaticModal>
             )}
             {downgradePlan && (
                 <StaticModal>
-                    <DowngradeModal />
+                    <DowngradeModal returnUrl="/dashboard?menu=account&invoicePage=1" />
                 </StaticModal>
             )}
             {reinstatePlan && (
                 <StaticModal>
-                    <ReinstateModal />
+                    <ReinstateModal returnUrl="/dashboard?menu=account&invoicePage=1" />
                 </StaticModal>
             )}
         </DashboardWrapper>

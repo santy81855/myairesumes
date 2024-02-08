@@ -12,6 +12,7 @@ type CardProps = {
     lockedFeatures: string[];
     rate?: string;
     specialText?: string;
+    url?: string;
 };
 
 const Card = ({
@@ -24,6 +25,7 @@ const Card = ({
     unlockedFeatures,
     lockedFeatures,
     specialText,
+    url,
 }: CardProps) => {
     return (
         <main
@@ -88,10 +90,10 @@ const Card = ({
                         *You are currently subscribed to this plan.
                     </p>
                 </section>
-            ) : (
+            ) : title === "FREE" ? null : (
                 <section className={styles.buttonContainer}>
                     <Link
-                        href="/pricing"
+                        href={url ? url : "/pricing"}
                         className={styles.upgradeButton}
                         style={{ backgroundColor: accentColor }}
                     >

@@ -1,7 +1,17 @@
 import styles from "./page.module.css";
 import PriceOptions from "@/components/pricing/price-options/PriceOptions";
+import UpgradeModal from "@/components/modals/payment/upgrade-plan-modal/UpgradeModal";
+import SpecialModal from "@/components/modals/payment/upgrade-special/SpecialModal";
 
-const Page = () => {
+const Page = async ({
+    params,
+    searchParams,
+}: {
+    params: { slug: string };
+    searchParams?: { [key: string]: string | string[] | undefined };
+}) => {
+    const pro = searchParams?.pro || false;
+    const special = searchParams?.special || false;
     return (
         <main id="pricingPage" className={styles.main}>
             <section className={styles.content}>
@@ -15,9 +25,11 @@ const Page = () => {
                     </p>
                 </section>
                 <section className={styles.priceSection}>
-                    <PriceOptions />
+                    <PriceOptions searchParams={searchParams} />
                 </section>
             </section>
+            {pro && <UpgradeModal returnUrl="/pricing" />}
+            {special && <SpecialModal returnUrl="/pricing" />}
         </main>
     );
 };
