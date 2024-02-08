@@ -7,7 +7,6 @@
     justify-content: space-around;
     align-items: center;
     gap: var(--padding-block-medium);
-    background-color: transparent;
 }
 
 .profileImage {
@@ -42,11 +41,7 @@
     font-size: var(--font-size-medium);
     font-weight: 600;
     z-index: 1;
-    width: 100%;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    max-width: 20ch;
     text-align: center;
 }
 
@@ -75,9 +70,6 @@
     font-weight: bold;
     z-index: 1;
     width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     height: 30px;
     background-color: rgb(242, 242, 242);
     border-radius: var(--border-radius-xsmall);
