@@ -16,6 +16,7 @@
     margin-block-start: var(--padding-block-xlarge);
     padding-inline: var(--padding-inline-large);
     border-radius: var(--border-radius);
+    margin-inline: var(--padding-inline-large);
 }
 
 .titleContainer {
@@ -52,6 +53,29 @@
     align-items: center;
     position: relative;
     padding-inline: var(--padding-inline-large);
-    padding-block: var(--padding-block-large);
+    padding-block-start: var(--padding-block-small);
+    padding-block-end: var(--padding-block-large);
     position: relative;
+}
+
+.infoMessage {
+    font-size: var(--font-size-small);
+    color: black;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-large);
+    font-weight: 700;
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        margin-block-start: var(--padding-block-large);
+    }
+
+    .priceSection {
+        padding-block-start: 0;
+    }
+    .titleContainer {
+        padding-block-end: var(--padding-block-medium);
+        gap: var(--padding-block-medium);
+    }
 }

@@ -34,8 +34,6 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
                   currentUser.stripeCustomerId
               )) as Stripe.Subscription)
             : null;
-    if (subscription)
-        console.log(subscription.items.data[0].plan.interval_count);
     const isPro =
         subscription && subscription.items.data[0].plan.interval_count === 1
             ? true
@@ -52,7 +50,7 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
 
     return (
         <main id="priceOptions" className={styles.container}>
-            <div className={`${styles.freeCard} ${styles.cardBackground}`}>
+            <div className={styles.freeCard}>
                 <Card
                     key="freeCard"
                     title="FREE"
@@ -62,9 +60,10 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
                     unlockedFeatures={[]}
                     lockedFeatures={freemiumFeatures}
                     style={{ backgroundColor: "white", color: "black" }}
+                    showButton={false} // never show upgrade button for free tier
                 />
             </div>
-            <div className={`${styles.specialCard} ${styles.cardBackground}`}>
+            <div className={styles.specialCard}>
                 <Card
                     key="proCardSpecial"
                     title="SPECIAL"
@@ -81,9 +80,10 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
                         [{ key: "special", value: "true" }],
                         "/pricing"
                     )}
+                    showButton={subscription === null} // show the upgrade button if the user is free tier
                 />
             </div>
-            <div className={`${styles.proCard} ${styles.cardBackground}`}>
+            <div className={styles.proCard}>
                 <Card
                     key="proCard"
                     title="PRO"
@@ -99,6 +99,7 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
                         [{ key: "pro", value: "true" }],
                         "/pricing"
                     )}
+                    showButton={subscription === null} // show the upgrade button if the user is free tier
                 />
             </div>
         </main>

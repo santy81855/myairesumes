@@ -13,6 +13,7 @@ type CardProps = {
     rate?: string;
     specialText?: string;
     url?: string;
+    showButton?: boolean;
 };
 
 const Card = ({
@@ -26,6 +27,7 @@ const Card = ({
     lockedFeatures,
     specialText,
     url,
+    showButton,
 }: CardProps) => {
     return (
         <main
@@ -54,7 +56,7 @@ const Card = ({
                 <section className={styles.featuresContainer}>
                     {unlockedFeatures.map((feature, index) => {
                         return (
-                            <section className={styles.item}>
+                            <section key={feature} className={styles.item}>
                                 <div className={styles.greenIconContainer}>
                                     {checkIcon}
                                 </div>
@@ -69,7 +71,7 @@ const Card = ({
                     })}
                     {lockedFeatures.map((feature, index) => {
                         return (
-                            <section className={styles.item}>
+                            <section key={feature} className={styles.item}>
                                 <div className={styles.redIconContainer}>
                                     {checkIcon}
                                 </div>
@@ -84,13 +86,14 @@ const Card = ({
                     })}
                 </section>
             </section>
-            {isCurrentPlan ? (
+            {isCurrentPlan && (
                 <section className={styles.currentPlanContainer}>
                     <p className={styles.currentPlan}>
                         *You are currently subscribed to this plan.
                     </p>
                 </section>
-            ) : title === "FREE" ? null : (
+            )}
+            {showButton && showButton === true && (
                 <section className={styles.buttonContainer}>
                     <Link
                         href={url ? url : "/pricing"}
