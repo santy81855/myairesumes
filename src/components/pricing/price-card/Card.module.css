@@ -1,0 +1,120 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: var(--border-radius);
+    padding-block: var(--padding-block-large);
+    width: 250px;
+}
+
+.angledRectangle {
+    width: 55%;
+    color: white;
+    position: relative;
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    padding-inline-start: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+    border-top-left-radius: var(--border-radius-xsmall);
+    margin-inline-start: -12px;
+}
+.angledRectangle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%; /* Adjust as needed */
+    height: 100%;
+    background-color: inherit;
+    transform: skew(30deg);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.angledRectangle::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-block-end: -12px;
+    border-left: 12px solid transparent; /* Adjust as needed */
+    border-top: 12px solid black; /* Adjust as needed */
+}
+
+.textContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-inline: var(--padding-inline-large);
+    padding-block: var(--padding-block-small);
+}
+
+.priceContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-inline-small);
+}
+
+.price {
+    font-size: var(--font-size-xlarge);
+    font-weight: 700;
+}
+
+.rate {
+    font-size: var(--font-size-small);
+    color: lightgrey;
+}
+
+.featuresContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-inline-small);
+}
+
+.greenIconContainer {
+    width: 15px;
+    height: 15px;
+}
+
+.greenIconContainer svg {
+    width: 100%;
+    height: 100%;
+    fill: #44de37;
+}
+
+.redIconContainer {
+    width: 15px;
+    height: 15px;
+}
+
+.redIconContainer svg {
+    width: 100%;
+    height: 100%;
+    fill: #ff6c62;
+}
+
+.unlockedFeature {
+    font-size: var(--font-size-small);
+}
+
+.currentPlan {
+    width: 100%;
+    font-size: var(--font-size-xsmall);
+    text-align: left;
+    font-weight: 600;
+    margin-block-start: var(--padding-block-medium);
+}

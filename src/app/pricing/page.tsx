@@ -12,7 +12,9 @@ const Page = () => {
                     the best plan for you and start creating resumes today!
                 </p>
             </section>
-            <PriceOptions />
+            <section className={styles.priceSection}>
+                <PriceOptions />
+            </section>
         </main>
     );
 };

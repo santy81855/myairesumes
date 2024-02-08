@@ -6,6 +6,9 @@
     align-items: center;
     justify-content: flex-start;
     background-color: #3864ff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-block: var(--padding-block-large);
 }
 
 .titleContainer {
@@ -14,7 +17,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: var(--padding-block-large);
     gap: var(--padding-block-small);
 }
 
@@ -33,4 +35,11 @@
     width: 100%;
     text-align: center;
     padding-inline: var(--padding-inline-large);
+}
+
+.priceSection {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
