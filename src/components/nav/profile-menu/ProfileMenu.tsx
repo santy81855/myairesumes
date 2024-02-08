@@ -115,7 +115,7 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                             left: buttonPosition.right,
                             transform: "translateX(-100%)",
                             top: buttonPosition.top,
-                            zIndex: -1,
+                            zIndex: -2,
                         }}
                         animate={{
                             width: width,
@@ -134,7 +134,7 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
                             top: buttonPosition.top + 10,
                             left: buttonPosition.right - 10,
                             transition: { duration: 0.3 },
-                            zIndex: -1,
+                            zIndex: -2,
                         }}
                         className={styles.aside}
                     >

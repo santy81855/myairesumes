@@ -1,0 +1,81 @@
+.main {
+    width: 100%;
+    height: calc(100% - var(--nav-height));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-block-end: var(--padding-block-large);
+    background-color: rgb(243, 243, 243);
+}
+
+.content {
+    background-color: white;
+    margin-block-start: var(--padding-block-xlarge);
+    padding-inline: var(--padding-inline-large);
+    border-radius: var(--border-radius);
+    margin-inline: var(--padding-inline-large);
+}
+
+.titleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-small);
+    padding-block: var(--padding-block-large);
+}
+
+.titleContainer h1 {
+    font-size: var(--font-size-x2large);
+    color: black;
+    width: 100%;
+    text-align: center;
+    padding-inline: var(--padding-inline-large);
+}
+
+.titleContainer p {
+    font-size: var(--font-size-small);
+    color: #7e7e7e;
+    max-width: 60ch;
+    width: 100%;
+    text-align: center;
+    padding-inline: var(--padding-inline-large);
+}
+
+.priceSection {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-inline: var(--padding-inline-large);
+    padding-block-start: var(--padding-block-small);
+    padding-block-end: var(--padding-block-large);
+    position: relative;
+}
+
+.infoMessage {
+    font-size: var(--font-size-small);
+    color: black;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-large);
+    font-weight: 700;
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        margin-block-start: var(--padding-block-large);
+    }
+
+    .priceSection {
+        padding-block-start: 0;
+    }
+    .titleContainer {
+        padding-block-end: var(--padding-block-medium);
+        gap: var(--padding-block-medium);
+    }
+}
