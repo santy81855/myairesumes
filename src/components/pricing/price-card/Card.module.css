@@ -1,0 +1,206 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    padding-block-start: var(--padding-block-large);
+    padding-block-end: var(--padding-block-small);
+    width: 250px;
+    min-height: 350px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+    position: relative;
+    z-index: 1;
+}
+
+.overflowHidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    z-index: -1;
+}
+
+.angledRectangle {
+    width: 55%;
+    color: white;
+    position: relative;
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    padding-inline-start: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+    border-top-left-radius: var(--border-radius-xsmall);
+    margin-inline-start: -12px;
+    z-index: 1;
+}
+.angledRectangle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%; /* Adjust as needed */
+    height: 100%;
+    background-color: inherit;
+    transform: skew(30deg);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    z-index: -1;
+}
+.angledRectangle::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-block-end: -12px;
+    border-left: 12px solid transparent; /* Adjust as needed */
+    border-top: 12px solid rgba(0, 0, 0, 0.552); /* Adjust as needed */
+    z-index: -1;
+}
+
+.specialMessage {
+    position: absolute;
+    font-size: var(--font-size-xsmall);
+    padding-block: var(--padding-block-small);
+    width: 150px;
+    text-align: center;
+    top: 0;
+    right: 0;
+    transform: translate(35px, 15px) rotate(35deg);
+    background-color: #ff9090;
+}
+
+.textContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-inline: var(--padding-inline-large);
+    padding-block: var(--padding-block-small);
+    gap: var(--padding-block-small);
+}
+
+.priceContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-inline-small);
+}
+
+.price {
+    font-size: var(--font-size-xlarge);
+    font-weight: 700;
+}
+
+.rate {
+    font-size: var(--font-size-small);
+    color: lightgrey;
+}
+
+.featuresContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-inline-small);
+}
+
+.greenIconContainer {
+    width: 15px;
+    height: 15px;
+}
+
+.greenIconContainer svg {
+    width: 100%;
+    height: 100%;
+    fill: #44de37;
+}
+
+.redIconContainer {
+    width: 15px;
+    height: 15px;
+}
+
+.redIconContainer svg {
+    width: 100%;
+    height: 100%;
+    fill: #ffc800;
+}
+
+.unlockedFeature {
+    font-size: var(--font-size-small);
+}
+
+.currentPlanContainer {
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-inline: var(--padding-inline-large);
+    padding-block: var(--padding-block-small);
+}
+
+.currentPlan {
+    width: 100%;
+    font-size: var(--font-size-xsmall);
+    text-align: left;
+    font-weight: 700;
+    padding-block: var(--padding-block-small);
+}
+
+.buttonContainer {
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-inline: var(--padding-inline-large);
+    padding-block: var(--padding-block-small);
+}
+
+.upgradeButton {
+    width: 100%;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-large);
+    border: none;
+    border-radius: var(--border-radius-xsmall);
+    color: white;
+    font-size: var(--font-size-small);
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upgradeButton::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: var(--border-radius-xsmall);
+    z-index: 1;
+}
+
+.upgradeButton:hover::after {
+    background-color: rgba(104, 104, 104, 0.344);
+}

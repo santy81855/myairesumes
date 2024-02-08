@@ -4,6 +4,7 @@ import { updateUserContactInfo } from "@/actions/user";
 import "react-toastify/dist/ReactToastify.css";
 import FormLoading from "@/components/form-loading/FormLoading";
 import Card from "@/components/dashboard/cards/dashboard-cards/Card";
+import { getSubstringEllipsis } from "@/lib/string";
 
 type ContactProps = {
     currentUser: any;
@@ -68,9 +69,12 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                                 >
                                     name
                                 </p>
-                                <p
-                                    className={styles.name}
-                                >{`${first} ${last}`}</p>
+                                <p className={styles.name}>
+                                    {getSubstringEllipsis(first, 0, 20)}
+                                </p>
+                                <p className={styles.name}>
+                                    {getSubstringEllipsis(last, 0, 20)}
+                                </p>
                             </>
                         )}
                     </section>
@@ -88,7 +92,9 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                                 required
                             />
                         ) : (
-                            <p className={styles.item}>{profileEmail}</p>
+                            <p className={styles.item}>
+                                {getSubstringEllipsis(email, 0, 25)}
+                            </p>
                         )}
                     </section>
                     <section className={styles.fieldContainer}>
@@ -103,7 +109,9 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                                 required
                             />
                         ) : (
-                            <p className={styles.item}>{phone}</p>
+                            <p className={styles.item}>
+                                {getSubstringEllipsis(phone, 0, 25)}
+                            </p>
                         )}
                     </section>
                     <section className={styles.fieldContainer}>
@@ -117,7 +125,9 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
                                 defaultValue={website}
                             />
                         ) : (
-                            <p className={styles.item}>{website}</p>
+                            <p className={styles.item}>
+                                {getSubstringEllipsis(website, 0, 25)}
+                            </p>
                         )}
                     </section>
                 </section>
