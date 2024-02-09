@@ -1,0 +1,59 @@
+.profileImageEdit {
+    width: 100%;
+    max-width: 130px;
+    aspect-ratio: 1/1;
+    position: relative;
+    z-index: 1;
+    opacity: 0.8;
+    border-radius: 50%;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    background-color: rgb(242, 242, 242);
+}
+
+.imageInput {
+    content: "";
+    position: absolute;
+    border: 2px dashed #a183cf;
+    border-radius: 50%;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    top: 0;
+    left: 0;
+    transform: translate(-10px, -10px);
+    z-index: 1;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.iconContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    stroke: rgb(186, 186, 186);
+    fill: rgb(186, 186, 186);
+    stroke-width: 0.5;
+    cursor: pointer;
+}
+
+.iconContainer svg {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    opacity: 0.5;
+}
+
+.iconContainer:hover {
+    stroke: rgb(94, 94, 94);
+    fill: rgb(84, 84, 84);
+    opacity: 1;
+}

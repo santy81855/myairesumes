@@ -2,6 +2,9 @@
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { r2 } from "@/lib/r2";
 
 export const initializeUserBasicInfo = async (user: any) => {
     "use server";
@@ -52,8 +55,43 @@ export const updateUserContactInfo = async (user: any, formData: any) => {
     const website = formData.get("website");
     const first = formData.get("firstName");
     const last = formData.get("lastName");
+    const image = formData.get("image");
+    let imageUrl = user.imageUrl;
+    // if image.size === 0 then no file was uploaded
+    if (image && image.size > 0) {
+        try {
+            //  delete their current profile image if they have one yet
+            if (imageUrl) {
+                const key = imageUrl.split("/").pop();
+                const deleteCommand = new DeleteObjectCommand({
+                    Bucket: process.env.R2_BUCKET_NAME || "",
+                    Key: key,
+                });
+                await r2.send(deleteCommand);
+            }
+            const signedUrl = await getSignedUrl(
+                r2,
+                new PutObjectCommand({
+                    Bucket: process.env.R2_BUCKET_NAME || "",
+                    Key: `${id}-${image.name}`,
+                    ContentType: image.type,
+                }),
+                { expiresIn: 60 * 60 }
+            );
+            await fetch(signedUrl, {
+                method: "PUT",
+                body: image,
+            });
+            imageUrl = `https://r2.myairesumes.com/${id}-${image.name}`;
+        } catch (error) {
+            return {
+                error: "An unknown error occurred. Please try again.",
+            };
+        }
+    }
     const basicInfo = user.basicInfo;
     const data = {
+        imageUrl,
         basicInfo: {
             ...basicInfo,
             firstName: first,
@@ -61,6 +99,7 @@ export const updateUserContactInfo = async (user: any, formData: any) => {
             email,
             phone,
             website,
+            imageUrl,
         },
     };
     const response = await prisma.user.update({
