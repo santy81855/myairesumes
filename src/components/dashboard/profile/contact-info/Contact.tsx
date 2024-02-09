@@ -5,15 +5,22 @@ import "react-toastify/dist/ReactToastify.css";
 import FormLoading from "@/components/form-loading/FormLoading";
 import Card from "@/components/dashboard/cards/dashboard-cards/Card";
 import { getSubstringEllipsis } from "@/lib/string";
+import Upload from "./image-upload/Upload";
+import Image from "next/image";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { r2 } from "@/lib/r2";
 
 type ContactProps = {
     currentUser: any;
     searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-const Contact = ({ currentUser, searchParams }: ContactProps) => {
+const Contact = async ({ currentUser, searchParams }: ContactProps) => {
     const { imageUrl, basicInfo, firstName, lastName, email } = currentUser;
-    const url = imageUrl || "/images/icons/default-profile-picture.svg";
+    const url = basicInfo
+        ? basicInfo.imageUrl
+        : "/images/icons/default-profile-picture.svg";
     const first = basicInfo ? basicInfo.firstName : firstName;
     const last = basicInfo ? basicInfo.lastName : lastName;
     const profileEmail = basicInfo ? basicInfo.email : email;
@@ -26,14 +33,19 @@ const Contact = ({ currentUser, searchParams }: ContactProps) => {
         <Card gridArea="profile" title="Profile" key="contact-card">
             <div className={styles.profileSectionContent}>
                 <section className={styles.profileImagecontainer}>
-                    <section
-                        className={styles.profileImage}
-                        style={{
-                            background: `url(${url})`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                        }}
-                    ></section>
+                    {edit ? (
+                        <Upload url={url} />
+                    ) : (
+                        <section className={styles.profileImage}>
+                            <Image
+                                src={url || ""}
+                                alt="profile image"
+                                width={200}
+                                height={200}
+                                className={styles.image}
+                            />
+                        </section>
+                    )}
                     <section className={styles.nameInfo}>
                         {edit ? (
                             <section className={styles.nameInputContainer}>
