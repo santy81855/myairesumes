@@ -7,9 +7,6 @@ import Card from "@/components/dashboard/cards/dashboard-cards/Card";
 import { getSubstringEllipsis } from "@/lib/string";
 import Upload from "./image-upload/Upload";
 import Image from "next/image";
-import { GetObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { r2 } from "@/lib/r2";
 
 type ContactProps = {
     currentUser: any;
@@ -18,9 +15,10 @@ type ContactProps = {
 
 const Contact = async ({ currentUser, searchParams }: ContactProps) => {
     const { imageUrl, basicInfo, firstName, lastName, email } = currentUser;
-    const url = basicInfo
-        ? basicInfo.imageUrl
-        : "/images/icons/default-profile-picture.svg";
+    const url =
+        basicInfo && basicInfo.imageUrl
+            ? basicInfo.imageUrl
+            : "/images/icons/default-profile-picture.svg";
     const first = basicInfo ? basicInfo.firstName : firstName;
     const last = basicInfo ? basicInfo.lastName : lastName;
     const profileEmail = basicInfo ? basicInfo.email : email;
