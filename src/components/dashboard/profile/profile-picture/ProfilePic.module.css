@@ -1,0 +1,174 @@
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-medium);
+    z-index: 1;
+    border-radius: var(--border-radius-xsmall);
+    padding-block: var(--padding-block-medium);
+    position: relative;
+    grid-area: profilePic;
+    background-color: rgba(244, 244, 244, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.profileImagecontainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-medium);
+    z-index: 1;
+    border-radius: var(--border-radius-xsmall);
+    padding-block: var(--padding-block-medium);
+    position: relative;
+}
+
+.profileImage {
+    width: 100%;
+    max-width: 130px;
+    aspect-ratio: 1/1;
+    position: relative;
+    z-index: 1;
+    opacity: 0.8;
+    border-radius: 50%;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    background-color: rgb(242, 242, 242);
+}
+
+.label {
+    font-size: var(--font-size-small);
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+    color: #797979;
+}
+
+.nameInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+.nameLabel {
+    text-align: center;
+}
+
+.name {
+    font-size: var(--font-size-medium);
+    font-weight: 600;
+    z-index: 1;
+    max-width: 20ch;
+    text-align: center;
+}
+
+.iconContainer {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.iconContainer:hover {
+    background-color: rgb(242, 242, 242);
+}
+
+.iconContainer svg {
+    width: 30px;
+    height: 30px;
+    stroke: rgb(186, 186, 186);
+    fill: rgb(186, 186, 186);
+    stroke-width: 0.5;
+}
+
+.nameInputContainer {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+.nameInput {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+.input {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e1e1e1;
+
+    padding-inline-start: var(--padding-block-small);
+    font-size: var(--font-size-small);
+}
+
+.input:focus {
+    outline: none;
+    border: 1px solid #a183cf;
+}
+
+.submitButton {
+    width: 100%;
+    background-color: #a183cf;
+    color: white;
+    min-height: 40px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submitButton:hover {
+    background-color: #8a6fbf;
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-block-start: var(--padding-block-medium);
+    gap: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+}
+
+.cancelButton {
+    width: 100%;
+    background-color: #eaeaea;
+    color: rgb(22, 22, 22);
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancelButton:hover {
+    background-color: #ffbcbc;
+}

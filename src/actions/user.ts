@@ -47,59 +47,55 @@ export const initializeUserBasicInfo = async (user: any) => {
     return redirect("/dashboard?menu=profile&tutorial=true");
 };
 
+export const updateUserNameInfo = async (
+    user: any,
+    url: string,
+    formData: any,
+    updatedImage: boolean
+) => {
+    "use server";
+    const { id, numImageUploads } = user;
+    const first = formData.get("firstName");
+    const last = formData.get("lastName");
+    const basicInfo = user.basicInfo;
+    const data = {
+        firstName: first,
+        lastName: last,
+        imageUrl: url,
+        numImageUploads: updatedImage ? numImageUploads + 1 : numImageUploads,
+        basicInfo: {
+            ...basicInfo,
+            firstName: first,
+            lastName: last,
+            imageUrl: url,
+        },
+    };
+    const response = await prisma.user.update({
+        where: { id },
+        data,
+    });
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return { success: "Profile updated successfully." };
+};
+
 export const updateUserContactInfo = async (user: any, formData: any) => {
     "use server";
     const { id } = user;
     const email = formData.get("email");
     const phone = formData.get("phone");
     const website = formData.get("website");
-    const first = formData.get("firstName");
-    const last = formData.get("lastName");
-    const image = formData.get("image");
-    let imageUrl = user.imageUrl;
-    // if image.size === 0 then no file was uploaded
-    if (image && image.size > 0) {
-        try {
-            //  delete their current profile image if they have one yet
-            if (imageUrl) {
-                const key = imageUrl.split("/").pop();
-                const deleteCommand = new DeleteObjectCommand({
-                    Bucket: process.env.R2_BUCKET_NAME || "",
-                    Key: key,
-                });
-                await r2.send(deleteCommand);
-            }
-            const signedUrl = await getSignedUrl(
-                r2,
-                new PutObjectCommand({
-                    Bucket: process.env.R2_BUCKET_NAME || "",
-                    Key: `${id}-${image.name}`,
-                    ContentType: image.type,
-                }),
-                { expiresIn: 60 * 60 }
-            );
-            await fetch(signedUrl, {
-                method: "PUT",
-                body: image,
-            });
-            imageUrl = `https://r2.myairesumes.com/${id}-${image.name}`;
-        } catch (error) {
-            return {
-                error: "An unknown error occurred. Please try again.",
-            };
-        }
-    }
     const basicInfo = user.basicInfo;
     const data = {
-        imageUrl,
         basicInfo: {
             ...basicInfo,
-            firstName: first,
-            lastName: last,
             email,
             phone,
             website,
-            imageUrl,
         },
     };
     const response = await prisma.user.update({
