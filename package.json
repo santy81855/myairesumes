@@ -17,6 +17,7 @@
         "arctic": "^1.1.0",
         "axios": "^1.6.7",
         "bcrypt": "^5.1.1",
+        "browser-image-compression": "^2.0.2",
         "framer-motion": "^11.0.3",
         "framer-motion-ticker": "^1.0.19",
         "lucia": "^3.0.1",
