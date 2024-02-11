@@ -3,21 +3,24 @@ import styles from "./Upload.module.css";
 import { plusIconCircled } from "@/components/icons/iconSVG";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const imageMimeType = /image\/(png|jpg|jpeg)/i;
 
 type UploadProps = {
     url: string;
+    setUrl?: (url: string) => void;
 };
 
-const Upload = ({ url }: UploadProps) => {
+const Upload = ({ url, setUrl }: UploadProps) => {
     const [file, setFile] = useState(null);
     const [fileDataURL, setFileDataURL] = useState(null);
 
     const changeHandler = (e: any) => {
         const file = e.target.files[0];
         if (!file.type.match(imageMimeType)) {
-            alert("Image mime type is not valid");
+            toast.warning("Please select a valid image file (png, jpg, jpeg).");
             return;
         }
         setFile(file);

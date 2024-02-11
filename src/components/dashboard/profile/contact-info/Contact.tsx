@@ -1,12 +1,12 @@
 import Link from "next/link";
 import styles from "./Contact.module.css";
-import { updateUserContactInfo } from "@/actions/user";
 import "react-toastify/dist/ReactToastify.css";
 import FormLoading from "@/components/form-loading/FormLoading";
 import Card from "@/components/dashboard/cards/dashboard-cards/Card";
 import { getSubstringEllipsis } from "@/lib/string";
 import Upload from "./image-upload/Upload";
 import Image from "next/image";
+import { updateUserContactInfo } from "@/actions/user";
 
 type ContactProps = {
     currentUser: any;
@@ -24,71 +24,12 @@ const Contact = async ({ currentUser, searchParams }: ContactProps) => {
     const profileEmail = basicInfo ? basicInfo.email : email;
     const phone = basicInfo ? basicInfo.phone : "";
     const website = basicInfo ? basicInfo.website : "";
-    const edit = searchParams?.profileEdit || false;
+    const edit = searchParams?.contactEdit || false;
     const updateBasicInfo = updateUserContactInfo.bind(null, currentUser);
 
     return (
-        <Card gridArea="profile" title="Profile" key="contact-card">
+        <Card gridArea="profile" title="Contact" key="contact-card">
             <div className={styles.profileSectionContent}>
-                <section className={styles.profileImagecontainer}>
-                    {edit ? (
-                        <Upload url={url} />
-                    ) : (
-                        <section className={styles.profileImage}>
-                            <Image
-                                src={url || ""}
-                                alt="profile image"
-                                width={200}
-                                height={200}
-                                className={styles.image}
-                            />
-                        </section>
-                    )}
-                    <section className={styles.nameInfo}>
-                        {edit ? (
-                            <section className={styles.nameInputContainer}>
-                                <section className={styles.nameInput}>
-                                    <p className={styles.label}>first name</p>
-                                    <input
-                                        aria-label="first name"
-                                        type="text"
-                                        name="firstName"
-                                        className={styles.input}
-                                        defaultValue={first}
-                                        autoFocus
-                                        required
-                                    />
-                                </section>
-                                <section className={styles.nameInput}>
-                                    <p className={styles.label}>last name</p>
-                                    <input
-                                        aria-label="last name"
-                                        type="text"
-                                        name="lastName"
-                                        className={styles.input}
-                                        defaultValue={last}
-                                        autoFocus
-                                        required
-                                    />
-                                </section>
-                            </section>
-                        ) : (
-                            <>
-                                <p
-                                    className={`${styles.label} ${styles.nameLabel}`}
-                                >
-                                    name
-                                </p>
-                                <p className={styles.name}>
-                                    {getSubstringEllipsis(first, 0, 20)}
-                                </p>
-                                <p className={styles.name}>
-                                    {getSubstringEllipsis(last, 0, 20)}
-                                </p>
-                            </>
-                        )}
-                    </section>
-                </section>
                 <section className={styles.contactInfo}>
                     <section className={styles.fieldContainer}>
                         <p className={styles.label}>email</p>
@@ -160,7 +101,7 @@ const Contact = async ({ currentUser, searchParams }: ContactProps) => {
                 </section>
             ) : (
                 <Link
-                    href="/dashboard?menu=profile&profileEdit=true"
+                    href="/dashboard?menu=profile&contactEdit=true"
                     type="button"
                     className={styles.submitButton}
                 >
