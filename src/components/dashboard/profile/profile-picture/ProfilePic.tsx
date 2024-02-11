@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { useState } from "react";
 import { createSignedUrl, deleteObject } from "@/actions/r2";
+import imageCompression from "browser-image-compression";
 
 type ProfilePicProps = {
     currentUser: any;
@@ -45,6 +46,9 @@ const ProfilePic = ({ currentUser }: ProfilePicProps) => {
         let updatedImage = false;
         if (image && image.size > 0) {
             try {
+                const compressedImage = await imageCompression(image, {
+                    maxSizeMB: 4,
+                }); // Set maximum file size
                 // if the user has an image already, delete it
                 if (currentUser.numImageUploads > 0) {
                     await deleteObject(`${id}-${currentUser.numImageUploads}`);
@@ -57,7 +61,7 @@ const ProfilePic = ({ currentUser }: ProfilePicProps) => {
                 // upload the image on the client side to save server resources
                 await fetch(signedUrl, {
                     method: "PUT",
-                    body: image,
+                    body: compressedImage,
                 });
                 updatedImage = true;
                 // update the url
