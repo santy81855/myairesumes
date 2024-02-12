@@ -2,9 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { r2 } from "@/lib/r2";
+import { createSignedUrl } from "./r2";
 
 export const initializeUserBasicInfo = async (user: any) => {
     "use server";
@@ -57,6 +55,8 @@ export const updateUserNameInfo = async (
     const { id, numImageUploads } = user;
     const first = formData.get("firstName");
     const last = formData.get("lastName");
+    const image = formData.get("image");
+    console.log("image on the formData: ", image);
     const basicInfo = user.basicInfo;
     const data = {
         firstName: first,
