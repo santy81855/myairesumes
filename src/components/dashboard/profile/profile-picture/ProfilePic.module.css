@@ -1,12 +1,30 @@
-.profileSectionContent {
+.form {
     width: 100%;
-    height: 100%;
-    z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     gap: var(--padding-block-medium);
+    z-index: 1;
+    border-radius: var(--border-radius-xsmall);
+    padding-block: var(--padding-block-medium);
+    position: relative;
+    grid-area: profilePic;
+    background-color: rgba(244, 244, 244, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.profileImagecontainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-medium);
+    z-index: 1;
+    border-radius: var(--border-radius-xsmall);
+    padding-block: var(--padding-block-medium);
+    position: relative;
 }
 
 .profileImage {
@@ -56,49 +74,30 @@
     text-align: center;
 }
 
-.contactInfo {
-    width: 100%;
+.iconContainer {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 0;
+    right: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: left;
-    margin-block-start: var(--padding-block-small);
-    gap: var(--padding-block-small);
-}
-
-.fieldContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 0.4rem;
-}
-
-.item {
-    font-size: var(--font-size-small);
-    font-weight: bold;
-    z-index: 1;
-    width: 100%;
-    height: 30px;
-    background-color: rgb(242, 242, 242);
-    border-radius: var(--border-radius-xsmall);
-    padding-block: var(--padding-block-small);
-    padding-inline-start: var(--padding-block-small);
-}
-
-.profileImagecontainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--padding-block-medium);
-    z-index: 1;
-    border-radius: var(--border-radius-xsmall);
-    padding-block: var(--padding-block-medium);
-    position: relative;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.iconContainer:hover {
+    background-color: rgb(242, 242, 242);
+}
+
+.iconContainer svg {
+    width: 30px;
+    height: 30px;
+    stroke: rgb(186, 186, 186);
+    fill: rgb(186, 186, 186);
+    stroke-width: 0.5;
 }
 
 .nameInputContainer {
@@ -155,6 +154,7 @@
     flex-direction: column;
     margin-block-start: var(--padding-block-medium);
     gap: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
 }
 
 .cancelButton {
@@ -171,42 +171,4 @@
 
 .cancelButton:hover {
     background-color: #ffbcbc;
-}
-
-@media screen and (max-width: 900px) {
-    .profileSection {
-        padding-inline: var(--padding-block-large);
-        padding-block: var(--padding-block-large);
-    }
-    .profileSectionContent {
-        flex-direction: row;
-        align-items: flex-end;
-    }
-    .contactInfo {
-        width: 100%;
-        align-self: center;
-    }
-}
-
-@media screen and (max-width: 635px) {
-    .profileSectionContent {
-        flex-direction: column;
-    }
-    .label {
-        text-align: center;
-    }
-    .item {
-        text-align: center;
-        padding-block-end: var(--padding-block-medium);
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .item {
-        font-size: var(--font-size-small);
-    }
-    .profileSection {
-        padding-inline: var(--padding-block-medium);
-        padding-block: var(--padding-block-medium);
-    }
 }

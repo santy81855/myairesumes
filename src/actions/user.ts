@@ -2,6 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { createSignedUrl } from "./r2";
 
 export const initializeUserBasicInfo = async (user: any) => {
     "use server";
@@ -44,20 +45,54 @@ export const initializeUserBasicInfo = async (user: any) => {
     return redirect("/dashboard?menu=profile&tutorial=true");
 };
 
+export const updateUserNameInfo = async (
+    user: any,
+    url: string,
+    formData: any,
+    updatedImage: boolean
+) => {
+    "use server";
+    const { id, numImageUploads } = user;
+    const first = formData.get("firstName");
+    const last = formData.get("lastName");
+    const image = formData.get("image");
+    console.log("image on the formData: ", image);
+    const basicInfo = user.basicInfo;
+    const data = {
+        firstName: first,
+        lastName: last,
+        imageUrl: url,
+        numImageUploads: updatedImage ? numImageUploads + 1 : numImageUploads,
+        basicInfo: {
+            ...basicInfo,
+            firstName: first,
+            lastName: last,
+            imageUrl: url,
+        },
+    };
+    const response = await prisma.user.update({
+        where: { id },
+        data,
+    });
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return { success: "Profile updated successfully." };
+};
+
 export const updateUserContactInfo = async (user: any, formData: any) => {
     "use server";
     const { id } = user;
     const email = formData.get("email");
     const phone = formData.get("phone");
     const website = formData.get("website");
-    const first = formData.get("firstName");
-    const last = formData.get("lastName");
     const basicInfo = user.basicInfo;
     const data = {
         basicInfo: {
             ...basicInfo,
-            firstName: first,
-            lastName: last,
             email,
             phone,
             website,
