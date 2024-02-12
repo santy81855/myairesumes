@@ -12,8 +12,20 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { useState } from "react";
-import { createSignedUrl, deleteObject } from "@/actions/r2";
-import imageCompression from "browser-image-compression";
+import {
+    createSignedUrl,
+    deleteObject,
+    createParallelUploads,
+    getMultipartUploadId,
+} from "@/actions/r2";
+import {
+    S3Client,
+    CreateMultipartUploadCommand,
+    UploadPartCommand,
+    CompleteMultipartUploadCommand,
+} from "@aws-sdk/client-s3";
+import fs from "fs";
+import { Buffer } from "node:buffer";
 
 type ProfilePicProps = {
     currentUser: any;
@@ -42,13 +54,12 @@ const ProfilePic = ({ currentUser }: ProfilePicProps) => {
         const formData = new FormData(e.target);
         // if they have a file uploaded, then upload it to get a url
         const image = formData.get("image") as File;
+        // remove the image from the form data
+        formData.delete("image");
         let newUrl = imageUrl;
         let updatedImage = false;
         if (image && image.size > 0) {
             try {
-                const compressedImage = await imageCompression(image, {
-                    maxSizeMB: 4,
-                }); // Set maximum file size
                 // if the user has an image already, delete it
                 if (currentUser.numImageUploads > 0) {
                     await deleteObject(`${id}-${currentUser.numImageUploads}`);
@@ -58,16 +69,24 @@ const ProfilePic = ({ currentUser }: ProfilePicProps) => {
                     `${id}-${currentUser.numImageUploads + 1}`,
                     image.type
                 );
-                // upload the image on the client side to save server resources
-                await fetch(signedUrl, {
+                console.log("signed url: ", signedUrl);
+                if (!signedUrl) {
+                    toast.error("An error occurred uploading your image.");
+                    setIsLoading(false);
+                    return;
+                }
+                console.log("about to upload");
+                const response = await fetch(signedUrl, {
                     method: "PUT",
-                    body: compressedImage,
+                    body: image,
                 });
+                console.log("just uploaded");
                 updatedImage = true;
                 // update the url
                 newUrl = `https://r2.myairesumes.com/${id}-${
                     currentUser.numImageUploads + 1
                 }`;
+                console.log(newUrl);
                 setUrl(newUrl);
             } catch (error) {
                 toast.error("An error occurred.");
