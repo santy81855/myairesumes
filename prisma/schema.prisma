@@ -26,7 +26,6 @@ model User {
     numberResumes      Int                      @default(0)
     numberCoverLetters Int                      @default(0)
     imageUrl           String                   @default("")
-    numImageUploads    Int                      @default(0)
     authSession        Session[]
     emailToken         EmailVerificationToken[]
     passwordToken      PasswordResetToken[]

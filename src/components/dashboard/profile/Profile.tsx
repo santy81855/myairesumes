@@ -1,5 +1,4 @@
 import styles from "./Profile.module.css";
-import ProfilePic from "./profile-picture/ProfilePic";
 import Contact from "./contact-info/Contact";
 import Work from "./work/Work";
 import { Education } from "./education-info/Education";
@@ -12,7 +11,6 @@ type ProfileProps = {
 const Profile = ({ currentUser, searchParams }: ProfileProps) => {
     return (
         <section className={styles.container}>
-            <ProfilePic currentUser={currentUser} />
             <Contact currentUser={currentUser} searchParams={searchParams} />
             <Work currentUser={currentUser} searchParams={searchParams} />
             <Education currentUser={currentUser} searchParams={searchParams} />
