@@ -66,6 +66,7 @@ const Upload = ({ url, setUrl }: UploadProps) => {
                 />
                 {plusIconCircled}
             </div>
+            <p className={styles.sizeLabel}>Max size: 10MB.</p>
         </section>
     );
 };

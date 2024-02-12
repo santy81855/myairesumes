@@ -2,7 +2,6 @@
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import { createSignedUrl } from "./r2";
 
 export const initializeUserBasicInfo = async (user: any) => {
     "use server";
@@ -56,7 +55,6 @@ export const updateUserNameInfo = async (
     const first = formData.get("firstName");
     const last = formData.get("lastName");
     const image = formData.get("image");
-    console.log("image on the formData: ", image);
     const basicInfo = user.basicInfo;
     const data = {
         firstName: first,
