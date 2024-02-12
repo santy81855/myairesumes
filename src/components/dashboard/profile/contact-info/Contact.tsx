@@ -1,35 +1,84 @@
 import Link from "next/link";
 import styles from "./Contact.module.css";
+import { updateUserContactInfo } from "@/actions/user";
 import "react-toastify/dist/ReactToastify.css";
 import FormLoading from "@/components/form-loading/FormLoading";
 import Card from "@/components/dashboard/cards/dashboard-cards/Card";
 import { getSubstringEllipsis } from "@/lib/string";
-import Upload from "./image-upload/Upload";
-import Image from "next/image";
-import { updateUserContactInfo } from "@/actions/user";
 
 type ContactProps = {
     currentUser: any;
     searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-const Contact = async ({ currentUser, searchParams }: ContactProps) => {
+const Contact = ({ currentUser, searchParams }: ContactProps) => {
     const { imageUrl, basicInfo, firstName, lastName, email } = currentUser;
-    const url =
-        basicInfo && basicInfo.imageUrl
-            ? basicInfo.imageUrl
-            : "/images/icons/default-profile-picture.svg";
+    const url = imageUrl || "/images/icons/default-profile-picture.svg";
     const first = basicInfo ? basicInfo.firstName : firstName;
     const last = basicInfo ? basicInfo.lastName : lastName;
     const profileEmail = basicInfo ? basicInfo.email : email;
     const phone = basicInfo ? basicInfo.phone : "";
     const website = basicInfo ? basicInfo.website : "";
-    const edit = searchParams?.contactEdit || false;
+    const edit = searchParams?.profileEdit || false;
     const updateBasicInfo = updateUserContactInfo.bind(null, currentUser);
 
     return (
-        <Card gridArea="profile" title="Contact" key="contact-card">
+        <Card gridArea="profile" title="Profile" key="contact-card">
             <div className={styles.profileSectionContent}>
+                <section className={styles.profileImagecontainer}>
+                    <section
+                        className={styles.profileImage}
+                        style={{
+                            background: `url(${url})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                        }}
+                    ></section>
+                    <section className={styles.nameInfo}>
+                        {edit ? (
+                            <section className={styles.nameInputContainer}>
+                                <section className={styles.nameInput}>
+                                    <p className={styles.label}>first name</p>
+                                    <input
+                                        aria-label="first name"
+                                        type="text"
+                                        name="firstName"
+                                        className={styles.input}
+                                        defaultValue={first}
+                                        autoFocus
+                                        required
+                                    />
+                                </section>
+                                <section className={styles.nameInput}>
+                                    <p className={styles.label}>last name</p>
+                                    <input
+                                        aria-label="last name"
+                                        type="text"
+                                        name="lastName"
+                                        className={styles.input}
+                                        defaultValue={last}
+                                        autoFocus
+                                        required
+                                    />
+                                </section>
+                            </section>
+                        ) : (
+                            <>
+                                <p
+                                    className={`${styles.label} ${styles.nameLabel}`}
+                                >
+                                    name
+                                </p>
+                                <p className={styles.name}>
+                                    {getSubstringEllipsis(first, 0, 20)}
+                                </p>
+                                <p className={styles.name}>
+                                    {getSubstringEllipsis(last, 0, 20)}
+                                </p>
+                            </>
+                        )}
+                    </section>
+                </section>
                 <section className={styles.contactInfo}>
                     <section className={styles.fieldContainer}>
                         <p className={styles.label}>email</p>
@@ -101,7 +150,7 @@ const Contact = async ({ currentUser, searchParams }: ContactProps) => {
                 </section>
             ) : (
                 <Link
-                    href="/dashboard?menu=profile&contactEdit=true"
+                    href="/dashboard?menu=profile&profileEdit=true"
                     type="button"
                     className={styles.submitButton}
                 >
