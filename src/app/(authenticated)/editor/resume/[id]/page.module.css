@@ -2,10 +2,8 @@
     width: 100%;
     height: calc(100% - var(--editor-titlebar-height));
     background-color: #f2f2f2;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    overflow-x: hidden;
+    overflow-x: auto;
     overflow-y: auto;
+    padding-block: var(--padding-block-large);
+    padding-inline: var(--padding-inline-medium);
 }

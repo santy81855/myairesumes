@@ -2,22 +2,28 @@ import styles from "./page.module.css";
 import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
-import Navbar from "@/components/nav/Navbar";
+import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
+import Placeholder from "@/components/resume-placeholder/Placeholder";
 
 const Page = async ({
     params,
     searchParams,
 }: {
-    params: { slug: string };
+    params: { id: string };
     searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
     const { user } = await validateRequest();
     if (!user) {
         redirect("/sign-in");
     }
+    // get the slug from the params
+    const { id } = params;
+
     return (
         <main className={styles.main}>
-            <p>Editor</p>
+            <DocumentContainer>
+                <Placeholder />
+            </DocumentContainer>
         </main>
     );
 };

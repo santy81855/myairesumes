@@ -26,13 +26,23 @@ const Menu = () => {
     const [isTemplateOpen, setIsTemplateOpen] = useState(false);
     const [isStyleOpen, setIsStyleOpen] = useState(false);
 
+    const toggleTemplate = () => {
+        setIsTemplateOpen(!isTemplateOpen);
+        setIsStyleOpen(false);
+    };
+
+    const toggleStyle = () => {
+        setIsStyleOpen(!isStyleOpen);
+        setIsTemplateOpen(false);
+    };
+
     return (
         <>
             <section className={styles.staticMenu}>
                 <section
                     className={styles.staticMenuItem}
                     style={isTemplateOpen ? { backgroundColor: "#303045" } : {}}
-                    onClick={() => setIsTemplateOpen(!isTemplateOpen)}
+                    onClick={() => toggleTemplate()}
                 >
                     <div className={styles.staticIconContainer}>
                         {templateIcon}
@@ -42,7 +52,7 @@ const Menu = () => {
                 <section
                     className={styles.staticMenuItem}
                     style={isStyleOpen ? { backgroundColor: "#303045" } : {}}
-                    onClick={() => setIsStyleOpen(!isStyleOpen)}
+                    onClick={() => toggleStyle()}
                 >
                     <div className={styles.staticIconContainer}>
                         {styleIcon}
