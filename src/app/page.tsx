@@ -6,7 +6,6 @@ import Navbar from "@/components/nav/Navbar";
 import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/user";
 import BasicInfoModal from "@/components/landing-page/basic-info-modal/BasicInfoModal";
-import { redirect } from "next/navigation";
 
 export default async function Home() {
     const { user } = await validateRequest();

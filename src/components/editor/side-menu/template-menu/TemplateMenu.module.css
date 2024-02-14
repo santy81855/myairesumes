@@ -1,0 +1,58 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    left: -500px;
+    height: 100%;
+    width: 100%;
+    background-color: #303045;
+    z-index: 10;
+}
+
+.mobileSidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-inline-medium);
+    gap: var(--padding-block-x2large);
+}
+
+.searchBarContainer {
+    width: 100%;
+    border-radius: var(--border-radius-xsmall);
+    padding-inline: var(--padding-inline-medium);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-inline-medium);
+    background-color: white;
+}
+
+.searchIconContainer {
+    width: 20px;
+    height: 20px;
+}
+
+.searchIconContainer svg {
+    width: 100%;
+    height: 100%;
+    fill: black;
+}
+
+.searchBarInput {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: var(--font-size-small);
+    padding-block: var(--padding-block-small);
+}
+
+.searchBarInput::placeholder {
+    color: rgb(146, 146, 146);
+}

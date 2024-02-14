@@ -1,0 +1,34 @@
+.container {
+    height: var(--editor-titlebar-height);
+    width: 100%;
+    background-color: #7367ff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--padding-inline-medium);
+    color: white;
+    gap: var(--gap-medium);
+}
+
+.title {
+    color: white;
+}
+
+.iconContainer {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.iconContainer svg:hover {
+    fill: rgb(154, 154, 154, 0.8);
+    stroke: rgb(154, 154, 154, 0.8);
+}
+
+.iconContainer svg {
+    width: 100%;
+    height: 100%;
+    fill: white;
+    stroke: white;
+}
