@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
 import Placeholder from "@/components/resume-placeholder/Placeholder";
 import AddPage from "@/components/editor/add-page-button/AddPage";
+import PageCounter from "@/components/editor/page-counter/PageCounter";
 
 const Page = async ({
     params,
@@ -22,6 +23,7 @@ const Page = async ({
 
     return (
         <main className={styles.main}>
+            <PageCounter />
             <DocumentContainer>
                 <Placeholder />
             </DocumentContainer>

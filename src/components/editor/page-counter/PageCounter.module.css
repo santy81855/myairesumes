@@ -1,0 +1,19 @@
+.container {
+    width: 70%;
+    min-width: 309px;
+    max-width: 850px;
+    margin-inline: auto;
+    padding-block-end: var(--gap-small);
+}
+
+.pageCounter {
+    font-size: var(--font-size-small);
+    width: 100%;
+    text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+    .documentContainer {
+        width: 90%;
+    }
+}
