@@ -4,6 +4,7 @@ import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
 import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
 import Placeholder from "@/components/resume-placeholder/Placeholder";
+import AddPage from "@/components/editor/add-page-button/AddPage";
 
 const Page = async ({
     params,
@@ -24,6 +25,7 @@ const Page = async ({
             <DocumentContainer>
                 <Placeholder />
             </DocumentContainer>
+            <AddPage />
         </main>
     );
 };
