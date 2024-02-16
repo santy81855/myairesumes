@@ -3,9 +3,10 @@ import { validateRequest } from "@/lib/auth";
 import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
 import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
-import Placeholder from "@/components/resume-placeholder/Placeholder";
 import AddPage from "@/components/editor/add-page-button/AddPage";
 import PageCounter from "@/components/editor/page-counter/PageCounter";
+import Placeholder from "@/components/resume-placeholder/Placeholder";
+import Basic from "@/components/resume-templates/basic/Basic";
 
 const Page = async ({
     params,
@@ -25,7 +26,7 @@ const Page = async ({
         <main className={styles.main}>
             <PageCounter />
             <DocumentContainer>
-                <Placeholder />
+                <Basic />
             </DocumentContainer>
             <AddPage />
         </main>
