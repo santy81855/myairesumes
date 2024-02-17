@@ -7,6 +7,7 @@ import AddPage from "@/components/editor/add-page-button/AddPage";
 import PageCounter from "@/components/editor/page-counter/PageCounter";
 import Placeholder from "@/components/resume-placeholder/Placeholder";
 import Basic from "@/components/resume-templates/basic/Basic";
+import DownloadButton from "@/components/editor/download-button/DownloadButton";
 
 const Page = async ({
     params,

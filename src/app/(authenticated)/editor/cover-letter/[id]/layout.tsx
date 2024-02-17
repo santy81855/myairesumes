@@ -10,6 +10,7 @@ const poppins = Poppins({
 });
 import styles from "./layout.module.css";
 import SideMenu from "@/components/editor/side-menu/SideMenu";
+import Navbar from "@/components/nav/Navbar";
 import TitleBar from "@/components/editor/title-bar/TitleBar";
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={poppins.className}>
+                <Navbar style={{ backgroundColor: "black", color: "white" }} />
                 <section className={styles.rowContainer}>
                     <SideMenu />
                     <section className={styles.columnContainer}>
