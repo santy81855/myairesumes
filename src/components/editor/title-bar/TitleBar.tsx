@@ -11,7 +11,7 @@ const TitleBar = () => {
             <p className={styles.title}>Resume Title</p>
             <div className={styles.iconContainer}>
                 <PDFDownloadLink
-                    document={<Basic download={true} />}
+                    document={<BasicDownload />}
                     fileName="somename.pdf"
                 >
                     {downloadIcon}

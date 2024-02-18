@@ -12,6 +12,7 @@ import ReactPDF, {
     StyleSheet,
     Font,
 } from "@react-pdf/renderer";
+import exp from "constants";
 
 type ResumeProps = {
     download?: boolean;
@@ -93,11 +94,13 @@ const Basic = ({ download }: ResumeProps) => {
         },
         sectionContainer: {
             width: "100%",
+            backgroundColor: "white",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            paddingInline: margin,
+            paddingLeft: margin,
+            paddingRight: margin,
             gap: fontSize / 4,
         },
         sectionTitle: {
@@ -125,8 +128,8 @@ const Basic = ({ download }: ResumeProps) => {
             gap: fontSize / 1.5,
         },
         bullet: {
-            width: fontSize / 3,
-            height: fontSize / 3,
+            width: fontSize / 4,
+            height: fontSize / 4,
             backgroundColor: "black",
             borderRadius: "50%",
         },
@@ -137,12 +140,73 @@ const Basic = ({ download }: ResumeProps) => {
         },
         contentText: {
             fontSize: fontSize,
+            width: "100%",
         },
-        text: {
-            fontSize: fontSize * 1.5,
-            marginTop: margin,
-            marginLeft: margin,
-            marginRight: margin,
+        educationItemContainer: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            gap: fontSize / 2,
+        },
+        educationTopRow: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+        },
+        school: {
+            fontSize: fontSize * 1.2,
+            fontWeight: "bold",
+        },
+        degree: {
+            fontSize: fontSize * 1.1,
+            fontWeight: "light",
+        },
+        experienceItemContainer: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            gap: fontSize / 2,
+        },
+        companyTopRow: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+        },
+        company: {
+            fontSize: fontSize * 1.2,
+            fontWeight: "bold",
+        },
+        date: {
+            fontSize: fontSize,
+            fontWeight: "light",
+        },
+        position: {
+            fontSize: fontSize * 1.1,
+            fontWeight: "light",
+        },
+        bulletItemContainer: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            gap: fontSize / 3,
+        },
+        bulletItem: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            gap: fontSize / 4,
         },
     });
 
@@ -151,9 +215,9 @@ const Basic = ({ download }: ResumeProps) => {
             <Text style={pdfstyles.name}>Santiago Garcia</Text>
             <Text style={pdfstyles.title}>Business Analyst</Text>
             <view style={pdfstyles.rowContainer}>
-                <Text style={pdfstyles.contact}>(678) 735-9580</Text>
-                <view style={pdfstyles.bullet}></view>
                 <Text style={pdfstyles.contact}>santy@santiagogarcia.dev</Text>
+                <Text style={pdfstyles.contact}>/</Text>
+                <Text style={pdfstyles.contact}>(678) 735-9580</Text>
             </view>
         </View>
     );
@@ -166,11 +230,11 @@ const Basic = ({ download }: ResumeProps) => {
                 Experienced professional with diverse skills in leadership,
                 communication, and problem-solving. Proven track record of
                 achieving goals and driving results. Strong team player with
-                excellent organizational abilities. Experienced professional
-                with diverse skills in leadership, communication, and
-                problem-solving. Proven track record of achieving goals and
-                driving results. Strong team player with excellent
-                organizational abilities.
+                excellent organizational abilities. Experienced amazing
+                wonderful professional with diverse skills in leadership,
+                communication, and problem-solving. Proven track record of
+                achieving goals and driving results. Strong team player with
+                excellent organizational abilities.
             </Text>
         </View>
     );
@@ -184,6 +248,102 @@ const Basic = ({ download }: ResumeProps) => {
                 management, Adaptability, Creativity, Technical proficiency,
                 Analytical skills, Customer service.
             </Text>
+        </View>
+    );
+
+    const experienceSection = (
+        <View style={pdfstyles.sectionContainer} id="skills">
+            <Text style={pdfstyles.sectionTitle}>Experience</Text>
+            <View style={pdfstyles.horizontalLine}></View>
+            <View style={pdfstyles.experienceItemContainer}>
+                <View style={pdfstyles.companyTopRow}>
+                    <Text style={pdfstyles.company}>Google</Text>
+                    <Text style={pdfstyles.date}>2019 - Present</Text>
+                </View>
+                <Text style={pdfstyles.position}>Business Analyst</Text>
+                <View style={pdfstyles.bulletItemContainer}>
+                    <View style={pdfstyles.bulletItem}>
+                        <View style={pdfstyles.bullet}></View>
+                        <Text style={pdfstyles.contentText}>
+                            Lead a team of 5 analysts to drive results and
+                            achieve goals. atnosehu toehu tehu ethut etuheot n
+                            tah uetoh tueh uotehu sntaoeutnh deo u oedhuone uoe
+                            utoaedu o
+                        </Text>
+                    </View>
+                    <View style={pdfstyles.bulletItem}>
+                        <View style={pdfstyles.bullet}></View>
+                        <Text style={pdfstyles.contentText}>
+                            Developed and implemented new strategies to improve
+                            customer service.
+                        </Text>
+                    </View>
+                    <View style={pdfstyles.bulletItem}>
+                        <View style={pdfstyles.bullet}></View>
+                        <Text style={pdfstyles.contentText}>
+                            Conducted market research and analysis to identify
+                            new opportunities for growth.
+                        </Text>
+                    </View>
+                </View>
+            </View>
+        </View>
+    );
+
+    const educationSection = (
+        <View style={pdfstyles.sectionContainer} id="education">
+            <Text style={pdfstyles.sectionTitle}>Education</Text>
+            <View style={pdfstyles.horizontalLine}></View>
+            <View style={pdfstyles.educationItemContainer}>
+                <View style={pdfstyles.educationTopRow}>
+                    <Text style={pdfstyles.school}>Georgia Tech</Text>
+                    <Text style={pdfstyles.date}>2015 - 2019</Text>
+                </View>
+                <Text style={pdfstyles.degree}>
+                    Bachelor of Science in Business Administration
+                </Text>
+                <View style={pdfstyles.bulletItemContainer}>
+                    <View style={pdfstyles.bulletItem}>
+                        <View style={pdfstyles.bullet}></View>
+                        <Text style={pdfstyles.contentText}>
+                            Graduated with honors and a 3.8 GPA.
+                        </Text>
+                    </View>
+                    <View style={pdfstyles.bulletItem}>
+                        <View style={pdfstyles.bullet}></View>
+                        <Text style={pdfstyles.contentText}>
+                            Completed a minor in Computer Science.
+                        </Text>
+                    </View>
+                </View>
+            </View>
+        </View>
+    );
+
+    const languageSection = (
+        <View style={pdfstyles.sectionContainer} id="languages">
+            <Text style={pdfstyles.sectionTitle}>Languages</Text>
+            <View style={pdfstyles.horizontalLine}></View>
+            <Text style={pdfstyles.contentText}>
+                English (Native), Spanish (Fluent), French (Conversational)
+            </Text>
+        </View>
+    );
+
+    const interestSection = (
+        <View style={pdfstyles.sectionContainer} id="interests">
+            <Text style={pdfstyles.sectionTitle}>Interests</Text>
+            <View style={pdfstyles.horizontalLine}></View>
+            <Text style={pdfstyles.contentText}>
+                Travel, Hiking, Reading, Cooking, Photography, Music
+            </Text>
+        </View>
+    );
+
+    const projectSection = (
+        <View style={pdfstyles.sectionContainer} id="projects">
+            <Text style={pdfstyles.sectionTitle}>Projects</Text>
+            <View style={pdfstyles.horizontalLine}></View>
         </View>
     );
 
@@ -227,14 +387,38 @@ const Basic = ({ download }: ResumeProps) => {
                     >
                         {skillSection}
                     </div>
-                    <Text style={pdfstyles.text}>
-                        tho auntoheau tnaoehu toehuntshetunho easntuh asontedhu
-                        tnaoeh utnaoeh utnshaoesnutaoheuaoedutnshaoe utnshaoe
-                        utnshoae uoaedu aoetuh aoeudaoe
-                        udheduhindihuedinehotdisb mbva oevmubavoe uhaoedu
-                        oaecrug acogrucae oucgraoeuclroaeg ucaoergu olarc
-                        ugcrlag oercug oaecrug acogrucae oucgraoeuclroaeg
-                    </Text>
+                    <div
+                        id="section"
+                        className={styles.sectionContainer}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        {experienceSection}
+                    </div>
+                    <div
+                        id="section"
+                        className={styles.sectionContainer}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        {educationSection}
+                    </div>
+                    <div
+                        id="section"
+                        className={styles.sectionContainer}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        {languageSection}
+                    </div>
+                    <div
+                        id="section"
+                        className={styles.sectionContainer}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        {interestSection}
+                    </div>
                 </View>
             </Page>
         </Document>
