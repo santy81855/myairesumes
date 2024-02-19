@@ -1,14 +1,15 @@
 "use client";
-import styles from "./TemplateMenu.module.css";
+import styles from "./SectionMenu.module.css";
 import { searchIcon } from "@/components/icons/iconSVG";
 
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const TemplateMenu = () => {
+const StyleMenu = () => {
     const [searchText, setSearchText] = useState("");
     return (
         <motion.section className={styles.searchBarContainer}>
+            <motion.p>Sections</motion.p>
             <motion.div className={styles.searchIconContainer}>
                 {searchIcon}
             </motion.div>
@@ -23,4 +24,4 @@ const TemplateMenu = () => {
     );
 };
 
-export default TemplateMenu;
+export default StyleMenu;

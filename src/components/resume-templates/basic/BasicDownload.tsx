@@ -49,7 +49,7 @@ const BasicDownload = () => {
         },
         sectionContainer: {
             width: "100%",
-            backgroundColor: "red",
+            backgroundColor: "white",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -83,8 +83,8 @@ const BasicDownload = () => {
             gap: fontSize / 1.5,
         },
         bullet: {
-            width: fontSize / 3,
-            height: fontSize / 3,
+            width: fontSize / 4,
+            height: fontSize / 4,
             backgroundColor: "black",
             borderRadius: "50%",
         },
@@ -95,6 +95,30 @@ const BasicDownload = () => {
         },
         contentText: {
             fontSize: fontSize,
+            width: "100%",
+        },
+        educationItemContainer: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            gap: fontSize / 2,
+        },
+        educationTopRow: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+        },
+        school: {
+            fontSize: fontSize * 1.2,
+            fontWeight: "bold",
+        },
+        degree: {
+            fontSize: fontSize * 1.1,
+            fontWeight: "light",
         },
         experienceItemContainer: {
             width: "100%",
@@ -139,12 +163,6 @@ const BasicDownload = () => {
             alignItems: "center",
             gap: fontSize / 4,
         },
-        text: {
-            fontSize: fontSize * 1.5,
-            marginTop: margin,
-            marginLeft: margin,
-            marginRight: margin,
-        },
     });
 
     const contactSection = (
@@ -155,6 +173,8 @@ const BasicDownload = () => {
                 <Text style={styles.contact}>(678) 735-9580</Text>
                 <View style={styles.bullet}></View>
                 <Text style={styles.contact}>santy@santiagogarcia.dev</Text>
+                <View style={styles.bullet}></View>
+                <Text style={styles.contact}>https://santiagogarcia.dev</Text>
             </View>
         </View>
     );
@@ -235,14 +255,6 @@ const BasicDownload = () => {
                     {summarySection}
                     {skillSection}
                     {experienceSection}
-                    <Text style={styles.text}>
-                        tho auntoheau tnaoehu toehuntshetunho easntuh asontedhu
-                        tnaoeh utnaoeh utnshaoesnutaoheuaoedutnshaoe utnshaoe
-                        utnshoae uoaedu aoetuh aoeudaoe
-                        udheduhindihuedinehotdisb mbva oevmubavoe uhaoedu
-                        oaecrug acogrucae oucgraoeuclroaeg ucaoergu olarc
-                        ugcrlag oercug oaecrug acogrucae oucgraoeuclroaeg
-                    </Text>
                 </View>
             </Page>
         </Document>

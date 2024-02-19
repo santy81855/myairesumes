@@ -1,9 +1,6 @@
 "use client";
 import styles from "./Basic.module.css";
 import { useState, useEffect, useRef } from "react";
-import { Inter, Montserrat, Poppins } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
-
 import ReactPDF, {
     Page,
     Text,
@@ -12,20 +9,30 @@ import ReactPDF, {
     StyleSheet,
     Font,
 } from "@react-pdf/renderer";
-import exp from "constants";
 
 type ResumeProps = {
-    download?: boolean;
+    resume: any;
 };
 
-const Basic = ({ download }: ResumeProps) => {
+const Basic = ({ resume }: ResumeProps) => {
+    const information = resume.information;
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(16);
+    const [orderArray, setOrderArray] = useState([
+        "contact",
+        "summary",
+        "skills",
+        "education",
+        "experience",
+        "languages",
+        "interests",
+        "projects",
+    ]);
 
     useEffect(() => {
         const template = templateRef.current as unknown as HTMLElement;
-        if (!template || download) return;
+        if (!template) return;
         const { width, height } = template.getBoundingClientRect();
         let size = 11 * (width / 610);
         setFontSize(size);
@@ -35,7 +42,7 @@ const Basic = ({ download }: ResumeProps) => {
         // handle the text scaling
         function handleResize() {
             const template = templateRef.current as unknown as HTMLElement;
-            if (!template || download) return;
+            if (!template) return;
             const { width, height } = template.getBoundingClientRect();
             let size = 11 * (width / 610);
             setFontSize(size);
@@ -210,143 +217,6 @@ const Basic = ({ download }: ResumeProps) => {
         },
     });
 
-    const contactSection = (
-        <View style={pdfstyles.sectionContainer} id="contact">
-            <Text style={pdfstyles.name}>Santiago Garcia</Text>
-            <Text style={pdfstyles.title}>Business Analyst</Text>
-            <view style={pdfstyles.rowContainer}>
-                <Text style={pdfstyles.contact}>santy@santiagogarcia.dev</Text>
-                <Text style={pdfstyles.contact}>/</Text>
-                <Text style={pdfstyles.contact}>(678) 735-9580</Text>
-            </view>
-        </View>
-    );
-
-    const summarySection = (
-        <View style={pdfstyles.sectionContainer} id="summary">
-            <Text style={pdfstyles.sectionTitle}>Summary</Text>
-            <View style={pdfstyles.horizontalLine}></View>
-            <Text style={pdfstyles.contentText}>
-                Experienced professional with diverse skills in leadership,
-                communication, and problem-solving. Proven track record of
-                achieving goals and driving results. Strong team player with
-                excellent organizational abilities. Experienced amazing
-                wonderful professional with diverse skills in leadership,
-                communication, and problem-solving. Proven track record of
-                achieving goals and driving results. Strong team player with
-                excellent organizational abilities.
-            </Text>
-        </View>
-    );
-
-    const skillSection = (
-        <View style={pdfstyles.sectionContainer} id="skills">
-            <Text style={pdfstyles.sectionTitle}>Skills</Text>
-            <View style={pdfstyles.horizontalLine}></View>
-            <Text style={pdfstyles.contentText}>
-                Leadership, Communication, Teamwork, Problem-solving, Time
-                management, Adaptability, Creativity, Technical proficiency,
-                Analytical skills, Customer service.
-            </Text>
-        </View>
-    );
-
-    const experienceSection = (
-        <View style={pdfstyles.sectionContainer} id="skills">
-            <Text style={pdfstyles.sectionTitle}>Experience</Text>
-            <View style={pdfstyles.horizontalLine}></View>
-            <View style={pdfstyles.experienceItemContainer}>
-                <View style={pdfstyles.companyTopRow}>
-                    <Text style={pdfstyles.company}>Google</Text>
-                    <Text style={pdfstyles.date}>2019 - Present</Text>
-                </View>
-                <Text style={pdfstyles.position}>Business Analyst</Text>
-                <View style={pdfstyles.bulletItemContainer}>
-                    <View style={pdfstyles.bulletItem}>
-                        <View style={pdfstyles.bullet}></View>
-                        <Text style={pdfstyles.contentText}>
-                            Lead a team of 5 analysts to drive results and
-                            achieve goals. atnosehu toehu tehu ethut etuheot n
-                            tah uetoh tueh uotehu sntaoeutnh deo u oedhuone uoe
-                            utoaedu o
-                        </Text>
-                    </View>
-                    <View style={pdfstyles.bulletItem}>
-                        <View style={pdfstyles.bullet}></View>
-                        <Text style={pdfstyles.contentText}>
-                            Developed and implemented new strategies to improve
-                            customer service.
-                        </Text>
-                    </View>
-                    <View style={pdfstyles.bulletItem}>
-                        <View style={pdfstyles.bullet}></View>
-                        <Text style={pdfstyles.contentText}>
-                            Conducted market research and analysis to identify
-                            new opportunities for growth.
-                        </Text>
-                    </View>
-                </View>
-            </View>
-        </View>
-    );
-
-    const educationSection = (
-        <View style={pdfstyles.sectionContainer} id="education">
-            <Text style={pdfstyles.sectionTitle}>Education</Text>
-            <View style={pdfstyles.horizontalLine}></View>
-            <View style={pdfstyles.educationItemContainer}>
-                <View style={pdfstyles.educationTopRow}>
-                    <Text style={pdfstyles.school}>Georgia Tech</Text>
-                    <Text style={pdfstyles.date}>2015 - 2019</Text>
-                </View>
-                <Text style={pdfstyles.degree}>
-                    Bachelor of Science in Business Administration
-                </Text>
-                <View style={pdfstyles.bulletItemContainer}>
-                    <View style={pdfstyles.bulletItem}>
-                        <View style={pdfstyles.bullet}></View>
-                        <Text style={pdfstyles.contentText}>
-                            Graduated with honors and a 3.8 GPA.
-                        </Text>
-                    </View>
-                    <View style={pdfstyles.bulletItem}>
-                        <View style={pdfstyles.bullet}></View>
-                        <Text style={pdfstyles.contentText}>
-                            Completed a minor in Computer Science.
-                        </Text>
-                    </View>
-                </View>
-            </View>
-        </View>
-    );
-
-    const languageSection = (
-        <View style={pdfstyles.sectionContainer} id="languages">
-            <Text style={pdfstyles.sectionTitle}>Languages</Text>
-            <View style={pdfstyles.horizontalLine}></View>
-            <Text style={pdfstyles.contentText}>
-                English (Native), Spanish (Fluent), French (Conversational)
-            </Text>
-        </View>
-    );
-
-    const interestSection = (
-        <View style={pdfstyles.sectionContainer} id="interests">
-            <Text style={pdfstyles.sectionTitle}>Interests</Text>
-            <View style={pdfstyles.horizontalLine}></View>
-            <Text style={pdfstyles.contentText}>
-                Travel, Hiking, Reading, Cooking, Photography, Music
-            </Text>
-        </View>
-    );
-
-    const projectSection = (
-        <View style={pdfstyles.sectionContainer} id="projects">
-            <Text style={pdfstyles.sectionTitle}>Projects</Text>
-            <View style={pdfstyles.horizontalLine}></View>
-        </View>
-    );
-
     const handleMouseEnter = (e: any) => {
         const divElement = document.getElementById("section");
         if (!divElement) return;
@@ -359,66 +229,206 @@ const Basic = ({ download }: ResumeProps) => {
         divElement.style.backgroundColor = "white";
     };
 
+    const handleClick = (e: any) => {
+        setOrderArray([
+            "contact",
+            "summary",
+            "skills",
+            "experience",
+            "education",
+            "languages",
+            "interests",
+            "projects",
+        ]);
+    };
+
+    const contactSection = (
+        <View style={pdfstyles.sectionContainer}>
+            <Text style={pdfstyles.name}>
+                {information.firstName} {information.lastName}
+            </Text>
+            <Text style={pdfstyles.title}>{information.position}</Text>
+            <view style={pdfstyles.rowContainer}>
+                <Text style={pdfstyles.contact}>
+                    {information.contactInfo.email}
+                </Text>
+                <Text style={pdfstyles.contact}>|</Text>
+                <Text style={pdfstyles.contact}>
+                    {information.contactInfo.phone}
+                </Text>
+                <Text style={pdfstyles.contact}>|</Text>
+                <Text style={pdfstyles.contact}>
+                    {information.contactInfo.website}
+                </Text>
+            </view>
+        </View>
+    );
+
+    const summarySection = (
+        <div className={styles.sectionContainer} onClick={handleClick}>
+            <View style={pdfstyles.sectionContainer}>
+                <Text style={pdfstyles.sectionTitle}>Summary</Text>
+                <View style={pdfstyles.horizontalLine}></View>
+                <Text style={pdfstyles.contentText}>
+                    Experienced professional with diverse skills in leadership,
+                    communication, and problem-solving. Proven track record of
+                    achieving goals and driving results. Strong team player with
+                    excellent organizational abilities. Experienced amazing
+                    wonderful professional with diverse skills in leadership,
+                    communication, and problem-solving. Proven track record of
+                    achieving goals and driving results. Strong team player with
+                    excellent organizational abilities.
+                </Text>
+            </View>
+        </div>
+    );
+
+    const skillSection = (
+        <div className={styles.sectionContainer}>
+            <View style={pdfstyles.sectionContainer} id="skills">
+                <Text style={pdfstyles.sectionTitle}>Skills</Text>
+                <View style={pdfstyles.horizontalLine}></View>
+                <Text style={pdfstyles.contentText}>
+                    Leadership, Communication, Teamwork, Problem-solving, Time
+                    management, Adaptability, Creativity, Technical proficiency,
+                    Analytical skills, Customer service.
+                </Text>
+            </View>
+        </div>
+    );
+
+    const experienceSection = (
+        <div className={styles.sectionContainer}>
+            <View style={pdfstyles.sectionContainer} id="skills">
+                <Text style={pdfstyles.sectionTitle}>Experience</Text>
+                <View style={pdfstyles.horizontalLine}></View>
+                <View style={pdfstyles.experienceItemContainer}>
+                    <View style={pdfstyles.companyTopRow}>
+                        <Text style={pdfstyles.company}>Google</Text>
+                        <Text style={pdfstyles.date}>2019 - Present</Text>
+                    </View>
+                    <Text style={pdfstyles.position}>Business Analyst</Text>
+                    <View style={pdfstyles.bulletItemContainer}>
+                        <View style={pdfstyles.bulletItem}>
+                            <View style={pdfstyles.bullet}></View>
+                            <Text style={pdfstyles.contentText}>
+                                Lead a team of 5 analysts to drive results and
+                                achieve goals. atnosehu toehu tehu ethut etuheot
+                                n tah uetoh tueh uotehu sntaoeutnh deo u
+                                oedhuone uoe utoaedu o
+                            </Text>
+                        </View>
+                        <View style={pdfstyles.bulletItem}>
+                            <View style={pdfstyles.bullet}></View>
+                            <Text style={pdfstyles.contentText}>
+                                Developed and implemented new strategies to
+                                improve customer service.
+                            </Text>
+                        </View>
+                        <View style={pdfstyles.bulletItem}>
+                            <View style={pdfstyles.bullet}></View>
+                            <Text style={pdfstyles.contentText}>
+                                Conducted market research and analysis to
+                                identify new opportunities for growth.
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
+        </div>
+    );
+
+    const educationSection = (
+        <div className={styles.sectionContainer}>
+            <View style={pdfstyles.sectionContainer} id="education">
+                <Text style={pdfstyles.sectionTitle}>Education</Text>
+                <View style={pdfstyles.horizontalLine}></View>
+                <View style={pdfstyles.educationItemContainer}>
+                    <View style={pdfstyles.educationTopRow}>
+                        <Text style={pdfstyles.school}>Georgia Tech</Text>
+                        <Text style={pdfstyles.date}>2015 - 2019</Text>
+                    </View>
+                    <Text style={pdfstyles.degree}>
+                        Bachelor of Science in Business Administration
+                    </Text>
+                    <View style={pdfstyles.bulletItemContainer}>
+                        <View style={pdfstyles.bulletItem}>
+                            <View style={pdfstyles.bullet}></View>
+                            <Text style={pdfstyles.contentText}>
+                                Graduated with honors and a 3.8 GPA.
+                            </Text>
+                        </View>
+                        <View style={pdfstyles.bulletItem}>
+                            <View style={pdfstyles.bullet}></View>
+                            <Text style={pdfstyles.contentText}>
+                                Completed a minor in Computer Science.
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
+        </div>
+    );
+
+    const languageSection = (
+        <div className={styles.sectionContainer}>
+            <View style={pdfstyles.sectionContainer} id="languages">
+                <Text style={pdfstyles.sectionTitle}>Languages</Text>
+                <View style={pdfstyles.horizontalLine}></View>
+                <Text style={pdfstyles.contentText}>
+                    English (Native), Spanish (Fluent), French (Conversational)
+                </Text>
+            </View>
+        </div>
+    );
+
+    const interestSection = (
+        <div className={styles.sectionContainer}>
+            <View style={pdfstyles.sectionContainer} id="interests">
+                <Text style={pdfstyles.sectionTitle}>Interests</Text>
+                <View style={pdfstyles.horizontalLine}></View>
+                <Text style={pdfstyles.contentText}>
+                    Travel, Hiking, Reading, Cooking, Photography, Music
+                </Text>
+            </View>
+        </div>
+    );
+
+    const projectSection = (
+        <div className={styles.sectionContainer}>
+            <View style={pdfstyles.sectionContainer} id="projects">
+                <Text style={pdfstyles.sectionTitle}>Projects</Text>
+                <View style={pdfstyles.horizontalLine}></View>
+            </View>
+        </div>
+    );
+
     return (
         <Document title="Resume">
             <Page wrap={false} style={pdfstyles.page}>
                 <View style={pdfstyles.pageContainer} ref={templateRef}>
-                    <div
-                        id="section"
-                        className={styles.sectionContainer}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {contactSection}
-                    </div>
-                    <div
-                        id="section"
-                        className={styles.sectionContainer}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {summarySection}
-                    </div>
-                    <div
-                        id="section"
-                        className={styles.sectionContainer}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {skillSection}
-                    </div>
-                    <div
-                        id="section"
-                        className={styles.sectionContainer}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {experienceSection}
-                    </div>
-                    <div
-                        id="section"
-                        className={styles.sectionContainer}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {educationSection}
-                    </div>
-                    <div
-                        id="section"
-                        className={styles.sectionContainer}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {languageSection}
-                    </div>
-                    <div
-                        id="section"
-                        className={styles.sectionContainer}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {interestSection}
-                    </div>
+                    {orderArray.map((section) => {
+                        switch (section) {
+                            case "contact":
+                                return contactSection;
+                            case "summary":
+                                return summarySection;
+                            case "skills":
+                                return skillSection;
+                            case "experience":
+                                return experienceSection;
+                            case "education":
+                                return educationSection;
+                            case "languages":
+                                return languageSection;
+                            case "interests":
+                                return interestSection;
+                            case "projects":
+                                return projectSection;
+                            default:
+                                return null;
+                        }
+                    })}
                 </View>
             </Page>
         </Document>

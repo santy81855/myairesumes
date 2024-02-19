@@ -7,7 +7,7 @@ import AddPage from "@/components/editor/add-page-button/AddPage";
 import PageCounter from "@/components/editor/page-counter/PageCounter";
 import Placeholder from "@/components/resume-placeholder/Placeholder";
 import Basic from "@/components/resume-templates/basic/Basic";
-import DownloadButton from "@/components/editor/download-button/DownloadButton";
+import { getResume } from "@/lib/resume";
 
 const Page = async ({
     params,
@@ -22,12 +22,13 @@ const Page = async ({
     }
     // get the slug from the params
     const { id } = params;
+    const resume = await getResume(user.id, id);
 
     return (
         <main className={styles.main}>
             <PageCounter />
             <DocumentContainer>
-                <Basic />
+                <Basic resume={resume} />
             </DocumentContainer>
             <AddPage />
         </main>

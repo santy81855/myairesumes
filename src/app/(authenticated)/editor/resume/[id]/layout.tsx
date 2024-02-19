@@ -12,19 +12,28 @@ import styles from "./layout.module.css";
 import SideMenu from "@/components/editor/side-menu/SideMenu";
 import TitleBar from "@/components/editor/title-bar/TitleBar";
 import Navbar from "@/components/nav/Navbar";
+import { getResume } from "@/lib/resume";
+import { validateRequest } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Editor",
     description: "Create and edit your resume with our AI-powered editor",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
     params,
 }: {
     children: React.ReactNode;
-    params: { slug: string };
+    params: { id: string };
 }) {
+    const { user } = await validateRequest();
+    if (!user) {
+        redirect("/sign-in");
+    }
+    const resume = await getResume(user.id, params.id);
+
     return (
         <html lang="en">
             <body className={poppins.className}>

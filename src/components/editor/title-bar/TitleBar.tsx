@@ -2,7 +2,6 @@
 import styles from "./TitleBar.module.css";
 import { downloadIcon } from "@/components/icons/iconSVG";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import Basic from "@/components/resume-templates/basic/Basic";
 import BasicDownload from "@/components/resume-templates/basic/BasicDownload";
 
 const TitleBar = () => {

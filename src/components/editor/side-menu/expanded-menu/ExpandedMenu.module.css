@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    left: -500px;
+    height: 100%;
+    width: 100%;
+    background-color: #303045;
+    z-index: 10;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-inline-medium);
+    gap: var(--padding-block-x2large);
+}

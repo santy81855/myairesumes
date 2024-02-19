@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import TitleSection from "@/components/dashboard/title-section/TitleSection";
 import Profile from "@/components/dashboard/profile/Profile";
 import Account from "@/components/dashboard/account/Account";
+import Resumes from "@/components/dashboard/resumes/Resumes";
 import DashboardWrapper from "@/components/dashboard/dashboard-wrapper/DashboardWrapper";
 import Sidebar from "@/components/dashboard/sidebar/Sidebar";
 import Navbar from "@/components/nav/Navbar";
@@ -13,6 +14,7 @@ import UpdateModal from "@/components/modals/payment/update-payment-modal/Update
 import UpgradeModal from "@/components/modals/payment/upgrade-plan-modal/UpgradeModal";
 import DowngradeModal from "@/components/modals/payment/downgrade-modal/DowngradeModal";
 import ReinstateModal from "@/components/modals/payment/reinstate-modal/ReintstateModal";
+import CreateResumeModal from "@/components/modals/document/create-resume/CreateResumeModal";
 import { UpdateUrl } from "@/lib/updateUrl";
 
 const Page = async ({
@@ -43,6 +45,7 @@ const Page = async ({
     const upgradePlan = searchParams?.upgradePlan || false;
     const downgradePlan = searchParams?.downgradePlan || false;
     const reinstatePlan = searchParams?.reinstatePlan || false;
+    const createResume = searchParams?.createResume || false;
 
     return (
         <DashboardWrapper>
@@ -80,6 +83,13 @@ const Page = async ({
                             key="accountSection"
                         />
                     )}
+                    {menuSection === "resumes" && (
+                        <Resumes
+                            key="resumesSection"
+                            currentUser={currentUser}
+                            searchParams={searchParams}
+                        />
+                    )}
                     <div className={styles.circle}></div>
                 </main>
             </section>
@@ -101,6 +111,11 @@ const Page = async ({
             {reinstatePlan && (
                 <StaticModal>
                     <ReinstateModal returnUrl="/dashboard?menu=account&invoicePage=1" />
+                </StaticModal>
+            )}
+            {createResume && (
+                <StaticModal>
+                    <CreateResumeModal returnUrl="/dashboard?menu=resumes" />
                 </StaticModal>
             )}
         </DashboardWrapper>

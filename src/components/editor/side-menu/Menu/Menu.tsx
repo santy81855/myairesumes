@@ -5,35 +5,33 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingScreen from "@/components/loading-screen/LoadingScreen";
-import { signout } from "@/actions/authentication";
-import {
-    profileIcon,
-    accountIcon,
-    jobIcon,
-    resumeIcon,
-    coverLetterIcon,
-    logoutIcon,
-    magicResumeLogo,
-    arrowRightIcon,
-    templateIcon,
-    styleIcon,
-} from "@/components/icons/iconSVG";
+import { templateIcon, styleIcon, orderIcon } from "@/components/icons/iconSVG";
+import ExpandedMenu from "../expanded-menu/ExpandedMenu";
 import TemplateMenu from "../template-menu/TemplateMenu";
+import StyleMenu from "../style-menu/StyleMenu";
+import SectionMenu from "../section-menu/SectionMenu";
 
 const Menu = () => {
-    const [state, setState] = useState(false);
     const [isTemplateOpen, setIsTemplateOpen] = useState(false);
     const [isStyleOpen, setIsStyleOpen] = useState(false);
+    const [isSectionOpen, setIsSectionOpen] = useState(false);
 
     const toggleTemplate = () => {
         setIsTemplateOpen(!isTemplateOpen);
         setIsStyleOpen(false);
+        setIsSectionOpen(false);
     };
 
     const toggleStyle = () => {
         setIsStyleOpen(!isStyleOpen);
         setIsTemplateOpen(false);
+        setIsSectionOpen(false);
+    };
+
+    const toggleSection = () => {
+        setIsSectionOpen(!isSectionOpen);
+        setIsTemplateOpen(false);
+        setIsStyleOpen(false);
     };
 
     return (
@@ -51,6 +49,16 @@ const Menu = () => {
                 </section>
                 <section
                     className={styles.staticMenuItem}
+                    style={isSectionOpen ? { backgroundColor: "#303045" } : {}}
+                    onClick={() => toggleSection()}
+                >
+                    <div className={styles.staticIconContainer}>
+                        {orderIcon}
+                    </div>
+                    <p className={styles.staticItemName}>Sections</p>
+                </section>
+                <section
+                    className={styles.staticMenuItem}
                     style={isStyleOpen ? { backgroundColor: "#303045" } : {}}
                     onClick={() => toggleStyle()}
                 >
@@ -60,7 +68,15 @@ const Menu = () => {
                     <p className={styles.staticItemName}>Styles</p>
                 </section>
             </section>
-            <TemplateMenu state={isTemplateOpen} setState={setIsTemplateOpen} />
+            <ExpandedMenu state={isTemplateOpen} setState={setIsTemplateOpen}>
+                <TemplateMenu />
+            </ExpandedMenu>
+            <ExpandedMenu state={isSectionOpen} setState={setIsSectionOpen}>
+                <SectionMenu />
+            </ExpandedMenu>
+            <ExpandedMenu state={isStyleOpen} setState={setIsStyleOpen}>
+                <StyleMenu />
+            </ExpandedMenu>
         </>
     );
 };
