@@ -21,6 +21,8 @@ const Basic = ({ resume, id }: ResumeProps) => {
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(16);
     const [orderArray, setOrderArray] = useState(resume.sectionOrder[0]);
+    const [lastChangePair, setLastChangePair] = useState("");
+    let lastChange = Date.now();
 
     useEffect(() => {
         const template = templateRef.current as unknown as HTMLElement;
@@ -93,7 +95,6 @@ const Basic = ({ resume, id }: ResumeProps) => {
         },
         sectionContainer: {
             width: "100%",
-            backgroundColor: "white",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -225,6 +226,17 @@ const Basic = ({ resume, id }: ResumeProps) => {
     const arrayReorder = (item: string, target: string) => {
         if (item === target) return;
         if (!orderArray.includes(item) || !orderArray.includes(target)) return;
+        // check if the Date.now is less than 100ms from the last change
+        console.log(item, target);
+        console.log("last change is ", lastChangePair);
+        if (
+            Date.now() - lastChange < 1000 &&
+            (item + target === lastChangePair ||
+                target + item === lastChangePair)
+        ) {
+            console.log("here");
+            return;
+        }
         const itemIndex = orderArray.indexOf(item);
         const targetIndex = orderArray.indexOf(target);
         // if the target is below the item
@@ -245,6 +257,8 @@ const Basic = ({ resume, id }: ResumeProps) => {
             newArray.push(orderArray[i]);
         }
         if (newArray === orderArray) return;
+        lastChange = Date.now();
+        setLastChangePair(item + target);
         setOrderArray(newArray);
     };
 
@@ -257,9 +271,6 @@ const Basic = ({ resume, id }: ResumeProps) => {
     const dragEnter = (e: any) => {
         dragOverItem.current = e.currentTarget.id;
         arrayReorder(dragItem.current, e.currentTarget.id);
-    };
-    const dragLeave = (e: any) => {
-        console.log("drag leave");
     };
     const drop = (e: any) => {
         return;
@@ -327,7 +338,6 @@ const Basic = ({ resume, id }: ResumeProps) => {
             draggable
             onDragStart={(e) => dragStart(e)}
             onDragEnter={(e) => dragEnter(e)}
-            onDragLeave={dragLeave}
             onDragEnd={drop}
         >
             <View style={pdfstyles.sectionContainer} id="summaryPdf">
@@ -354,7 +364,6 @@ const Basic = ({ resume, id }: ResumeProps) => {
             draggable
             onDragStart={(e) => dragStart(e)}
             onDragEnter={(e) => dragEnter(e)}
-            onDragLeave={dragLeave}
             onDragEnd={drop}
         >
             <View style={pdfstyles.sectionContainer} id="skillsPdf">
@@ -376,7 +385,6 @@ const Basic = ({ resume, id }: ResumeProps) => {
             draggable
             onDragStart={(e) => dragStart(e)}
             onDragEnter={(e) => dragEnter(e)}
-            onDragLeave={dragLeave}
             onDragEnd={drop}
         >
             <View style={pdfstyles.sectionContainer} id="experiencePdf">
@@ -425,7 +433,6 @@ const Basic = ({ resume, id }: ResumeProps) => {
             draggable
             onDragStart={(e) => dragStart(e)}
             onDragEnter={(e) => dragEnter(e)}
-            onDragLeave={dragLeave}
             onDragEnd={drop}
         >
             <View style={pdfstyles.sectionContainer} id="educationPdf">
@@ -465,7 +472,6 @@ const Basic = ({ resume, id }: ResumeProps) => {
             draggable
             onDragStart={(e) => dragStart(e)}
             onDragEnter={(e) => dragEnter(e)}
-            onDragLeave={dragLeave}
             onDragEnd={drop}
         >
             <View style={pdfstyles.sectionContainer} id="languagesPdf">
@@ -485,7 +491,6 @@ const Basic = ({ resume, id }: ResumeProps) => {
             draggable
             onDragStart={(e) => dragStart(e)}
             onDragEnter={(e) => dragEnter(e)}
-            onDragLeave={dragLeave}
             onDragEnd={drop}
         >
             <View style={pdfstyles.sectionContainer} id="interests">
