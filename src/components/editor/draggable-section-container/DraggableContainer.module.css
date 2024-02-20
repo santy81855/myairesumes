@@ -1,0 +1,16 @@
+.sectionContainer {
+    width: 100%;
+    position: relative;
+}
+
+.draggableSection {
+    position: absolute;
+    width: 1.5em;
+    height: 1.5em;
+    top: 0em;
+    right: 0.5em;
+    stroke-width: 2;
+    fill: black;
+    stroke: black;
+    cursor: pointer;
+}

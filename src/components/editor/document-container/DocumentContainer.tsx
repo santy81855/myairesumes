@@ -3,6 +3,8 @@ import styles from "./DocumentContainer.module.css";
 import Basic from "@/components/resume-templates/basic/Basic";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/app/providers";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 type DocumentContainerProps = {
     resume: any;
@@ -24,7 +26,9 @@ const DocumentContainer = ({ resume }: DocumentContainerProps) => {
     return (
         <section className={styles.documentContainer}>
             <section className={styles.document}>
-                <Basic id={id} resume={resume.information} />
+                <DndProvider backend={HTML5Backend}>
+                    <Basic id={id} resume={resume.information} />
+                </DndProvider>
             </section>
         </section>
     );

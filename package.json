@@ -27,6 +27,8 @@
         "oslo": "^1.0.2",
         "prisma": "^5.8.1",
         "react": "^18",
+        "react-dnd": "^16.0.1",
+        "react-dnd-html5-backend": "^16.0.1",
         "react-dom": "^18",
         "react-hot-toast": "^2.4.1",
         "react-toastify": "^10.0.4",

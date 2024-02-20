@@ -269,6 +269,12 @@ export const modernResumeIcon = (
     </svg>
 );
 
+export const dragIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
+        <path d="M3 5.5a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm5 0a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm5 0a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm-10 4a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm5 0a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Zm5 0a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0Z"></path>
+    </svg>
+);
+
 export const magicResumeLogo = (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
         <g fillRule="evenodd" stroke="none">
