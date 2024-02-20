@@ -1,5 +1,6 @@
 "use client";
 import styles from "./Basic.module.css";
+import { useAppContext } from "@/app/providers";
 import { useState, useEffect, useRef, useCallback } from "react";
 import ReactPDF, {
     Page,
@@ -11,17 +12,18 @@ import ReactPDF, {
 } from "@react-pdf/renderer";
 import DraggableContainer from "@/components/editor/draggable-section-container/DraggableContainer";
 
-type ResumeProps = {
-    resume: any;
-    id: string;
+type BasicProps = {
+    document: any;
+    updateDocument: any;
 };
 
-const Basic = ({ resume, id }: ResumeProps) => {
-    const information = resume;
+const Basic = ({ document, updateDocument }: BasicProps) => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(16);
-    const [orderArray, setOrderArray] = useState(resume.sectionOrder[0]);
+    const [orderArray, setOrderArray] = useState(
+        document.information.sectionOrder[document.currentPage - 1]
+    );
 
     useEffect(() => {
         const template = templateRef.current as unknown as HTMLElement;
@@ -212,14 +214,14 @@ const Basic = ({ resume, id }: ResumeProps) => {
     const nameSection = (
         <View style={pdfstyles.sectionContainer}>
             <Text style={pdfstyles.name}>
-                {information.firstName} {information.lastName}
+                {document.information.firstName} {document.information.lastName}
             </Text>
         </View>
     );
 
     const positionSection = (
         <View style={pdfstyles.sectionContainer}>
-            <Text style={pdfstyles.title}>{information.position}</Text>
+            <Text style={pdfstyles.title}>{document.information.position}</Text>
         </View>
     );
 
@@ -227,34 +229,42 @@ const Basic = ({ resume, id }: ResumeProps) => {
         <View style={pdfstyles.sectionContainer}>
             <View style={pdfstyles.rowContainer}>
                 <Text style={pdfstyles.contact}>
-                    {information.contactInfo.email}
+                    {document.information.contactInfo.email}
                 </Text>
                 <Text style={pdfstyles.contact}>|</Text>
                 <Text style={pdfstyles.contact}>
-                    {information.contactInfo.phone}
+                    {document.information.contactInfo.phone}
                 </Text>
                 <Text style={pdfstyles.contact}>|</Text>
                 <Text style={pdfstyles.contact}>
-                    {information.contactInfo.website}
+                    {document.information.contactInfo.website}
                 </Text>
             </View>
         </View>
     );
 
-    const moveSection = useCallback(
-        (dragIndex: number, hoverIndex: number) => {
-            const newOrderArray = [...orderArray]; // Create a copy of the orderArray
-            const draggedItem = newOrderArray[dragIndex]; // Get the dragged item
+    const moveSection = (dragIndex: number, hoverIndex: number) => {
+        // Create a copy of the orderArray
+        const newOrderArray = [...orderArray];
 
-            // Remove the dragged item from its original position
-            newOrderArray.splice(dragIndex, 1);
-            // Insert the dragged item at the new position
-            newOrderArray.splice(hoverIndex, 0, draggedItem);
+        // Get the dragged item
+        const draggedItem = newOrderArray[dragIndex];
 
-            setOrderArray(newOrderArray); // Update the state with the new orderArray
-        },
-        [orderArray]
-    );
+        // Remove the dragged item from its original position
+        newOrderArray.splice(dragIndex, 1);
+
+        // Insert the dragged item at the new position
+        newOrderArray.splice(hoverIndex, 0, draggedItem);
+        // update the orderArray in the document
+        const updatedDocument = { ...document };
+        updatedDocument.information.sectionOrder[
+            updatedDocument.currentPage - 1
+        ] = newOrderArray;
+        // update the resume in local storage
+        updateDocument(updatedDocument);
+        // Update the state with the new orderArray
+        setOrderArray(newOrderArray);
+    };
 
     const getSection = (id: string) => {
         switch (id) {
@@ -418,7 +428,6 @@ const Basic = ({ resume, id }: ResumeProps) => {
                                 id={section}
                                 key={section}
                                 orderArray={orderArray}
-                                setOrderArray={setOrderArray}
                                 moveSection={moveSection}
                             >
                                 {getSection(section)}

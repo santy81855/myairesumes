@@ -3,7 +3,7 @@ import styles from "./DraggableContainer.module.css";
 import type { Identifier, XYCoord } from "dnd-core";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { dragIcon } from "@/components/icons/iconSVG";
+import { useAppContext } from "@/app/providers";
 
 interface DragItem {
     index: number;
@@ -20,7 +20,6 @@ type DraggableContainerProps = {
     id: string;
     moveSection: (dragIndex: number, hoverIndex: number) => void;
     orderArray: string[];
-    setOrderArray: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 const DraggableContainer = ({
@@ -28,9 +27,10 @@ const DraggableContainer = ({
     id,
     moveSection,
     orderArray,
-    setOrderArray,
 }: DraggableContainerProps) => {
+    const { isReordering } = useAppContext();
     const containerRef = useRef<HTMLDivElement>(null);
+    // for adding a draggable element rather than using the whole section
     const itemRef = useRef<HTMLDivElement>(null);
     let index = orderArray.indexOf(id);
     const [{ handlerId }, drop] = useDrop<
@@ -106,19 +106,25 @@ const DraggableContainer = ({
     });
 
     //drag(drop(containerRef));
-    drag(itemRef);
-    drop(containerRef);
+    // the below line makes it so that you drab by the draggableSection and not the whole container but can still drop on the whole container
+    // drag(itemRef);
+    drag(isReordering ? containerRef : null);
+    drop(isReordering ? containerRef : null);
     return (
         <div
-            className={styles.sectionContainer}
-            style={{ opacity: isDragging ? 0.2 : 1 }}
+            className={`${styles.sectionContainer} ${
+                isReordering && styles.reorderStyle
+            }`}
+            style={{
+                opacity: isDragging ? 0.2 : 1,
+                backgroundColor: isDragging
+                    ? "rgba(39, 43, 128, 0.4)"
+                    : "transparent",
+            }}
             ref={containerRef}
             id={id}
             data-handler-id={handlerId}
         >
-            <div className={styles.draggableSection} ref={itemRef}>
-                {dragIcon}
-            </div>
             {children}
         </div>
     );

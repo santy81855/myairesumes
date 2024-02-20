@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
 import Placeholder from "@/components/resume-placeholder/Placeholder";
 import AddPage from "@/components/editor/add-page-button/AddPage";
-import PageCounter from "@/components/editor/page-counter/PageCounter";
+import PageCounter from "@/components/editor/page-util-bar/PageCounter";
 import { getResume } from "@/lib/resume";
 
 const Page = async ({

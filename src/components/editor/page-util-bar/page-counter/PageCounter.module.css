@@ -1,0 +1,28 @@
+.pageCounter {
+    display: flex;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: center;
+    background-color: #7367ff;
+    padding-inline: var(--padding-block-small);
+    padding-block: var(--padding-block-small);
+    border-radius: var(--border-radius-xsmall);
+}
+
+.pageCounter p {
+    color: white;
+    font-size: var(--font-size-small);
+    margin: 0;
+    padding: 0;
+}
+
+.pageChanger {
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    stroke: white;
+    fill: white;
+}

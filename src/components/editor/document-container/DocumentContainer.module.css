@@ -12,6 +12,7 @@
 .document {
     aspect-ratio: 8.5 / 11;
     width: 100%;
+    position: relative;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,0 +1,28 @@
+.container {
+    background-color: #7367ff;
+    border: none;
+    padding-inline: var(--padding-block-small);
+    padding-block: var(--padding-block-small);
+    border-radius: var(--border-radius-xsmall);
+    cursor: pointer;
+    display: flex;
+    gap: var(--gap-small);
+}
+
+.container:hover {
+    background-color: #5f54e3;
+}
+
+.container p {
+    font-size: var(--font-size-small);
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.container svg {
+    stroke: white;
+    fill: white;
+    width: 15px;
+    height: 15px;
+}

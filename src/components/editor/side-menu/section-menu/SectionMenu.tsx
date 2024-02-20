@@ -8,7 +8,6 @@ import { useAppContext } from "@/app/providers";
 const StyleMenu = () => {
     const { resumeInformation, setResumeInformation, resumeId } =
         useAppContext();
-    console.log(resumeInformation);
     const [searchText, setSearchText] = useState("");
 
     return (
@@ -16,11 +15,13 @@ const StyleMenu = () => {
             <motion.p className={styles.title}>Sections</motion.p>
             <motion.section className={styles.itemContainer}>
                 {resumeInformation &&
-                    resumeInformation.sectionOrder[0].map((section: string) => (
-                        <motion.div className={styles.item}>
-                            {section}
-                        </motion.div>
-                    ))}
+                    resumeInformation.sectionOrder[0].map(
+                        (section: string, index: number) => (
+                            <motion.div className={styles.item} key={index}>
+                                {section}
+                            </motion.div>
+                        )
+                    )}
             </motion.section>
         </motion.section>
     );

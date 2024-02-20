@@ -5,12 +5,19 @@
 
 .draggableSection {
     position: absolute;
-    width: 1.5em;
-    height: 1.5em;
-    top: 0em;
-    right: 0.5em;
-    stroke-width: 2;
-    fill: black;
-    stroke: black;
+    width: min(1.5em, 10px);
+    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(39, 43, 128, 0.464);
+    right: -0.1em;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     cursor: pointer;
+}
+
+.reorderStyle {
+    cursor: move;
+    outline: 1px solid rgba(220, 220, 220, 0.5);
+    background-color: rgba(220, 220, 220, 0.2) !important;
 }
