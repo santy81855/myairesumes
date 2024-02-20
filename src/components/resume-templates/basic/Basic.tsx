@@ -12,23 +12,15 @@ import ReactPDF, {
 
 type ResumeProps = {
     resume: any;
+    id: string;
 };
 
-const Basic = ({ resume }: ResumeProps) => {
-    const information = resume.information;
+const Basic = ({ resume, id }: ResumeProps) => {
+    const information = resume;
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(16);
-    const [orderArray, setOrderArray] = useState([
-        "contact",
-        "summary",
-        "skills",
-        "education",
-        "experience",
-        "languages",
-        "interests",
-        "projects",
-    ]);
+    const [orderArray, setOrderArray] = useState(resume.sectionOrder[0]);
 
     useEffect(() => {
         const template = templateRef.current as unknown as HTMLElement;
@@ -217,38 +209,102 @@ const Basic = ({ resume }: ResumeProps) => {
         },
     });
 
-    const handleMouseEnter = (e: any) => {
-        const divElement = document.getElementById("section");
-        if (!divElement) return;
-        divElement.style.backgroundColor = "red";
+    const handleHover = (e: any) => {
+        console.log(e.currentTarget.id);
+
+        if (!orderArray.includes(e.currentTarget.id)) return;
+        console.log(e.currentTarget);
+        e.currentTarget.style.backgroundColor = "green";
     };
 
-    const handleMouseLeave = (e: any) => {
-        const divElement = document.getElementById("section");
-        if (!divElement) return;
-        divElement.style.backgroundColor = "white";
+    const handleHoverEnd = (e: any) => {
+        if (!orderArray.includes(e.currentTarget.id)) return;
+        e.currentTarget.style.backgroundColor = "green";
     };
 
-    const handleClick = (e: any) => {
-        setOrderArray([
-            "contact",
-            "summary",
-            "skills",
-            "experience",
-            "education",
-            "languages",
-            "interests",
-            "projects",
-        ]);
+    const arrayReorder = (item: string, target: string) => {
+        if (item === target) return;
+        if (!orderArray.includes(item) || !orderArray.includes(target)) return;
+        const itemIndex = orderArray.indexOf(item);
+        const targetIndex = orderArray.indexOf(target);
+        // if the target is below the item
+        const isBackwards = itemIndex < targetIndex;
+        const newArray = [];
+        for (let i = 0; i < orderArray.length; i++) {
+            if (orderArray[i] === item) {
+                continue;
+            }
+            if (orderArray[i] === target) {
+                if (!isBackwards) newArray.push(item);
+                else {
+                    newArray.push(orderArray[i]);
+                    newArray.push(item);
+                    continue;
+                }
+            }
+            newArray.push(orderArray[i]);
+        }
+        if (newArray === orderArray) return;
+        setOrderArray(newArray);
     };
 
-    const contactSection = (
+    const dragItem = useRef() as any;
+    const dragOverItem = useRef() as any;
+    const dragStart = (e: any) => {
+        console.log("drag start");
+        dragItem.current = e.currentTarget.id;
+    };
+    const dragEnter = (e: any) => {
+        dragOverItem.current = e.currentTarget.id;
+        arrayReorder(dragItem.current, e.currentTarget.id);
+    };
+    const dragLeave = (e: any) => {
+        console.log("drag leave");
+    };
+    const drop = (e: any) => {
+        return;
+        const copyListItems = [...orderArray];
+        const dragItemId = dragItem.current;
+        const target = dragOverItem.current;
+        console.log("dropped ", dragItemId, " on ", target);
+        console.log("before array is ", copyListItems);
+        // delete the dragged item from the array
+        for (let i = 0; i < copyListItems.length; i++) {
+            if (copyListItems[i] === dragItemId) {
+                copyListItems.splice(i, 1);
+                break;
+            }
+        }
+        // add it rigiht before the target
+        for (let i = 0; i < copyListItems.length; i++) {
+            console.log(copyListItems[i]);
+            if (copyListItems[i] === target) {
+                copyListItems.splice(i, 0, dragItemId);
+                break;
+            }
+        }
+
+        console.log("after array is ", copyListItems);
+        setOrderArray(copyListItems);
+    };
+
+    const nameSection = (
         <View style={pdfstyles.sectionContainer}>
             <Text style={pdfstyles.name}>
                 {information.firstName} {information.lastName}
             </Text>
+        </View>
+    );
+
+    const positionSection = (
+        <View style={pdfstyles.sectionContainer}>
             <Text style={pdfstyles.title}>{information.position}</Text>
-            <view style={pdfstyles.rowContainer}>
+        </View>
+    );
+
+    const contactSection = (
+        <View style={pdfstyles.sectionContainer}>
+            <View style={pdfstyles.rowContainer}>
                 <Text style={pdfstyles.contact}>
                     {information.contactInfo.email}
                 </Text>
@@ -260,13 +316,21 @@ const Basic = ({ resume }: ResumeProps) => {
                 <Text style={pdfstyles.contact}>
                     {information.contactInfo.website}
                 </Text>
-            </view>
+            </View>
         </View>
     );
 
     const summarySection = (
-        <div className={styles.sectionContainer} onClick={handleClick}>
-            <View style={pdfstyles.sectionContainer}>
+        <div
+            id="summary"
+            className={styles.sectionContainer}
+            draggable
+            onDragStart={(e) => dragStart(e)}
+            onDragEnter={(e) => dragEnter(e)}
+            onDragLeave={dragLeave}
+            onDragEnd={drop}
+        >
+            <View style={pdfstyles.sectionContainer} id="summaryPdf">
                 <Text style={pdfstyles.sectionTitle}>Summary</Text>
                 <View style={pdfstyles.horizontalLine}></View>
                 <Text style={pdfstyles.contentText}>
@@ -284,8 +348,16 @@ const Basic = ({ resume }: ResumeProps) => {
     );
 
     const skillSection = (
-        <div className={styles.sectionContainer}>
-            <View style={pdfstyles.sectionContainer} id="skills">
+        <div
+            id="skills"
+            className={styles.sectionContainer}
+            draggable
+            onDragStart={(e) => dragStart(e)}
+            onDragEnter={(e) => dragEnter(e)}
+            onDragLeave={dragLeave}
+            onDragEnd={drop}
+        >
+            <View style={pdfstyles.sectionContainer} id="skillsPdf">
                 <Text style={pdfstyles.sectionTitle}>Skills</Text>
                 <View style={pdfstyles.horizontalLine}></View>
                 <Text style={pdfstyles.contentText}>
@@ -298,8 +370,16 @@ const Basic = ({ resume }: ResumeProps) => {
     );
 
     const experienceSection = (
-        <div className={styles.sectionContainer}>
-            <View style={pdfstyles.sectionContainer} id="skills">
+        <div
+            id="experience"
+            className={styles.sectionContainer}
+            draggable
+            onDragStart={(e) => dragStart(e)}
+            onDragEnter={(e) => dragEnter(e)}
+            onDragLeave={dragLeave}
+            onDragEnd={drop}
+        >
+            <View style={pdfstyles.sectionContainer} id="experiencePdf">
                 <Text style={pdfstyles.sectionTitle}>Experience</Text>
                 <View style={pdfstyles.horizontalLine}></View>
                 <View style={pdfstyles.experienceItemContainer}>
@@ -339,8 +419,16 @@ const Basic = ({ resume }: ResumeProps) => {
     );
 
     const educationSection = (
-        <div className={styles.sectionContainer}>
-            <View style={pdfstyles.sectionContainer} id="education">
+        <div
+            id="education"
+            className={styles.sectionContainer}
+            draggable
+            onDragStart={(e) => dragStart(e)}
+            onDragEnter={(e) => dragEnter(e)}
+            onDragLeave={dragLeave}
+            onDragEnd={drop}
+        >
+            <View style={pdfstyles.sectionContainer} id="educationPdf">
                 <Text style={pdfstyles.sectionTitle}>Education</Text>
                 <View style={pdfstyles.horizontalLine}></View>
                 <View style={pdfstyles.educationItemContainer}>
@@ -371,8 +459,16 @@ const Basic = ({ resume }: ResumeProps) => {
     );
 
     const languageSection = (
-        <div className={styles.sectionContainer}>
-            <View style={pdfstyles.sectionContainer} id="languages">
+        <div
+            id="languages"
+            className={styles.sectionContainer}
+            draggable
+            onDragStart={(e) => dragStart(e)}
+            onDragEnter={(e) => dragEnter(e)}
+            onDragLeave={dragLeave}
+            onDragEnd={drop}
+        >
+            <View style={pdfstyles.sectionContainer} id="languagesPdf">
                 <Text style={pdfstyles.sectionTitle}>Languages</Text>
                 <View style={pdfstyles.horizontalLine}></View>
                 <Text style={pdfstyles.contentText}>
@@ -383,7 +479,15 @@ const Basic = ({ resume }: ResumeProps) => {
     );
 
     const interestSection = (
-        <div className={styles.sectionContainer}>
+        <div
+            id="interests"
+            className={styles.sectionContainer}
+            draggable
+            onDragStart={(e) => dragStart(e)}
+            onDragEnter={(e) => dragEnter(e)}
+            onDragLeave={dragLeave}
+            onDragEnd={drop}
+        >
             <View style={pdfstyles.sectionContainer} id="interests">
                 <Text style={pdfstyles.sectionTitle}>Interests</Text>
                 <View style={pdfstyles.horizontalLine}></View>
@@ -407,8 +511,12 @@ const Basic = ({ resume }: ResumeProps) => {
         <Document title="Resume">
             <Page wrap={false} style={pdfstyles.page}>
                 <View style={pdfstyles.pageContainer} ref={templateRef}>
-                    {orderArray.map((section) => {
+                    {orderArray.map((section: string) => {
                         switch (section) {
+                            case "name":
+                                return nameSection;
+                            case "position":
+                                return positionSection;
                             case "contact":
                                 return contactSection;
                             case "summary":

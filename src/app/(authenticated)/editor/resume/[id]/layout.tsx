@@ -15,6 +15,7 @@ import Navbar from "@/components/nav/Navbar";
 import { getResume } from "@/lib/resume";
 import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { ResumeContext } from "@/app/providers";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Editor",
@@ -38,13 +39,15 @@ export default async function RootLayout({
         <html lang="en">
             <body className={poppins.className}>
                 <Navbar style={{ backgroundColor: "black", color: "white" }} />
-                <section className={styles.rowContainer}>
-                    <SideMenu />
-                    <section className={styles.columnContainer}>
-                        <TitleBar />
-                        {children}
+                <ResumeContext>
+                    <section className={styles.rowContainer}>
+                        <SideMenu />
+                        <section className={styles.columnContainer}>
+                            <TitleBar />
+                            {children}
+                        </section>
                     </section>
-                </section>
+                </ResumeContext>
             </body>
         </html>
     );

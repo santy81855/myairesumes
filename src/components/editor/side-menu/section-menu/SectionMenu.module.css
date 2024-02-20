@@ -1,34 +1,36 @@
-.searchBarContainer {
+.container {
     width: 100%;
-    border-radius: var(--border-radius-xsmall);
-    padding-inline: var(--padding-inline-medium);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: var(--padding-block-medium);
     justify-content: flex-start;
     align-items: center;
-    gap: var(--padding-inline-medium);
-    background-color: white;
+    position: relative;
 }
 
-.searchIconContainer {
-    width: 20px;
-    height: 20px;
-}
-
-.searchIconContainer svg {
+.itemContainer {
     width: 100%;
-    height: 100%;
-    fill: black;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
 }
 
-.searchBarInput {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    font-size: var(--font-size-small);
+.title {
+    font-size: var(--font-size-medium);
+    color: white;
+    width: 100%;
+    text-align: left;
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-small);
+    padding-inline: var(--padding-inline-medium);
     padding-block: var(--padding-block-small);
-}
-
-.searchBarInput::placeholder {
-    color: rgb(146, 146, 146);
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: context-menu;
 }

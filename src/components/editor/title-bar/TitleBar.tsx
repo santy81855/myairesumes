@@ -1,8 +1,8 @@
 "use client";
 import styles from "./TitleBar.module.css";
 import { downloadIcon } from "@/components/icons/iconSVG";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import BasicDownload from "@/components/resume-templates/basic/BasicDownload";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 const TitleBar = () => {
     return (

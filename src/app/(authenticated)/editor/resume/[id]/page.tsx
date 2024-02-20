@@ -27,9 +27,7 @@ const Page = async ({
     return (
         <main className={styles.main}>
             <PageCounter />
-            <DocumentContainer>
-                <Basic resume={resume} />
-            </DocumentContainer>
+            <DocumentContainer resume={resume} />
             <AddPage />
         </main>
     );
