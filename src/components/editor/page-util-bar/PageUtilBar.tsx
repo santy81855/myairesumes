@@ -18,14 +18,13 @@ const PageUtilBar = ({ resumeId }: PageUtilBarProps) => {
     useEffect(() => {
         setDocument(documentArray.find((document) => document.id === resumeId));
     }, [documentArray]);
-    console.log(document);
+
     const handleDeletePage = () => {
         if (!document) return;
         if (document.information.numPages === 1) return;
         // remove the sectionOrder array for this page from the document
         let newSectionOrder = [...document.information.sectionOrder];
         newSectionOrder.splice(document.currentPage - 1, 1);
-        console.log(newSectionOrder);
         const newNumPages = document.information.numPages - 1;
         const updatedDocument = {
             ...document,
@@ -37,12 +36,10 @@ const PageUtilBar = ({ resumeId }: PageUtilBarProps) => {
             currentPage:
                 document.currentPage === 1 ? 1 : document.currentPage - 1,
         };
-        console.log(updatedDocument);
         const newDocumentArray = updateDocumentArray(
             updatedDocument,
             documentArray
         );
-        console.log(newDocumentArray);
         setDocumentArray(newDocumentArray);
     };
 
@@ -50,7 +47,6 @@ const PageUtilBar = ({ resumeId }: PageUtilBarProps) => {
         <section className={styles.container}>
             <ReorderButton />
             <section className={styles.pageFunctionContainer}>
-                <PageCounter resumeId={resumeId} />
                 {document && document.information.numPages > 1 && (
                     <button
                         title="delete page"
@@ -60,6 +56,7 @@ const PageUtilBar = ({ resumeId }: PageUtilBarProps) => {
                         {trashIcon}
                     </button>
                 )}
+                <PageCounter resumeId={resumeId} />
             </section>
         </section>
     );

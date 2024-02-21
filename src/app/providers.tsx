@@ -30,7 +30,6 @@ export const ResumeContext = ({ children }: { children: React.ReactNode }) => {
     function setLocalStorage(key: string, value: any) {
         try {
             localStorage.setItem(key, JSON.stringify(value));
-            console.log("set local storage to ", value);
         } catch (e) {
             // catch possible errors:
             // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API

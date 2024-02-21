@@ -12,15 +12,29 @@ const PDFDownloadLink = dynamic(
     }
 );
 // import { PDFDownloadLink } from "@react-pdf/renderer";
+import { useAppContext } from "@/app/providers";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 const TitleBar = () => {
+    const { documentArray } = useAppContext();
+    if (!documentArray) return null;
+    const params = useParams();
+    const [document, setDocument] = useState<any>(
+        documentArray.find((document) => document.id === params.id)
+    );
+    useEffect(() => {
+        setDocument(
+            documentArray.find((document) => document.id === params.id)
+        );
+    }, [documentArray]);
     return (
         <section className={styles.container}>
             <p className={styles.title}>Resume Title</p>
             <div className={styles.iconContainer}>
                 <PDFDownloadLink
-                    document={<BasicDownload />}
-                    fileName="somename.pdf"
+                    document={<BasicDownload document={document} />}
+                    fileName={`${document.information.resumeName}.pdf`}
                 >
                     {downloadIcon}
                 </PDFDownloadLink>

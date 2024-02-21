@@ -8,7 +8,11 @@ import ReactPDF, {
     Font,
 } from "@react-pdf/renderer";
 
-const BasicDownload = () => {
+type DocumentProps = {
+    document: any;
+};
+
+const BasicDownload = ({ document }: DocumentProps) => {
     const hyphenationCallback = (word: string) => {
         // Return word parts in an array
         return [word];
@@ -49,7 +53,6 @@ const BasicDownload = () => {
         },
         sectionContainer: {
             width: "100%",
-            backgroundColor: "white",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -165,22 +168,40 @@ const BasicDownload = () => {
         },
     });
 
+    const nameSection = (
+        <View style={styles.sectionContainer}>
+            <Text style={styles.name}>
+                {document.information.firstName} {document.information.lastName}
+            </Text>
+        </View>
+    );
+
+    const positionSection = (
+        <View style={styles.sectionContainer}>
+            <Text style={styles.title}>{document.information.position}</Text>
+        </View>
+    );
+
     const contactSection = (
-        <View style={styles.sectionContainer} id="contact">
-            <Text style={styles.name}>Santiago Garcia</Text>
-            <Text style={styles.title}>Business Analyst</Text>
+        <View style={styles.sectionContainer}>
             <View style={styles.rowContainer}>
-                <Text style={styles.contact}>(678) 735-9580</Text>
-                <View style={styles.bullet}></View>
-                <Text style={styles.contact}>santy@santiagogarcia.dev</Text>
-                <View style={styles.bullet}></View>
-                <Text style={styles.contact}>https://santiagogarcia.dev</Text>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.email}
+                </Text>
+                <Text style={styles.contact}>|</Text>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.phone}
+                </Text>
+                <Text style={styles.contact}>|</Text>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.website}
+                </Text>
             </View>
         </View>
     );
 
     const summarySection = (
-        <View style={styles.sectionContainer} id="summary">
+        <View style={styles.sectionContainer} id="summaryPdf">
             <Text style={styles.sectionTitle}>Summary</Text>
             <View style={styles.horizontalLine}></View>
             <Text style={styles.contentText}>
@@ -197,7 +218,7 @@ const BasicDownload = () => {
     );
 
     const skillSection = (
-        <View style={styles.sectionContainer} id="skills">
+        <View style={styles.sectionContainer} id="skillsPdf">
             <Text style={styles.sectionTitle}>Skills</Text>
             <View style={styles.horizontalLine}></View>
             <Text style={styles.contentText}>
@@ -209,7 +230,7 @@ const BasicDownload = () => {
     );
 
     const experienceSection = (
-        <View style={styles.sectionContainer} id="skills">
+        <View style={styles.sectionContainer} id="experiencePdf">
             <Text style={styles.sectionTitle}>Experience</Text>
             <View style={styles.horizontalLine}></View>
             <View style={styles.experienceItemContainer}>
@@ -247,16 +268,103 @@ const BasicDownload = () => {
         </View>
     );
 
+    const educationSection = (
+        <View style={styles.sectionContainer} id="educationPdf">
+            <Text style={styles.sectionTitle}>Education</Text>
+            <View style={styles.horizontalLine}></View>
+            <View style={styles.educationItemContainer}>
+                <View style={styles.educationTopRow}>
+                    <Text style={styles.school}>Georgia Tech</Text>
+                    <Text style={styles.date}>2015 - 2019</Text>
+                </View>
+                <Text style={styles.degree}>
+                    Bachelor of Science in Business Administration
+                </Text>
+                <View style={styles.bulletItemContainer}>
+                    <View style={styles.bulletItem}>
+                        <View style={styles.bullet}></View>
+                        <Text style={styles.contentText}>
+                            Graduated with honors and a 3.8 GPA.
+                        </Text>
+                    </View>
+                    <View style={styles.bulletItem}>
+                        <View style={styles.bullet}></View>
+                        <Text style={styles.contentText}>
+                            Completed a minor in Computer Science.
+                        </Text>
+                    </View>
+                </View>
+            </View>
+        </View>
+    );
+
+    const languageSection = (
+        <View style={styles.sectionContainer} id="languagesPdf">
+            <Text style={styles.sectionTitle}>Languages</Text>
+            <View style={styles.horizontalLine}></View>
+            <Text style={styles.contentText}>
+                English (Native), Spanish (Fluent), French (Conversational)
+            </Text>
+        </View>
+    );
+
+    const interestSection = (
+        <View style={styles.sectionContainer} id="interests">
+            <Text style={styles.sectionTitle}>Interests</Text>
+            <View style={styles.horizontalLine}></View>
+            <Text style={styles.contentText}>
+                Travel, Hiking, Reading, Cooking, Photography, Music
+            </Text>
+        </View>
+    );
+
+    const projectSection = (
+        <View style={styles.sectionContainer} id="projects">
+            <Text style={styles.sectionTitle}>Projects</Text>
+            <View style={styles.horizontalLine}></View>
+        </View>
+    );
+
+    const getSection = (id: string) => {
+        switch (id) {
+            case "name":
+                return nameSection;
+            case "position":
+                return positionSection;
+            case "contact":
+                return contactSection;
+            case "summary":
+                return summarySection;
+            case "skills":
+                return skillSection;
+            case "experience":
+                return experienceSection;
+            case "education":
+                return educationSection;
+            case "languages":
+                return languageSection;
+            case "interests":
+                return interestSection;
+            case "projects":
+                return projectSection;
+            default:
+                return null;
+        }
+    };
+
     return (
         <Document title="Resume">
-            <Page wrap={false} style={styles.page}>
-                <View style={styles.pageContainer}>
-                    {contactSection}
-                    {summarySection}
-                    {skillSection}
-                    {experienceSection}
-                </View>
-            </Page>
+            {document.information.sectionOrder.map(
+                (array: string[], index: number) => (
+                    <Page key={index} wrap={false} style={styles.page}>
+                        <View style={styles.pageContainer}>
+                            {array.map((section: string, innerIndex: number) =>
+                                getSection(section)
+                            )}
+                        </View>
+                    </Page>
+                )
+            )}
         </Document>
     );
 };

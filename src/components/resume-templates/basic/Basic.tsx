@@ -39,7 +39,6 @@ const Basic = ({ updateDocument, index, resumeId }: BasicProps) => {
             ]
         );
     }, [documentArray]);
-    console.log(document);
 
     const [orderArray, setOrderArray] = useState(
         document?.information.sectionOrder[document.currentPage - 1]
@@ -231,38 +230,6 @@ const Basic = ({ updateDocument, index, resumeId }: BasicProps) => {
         },
     });
 
-    const nameSection = (
-        <View style={pdfstyles.sectionContainer}>
-            <Text style={pdfstyles.name}>
-                {document.information.firstName} {document.information.lastName}
-            </Text>
-        </View>
-    );
-
-    const positionSection = (
-        <View style={pdfstyles.sectionContainer}>
-            <Text style={pdfstyles.title}>{document.information.position}</Text>
-        </View>
-    );
-
-    const contactSection = (
-        <View style={pdfstyles.sectionContainer}>
-            <View style={pdfstyles.rowContainer}>
-                <Text style={pdfstyles.contact}>
-                    {document.information.contactInfo.email}
-                </Text>
-                <Text style={pdfstyles.contact}>|</Text>
-                <Text style={pdfstyles.contact}>
-                    {document.information.contactInfo.phone}
-                </Text>
-                <Text style={pdfstyles.contact}>|</Text>
-                <Text style={pdfstyles.contact}>
-                    {document.information.contactInfo.website}
-                </Text>
-            </View>
-        </View>
-    );
-
     const moveSection = (dragIndex: number, hoverIndex: number) => {
         // Create a copy of the orderArray
         const newOrderArray = [...orderArray];
@@ -312,6 +279,38 @@ const Basic = ({ updateDocument, index, resumeId }: BasicProps) => {
                 return null;
         }
     };
+
+    const nameSection = (
+        <View style={pdfstyles.sectionContainer}>
+            <Text style={pdfstyles.name}>
+                {document.information.firstName} {document.information.lastName}
+            </Text>
+        </View>
+    );
+
+    const positionSection = (
+        <View style={pdfstyles.sectionContainer}>
+            <Text style={pdfstyles.title}>{document.information.position}</Text>
+        </View>
+    );
+
+    const contactSection = (
+        <View style={pdfstyles.sectionContainer}>
+            <View style={pdfstyles.rowContainer}>
+                <Text style={pdfstyles.contact}>
+                    {document.information.contactInfo.email}
+                </Text>
+                <Text style={pdfstyles.contact}>|</Text>
+                <Text style={pdfstyles.contact}>
+                    {document.information.contactInfo.phone}
+                </Text>
+                <Text style={pdfstyles.contact}>|</Text>
+                <Text style={pdfstyles.contact}>
+                    {document.information.contactInfo.website}
+                </Text>
+            </View>
+        </View>
+    );
 
     const summarySection = (
         <View style={pdfstyles.sectionContainer} id="summaryPdf">

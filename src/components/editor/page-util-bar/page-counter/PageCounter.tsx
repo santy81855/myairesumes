@@ -23,7 +23,6 @@ const PageCounter = ({ resumeId }: PageCounterProps) => {
     useEffect(() => {
         setDocument(documentArray.find((document) => document.id === resumeId));
     }, [documentArray]);
-    console.log(document);
 
     const handleAddPage = () => {
         if (!document) return;

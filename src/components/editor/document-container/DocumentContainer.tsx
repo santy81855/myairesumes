@@ -27,7 +27,6 @@ const DocumentContainer = ({ resume }: DocumentContainerProps) => {
         // add the resume to the document array if it is not already there
         const tempArray = [...documentArray];
         if (!tempArray.some((document: any) => document.id === id)) {
-            console.log("adding new document with id = ", id);
             tempArray.push({
                 id,
                 currentPage: 1,
@@ -40,7 +39,6 @@ const DocumentContainer = ({ resume }: DocumentContainerProps) => {
             });
             setDocumentArray(tempArray);
         } else {
-            console.log("document already exists with id = ", id);
             const updatedDocument = documentArray.find(
                 (document) => document.id === id
             );
