@@ -102,6 +102,9 @@ const Basic = ({ index, resumeId }: BasicProps) => {
             backgroundColor: "white",
             width: "100%",
             height: "100%",
+            paddingLeft: margin,
+            paddingRight: margin,
+            paddingTop: margin,
             fontSize: fontSize,
             fontFamily: "Times-Roman",
             display: "flex",
@@ -115,7 +118,11 @@ const Basic = ({ index, resumeId }: BasicProps) => {
     return (
         <Document title="Resume">
             <Page wrap={false} style={styles.page}>
-                <View style={styles.pageContainer} ref={templateRef}>
+                <View
+                    wrap={false}
+                    style={styles.pageContainer}
+                    ref={templateRef}
+                >
                     <SectionComponents
                         document={document}
                         font={document.information.font}

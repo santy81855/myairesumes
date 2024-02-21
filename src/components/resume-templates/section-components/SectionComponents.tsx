@@ -10,6 +10,7 @@ import ReactPDF, {
 import { useAppContext } from "@/app/providers";
 import { updateDocumentArray } from "@/lib/document";
 import DraggableContainer from "@/components/editor/draggable-section-container/DraggableContainer";
+import SectionContainerEditor from "./section-container-editor/SectionContainerEditor";
 
 const SectionComponents = ({
     document,
@@ -31,7 +32,6 @@ const SectionComponents = ({
         // Return word parts in an array
         return [word];
     };
-    console.log(font);
     // function to handle work break
     Font.registerHyphenationCallback(hyphenationCallback);
 
@@ -82,8 +82,6 @@ const SectionComponents = ({
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            paddingLeft: margin,
-            paddingRight: margin,
             gap: fontSize / 4,
         },
         sectionTitle: {
@@ -95,7 +93,6 @@ const SectionComponents = ({
             fontSize: fontSize * 2,
             fontFamily: getBoldFont(),
             fontWeight: "bold",
-            paddingTop: margin,
         },
         title: {
             fontSize: fontSize * 1.2,
@@ -111,6 +108,14 @@ const SectionComponents = ({
             alignItems: "center",
             gap: fontSize / 1.5,
         },
+        columnGroup: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: fontSize / 12,
+        },
         bullet: {
             width: fontSize / 4,
             height: fontSize / 4,
@@ -125,6 +130,7 @@ const SectionComponents = ({
         contentText: {
             fontSize: fontSize,
             fontFamily: font,
+            fontWeight: "normal",
             width: "100%",
         },
         educationItemContainer: {
@@ -222,8 +228,83 @@ const SectionComponents = ({
         setOrderArray(newOrderArray);
     };
 
-    const getSection = (id: string) => {
+    const getSectionEditor = (id: string) => {
         switch (id) {
+            case "namePositionVertical":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {namePositionSectionVertical}
+                    </SectionContainerEditor>
+                );
+            case "name":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {nameSection}
+                    </SectionContainerEditor>
+                );
+            case "position":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {positionSection}
+                    </SectionContainerEditor>
+                );
+            case "contact":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {contactSection}
+                    </SectionContainerEditor>
+                );
+            case "summary":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {summarySection}
+                    </SectionContainerEditor>
+                );
+            case "skills":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {skillSection}
+                    </SectionContainerEditor>
+                );
+            case "experience":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {experienceSection}
+                    </SectionContainerEditor>
+                );
+            case "education":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {educationSection}
+                    </SectionContainerEditor>
+                );
+            case "languages":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {languageSection}
+                    </SectionContainerEditor>
+                );
+            case "interests":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {interestSection}
+                    </SectionContainerEditor>
+                );
+            case "projects":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {projectSection}
+                    </SectionContainerEditor>
+                );
+            default:
+                return null;
+        }
+    };
+
+    const getSectionDownload = (id: string) => {
+        switch (id) {
+            case "namePositionVertical":
+                return namePositionSectionVertical;
             case "name":
                 return nameSection;
             case "position":
@@ -248,6 +329,22 @@ const SectionComponents = ({
                 return null;
         }
     };
+
+    const namePositionSectionVertical = (
+        <View style={styles.columnGroup}>
+            <View style={styles.sectionContainer}>
+                <Text style={styles.name}>
+                    {document.information.firstName}{" "}
+                    {document.information.lastName}
+                </Text>
+            </View>
+            <View style={styles.sectionContainer}>
+                <Text style={styles.title}>
+                    {document.information.position}
+                </Text>
+            </View>
+        </View>
+    );
 
     const nameSection = (
         <View style={styles.sectionContainer}>
@@ -414,10 +511,10 @@ const SectionComponents = ({
                 orderArray={orderArray}
                 moveSection={moveSection}
             >
-                {getSection(section)}
+                {getSectionEditor(section)}
             </DraggableContainer>
         ) : (
-            getSection(section)
+            getSectionDownload(section)
         );
     });
 };

@@ -24,18 +24,14 @@ const BasicDownload = ({ document }: DocumentProps) => {
     Font.registerHyphenationCallback(hyphenationCallback);
     // Create styles
     const styles = StyleSheet.create({
-        document: {
-            width: "100%",
-            height: "100%",
-        },
-        page: {
-            width: "100%",
-            height: "100%",
-        },
+        page: { flexDirection: "row" },
         pageContainer: {
             backgroundColor: "white",
             width: "100%",
             height: "100%",
+            paddingLeft: margin,
+            paddingRight: margin,
+            paddingTop: margin,
             fontSize: fontSize,
             fontFamily: "Times-Roman",
             display: "flex",
@@ -51,8 +47,13 @@ const BasicDownload = ({ document }: DocumentProps) => {
             {document &&
                 document.information.sectionOrder.map(
                     (array: string[], index: number) => (
-                        <Page key={index} wrap={false} style={styles.page}>
-                            <View style={styles.pageContainer}>
+                        <Page
+                            wrap={false}
+                            key={index}
+                            style={styles.page}
+                            size={[610, 790.59]}
+                        >
+                            <View wrap={false} style={styles.pageContainer}>
                                 <SectionComponents
                                     document={document}
                                     font="Times-Roman"
