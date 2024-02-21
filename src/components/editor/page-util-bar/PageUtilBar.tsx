@@ -12,9 +12,7 @@ type PageUtilBarProps = {
 };
 const PageUtilBar = ({ resumeId }: PageUtilBarProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
-    const [document, setDocument] = useState(
-        documentArray.find((document) => document.id === resumeId)
-    );
+    const [document, setDocument] = useState<any>(null);
     useEffect(() => {
         setDocument(documentArray.find((document) => document.id === resumeId));
     }, [documentArray]);
@@ -45,19 +43,23 @@ const PageUtilBar = ({ resumeId }: PageUtilBarProps) => {
 
     return (
         <section className={styles.container}>
-            <ReorderButton />
-            <section className={styles.pageFunctionContainer}>
-                {document && document.information.numPages > 1 && (
-                    <button
-                        title="delete page"
-                        className={styles.deletePageButton}
-                        onClick={handleDeletePage}
-                    >
-                        {trashIcon}
-                    </button>
-                )}
-                <PageCounter resumeId={resumeId} />
-            </section>
+            {document && (
+                <>
+                    <ReorderButton />
+                    <section className={styles.pageFunctionContainer}>
+                        {document.information.numPages > 1 && (
+                            <button
+                                title="delete page"
+                                className={styles.deletePageButton}
+                                onClick={handleDeletePage}
+                            >
+                                {trashIcon}
+                            </button>
+                        )}
+                        <PageCounter resumeId={resumeId} />
+                    </section>
+                </>
+            )}
         </section>
     );
 };

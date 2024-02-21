@@ -20,9 +20,7 @@ const TitleBar = () => {
     const { documentArray } = useAppContext();
     if (!documentArray) return null;
     const params = useParams();
-    const [document, setDocument] = useState<any>(
-        documentArray.find((document) => document.id === params.id)
-    );
+    const [document, setDocument] = useState<any>(null);
     useEffect(() => {
         setDocument(
             documentArray.find((document) => document.id === params.id)
@@ -31,14 +29,16 @@ const TitleBar = () => {
     return (
         <section className={styles.container}>
             <p className={styles.title}>Resume Title</p>
-            <div className={styles.iconContainer}>
-                <PDFDownloadLink
-                    document={<BasicDownload document={document} />}
-                    fileName={`${document.information.resumeName}.pdf`}
-                >
-                    {downloadIcon}
-                </PDFDownloadLink>
-            </div>
+            {document && (
+                <div className={styles.iconContainer}>
+                    <PDFDownloadLink
+                        document={<BasicDownload document={document} />}
+                        fileName={`${document.information.resumeName}.pdf`}
+                    >
+                        {downloadIcon}
+                    </PDFDownloadLink>
+                </div>
+            )}
         </section>
     );
 };

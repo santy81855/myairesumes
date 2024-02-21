@@ -51,6 +51,7 @@ export const initializeNewResume = (
         jobTitle: job,
         description,
         template: "basic",
+        font: "Times-Roman",
         firstName: first,
         lastName: last,
         sectionOrder: [

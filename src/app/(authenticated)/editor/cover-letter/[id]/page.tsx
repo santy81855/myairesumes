@@ -1,12 +1,10 @@
 import styles from "./page.module.css";
 import { validateRequest } from "@/lib/auth";
-import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
-import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
-import Placeholder from "@/components/resume-placeholder/Placeholder";
-import AddPage from "@/components/editor/add-page-button/AddPage";
-import PageCounter from "@/components/editor/page-util-bar/PageCounter";
 import { getResume } from "@/lib/resume";
+
+import PageUtilBar from "@/components/editor/page-util-bar/PageUtilBar";
+import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
 
 const Page = async ({
     params,
@@ -25,9 +23,8 @@ const Page = async ({
 
     return (
         <main className={styles.main}>
-            <PageCounter />
-            <DocumentContainer resume={resume} />
-            <AddPage />
+            <PageUtilBar resumeId={id} />
+            <DocumentContainer document={resume} />
         </main>
     );
 };

@@ -1,23 +1,10 @@
 import styles from "./page.module.css";
 import { validateRequest } from "@/lib/auth";
-import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
-
 import { getResume } from "@/lib/resume";
-import dynamic from "next/dynamic";
 
-const AddPage = dynamic(
-    () => import("@/components/editor/add-page-button/AddPage"),
-    { ssr: false }
-);
-const PageUtilBar = dynamic(
-    () => import("@/components/editor/page-util-bar/PageUtilBar"),
-    { ssr: false }
-);
-const DocumentContainer = dynamic(
-    () => import("@/components/editor/document-container/DocumentContainer"),
-    { ssr: false }
-);
+import PageUtilBar from "@/components/editor/page-util-bar/PageUtilBar";
+import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
 
 const Page = async ({
     params,
@@ -37,8 +24,7 @@ const Page = async ({
     return (
         <main className={styles.main}>
             <PageUtilBar resumeId={id} />
-            <DocumentContainer resume={resume} />
-            <AddPage resumeId={id} />
+            <DocumentContainer document={resume} />
         </main>
     );
 };
