@@ -77,7 +77,7 @@ model Subscription {
 
 model Resume {
     id          String   @id @unique @default(cuid())
-    userId      String   @unique
+    userId      String
     information Json
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt

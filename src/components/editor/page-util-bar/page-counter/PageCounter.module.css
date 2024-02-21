@@ -17,6 +17,21 @@
 }
 
 .pageChanger {
+    background-color: transparent;
+    border: none;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    stroke: white;
+    fill: white;
+}
+
+.addPageButton {
+    background-color: transparent;
+    border: none;
     width: 15px;
     height: 15px;
     display: flex;

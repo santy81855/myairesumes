@@ -6,6 +6,7 @@ import { useAppContext } from "@/app/providers";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
+import { updateDocumentArray } from "@/lib/document";
 
 type DocumentContainerProps = {
     resume: any;
@@ -13,63 +14,68 @@ type DocumentContainerProps = {
 
 const DocumentContainer = ({ resume }: DocumentContainerProps) => {
     const id = resume.id;
-    const [currentDocument, setCurrentDocument] = useState<any>(null);
     const { documentArray, setDocumentArray } = useAppContext();
+    const [currentDocument, setCurrentDocument] = useState<any>(null);
+
     useEffect(() => {
-        if (!localStorage.getItem("documentArray")) {
-            localStorage.setItem("documentArray", JSON.stringify([]));
-        } else {
-            const initialArray = JSON.parse(
-                localStorage.getItem("documentArray") as string
-            );
-            // add the resume to the document array if it is not already there
-            if (!initialArray.some((document: any) => document.id === id)) {
-                initialArray.push({
-                    id,
-                    currentPage: 1,
-                    information: resume.information,
-                });
-            }
-            setDocumentArray(initialArray);
+        setCurrentDocument(
+            documentArray.find((document) => document.id === id)
+        );
+    }, [documentArray]);
+
+    useEffect(() => {
+        // add the resume to the document array if it is not already there
+        const tempArray = [...documentArray];
+        if (!tempArray.some((document: any) => document.id === id)) {
+            console.log("adding new document with id = ", id);
+            tempArray.push({
+                id,
+                currentPage: 1,
+                information: resume.information,
+            });
             setCurrentDocument({
                 id,
                 currentPage: 1,
                 information: resume.information,
             });
+            setDocumentArray(tempArray);
+        } else {
+            console.log("document already exists with id = ", id);
+            const updatedDocument = documentArray.find(
+                (document) => document.id === id
+            );
+            setCurrentDocument(updatedDocument);
         }
     }, []);
 
-    useEffect(() => {
-        // whenever the document array changes, update the currentDocument
-        const currentDocument = documentArray.find(
-            (document) => document.id === id
-        );
-        setCurrentDocument(currentDocument);
-    }, [documentArray]);
-
     const updateDocument = (updatedDocument: any) => {
-        const { id } = updatedDocument;
-        // update the documentArray with the new information
-        const newDocumentArray = documentArray.map((document) => {
-            if (document.id === id) {
-                return updatedDocument;
-            }
-            return document;
-        });
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
         setDocumentArray(newDocumentArray);
     };
+
+    const documentPages =
+        currentDocument &&
+        Array.from({ length: currentDocument.information.numPages }).map(
+            (_, index) => (
+                <Basic
+                    key={`page${index}`}
+                    resumeId={id}
+                    updateDocument={updateDocument}
+                    index={index}
+                />
+            )
+        );
 
     return (
         <section className={styles.documentContainer}>
             <section className={styles.document}>
                 <DndProvider backend={HTML5Backend}>
                     {!currentDocument && <LoadingScreen />}
-                    {currentDocument && (
-                        <Basic
-                            document={currentDocument}
-                            updateDocument={updateDocument}
-                        />
-                    )}
+                    {currentDocument &&
+                        documentPages[currentDocument.currentPage - 1]}
                 </DndProvider>
             </section>
         </section>

@@ -18,27 +18,35 @@ type AppContextType = {
 const AppContext = createContext({} as AppContextType);
 
 export const ResumeContext = ({ children }: { children: React.ReactNode }) => {
-    const [documentArray, setDocumentArray] = useState<Document[]>([]);
+    const [documentArray, setDocumentArray] = useState<Document[] | []>(
+        getLocalStorage("documentArray", [])
+    );
+    const [isReordering, setIsReordering] = useState<boolean>(false);
 
     useEffect(() => {
-        const isStored = localStorage.getItem("documentArray");
-        let initialArray: Document[] = [];
-        if (!isStored) {
-            localStorage.setItem("documentArray", JSON.stringify([]));
-        } else {
-            initialArray = JSON.parse(
-                localStorage.getItem("documentArray") as string
-            );
-        }
-        setDocumentArray(initialArray);
-    }, []);
-
-    useEffect(() => {
-        // if the document array changes, update the local storage
-        localStorage.setItem("documentArray", JSON.stringify(documentArray));
+        setLocalStorage("documentArray", documentArray);
     }, [documentArray]);
 
-    const [isReordering, setIsReordering] = useState<boolean>(false);
+    function setLocalStorage(key: string, value: any) {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+            console.log("set local storage to ", value);
+        } catch (e) {
+            // catch possible errors:
+            // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+        }
+    }
+
+    function getLocalStorage(key: string, initialValue: []) {
+        try {
+            const value = window.localStorage.getItem(key);
+            return value ? JSON.parse(value) : initialValue;
+        } catch (e) {
+            // if error, return initial value
+            return initialValue;
+        }
+    }
+
     return (
         <AppContext.Provider
             value={{

@@ -13,16 +13,36 @@ import ReactPDF, {
 import DraggableContainer from "@/components/editor/draggable-section-container/DraggableContainer";
 
 type BasicProps = {
-    document: any;
     updateDocument: any;
+    index: number;
+    resumeId: string;
 };
 
-const Basic = ({ document, updateDocument }: BasicProps) => {
+const Basic = ({ updateDocument, index, resumeId }: BasicProps) => {
+    const { documentArray } = useAppContext();
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(16);
+    const [document, setDocument] = useState(
+        documentArray.find((document) => document.id === resumeId)
+    );
+    if (!document) return <p>loading...</p>;
+    useEffect(() => {
+        const updatedDocument = documentArray.find(
+            (document) => document.id === resumeId
+        );
+        if (!updatedDocument) return;
+        setDocument(updatedDocument);
+        setOrderArray(
+            updatedDocument.information.sectionOrder[
+                updatedDocument.currentPage - 1
+            ]
+        );
+    }, [documentArray]);
+    console.log(document);
+
     const [orderArray, setOrderArray] = useState(
-        document.information.sectionOrder[document.currentPage - 1]
+        document?.information.sectionOrder[document.currentPage - 1]
     );
 
     useEffect(() => {
