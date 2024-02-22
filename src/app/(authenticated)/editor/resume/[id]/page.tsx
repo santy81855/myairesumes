@@ -23,7 +23,7 @@ const Page = async ({
 
     return (
         <main className={styles.main}>
-            <PageUtilBar resumeId={id} />
+            <PageUtilBar documentId={id} />
             <DocumentContainer document={resume} />
         </main>
     );

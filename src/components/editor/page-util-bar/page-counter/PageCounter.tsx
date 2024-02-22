@@ -11,17 +11,19 @@ import {
 import { updateDocumentArray } from "@/lib/document";
 
 type PageCounterProps = {
-    resumeId: string;
+    documentId: string;
 };
 
-const PageCounter = ({ resumeId }: PageCounterProps) => {
+const PageCounter = ({ documentId }: PageCounterProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const [document, setDocument] = useState(
-        documentArray.find((document) => document.id === resumeId)
+        documentArray.find((document) => document.id === documentId)
     );
 
     useEffect(() => {
-        setDocument(documentArray.find((document) => document.id === resumeId));
+        setDocument(
+            documentArray.find((document) => document.id === documentId)
+        );
     }, [documentArray]);
 
     const handleAddPage = () => {

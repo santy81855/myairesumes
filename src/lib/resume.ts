@@ -8,7 +8,7 @@ export const getResume = async (userId: string, resumeId: string) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            next: { tags: ["currentResume"] },
+            //next: { tags: ["currentResume"] },
         }
     );
     if (!response.ok) {

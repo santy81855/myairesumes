@@ -8,13 +8,15 @@ import { useAppContext } from "@/app/providers";
 import { updateDocumentArray } from "@/lib/document";
 
 type PageUtilBarProps = {
-    resumeId: string;
+    documentId: string;
 };
-const PageUtilBar = ({ resumeId }: PageUtilBarProps) => {
+const PageUtilBar = ({ documentId }: PageUtilBarProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const [document, setDocument] = useState<any>(null);
     useEffect(() => {
-        setDocument(documentArray.find((document) => document.id === resumeId));
+        setDocument(
+            documentArray.find((document) => document.id === documentId)
+        );
     }, [documentArray]);
 
     const handleDeletePage = () => {
@@ -56,7 +58,7 @@ const PageUtilBar = ({ resumeId }: PageUtilBarProps) => {
                                 {trashIcon}
                             </button>
                         )}
-                        <PageCounter resumeId={resumeId} />
+                        <PageCounter documentId={documentId} />
                     </section>
                 </>
             )}

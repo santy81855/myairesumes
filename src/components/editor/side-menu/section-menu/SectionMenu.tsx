@@ -99,7 +99,7 @@ const StyleMenu = () => {
                             <motion.section
                                 className={styles.pageFunctionContainer}
                             >
-                                <PageCounter resumeId={params.id as string} />
+                                <PageCounter documentId={params.id as string} />
                             </motion.section>
                             <motion.div
                                 className={styles.horizontalLine}

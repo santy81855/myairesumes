@@ -13,7 +13,8 @@ type DocumentContainerProps = {
 
 const DocumentContainer = ({ document }: DocumentContainerProps) => {
     const id = document.id;
-    const { documentArray, setDocumentArray } = useAppContext();
+    const { documentArray, setDocumentArray, isDocumentLoading } =
+        useAppContext();
     const [currentDocument, setCurrentDocument] = useState<any>(null);
 
     useEffect(() => {
@@ -56,6 +57,7 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
     return (
         <section className={styles.documentContainer}>
             <section className={styles.document}>
+                {isDocumentLoading && <LoadingScreen />}
                 {!currentDocument && <LoadingScreen />}
                 {currentDocument && (
                     <DndProvider backend={HTML5Backend}>

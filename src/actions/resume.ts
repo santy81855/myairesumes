@@ -54,3 +54,34 @@ export const createResume = async (formData: any) => {
     revalidateTag("currentUser");
     return redirect(`/editor/resume/${resume.id}`);
 };
+
+export const updateResume = async (formData: any) => {
+    "use server";
+    // get the current user
+    const { user } = await validateRequest();
+    if (!user) {
+        return redirect("/sign-in");
+    }
+    // get the formData information
+    const document = JSON.parse(formData.get("document"));
+    console.log(document);
+    const id = document.id;
+    // update the resume
+    const updatedResume = await prisma.resume.update({
+        where: {
+            id,
+        },
+        data: {
+            information: document.information,
+        },
+    });
+    if (!updatedResume) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    // revalidateTag("currentResume");
+    return {
+        success: true,
+    };
+};
