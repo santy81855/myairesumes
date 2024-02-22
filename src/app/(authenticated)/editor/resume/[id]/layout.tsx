@@ -16,6 +16,7 @@ import { getResume } from "@/lib/resume";
 import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { ResumeContext } from "@/app/providers";
+import AddSectionModal from "@/components/editor/add-section-modal/AddSectionModal";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Editor",
@@ -38,8 +39,11 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body className={poppins.className}>
-                <Navbar style={{ backgroundColor: "black", color: "white" }} />
                 <ResumeContext>
+                    <AddSectionModal />
+                    <Navbar
+                        style={{ backgroundColor: "black", color: "white" }}
+                    />
                     <section className={styles.rowContainer}>
                         <SideMenu />
                         <section className={styles.columnContainer}>

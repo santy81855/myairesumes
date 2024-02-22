@@ -5,6 +5,7 @@ import { getResume } from "@/lib/resume";
 
 import PageUtilBar from "@/components/editor/page-util-bar/PageUtilBar";
 import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
+import AddSectionModal from "@/components/editor/add-section-modal/AddSectionModal";
 
 const Page = async ({
     params,
@@ -23,6 +24,7 @@ const Page = async ({
 
     return (
         <main className={styles.main}>
+            <AddSectionModal />
             <PageUtilBar documentId={id} />
             <DocumentContainer document={resume} />
         </main>

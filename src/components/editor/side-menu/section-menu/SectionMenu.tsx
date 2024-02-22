@@ -14,7 +14,12 @@ import PageCounter from "../../page-util-bar/page-counter/PageCounter";
 import Page from "@/app/pricing/page";
 
 const StyleMenu = () => {
-    const { documentArray, setDocumentArray } = useAppContext();
+    const {
+        documentArray,
+        setDocumentArray,
+        showComponentModal,
+        setShowComponentModal,
+    } = useAppContext();
     const [clickedIndex, setClickedIndex] = useState<number | null>(null);
     const params = useParams();
     const [document, setDocument] = useState<any>(null);
@@ -25,7 +30,11 @@ const StyleMenu = () => {
     }, [documentArray]);
 
     const handleAddSectionClick = (index: number) => {
-        setClickedIndex(index);
+        //setClickedIndex(index);
+        setShowComponentModal({
+            ...showComponentModal,
+            [params.id as string]: index,
+        });
     };
 
     const sectionMenuClicked = (e: any) => {

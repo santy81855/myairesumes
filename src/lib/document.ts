@@ -10,10 +10,54 @@ export const updateDocumentArray = (updatedDocument: any, array: any) => {
     return newDocumentArray;
 };
 
+/*
+    const getSectionDownload = (id: string) => {
+        switch (id) {
+            case "namePositionVertical":
+                return namePositionSectionVertical;
+            case "name":
+                return nameSection;
+            case "position":
+                return positionSection;
+            case "contact":
+                return contactSection;
+            case "contactEmailPhoneWebsite":
+                return contactEmailPhoneWebsiteSection;
+            case "contactEmailPhone":
+                return contactEmailPhoneSection;
+            case "contactEmailWebsite":
+                return contactEmailWebsiteSection;
+            case "contactPhoneWebsite":
+                return contactPhoneWebsiteSection;
+            case "summary":
+                return summarySection;
+            case "skills":
+                return skillSection;
+            case "experience":
+                return experienceSection;
+            case "education":
+                return educationSection;
+            case "languages":
+                return languageSection;
+            case "interests":
+                return interestSection;
+            case "projects":
+                return projectSection;
+            default:
+                return null;
+        }
+    };
+*/
+
 export const allSections = [
+    "namePositionVertical",
     "name",
     "position",
     "contact",
+    "contactEmailPhoneWebsite",
+    "contactEmailPhone",
+    "contactEmailWebsite",
+    "contactPhoneWebsite",
     "summary",
     "experience",
     "education",
@@ -21,7 +65,6 @@ export const allSections = [
     "languages",
     "interests",
     "projects",
-    "namePositionVertical",
 ];
 
 export const getReadableSectionName = (section: string) => {
@@ -32,6 +75,14 @@ export const getReadableSectionName = (section: string) => {
             return "Position";
         case "contact":
             return "Contact";
+        case "contactEmailPhoneWebsite":
+            return "Contact: Email, Phone, Website";
+        case "contactEmailPhone":
+            return "Contact: Email, Phone";
+        case "contactEmailWebsite":
+            return "Contact: Email, Website";
+        case "contactPhoneWebsite":
+            return "Contact: Phone, Website";
         case "summary":
             return "Summary";
         case "experience":
@@ -51,4 +102,30 @@ export const getReadableSectionName = (section: string) => {
         default:
             return "";
     }
+};
+
+export const sectionKeywords = {
+    name: ["name", "first", "last"],
+    position: ["position", "job", "title"],
+    contact: ["contact", "email", "phone", "website", "information"],
+    contactEmailPhoneWebsite: ["contact", "email", "phone", "website"],
+    contactEmailPhone: ["contact", "email", "phone"],
+    contactEmailWebsite: ["contact", "email", "website"],
+    contactPhoneWebsite: ["contact", "phone", "website"],
+    summary: ["summary", "description", "about", "objective", "bio", "me"],
+    experience: [
+        "experience",
+        "work",
+        "job",
+        "career",
+        "professional",
+        "employment",
+        "history",
+    ],
+    education: ["education", "school", "degree", "academic", "history"],
+    skills: ["skills", "skill"],
+    languages: ["languages", "language"],
+    interests: ["interests", "interest", "hobbies", "hobby"],
+    projects: ["projects", "project", "portfolio", "work", "assignments"],
+    namePositionVertical: ["name", "position", "job", "title", "first", "last"],
 };

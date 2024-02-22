@@ -16,15 +16,15 @@ const SectionComponents = ({
     document,
     font,
     fontSize,
-    margin,
     orderArray,
+    margin,
     setOrderArray,
 }: {
     document: any;
     font: string;
     fontSize: number;
-    margin: number;
     orderArray: string[];
+    margin?: number;
     setOrderArray?: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
     const { documentArray, setDocumentArray } = useAppContext();
@@ -202,6 +202,7 @@ const SectionComponents = ({
 
     const moveSection = (dragIndex: number, hoverIndex: number) => {
         if (!setOrderArray) return;
+        if (!orderArray) return;
         // Create a copy of the orderArray
         const newOrderArray = [...orderArray];
 
@@ -252,6 +253,30 @@ const SectionComponents = ({
                 return (
                     <SectionContainerEditor key={id}>
                         {contactSection}
+                    </SectionContainerEditor>
+                );
+            case "contactEmailPhoneWebsite":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {contactEmailPhoneWebsiteSection}
+                    </SectionContainerEditor>
+                );
+            case "contactEmailPhone":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {contactEmailPhoneSection}
+                    </SectionContainerEditor>
+                );
+            case "contactEmailWebsite":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {contactEmailWebsiteSection}
+                    </SectionContainerEditor>
+                );
+            case "contactPhoneWebsite":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {contactPhoneWebsiteSection}
                     </SectionContainerEditor>
                 );
             case "summary":
@@ -311,6 +336,14 @@ const SectionComponents = ({
                 return positionSection;
             case "contact":
                 return contactSection;
+            case "contactEmailPhoneWebsite":
+                return contactEmailPhoneWebsiteSection;
+            case "contactEmailPhone":
+                return contactEmailPhoneSection;
+            case "contactEmailWebsite":
+                return contactEmailWebsiteSection;
+            case "contactPhoneWebsite":
+                return contactPhoneWebsiteSection;
             case "summary":
                 return summarySection;
             case "skills":
@@ -367,6 +400,66 @@ const SectionComponents = ({
                     {document.information.contactInfo.email}
                 </Text>
                 <Text style={styles.contact}>|</Text>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.phone}
+                </Text>
+                <Text style={styles.contact}>|</Text>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.website}
+                </Text>
+            </View>
+        </View>
+    );
+
+    const contactEmailPhoneWebsiteSection = (
+        <View style={styles.sectionContainer}>
+            <View style={styles.rowContainer}>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.email}
+                </Text>
+                <Text style={styles.contact}>|</Text>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.phone}
+                </Text>
+                <Text style={styles.contact}>|</Text>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.website}
+                </Text>
+            </View>
+        </View>
+    );
+
+    const contactEmailPhoneSection = (
+        <View style={styles.sectionContainer}>
+            <View style={styles.rowContainer}>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.email}
+                </Text>
+                <Text style={styles.contact}>|</Text>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.phone}
+                </Text>
+            </View>
+        </View>
+    );
+
+    const contactEmailWebsiteSection = (
+        <View style={styles.sectionContainer}>
+            <View style={styles.rowContainer}>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.email}
+                </Text>
+                <Text style={styles.contact}>|</Text>
+                <Text style={styles.contact}>
+                    {document.information.contactInfo.website}
+                </Text>
+            </View>
+        </View>
+    );
+
+    const contactPhoneWebsiteSection = (
+        <View style={styles.sectionContainer}>
+            <View style={styles.rowContainer}>
                 <Text style={styles.contact}>
                     {document.information.contactInfo.phone}
                 </Text>

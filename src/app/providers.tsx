@@ -15,6 +15,8 @@ type AppContextType = {
     setIsReordering: React.Dispatch<boolean>;
     isDocumentLoading: boolean;
     setIsDocumentLoading: React.Dispatch<boolean>;
+    showComponentModal: Record<string, any>;
+    setShowComponentModal: React.Dispatch<Record<string, any>>;
 };
 
 const AppContext = createContext({} as AppContextType);
@@ -25,6 +27,9 @@ export const ResumeContext = ({ children }: { children: React.ReactNode }) => {
     );
     const [isReordering, setIsReordering] = useState<boolean>(false);
     const [isDocumentLoading, setIsDocumentLoading] = useState<boolean>(false);
+    const [showComponentModal, setShowComponentModal] = useState<
+        Record<string, any>
+    >({});
 
     useEffect(() => {
         setLocalStorage("documentArray", documentArray);
@@ -58,6 +63,8 @@ export const ResumeContext = ({ children }: { children: React.ReactNode }) => {
                 setDocumentArray,
                 isDocumentLoading,
                 setIsDocumentLoading,
+                showComponentModal,
+                setShowComponentModal,
             }}
         >
             {children}
