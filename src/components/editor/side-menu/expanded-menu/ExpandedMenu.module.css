@@ -22,3 +22,23 @@
     padding-inline: var(--padding-inline-medium);
     gap: var(--padding-block-x2large);
 }
+
+.closeTab {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -63px;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%) rotate(90deg);
+    width: 90px; /* Width of the trapezoid */
+    height: 35px;
+    border-left: #303045 solid 1px;
+    border-right: #303045 solid 1px;
+    border-top: #303045 solid 1px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}

@@ -2,7 +2,8 @@
 import styles from "./TitleBar.module.css";
 import { downloadIcon, saveIcon } from "@/components/icons/iconSVG";
 import BasicDownload from "@/components/resume-templates/basic/BasicDownload";
-import Spinner from "@/components/loaders/Spinner/Spinner";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import PDFDownloadLink dynamically to avoid SSR
 import dynamic from "next/dynamic";
 const PDFDownloadLink = dynamic(
@@ -37,10 +38,10 @@ const TitleBar = () => {
         formData.append("document", JSON.stringify(document));
         const response = await updateResume(formData);
         if (response.error) {
+            toast.error("Error saving document.");
             setIsDocumentLoading(false);
-            console.log("errer");
         } else {
-            console.log("success");
+            toast.success("Document saved successfully.");
             setIsDocumentLoading(false);
         }
     };
@@ -61,12 +62,11 @@ const TitleBar = () => {
                             <button type="submit">{saveIcon}</button>
                         </form>
                         <div className={styles.iconContainer} title="download">
+                            {downloadIcon}
                             <PDFDownloadLink
                                 document={<BasicDownload document={document} />}
                                 fileName={`${document.information.documentName}.pdf`}
-                            >
-                                {downloadIcon}
-                            </PDFDownloadLink>
+                            ></PDFDownloadLink>
                         </div>
                     </div>
                 </>

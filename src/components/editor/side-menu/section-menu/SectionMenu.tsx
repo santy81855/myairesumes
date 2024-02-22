@@ -94,18 +94,11 @@ const StyleMenu = () => {
             </motion.p>
             {document && (
                 <>
-                    {document.information.numPages > 1 && (
-                        <>
-                            <motion.section
-                                className={styles.pageFunctionContainer}
-                            >
-                                <PageCounter documentId={params.id as string} />
-                            </motion.section>
-                            <motion.div
-                                className={styles.horizontalLine}
-                            ></motion.div>
-                        </>
-                    )}
+                    <motion.section className={styles.pageFunctionContainer}>
+                        <PageCounter documentId={params.id as string} />
+                    </motion.section>
+                    <motion.div className={styles.horizontalLine}></motion.div>
+
                     <motion.section className={styles.sectionContainer}>
                         {clickedIndex === 0 ? (
                             <motion.select

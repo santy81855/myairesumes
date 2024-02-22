@@ -64,7 +64,6 @@ export const updateResume = async (formData: any) => {
     }
     // get the formData information
     const document = JSON.parse(formData.get("document"));
-    console.log(document);
     const id = document.id;
     // update the resume
     const updatedResume = await prisma.resume.update({

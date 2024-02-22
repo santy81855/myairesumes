@@ -311,6 +311,15 @@ export const saveIcon = (
     </svg>
 );
 
+export const trapezoid = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 48">
+        <path
+            strokeWidth={4}
+            d="M31.794 8H16.206a3 3 0 0 0-2.864 2.105l-8.125 26A3 3 0 0 0 8.081 40h31.838a3 3 0 0 0 2.864-3.895l-8.125-26A3 3 0 0 0 31.794 8Z"
+        ></path>
+    </svg>
+);
+
 export const magicResumeLogo = (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
         <g fillRule="evenodd" stroke="none">
