@@ -10,45 +10,6 @@ export const updateDocumentArray = (updatedDocument: any, array: any) => {
     return newDocumentArray;
 };
 
-/*
-    const getSectionDownload = (id: string) => {
-        switch (id) {
-            case "namePositionVertical":
-                return namePositionSectionVertical;
-            case "name":
-                return nameSection;
-            case "position":
-                return positionSection;
-            case "contact":
-                return contactSection;
-            case "contactEmailPhoneWebsite":
-                return contactEmailPhoneWebsiteSection;
-            case "contactEmailPhone":
-                return contactEmailPhoneSection;
-            case "contactEmailWebsite":
-                return contactEmailWebsiteSection;
-            case "contactPhoneWebsite":
-                return contactPhoneWebsiteSection;
-            case "summary":
-                return summarySection;
-            case "skills":
-                return skillSection;
-            case "experience":
-                return experienceSection;
-            case "education":
-                return educationSection;
-            case "languages":
-                return languageSection;
-            case "interests":
-                return interestSection;
-            case "projects":
-                return projectSection;
-            default:
-                return null;
-        }
-    };
-*/
-
 export const allSections = [
     "namePositionVertical",
     "name",
@@ -62,6 +23,7 @@ export const allSections = [
     "experience",
     "education",
     "skills",
+    "shortSkills",
     "languages",
     "interests",
     "projects",
@@ -69,6 +31,8 @@ export const allSections = [
 
 export const getReadableSectionName = (section: string) => {
     switch (section) {
+        case "namePositionVertical":
+            return "Name & Position";
         case "name":
             return "Name";
         case "position":
@@ -91,41 +55,127 @@ export const getReadableSectionName = (section: string) => {
             return "Education";
         case "skills":
             return "Skills";
+        case "shortSkills":
+            return "Short Skills";
         case "languages":
             return "Languages";
         case "interests":
             return "Interests";
         case "projects":
             return "Projects";
-        case "namePositionVertical":
-            return "Name & Position";
         default:
             return "";
     }
 };
 
-export const sectionKeywords = {
-    name: ["name", "first", "last"],
-    position: ["position", "job", "title"],
-    contact: ["contact", "email", "phone", "website", "information"],
-    contactEmailPhoneWebsite: ["contact", "email", "phone", "website"],
-    contactEmailPhone: ["contact", "email", "phone"],
-    contactEmailWebsite: ["contact", "email", "website"],
-    contactPhoneWebsite: ["contact", "phone", "website"],
-    summary: ["summary", "description", "about", "objective", "bio", "me"],
-    experience: [
-        "experience",
-        "work",
-        "job",
-        "career",
-        "professional",
-        "employment",
-        "history",
-    ],
-    education: ["education", "school", "degree", "academic", "history"],
-    skills: ["skills", "skill"],
-    languages: ["languages", "language"],
-    interests: ["interests", "interest", "hobbies", "hobby"],
-    projects: ["projects", "project", "portfolio", "work", "assignments"],
-    namePositionVertical: ["name", "position", "job", "title", "first", "last"],
-};
+/**
+ * sectionInformationArray is an array of objects that contain the section name, section id, section description, and an array of the key words that are associated with the section.
+ */
+
+export const sectionInformationArray = [
+    {
+        id: "name",
+        name: "Bold Name",
+        description: "Your full name",
+        keyWords: ["name", "first", "last"],
+    },
+    {
+        id: "position",
+        name: "Position",
+        description: "Your job title",
+        keyWords: ["position", "job", "title"],
+    },
+    {
+        id: "contact",
+        name: "Contact",
+        description: "Your contact information",
+        keyWords: ["contact", "email", "phone", "website", "information"],
+    },
+    {
+        id: "contactEmailPhoneWebsite",
+        name: "Contact: Email, Phone, Website",
+        description: "Your email, phone number, and website",
+        keyWords: ["contact", "email", "phone", "website"],
+    },
+    {
+        id: "contactEmailPhone",
+        name: "Contact: Email, Phone",
+        description: "Your email and phone number",
+        keyWords: ["contact", "email", "phone"],
+    },
+    {
+        id: "contactEmailWebsite",
+        name: "Contact: Email, Website",
+        description: "Your email and website",
+        keyWords: ["contact", "email", "website"],
+    },
+    {
+        id: "contactPhoneWebsite",
+        name: "Contact: Phone, Website",
+        description: "Your phone number and website",
+        keyWords: ["contact", "phone", "website"],
+    },
+    {
+        id: "summary",
+        name: "Summary",
+        description:
+            "A brief summary of yourself, like a bio or objective statement.",
+        keyWords: ["summary", "description", "about", "objective", "bio", "me"],
+    },
+    {
+        id: "experience",
+        name: "Experience",
+        description: "Your previous employment history.",
+        keyWords: [
+            "experience",
+            "work",
+            "job",
+            "career",
+            "professional",
+            "employment",
+            "history",
+        ],
+    },
+    {
+        id: "education",
+        name: "Education",
+        description: "Your academic history.",
+        keyWords: ["education", "school", "degree", "academic", "history"],
+    },
+    {
+        id: "skills",
+        name: "Skills",
+        description: "Your skills in a bullet point list.",
+        keyWords: ["skills", "skill"],
+    },
+    {
+        id: "shortSkills",
+        name: "Short Skills",
+        description: "Your skills in a comma separated list.",
+        keyWords: ["skills", "skill", "short"],
+    },
+    {
+        id: "languages",
+        name: "Languages",
+        description: "Your languages in a comma separated list.",
+        keyWords: ["languages", "language"],
+    },
+    {
+        id: "interests",
+        name: "Interests",
+        description: "Your interests in a comma separated list.",
+        keyWords: ["interests", "interest", "hobbies", "hobby"],
+    },
+    {
+        id: "projects",
+        name: "Projects",
+        description: "Your projects",
+        keyWords: ["projects", "project", "portfolio", "work", "assignments"],
+    },
+    {
+        id: "namePositionVertical",
+        name: "Name & Position",
+        description: "Your full name and job title together.",
+        keyWords: ["name", "position", "job", "title", "first", "last"],
+    },
+];

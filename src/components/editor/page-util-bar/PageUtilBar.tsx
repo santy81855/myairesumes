@@ -2,7 +2,7 @@
 import styles from "./PageUtilBar.module.css";
 import ReorderButton from "./reorder-button/ReorderButton";
 import PageCounter from "./page-counter/PageCounter";
-import { trashIcon } from "@/components/icons/iconSVG";
+import { minusIcon, plusIcon } from "@/components/icons/iconSVG";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/app/providers";
 import { updateDocumentArray } from "@/lib/document";
@@ -18,6 +18,24 @@ const PageUtilBar = ({ documentId }: PageUtilBarProps) => {
             documentArray.find((document) => document.id === documentId)
         );
     }, [documentArray]);
+
+    const handleAddPage = () => {
+        if (!document) return;
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                sectionOrder: [...document.information.sectionOrder, []],
+                numPages: document.information.numPages + 1,
+            },
+            currentPage: document.currentPage + 1,
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+    };
 
     const handleDeletePage = () => {
         if (!document) return;
@@ -49,15 +67,24 @@ const PageUtilBar = ({ documentId }: PageUtilBarProps) => {
                 <>
                     <ReorderButton />
                     <section className={styles.pageFunctionContainer}>
-                        {document.information.numPages > 1 && (
+                        <section className={styles.functionButtonContainer}>
+                            {document.information.numPages > 1 && (
+                                <button
+                                    title="delete page"
+                                    className={styles.deletePageButton}
+                                    onClick={handleDeletePage}
+                                >
+                                    {minusIcon}
+                                </button>
+                            )}
                             <button
-                                title="delete page"
-                                className={styles.deletePageButton}
-                                onClick={handleDeletePage}
+                                title="add page"
+                                className={styles.addPageButton}
+                                onClick={handleAddPage}
                             >
-                                {trashIcon}
+                                {plusIcon}
                             </button>
-                        )}
+                        </section>
                         <PageCounter documentId={documentId} />
                     </section>
                 </>

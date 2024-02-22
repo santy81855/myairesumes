@@ -291,6 +291,12 @@ const SectionComponents = ({
                         {skillSection}
                     </SectionContainerEditor>
                 );
+            case "shortSkills":
+                return (
+                    <SectionContainerEditor key={id}>
+                        {shortSkillSection}
+                    </SectionContainerEditor>
+                );
             case "experience":
                 return (
                     <SectionContainerEditor key={id}>
@@ -348,6 +354,8 @@ const SectionComponents = ({
                 return summarySection;
             case "skills":
                 return skillSection;
+            case "shortSkills":
+                return shortSkillSection;
             case "experience":
                 return experienceSection;
             case "education":
@@ -490,6 +498,18 @@ const SectionComponents = ({
 
     const skillSection = (
         <View style={styles.sectionContainer} id="skillsPdf">
+            <Text style={styles.sectionTitle}>Skills</Text>
+            <View style={styles.horizontalLine}></View>
+            <Text style={styles.contentText}>
+                Leadership, Communication, Teamwork, Problem-solving, Time
+                management, Adaptability, Creativity, Technical proficiency,
+                Analytical skills, Customer service.
+            </Text>
+        </View>
+    );
+
+    const shortSkillSection = (
+        <View style={styles.sectionContainer} id="shorkSkillsPdf">
             <Text style={styles.sectionTitle}>Skills</Text>
             <View style={styles.horizontalLine}></View>
             <Text style={styles.contentText}>

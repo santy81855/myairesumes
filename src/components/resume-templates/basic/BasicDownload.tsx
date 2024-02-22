@@ -14,6 +14,7 @@ type DocumentProps = {
 };
 
 const BasicDownload = ({ document }: DocumentProps) => {
+    console.log(document);
     const hyphenationCallback = (word: string) => {
         // Return word parts in an array
         return [word];

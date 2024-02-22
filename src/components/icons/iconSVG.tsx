@@ -320,6 +320,24 @@ export const trapezoid = (
     </svg>
 );
 
+export const circledXIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+        <g fill="none" strokeLinejoin="round" strokeWidth={4}>
+            <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"></path>
+            <path
+                strokeLinecap="round"
+                d="M29.657 18.343L18.343 29.657m0-11.314l11.314 11.314"
+            ></path>
+        </g>
+    </svg>
+);
+
+export const minusIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M18 12.998H6a1 1 0 0 1 0-2h12a1 1 0 0 1 0 2"></path>
+    </svg>
+);
+
 export const magicResumeLogo = (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
         <g fillRule="evenodd" stroke="none">

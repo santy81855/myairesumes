@@ -116,7 +116,7 @@ const Basic = ({ index, resumeId }: BasicProps) => {
     });
 
     return (
-        <Document title="Resume">
+        <Document>
             <Page wrap={false} style={styles.page}>
                 <View
                     wrap={false}

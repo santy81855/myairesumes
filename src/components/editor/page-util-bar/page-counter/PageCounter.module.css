@@ -11,7 +11,7 @@
 
 .pageCounter p {
     color: white;
-    font-size: var(--font-size-small);
+    font-size: 0.6rem;
     margin: 0;
     padding: 0;
 }
@@ -19,8 +19,6 @@
 .pageChanger {
     background-color: transparent;
     border: none;
-    width: 15px;
-    height: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,8 +28,8 @@
 .pageChanger svg {
     stroke: white;
     fill: white;
-    width: 100%;
-    height: 100%;
+    width: 15px;
+    height: 15px;
 }
 
 .pageChanger svg:hover {
@@ -42,8 +40,6 @@
 .addPageButton {
     background-color: transparent;
     border: none;
-    width: 15px;
-    height: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,8 +49,8 @@
 .addPageButton svg {
     stroke: white;
     fill: white;
-    width: 100%;
-    height: 100%;
+    width: 15px;
+    height: 15px;
 }
 
 .addPageButton svg:hover {

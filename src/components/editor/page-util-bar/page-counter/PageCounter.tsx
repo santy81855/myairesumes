@@ -2,12 +2,7 @@
 import styles from "./PageCounter.module.css";
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/app/providers";
-import {
-    backArrow,
-    forwardArrow,
-    plusIcon,
-    trashIcon,
-} from "@/components/icons/iconSVG";
+import { backArrow, forwardArrow } from "@/components/icons/iconSVG";
 import { updateDocumentArray } from "@/lib/document";
 
 type PageCounterProps = {
@@ -25,27 +20,6 @@ const PageCounter = ({ documentId }: PageCounterProps) => {
             documentArray.find((document) => document.id === documentId)
         );
     }, [documentArray]);
-
-    const handleAddPage = () => {
-        if (!document) return;
-        const updatedDocument = {
-            ...document,
-            information: {
-                ...document.information,
-                sectionOrder: [
-                    ...document.information.sectionOrder,
-                    ["summary", "education"],
-                ],
-                numPages: document.information.numPages + 1,
-            },
-            currentPage: document.currentPage + 1,
-        };
-        const newDocumentArray = updateDocumentArray(
-            updatedDocument,
-            documentArray
-        );
-        setDocumentArray(newDocumentArray);
-    };
 
     const handleBack = () => {
         if (!document) return;
@@ -81,6 +55,9 @@ const PageCounter = ({ documentId }: PageCounterProps) => {
             {document ? (
                 <>
                     <p>Page</p>
+                    <p>{document.currentPage}</p>
+                    <p>of</p>
+                    <p>{document.information.numPages}</p>
                     {document.currentPage > 1 && (
                         <button
                             title="previous"
@@ -90,9 +67,6 @@ const PageCounter = ({ documentId }: PageCounterProps) => {
                             {backArrow}
                         </button>
                     )}
-                    <p>{document.currentPage}</p>
-                    <p>of</p>
-                    <p>{document.information.numPages}</p>
                     {document.currentPage < document.information.numPages && (
                         <button
                             title="next"
@@ -102,13 +76,6 @@ const PageCounter = ({ documentId }: PageCounterProps) => {
                             {forwardArrow}
                         </button>
                     )}
-                    <button
-                        title="add page"
-                        className={styles.addPageButton}
-                        onClick={handleAddPage}
-                    >
-                        {plusIcon}
-                    </button>
                 </>
             ) : (
                 <p>Page ...</p>

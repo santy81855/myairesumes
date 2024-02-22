@@ -61,13 +61,24 @@ const TitleBar = () => {
                         >
                             <button type="submit">{saveIcon}</button>
                         </form>
-                        <div className={styles.iconContainer} title="download">
-                            {downloadIcon}
-                            <PDFDownloadLink
-                                document={<BasicDownload document={document} />}
-                                fileName={`${document.information.documentName}.pdf`}
-                            ></PDFDownloadLink>
-                        </div>
+
+                        <PDFDownloadLink
+                            document={<BasicDownload document={document} />}
+                            fileName={`${document.information.documentName}.pdf`}
+                        >
+                            {({ blob, url, loading, error }) =>
+                                loading ? (
+                                    ""
+                                ) : (
+                                    <div
+                                        className={styles.iconContainer}
+                                        title="download"
+                                    >
+                                        {downloadIcon}
+                                    </div>
+                                )
+                            }
+                        </PDFDownloadLink>
                     </div>
                 </>
             )}
