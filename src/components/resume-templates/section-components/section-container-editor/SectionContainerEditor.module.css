@@ -2,13 +2,3 @@
     width: 100%;
     position: relative;
 }
-
-.addButton {
-    position: absolute;
-    left: -16px;
-    top: 0;
-    transform: translateY(50%);
-    width: 1em;
-    height: 1em;
-    background-color: red;
-}

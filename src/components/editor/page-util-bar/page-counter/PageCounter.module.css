@@ -1,6 +1,6 @@
 .pageCounter {
     display: flex;
-    gap: var(--gap-small);
+    gap: var(--gap-medium);
     align-items: center;
     justify-content: center;
     background-color: #7367ff;

@@ -47,7 +47,7 @@ export const initializeNewResume = (
             ? basicInfo.website
             : "https://example-website.com";
     const data = {
-        resumeName: name,
+        documentName: name,
         jobTitle: job,
         description,
         template: "basic",

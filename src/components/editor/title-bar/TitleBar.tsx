@@ -28,16 +28,20 @@ const TitleBar = () => {
     }, [documentArray]);
     return (
         <section className={styles.container}>
-            <p className={styles.title}>Resume Title</p>
             {document && (
-                <div className={styles.iconContainer}>
-                    <PDFDownloadLink
-                        document={<BasicDownload document={document} />}
-                        fileName={`${document.information.resumeName}.pdf`}
-                    >
-                        {downloadIcon}
-                    </PDFDownloadLink>
-                </div>
+                <>
+                    <p className={styles.title}>
+                        {document.information.documentName}
+                    </p>
+                    <div className={styles.iconContainer}>
+                        <PDFDownloadLink
+                            document={<BasicDownload document={document} />}
+                            fileName={`${document.information.documentName}.pdf`}
+                        >
+                            {downloadIcon}
+                        </PDFDownloadLink>
+                    </div>
+                </>
             )}
         </section>
     );

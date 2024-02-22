@@ -1,11 +1,13 @@
 .container {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: var(--padding-block-medium);
     justify-content: flex-start;
     align-items: center;
     position: relative;
+    overflow-y: auto;
 }
 
 .itemContainer {
@@ -22,6 +24,13 @@
     text-align: left;
 }
 
+.description {
+    font-size: var(--font-size-small);
+    color: white;
+    width: 100%;
+    text-align: left;
+}
+
 .item {
     width: 100%;
     display: flex;
@@ -33,4 +42,112 @@
     background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     cursor: context-menu;
+}
+
+.pageFunctionContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-block-start: var(--padding-block-large);
+}
+
+.sectionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.section {
+    width: 100%;
+    background-color: white;
+    padding: var(--padding-block-medium);
+    border-radius: var(--border-radius-xsmall);
+    position: relative;
+}
+
+.sectionText {
+    font-size: var(--font-size-small);
+    color: var(--text-color-rgb);
+    text-align: left;
+}
+
+.addSectionButton {
+    width: 60px;
+    height: 30px;
+    font-size: var(--font-size-medium);
+    background-color: #7467ff;
+    border-radius: var(--border-radius-xsmall);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block-start: -10px;
+    margin-block-end: -10px;
+    z-index: 1;
+}
+
+.addSectionButton:hover {
+    background-color: #5f52e6;
+}
+
+.sectionItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.horizontalLine {
+    width: 100%;
+    height: 1px;
+    background-color: white;
+    margin-block-start: var(--padding-block-small);
+    margin-block-end: var(--padding-block-small);
+}
+
+.dropdown {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-small);
+    padding-inline: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: context-menu;
+    margin-block: var(--padding-block-small);
+}
+
+.dropdown:hover {
+    background-color: #f2f2f2;
+}
+
+/* make it so that when an option is selected there is no added border */
+.dropdown:focus {
+    outline: none;
+}
+
+.deleteButton {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteButton svg {
+    width: 100%;
+    height: 100%;
+    stroke: rgb(255, 102, 102);
+    fill: rgb(255, 102, 102);
 }

@@ -293,6 +293,18 @@ export const trashIcon = (
     </svg>
 );
 
+export const sectionIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M21 8H3V4h18zm0 2H3v4h18zm0 6H3v4h18z"></path>
+    </svg>
+);
+
+export const cancelIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
+        <path d="m1115 1024l690 691l-90 90l-691-690l-691 690l-90-90l690-691l-690-691l90-90l691 690l691-690l90 90z"></path>
+    </svg>
+);
+
 export const magicResumeLogo = (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
         <g fillRule="evenodd" stroke="none">

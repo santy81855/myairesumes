@@ -5,7 +5,11 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { templateIcon, styleIcon, orderIcon } from "@/components/icons/iconSVG";
+import {
+    templateIcon,
+    styleIcon,
+    sectionIcon,
+} from "@/components/icons/iconSVG";
 import ExpandedMenu from "../expanded-menu/ExpandedMenu";
 import TemplateMenu from "../template-menu/TemplateMenu";
 import StyleMenu from "../style-menu/StyleMenu";
@@ -53,7 +57,7 @@ const Menu = () => {
                     onClick={() => toggleSection()}
                 >
                     <div className={styles.staticIconContainer}>
-                        {orderIcon}
+                        {sectionIcon}
                     </div>
                     <p className={styles.staticItemName}>Sections</p>
                 </section>
