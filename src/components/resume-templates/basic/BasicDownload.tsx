@@ -18,7 +18,6 @@ const BasicDownload = ({ document }: DocumentProps) => {
         // Return word parts in an array
         return [word];
     };
-    const verticalMargin = 11;
     const margin = 11;
     const fontSize = 11;
 
@@ -32,14 +31,14 @@ const BasicDownload = ({ document }: DocumentProps) => {
             height: "100%",
             paddingLeft: margin,
             paddingRight: margin,
-            paddingTop: verticalMargin,
+            paddingTop: margin,
             fontSize: fontSize,
             fontFamily: "Times-Roman",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: verticalMargin,
+            gap: margin,
         },
     });
 
@@ -60,7 +59,6 @@ const BasicDownload = ({ document }: DocumentProps) => {
                                     font="Times-Roman"
                                     fontSize={fontSize}
                                     margin={margin}
-                                    verticalMargin={verticalMargin}
                                     orderArray={array}
                                 />
                             </View>

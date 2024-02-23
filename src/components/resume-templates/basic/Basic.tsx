@@ -20,7 +20,6 @@ const Basic = ({ index, resumeId }: BasicProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
-    const [verticalMargin, setVerticalMargin] = useState(11);
     const [margin, setMargin] = useState(11);
     const [currentDocument, setCurrentDocument] = useState(
         documentArray.find((currentDocument) => currentDocument.id === resumeId)
@@ -53,8 +52,6 @@ const Basic = ({ index, resumeId }: BasicProps) => {
         setFontSize(size);
         let newMargin = 11 * (width / 610);
         setMargin(newMargin);
-        let newVerticalMargin = 11 * (height / 790.59);
-        setVerticalMargin(newVerticalMargin);
 
         // handle the text scaling
         function handleResize() {
@@ -66,8 +63,6 @@ const Basic = ({ index, resumeId }: BasicProps) => {
             //  do the same for the margin value, which should be 16px at 610px width
             let newMargin = 11 * (width / 610);
             setMargin(newMargin);
-            let newVerticalMargin = 11 * (height / 789.4);
-            setVerticalMargin(newVerticalMargin);
         }
 
         window.addEventListener("resize", handleResize);
@@ -107,14 +102,14 @@ const Basic = ({ index, resumeId }: BasicProps) => {
             height: "100%",
             paddingLeft: margin,
             paddingRight: margin,
-            paddingTop: verticalMargin,
+            paddingTop: margin,
             fontSize: fontSize,
             fontFamily: "Times-Roman",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: verticalMargin,
+            gap: margin,
         },
     });
 
@@ -131,7 +126,6 @@ const Basic = ({ index, resumeId }: BasicProps) => {
                         font={currentDocument.information.font}
                         fontSize={fontSize}
                         margin={margin}
-                        verticalMargin={verticalMargin}
                         orderArray={orderArray}
                         setOrderArray={setOrderArray}
                     />

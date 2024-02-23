@@ -12,8 +12,7 @@ export const SectionConfig = (
     document: any,
     fontSize: any,
     font: string,
-    margin: any,
-    verticalMargin?: any
+    margin: any
 ) => {
     const hyphenationCallback = (word: string) => {
         // Return word parts in an array
@@ -68,7 +67,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: verticalMargin / 4,
+            gap: margin / 4,
         },
         sectionTitle: {
             fontSize: fontSize * 1.3,
@@ -122,7 +121,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: verticalMargin / 12,
+            gap: margin / 12,
         },
         columnGroupLeft: {
             width: "100%",
@@ -130,7 +129,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            gap: verticalMargin / 12,
+            gap: margin / 12,
         },
         columnGroupRight: {
             width: "100%",
@@ -138,7 +137,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-end",
-            gap: verticalMargin / 12,
+            gap: margin / 12,
         },
         bullet: {
             width: fontSize / 4,
@@ -148,7 +147,7 @@ export const SectionConfig = (
         },
         horizontalLine: {
             width: "100%",
-            height: verticalMargin / 10,
+            height: margin / 10,
             backgroundColor: "black",
         },
         arrayContainer: {
@@ -157,7 +156,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: verticalMargin,
+            gap: margin,
         },
         arrayItem: {
             width: "100%",
@@ -165,7 +164,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            gap: verticalMargin / 2,
+            gap: margin / 2,
         },
         rowSpaceBetween: {
             width: "100%",
@@ -180,7 +179,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            gap: verticalMargin / 3,
+            gap: margin / 3,
         },
         bulletItem: {
             width: "100%",

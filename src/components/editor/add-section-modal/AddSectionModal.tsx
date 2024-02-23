@@ -25,7 +25,6 @@ const AddSectionModal = () => {
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(11);
     const [allSections, setAllSections] = useState<any>(null);
-    const [verticalMargin, setVerticalMargin] = useState(11);
 
     useEffect(() => {
         const template = templateRef.current as unknown as HTMLElement;
@@ -35,8 +34,6 @@ const AddSectionModal = () => {
         setFontSize(size);
         let newMargin = 11 * (width / 610);
         setMargin(newMargin);
-        let newVerticalMargin = 11 * (height / 790.59);
-        setVerticalMargin(newVerticalMargin);
 
         // handle the text scaling
         function handleResize() {
@@ -48,8 +45,6 @@ const AddSectionModal = () => {
             //  do the same for the margin value, which should be 16px at 610px width
             let newMargin = 11 * (width / 610);
             setMargin(newMargin);
-            let newVerticalMargin = 11 * (height / 790.59);
-            setVerticalMargin(newVerticalMargin);
         }
 
         window.addEventListener("resize", handleResize);
@@ -64,9 +59,9 @@ const AddSectionModal = () => {
         const temp = SectionConfig(
             documentArray.find((document) => document.id === params.id),
             null,
-            document.information.font,
-            margin,
-            verticalMargin
+            documentArray.find((document) => document.id === params.id)
+                ?.information.font,
+            margin
         );
         let sectionConfigArray = Object.entries(temp).map(([id, config]) => ({
             id,
@@ -224,7 +219,6 @@ const AddSectionModal = () => {
                                                 orderArray={[
                                                     result.id as string,
                                                 ]}
-                                                verticalMargin={verticalMargin}
                                                 margin={margin}
                                             />
                                         </div>
