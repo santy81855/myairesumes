@@ -18,7 +18,8 @@ const BasicDownload = ({ document }: DocumentProps) => {
         // Return word parts in an array
         return [word];
     };
-    const margin = 16;
+    const verticalMargin = 11;
+    const margin = 11;
     const fontSize = 11;
 
     Font.registerHyphenationCallback(hyphenationCallback);
@@ -31,14 +32,14 @@ const BasicDownload = ({ document }: DocumentProps) => {
             height: "100%",
             paddingLeft: margin,
             paddingRight: margin,
-            paddingTop: margin,
+            paddingTop: verticalMargin,
             fontSize: fontSize,
             fontFamily: "Times-Roman",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: fontSize,
+            gap: verticalMargin,
         },
     });
 
@@ -51,7 +52,7 @@ const BasicDownload = ({ document }: DocumentProps) => {
                             wrap={false}
                             key={index}
                             style={styles.page}
-                            size={[610, 790.59]}
+                            size={[610, 789.4]}
                         >
                             <View wrap={false} style={styles.pageContainer}>
                                 <SectionComponents
@@ -59,6 +60,7 @@ const BasicDownload = ({ document }: DocumentProps) => {
                                     font="Times-Roman"
                                     fontSize={fontSize}
                                     margin={margin}
+                                    verticalMargin={verticalMargin}
                                     orderArray={array}
                                 />
                             </View>

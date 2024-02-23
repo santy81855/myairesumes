@@ -20,17 +20,18 @@ const Basic = ({ index, resumeId }: BasicProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
-    const [margin, setMargin] = useState(16);
-    const [document, setDocument] = useState(
-        documentArray.find((document) => document.id === resumeId)
+    const [verticalMargin, setVerticalMargin] = useState(11);
+    const [margin, setMargin] = useState(11);
+    const [currentDocument, setCurrentDocument] = useState(
+        documentArray.find((currentDocument) => currentDocument.id === resumeId)
     );
-    if (!document) return <p>loading...</p>;
+    if (!currentDocument) return <p>loading...</p>;
     useEffect(() => {
         const updatedDocument = documentArray.find(
-            (document) => document.id === resumeId
+            (currentDocument) => currentDocument.id === resumeId
         );
         if (!updatedDocument) return;
-        setDocument(updatedDocument);
+        setCurrentDocument(updatedDocument);
         setOrderArray(
             updatedDocument.information.sectionOrder[
                 updatedDocument.currentPage - 1
@@ -39,7 +40,9 @@ const Basic = ({ index, resumeId }: BasicProps) => {
     }, [documentArray]);
 
     const [orderArray, setOrderArray] = useState(
-        document?.information.sectionOrder[document.currentPage - 1]
+        currentDocument?.information.sectionOrder[
+            currentDocument.currentPage - 1
+        ]
     );
 
     useEffect(() => {
@@ -48,8 +51,10 @@ const Basic = ({ index, resumeId }: BasicProps) => {
         const { width, height } = template.getBoundingClientRect();
         let size = 11 * (width / 610);
         setFontSize(size);
-        let newMargin = 16 * (width / 610);
+        let newMargin = 11 * (width / 610);
         setMargin(newMargin);
+        let newVerticalMargin = 11 * (height / 790.59);
+        setVerticalMargin(newVerticalMargin);
 
         // handle the text scaling
         function handleResize() {
@@ -59,8 +64,10 @@ const Basic = ({ index, resumeId }: BasicProps) => {
             let size = 11 * (width / 610);
             setFontSize(size);
             //  do the same for the margin value, which should be 16px at 610px width
-            let newMargin = 16 * (width / 610);
+            let newMargin = 11 * (width / 610);
             setMargin(newMargin);
+            let newVerticalMargin = 11 * (height / 789.4);
+            setVerticalMargin(newVerticalMargin);
         }
 
         window.addEventListener("resize", handleResize);
@@ -90,10 +97,6 @@ const Basic = ({ index, resumeId }: BasicProps) => {
 
     // Create styles
     const styles = StyleSheet.create({
-        document: {
-            width: "100%",
-            height: "100%",
-        },
         page: {
             width: "100%",
             height: "100%",
@@ -104,14 +107,14 @@ const Basic = ({ index, resumeId }: BasicProps) => {
             height: "100%",
             paddingLeft: margin,
             paddingRight: margin,
-            paddingTop: margin,
+            paddingTop: verticalMargin,
             fontSize: fontSize,
             fontFamily: "Times-Roman",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: fontSize,
+            gap: verticalMargin,
         },
     });
 
@@ -124,10 +127,11 @@ const Basic = ({ index, resumeId }: BasicProps) => {
                     ref={templateRef}
                 >
                     <SectionComponents
-                        document={document}
-                        font={document.information.font}
+                        document={currentDocument}
+                        font={currentDocument.information.font}
                         fontSize={fontSize}
                         margin={margin}
+                        verticalMargin={verticalMargin}
                         orderArray={orderArray}
                         setOrderArray={setOrderArray}
                     />

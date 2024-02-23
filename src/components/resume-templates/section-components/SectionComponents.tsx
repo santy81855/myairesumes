@@ -18,6 +18,7 @@ const SectionComponents = ({
     font,
     fontSize,
     orderArray,
+    verticalMargin,
     margin,
     setOrderArray,
 }: {
@@ -26,10 +27,18 @@ const SectionComponents = ({
     fontSize: number;
     orderArray: string[];
     margin?: number;
+    verticalMargin?: number;
     setOrderArray?: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
+    console.log("here");
     const { documentArray, setDocumentArray } = useAppContext();
-    const sectionConfig = SectionConfig(document, fontSize, font);
+    const sectionConfig = SectionConfig(
+        document,
+        fontSize,
+        font,
+        margin,
+        verticalMargin
+    );
 
     const moveSection = (dragIndex: number, hoverIndex: number) => {
         if (!setOrderArray) return;

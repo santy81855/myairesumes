@@ -1,6 +1,6 @@
 "use client";
 import styles from "./SectionMenu.module.css";
-import { circledXIcon } from "@/components/icons/iconSVG";
+import { circledXIcon, circledXFilledIcon } from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/app/providers";
@@ -97,7 +97,7 @@ const StyleMenu = () => {
                                             handleRemoveSectionClick(index);
                                         }}
                                     >
-                                        {circledXIcon}
+                                        {circledXFilledIcon}
                                     </motion.button>
                                     <motion.p className={styles.sectionText}>
                                         {allSections[section].name}

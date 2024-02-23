@@ -40,7 +40,8 @@ export const initializeNewResume = (
                       position: "Example Position",
                       startDate: "2020-01-01",
                       endDate: "2023-01-01",
-                      summary: "Example summary.",
+                      summary:
+                          "Experienced professional with a strong background in example industry. Proven track record of delivering high-quality results and exceeding expectations. Skilled in problem-solving, communication, and teamwork.",
                       currentEmployment: false,
                       bullets: [
                           "Example bullet 1.",
@@ -54,7 +55,8 @@ export const initializeNewResume = (
                       position: "Example Position 2",
                       startDate: "2023-01-01",
                       endDate: "Present",
-                      summary: "Example summary.",
+                      summary:
+                          "Experienced professional with a strong background in example industry. Proven track record of delivering high-quality results and exceeding expectations. Skilled in problem-solving, communication, and teamwork.",
                       currentEmployment: true,
                       bullets: [
                           "Example bullet 1.",
@@ -130,12 +132,12 @@ export const initializeNewResume = (
         lastName: last,
         sectionOrder: [
             [
-                "name",
-                "position",
+                "nameLargeBold",
+                "positionSmall",
                 "contactEmailPhoneWebsite",
                 "summary",
                 "experience",
-                "education",
+                "educationDetailed",
                 "skills",
                 "languages",
             ],
@@ -143,7 +145,8 @@ export const initializeNewResume = (
         numPages: 1,
         position: "Example Position",
         imageUrl,
-        summary: "Example summary.",
+        summary:
+            "At Example Company, excelled in the role of Example Position, leveraging innovative strategies to drive impactful results. Demonstrated strong leadership and collaboration skills, contributing to the achievement of organizational objectives and fostering team success",
         skillArray: [
             "Example Long Skill 1.",
             "Example Long Skill 2.",

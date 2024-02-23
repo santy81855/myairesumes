@@ -23,8 +23,9 @@ const AddSectionModal = () => {
 
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
-    const [margin, setMargin] = useState(16);
+    const [margin, setMargin] = useState(11);
     const [allSections, setAllSections] = useState<any>(null);
+    const [verticalMargin, setVerticalMargin] = useState(11);
 
     useEffect(() => {
         const template = templateRef.current as unknown as HTMLElement;
@@ -32,8 +33,10 @@ const AddSectionModal = () => {
         const { width, height } = template.getBoundingClientRect();
         let size = 11 * (width / 610);
         setFontSize(size);
-        let newMargin = 16 * (width / 610);
+        let newMargin = 11 * (width / 610);
         setMargin(newMargin);
+        let newVerticalMargin = 11 * (height / 790.59);
+        setVerticalMargin(newVerticalMargin);
 
         // handle the text scaling
         function handleResize() {
@@ -43,8 +46,10 @@ const AddSectionModal = () => {
             let size = 11 * (width / 610);
             setFontSize(size);
             //  do the same for the margin value, which should be 16px at 610px width
-            let newMargin = 16 * (width / 610);
+            let newMargin = 11 * (width / 610);
             setMargin(newMargin);
+            let newVerticalMargin = 11 * (height / 790.59);
+            setVerticalMargin(newVerticalMargin);
         }
 
         window.addEventListener("resize", handleResize);
@@ -57,7 +62,11 @@ const AddSectionModal = () => {
             documentArray.find((document) => document.id === params.id)
         );
         const temp = SectionConfig(
-            documentArray.find((document) => document.id === params.id)
+            documentArray.find((document) => document.id === params.id),
+            null,
+            document.information.font,
+            margin,
+            verticalMargin
         );
         let sectionConfigArray = Object.entries(temp).map(([id, config]) => ({
             id,
@@ -89,6 +98,8 @@ const AddSectionModal = () => {
                         )
                     )
         );
+        // make the results be in alphabetical order by name
+        results.sort((a, b) => a.name.localeCompare(b.name));
         setResults(results);
     };
 
@@ -145,6 +156,7 @@ const AddSectionModal = () => {
                     >
                         {searchIcon}
                         <input
+                            id="searchBar"
                             type="text"
                             className={styles.searchBar}
                             placeholder="Search for a section. Eg. 'Experience', 'Skills', etc."
@@ -212,6 +224,8 @@ const AddSectionModal = () => {
                                                 orderArray={[
                                                     result.id as string,
                                                 ]}
+                                                verticalMargin={verticalMargin}
+                                                margin={margin}
                                             />
                                         </div>
                                         <button

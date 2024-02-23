@@ -108,10 +108,11 @@ const DraggableContainer = ({
         }),
     });
 
-    drag(drop(containerRef));
+    // drag(drop(containerRef));
     // the below line makes it so that you drab by the draggableSection and not the whole container but can still drop on the whole container
     // drag(itemRef);
-    // drop(isReordering ? containerRef : null);
+    drag(isReordering ? containerRef : null);
+    drop(isReordering ? containerRef : null);
     return (
         <div
             className={`${styles.sectionContainer} ${
