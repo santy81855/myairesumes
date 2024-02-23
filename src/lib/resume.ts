@@ -31,12 +31,86 @@ export const initializeNewResume = (
     const experienceArray = basicInfo
         ? sortObjectArrayByDateEnd(basicInfo.work, basicInfo.workOrder)
         : [];
+    const newExperienceArray =
+        experienceArray.length === 0
+            ? [
+                  {
+                      id: 1,
+                      company: "Example Company",
+                      position: "Example Position",
+                      startDate: "2020-01-01",
+                      endDate: "2023-01-01",
+                      summary: "Example summary.",
+                      currentEmployment: false,
+                      bullets: [
+                          "Example bullet 1.",
+                          "Example bullet 2.",
+                          "Example bullet 3.",
+                      ],
+                  },
+                  {
+                      id: 2,
+                      company: "Example Company 2",
+                      position: "Example Position 2",
+                      startDate: "2023-01-01",
+                      endDate: "Present",
+                      summary: "Example summary.",
+                      currentEmployment: true,
+                      bullets: [
+                          "Example bullet 1.",
+                          "Example bullet 2.",
+                          "Example bullet 3.",
+                      ],
+                  },
+              ]
+            : experienceArray.map((item) => {
+                  return {
+                      ...item,
+                      summary: "Example summary.",
+                      bullets: [
+                          "Example bullet 1.",
+                          "Example bullet 2.",
+                          "Example bullet 3.",
+                      ],
+                  };
+              });
     const educationArray = basicInfo
         ? sortObjectArrayByDateEnd(
               basicInfo.education,
               basicInfo.educationOrder
           )
         : [];
+    const newEducationArray =
+        educationArray.length === 0
+            ? [
+                  {
+                      id: 1,
+                      currentEnrollment: false,
+                      schoolName: "Example University",
+                      degreeType: "Bachelor's Degree",
+                      degreeField: "Business Administration",
+                      startDate: "2016-01-01",
+                      endDate: "2020-01-01",
+                      gpa: "3.7",
+                      bullets: [
+                          "Example bullet 1.",
+                          "Example bullet 2.",
+                          "Example bullet 3.",
+                      ],
+                  },
+              ]
+            : educationArray.map((item) => {
+                  return {
+                      ...item,
+                      gpa: "3.7",
+                      bullets: [
+                          "Example bullet 1.",
+                          "Example bullet 2.",
+                          "Example bullet 3.",
+                      ],
+                  };
+              });
+
     const first = basicInfo ? basicInfo.firstName : user.firstName;
     const last = basicInfo ? basicInfo.lastName : user.lastName;
     const email = basicInfo && basicInfo.email ? basicInfo.email : user.email;
@@ -58,7 +132,7 @@ export const initializeNewResume = (
             [
                 "name",
                 "position",
-                "contact",
+                "contactEmailPhoneWebsite",
                 "summary",
                 "experience",
                 "education",
@@ -76,24 +150,8 @@ export const initializeNewResume = (
             "Example Long Skill 3.",
         ],
         shortSkillArray: ["Skill 1", "Skill 2", "Skill 3"],
-        experienceArray: {
-            ...experienceArray,
-            summary: "Example summary.",
-            bullets: [
-                "Example bullet 1.",
-                "Example bullet 2.",
-                "Example bullet 3.",
-            ],
-        },
-        educationArray: {
-            ...educationArray,
-            gpa: "3.7",
-            bullets: [
-                "Example bullet 1.",
-                "Example bullet 2.",
-                "Example bullet 3.",
-            ],
-        },
+        experienceArray: newExperienceArray,
+        educationArray: newEducationArray,
         languageArray: ["langauge 1", "language 2", "language 3"],
         interestArray: ["interest 1", "interest 2", "interest 3"],
         contactInfo: {

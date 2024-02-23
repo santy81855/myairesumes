@@ -7,9 +7,10 @@ import { updateDocumentArray } from "@/lib/document";
 
 type PageCounterProps = {
     documentId: string;
+    fullWidth?: boolean;
 };
 
-const PageCounter = ({ documentId }: PageCounterProps) => {
+const PageCounter = ({ documentId, fullWidth }: PageCounterProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const [document, setDocument] = useState(
         documentArray.find((document) => document.id === documentId)
@@ -51,7 +52,10 @@ const PageCounter = ({ documentId }: PageCounterProps) => {
     };
 
     return (
-        <div className={styles.pageCounter}>
+        <div
+            className={styles.pageCounter}
+            style={fullWidth ? { width: "100%" } : {}}
+        >
             {document ? (
                 <>
                     <p>Page</p>

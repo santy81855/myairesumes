@@ -32,7 +32,10 @@ const DraggableContainer = ({
     const containerRef = useRef<HTMLDivElement>(null);
     // for adding a draggable element rather than using the whole section
     const itemRef = useRef<HTMLDivElement>(null);
-    let index = orderArray.indexOf(id);
+    // the id is structured like this: "section-0" so we need to get the number from it and convert it to a number
+    const index = parseInt(id.split("-")[1]);
+
+    //let index = orderArray.indexOf(id);
     const [{ handlerId }, drop] = useDrop<
         DragItem,
         void,
@@ -105,11 +108,10 @@ const DraggableContainer = ({
         }),
     });
 
-    //drag(drop(containerRef));
+    drag(drop(containerRef));
     // the below line makes it so that you drab by the draggableSection and not the whole container but can still drop on the whole container
     // drag(itemRef);
-    drag(isReordering ? containerRef : null);
-    drop(isReordering ? containerRef : null);
+    // drop(isReordering ? containerRef : null);
     return (
         <div
             className={`${styles.sectionContainer} ${

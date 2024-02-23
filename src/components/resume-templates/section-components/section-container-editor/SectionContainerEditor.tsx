@@ -15,7 +15,7 @@ const SectionContainerEditor = ({
     return (
         <div
             className={styles.container}
-            style={!isReordering ? { cursor: "pointer" } : {}}
+            style={!isReordering ? { cursor: "auto" } : {}}
         >
             {children}
         </div>

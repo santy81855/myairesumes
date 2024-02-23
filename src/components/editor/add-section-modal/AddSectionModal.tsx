@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { useAppContext } from "@/app/providers";
 import { useParams } from "next/navigation";
 import { circledXIcon, searchIcon } from "@/components/icons/iconSVG";
-import { sectionInformationArray } from "@/lib/document";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionComponents from "@/components/resume-templates/section-components/SectionComponents";
 import { updateDocumentArray } from "@/lib/document";
+import { SectionConfig } from "@/lib/sectionConfig";
 
 const AddSectionModal = () => {
     const {
@@ -24,6 +24,7 @@ const AddSectionModal = () => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(16);
+    const [allSections, setAllSections] = useState<any>(null);
 
     useEffect(() => {
         const template = templateRef.current as unknown as HTMLElement;
@@ -55,6 +56,14 @@ const AddSectionModal = () => {
         setDocument(
             documentArray.find((document) => document.id === params.id)
         );
+        const temp = SectionConfig(
+            documentArray.find((document) => document.id === params.id)
+        );
+        let sectionConfigArray = Object.entries(temp).map(([id, config]) => ({
+            id,
+            ...config,
+        }));
+        setAllSections(sectionConfigArray);
     }, [documentArray]);
 
     const searchContentChanged = (content: string) => {
@@ -63,7 +72,7 @@ const AddSectionModal = () => {
             setResults([]);
             return;
         }
-        const tempArray = [...sectionInformationArray];
+        const tempArray = [...allSections];
         const results = tempArray.filter(
             (item: {
                 id: string;
@@ -138,7 +147,7 @@ const AddSectionModal = () => {
                         <input
                             type="text"
                             className={styles.searchBar}
-                            placeholder="Search for a section"
+                            placeholder="Search for a section. Eg. 'Experience', 'Skills', etc."
                             value={searchContent}
                             onChange={(e) =>
                                 searchContentChanged(e.target.value)
