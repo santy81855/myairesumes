@@ -3,7 +3,7 @@ import StaticModal from "@/components/static-modal/StaticModal";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { checkIcon, modernResumeIcon } from "@/components/icons/iconSVG";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 import FormLoading from "@/components/form-loading/FormLoading";
 import { createResume } from "@/actions/resume";

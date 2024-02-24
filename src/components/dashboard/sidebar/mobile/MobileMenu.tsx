@@ -6,7 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
-import { signout } from "@/actions/authentication";
+import { signOutAction } from "@/features/authentication";
 import {
     profileIcon,
     accountIcon,
@@ -58,7 +58,7 @@ const MobileMenu = () => {
 
     const signoutPressed = async () => {
         setIsLoading(true);
-        const response = await signout();
+        const response = await signOutAction();
         if (response.error) {
             toast.warning(response.error);
             setIsLoading(false);

@@ -19,9 +19,7 @@ const SectionComponents = ({
     fontSize: number;
     orderArray: string[];
     margin?: number;
-    setOrderArray?:
-        | React.Dispatch<React.SetStateAction<string[]>>
-        | React.Dispatch<React.SetStateAction<never[]>>;
+    setOrderArray?: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const sectionConfig = SectionConfig(document, fontSize, font, margin);

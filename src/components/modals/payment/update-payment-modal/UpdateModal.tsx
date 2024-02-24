@@ -6,7 +6,7 @@ import { getCustomerSubscription } from "@/lib/stripe";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import Link from "next/link";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 
 type UpgradeModalProps = {

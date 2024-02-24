@@ -1,7 +1,7 @@
 "use client";
 import styles from "./Menu.module.css";
 import { useSearchParams, useRouter } from "next/navigation";
-import { signout } from "@/actions/authentication";
+import { signOutAction } from "@/features/authentication";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,7 +23,7 @@ const Menu = () => {
 
     const signoutPressed = async () => {
         setIsLoading(true);
-        const response = await signout();
+        const response = await signOutAction();
         if (response.error) {
             toast.warning(response.error);
             setIsLoading(false);

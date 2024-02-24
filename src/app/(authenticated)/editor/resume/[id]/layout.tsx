@@ -13,7 +13,7 @@ import SideMenu from "@/components/editor/side-menu/SideMenu";
 import TitleBar from "@/components/editor/title-bar/TitleBar";
 import Navbar from "@/components/nav/Navbar";
 import { getResume } from "@/lib/resume";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { redirect } from "next/navigation";
 import { ResumeContext } from "@/app/providers";
 import AddSectionModal from "@/components/editor/add-section-modal/AddSectionModal";

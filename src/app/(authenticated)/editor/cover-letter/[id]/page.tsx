@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { redirect } from "next/navigation";
 import { getResume } from "@/lib/resume";
 

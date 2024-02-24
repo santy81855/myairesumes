@@ -4,13 +4,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import Spincube from "@/components/loaders/Spincube/Spincube";
-import { resendEmailVerification } from "@/actions/authentication";
+import { resendEmailVerificationAction } from "@/features/authentication";
 
 const Card = () => {
     const [isLoading, setIsLoading] = useState(false);
     const resendClicked = async () => {
         setIsLoading(true);
-        const response = await resendEmailVerification();
+        const response = await resendEmailVerificationAction();
         if (response.success) {
             toast.success("Email verification link sent.");
             setIsLoading(false);

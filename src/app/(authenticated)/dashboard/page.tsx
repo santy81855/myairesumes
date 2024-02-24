@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
 import TitleSection from "@/components/dashboard/title-section/TitleSection";

@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Spincube from "@/components/loaders/Spincube/Spincube";
-import { resetPassword } from "@/actions/authentication";
+import { resetPasswordAction } from "@/features/authentication";
 
 type CardProps = {
     token: string;
@@ -26,7 +26,7 @@ const Card = ({ token }: CardProps) => {
         setIsLoading(true);
         const formData = new FormData();
         formData.append("password", password);
-        const response = await resetPassword(formData, token);
+        const response = await resetPasswordAction(formData, token);
         if (response.error) {
             toast.warning(response.error);
             setIsLoading(false);

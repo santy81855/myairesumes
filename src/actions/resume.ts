@@ -2,7 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { initializeNewResume } from "@/lib/resume";
 
 export const createResume = async (formData: any) => {

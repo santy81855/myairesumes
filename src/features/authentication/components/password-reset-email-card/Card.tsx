@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Spincube from "@/components/loaders/Spincube/Spincube";
-import { sendPasswordResetEmail } from "@/actions/authentication";
+import { sendPasswordResetEmailAction } from "@/features/authentication";
 
 const Card = () => {
     const searchParams = useSearchParams();
@@ -22,7 +22,7 @@ const Card = () => {
         setIsLoading(true);
         const formData = new FormData();
         formData.append("email", email);
-        const response = await sendPasswordResetEmail(formData);
+        const response = await sendPasswordResetEmailAction(formData);
         if (response.error) {
             toast.warning(response.error);
             setIsLoading(false);

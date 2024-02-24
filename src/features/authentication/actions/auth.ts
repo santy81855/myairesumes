@@ -1,7 +1,7 @@
 "use server";
 import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
-import { lucia, validateRequest } from "@/lib/auth";
+import { validateRequest, lucia } from "@/features/authentication/lib/auth";
 import { cookies } from "next/headers";
 import { ActionResult } from "@/types";
 import { prisma } from "@/lib/prisma";

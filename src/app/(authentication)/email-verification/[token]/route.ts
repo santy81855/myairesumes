@@ -1,4 +1,4 @@
-import { lucia } from "@/lib/auth";
+import { lucia } from "@/features/authentication/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { validateEmailVerificationToken } from "@/auth/token";
 

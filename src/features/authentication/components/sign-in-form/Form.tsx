@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spincube from "@/components/loaders/Spincube/Spincube";
-import { signin } from "@/actions/authentication";
+import { signInAction } from "@/features/authentication";
 
 const Form = () => {
     const [emailAddress, setEmailAddress] = useState("");
@@ -22,7 +22,7 @@ const Form = () => {
         const formData = new FormData();
         formData.append("email", emailAddress);
         formData.append("password", password);
-        const response = await signin(formData);
+        const response = await signInAction(formData);
         if (response.error) {
             toast.warning(response.error);
             setIsLoading(false);

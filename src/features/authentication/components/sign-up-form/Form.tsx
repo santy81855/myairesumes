@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import Spincube from "@/components/loaders/Spincube/Spincube";
-import { signup } from "@/actions/authentication";
+import { signUpAction } from "@/features/authentication";
 
 const Form = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +63,7 @@ const Form = () => {
         formData.append("password", password);
         formData.append("firstName", firstName);
         formData.append("lastName", lastName);
-        const response = await signup(formData);
+        const response = await signUpAction(formData);
         if (response.error) {
             toast.warning(response.error);
             setIsLoading(false);
