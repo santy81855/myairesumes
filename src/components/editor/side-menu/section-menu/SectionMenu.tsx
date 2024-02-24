@@ -25,6 +25,9 @@ const StyleMenu = () => {
             documentArray.find((document) => document.id === params.id)
         );
         const sectionConfig = SectionConfig(
+            document,
+            null,
+            "",
             documentArray.find((document) => document.id === params.id)
         );
         // tempArr is an object where all the keys are the section names

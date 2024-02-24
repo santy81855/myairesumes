@@ -123,6 +123,14 @@ export const initializeNewResume = (
             ? basicInfo.website
             : "https://example-website.com";
     const data = {
+        style: {
+            baseFontSize: 11,
+            baseMarginSize: 11,
+            backgroundColor: "#ffffff",
+            textColor: "#000000",
+            accentBackgroundColor: "#f0f0f0",
+            accentTextColor: "#000000",
+        },
         documentName: name,
         jobTitle: job,
         description,
@@ -147,6 +155,14 @@ export const initializeNewResume = (
         imageUrl,
         summary:
             "At Example Company, excelled in the role of Example Position, leveraging innovative strategies to drive impactful results. Demonstrated strong leadership and collaboration skills, contributing to the achievement of organizational objectives and fostering team success",
+        summaryConfig: {
+            fontSizeRatio: 1,
+            isBold: false,
+            isItalic: false,
+            isUnderline: false,
+            textColor: "#000000",
+            sectionTitle: "Summary",
+        },
         skillArray: [
             "Example Long Skill 1.",
             "Example Long Skill 2.",

@@ -21,16 +21,15 @@ const Basic = ({ index, resumeId }: BasicProps) => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(11);
-    const [currentDocument, setCurrentDocument] = useState(
-        documentArray.find((currentDocument) => currentDocument.id === resumeId)
+    const [document, setDocument] = useState(
+        documentArray.find((document) => document.id === resumeId)
     );
-    if (!currentDocument) return <p>loading...</p>;
     useEffect(() => {
         const updatedDocument = documentArray.find(
-            (currentDocument) => currentDocument.id === resumeId
+            (document) => document.id === resumeId
         );
         if (!updatedDocument) return;
-        setCurrentDocument(updatedDocument);
+        setDocument(updatedDocument);
         setOrderArray(
             updatedDocument.information.sectionOrder[
                 updatedDocument.currentPage - 1
@@ -39,9 +38,7 @@ const Basic = ({ index, resumeId }: BasicProps) => {
     }, [documentArray]);
 
     const [orderArray, setOrderArray] = useState(
-        currentDocument?.information.sectionOrder[
-            currentDocument.currentPage - 1
-        ]
+        document?.information.sectionOrder[document.currentPage - 1]
     );
 
     useEffect(() => {
@@ -114,24 +111,26 @@ const Basic = ({ index, resumeId }: BasicProps) => {
     });
 
     return (
-        <Document>
-            <Page wrap={false} style={styles.page}>
-                <View
-                    wrap={false}
-                    style={styles.pageContainer}
-                    ref={templateRef}
-                >
-                    <SectionComponents
-                        document={currentDocument}
-                        font={currentDocument.information.font}
-                        fontSize={fontSize}
-                        margin={margin}
-                        orderArray={orderArray}
-                        setOrderArray={setOrderArray}
-                    />
-                </View>
-            </Page>
-        </Document>
+        document && (
+            <Document>
+                <Page wrap={false} style={styles.page}>
+                    <View
+                        wrap={false}
+                        style={styles.pageContainer}
+                        ref={templateRef}
+                    >
+                        <SectionComponents
+                            document={document}
+                            font={document.information.font}
+                            fontSize={fontSize}
+                            margin={margin}
+                            orderArray={orderArray}
+                            setOrderArray={setOrderArray}
+                        />
+                    </View>
+                </Page>
+            </Document>
+        )
     );
 };
 

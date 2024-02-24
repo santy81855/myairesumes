@@ -1,17 +1,10 @@
 "use client";
-import ReactPDF, {
-    Page,
-    Text,
-    View,
-    Document,
-    StyleSheet,
-    Font,
-} from "@react-pdf/renderer";
 import { useAppContext } from "@/app/providers";
 import { updateDocumentArray } from "@/lib/document";
 import DraggableContainer from "@/components/editor/draggable-section-container/DraggableContainer";
 import SectionContainerEditor from "./section-container-editor/SectionContainerEditor";
 import { SectionConfig } from "@/lib/sectionConfig";
+import { useMemo } from "react";
 
 const SectionComponents = ({
     document,
@@ -26,9 +19,10 @@ const SectionComponents = ({
     fontSize: number;
     orderArray: string[];
     margin?: number;
-    setOrderArray?: React.Dispatch<React.SetStateAction<string[]>>;
+    setOrderArray?:
+        | React.Dispatch<React.SetStateAction<string[]>>
+        | React.Dispatch<React.SetStateAction<never[]>>;
 }) => {
-    console.log("here");
     const { documentArray, setDocumentArray } = useAppContext();
     const sectionConfig = SectionConfig(document, fontSize, font, margin);
 
@@ -63,12 +57,17 @@ const SectionComponents = ({
 
     const getSectionEditor = (id: string) => {
         return sectionConfig.hasOwnProperty(id) ? (
-            <SectionContainerEditor key={id}>
+            <SectionContainerEditor key={id} document={document}>
                 {sectionConfig[id as keyof typeof sectionConfig]?.component ??
                     null}
             </SectionContainerEditor>
         ) : null;
     };
+
+    const memoizedGetSectionEditor = useMemo(
+        () => getSectionEditor,
+        [sectionConfig]
+    );
 
     const getSectionDownload = (id: string) => {
         return (
@@ -84,7 +83,7 @@ const SectionComponents = ({
                 orderArray={orderArray}
                 moveSection={moveSection}
             >
-                {getSectionEditor(section)}
+                {memoizedGetSectionEditor(section)}
             </DraggableContainer>
         ) : (
             getSectionDownload(section)

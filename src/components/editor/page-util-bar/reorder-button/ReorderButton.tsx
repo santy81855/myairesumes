@@ -12,7 +12,8 @@ const ReorderButton = () => {
             onClick={() => setIsReordering(!isReordering)}
         >
             {orderIcon}
-            <p>order</p>
+            {!isReordering && <p>Reorder Mode</p>}
+            {isReordering && <p>Exit Reorder Mode</p>}
         </button>
     );
 };
