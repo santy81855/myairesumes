@@ -1,11 +1,11 @@
 "use server";
-import { AuthEmailData } from "@/types";
+import { AuthEmailDataType } from "@/features/authentication";
 import { EmailVerificationTemplate } from "@/components/email-templates/email-verification-template/EmailTemplate";
 import { PasswordResetTemplate } from "@/components/email-templates/password-reset-template/EmailTemplate";
 import { FailedPaymentTemplate } from "@/components/email-templates/payment-failed-template/EmailTemplate";
 import { Resend } from "resend";
 
-export async function send(data: AuthEmailData) {
+export async function send(data: AuthEmailDataType) {
     const { email, firstName, lastName, subject, url, type } = data;
     const resend = new Resend(process.env.RESEND_API_KEY);
     try {

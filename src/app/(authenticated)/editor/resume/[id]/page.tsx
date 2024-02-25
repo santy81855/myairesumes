@@ -1,11 +1,12 @@
 import styles from "./page.module.css";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { redirect } from "next/navigation";
-import { getResume } from "@/lib/resume";
-
-import PageUtilBar from "@/components/editor/page-util-bar/PageUtilBar";
-import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
-import AddSectionModal from "@/components/editor/add-section-modal/AddSectionModal";
+import {
+    AddSectionModal,
+    DocumentContainer,
+    getResume,
+    PageUtilBar,
+} from "@/features/editor";
 
 const Page = async ({
     params,
@@ -24,7 +25,6 @@ const Page = async ({
 
     return (
         <main className={styles.main}>
-            <AddSectionModal />
             <PageUtilBar documentId={id} />
             <DocumentContainer document={resume} />
         </main>

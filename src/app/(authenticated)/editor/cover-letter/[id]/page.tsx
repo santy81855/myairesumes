@@ -1,10 +1,7 @@
 import styles from "./page.module.css";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { redirect } from "next/navigation";
-import { getResume } from "@/lib/resume";
-
-import PageUtilBar from "@/components/editor/page-util-bar/PageUtilBar";
-import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
+import { getResume, DocumentContainer, PageUtilBar } from "@/features/editor";
 
 const Page = async ({
     params,

@@ -2,7 +2,7 @@ import styles from "./Navbar.module.css";
 import Link from "next/link";
 import Menu from "@/components/nav/mobile/Menu";
 import ProfileButton from "@/components/nav/profile-button/ProfileButton";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 
 type NavbarProps = {
     style?: object;

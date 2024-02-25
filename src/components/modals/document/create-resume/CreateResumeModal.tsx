@@ -3,10 +3,9 @@ import StaticModal from "@/components/static-modal/StaticModal";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { checkIcon, modernResumeIcon } from "@/components/icons/iconSVG";
-import { validateRequest } from "@/lib/auth";
-import { getUser } from "@/lib/user";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import FormLoading from "@/components/form-loading/FormLoading";
-import { createResume } from "@/actions/resume";
+import { createResumeAction } from "@/features/editor";
 
 type UpgradeModalProps = {
     returnUrl: string;
@@ -28,7 +27,7 @@ const CreateResumeModal = async ({ returnUrl }: UpgradeModalProps) => {
                     </p>
                 </section>
 
-                <form className={styles.form} action={createResume}>
+                <form className={styles.form} action={createResumeAction}>
                     <section className={styles.inputContainer}>
                         <label htmlFor="job" className={styles.label}>
                             Job Title

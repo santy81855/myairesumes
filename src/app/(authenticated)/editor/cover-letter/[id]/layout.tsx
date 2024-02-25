@@ -9,9 +9,8 @@ const poppins = Poppins({
     weight: "300",
 });
 import styles from "./layout.module.css";
-import SideMenu from "@/components/editor/side-menu/SideMenu";
+import { SideMenu, TitleBar } from "@/features/editor";
 import Navbar from "@/components/nav/Navbar";
-import TitleBar from "@/components/editor/title-bar/TitleBar";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Editor",

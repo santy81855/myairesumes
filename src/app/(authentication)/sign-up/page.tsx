@@ -1,6 +1,6 @@
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import styles from "./page.module.css";
-import Card from "@/components/authentication/card/Card";
+import { AuthCard } from "@/features/authentication";
 import { redirect } from "next/navigation";
 
 const SignUpPage = async () => {
@@ -10,7 +10,7 @@ const SignUpPage = async () => {
     }
     return (
         <main className={styles.pageContainer}>
-            <Card authType="sign-up" />
+            <AuthCard authType="sign-up" />
         </main>
     );
 };

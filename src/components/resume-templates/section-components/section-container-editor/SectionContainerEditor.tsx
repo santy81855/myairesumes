@@ -1,9 +1,8 @@
 "use client";
 import styles from "./SectionContainerEditor.module.css";
 import { useAppContext } from "@/app/providers";
-import { trashIcon, editIcon, cancelIcon } from "@/components/icons/iconSVG";
 import { useState } from "react";
-import { updateDocumentArray } from "@/lib/document";
+import { updateDocumentArray } from "@/features/editor";
 
 const SectionContainerEditor = ({
     children,

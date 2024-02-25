@@ -9,14 +9,16 @@ const poppins = Poppins({
     weight: "300",
 });
 import styles from "./layout.module.css";
-import SideMenu from "@/components/editor/side-menu/SideMenu";
-import TitleBar from "@/components/editor/title-bar/TitleBar";
 import Navbar from "@/components/nav/Navbar";
-import { getResume } from "@/lib/resume";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
+import {
+    AddSectionModal,
+    getResume,
+    SideMenu,
+    TitleBar,
+} from "@/features/editor";
 import { redirect } from "next/navigation";
 import { ResumeContext } from "@/app/providers";
-import AddSectionModal from "@/components/editor/add-section-modal/AddSectionModal";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Editor",

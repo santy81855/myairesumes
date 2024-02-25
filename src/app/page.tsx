@@ -3,7 +3,7 @@ import Title from "@/components/landing-page/title/Title";
 import Blur from "@/components/landing-page/color-blur/Blur";
 import HeroImage from "@/components/landing-page/hero-image/HeroImage";
 import Navbar from "@/components/nav/Navbar";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 import BasicInfoModal from "@/components/landing-page/basic-info-modal/BasicInfoModal";
 
