@@ -10,11 +10,100 @@ import {
     generatePasswordResetToken,
     validatePasswordResetToken,
     generateEmailVerificationToken,
-} from "@/features/authentication/lib/token";
-import {
+    generateEmailVerificationCode,
     sendPasswordResetLink,
     sendEmailVerificationLink,
-} from "@/features/authentication/lib/email";
+    sendEmailVerificationCode,
+} from "@/features/authentication";
+import { isWithinExpirationDate } from "oslo";
+
+export const validateEmailVerificationCode = async (code: string) => {
+    "use server";
+    const { user } = await validateRequest();
+    if (!user) {
+        return {
+            error: "Please log in to verify your email.",
+        };
+    }
+    const storedCode = await prisma.$transaction(async (trx) => {
+        const storedCode = await trx.emailVerificationCode.findUnique({
+            where: {
+                userId: user.id,
+            },
+        });
+        if (!storedCode) return null;
+        await trx.emailVerificationCode.deleteMany({
+            where: {
+                userId: storedCode.userId,
+            },
+        });
+        return storedCode;
+    });
+    if (!storedCode) {
+        return {
+            error: "Invalid code.",
+        };
+    }
+    if (storedCode.code !== code) {
+        return {
+            error: "Invalid code.",
+        };
+    }
+    if (!isWithinExpirationDate(storedCode.expiresAt)) {
+        return {
+            error: "Expired code. Please request a new one.",
+        };
+    }
+    // update the user's emailVerified status
+    await prisma.user.update({
+        where: {
+            id: user.id,
+        },
+        data: {
+            emailVerified: true,
+        },
+    });
+    return {
+        success: "Email verified.",
+    };
+};
+
+export async function resendEmailVerificationCode() {
+    "use server";
+    const { user } = await validateRequest();
+    if (!user) {
+        return {
+            error: "Please log in to resend the email verification link.",
+        };
+    }
+    // get email verification code
+    const verificationCode = await generateEmailVerificationCode(
+        user.id,
+        user.email
+    );
+    if (!verificationCode) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    const first = user.firstName || "User";
+    const last = user.lastName || "";
+    // send email with the code
+    const response = await sendEmailVerificationCode({
+        email: user.email,
+        code: verificationCode,
+        firstName: first,
+        lastName: last,
+    });
+    if (response.error) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    return {
+        success: "The email verification code was sent to your email.",
+    };
+}
 
 export async function resendEmailVerification() {
     "use server";
@@ -153,6 +242,50 @@ export async function signout(): Promise<ActionResult> {
     return redirect("/sign-in");
 }
 
+/*
+ if (verificationType === "link") {
+            // send email verification link
+            const verificationToken = await generateEmailVerificationToken(
+                user.id,
+                email
+            );
+            if (!verificationToken) {
+                return {
+                    error: "An unknown error occurred. Please try again.",
+                };
+            }
+            const first = user.firstName || "User";
+            const last = user.lastName || "";
+            await sendEmailVerificationLink({
+                email,
+                token: verificationToken,
+                firstName: first,
+                lastName: last,
+            });}
+            else if (verificationType === "code") {
+            // get email verification code
+            const verificationCode = await generateEmailVerificationCode(
+                user.id,
+                email
+            );
+            if (!verificationCode) {
+                return {
+                    error: "An unknown error occurred. Please try again.",
+                };
+            }
+            const first = user.firstName || "User";
+            const last = user.lastName || "";
+            // send email with the code
+            await sendEmailVerificationCode({
+                email: email,
+                code: verificationCode,
+                firstName: first,
+                lastName: last,
+            });
+
+        }
+*/
+
 export async function signup(formData: FormData): Promise<ActionResult> {
     "use server";
     const email = formData.get("email") as string;
@@ -221,24 +354,26 @@ export async function signup(formData: FormData): Promise<ActionResult> {
                     error: "An unknown error occurred. Please try again.",
                 };
             }
-            // send email verification link
-            const verificationToken = await generateEmailVerificationToken(
+
+            const verificationCode = await generateEmailVerificationCode(
                 user.id,
                 email
             );
-            if (!verificationToken) {
+            if (!verificationCode) {
                 return {
                     error: "An unknown error occurred. Please try again.",
                 };
             }
             const first = user.firstName || "User";
             const last = user.lastName || "";
-            await sendEmailVerificationLink({
-                email,
-                token: verificationToken,
+            // send email with the code
+            await sendEmailVerificationCode({
+                email: email,
+                code: verificationCode,
                 firstName: first,
                 lastName: last,
             });
+
             const session = await lucia.createSession(user.id, {});
             const sessionCookie = lucia.createSessionCookie(session.id);
             cookies().set(

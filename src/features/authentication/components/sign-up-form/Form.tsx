@@ -112,6 +112,7 @@ const Form = () => {
                                 id="email"
                                 type="email"
                                 placeholder="Email"
+                                autoComplete="email"
                                 onChange={(event) => {
                                     setEmailAddress(event.target.value);
                                 }}
@@ -123,6 +124,7 @@ const Form = () => {
                                 id="password"
                                 type="password"
                                 placeholder="Password"
+                                autoComplete="new-password"
                                 onChange={(event) => {
                                     setPassword(event.target.value);
                                 }}
@@ -136,6 +138,7 @@ const Form = () => {
                                 id="confirmPassword"
                                 type="password"
                                 placeholder="Confirm Password"
+                                autoComplete="new-password"
                                 onChange={(event) => {
                                     setConfirmPassword(event.target.value);
                                 }}
@@ -158,6 +161,7 @@ const Form = () => {
                                 id="first"
                                 type="text"
                                 placeholder="First Name"
+                                autoComplete="given-name"
                                 onChange={(event) => {
                                     setFirstName(event.target.value);
                                 }}
@@ -169,6 +173,7 @@ const Form = () => {
                                 id="last"
                                 type="text"
                                 placeholder="Last Name"
+                                autoComplete="family-name"
                                 onChange={(event) => {
                                     setLastName(event.target.value);
                                 }}

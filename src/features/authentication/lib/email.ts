@@ -1,5 +1,32 @@
 import { send } from "@/actions/email";
 
+export const sendEmailVerificationCode = async ({
+    email,
+    code,
+    firstName,
+    lastName,
+}: {
+    email: string;
+    code: string;
+    firstName: string;
+    lastName: string;
+}) => {
+    const subject = "Email verification code";
+    try {
+        await send({
+            email,
+            firstName: firstName,
+            lastName: lastName,
+            subject,
+            code,
+            type: "email-verification-code",
+        });
+        return { success: "Email sent" };
+    } catch (e) {
+        return { error: e };
+    }
+};
+
 export const sendEmailVerificationLink = async ({
     email,
     token,
