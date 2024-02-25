@@ -14,7 +14,6 @@ const SectionContainerEditor = ({
     const { documentArray, setDocumentArray, isReordering } = useAppContext();
     const [isClicked, setIsClicked] = useState(false);
     const handleClick = (e: React.MouseEvent) => {
-        console.log("clicked");
         const updatedDocument = {
             ...document,
             information: {
@@ -25,7 +24,6 @@ const SectionContainerEditor = ({
                 },
             },
         };
-        console.log(updatedDocument);
         const newDocumentArray = updateDocumentArray(
             updatedDocument,
             documentArray

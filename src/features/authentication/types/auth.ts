@@ -3,6 +3,7 @@ export type AuthEmailData = {
     firstName: string;
     lastName: string;
     subject: string;
-    url: string;
+    url?: string;
     type: string;
+    code?: string;
 };

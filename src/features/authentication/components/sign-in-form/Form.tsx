@@ -69,6 +69,7 @@ const Form = () => {
                         id="email"
                         type="email"
                         placeholder="Email"
+                        autoComplete="email"
                         onChange={(event) => {
                             setEmailAddress(event.target.value);
                         }}
@@ -79,6 +80,7 @@ const Form = () => {
                     <input
                         id="password"
                         type="password"
+                        autoComplete="current-password"
                         placeholder="Password"
                         onChange={(event) => {
                             setPassword(event.target.value);

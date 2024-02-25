@@ -29,6 +29,7 @@ model User {
     numImageUploads    Int                      @default(0)
     authSession        Session[]
     emailToken         EmailVerificationToken[]
+    emailCode          EmailVerificationCode[]
     passwordToken      PasswordResetToken[]
     subscription       Subscription?
     resume             Resume[]
@@ -45,7 +46,18 @@ model Session {
 
 model EmailVerificationToken {
     id        String   @id @unique @default(cuid())
-    userId    String
+    userId    String   @unique
+    email     String
+    expiresAt DateTime
+    user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+    @@index([userId])
+}
+
+model EmailVerificationCode {
+    id        String   @id @unique @default(cuid())
+    code      String
+    userId    String   @unique
     email     String
     expiresAt DateTime
     user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)

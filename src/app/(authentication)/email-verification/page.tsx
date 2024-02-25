@@ -1,6 +1,9 @@
 import { redirect } from "next/navigation";
 import styles from "./page.module.css";
-import { EmailVerificationCard } from "@/features/authentication";
+import {
+    EmailVerificationCard,
+    ChooseVerificationCard,
+} from "@/features/authentication";
 import { validateRequest } from "@/features/authentication/lib/auth";
 
 const Page = async () => {
@@ -10,7 +13,7 @@ const Page = async () => {
 
     return (
         <main className={styles.pageContainer}>
-            <EmailVerificationCard />
+            <ChooseVerificationCard />
         </main>
     );
 };
