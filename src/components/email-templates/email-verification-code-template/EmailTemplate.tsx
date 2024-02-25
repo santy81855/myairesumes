@@ -14,14 +14,14 @@ export const EmailVerificationCodeTemplate: React.FC<
         <h1>
             Dear {firstName} {lastName},
         </h1>
-        <p>
-            Thank you for registering with MyAiResumes! To complete the
-            registration process and ensure the security of your account, please
-            enter the following verification code:
-        </p>
+        <p>Your Code is:</p>
         <br />
         <h2>{code}</h2>
         <br />
+        <p>
+            To complete the registration process and ensure the security of your
+            account, please enter the code in the verification page.
+        </p>
         <p>
             Note: If you did not sign up for MyAiResumes, please ignore this
             email.
