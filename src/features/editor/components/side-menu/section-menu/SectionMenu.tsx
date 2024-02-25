@@ -18,7 +18,6 @@ const StyleMenu = () => {
         showComponentModal,
         setShowComponentModal,
     } = useAppContext();
-    const [clickedIndex, setClickedIndex] = useState<number | null>(null);
     const params = useParams();
     const [document, setDocument] = useState<any>(null);
     const [allSections, setAllSections] = useState<any>([]);

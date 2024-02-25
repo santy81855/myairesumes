@@ -8,7 +8,6 @@ const poppins = Poppins({
     subsets: ["latin"],
     weight: "300",
 });
-import Navbar from "@/components/nav/Navbar";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Editor",
