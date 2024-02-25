@@ -2,12 +2,14 @@ import styles from "./page.module.css";
 import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 import { redirect } from "next/navigation";
-import TitleSection from "@/components/dashboard/title-section/TitleSection";
-import Profile from "@/components/dashboard/profile/Profile";
-import Account from "@/components/dashboard/account/Account";
-import Resumes from "@/components/dashboard/resumes/Resumes";
-import DashboardWrapper from "@/components/dashboard/dashboard-wrapper/DashboardWrapper";
-import Sidebar from "@/components/dashboard/sidebar/Sidebar";
+import {
+    TitleSection,
+    Sidebar,
+    DashboardWrapper,
+    Account,
+    Profile,
+    Resumes,
+} from "@/features/dashboard";
 import Navbar from "@/components/nav/Navbar";
 import StaticModal from "@/components/static-modal/StaticModal";
 import UpdateModal from "@/components/modals/payment/update-payment-modal/UpdateModal";

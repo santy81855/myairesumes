@@ -1,6 +1,6 @@
 "use client";
 import { useAppContext } from "@/app/providers";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import {
     Page,
     Text,

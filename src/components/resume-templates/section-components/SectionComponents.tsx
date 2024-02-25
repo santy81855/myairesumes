@@ -1,9 +1,11 @@
 "use client";
 import { useAppContext } from "@/app/providers";
-import { updateDocumentArray } from "@/lib/document";
-import DraggableContainer from "@/components/editor/draggable-section-container/DraggableContainer";
+import {
+    DraggableContainer,
+    updateDocumentArray,
+    SectionConfig,
+} from "@/features/editor";
 import SectionContainerEditor from "./section-container-editor/SectionContainerEditor";
-import { SectionConfig } from "@/lib/sectionConfig";
 import { useMemo } from "react";
 
 const SectionComponents = ({

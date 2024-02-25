@@ -10,8 +10,11 @@ import {
     generatePasswordResetToken,
     validatePasswordResetToken,
     generateEmailVerificationToken,
-} from "@/auth/token";
-import { sendPasswordResetLink, sendEmailVerificationLink } from "@/auth/email";
+} from "@/features/authentication/lib/token";
+import {
+    sendPasswordResetLink,
+    sendEmailVerificationLink,
+} from "@/features/authentication/lib/email";
 
 export async function resendEmailVerification() {
     "use server";
