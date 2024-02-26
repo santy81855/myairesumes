@@ -15,20 +15,20 @@ import { useState, useEffect } from "react";
 import { SectionConfig } from "../../../features/editor";
 
 type SectionProps = {
+    sectionId: string;
     document: any;
     baseFontSize: any;
-    font: string;
     baseMarginSize: any;
-    sectionId: string;
+    font: string;
     templateRef?: React.RefObject<HTMLElement>;
 };
 
 const Section = ({
+    sectionId,
     document,
     baseFontSize,
-    font,
     baseMarginSize,
-    sectionId,
+    font,
     templateRef,
 }: SectionProps) => {
     const [fontSize, setFontSize] = useState(baseFontSize);

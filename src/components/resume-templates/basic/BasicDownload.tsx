@@ -14,14 +14,9 @@ type DocumentProps = {
 };
 
 const BasicDownload = ({ document }: DocumentProps) => {
-    const hyphenationCallback = (word: string) => {
-        // Return word parts in an array
-        return [word];
-    };
     const margin = 11;
     const fontSize = 11;
 
-    Font.registerHyphenationCallback(hyphenationCallback);
     // Create styles
     const styles = StyleSheet.create({
         page: { flexDirection: "row" },
@@ -33,7 +28,6 @@ const BasicDownload = ({ document }: DocumentProps) => {
             paddingRight: margin,
             paddingTop: margin,
             fontSize: fontSize,
-            fontFamily: "Times-Roman",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
@@ -60,6 +54,7 @@ const BasicDownload = ({ document }: DocumentProps) => {
                                     fontSize={fontSize}
                                     margin={margin}
                                     orderArray={array}
+                                    isDownload={true}
                                 />
                             </View>
                         </Page>

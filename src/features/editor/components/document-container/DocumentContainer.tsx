@@ -50,7 +50,11 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
         currentDocument &&
         Array.from({ length: currentDocument.information.numPages }).map(
             (_, index) => (
-                <Basic key={`page${index}`} resumeId={id} index={index} />
+                <Basic
+                    key={`page${index}`}
+                    document={currentDocument}
+                    isEditor={true}
+                />
             )
         );
 

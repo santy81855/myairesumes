@@ -14,21 +14,21 @@ const SectionComponents = ({
     fontSize,
     orderArray,
     margin,
-    setOrderArray,
+    isDownload,
 }: {
     document: any;
     font: string;
     fontSize: number;
     orderArray: string[];
     margin?: number;
-    setOrderArray?: React.Dispatch<React.SetStateAction<string[]>>;
+    isDownload?: boolean;
 }) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const sectionConfig = SectionConfig(document, fontSize, font, margin);
 
     const moveSection = (dragIndex: number, hoverIndex: number) => {
-        if (!setOrderArray) return;
         if (!orderArray) return;
+        if (isDownload) return;
         // Create a copy of the orderArray
         const newOrderArray = [...orderArray];
 
@@ -51,8 +51,6 @@ const SectionComponents = ({
             documentArray
         );
         setDocumentArray(newDocumentArray);
-        // Update the state with the new orderArray
-        setOrderArray(newOrderArray);
     };
 
     const getSectionEditor = (id: string) => {
@@ -76,7 +74,7 @@ const SectionComponents = ({
     };
 
     return orderArray.map((section: string, index: number) => {
-        return setOrderArray ? (
+        return !isDownload ? (
             <DraggableContainer
                 id={`${section}-${index}`}
                 key={section + index.toString()}

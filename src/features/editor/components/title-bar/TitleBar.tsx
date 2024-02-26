@@ -17,6 +17,7 @@ import { useAppContext } from "@/app/providers";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { updateResumeAction } from "@/features/editor";
+import Basic from "@/components/resume-templates/basic/Basic";
 
 const TitleBar = () => {
     const { documentArray, isDocumentLoading, setIsDocumentLoading } =
@@ -62,7 +63,9 @@ const TitleBar = () => {
                         </form>
 
                         <PDFDownloadLink
-                            document={<BasicDownload document={document} />}
+                            document={
+                                <Basic document={document} isDownload={true} />
+                            }
                             fileName={`${document.information.documentName}.pdf`}
                         >
                             {({ blob, url, loading, error }) =>

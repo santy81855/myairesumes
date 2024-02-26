@@ -10,41 +10,30 @@ import {
     Font,
 } from "@react-pdf/renderer";
 import SectionComponents from "../section-components/SectionComponents";
+import {
+    DraggableContainer,
+    updateDocumentArray,
+    SectionConfig,
+} from "@/features/editor";
 
 type BasicProps = {
-    index: number;
-    resumeId: string;
+    document: any;
+    isEditor?: boolean;
+    isDownload?: boolean;
+    isPreview?: boolean;
 };
 
-const Basic = ({ index, resumeId }: BasicProps) => {
+const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(11);
-    const [document, setDocument] = useState(
-        documentArray.find((document) => document.id === resumeId)
-    );
-    useEffect(() => {
-        const updatedDocument = documentArray.find(
-            (document) => document.id === resumeId
-        );
-        if (!updatedDocument) return;
-        setDocument(updatedDocument);
-        setOrderArray(
-            updatedDocument.information.sectionOrder[
-                updatedDocument.currentPage - 1
-            ]
-        );
-    }, [documentArray]);
-
-    const [orderArray, setOrderArray] = useState(
-        document?.information.sectionOrder[document.currentPage - 1]
-    );
 
     useEffect(() => {
         const template = templateRef.current as unknown as HTMLElement;
         if (!template) return;
         const { width, height } = template.getBoundingClientRect();
+        console.log(width);
         let size = 11 * (width / 610);
         setFontSize(size);
         let newMargin = 11 * (width / 610);
@@ -67,32 +56,36 @@ const Basic = ({ index, resumeId }: BasicProps) => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const hyphenationCallback = (word: string) => {
-        // Return word parts in an array
-        return [word];
-    };
-    // function to handle work break
-    Font.registerHyphenationCallback(hyphenationCallback);
+    const moveSection = (dragIndex: number, hoverIndex: number) => {
+        if (isEditor) {
+            // Create a copy of the sectionOrder
+            const newOrderArray = [...document.information.sectionOrder];
 
-    /**
-     * Available fonts
-     * Courier
-     * Courier-Bold
-     * Courier-Oblique
-     * Courier-BoldOblique
-     * Helvetica
-     * Helvetica-Bold
-     * Helvetica-Oblique
-     * Helvetica-BoldOblique
-     * Times-Roman
-     */
+            // Get the dragged item
+            const draggedItem = newOrderArray[dragIndex];
+
+            // Remove the dragged item from its original position
+            newOrderArray.splice(dragIndex, 1);
+
+            // Insert the dragged item at the new position
+            newOrderArray.splice(hoverIndex, 0, draggedItem);
+            // update the orderArray in the document
+            const updatedDocument = { ...document };
+            updatedDocument.information.sectionOrder[
+                updatedDocument.currentPage - 1
+            ] = newOrderArray;
+            // update the documentArray
+            const newDocumentArray = updateDocumentArray(
+                updatedDocument,
+                documentArray
+            );
+            setDocumentArray(newDocumentArray);
+        }
+    };
 
     // Create styles
     const styles = StyleSheet.create({
-        page: {
-            width: "100%",
-            height: "100%",
-        },
+        page: { flexDirection: "row" },
         pageContainer: {
             backgroundColor: "white",
             width: "100%",
@@ -101,7 +94,6 @@ const Basic = ({ index, resumeId }: BasicProps) => {
             paddingRight: margin,
             paddingTop: margin,
             fontSize: fontSize,
-            fontFamily: "Times-Roman",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
@@ -113,22 +105,49 @@ const Basic = ({ index, resumeId }: BasicProps) => {
     return (
         document && (
             <Document>
-                <Page wrap={false} style={styles.page}>
-                    <View
-                        wrap={false}
-                        style={styles.pageContainer}
-                        ref={templateRef}
-                    >
-                        <SectionComponents
-                            document={document}
-                            font={document.information.font}
-                            fontSize={fontSize}
-                            margin={margin}
-                            orderArray={orderArray}
-                            setOrderArray={setOrderArray}
-                        />
-                    </View>
-                </Page>
+                {isEditor && (
+                    <Page wrap={false} style={styles.page}>
+                        <View
+                            wrap={false}
+                            style={styles.pageContainer}
+                            ref={templateRef}
+                        >
+                            <SectionComponents
+                                document={document}
+                                font={document.information.font}
+                                fontSize={fontSize}
+                                margin={margin}
+                                orderArray={
+                                    document.information.sectionOrder[
+                                        document.currentPage - 1
+                                    ]
+                                }
+                            />
+                        </View>
+                    </Page>
+                )}
+                {isDownload &&
+                    document.information.sectionOrder.map(
+                        (array: string[], index: number) => (
+                            <Page
+                                wrap={false}
+                                key={index}
+                                style={styles.page}
+                                size={[610, 789.4]}
+                            >
+                                <View wrap={false} style={styles.pageContainer}>
+                                    <SectionComponents
+                                        document={document}
+                                        font="Times-Roman"
+                                        fontSize={fontSize}
+                                        margin={margin}
+                                        orderArray={array}
+                                        isDownload={true}
+                                    />
+                                </View>
+                            </Page>
+                        )
+                    )}
             </Document>
         )
     );

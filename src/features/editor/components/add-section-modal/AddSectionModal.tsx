@@ -219,6 +219,7 @@ const AddSectionModal = () => {
                                                     result.id as string,
                                                 ]}
                                                 margin={margin}
+                                                isDownload={true}
                                             />
                                         </div>
                                         <button
