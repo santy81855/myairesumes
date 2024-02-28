@@ -91,140 +91,131 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
             <section className={styles.document}>
                 {isDocumentLoading && <LoadingScreen />}
                 {!currentDocument && <LoadingScreen />}
-                {currentDocument && (
-                    <section className={styles.testDocument}>
-                        <div className={styles.testContainer} ref={templateRef}>
-                            <p>
-                                rem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Integer nec odio. Praesent libero. Sed
-                                cursus ante dapibus diam. Sed nisi. Nulla quis
-                                sem at nibh elementum imperdiet. Duis sagittis
-                                ipsum. Praesent mauris. Fusce nec tellus sed
-                                augue semper porta. Mauris massa. Vestibulum
-                                lacinia arcu eget nulla. Class aptent taciti
-                                sociosqu ad litora torquent per conubia nostra,
-                                per inceptos himenaeos. Curabitur sodales ligula
-                                in libero. Sed dignissim lacinia nunc. Curabitur
-                                tortor. Pellentesque nibh. Aenean quam. In
-                                scelerisque sem at dolor. Maecenas mattis. Sed
-                                convallis tristique sem. Proin ut ligula vel
-                                nunc egestas porttitor.
-                            </p>
-                            <p>
-                                rem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Integer nec odio. Praesent libero. Sed
-                                cursus ante dapibus diam. Sed nisi. Nulla quis
-                                sem at nibh elementum imperdiet. Duis sagittis
-                                ipsum. Praesent mauris. Fusce nec tellus sed
-                                augue semper porta. Mauris massa. Vestibulum
-                                lacinia arcu eget nulla. Class aptent taciti
-                                sociosqu ad litora torquent per conubia nostra,
-                                per inceptos himenaeos. Curabitur sodales ligula
-                                in libero. Sed dignissim lacinia nunc. Curabitur
-                                tortor. Pellentesque nibh. Aenean quam. In
-                                scelerisque sem at dolor. Maecenas mattis. Sed
-                                convallis tristique sem. Proin ut ligula vel
-                                nunc egestas porttitor.
-                            </p>
-                            <p>
-                                rem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Integer nec odio. Praesent libero. Sed
-                                cursus ante dapibus diam. Sed nisi. Nulla quis
-                                sem at nibh elementum imperdiet. Duis sagittis
-                                ipsum. Praesent mauris. Fusce nec tellus sed
-                                augue semper porta. Mauris massa. Vestibulum
-                                lacinia arcu eget nulla. Class aptent taciti
-                                sociosqu ad litora torquent per conubia nostra,
-                                per inceptos himenaeos. Curabitur sodales ligula
-                                in libero. Sed dignissim lacinia nunc. Curabitur
-                                tortor. Pellentesque nibh. Aenean quam. In
-                                scelerisque sem at dolor. Maecenas mattis. Sed
-                                convallis tristique sem. Proin ut ligula vel
-                                nunc egestas porttitor.
-                            </p>
-                            <p>
-                                rem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Integer nec odio. Praesent libero. Sed
-                                cursus ante dapibus diam. Sed nisi. Nulla quis
-                                sem at nibh elementum imperdiet. Duis sagittis
-                                ipsum. Praesent mauris. Fusce nec tellus sed
-                                augue semper porta. Mauris massa. Vestibulum
-                                lacinia arcu eget nulla. Class aptent taciti
-                                sociosqu ad litora torquent per conubia nostra,
-                                per inceptos himenaeos. Curabitur sodales ligula
-                                in libero. Sed dignissim lacinia nunc. Curabitur
-                                tortor. Pellentesque nibh. Aenean quam. In
-                                scelerisque sem at dolor. Maecenas mattis. Sed
-                                convallis tristique sem. Proin ut ligula vel
-                                nunc egestas porttitor.
-                            </p>
-                            <p>
-                                rem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Integer nec odio. Praesent libero. Sed
-                                cursus ante dapibus diam. Sed nisi. Nulla quis
-                                sem at nibh elementum imperdiet. Duis sagittis
-                                ipsum. Praesent mauris. Fusce nec tellus sed
-                                augue semper porta. Mauris massa. Vestibulum
-                                lacinia arcu eget nulla. Class aptent taciti
-                                sociosqu ad litora torquent per conubia nostra,
-                                per inceptos himenaeos. Curabitur sodales ligula
-                                in libero. Sed dignissim lacinia nunc. Curabitur
-                                tortor. Pellentesque nibh. Aenean quam. In
-                                scelerisque sem at dolor. Maecenas mattis. Sed
-                                convallis tristique sem. Proin ut ligula vel
-                                nunc egestas porttitor.
-                            </p>
-                            <p>
-                                rem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Integer nec odio. Praesent libero. Sed
-                                cursus ante dapibus diam. Sed nisi. Nulla quis
-                                sem at nibh elementum imperdiet. Duis sagittis
-                                ipsum. Praesent mauris. Fusce nec tellus sed
-                                augue semper porta. Mauris massa. Vestibulum
-                                lacinia arcu eget nulla. Class aptent taciti
-                                sociosqu ad litora torquent per conubia nostra,
-                                per inceptos himenaeos. Curabitur sodales ligula
-                                in libero. Sed dignissim lacinia nunc. Curabitur
-                                tortor. Pellentesque nibh. Aenean quam. In
-                                scelerisque sem at dolor. Maecenas mattis. Sed
-                                convallis tristique sem. Proin ut ligula vel
-                                nunc egestas porttitor.
-                            </p>
-                            <p>
-                                rem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Integer nec odio. Praesent libero. Sed
-                                cursus ante dapibus diam. Sed nisi. Nulla quis
-                                sem at nibh elementum imperdiet. Duis sagittis
-                                ipsum. Praesent mauris. Fusce nec tellus sed
-                                augue semper porta. Mauris massa. Vestibulum
-                                lacinia arcu eget nulla. Class aptent taciti
-                                sociosqu ad litora torquent per conubia nostra,
-                                per inceptos himenaeos. Curabitur sodales ligula
-                                in libero. Sed dignissim lacinia nunc. Curabitur
-                                tortor. Pellentesque nibh. Aenean quam. In
-                                scelerisque sem at dolor. Maecenas mattis. Sed
-                                convallis tristique sem. Proin ut ligula vel
-                                nunc egestas porttitor.
-                            </p>
-                            <p>
-                                rem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Integer nec odio. Praesent libero. Sed
-                                cursus ante dapibus diam. Sed nisi. Nulla quis
-                                sem at nibh elementum imperdiet. Duis sagittis
-                                ipsum. Praesent mauris. Fusce nec tellus sed
-                                augue semper porta. Mauris massa. Vestibulum
-                                lacinia arcu eget nulla. Class aptent taciti
-                                sociosqu ad litora torquent per conubia nostra,
-                                per inceptos himenaeos. Curabitur sodales ligula
-                                in libero. Sed dignissim lacinia nunc. Curabitur
-                                tortor. Pellentesque nibh. Aenean quam. In
-                                scelerisque sem at dolor. Maecenas mattis. Sed
-                                convallis tristique sem. Proin ut ligula vel
-                                nunc egestas porttitor.
-                            </p>
-                        </div>
-                    </section>
-                )}
+
+                <section className={styles.testDocument}>
+                    <div className={styles.testContainer} ref={templateRef}>
+                        <p>
+                            rem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Integer nec odio. Praesent libero. Sed cursus
+                            ante dapibus diam. Sed nisi. Nulla quis sem at nibh
+                            elementum imperdiet. Duis sagittis ipsum. Praesent
+                            mauris. Fusce nec tellus sed augue semper porta.
+                            Mauris massa. Vestibulum lacinia arcu eget nulla.
+                            Class aptent taciti sociosqu ad litora torquent per
+                            conubia nostra, per inceptos himenaeos. Curabitur
+                            sodales ligula in libero. Sed dignissim lacinia
+                            nunc. Curabitur tortor. Pellentesque nibh. Aenean
+                            quam. In scelerisque sem at dolor. Maecenas mattis.
+                            Sed convallis tristique sem. Proin ut ligula vel
+                            nunc egestas porttitor.
+                        </p>
+                        <p>
+                            rem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Integer nec odio. Praesent libero. Sed cursus
+                            ante dapibus diam. Sed nisi. Nulla quis sem at nibh
+                            elementum imperdiet. Duis sagittis ipsum. Praesent
+                            mauris. Fusce nec tellus sed augue semper porta.
+                            Mauris massa. Vestibulum lacinia arcu eget nulla.
+                            Class aptent taciti sociosqu ad litora torquent per
+                            conubia nostra, per inceptos himenaeos. Curabitur
+                            sodales ligula in libero. Sed dignissim lacinia
+                            nunc. Curabitur tortor. Pellentesque nibh. Aenean
+                            quam. In scelerisque sem at dolor. Maecenas mattis.
+                            Sed convallis tristique sem. Proin ut ligula vel
+                            nunc egestas porttitor.
+                        </p>
+                        <p>
+                            rem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Integer nec odio. Praesent libero. Sed cursus
+                            ante dapibus diam. Sed nisi. Nulla quis sem at nibh
+                            elementum imperdiet. Duis sagittis ipsum. Praesent
+                            mauris. Fusce nec tellus sed augue semper porta.
+                            Mauris massa. Vestibulum lacinia arcu eget nulla.
+                            Class aptent taciti sociosqu ad litora torquent per
+                            conubia nostra, per inceptos himenaeos. Curabitur
+                            sodales ligula in libero. Sed dignissim lacinia
+                            nunc. Curabitur tortor. Pellentesque nibh. Aenean
+                            quam. In scelerisque sem at dolor. Maecenas mattis.
+                            Sed convallis tristique sem. Proin ut ligula vel
+                            nunc egestas porttitor.
+                        </p>
+                        <p>
+                            rem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Integer nec odio. Praesent libero. Sed cursus
+                            ante dapibus diam. Sed nisi. Nulla quis sem at nibh
+                            elementum imperdiet. Duis sagittis ipsum. Praesent
+                            mauris. Fusce nec tellus sed augue semper porta.
+                            Mauris massa. Vestibulum lacinia arcu eget nulla.
+                            Class aptent taciti sociosqu ad litora torquent per
+                            conubia nostra, per inceptos himenaeos. Curabitur
+                            sodales ligula in libero. Sed dignissim lacinia
+                            nunc. Curabitur tortor. Pellentesque nibh. Aenean
+                            quam. In scelerisque sem at dolor. Maecenas mattis.
+                            Sed convallis tristique sem. Proin ut ligula vel
+                            nunc egestas porttitor.
+                        </p>
+                        <p>
+                            rem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Integer nec odio. Praesent libero. Sed cursus
+                            ante dapibus diam. Sed nisi. Nulla quis sem at nibh
+                            elementum imperdiet. Duis sagittis ipsum. Praesent
+                            mauris. Fusce nec tellus sed augue semper porta.
+                            Mauris massa. Vestibulum lacinia arcu eget nulla.
+                            Class aptent taciti sociosqu ad litora torquent per
+                            conubia nostra, per inceptos himenaeos. Curabitur
+                            sodales ligula in libero. Sed dignissim lacinia
+                            nunc. Curabitur tortor. Pellentesque nibh. Aenean
+                            quam. In scelerisque sem at dolor. Maecenas mattis.
+                            Sed convallis tristique sem. Proin ut ligula vel
+                            nunc egestas porttitor.
+                        </p>
+                        <p>
+                            rem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Integer nec odio. Praesent libero. Sed cursus
+                            ante dapibus diam. Sed nisi. Nulla quis sem at nibh
+                            elementum imperdiet. Duis sagittis ipsum. Praesent
+                            mauris. Fusce nec tellus sed augue semper porta.
+                            Mauris massa. Vestibulum lacinia arcu eget nulla.
+                            Class aptent taciti sociosqu ad litora torquent per
+                            conubia nostra, per inceptos himenaeos. Curabitur
+                            sodales ligula in libero. Sed dignissim lacinia
+                            nunc. Curabitur tortor. Pellentesque nibh. Aenean
+                            quam. In scelerisque sem at dolor. Maecenas mattis.
+                            Sed convallis tristique sem. Proin ut ligula vel
+                            nunc egestas porttitor.
+                        </p>
+                        <p>
+                            rem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Integer nec odio. Praesent libero. Sed cursus
+                            ante dapibus diam. Sed nisi. Nulla quis sem at nibh
+                            elementum imperdiet. Duis sagittis ipsum. Praesent
+                            mauris. Fusce nec tellus sed augue semper porta.
+                            Mauris massa. Vestibulum lacinia arcu eget nulla.
+                            Class aptent taciti sociosqu ad litora torquent per
+                            conubia nostra, per inceptos himenaeos. Curabitur
+                            sodales ligula in libero. Sed dignissim lacinia
+                            nunc. Curabitur tortor. Pellentesque nibh. Aenean
+                            quam. In scelerisque sem at dolor. Maecenas mattis.
+                            Sed convallis tristique sem. Proin ut ligula vel
+                            nunc egestas porttitor.
+                        </p>
+                        <p>
+                            rem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Integer nec odio. Praesent libero. Sed cursus
+                            ante dapibus diam. Sed nisi. Nulla quis sem at nibh
+                            elementum imperdiet. Duis sagittis ipsum. Praesent
+                            mauris. Fusce nec tellus sed augue semper porta.
+                            Mauris massa. Vestibulum lacinia arcu eget nulla.
+                            Class aptent taciti sociosqu ad litora torquent per
+                            conubia nostra, per inceptos himenaeos. Curabitur
+                            sodales ligula in libero. Sed dignissim lacinia
+                            nunc. Curabitur tortor. Pellentesque nibh. Aenean
+                            quam. In scelerisque sem at dolor. Maecenas mattis.
+                            Sed convallis tristique sem. Proin ut ligula vel
+                            nunc egestas porttitor.
+                        </p>
+                    </div>
+                </section>
             </section>
         </section>
     );
