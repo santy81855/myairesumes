@@ -28,57 +28,57 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
             )
         );
 
-        useEffect(() => {
-            if (!ref) return;
-            const template = ref.current as unknown as HTMLElement;
-            if (!template) return;
-            const { width, height } = template.getBoundingClientRect();
-            let size = document.information.style.baseFontSize * (width / 612);
-            setFontSize(size);
-            let newMargin =
-                document.information.style.baseMarginSize * (width / 612);
-            setMargin(newMargin);
+        // useEffect(() => {
+        //     if (!ref) return;
+        //     const template = ref.current as unknown as HTMLElement;
+        //     if (!template) return;
+        //     const { width, height } = template.getBoundingClientRect();
+        //     let size = document.information.style.baseFontSize * (width / 612);
+        //     setFontSize(size);
+        //     let newMargin =
+        //         document.information.style.baseMarginSize * (width / 612);
+        //     setMargin(newMargin);
 
-            setSectionConfig(
-                SectionConfig(
-                    document,
-                    size,
-                    document.information.font,
-                    newMargin
-                )
-            );
+        //     setSectionConfig(
+        //         SectionConfig(
+        //             document,
+        //             size,
+        //             document.information.font,
+        //             newMargin
+        //         )
+        //     );
 
-            // handle the text scaling
-            function handleResize() {
-                console.log("here");
-                if (!ref) return;
-                console.log("here2");
-                const template = ref.current as unknown as HTMLElement;
-                if (!template) return;
-                const { width, height } = template.getBoundingClientRect();
-                let size =
-                    document.information.style.baseFontSize * (width / 612);
-                // console.log(width, height);
-                // console.log(size);
-                setFontSize(size);
-                //  do the same for the margin value, which should be 16px at 610px width
-                let newMargin =
-                    document.information.style.baseMarginSize * (width / 612);
-                setMargin(newMargin);
-                setSectionConfig(
-                    SectionConfig(
-                        document,
-                        size,
-                        document.information.font,
-                        newMargin
-                    )
-                );
-            }
+        //     // handle the text scaling
+        // //     function handleResize() {
+        // //         console.log("here");
+        // //         if (!ref) return;
+        // //         console.log("here2");
+        // //         const template = ref.current as unknown as HTMLElement;
+        // //         if (!template) return;
+        // //         const { width, height } = template.getBoundingClientRect();
+        // //         let size =
+        // //             document.information.style.baseFontSize * (width / 612);
+        // //         // console.log(width, height);
+        // //         // console.log(size);
+        // //         setFontSize(size);
+        // //         //  do the same for the margin value, which should be 16px at 610px width
+        // //         let newMargin =
+        // //             document.information.style.baseMarginSize * (width / 612);
+        // //         setMargin(newMargin);
+        // //         setSectionConfig(
+        // //             SectionConfig(
+        // //                 document,
+        // //                 size,
+        // //                 document.information.font,
+        // //                 newMargin
+        // //             )
+        // //         );
+        // //     }
 
-            window.addEventListener("resize", handleResize);
+        // //     window.addEventListener("resize", handleResize);
 
-            return () => window.removeEventListener("resize", handleResize);
-        }, []);
+        // //     return () => window.removeEventListener("resize", handleResize);
+        // // }, []);
 
         console.log(fontSize);
         const styles = {
