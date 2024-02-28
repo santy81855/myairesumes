@@ -4,6 +4,7 @@ import type { Identifier, XYCoord } from "dnd-core";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useAppContext } from "@/app/providers";
+import { updateDocumentArray } from "@/features/editor";
 
 interface DragItem {
     index: number;
@@ -18,17 +19,17 @@ const ItemTypes = {
 type DraggableContainerProps = {
     children: React.ReactNode;
     id: string;
-    moveSection: (dragIndex: number, hoverIndex: number) => void;
     orderArray: string[];
+    document: any;
 };
 
 const DraggableContainer = ({
     children,
     id,
-    moveSection,
     orderArray,
+    document,
 }: DraggableContainerProps) => {
-    const { isReordering } = useAppContext();
+    const { documentArray, setDocumentArray, isReordering } = useAppContext();
     const containerRef = useRef<HTMLDivElement>(null);
     // for adding a draggable element rather than using the whole section
     const itemRef = useRef<HTMLDivElement>(null);
@@ -107,6 +108,33 @@ const DraggableContainer = ({
             isDragging: monitor.isDragging(),
         }),
     });
+
+    const moveSection = (dragIndex: number, hoverIndex: number) => {
+        // Create a copy of the sectionOrder
+        const newOrderArray = [
+            ...document.information.sectionOrder[document.currentPage - 1],
+        ];
+
+        // Get the dragged item
+        const draggedItem = newOrderArray[dragIndex];
+
+        // Remove the dragged item from its original position
+        newOrderArray.splice(dragIndex, 1);
+
+        // Insert the dragged item at the new position
+        newOrderArray.splice(hoverIndex, 0, draggedItem);
+        // update the orderArray in the document
+        const updatedDocument = { ...document };
+        updatedDocument.information.sectionOrder[
+            updatedDocument.currentPage - 1
+        ] = newOrderArray;
+        // update the documentArray
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+    };
 
     // drag(drop(containerRef));
     // the below line makes it so that you drab by the draggableSection and not the whole container but can still drop on the whole container

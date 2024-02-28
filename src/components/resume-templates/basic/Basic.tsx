@@ -22,7 +22,6 @@ type BasicProps = {
 };
 
 const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
-    const { documentArray, setDocumentArray } = useAppContext();
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(11);
@@ -76,35 +75,6 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
         }
     };
 
-    const moveSection = (dragIndex: number, hoverIndex: number) => {
-        if (isEditor) {
-            // Create a copy of the sectionOrder
-            const newOrderArray = [
-                ...document.information.sectionOrder[document.currentPage - 1],
-            ];
-
-            // Get the dragged item
-            const draggedItem = newOrderArray[dragIndex];
-
-            // Remove the dragged item from its original position
-            newOrderArray.splice(dragIndex, 1);
-
-            // Insert the dragged item at the new position
-            newOrderArray.splice(hoverIndex, 0, draggedItem);
-            // update the orderArray in the document
-            const updatedDocument = { ...document };
-            updatedDocument.information.sectionOrder[
-                updatedDocument.currentPage - 1
-            ] = newOrderArray;
-            // update the documentArray
-            const newDocumentArray = updateDocumentArray(
-                updatedDocument,
-                documentArray
-            );
-            setDocumentArray(newDocumentArray);
-        }
-    };
-
     // Create pdfStyles
     const pdfStyles = StyleSheet.create({
         page: { width: "100%", height: "100%" },
@@ -145,7 +115,7 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                         document.currentPage - 1
                                     ]
                                 }
-                                moveSection={moveSection}
+                                document={document}
                             >
                                 <SectionContainerEditor document={document}>
                                     <Section
