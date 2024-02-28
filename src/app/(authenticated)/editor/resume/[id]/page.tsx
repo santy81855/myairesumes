@@ -1,11 +1,12 @@
 import styles from "./page.module.css";
-import { validateRequest } from "@/lib/auth";
-import { getUser } from "@/lib/user";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { redirect } from "next/navigation";
-import DocumentContainer from "@/components/editor/document-container/DocumentContainer";
-import Placeholder from "@/components/resume-placeholder/Placeholder";
-import AddPage from "@/components/editor/add-page-button/AddPage";
-import PageCounter from "@/components/editor/page-counter/PageCounter";
+import {
+    AddSectionModal,
+    DocumentContainer,
+    getResume,
+    PageUtilBar,
+} from "@/features/editor";
 
 const Page = async ({
     params,
@@ -20,14 +21,11 @@ const Page = async ({
     }
     // get the slug from the params
     const { id } = params;
-
+    const resume = await getResume(user.id, id);
+    //<PageUtilBar documentId={id} />
     return (
         <main className={styles.main}>
-            <PageCounter />
-            <DocumentContainer>
-                <Placeholder />
-            </DocumentContainer>
-            <AddPage />
+            <DocumentContainer document={resume} />
         </main>
     );
 };

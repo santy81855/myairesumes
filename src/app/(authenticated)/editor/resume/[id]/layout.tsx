@@ -9,31 +9,51 @@ const poppins = Poppins({
     weight: "300",
 });
 import styles from "./layout.module.css";
-import SideMenu from "@/components/editor/side-menu/SideMenu";
-import TitleBar from "@/components/editor/title-bar/TitleBar";
+import Navbar from "@/components/nav/Navbar";
+import { validateRequest } from "@/features/authentication/lib/auth";
+import {
+    AddSectionModal,
+    getResume,
+    SideMenu,
+    TitleBar,
+} from "@/features/editor";
+import { redirect } from "next/navigation";
+import { ResumeContext } from "@/app/providers";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Editor",
     description: "Create and edit your resume with our AI-powered editor",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
     params,
 }: {
     children: React.ReactNode;
-    params: { slug: string };
+    params: { id: string };
 }) {
+    const { user } = await validateRequest();
+    if (!user) {
+        redirect("/sign-in");
+    }
+    const resume = await getResume(user.id, params.id);
+
     return (
         <html lang="en">
             <body className={poppins.className}>
-                <section className={styles.rowContainer}>
-                    <SideMenu />
-                    <section className={styles.columnContainer}>
-                        <TitleBar />
-                        {children}
+                <ResumeContext>
+                    <AddSectionModal />
+                    <Navbar
+                        style={{ backgroundColor: "black", color: "white" }}
+                    />
+                    <section className={styles.rowContainer}>
+                        <SideMenu />
+                        <section className={styles.columnContainer}>
+                            <TitleBar />
+                            {children}
+                        </section>
                     </section>
-                </section>
+                </ResumeContext>
             </body>
         </html>
     );

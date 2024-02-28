@@ -8,7 +8,6 @@ const poppins = Poppins({
     subsets: ["latin"],
     weight: "300",
 });
-import Navbar from "@/components/nav/Navbar";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Editor",
@@ -22,10 +21,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={poppins.className}>
-                <Navbar style={{ backgroundColor: "black", color: "white" }} />
-                {children}
-            </body>
+            <body className={poppins.className}>{children}</body>
         </html>
     );
 }

@@ -1,4 +1,4 @@
-import { Inter, Montserrat } from "next/font/google";
+import { Inter } from "next/font/google";
 import Navbar from "@/components/nav/Navbar";
 import { ToastContainer } from "react-toastify";
 import "../globals.css";

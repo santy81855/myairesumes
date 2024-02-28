@@ -1,0 +1,43 @@
+.documentContainer {
+    aspect-ratio: 8.5 / 11;
+    width: 70%;
+    min-width: 300px;
+    max-width: 800px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    margin-inline: auto;
+}
+
+.document {
+    aspect-ratio: 8.5 / 11;
+    width: 100%;
+    position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    .documentContainer {
+        width: 90%;
+    }
+}
+
+.testDocument {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    overflow: hidden;
+}
+
+.testContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+    font-size: 100%;
+}
+
+.testContainer p {
+}
+
+/*
+[595.28, 841.89],
+*/

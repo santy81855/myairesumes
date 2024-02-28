@@ -6,10 +6,9 @@ import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import Link from "next/link";
 import { checkIcon, lockIcon } from "@/components/icons/iconSVG";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 import FormLoading from "@/components/form-loading/FormLoading";
-import Form from "@/components/authentication/sign-up-form/Form";
 
 type UpgradeModalProps = {
     returnUrl: string;

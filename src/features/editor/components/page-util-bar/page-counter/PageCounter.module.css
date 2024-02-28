@@ -1,0 +1,59 @@
+.pageCounter {
+    display: flex;
+    gap: var(--gap-medium);
+    align-items: center;
+    justify-content: center;
+    background-color: #7367ff;
+    padding-inline: var(--padding-block-small);
+    padding-block: var(--padding-block-small);
+    border-radius: var(--border-radius-xsmall);
+}
+
+.pageCounter p {
+    color: white;
+    font-size: 0.6rem;
+    margin: 0;
+    padding: 0;
+}
+
+.pageChanger {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pageChanger svg {
+    stroke: white;
+    fill: white;
+    width: 15px;
+    height: 15px;
+}
+
+.pageChanger svg:hover {
+    fill: #a4a0d1;
+    stroke: #a4a0d1;
+}
+
+.addPageButton {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.addPageButton svg {
+    stroke: white;
+    fill: white;
+    width: 15px;
+    height: 15px;
+}
+
+.addPageButton svg:hover {
+    fill: #a4a0d1;
+    stroke: #a4a0d1;
+}

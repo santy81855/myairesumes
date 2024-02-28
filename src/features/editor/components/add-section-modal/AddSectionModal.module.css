@@ -1,0 +1,190 @@
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(162, 162, 162, 0.502);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    padding-block: var(--padding-block-large);
+    gap: var(--padding-block-large);
+}
+
+.container {
+    width: 80%;
+    max-width: 700px;
+    max-height: 90%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-medium);
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-inline-medium);
+    border-radius: var(--border-radius-small);
+}
+
+.titleContainer {
+    display: flex;
+    gap: var(--padding-block-small);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cancelButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.cancelButton svg {
+    width: 20px;
+    height: 20px;
+    stroke: #7367ff;
+}
+
+.cancelButton svg:hover {
+    stroke: #5f52e6;
+}
+
+.title {
+    font-size: var(--font-size-medium);
+}
+
+.searchBarContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--padding-block-small);
+    align-items: center;
+    justify-content: center;
+    border: 1px solid grey;
+    border-radius: var(--border-radius-xsmall);
+    padding-inline: var(--padding-inline-small);
+}
+
+.searchBarContainer svg {
+    width: 20px;
+    height: 20px;
+    stroke: none;
+    fill: grey;
+}
+
+.searchBar {
+    flex-grow: 1;
+    border: none;
+    background-color: transparent;
+    font-size: var(--font-size-small);
+    padding-block: var(--padding-block-small);
+}
+
+.searchBar:focus {
+    outline: none;
+}
+
+.searchbarContainerFocus {
+    border: 1px solid #7367ff;
+}
+
+.resultsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-large);
+    overflow-y: auto;
+}
+
+.resultItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-inline: var(--padding-inline-small);
+}
+
+.colContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.rowContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--padding-block-small);
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.name {
+    font-size: var(--font-size-medium);
+    color: black;
+    font-weight: bold;
+}
+
+.description {
+    font-size: var(--font-size-small);
+    color: grey;
+}
+
+.selectButton {
+    background-color: #7367ff;
+    color: white;
+    border: none;
+    padding-inline: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+    border-radius: var(--border-radius-xsmall);
+    cursor: pointer;
+    font-size: var(--font-size-small);
+    min-width: 120px;
+}
+
+.selectButton:hover {
+    background-color: #5f52e6;
+}
+
+.exampleContainer {
+    width: 100%;
+    border: 1px solid grey;
+    margin-block-start: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+}
+
+.selectButtonMobile {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding-inline: var(--padding-inline-small);
+    }
+
+    .selectButton {
+        display: none;
+    }
+
+    .selectButtonMobile {
+        display: flex;
+        width: 100%;
+        background-color: #7367ff;
+        color: white;
+        border: none;
+        padding-inline: var(--padding-inline-medium);
+        padding-block: var(--padding-block-small);
+        border-radius: var(--border-radius-xsmall);
+        cursor: pointer;
+        font-size: var(--font-size-small);
+        margin-block-start: var(--padding-block-small);
+    }
+
+    .selectButtonMobile:hover {
+        background-color: #5f52e6;
+    }
+}

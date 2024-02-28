@@ -244,6 +244,106 @@ export const templateIcon = (
     </svg>
 );
 
+export const holdIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M14 10v4h-4v-4zm2 0h5v4h-5zm-2 11h-4v-5h4zm2 0v-5h5v4a1 1 0 0 1-1 1zM14 3v5h-4V3zm2 0h4a1 1 0 0 1 1 1v4h-5zm-8 7v4H3v-4zm0 11H4a1 1 0 0 1-1-1v-4h5zM8 3v5H3V4a1 1 0 0 1 1-1z"></path>
+    </svg>
+);
+
+export const orderIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+        <path d="M4 20h11v6.17l-2.59-2.58L11 25l5 5l5-5l-1.41-1.41L17 26.17V20h11v-2H4zm7-13l1.41 1.41L15 5.83V12H4v2h24v-2H17V5.83l2.59 2.58L21 7l-5-5z"></path>
+    </svg>
+);
+
+export const modernResumeIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+        <g>
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10 9h4m-4 7h12m-12 4h12m-12 4h4m-6 5h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2"
+            ></path>
+            <circle cx={22} cy={9} r={0.5} fill="currentColor"></circle>
+        </g>
+    </svg>
+);
+
+export const dragIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <path d="M2 11h16v2H2zm0-4h16v2H2zm11 8H7l3 3zM7 5h6l-3-3z"></path>
+    </svg>
+);
+
+export const backArrow = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M19 11H7.14l3.63-4.36a1 1 0 1 0-1.54-1.28l-5 6a1.19 1.19 0 0 0-.09.15c0 .05 0 .08-.07.13A1 1 0 0 0 4 12a1 1 0 0 0 .07.36c0 .05 0 .08.07.13a1.19 1.19 0 0 0 .09.15l5 6A1 1 0 0 0 10 19a1 1 0 0 0 .64-.23a1 1 0 0 0 .13-1.41L7.14 13H19a1 1 0 0 0 0-2"></path>
+    </svg>
+);
+
+export const forwardArrow = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M5 13h11.86l-3.63 4.36a1 1 0 0 0 1.54 1.28l5-6a1.19 1.19 0 0 0 .09-.15c0-.05.05-.08.07-.13A1 1 0 0 0 20 12a1 1 0 0 0-.07-.36c0-.05-.05-.08-.07-.13a1.19 1.19 0 0 0-.09-.15l-5-6A1 1 0 0 0 14 5a1 1 0 0 0-.64.23a1 1 0 0 0-.13 1.41L16.86 11H5a1 1 0 0 0 0 2"></path>
+    </svg>
+);
+
+export const trashIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z"></path>
+    </svg>
+);
+
+export const sectionIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M21 8H3V4h18zm0 2H3v4h18zm0 6H3v4h18z"></path>
+    </svg>
+);
+
+export const cancelIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
+        <path d="m1115 1024l690 691l-90 90l-691-690l-691 690l-90-90l690-691l-690-691l90-90l691 690l691-690l90 90z"></path>
+    </svg>
+);
+
+export const saveIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+        <path d="M5 2v2.5A1.5 1.5 0 0 0 6.5 6h2A1.5 1.5 0 0 0 10 4.5V2h.379a2 2 0 0 1 1.414.586l1.621 1.621A2 2 0 0 1 14 5.621V12a2 2 0 0 1-2 2V9.5A1.5 1.5 0 0 0 10.5 8h-5C4.673 8 4 8.669 4 9.498V14a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm1 0v2.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V2zM5 14h6V9.5a.5.5 0 0 0-.5-.5h-5c-.277 0-.5.223-.5.498z"></path>
+    </svg>
+);
+
+export const trapezoid = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 48">
+        <path
+            strokeWidth={4}
+            d="M31.794 8H16.206a3 3 0 0 0-2.864 2.105l-8.125 26A3 3 0 0 0 8.081 40h31.838a3 3 0 0 0 2.864-3.895l-8.125-26A3 3 0 0 0 31.794 8Z"
+        ></path>
+    </svg>
+);
+
+export const circledXIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+        <g fill="none" strokeLinejoin="round" strokeWidth={4}>
+            <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"></path>
+            <path
+                strokeLinecap="round"
+                d="M29.657 18.343L18.343 29.657m0-11.314l11.314 11.314"
+            ></path>
+        </g>
+    </svg>
+);
+
+export const circledXFilledIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+        <path d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2m5.4 21L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"></path>
+    </svg>
+);
+
+export const minusIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M18 12.998H6a1 1 0 0 1 0-2h12a1 1 0 0 1 0 2"></path>
+    </svg>
+);
+
 export const magicResumeLogo = (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
         <g fillRule="evenodd" stroke="none">

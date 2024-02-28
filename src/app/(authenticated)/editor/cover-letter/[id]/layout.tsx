@@ -9,8 +9,8 @@ const poppins = Poppins({
     weight: "300",
 });
 import styles from "./layout.module.css";
-import SideMenu from "@/components/editor/side-menu/SideMenu";
-import TitleBar from "@/components/editor/title-bar/TitleBar";
+import { SideMenu, TitleBar } from "@/features/editor";
+import Navbar from "@/components/nav/Navbar";
 
 export const metadata: Metadata = {
     title: "My AI Resumes - Editor",
@@ -27,6 +27,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={poppins.className}>
+                <Navbar style={{ backgroundColor: "black", color: "white" }} />
                 <section className={styles.rowContainer}>
                     <SideMenu />
                     <section className={styles.columnContainer}>

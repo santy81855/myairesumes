@@ -4,7 +4,7 @@ import { createSpecialSubscription } from "@/actions/stripe";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { checkIcon, unlockIcon } from "@/components/icons/iconSVG";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import FormLoading from "@/components/form-loading/FormLoading";
 
 type UpgradeModalProps = {
