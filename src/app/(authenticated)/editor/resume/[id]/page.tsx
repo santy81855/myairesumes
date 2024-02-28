@@ -22,10 +22,9 @@ const Page = async ({
     // get the slug from the params
     const { id } = params;
     const resume = await getResume(user.id, id);
-
+    //<PageUtilBar documentId={id} />
     return (
         <main className={styles.main}>
-            <PageUtilBar documentId={id} />
             <DocumentContainer document={resume} />
         </main>
     );
