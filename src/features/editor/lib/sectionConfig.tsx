@@ -94,22 +94,27 @@ export const SectionConfig = (
         extraSmall: {
             fontSize: fontSize * 0.8,
             fontFamily: font,
+            lineHeight: 1.2,
         },
         small: {
             fontSize: fontSize,
             fontFamily: font,
+            lineHeight: 1.2,
         },
         medium: {
             fontSize: fontSize * 1.2,
             fontFamily: font,
+            lineHeight: 1.2,
         },
         large: {
             fontSize: fontSize * 1.5,
             fontFamily: font,
+            lineHeight: 1.2,
         },
         extraLarge: {
             fontFamily: font,
             fontSize: fontSize * 2,
+            lineHeight: 1.2,
         },
         rowContainer: {
             width: "100%",

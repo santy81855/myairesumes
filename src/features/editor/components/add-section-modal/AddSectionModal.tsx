@@ -16,6 +16,7 @@ const AddSectionModal = () => {
         setShowComponentModal,
     } = useAppContext();
     const params = useParams();
+    const id = params.slug[1];
     const [document, setDocument] = useState<any>(null);
     const [searchContent, setSearchContent] = useState("");
     const [results, setResults] = useState<any[]>([]);
@@ -52,14 +53,12 @@ const AddSectionModal = () => {
     }, []);
 
     useEffect(() => {
-        setDocument(
-            documentArray.find((document) => document.id === params.id)
-        );
+        setDocument(documentArray.find((document) => document.id === id));
         const temp = SectionConfig(
-            documentArray.find((document) => document.id === params.id),
+            documentArray.find((document) => document.id === id),
             null,
-            documentArray.find((document) => document.id === params.id)
-                ?.information.font,
+            documentArray.find((document) => document.id === id)?.information
+                .font,
             margin
         );
         let sectionConfigArray = Object.entries(temp).map(([id, config]) => ({
@@ -98,7 +97,7 @@ const AddSectionModal = () => {
     };
 
     const handleAddSectionClicked = (section: string) => {
-        const index = showComponentModal[params.id as string];
+        const index = showComponentModal[id as string];
         // add given section at given index in the sectionOrder array of the document and update the documentArray
         if (!document) return;
         const currentPageIndex = document.currentPage - 1;
@@ -123,13 +122,13 @@ const AddSectionModal = () => {
     };
 
     const closeComponentModal = () => {
-        const { [params.id as string]: _, ...newState } = showComponentModal;
+        const { [id as string]: _, ...newState } = showComponentModal;
         setShowComponentModal(newState);
     };
 
     return (
         showComponentModal &&
-        showComponentModal.hasOwnProperty(params.id as string) &&
+        showComponentModal.hasOwnProperty(id as string) &&
         document && (
             <section className={styles.background}>
                 <section className={styles.container}>

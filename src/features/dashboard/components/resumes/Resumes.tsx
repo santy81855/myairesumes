@@ -31,6 +31,7 @@ const Resumes = async ({ currentUser, searchParams }: ResumesProps) => {
     return (
         <main className={styles.container}>
             <DashboardCard key="resumes-card" title="Resumes">
+                {addResumeButton}
                 <section className={styles.resumesContainer}>
                     {resumes.map((resume: any) => {
                         return (
