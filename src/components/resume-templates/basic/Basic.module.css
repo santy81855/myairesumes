@@ -6,12 +6,11 @@
 }
 
 .pageContainer {
+    aspect-ratio: 8.5 / 11;
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     background-color: white;
-    font-family: "Times New Roman", Times, serif;
 }

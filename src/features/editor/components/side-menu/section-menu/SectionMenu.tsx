@@ -19,26 +19,24 @@ const StyleMenu = () => {
         setShowComponentModal,
     } = useAppContext();
     const params = useParams();
+    const id = params.slug[1];
     const [document, setDocument] = useState<any>(null);
     const [allSections, setAllSections] = useState<any>([]);
     useEffect(() => {
-        setDocument(
-            documentArray.find((document) => document.id === params.id)
-        );
+        setDocument(documentArray.find((document) => document.id === id));
         const sectionConfig = SectionConfig(
             document,
             null,
             "",
-            documentArray.find((document) => document.id === params.id)
+            documentArray.find((document) => document.id === id)
         );
-        // tempArr is an object where all the keys are the section names
         setAllSections(sectionConfig);
-    }, [documentArray, params.id]);
+    }, [documentArray]);
 
     const handleAddSectionClick = (index: number) => {
         setShowComponentModal({
             ...showComponentModal,
-            [params.id as string]: index,
+            [id as string]: index,
         });
     };
     const handleRemoveSectionClick = (index: number) => {
@@ -72,7 +70,7 @@ const StyleMenu = () => {
                 <>
                     <motion.section className={styles.pageFunctionContainer}>
                         <PageCounter
-                            documentId={params.id as string}
+                            documentId={id as string}
                             fullWidth={true}
                         />
                     </motion.section>
@@ -107,7 +105,7 @@ const StyleMenu = () => {
                                         {circledXFilledIcon}
                                     </motion.button>
                                     <motion.p className={styles.sectionText}>
-                                        {allSections[section].name}
+                                        {allSections[section]?.name}
                                     </motion.p>
                                 </motion.section>
                                 <motion.button

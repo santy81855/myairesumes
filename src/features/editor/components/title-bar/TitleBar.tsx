@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { updateResumeAction } from "@/features/editor";
 import Basic from "@/components/resume-templates/basic/Basic";
+import { savePDF } from "@progress/kendo-react-pdf";
 
 const TitleBar = () => {
     const { documentArray, isDocumentLoading, setIsDocumentLoading } =
@@ -26,7 +27,7 @@ const TitleBar = () => {
     const [document, setDocument] = useState<any>(null);
     useEffect(() => {
         setDocument(
-            documentArray.find((document) => document.id === params.id)
+            documentArray.find((document) => document.id === params.slug[1])
         );
     }, [documentArray]);
 
@@ -61,7 +62,6 @@ const TitleBar = () => {
                         >
                             <button type="submit">{saveIcon}</button>
                         </form>
-
                         <PDFDownloadLink
                             document={
                                 <Basic document={document} isDownload={true} />

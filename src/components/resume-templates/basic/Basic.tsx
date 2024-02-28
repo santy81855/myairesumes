@@ -9,19 +9,9 @@ import {
     Document,
     StyleSheet,
     Font,
-    PDFViewer,
 } from "@react-pdf/renderer";
-import SectionComponents from "../section-components/SectionComponents";
-import {
-    DraggableContainer,
-    updateDocumentArray,
-    SectionConfig,
-} from "@/features/editor";
+import { DraggableContainer, updateDocumentArray } from "@/features/editor";
 import Section from "../Section/Section";
-import {
-    formatDateMonthDayYear,
-    sortObjectArrayByDateEnd,
-} from "../../../lib/date";
 import SectionContainerEditor from "../section-components/section-container-editor/SectionContainerEditor";
 
 type BasicProps = {
@@ -38,24 +28,27 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const [margin, setMargin] = useState(11);
 
     useEffect(() => {
+        if (isDownload) return;
         const template = templateRef.current as unknown as HTMLElement;
         if (!template) return;
         const { width, height } = template.getBoundingClientRect();
-        console.log(width);
         let size = 11 * (width / 610);
-        setFontSize((prev) => size);
+        setFontSize(size);
         let newMargin = 11 * (width / 610);
-        setMargin((prev) => newMargin);
+        setMargin(newMargin);
+        console.log(newMargin);
 
         // handle the text scaling
         function handleResize() {
+            if (isDownload) return;
             const template = templateRef.current as unknown as HTMLElement;
             if (!template) return;
             const { width, height } = template.getBoundingClientRect();
             let size = 11 * (width / 610);
-            setFontSize((prev) => size);
+            setFontSize(size);
             let newMargin = 11 * (width / 610);
-            setMargin((prev) => newMargin);
+            setMargin(newMargin);
+            checkoverflow();
         }
 
         window.addEventListener("resize", handleResize);
@@ -63,10 +56,32 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    const checkoverflow = () => {
+        if (!templateRef.current) return;
+        const content = templateRef.current as unknown as HTMLElement;
+        // check if it is overflowing by more than like 2 pixels
+        if (content.scrollHeight - content.clientHeight > 2) {
+            const bigRect = content.getBoundingClientRect();
+
+            const children = content.children;
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i];
+                const childRect = child.getBoundingClientRect();
+
+                if (childRect.bottom > bigRect.bottom) {
+                    console.log("overflow in child: ");
+                    console.log(child);
+                }
+            }
+        }
+    };
+
     const moveSection = (dragIndex: number, hoverIndex: number) => {
         if (isEditor) {
             // Create a copy of the sectionOrder
-            const newOrderArray = [...document.information.sectionOrder];
+            const newOrderArray = [
+                ...document.information.sectionOrder[document.currentPage - 1],
+            ];
 
             // Get the dragged item
             const draggedItem = newOrderArray[dragIndex];
@@ -92,7 +107,7 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
 
     // Create pdfStyles
     const pdfStyles = StyleSheet.create({
-        page: { flexDirection: "row" },
+        page: { width: "100%", height: "100%" },
         pageContainer: {
             backgroundColor: "white",
             width: "100%",
@@ -105,215 +120,18 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
             justifyContent: "flex-start",
             alignItems: "center",
             gap: margin,
+            overflow: "hidden",
+            fontSize: fontSize,
         },
     });
 
-    const editorStyles = {
-        sectionContainer: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "column" as "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "1em",
-        },
-
-        sectionTitle: {
-            fontSize: fontSize * 1.3,
-            fontWeight: "bold",
-        },
-
-        italic: {
-            fontStyle: "italic",
-        },
-
-        boldItalic: {
-            fontWeight: "bold",
-            fontStyle: "italic",
-        },
-
-        bold: {
-            fontWeight: "bold",
-        },
-
-        extraSmall: {
-            fontSize: fontSize * 0.8,
-        },
-
-        small: {
-            fontSize: fontSize,
-        },
-
-        medium: {
-            fontSize: fontSize * 1.2,
-        },
-        large: {
-            fontSize: fontSize * 1.5,
-        },
-
-        extraLarge: {
-            fontSize: fontSize * 2,
-        },
-
-        rowContainer: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "row" as "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "calc(1em / 1.5)",
-        },
-
-        columnGroupCenter: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "column" as "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "calc(1em / 12)",
-        },
-
-        columnGroupLeft: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "column" as "column",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            gap: "calc(1em / 12)",
-        },
-
-        columnGroupRight: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "column" as "column",
-            justifyContent: "flex-start",
-            alignItems: "flex-end",
-            gap: "calc(1em / 12)",
-        },
-        bullet: {
-            width: fontSize / 4,
-            height: fontSize / 4,
-            backgroundColor: "black",
-            borderRadius: "50%",
-        },
-
-        horizontalLine: {
-            width: "100%",
-            height: "calc(1em / 10)",
-            backgroundColor: "black",
-        },
-
-        arrayContainer: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "column" as "column",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            gap: "calc(1em)",
-        },
-
-        arrayItem: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "column" as "column",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            gap: "calc(1em / 2)",
-        },
-
-        rowSpaceBetween: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "row" as "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-        },
-
-        bulletItemContainer: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "column" as "column",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            gap: "calc(1em /3)",
-        },
-
-        bulletItem: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "row" as "row",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            gap: "calc(1em / 4)",
-        },
-    };
-
-    const example = (
-        <div style={editorStyles.sectionContainer}>
-            <p style={{ ...editorStyles.medium, ...editorStyles.bold }}>
-                Education
-            </p>
-            <div style={editorStyles.horizontalLine}></div>
-            <div style={editorStyles.arrayContainer}>
-                {sortObjectArrayByDateEnd(
-                    document.information.educationArray,
-                    -1
-                ).map((education: any, index: number) => (
-                    <div key={index} style={editorStyles.arrayItem}>
-                        <div style={editorStyles.rowSpaceBetween}>
-                            <p
-                                style={{
-                                    ...editorStyles.medium,
-                                    ...editorStyles.bold,
-                                }}
-                            >
-                                {education.schoolName}
-                            </p>
-                            <p style={editorStyles.small}>
-                                {formatDateMonthDayYear(education.startDate)} -{" "}
-                                {education.endDate === "Present"
-                                    ? "Present"
-                                    : formatDateMonthDayYear(education.endDate)}
-                            </p>
-                        </div>
-                        <p style={editorStyles.small}>
-                            {education.degreeType} in {education.degreeField}
-                        </p>
-                        <p style={editorStyles.small}>GPA: {education.gpa}</p>
-                        <div style={editorStyles.bulletItemContainer}>
-                            {education.bullets.map(
-                                (bullet: string, index: number) => (
-                                    <div
-                                        key={index}
-                                        style={editorStyles.bulletItem}
-                                    >
-                                        <div style={editorStyles.bullet}></div>
-                                        <p style={editorStyles.small}>
-                                            {bullet}
-                                        </p>
-                                    </div>
-                                )
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-
-    return (
-        document && (
-            <>
-                {isEditor && (
-                    <div
-                        className={styles.pageContainer}
-                        style={{
-                            paddingLeft: "1em",
-                            paddingRight: "1em",
-                            paddingTop: "1em",
-                            fontSize: fontSize,
-                            gap: "1em",
-                        }}
+    if (isEditor) {
+        return (
+            <Document>
+                <Page wrap={false} style={pdfStyles.page}>
+                    <View
+                        wrap={false}
+                        style={pdfStyles.pageContainer}
                         ref={templateRef}
                     >
                         {document.information.sectionOrder[
@@ -333,44 +151,42 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                     <Section
                                         sectionId={section}
                                         document={document}
-                                        ref={templateRef}
+                                        templateRef={templateRef}
                                     />
                                 </SectionContainerEditor>
                             </DraggableContainer>
                         ))}
-                    </div>
+                    </View>
+                </Page>
+            </Document>
+        );
+    }
+    if (isDownload) {
+        return (
+            <Document title="Resume">
+                {document.information.sectionOrder.map(
+                    (array: string[], index: number) => (
+                        <Page
+                            wrap={false}
+                            key={index}
+                            style={pdfStyles.page}
+                            size={[610, 789.4]}
+                        >
+                            <View wrap={false} style={pdfStyles.pageContainer}>
+                                {array.map((section: string, index: number) => (
+                                    <Section
+                                        key={section + index.toString()}
+                                        sectionId={section}
+                                        document={document}
+                                    />
+                                ))}
+                            </View>
+                        </Page>
+                    )
                 )}
-                {isDownload && (
-                    <Document title="Resume">
-                        {document.information.sectionOrder.map(
-                            (array: string[], index: number) => (
-                                <Page
-                                    wrap={false}
-                                    key={index}
-                                    style={pdfStyles.page}
-                                    size="LETTER"
-                                >
-                                    <View
-                                        wrap={false}
-                                        style={pdfStyles.pageContainer}
-                                    >
-                                        <SectionComponents
-                                            document={document}
-                                            font="Times-Roman"
-                                            fontSize={fontSize}
-                                            margin={margin}
-                                            orderArray={array}
-                                            isDownload={true}
-                                        />
-                                    </View>
-                                </Page>
-                            )
-                        )}
-                    </Document>
-                )}
-            </>
-        )
-    );
+            </Document>
+        );
+    }
 };
 
 export default Basic;
