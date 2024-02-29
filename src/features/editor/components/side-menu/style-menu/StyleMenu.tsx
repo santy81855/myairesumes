@@ -119,6 +119,11 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                                     <motion.option
                                         key={index}
                                         value={(index + 1).toString()}
+                                        selected={
+                                            document.information.style
+                                                .baseFontSize ===
+                                            index + 1
+                                        }
                                     >
                                         {index + 1}
                                     </motion.option>
@@ -135,13 +140,15 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                                     handleMarginSizeChange(e.target.value)
                                 }
                             >
-                                <motion.option disabled selected>
-                                    Margin
-                                </motion.option>
                                 {Array.from({ length: 60 }).map((_, index) => (
                                     <motion.option
                                         key={index}
                                         value={(index + 1).toString()}
+                                        selected={
+                                            document.information.style
+                                                .baseMarginSize ===
+                                            index + 1
+                                        }
                                     >
                                         {index + 1}
                                     </motion.option>
@@ -155,16 +162,28 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                             className={styles.font}
                             onChange={(e) => handleFontChange(e.target.value)}
                         >
-                            <motion.option disabled selected>
-                                Font
-                            </motion.option>
-                            <motion.option value="Courier">
+                            <motion.option
+                                value="Courier"
+                                selected={
+                                    document.information.font === "Courier"
+                                }
+                            >
                                 Courier
                             </motion.option>
-                            <motion.option value="Helvetica">
+                            <motion.option
+                                value="Helvetica"
+                                selected={
+                                    document.information.font === "Helvetica"
+                                }
+                            >
                                 Helvetica
                             </motion.option>
-                            <motion.option value="Times-Roman">
+                            <motion.option
+                                value="Times-Roman"
+                                selected={
+                                    document.information.font === "Times-Roman"
+                                }
+                            >
                                 Times New Roman
                             </motion.option>
                         </motion.select>

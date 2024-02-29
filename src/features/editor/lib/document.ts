@@ -168,9 +168,9 @@ export const initializeNewResume = (
         lastName: last,
         sectionOrder: [
             [
-                "nameLargeBold",
-                "positionSmall",
-                "contactEmailPhoneWebsite",
+                "name",
+                "position",
+                "contactHorizontal",
                 "summary",
                 "experience",
                 "educationDetailed",
