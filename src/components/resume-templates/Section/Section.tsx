@@ -1,10 +1,6 @@
 "use client";
-import { useState, useEffect, forwardRef } from "react";
+import { useState, useEffect } from "react";
 import { SectionConfig } from "../../../features/editor";
-import {
-    formatDateMonthDayYear,
-    sortObjectArrayByDateEnd,
-} from "../../../lib/date";
 
 type SectionProps = {
     sectionId: string;
