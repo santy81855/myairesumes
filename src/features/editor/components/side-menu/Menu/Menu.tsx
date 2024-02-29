@@ -1,8 +1,6 @@
 "use client";
 import styles from "./Menu.module.css";
-import Link from "next/link";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -14,11 +12,21 @@ import ExpandedMenu from "../expanded-menu/ExpandedMenu";
 import TemplateMenu from "../template-menu/TemplateMenu";
 import StyleMenu from "../style-menu/StyleMenu";
 import SectionMenu from "../section-menu/SectionMenu";
+import { useAppContext } from "@/app/providers";
+import { useParams } from "next/navigation";
 
 const Menu = () => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const params = useParams();
+    const id = params.slug[1];
+    const [document, setDocument] = useState<any>(null);
     const [isTemplateOpen, setIsTemplateOpen] = useState(false);
     const [isStyleOpen, setIsStyleOpen] = useState(false);
     const [isSectionOpen, setIsSectionOpen] = useState(false);
+
+    useEffect(() => {
+        setDocument(documentArray.find((document) => document.id === id));
+    }, [documentArray]);
 
     const toggleTemplate = () => {
         setIsTemplateOpen(!isTemplateOpen);
@@ -72,15 +80,25 @@ const Menu = () => {
                     <p className={styles.staticItemName}>Styles</p>
                 </section>
             </section>
-            <ExpandedMenu state={isTemplateOpen} setState={setIsTemplateOpen}>
-                <TemplateMenu />
-            </ExpandedMenu>
-            <ExpandedMenu state={isSectionOpen} setState={setIsSectionOpen}>
-                <SectionMenu />
-            </ExpandedMenu>
-            <ExpandedMenu state={isStyleOpen} setState={setIsStyleOpen}>
-                <StyleMenu />
-            </ExpandedMenu>
+            {document && (
+                <>
+                    <ExpandedMenu
+                        state={isTemplateOpen}
+                        setState={setIsTemplateOpen}
+                    >
+                        <TemplateMenu document={document} />
+                    </ExpandedMenu>
+                    <ExpandedMenu
+                        state={isSectionOpen}
+                        setState={setIsSectionOpen}
+                    >
+                        <SectionMenu document={document} />
+                    </ExpandedMenu>
+                    <ExpandedMenu state={isStyleOpen} setState={setIsStyleOpen}>
+                        <StyleMenu document={document} />
+                    </ExpandedMenu>
+                </>
+            )}
         </>
     );
 };

@@ -63,7 +63,7 @@ const Section = ({ sectionId, document, templateRef }: SectionProps) => {
         window.addEventListener("resize", handleResize);
 
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [document]);
 
     return (
         sectionConfig[sectionId as keyof typeof sectionConfig]?.component ??

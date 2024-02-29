@@ -78,7 +78,7 @@
 }
 
 .addSectionButton {
-    width: 60px;
+    width: 50px;
     height: 30px;
     font-size: var(--font-size-medium);
     background-color: #7467ff;

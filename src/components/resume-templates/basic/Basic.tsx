@@ -23,19 +23,23 @@ type BasicProps = {
 
 const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const templateRef = useRef(null);
-    const [fontSize, setFontSize] = useState(11);
-    const [margin, setMargin] = useState(11);
+    const [fontSize, setFontSize] = useState(
+        document.information.style.baseFontSize
+    );
+    const [margin, setMargin] = useState(
+        document.information.style.baseMarginSize
+    );
 
     useEffect(() => {
         if (isDownload) return;
         const template = templateRef.current as unknown as HTMLElement;
         if (!template) return;
         const { width, height } = template.getBoundingClientRect();
-        let size = 11 * (width / 610);
+        let size = document.information.style.baseFontSize * (width / 610);
         setFontSize(size);
-        let newMargin = 11 * (width / 610);
+        let newMargin =
+            document.information.style.baseMarginSize * (width / 610);
         setMargin(newMargin);
-        console.log(newMargin);
 
         // handle the text scaling
         function handleResize() {
@@ -43,17 +47,18 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
             const template = templateRef.current as unknown as HTMLElement;
             if (!template) return;
             const { width, height } = template.getBoundingClientRect();
-            let size = 11 * (width / 610);
+            let size =
+                (document.information.style.baseFontSize + 5) * (width / 610);
             setFontSize(size);
-            let newMargin = 11 * (width / 610);
+            let newMargin =
+                document.information.style.baseMarginSize * (width / 610);
             setMargin(newMargin);
-            checkoverflow();
         }
 
         window.addEventListener("resize", handleResize);
 
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [document]);
 
     const checkoverflow = () => {
         if (!templateRef.current) return;
@@ -89,9 +94,8 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: margin,
+            gap: fontSize,
             overflow: "hidden",
-            fontSize: fontSize,
         },
     });
 

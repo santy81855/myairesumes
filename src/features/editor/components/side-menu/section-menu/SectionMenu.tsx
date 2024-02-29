@@ -10,8 +10,13 @@ import {
     updateDocumentArray,
     SectionConfig,
 } from "@/features/editor";
+import { MenuContainer } from "@/features/editor";
 
-const StyleMenu = () => {
+type SectionMenuProps = {
+    document: any;
+};
+
+const StyleMenu = ({ document }: SectionMenuProps) => {
     const {
         documentArray,
         setDocumentArray,
@@ -20,10 +25,8 @@ const StyleMenu = () => {
     } = useAppContext();
     const params = useParams();
     const id = params.slug[1];
-    const [document, setDocument] = useState<any>(null);
     const [allSections, setAllSections] = useState<any>([]);
     useEffect(() => {
-        setDocument(documentArray.find((document) => document.id === id));
         const sectionConfig = SectionConfig(
             document,
             null,
@@ -61,7 +64,7 @@ const StyleMenu = () => {
     };
 
     return (
-        <motion.section className={styles.container}>
+        <MenuContainer>
             <motion.p className={styles.title}>Sections</motion.p>
             <motion.p className={styles.description}>
                 Add or remove sections from your document.
@@ -122,7 +125,7 @@ const StyleMenu = () => {
                     </motion.section>
                 </>
             )}
-        </motion.section>
+        </MenuContainer>
     );
 };
 

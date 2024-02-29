@@ -71,7 +71,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: margin / 4,
+            gap: fontSize / 4,
         },
         sectionTitle: {
             fontSize: fontSize * 1.3,
@@ -122,7 +122,7 @@ export const SectionConfig = (
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            gap: margin / 1.5,
+            gap: fontSize / 1.5,
         },
         columnGroupCenter: {
             width: "100%",
@@ -130,7 +130,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: margin / 12,
+            gap: fontSize / 12,
         },
         columnGroupLeft: {
             width: "100%",
@@ -138,7 +138,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            gap: margin / 12,
+            gap: fontSize / 12,
         },
         columnGroupRight: {
             width: "100%",
@@ -146,7 +146,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-end",
-            gap: margin / 12,
+            gap: fontSize / 12,
         },
         bullet: {
             width: fontSize / 4,
@@ -156,7 +156,7 @@ export const SectionConfig = (
         },
         horizontalLine: {
             width: "100%",
-            height: margin / 10,
+            height: fontSize / 10,
             backgroundColor: "black",
         },
         arrayContainer: {
@@ -165,7 +165,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: margin,
+            gap: fontSize,
         },
         arrayItem: {
             width: "100%",
@@ -173,7 +173,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            gap: margin / 2,
+            gap: fontSize / 2,
         },
         rowSpaceBetween: {
             width: "100%",
@@ -188,7 +188,7 @@ export const SectionConfig = (
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            gap: margin / 3,
+            gap: fontSize / 3,
         },
         bulletItem: {
             width: "100%",
@@ -196,7 +196,7 @@ export const SectionConfig = (
             flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: margin / 4,
+            gap: fontSize / 4,
         },
     });
 

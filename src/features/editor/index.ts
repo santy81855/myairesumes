@@ -1,5 +1,6 @@
 export { default as AddSectionModal } from "./components/add-section-modal/AddSectionModal";
 export { default as DocumentContainer } from "./components/document-container/DocumentContainer";
+export { default as MenuContainer } from "./components/side-menu/menu-container/MenuContainer";
 export { default as DraggableContainer } from "./components/draggable-section-container/DraggableContainer";
 export { default as PageUtilBar } from "./components/page-util-bar/PageUtilBar";
 export { default as PageCounter } from "./components/page-util-bar/page-counter/PageCounter";

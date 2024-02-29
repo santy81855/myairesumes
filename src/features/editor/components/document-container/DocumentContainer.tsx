@@ -64,7 +64,7 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
                 {(isDocumentLoading || !currentDocument) && <LoadingScreen />}
                 {currentDocument && (
                     <DndProvider backend={HTML5Backend}>
-                        {documentPages[currentDocument.currentPage - 1]}
+                        <Basic document={currentDocument} isEditor={true} />
                     </DndProvider>
                 )}
             </section>
