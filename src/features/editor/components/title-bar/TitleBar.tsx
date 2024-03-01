@@ -15,7 +15,7 @@ const PDFDownloadLink = dynamic(
 import { useAppContext } from "@/app/providers";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { updateResumeAction, getResumeTemplate } from "@/features/editor";
+import { updateResumeAction, getAllResumeTemplates } from "@/features/editor";
 import Basic from "@/components/resume-templates/basic/Basic";
 
 const TitleBar = () => {
@@ -23,11 +23,17 @@ const TitleBar = () => {
         useAppContext();
     const params = useParams();
     const [currentDocument, setCurrentDocument] = useState<any>(null);
+    const [currentTemplate, setCurrentTemplate] = useState<any>(null);
     useEffect(() => {
-        setCurrentDocument(
-            documentArray.find(
-                (currentDocument) => currentDocument.id === params.slug[1]
-            )
+        const doc = documentArray.find(
+            (currentDocument) => currentDocument.id === params.slug[1]
+        );
+        if (!doc) return;
+        setCurrentDocument(doc);
+        const template = getAllResumeTemplates(doc);
+        setCurrentTemplate(
+            template[doc.information.template as keyof typeof template]
+                ?.downloadComponent
         );
     }, [documentArray]);
 
@@ -63,11 +69,7 @@ const TitleBar = () => {
                             <button type="submit">{saveIcon}</button>
                         </form>
                         <PDFDownloadLink
-                            document={getResumeTemplate(
-                                currentDocument.information.template,
-                                "download",
-                                currentDocument
-                            )}
+                            document={currentTemplate}
                             fileName={`${currentDocument.information.documentName}.pdf`}
                         >
                             {({ blob, url, loading, error }) =>

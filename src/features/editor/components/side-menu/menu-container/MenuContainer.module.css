@@ -8,6 +8,7 @@
     align-items: center;
     position: relative;
     overflow-y: auto;
+    overflow-x: hidden;
     z-index: 1;
     padding-inline: var(--padding-inline-small);
     padding-block: var(--padding-block-small);

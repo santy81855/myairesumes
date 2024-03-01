@@ -5,7 +5,6 @@ import { useAppContext } from "@/app/providers";
 import { useParams } from "next/navigation";
 import { circledXIcon, searchIcon } from "@/components/icons/iconSVG";
 import { motion, AnimatePresence } from "framer-motion";
-import SectionComponents from "@/components/resume-templates/section-components/SectionComponents";
 import { updateDocumentArray, SectionConfig } from "@/features/editor";
 import Section from "@/components/resume-templates/Section/Section";
 
@@ -56,7 +55,6 @@ const AddSectionModal = () => {
     useEffect(() => {
         const doc = documentArray.find((document) => document.id === id);
         if (!doc) return;
-        console.log(doc.information.template);
         setDocument(doc);
         const temp = SectionConfig(
             doc,
@@ -160,6 +158,7 @@ const AddSectionModal = () => {
                             onChange={(e) =>
                                 searchContentChanged(e.target.value)
                             }
+                            autoComplete="off"
                         />
                     </section>
                     <AnimatePresence>

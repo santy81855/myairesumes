@@ -1,34 +1,120 @@
 import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
 import Basic from "@/components/resume-templates/basic/Basic";
 import Nexus from "@/components/resume-templates/nexus/Nexus";
+import Impact from "@/components/resume-templates/impact/Impact";
 
-export const getResumeTemplate = (
-    template: string,
-    type: string,
-    document: any
-) => {
-    switch (template) {
-        case "basic":
-            switch (type) {
-                case "editor":
-                    return <Basic isEditor={true} document={document} />;
-                case "download":
-                    return <Basic isDownload={true} document={document} />;
-                case "preview":
-                    return <Basic isPreview={true} document={document} />;
-            }
-        case "nexus":
-            switch (type) {
-                case "editor":
-                    return <Nexus isEditor={true} document={document} />;
-                case "download":
-                    return <Nexus isDownload={true} document={document} />;
-                case "preview":
-                    return <Nexus isPreview={true} document={document} />;
-            }
-        default:
-            return <Basic isPreview={true} document={document} />;
-    }
+const updateDocument = (document: any, template: string) => {
+    // change the template field to the new template
+    // search for any items in the document.information.sectionOrder that have the substring 'header', and replace the item with headerTemplate depending on the passed template
+    const newSectionOrder = document.information.sectionOrder.map(
+        (array: any) =>
+            array.map((item: string) => {
+                if (item.includes("header")) {
+                    // return 'header' + template but make the first letter of template capitalized
+                    return `header${template
+                        .charAt(0)
+                        .toUpperCase()}${template.slice(1)}`;
+                }
+                return item;
+            })
+    );
+    const updatedDocument = {
+        ...document,
+        information: {
+            ...document.information,
+            template,
+            sectionOrder: newSectionOrder,
+        },
+    };
+    return updatedDocument;
+};
+
+export const getAllResumeTemplates = (document: any) => {
+    return {
+        basic: {
+            name: "Basic",
+            description: "A simple and clean resume template.",
+            keywords: [
+                "basic",
+                "simple",
+                "clean",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <Basic
+                    isEditor={true}
+                    document={updateDocument(document, "basic")}
+                />
+            ),
+            downloadComponent: (
+                <Basic
+                    isDownload={true}
+                    document={updateDocument(document, "basic")}
+                />
+            ),
+            previewComponent: (
+                <Basic
+                    isPreview={true}
+                    document={updateDocument(document, "basic")}
+                />
+            ),
+        },
+        nexus: {
+            name: "Nexus",
+            description: "A modern and sleek resume template.",
+            keywords: [
+                "nexus",
+                "modern",
+                "sleek",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <Nexus
+                    isEditor={true}
+                    document={updateDocument(document, "nexus")}
+                />
+            ),
+            downloadComponent: (
+                <Nexus
+                    isDownload={true}
+                    document={updateDocument(document, "nexus")}
+                />
+            ),
+            previewComponent: (
+                <Nexus
+                    isPreview={true}
+                    document={updateDocument(document, "nexus")}
+                />
+            ),
+        },
+        impact: {
+            name: "Impact",
+            description: "A bold and impactful resume template.",
+            keywords: ["impact", "bold", "professional", "smart", "ats"],
+            editorComponent: (
+                <Impact
+                    isEditor={true}
+                    document={updateDocument(document, "impact")}
+                />
+            ),
+            downloadComponent: (
+                <Impact
+                    isDownload={true}
+                    document={updateDocument(document, "impact")}
+                />
+            ),
+            previewComponent: (
+                <Impact
+                    isPreview={true}
+                    document={updateDocument(document, "impact")}
+                />
+            ),
+        },
+    };
 };
 
 export const updateDocumentArray = (updatedDocument: any, array: any) => {
@@ -188,8 +274,8 @@ export const initializeNewResume = (
             baseMarginSize: 11,
             backgroundColor: "#ffffff",
             textColor: "#000000",
-            accentBackgroundColor: "#f0f0f0",
-            accentTextColor: "#000000",
+            accentBackgroundColor: "#5B7FC5",
+            accentTextColor: "white",
         },
         documentName: name,
         jobTitle: job,
@@ -200,9 +286,7 @@ export const initializeNewResume = (
         lastName: last,
         sectionOrder: [
             [
-                "name",
-                "position",
-                "contactHorizontal",
+                "headerBasic",
                 "summary",
                 "experience",
                 "educationDetailed",

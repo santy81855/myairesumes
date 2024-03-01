@@ -31,11 +31,13 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
     const id = params.slug[1];
     const [allSections, setAllSections] = useState<any>([]);
     useEffect(() => {
+        const doc = documentArray.find((document) => document.id === id);
+        if (!doc) return;
         const sectionConfig = SectionConfig(
             document,
             null,
             "",
-            documentArray.find((document) => document.id === id)
+            doc.information.template
         );
         setAllSections(sectionConfig);
     }, [documentArray]);

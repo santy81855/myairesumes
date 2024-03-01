@@ -33,20 +33,55 @@ export const SectionConfig = (
                 return (
                     <View
                         style={{
-                            backgroundColor: "#f5f5f5",
+                            backgroundColor:
+                                document.information.style
+                                    .accentBackgroundColor,
                             width: "100%",
+                            maxHeight: fontSize * 1.6,
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            alignItems: "center",
                         }}
                     >
                         <Text
                             style={{
                                 ...styles.medium,
-                                ...styles.accentTextColor,
+                                ...styles.accentText,
                                 ...styles.textLeftAlign,
                                 ...styles.marginLeftMedium,
                             }}
                         >
                             {title}
                         </Text>
+                    </View>
+                );
+            case "impact":
+                return (
+                    <View
+                        style={{
+                            ...styles.row,
+                            ...styles.alignCenter,
+                            ...styles.justifyStart,
+                            ...styles.gapMedium,
+                            ...styles.marginBottomMedium,
+                        }}
+                    >
+                        <Text
+                            style={{
+                                ...styles.medium,
+                                ...styles.accentBackgroundText,
+                                ...styles.textLeftAlign,
+                                ...styles.uppercase,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.flexGrow,
+                                ...styles.dottedHorizontalLineAccent,
+                            }}
+                        ></View>
                     </View>
                 );
             default:
@@ -94,7 +129,13 @@ export const SectionConfig = (
     };
     // Create styles
     const styles = StyleSheet.create({
-        accentTextColor: {
+        uppercase: {
+            textTransform: "uppercase",
+        },
+        accentText: {
+            color: document.information.style.accentTextColor,
+        },
+        accentBackgroundText: {
             color: document.information.style.accentBackgroundColor,
         },
         accentBackgroundColor: {
@@ -173,6 +214,74 @@ export const SectionConfig = (
             fontFamily: font,
             fontSize: fontSize * 2.5,
             lineHeight: 1.2,
+        },
+        row: {
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+        },
+        col: {
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+        },
+        alignStart: {
+            alignItems: "flex-start",
+        },
+        alignEnd: {
+            alignItems: "flex-end",
+        },
+        alignCenter: {
+            alignItems: "center",
+        },
+        justifyStart: {
+            justifyContent: "flex-start",
+        },
+        justifyEnd: {
+            justifyContent: "flex-end",
+        },
+        justifyCenter: {
+            justifyContent: "center",
+        },
+        gapSmall: {
+            gap: fontSize / 2,
+        },
+        gapMedium: {
+            gap: fontSize,
+        },
+        gapLarge: {
+            gap: fontSize * 2,
+        },
+        flexGrow: {
+            flexGrow: 1,
+        },
+        marginBottomSmall: {
+            marginBottom: fontSize / 4,
+        },
+        marginBottomMedium: {
+            marginBottom: fontSize / 2,
+        },
+        marginBottomLarge: {
+            marginBottom: fontSize,
+        },
+        marginTopSmall: {
+            marginTop: fontSize / 4,
+        },
+        marginTopMedium: {
+            marginTop: fontSize / 2,
+        },
+        marginTopLarge: {
+            marginTop: fontSize,
+        },
+        dottedHorizontalLine: {
+            borderBottomStyle: "dotted",
+            borderBottomWidth: fontSize / 6,
+            borderBottomColor: "black",
+        },
+        dottedHorizontalLineAccent: {
+            borderBottomStyle: "dotted",
+            borderBottomWidth: fontSize / 6,
+            borderBottomColor: document.information.style.accentBackgroundColor,
         },
         rowContainer: {
             width: "100%",
@@ -339,29 +448,22 @@ export const SectionConfig = (
             left: `calc(50% - ${fontSize / 12}px)`,
             transform: "rotate(45deg)",
         },
+        paddingSmall: {
+            padding: fontSize / 4,
+        },
+        paddingMedium: {
+            padding: fontSize / 2,
+        },
+        paddingLarge: {
+            padding: fontSize,
+        },
     });
 
     const headerVariants = {
-        headerNamePositionBasic: {
-            name: "Basic Header with Name and Position",
-            description: "A basic header with your name and position.",
-            keyWords: ["header", "name", "position", "title"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer}>
-                    <Text style={styles.large}>
-                        {document.information.firstName}{" "}
-                        {document.information.lastName}
-                    </Text>
-                    <Text style={styles.small}>
-                        {document.information.position}
-                    </Text>
-                </View>
-            ) : null,
-        },
-        headerNamePositionContactBasic: {
-            name: "Basic Header - Vertical",
+        headerBasic: {
+            name: "Basic Header",
             description:
-                "A header with your name, position, and contact information.",
+                "A header with your name, position, and contact information displayed as a column. Made to match the Basic template.",
             keyWords: ["header", "name", "position", "title", "contact"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
@@ -388,40 +490,8 @@ export const SectionConfig = (
                 </View>
             ) : null,
         },
-        headerNamePositionContactRowBasic: {
-            name: "Basic Header - Horizontal",
-            description:
-                "A header with your name, position, and contact information displayed as a row.",
-            keyWords: ["header", "name", "position", "title", "contact", "row"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer}>
-                    <View style={styles.rowSpaceBetween}>
-                        <View style={styles.columnGroupLeft}>
-                            <Text style={styles.large}>
-                                {document.information.firstName}{" "}
-                                {document.information.lastName}
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.position}
-                            </Text>
-                        </View>
-                        <View style={styles.columnGroupRight}>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.email}
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.phone}
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.website}
-                            </Text>
-                        </View>
-                    </View>
-                </View>
-            ) : null,
-        },
-        headerNamePositionContactRowNexus: {
-            name: "Nexus Header - Horizontal",
+        headerNexus: {
+            name: "Nexus Header",
             description:
                 "A header with your name, position, and contact information displayed as a row. Made to match the Nexus template.",
             keyWords: [
@@ -461,7 +531,7 @@ export const SectionConfig = (
                                     <Text
                                         style={{
                                             ...styles.extraLarge,
-                                            ...styles.accentTextColor,
+                                            ...styles.accentBackgroundText,
                                         }}
                                     >
                                         {document.information.firstName}
@@ -469,7 +539,7 @@ export const SectionConfig = (
                                     <Text
                                         style={{
                                             ...styles.extraLarge,
-                                            ...styles.accentTextColor,
+                                            ...styles.accentBackgroundText,
                                         }}
                                     >
                                         {document.information.lastName}
@@ -479,6 +549,86 @@ export const SectionConfig = (
                                     </Text>
                                 </View>
                             </View>
+                        </View>
+                        <View style={styles.columnGroupRight}>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.email}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.phone}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.website}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            ) : null,
+        },
+        headerImpact: {
+            name: "Impact Header",
+            description:
+                "A header with your name, position, and contact information displayed as a row. Made to match the Impact template.",
+            keyWords: ["header", "name", "position", "title", "contact", "row"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <View style={styles.rowSpaceBetween}>
+                        <View
+                            style={{
+                                ...styles.columnGroupLeft,
+                                ...styles.accentBackgroundColor,
+                                ...styles.paddingLarge,
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    ...styles.extraLarge,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                {document.information.firstName}{" "}
+                                {document.information.lastName}
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                {document.information.position}
+                            </Text>
+                        </View>
+                        <View style={styles.columnGroupRight}>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.email}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.phone}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.website}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            ) : null,
+        },
+        headerRow: {
+            name: "Impact Header",
+            description:
+                "A header with your name, position, and contact information displayed as a row. Made to match the Impact template.",
+            keyWords: ["header", "name", "position", "title", "contact", "row"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <View style={styles.rowSpaceBetween}>
+                        <View style={styles.columnGroupLeft}>
+                            <Text style={styles.large}>
+                                {document.information.firstName}{" "}
+                                {document.information.lastName}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.position}
+                            </Text>
                         </View>
                         <View style={styles.columnGroupRight}>
                             <Text style={styles.small}>
