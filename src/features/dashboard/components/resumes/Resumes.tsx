@@ -1,9 +1,9 @@
 import styles from "./Resumes.module.css";
-import { DashboardCard } from "@/features/dashboard";
 import Link from "next/link";
 import { UpdateUrl } from "@/lib/updateUrl";
 import { getAllUserResumes } from "@/features/editor";
-import Basic from "@/components/resume-templates/basic/Basic";
+import { DashboardCard, DocumentCardDisplay } from "@/features/dashboard";
+import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 
 type ResumesProps = {
     currentUser: any;
@@ -12,7 +12,6 @@ type ResumesProps = {
 
 const Resumes = async ({ currentUser, searchParams }: ResumesProps) => {
     const resumes = await getAllUserResumes(currentUser.id);
-    console.log(resumes);
 
     const addResumeButton = (
         <Link
@@ -31,19 +30,9 @@ const Resumes = async ({ currentUser, searchParams }: ResumesProps) => {
     return (
         <main className={styles.container}>
             <DashboardCard key="resumes-card" title="Resumes">
+                {!resumes && <LoadingScreen />}
                 {addResumeButton}
-                <section className={styles.resumesContainer}>
-                    {resumes.map((resume: any) => {
-                        return (
-                            <section
-                                className={styles.resumeCard}
-                                key={resume.id}
-                            >
-                                {resume.information.sectionOrder}
-                            </section>
-                        );
-                    })}
-                </section>
+                {resumes && <DocumentCardDisplay documents={resumes} />}
             </DashboardCard>
         </main>
     );

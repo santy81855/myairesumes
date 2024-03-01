@@ -6,6 +6,7 @@ import { useAppContext } from "@/app/providers";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { PageButtons } from "@/features/editor";
 
 type DocumentContainerProps = {
     document: any;
@@ -68,6 +69,7 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
                     </DndProvider>
                 )}
             </section>
+            <PageButtons documentId={id} />
         </section>
     );
 };

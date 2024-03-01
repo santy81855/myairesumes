@@ -1,5 +1,4 @@
 "use client";
-import { useAppContext } from "@/app/providers";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import {
     Page,
@@ -20,7 +19,7 @@ type BasicProps = {
     isPreview?: boolean;
 };
 
-const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
+const Nexus = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(
         document.information.style.baseFontSize
@@ -186,4 +185,4 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     }
 };
 
-export default Basic;
+export default Nexus;

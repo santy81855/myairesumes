@@ -151,6 +151,7 @@ export const initializeNewResume = (
             ? basicInfo.website
             : "https://example-website.com";
     const data = {
+        currentPage: 1,
         style: {
             baseFontSize: 11,
             baseMarginSize: 11,
@@ -174,7 +175,7 @@ export const initializeNewResume = (
                 "summary",
                 "experience",
                 "educationDetailed",
-                "skills",
+                "skillsBullet",
                 "languages",
             ],
         ],
@@ -196,7 +197,6 @@ export const initializeNewResume = (
             "Example Long Skill 2.",
             "Example Long Skill 3.",
         ],
-        shortSkillArray: ["Skill 1", "Skill 2", "Skill 3"],
         experienceArray: newExperienceArray,
         educationArray: newEducationArray,
         languageArray: ["langauge 1", "language 2", "language 3"],

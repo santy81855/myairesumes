@@ -1,17 +1,3 @@
-.container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-block-medium);
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    overflow-y: auto;
-    z-index: 1;
-    padding-inline: var(--padding-inline-small);
-}
-
 .itemContainer {
     width: 100%;
     display: flex;
@@ -19,16 +5,40 @@
     gap: var(--padding-block-small);
 }
 
+.titleContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-small);
+}
+
+.iconContainer {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleContainer svg {
+    width: 100%;
+    height: 100%;
+    stroke: #7467ff;
+    fill: #7467ff;
+}
+
 .title {
     font-size: var(--font-size-medium);
-    color: white;
+    color: black;
     width: 100%;
     text-align: left;
+    font-weight: bold;
 }
 
 .description {
     font-size: var(--font-size-small);
-    color: white;
+    color: black;
     width: 100%;
     text-align: left;
 }
@@ -51,7 +61,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-block-start: var(--padding-block-large);
+    margin-block-end: var(--padding-block-small);
 }
 
 .sectionContainer {
@@ -66,6 +76,7 @@
 .section {
     width: 100%;
     background-color: white;
+    border: 1px solid black;
     padding: var(--padding-block-medium);
     border-radius: var(--border-radius-xsmall);
     position: relative;
@@ -110,9 +121,8 @@
 .horizontalLine {
     width: 100%;
     height: 1px;
-    background-color: white;
-    margin-block-start: var(--padding-block-small);
-    margin-block-end: var(--padding-block-small);
+    background-color: black;
+    margin-block: var(--padding-block-small);
 }
 
 .dropdown {

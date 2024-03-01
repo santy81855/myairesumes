@@ -1,6 +1,10 @@
 "use client";
 import styles from "./SectionMenu.module.css";
-import { circledXIcon, circledXFilledIcon } from "@/components/icons/iconSVG";
+import {
+    circledXIcon,
+    circledXFilledIcon,
+    sectionIcon,
+} from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/app/providers";
@@ -65,10 +69,16 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
 
     return (
         <MenuContainer>
-            <motion.p className={styles.title}>Sections</motion.p>
+            <motion.section className={styles.titleContainer}>
+                <motion.div className={styles.iconContainer}>
+                    {sectionIcon}
+                </motion.div>
+                <motion.p className={styles.title}>Sections</motion.p>
+            </motion.section>
             <motion.p className={styles.description}>
                 Add or remove sections from your document.
             </motion.p>
+            <motion.div className={styles.horizontalLine}></motion.div>
             {document && (
                 <>
                     <motion.section className={styles.pageFunctionContainer}>
@@ -77,7 +87,6 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
                             fullWidth={true}
                         />
                     </motion.section>
-                    <motion.div className={styles.horizontalLine}></motion.div>
 
                     <motion.section className={styles.sectionContainer}>
                         <motion.button

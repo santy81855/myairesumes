@@ -1,9 +1,5 @@
 .stylesContainer {
     width: 100%;
-    background-color: white;
-    padding-inline: var(--padding-inline-small);
-    padding-block: var(--padding-block-small);
-    border-radius: var(--border-radius-xsmall);
     display: flex;
     flex-direction: column;
     gap: var(--gap-medium);
@@ -19,7 +15,7 @@
 .titleContainer svg {
     width: 30px;
     height: 30px;
-    stroke: white;
+    stroke: #7467ff;
     fill: #7467ff;
 }
 

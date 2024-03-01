@@ -1,12 +1,5 @@
 "use client";
-import {
-    Page,
-    Text,
-    View,
-    Document,
-    StyleSheet,
-    Font,
-} from "@react-pdf/renderer";
+import { Text, View, StyleSheet, Font } from "@react-pdf/renderer";
 import {
     formatDateMonthDayYear,
     sortObjectArrayByDateEnd,
@@ -16,7 +9,7 @@ export const SectionConfig = (
     document: any,
     fontSize: any,
     font: string,
-    margin: any
+    template: string
 ) => {
     const hyphenationCallback = (word: string) => {
         // Return word parts in an array
@@ -24,6 +17,42 @@ export const SectionConfig = (
     };
     // function to handle work break
     Font.registerHyphenationCallback(hyphenationCallback);
+
+    const getSectionTitleComponent = (title: string) => {
+        switch (template) {
+            case "basic":
+                return (
+                    <>
+                        <Text style={{ ...styles.medium, ...styles.bold }}>
+                            {title}
+                        </Text>
+                        <View style={styles.horizontalLine}></View>
+                    </>
+                );
+            case "nexus":
+                return (
+                    <View
+                        style={{
+                            backgroundColor: "#f5f5f5",
+                            width: "100%",
+                        }}
+                    >
+                        <Text
+                            style={{
+                                ...styles.medium,
+                                ...styles.accentTextColor,
+                                ...styles.textLeftAlign,
+                                ...styles.marginLeftMedium,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                    </View>
+                );
+            default:
+                return "Section Title";
+        }
+    };
 
     const getBoldFont = () => {
         switch (font) {
@@ -65,6 +94,12 @@ export const SectionConfig = (
     };
     // Create styles
     const styles = StyleSheet.create({
+        accentTextColor: {
+            color: document.information.style.accentBackgroundColor,
+        },
+        accentBackgroundColor: {
+            backgroundColor: document.information.style.accentBackgroundColor,
+        },
         sectionContainer: {
             width: "100%",
             display: "flex",
@@ -91,6 +126,24 @@ export const SectionConfig = (
             fontFamily: getBoldFont(),
             fontWeight: "bold",
         },
+        marginLeftSmall: {
+            marginLeft: fontSize / 4,
+        },
+        marginLeftMedium: {
+            marginLeft: fontSize / 2,
+        },
+        marginLeftLarge: {
+            marginLeft: fontSize,
+        },
+        textLeftAlign: {
+            textAlign: "left",
+        },
+        textCenterAlign: {
+            textAlign: "center",
+        },
+        textRightAlign: {
+            textAlign: "right",
+        },
         extraSmall: {
             fontSize: fontSize * 0.8,
             fontFamily: font,
@@ -114,6 +167,11 @@ export const SectionConfig = (
         extraLarge: {
             fontFamily: font,
             fontSize: fontSize * 2,
+            lineHeight: 1.2,
+        },
+        x2Large: {
+            fontFamily: font,
+            fontSize: fontSize * 2.5,
             lineHeight: 1.2,
         },
         rowContainer: {
@@ -149,8 +207,8 @@ export const SectionConfig = (
             gap: fontSize / 12,
         },
         bullet: {
-            width: fontSize / 4,
-            height: fontSize / 4,
+            minWidth: fontSize / 3,
+            minHeight: fontSize / 3,
             backgroundColor: "black",
             borderRadius: "50%",
         },
@@ -196,9 +254,248 @@ export const SectionConfig = (
             flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: fontSize / 4,
+            paddingLeft: fontSize / 4,
+            gap: fontSize / 2,
+        },
+        bulletItem30: {
+            flexBasis: "30%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            gap: fontSize / 2,
+        },
+        rowContainerWrap: {
+            width: "100%",
+            display: "flex",
+            flexWrap: "wrap",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            gap: fontSize / 1.5,
+        },
+        rowContainerBottom: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "flex-end",
+            gap: fontSize / 1.5,
+        },
+        rowContainerSpaceBetweenBottom: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            gap: fontSize / 1.5,
+        },
+        rowContainerSpaceBetweenTop: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            gap: fontSize / 1.5,
+        },
+        rowContainerTop: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "flex-start",
+            gap: fontSize / 1.5,
+        },
+        initialsBox: {
+            minWidth: fontSize * 6,
+            minHeight: fontSize * 6,
+            backgroundColor: "transparent",
+            border: `${fontSize / 6}px solid ${
+                document.information.style.accentBackgroundColor
+            }`,
+            position: "relative",
+        },
+        firstInitial: {
+            width: "50%",
+            fontFamily: font,
+            color: document.information.style.accentBackgroundColor,
+            position: "absolute",
+            top: fontSize / 2,
+            left: fontSize / 2,
+        },
+        lastInitial: {
+            fontFamily: font,
+            color: document.information.style.accentBackgroundColor,
+            position: "absolute",
+            bottom: fontSize / 2,
+            right: fontSize / 2,
+        },
+        diagonalBar: {
+            width: fontSize / 6,
+            height: "100%",
+            backgroundColor: document.information.style.accentBackgroundColor,
+            position: "absolute",
+            top: "0",
+            left: `calc(50% - ${fontSize / 12}px)`,
+            transform: "rotate(45deg)",
         },
     });
+
+    const headerVariants = {
+        headerNamePositionBasic: {
+            name: "Basic Header with Name and Position",
+            description: "A basic header with your name and position.",
+            keyWords: ["header", "name", "position", "title"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.large}>
+                        {document.information.firstName}{" "}
+                        {document.information.lastName}
+                    </Text>
+                    <Text style={styles.small}>
+                        {document.information.position}
+                    </Text>
+                </View>
+            ) : null,
+        },
+        headerNamePositionContactBasic: {
+            name: "Basic Header - Vertical",
+            description:
+                "A header with your name, position, and contact information.",
+            keyWords: ["header", "name", "position", "title", "contact"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.large}>
+                        {document.information.firstName}{" "}
+                        {document.information.lastName}
+                    </Text>
+                    <Text style={styles.small}>
+                        {document.information.position}
+                    </Text>
+                    <View style={styles.rowContainer}>
+                        <Text style={styles.small}>
+                            {document.information.contactInfo.email}
+                        </Text>
+                        <Text style={styles.small}>|</Text>
+                        <Text style={styles.small}>
+                            {document.information.contactInfo.phone}
+                        </Text>
+                        <Text style={styles.small}>|</Text>
+                        <Text style={styles.small}>
+                            {document.information.contactInfo.website}
+                        </Text>
+                    </View>
+                </View>
+            ) : null,
+        },
+        headerNamePositionContactRowBasic: {
+            name: "Basic Header - Horizontal",
+            description:
+                "A header with your name, position, and contact information displayed as a row.",
+            keyWords: ["header", "name", "position", "title", "contact", "row"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <View style={styles.rowSpaceBetween}>
+                        <View style={styles.columnGroupLeft}>
+                            <Text style={styles.large}>
+                                {document.information.firstName}{" "}
+                                {document.information.lastName}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.position}
+                            </Text>
+                        </View>
+                        <View style={styles.columnGroupRight}>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.email}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.phone}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.website}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            ) : null,
+        },
+        headerNamePositionContactRowNexus: {
+            name: "Nexus Header - Horizontal",
+            description:
+                "A header with your name, position, and contact information displayed as a row. Made to match the Nexus template.",
+            keyWords: [
+                "header",
+                "name",
+                "position",
+                "title",
+                "contact",
+                "row",
+                "nexus",
+            ],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <View style={styles.rowContainerSpaceBetweenTop}>
+                        <View style={styles.columnGroupLeft}>
+                            <View style={styles.rowContainerBottom}>
+                                <View style={styles.initialsBox}>
+                                    <Text
+                                        style={{
+                                            ...styles.firstInitial,
+                                            ...styles.x2Large,
+                                        }}
+                                    >
+                                        {document.information.firstName[0]}
+                                    </Text>
+
+                                    <Text
+                                        style={{
+                                            ...styles.lastInitial,
+                                            ...styles.x2Large,
+                                        }}
+                                    >
+                                        {document.information.lastName[0]}
+                                    </Text>
+                                </View>
+                                <View style={styles.columnGroupLeft}>
+                                    <Text
+                                        style={{
+                                            ...styles.extraLarge,
+                                            ...styles.accentTextColor,
+                                        }}
+                                    >
+                                        {document.information.firstName}
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.extraLarge,
+                                            ...styles.accentTextColor,
+                                        }}
+                                    >
+                                        {document.information.lastName}
+                                    </Text>
+                                    <Text style={styles.small}>
+                                        {document.information.position}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={styles.columnGroupRight}>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.email}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.phone}
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.website}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            ) : null,
+        },
+    };
 
     const educationVariants = {
         educationShort: {
@@ -208,10 +505,7 @@ export const SectionConfig = (
             keyWords: ["education", "school", "degree", "graduation", "short"],
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="educationPdf">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Education
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
+                    {getSectionTitleComponent("Education")}
                     <View style={styles.arrayContainer}>
                         {sortObjectArrayByDateEnd(
                             document.information.educationArray,
@@ -266,10 +560,7 @@ export const SectionConfig = (
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="educationPdf">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Education
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
+                    {getSectionTitleComponent("Education")}
                     <View style={styles.arrayContainer}>
                         {sortObjectArrayByDateEnd(
                             document.information.educationArray,
@@ -407,11 +698,73 @@ export const SectionConfig = (
         },
     };
 
+    const skillsVariants = {
+        skillsBulletRow: {
+            name: "Skills - Brief, Bullet Points",
+            description:
+                "Your skills in a horizontal bullet point list. Ideal for a list of short skills.",
+            keyWords: ["skills", "abilities", "strengths", "bullet", "row"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer} id="skillsPdf">
+                    {getSectionTitleComponent("Skills")}
+                    <View style={{ ...styles.rowContainerWrap }}>
+                        {document.information.skillArray.map(
+                            (skill: string, index: number) => (
+                                <View style={styles.bulletItem30} key={index}>
+                                    <View style={styles.bullet}></View>
+                                    <Text style={styles.small}>{skill}</Text>
+                                </View>
+                            )
+                        )}
+                    </View>
+                </View>
+            ) : null,
+        },
+        skillsBullet: {
+            name: "Skills - Detailed, Bullet Points",
+            description:
+                "Your skills in a vertical bullet point list. Ideal for a list of detailed skills.",
+            keyWords: ["skills", "abilities", "strengths", "bullet"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer} id="skillsPdf">
+                    {getSectionTitleComponent("Skills")}
+                    <View style={styles.bulletItemContainer}>
+                        {document.information.skillArray.map(
+                            (skill: string, index: number) => (
+                                <View style={styles.bulletItem} key={index}>
+                                    <View style={styles.bullet}></View>
+                                    <Text style={styles.small}>{skill}</Text>
+                                </View>
+                            )
+                        )}
+                    </View>
+                </View>
+            ) : null,
+        },
+        skillsComma: {
+            name: "Skills - Brief, Comma-Separated",
+            description:
+                "Your skills in a comma separated list. Ideal for a list of skills that are only 1 or 2 words long. Useful for when you want to save space.",
+            keyWords: ["skills", "abilities", "strengths", "short", "comma"],
+            // short skills are displayed as a comma separated list
+            component: fontSize ? (
+                <View style={styles.sectionContainer} id="shortSkillsPdf">
+                    {getSectionTitleComponent("Skills")}
+                    <Text style={styles.small}>
+                        {document.information.skillArray.join(", ")}
+                    </Text>
+                </View>
+            ) : null,
+        },
+    };
+
     return {
+        ...headerVariants,
         ...nameVariants,
         ...positionVariants,
         ...educationVariants,
         ...contactVariants,
+        ...skillsVariants,
         summary: {
             name: "Summary",
             description:
@@ -426,52 +779,9 @@ export const SectionConfig = (
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="summaryPdf">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Summary
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
+                    {getSectionTitleComponent("Summary")}
                     <Text style={styles.small}>
                         {document.information.summary}
-                    </Text>
-                </View>
-            ) : null,
-        },
-        skills: {
-            name: "Skills",
-            description: "Your skills in a bullet point list.",
-            keyWords: ["skills", "abilities", "strengths", "bullet"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="skillsPdf">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Skills
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
-                    <View style={styles.bulletItemContainer}>
-                        {document.information.skillArray.map(
-                            (skill: string, index: number) => (
-                                <View style={styles.bulletItem} key={index}>
-                                    <View style={styles.bullet}></View>
-                                    <Text style={styles.small}>{skill}</Text>
-                                </View>
-                            )
-                        )}
-                    </View>
-                </View>
-            ) : null,
-        },
-        shortSkills: {
-            name: "Short Skills",
-            description: "Your skills in a comma separated list.",
-            keyWords: ["skills", "abilities", "strengths", "short", "comma"],
-            // short skills are displayed as a comma separated list
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="shortSkillsPdf">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Skills
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
-                    <Text style={styles.small}>
-                        {document.information.shortSkillArray.join(", ")}
                     </Text>
                 </View>
             ) : null,
@@ -490,10 +800,7 @@ export const SectionConfig = (
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="experiencePdf">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Experience
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
+                    {getSectionTitleComponent("Experience")}
                     <View style={styles.arrayContainer}>
                         {sortObjectArrayByDateEnd(
                             document.information.experienceArray,
@@ -556,10 +863,7 @@ export const SectionConfig = (
             keyWords: ["languages"],
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="languagesPdf">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Languages
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
+                    {getSectionTitleComponent("Languages")}
                     <View style={styles.arrayContainer}>
                         <View style={styles.bulletItemContainer}>
                             {document.information.languageArray.map(
@@ -583,10 +887,7 @@ export const SectionConfig = (
             keyWords: ["languages"],
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="languagesPdf">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Languages
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
+                    {getSectionTitleComponent("Languages")}
                     <Text style={styles.small}>
                         {document.information.languageArray.join(", ")}
                     </Text>
@@ -599,10 +900,7 @@ export const SectionConfig = (
             keyWords: ["interests", "hobbies"],
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="interests">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Interests
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
+                    {getSectionTitleComponent("Interests")}
                     <View style={styles.bulletItemContainer}>
                         {document.information.interestArray.map(
                             (skill: string, index: number) => (
@@ -622,10 +920,7 @@ export const SectionConfig = (
             keyWords: ["interests", "hobbies"],
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="interests">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Interests
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
+                    {getSectionTitleComponent("Interests")}
                     <Text style={styles.small}>
                         {document.information.interestArray.join(", ")}
                     </Text>
@@ -644,10 +939,7 @@ export const SectionConfig = (
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="projects">
-                    <Text style={{ ...styles.medium, ...styles.bold }}>
-                        Projects
-                    </Text>
-                    <View style={styles.horizontalLine}></View>
+                    {getSectionTitleComponent("Projects")}
                 </View>
             ) : null,
         },

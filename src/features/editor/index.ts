@@ -4,6 +4,7 @@ export { default as MenuContainer } from "./components/side-menu/menu-container/
 export { default as DraggableContainer } from "./components/draggable-section-container/DraggableContainer";
 export { default as PageUtilBar } from "./components/page-util-bar/PageUtilBar";
 export { default as PageCounter } from "./components/page-util-bar/page-counter/PageCounter";
+export { default as PageButtons } from "./components/page-add-delete-buttons/PageButtons";
 export { default as SideMenu } from "./components/side-menu/SideMenu";
 export { default as TitleBar } from "./components/title-bar/TitleBar";
 export { SectionConfig } from "./lib/sectionConfig";

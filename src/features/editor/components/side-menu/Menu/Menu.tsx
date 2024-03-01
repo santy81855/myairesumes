@@ -51,13 +51,13 @@ const Menu = () => {
             <section className={styles.staticMenu}>
                 <section
                     className={styles.staticMenuItem}
-                    style={isTemplateOpen ? { backgroundColor: "#303045" } : {}}
-                    onClick={() => toggleTemplate()}
+                    style={isStyleOpen ? { backgroundColor: "#303045" } : {}}
+                    onClick={() => toggleStyle()}
                 >
                     <div className={styles.staticIconContainer}>
-                        {templateIcon}
+                        {styleIcon}
                     </div>
-                    <p className={styles.staticItemName}>Templates</p>
+                    <p className={styles.staticItemName}>Styles</p>
                 </section>
                 <section
                     className={styles.staticMenuItem}
@@ -71,13 +71,13 @@ const Menu = () => {
                 </section>
                 <section
                     className={styles.staticMenuItem}
-                    style={isStyleOpen ? { backgroundColor: "#303045" } : {}}
-                    onClick={() => toggleStyle()}
+                    style={isTemplateOpen ? { backgroundColor: "#303045" } : {}}
+                    onClick={() => toggleTemplate()}
                 >
                     <div className={styles.staticIconContainer}>
-                        {styleIcon}
+                        {templateIcon}
                     </div>
-                    <p className={styles.staticItemName}>Styles</p>
+                    <p className={styles.staticItemName}>Templates</p>
                 </section>
             </section>
             {document && (
