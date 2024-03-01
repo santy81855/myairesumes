@@ -1,11 +1,11 @@
 "use client";
 import styles from "./DocumentContainer.module.css";
-import Basic from "@/components/resume-templates/basic/Basic";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/app/providers";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { PageButtons, getAllResumeTemplates } from "@/features/editor";
 
 type DocumentContainerProps = {
     document: any;
@@ -16,10 +16,16 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
     const { documentArray, setDocumentArray, isDocumentLoading } =
         useAppContext();
     const [currentDocument, setCurrentDocument] = useState<any>(null);
+    const [currentTemplate, setCurrentTemplate] = useState<any>(null);
 
     useEffect(() => {
-        setCurrentDocument(
-            documentArray.find((document) => document.id === id)
+        const doc = documentArray.find((document) => document.id === id);
+        if (!doc) return;
+        setCurrentDocument(doc);
+        const template = getAllResumeTemplates(doc);
+        setCurrentTemplate(
+            template[doc.information.template as keyof typeof template]
+                ?.editorComponent
         );
     }, [documentArray]);
 
@@ -46,28 +52,17 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
         }
     }, []);
 
-    const documentPages =
-        currentDocument &&
-        Array.from({ length: currentDocument.information.numPages }).map(
-            (_, index) => (
-                <Basic
-                    key={`page${index}`}
-                    document={currentDocument}
-                    isEditor={true}
-                />
-            )
-        );
-
     return (
         <section className={styles.documentContainer}>
             <section className={styles.document}>
                 {(isDocumentLoading || !currentDocument) && <LoadingScreen />}
                 {currentDocument && (
                     <DndProvider backend={HTML5Backend}>
-                        {documentPages[currentDocument.currentPage - 1]}
+                        {currentTemplate}
                     </DndProvider>
                 )}
             </section>
+            <PageButtons documentId={id} />
         </section>
     );
 };

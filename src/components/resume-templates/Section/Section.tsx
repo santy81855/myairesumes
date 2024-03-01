@@ -20,12 +20,23 @@ const Section = ({ sectionId, document, templateRef }: SectionProps) => {
             document,
             document.information.style.baseFontSize,
             document.information.font,
-            document.information.style.baseMarginSize
+            document.information.template
         )
     );
 
     useEffect(() => {
-        if (!templateRef) return;
+        if (!templateRef) {
+            // if there is no templateRef, then it is a download template, and we want to make sure we update the sectionConfig with any updated values
+            setSectionConfig(
+                SectionConfig(
+                    document,
+                    document.information.style.baseFontSize,
+                    document.information.font,
+                    document.information.template
+                )
+            );
+            return;
+        }
         const template = templateRef.current as unknown as HTMLElement;
         if (!template) return;
         const { width, height } = template.getBoundingClientRect();
@@ -35,7 +46,12 @@ const Section = ({ sectionId, document, templateRef }: SectionProps) => {
             document.information.style.baseMarginSize * (width / 610);
         setMargin(newMargin);
         setSectionConfig(
-            SectionConfig(document, size, document.information.font, newMargin)
+            SectionConfig(
+                document,
+                size,
+                document.information.font,
+                document.information.template
+            )
         );
 
         // handle the text scaling
@@ -55,7 +71,7 @@ const Section = ({ sectionId, document, templateRef }: SectionProps) => {
                     document,
                     size,
                     document.information.font,
-                    newMargin
+                    document.information.template
                 )
             );
         }
@@ -63,7 +79,7 @@ const Section = ({ sectionId, document, templateRef }: SectionProps) => {
         window.addEventListener("resize", handleResize);
 
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [document]);
 
     return (
         sectionConfig[sectionId as keyof typeof sectionConfig]?.component ??

@@ -5,8 +5,8 @@ import { useAppContext } from "@/app/providers";
 import { useParams } from "next/navigation";
 import { circledXIcon, searchIcon } from "@/components/icons/iconSVG";
 import { motion, AnimatePresence } from "framer-motion";
-import SectionComponents from "@/components/resume-templates/section-components/SectionComponents";
 import { updateDocumentArray, SectionConfig } from "@/features/editor";
+import Section from "@/components/resume-templates/Section/Section";
 
 const AddSectionModal = () => {
     const {
@@ -53,13 +53,14 @@ const AddSectionModal = () => {
     }, []);
 
     useEffect(() => {
-        setDocument(documentArray.find((document) => document.id === id));
+        const doc = documentArray.find((document) => document.id === id);
+        if (!doc) return;
+        setDocument(doc);
         const temp = SectionConfig(
-            documentArray.find((document) => document.id === id),
+            doc,
             null,
-            documentArray.find((document) => document.id === id)?.information
-                .font,
-            margin
+            doc.information.font,
+            doc.information.template
         );
         let sectionConfigArray = Object.entries(temp).map(([id, config]) => ({
             id,
@@ -157,6 +158,7 @@ const AddSectionModal = () => {
                             onChange={(e) =>
                                 searchContentChanged(e.target.value)
                             }
+                            autoComplete="off"
                         />
                     </section>
                     <AnimatePresence>
@@ -170,8 +172,9 @@ const AddSectionModal = () => {
                                     ease: "easeInOut",
                                 }}
                                 className={styles.resultsContainer}
+                                ref={templateRef}
                             >
-                                {results.map((result) => (
+                                {results.map((result, index) => (
                                     <motion.div
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
@@ -208,17 +211,14 @@ const AddSectionModal = () => {
                                         </section>
                                         <div
                                             className={styles.exampleContainer}
-                                            ref={templateRef}
                                         >
-                                            <SectionComponents
+                                            <Section
+                                                key={
+                                                    result.id + index.toString()
+                                                }
+                                                sectionId={result.id}
                                                 document={document}
-                                                font={document.information.font}
-                                                fontSize={fontSize}
-                                                orderArray={[
-                                                    result.id as string,
-                                                ]}
-                                                margin={margin}
-                                                isDownload={true}
+                                                templateRef={templateRef}
                                             />
                                         </div>
                                         <button

@@ -1,5 +1,4 @@
 "use client";
-import { useAppContext } from "@/app/providers";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import {
     Page,
@@ -20,7 +19,7 @@ type BasicProps = {
     isPreview?: boolean;
 };
 
-const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
+const Nexus = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(
         document.information.style.baseFontSize
@@ -79,41 +78,23 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     };
 
     // Create pdfStyles
-    const pdfStyles = isDownload
-        ? StyleSheet.create({
-              page: { width: "100%", height: "100%" },
-              pageContainer: {
-                  backgroundColor: "white",
-                  width: "100%",
-                  height: "100%",
-                  paddingLeft: document.information.style.baseMarginSize,
-                  paddingRight: document.information.style.baseMarginSize,
-                  paddingTop: document.information.style.baseMarginSize,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                  gap: document.information.style.baseFontSize,
-                  overflow: "hidden",
-              },
-          })
-        : StyleSheet.create({
-              page: { width: "100%", height: "100%" },
-              pageContainer: {
-                  backgroundColor: "white",
-                  width: "100%",
-                  height: "100%",
-                  paddingLeft: margin,
-                  paddingRight: margin,
-                  paddingTop: margin,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                  gap: fontSize,
-                  overflow: "hidden",
-              },
-          });
+    const pdfStyles = StyleSheet.create({
+        page: { width: "100%", height: "100%" },
+        pageContainer: {
+            backgroundColor: "white",
+            width: "100%",
+            height: "100%",
+            paddingLeft: margin,
+            paddingRight: margin,
+            paddingTop: margin,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            gap: fontSize,
+            overflow: "hidden",
+        },
+    });
 
     if (isPreview) {
         return (
@@ -151,28 +132,26 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                     >
                         {document.information.sectionOrder[
                             document.currentPage - 1
-                        ].map((section: string, index: number) => {
-                            return (
-                                <DraggableContainer
-                                    key={section + index.toString()}
-                                    id={`${section}-${index}`}
-                                    orderArray={
-                                        document.information.sectionOrder[
-                                            document.currentPage - 1
-                                        ]
-                                    }
-                                    document={document}
-                                >
-                                    <SectionContainerEditor document={document}>
-                                        <Section
-                                            sectionId={section}
-                                            document={document}
-                                            templateRef={templateRef}
-                                        />
-                                    </SectionContainerEditor>
-                                </DraggableContainer>
-                            );
-                        })}
+                        ].map((section: string, index: number) => (
+                            <DraggableContainer
+                                key={section + index.toString()}
+                                id={`${section}-${index}`}
+                                orderArray={
+                                    document.information.sectionOrder[
+                                        document.currentPage - 1
+                                    ]
+                                }
+                                document={document}
+                            >
+                                <SectionContainerEditor document={document}>
+                                    <Section
+                                        sectionId={section}
+                                        document={document}
+                                        templateRef={templateRef}
+                                    />
+                                </SectionContainerEditor>
+                            </DraggableContainer>
+                        ))}
                     </View>
                 </Page>
             </Document>
@@ -206,4 +185,4 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     }
 };
 
-export default Basic;
+export default Nexus;

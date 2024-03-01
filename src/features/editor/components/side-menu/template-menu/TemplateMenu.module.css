@@ -7,7 +7,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: var(--padding-inline-medium);
-    background-color: white;
+    border: 1px solid black;
 }
 
 .searchIconContainer {
@@ -31,4 +31,37 @@
 
 .searchBarInput::placeholder {
     color: rgb(146, 146, 146);
+}
+
+.templateContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--padding-block-medium);
+}
+
+.rowTitle {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+}
+
+.templates {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-block: var(--padding-block-medium);
+    gap: var(--padding-inline-small);
+    overflow-x: auto;
+}
+
+.template {
+    aspect-ratio: 8.5/11;
+    min-width: 150px;
+}
+
+.templatePreview {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(198, 198, 198, 0.416);
 }

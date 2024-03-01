@@ -1,6 +1,10 @@
 "use client";
 import styles from "./SectionMenu.module.css";
-import { circledXIcon, circledXFilledIcon } from "@/components/icons/iconSVG";
+import {
+    circledXIcon,
+    circledXFilledIcon,
+    sectionIcon,
+} from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/app/providers";
@@ -10,8 +14,13 @@ import {
     updateDocumentArray,
     SectionConfig,
 } from "@/features/editor";
+import { MenuContainer } from "@/features/editor";
 
-const StyleMenu = () => {
+type SectionMenuProps = {
+    document: any;
+};
+
+const StyleMenu = ({ document }: SectionMenuProps) => {
     const {
         documentArray,
         setDocumentArray,
@@ -20,15 +29,15 @@ const StyleMenu = () => {
     } = useAppContext();
     const params = useParams();
     const id = params.slug[1];
-    const [document, setDocument] = useState<any>(null);
     const [allSections, setAllSections] = useState<any>([]);
     useEffect(() => {
-        setDocument(documentArray.find((document) => document.id === id));
+        const doc = documentArray.find((document) => document.id === id);
+        if (!doc) return;
         const sectionConfig = SectionConfig(
             document,
             null,
             "",
-            documentArray.find((document) => document.id === id)
+            doc.information.template
         );
         setAllSections(sectionConfig);
     }, [documentArray]);
@@ -61,11 +70,17 @@ const StyleMenu = () => {
     };
 
     return (
-        <motion.section className={styles.container}>
-            <motion.p className={styles.title}>Sections</motion.p>
+        <MenuContainer>
+            <motion.section className={styles.titleContainer}>
+                <motion.div className={styles.iconContainer}>
+                    {sectionIcon}
+                </motion.div>
+                <motion.p className={styles.title}>Sections</motion.p>
+            </motion.section>
             <motion.p className={styles.description}>
                 Add or remove sections from your document.
             </motion.p>
+            <motion.div className={styles.horizontalLine}></motion.div>
             {document && (
                 <>
                     <motion.section className={styles.pageFunctionContainer}>
@@ -74,7 +89,6 @@ const StyleMenu = () => {
                             fullWidth={true}
                         />
                     </motion.section>
-                    <motion.div className={styles.horizontalLine}></motion.div>
 
                     <motion.section className={styles.sectionContainer}>
                         <motion.button
@@ -122,7 +136,7 @@ const StyleMenu = () => {
                     </motion.section>
                 </>
             )}
-        </motion.section>
+        </MenuContainer>
     );
 };
 

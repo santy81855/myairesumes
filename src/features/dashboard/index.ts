@@ -7,6 +7,11 @@ export { default as DashboardWrapper } from "./components/dashboard-wrapper/Dash
 export { default as Account } from "./components/account/Account";
 export { default as Profile } from "./components/profile/Profile";
 export { default as Resumes } from "./components/resumes/Resumes";
+export { default as DocumentCardDisplay } from "./components/document-card-display/DocumentCardDisplay";
+export { default as Plan } from "./components/account/plan-details/Plan";
+export { default as Bill } from "./components/account/bill/Bill";
+export { default as Upgrade } from "./components/account/upgrade/Upgrade";
+export { default as Payments } from "./components/account/payments/Payments";
 export { addUserWorkInfo as addUserWorkInfoAction } from "./actions/dashboard";
 export { updateUserWorkInfo as updateUserWorkInfoAction } from "./actions/dashboard";
 export { removeUserWorkInfo as removeUserWorkInfoAction } from "./actions/dashboard";
