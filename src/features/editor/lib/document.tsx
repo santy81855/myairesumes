@@ -1,4 +1,35 @@
 import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
+import Basic from "@/components/resume-templates/basic/Basic";
+import Nexus from "@/components/resume-templates/nexus/Nexus";
+
+export const getResumeTemplate = (
+    template: string,
+    type: string,
+    document: any
+) => {
+    switch (template) {
+        case "basic":
+            switch (type) {
+                case "editor":
+                    return <Basic isEditor={true} document={document} />;
+                case "download":
+                    return <Basic isDownload={true} document={document} />;
+                case "preview":
+                    return <Basic isPreview={true} document={document} />;
+            }
+        case "nexus":
+            switch (type) {
+                case "editor":
+                    return <Nexus isEditor={true} document={document} />;
+                case "download":
+                    return <Nexus isDownload={true} document={document} />;
+                case "preview":
+                    return <Nexus isPreview={true} document={document} />;
+            }
+        default:
+            return <Basic isPreview={true} document={document} />;
+    }
+};
 
 export const updateDocumentArray = (updatedDocument: any, array: any) => {
     const { id } = updatedDocument;

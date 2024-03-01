@@ -1,12 +1,11 @@
 "use client";
 import styles from "./DocumentContainer.module.css";
-import Basic from "@/components/resume-templates/basic/Basic";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/app/providers";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { PageButtons } from "@/features/editor";
+import { PageButtons, getResumeTemplate } from "@/features/editor";
 
 type DocumentContainerProps = {
     document: any;
@@ -47,25 +46,17 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
         }
     }, []);
 
-    const documentPages =
-        currentDocument &&
-        Array.from({ length: currentDocument.information.numPages }).map(
-            (_, index) => (
-                <Basic
-                    key={`page${index}`}
-                    document={currentDocument}
-                    isEditor={true}
-                />
-            )
-        );
-
     return (
         <section className={styles.documentContainer}>
             <section className={styles.document}>
                 {(isDocumentLoading || !currentDocument) && <LoadingScreen />}
                 {currentDocument && (
                     <DndProvider backend={HTML5Backend}>
-                        <Basic document={currentDocument} isEditor={true} />
+                        {getResumeTemplate(
+                            currentDocument.information.template,
+                            "editor",
+                            currentDocument
+                        )}
                     </DndProvider>
                 )}
             </section>
