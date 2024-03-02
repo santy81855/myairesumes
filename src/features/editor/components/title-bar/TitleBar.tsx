@@ -46,7 +46,7 @@ const TitleBar = () => {
             );
             setCurrentTemplate(
                 template[doc.information.template as keyof typeof template]
-                    ?.editorComponent
+                    ?.downloadComponent
             );
             setCurrentDocument(updatedDoc);
         } else {
@@ -58,7 +58,7 @@ const TitleBar = () => {
             );
             setCurrentTemplate(
                 template[doc.information.template as keyof typeof template]
-                    ?.editorComponent
+                    ?.downloadComponent
             );
             setCurrentDocument(updatedDoc);
         }
