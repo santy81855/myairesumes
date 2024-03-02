@@ -654,7 +654,7 @@ export const SectionConfig = (
             marginRight: fontSize,
         },
         horizontalLineSmall: {
-            width: fontSize * 6,
+            width: "20%",
             height: fontSize / 12,
         },
     });
