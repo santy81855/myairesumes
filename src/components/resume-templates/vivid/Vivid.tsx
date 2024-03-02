@@ -20,7 +20,7 @@ type BasicProps = {
     isPreview?: boolean;
 };
 
-const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
+const Vivid = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(
         document.information.style.baseFontSize
@@ -480,4 +480,4 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     }
 };
 
-export default Nova;
+export default Vivid;

@@ -4,6 +4,7 @@ import Nexus from "@/components/resume-templates/nexus/Nexus";
 import Impact from "@/components/resume-templates/impact/Impact";
 import Nova from "@/components/resume-templates/nova/Nova";
 import Fresh from "@/components/resume-templates/fresh/Fresh";
+import Vivid from "@/components/resume-templates/vivid/Vivid";
 
 export const updateDocument = (
     document: any,
@@ -38,6 +39,31 @@ export const updateDocument = (
                 }
             );
         }
+    } else if (template === "vivid") {
+        // if the template is nova, then the sectionOrder array for the first array should be: ['headerNova', 'summary', 'experience', 'colBreak' 'contactVertical', 'skills', 'education', 'languages']
+        const newArr = [
+            "headerVivid",
+            "summary",
+            "experience",
+            "colBreak",
+            "contactVertical",
+            "skillsVivid",
+            "educationShort",
+            "languages",
+        ];
+        // make the first array in sectionOrder equal to newArr
+        // add the newArr to the newSectionOrder
+        // check if the first array in sectionOrder contains 'colBreak' or an element that includes 'nova'
+        if (!changedTemplate) {
+            // make the newSectionOrder the same as the current array
+            newSectionOrder = document.information.sectionOrder;
+        } else {
+            newSectionOrder = document.information.sectionOrder.map(
+                (array: any, index: number) => {
+                    return index === 0 ? newArr : array;
+                }
+            );
+        }
     } else {
         if (changedTemplate) {
             newSectionOrder = document.information.sectionOrder.map(
@@ -52,6 +78,9 @@ export const updateDocument = (
                             return `header${template
                                 .charAt(0)
                                 .toUpperCase()}${template.slice(1)}`;
+                        }
+                        if (item.includes("skills")) {
+                            return "skillsBullet";
                         }
                         return item;
                     })
@@ -259,6 +288,42 @@ export const getAllResumeTemplates = (
                     document={updateDocument(
                         document,
                         "fresh",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        vivid: {
+            name: "Vivid",
+            description:
+                "A unique resume template with two columns, and a touch of flair with your initials.",
+            keywords: ["vivid", "colorful", "modern", "unique", "art"],
+            editorComponent: (
+                <Vivid
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "vivid",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Vivid
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "vivid",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Vivid
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "vivid",
                         changedTemplate
                     )}
                 />

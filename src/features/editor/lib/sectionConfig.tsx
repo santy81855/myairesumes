@@ -1,5 +1,5 @@
 "use client";
-import { Text, View, StyleSheet, Font } from "@react-pdf/renderer";
+import { Text, View, StyleSheet, Font, Image } from "@react-pdf/renderer";
 import {
     formatDateMonthYear,
     sortObjectArrayByDateEnd,
@@ -133,9 +133,27 @@ export const SectionConfig = (
                         <View
                             style={{
                                 ...styles.horizontalLineBackgroundAccent,
-                                ...styles.marginBottomMedium,
+                                ...styles.marginBottomSmall,
                             }}
                         ></View>
+                    </>
+                );
+            case "vivid":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.width100,
+                                ...styles.large,
+                                ...styles.bold,
+                                ...styles.uppercase,
+                                ...styles.textLeft,
+                                ...styles.accentBackgroundText,
+                                ...styles.marginBottomMedium,
+                            }}
+                        >
+                            {title}
+                        </Text>
                     </>
                 );
             default:
@@ -572,6 +590,51 @@ export const SectionConfig = (
         widthAuto: {
             width: "auto",
         },
+        accentTextBackground: {
+            backgroundColor: document.information.style.accentTextColor,
+        },
+        borderRadiusSmall: {
+            borderRadius: fontSize / 4,
+        },
+        paddingVerticalSmall: {
+            paddingVertical: fontSize / 6,
+        },
+        paddingHorizontalSmall: {
+            paddingHorizontal: fontSize / 6,
+        },
+        paddingHorizontalMedium: {
+            paddingHorizontal: fontSize / 4,
+        },
+        paddingHorizontalLarge: {
+            paddingHorizontal: fontSize / 2,
+        },
+        paddingVerticalLarge: {
+            paddingVertical: fontSize / 2,
+        },
+        paddingVerticalMedium: {
+            paddingVertical: fontSize / 4,
+        },
+        backgroundAccentForText: {
+            color: document.information.style.accentBackgroundColor,
+        },
+        minHeightSmall: {
+            minHeight: fontSize * 2,
+        },
+        minHeightMedium: {
+            minHeight: fontSize * 3,
+        },
+        minHeightLarge: {
+            minHeight: fontSize * 4,
+        },
+        marginRightSmall: {
+            marginRight: fontSize / 4,
+        },
+        marginRightMedium: {
+            marginRight: fontSize / 2,
+        },
+        marginRightLarge: {
+            marginRight: fontSize,
+        },
     });
 
     const headerVariants = {
@@ -886,6 +949,80 @@ export const SectionConfig = (
                 </View>
             ) : null,
         },
+        headerVivid: {
+            name: "Vivid Header",
+            description:
+                "A header with your name, a headshot, position, and a summary. Made to match the Vivid template.",
+            keyWords: [
+                "header",
+                "name",
+                "position",
+                "title",
+                "picture",
+                "vivid",
+            ],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <View style={styles.rowContainerSpaceBetweenTop}>
+                        <View style={styles.columnGroupLeft}>
+                            <View style={styles.rowContainerTop}>
+                                <View style={styles.initialsBox}>
+                                    <Text
+                                        style={{
+                                            ...styles.firstInitial,
+                                            ...styles.x2Large,
+                                            ...styles.accentBackgroundText,
+                                        }}
+                                    >
+                                        {document.information.firstName[0]}
+                                    </Text>
+
+                                    <Text
+                                        style={{
+                                            ...styles.lastInitial,
+                                            ...styles.x2Large,
+                                            ...styles.accentBackgroundText,
+                                        }}
+                                    >
+                                        {document.information.lastName[0]}
+                                    </Text>
+                                </View>
+                                <View
+                                    style={{
+                                        ...styles.columnGroupLeft,
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            ...styles.large,
+                                            ...styles.accentBackgroundText,
+                                        }}
+                                    >
+                                        {document.information.firstName}{" "}
+                                        {document.information.lastName}
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                        }}
+                                    >
+                                        {document.information.position}
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            ...styles.marginTopSmall,
+                                        }}
+                                    >
+                                        {document.information.summary}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            ) : null,
+        },
         headerRow: {
             name: "Impact Header",
             description:
@@ -1142,6 +1279,78 @@ export const SectionConfig = (
     };
 
     const skillsVariants = {
+        skillsVivid: {
+            name: "Skills - Vivid",
+            description:
+                "Your skills in a column, with a contrasting background. Ideal for a list of short skills. Made to match the Vivid template.",
+            keyWords: [
+                "skills",
+                "abilities",
+                "strengths",
+                "brief",
+                "column",
+                "vivid",
+            ],
+            component: fontSize ? (
+                <View style={styles.sectionContainer} id="skillsPdf">
+                    {getSectionTitleComponent("Skills")}
+                    <View style={styles.rowContainerWrap}>
+                        {document.information.skillArray.map(
+                            (skill: string, index: number) => (
+                                <View
+                                    style={
+                                        accentColumn
+                                            ? {
+                                                  ...styles.col,
+                                                  ...styles.justifyCenter,
+                                                  ...styles.alignStart,
+                                                  ...styles.width100,
+                                                  ...styles.minHeightMedium,
+                                                  ...styles.accentTextBackground,
+                                                  ...styles.borderRadiusSmall,
+                                              }
+                                            : {
+                                                  ...styles.col,
+                                                  ...styles.justifyCenter,
+                                                  ...styles.alignStart,
+                                                  ...styles.width100,
+                                                  ...styles.minHeightMedium,
+                                                  ...styles.accentBackgroundColor,
+                                                  ...styles.borderRadiusSmall,
+                                              }
+                                    }
+                                    key={index}
+                                >
+                                    <Text
+                                        style={
+                                            accentColumn
+                                                ? {
+                                                      ...styles.marginLeftSmall,
+                                                      ...styles.marginRightSmall,
+                                                      ...styles.marginTopSmall,
+                                                      ...styles.marginBottomSmall,
+                                                      ...styles.small,
+                                                      ...styles.backgroundAccentForText,
+                                                  }
+                                                : {
+                                                      ...styles.marginLeftSmall,
+                                                      ...styles.marginRightSmall,
+                                                      ...styles.marginTopSmall,
+                                                      ...styles.marginBottomSmall,
+                                                      ...styles.small,
+                                                      ...styles.accentText,
+                                                  }
+                                        }
+                                    >
+                                        {skill}
+                                    </Text>
+                                </View>
+                            )
+                        )}
+                    </View>
+                </View>
+            ) : null,
+        },
         skillsBulletRow: {
             name: "Skills - Brief, Bullet Points",
             description:
