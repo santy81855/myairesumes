@@ -1,34 +1,105 @@
-.searchBarContainer {
+.stylesContainer {
     width: 100%;
-    border-radius: var(--border-radius-xsmall);
-    padding-inline: var(--padding-inline-medium);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: var(--gap-medium);
+}
+
+.titleContainer {
+    display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: var(--padding-inline-medium);
-    background-color: white;
+    gap: var(--gap-small);
 }
 
-.searchIconContainer {
-    width: 20px;
-    height: 20px;
+.titleContainer svg {
+    width: 30px;
+    height: 30px;
+    stroke: #7467ff;
+    fill: #7467ff;
 }
 
-.searchIconContainer svg {
+.title {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+}
+
+.dropdownContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--gap-small);
+}
+
+.topRow {
     width: 100%;
-    height: 100%;
-    fill: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-small);
 }
 
-.searchBarInput {
-    flex-grow: 1;
-    border: none;
-    outline: none;
+.description {
     font-size: var(--font-size-small);
-    padding-block: var(--padding-block-small);
+    font-weight: bold;
 }
 
-.searchBarInput::placeholder {
-    color: rgb(146, 146, 146);
+.sectionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gap-small) / 2);
+}
+
+.font,
+.fontSize,
+.marginSize {
+    width: 100%;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-small);
+    border-radius: var(--border-radius-xsmall);
+    border: 1px solid lightgrey;
+}
+
+.font:focus,
+.fontSize:focus,
+.marginSize:focus {
+    outline: none;
+    border: 1px solid #7467ff;
+}
+
+.colorPickerButton {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    border: 1px solid grey;
+}
+
+.pickerContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-block-start: var(--padding-block-medium);
+}
+
+.colorPickerButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-small);
+    margin-block-start: var(--padding-block-small);
+}
+
+.colorPickerOptionsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-large);
 }

@@ -1,6 +1,10 @@
 "use client";
 import styles from "./SectionMenu.module.css";
-import { circledXIcon, circledXFilledIcon } from "@/components/icons/iconSVG";
+import {
+    circledXIcon,
+    circledXFilledIcon,
+    sectionIcon,
+} from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/app/providers";
@@ -10,8 +14,13 @@ import {
     updateDocumentArray,
     SectionConfig,
 } from "@/features/editor";
+import { MenuContainer } from "@/features/editor";
 
-const StyleMenu = () => {
+type SectionMenuProps = {
+    document: any;
+};
+
+const StyleMenu = ({ document }: SectionMenuProps) => {
     const {
         documentArray,
         setDocumentArray,
@@ -19,26 +28,24 @@ const StyleMenu = () => {
         setShowComponentModal,
     } = useAppContext();
     const params = useParams();
-    const [document, setDocument] = useState<any>(null);
+    const id = params.slug[1];
     const [allSections, setAllSections] = useState<any>([]);
     useEffect(() => {
-        setDocument(
-            documentArray.find((document) => document.id === params.id)
-        );
+        const doc = documentArray.find((document) => document.id === id);
+        if (!doc) return;
         const sectionConfig = SectionConfig(
             document,
             null,
             "",
-            documentArray.find((document) => document.id === params.id)
+            doc.information.template
         );
-        // tempArr is an object where all the keys are the section names
         setAllSections(sectionConfig);
-    }, [documentArray, params.id]);
+    }, [documentArray]);
 
     const handleAddSectionClick = (index: number) => {
         setShowComponentModal({
             ...showComponentModal,
-            [params.id as string]: index,
+            [id as string]: index,
         });
     };
     const handleRemoveSectionClick = (index: number) => {
@@ -63,20 +70,25 @@ const StyleMenu = () => {
     };
 
     return (
-        <motion.section className={styles.container}>
-            <motion.p className={styles.title}>Sections</motion.p>
+        <MenuContainer>
+            <motion.section className={styles.titleContainer}>
+                <motion.div className={styles.iconContainer}>
+                    {sectionIcon}
+                </motion.div>
+                <motion.p className={styles.title}>Sections</motion.p>
+            </motion.section>
             <motion.p className={styles.description}>
                 Add or remove sections from your document.
             </motion.p>
+            <motion.div className={styles.horizontalLine}></motion.div>
             {document && (
                 <>
                     <motion.section className={styles.pageFunctionContainer}>
                         <PageCounter
-                            documentId={params.id as string}
+                            documentId={id as string}
                             fullWidth={true}
                         />
                     </motion.section>
-                    <motion.div className={styles.horizontalLine}></motion.div>
 
                     <motion.section className={styles.sectionContainer}>
                         <motion.button
@@ -88,43 +100,48 @@ const StyleMenu = () => {
                         </motion.button>
                         {document.information.sectionOrder[
                             document.currentPage - 1
-                        ].map((section: string, index: number) => (
-                            <motion.section
-                                className={styles.sectionItem}
-                                key={index}
-                            >
+                        ].map((section: string, index: number) => {
+                            if (section === "colBreak") return null;
+                            return (
                                 <motion.section
-                                    key={section}
-                                    className={styles.section}
+                                    className={styles.sectionItem}
+                                    key={index}
                                 >
-                                    <motion.button
-                                        className={styles.deleteButton}
-                                        title="remove section"
-                                        onClick={() => {
-                                            handleRemoveSectionClick(index);
-                                        }}
+                                    <motion.section
+                                        key={section}
+                                        className={styles.section}
                                     >
-                                        {circledXFilledIcon}
+                                        <motion.button
+                                            className={styles.deleteButton}
+                                            title="remove section"
+                                            onClick={() => {
+                                                handleRemoveSectionClick(index);
+                                            }}
+                                        >
+                                            {circledXFilledIcon}
+                                        </motion.button>
+                                        <motion.p
+                                            className={styles.sectionText}
+                                        >
+                                            {allSections[section]?.name}
+                                        </motion.p>
+                                    </motion.section>
+                                    <motion.button
+                                        title="add section here"
+                                        className={styles.addSectionButton}
+                                        onClick={() =>
+                                            handleAddSectionClick(index + 1)
+                                        }
+                                    >
+                                        +
                                     </motion.button>
-                                    <motion.p className={styles.sectionText}>
-                                        {allSections[section].name}
-                                    </motion.p>
                                 </motion.section>
-                                <motion.button
-                                    title="add section here"
-                                    className={styles.addSectionButton}
-                                    onClick={() =>
-                                        handleAddSectionClick(index + 1)
-                                    }
-                                >
-                                    +
-                                </motion.button>
-                            </motion.section>
-                        ))}
+                            );
+                        })}
                     </motion.section>
                 </>
             )}
-        </motion.section>
+        </MenuContainer>
     );
 };
 

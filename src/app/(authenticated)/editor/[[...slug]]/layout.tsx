@@ -30,13 +30,24 @@ export default async function RootLayout({
     params,
 }: {
     children: React.ReactNode;
-    params: { id: string };
+    params: { slug: string[] };
 }) {
     const { user } = await validateRequest();
     if (!user) {
         redirect("/sign-in");
     }
-    const resume = await getResume(user.id, params.id);
+    if (params.slug.length < 2 || params.slug.length > 2) {
+        redirect("/");
+    }
+    const documentType = params.slug[0];
+    if (documentType !== "resume" && documentType !== "cover-letter") {
+        redirect("/");
+    }
+
+    const document =
+        documentType === "resume"
+            ? await getResume(user.id, params.slug[1])
+            : null;
 
     return (
         <html lang="en">
