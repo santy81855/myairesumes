@@ -15,7 +15,11 @@ const PDFDownloadLink = dynamic(
 import { useAppContext } from "@/app/providers";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { updateResumeAction, getAllResumeTemplates } from "@/features/editor";
+import {
+    updateResumeAction,
+    getAllResumeTemplates,
+    updateDocument,
+} from "@/features/editor";
 import Basic from "@/components/resume-templates/basic/Basic";
 
 const TitleBar = () => {
@@ -29,12 +33,35 @@ const TitleBar = () => {
             (currentDocument) => currentDocument.id === params.slug[1]
         );
         if (!doc) return;
-        setCurrentDocument(doc);
-        const template = getAllResumeTemplates(doc);
-        setCurrentTemplate(
-            template[doc.information.template as keyof typeof template]
-                ?.downloadComponent
-        );
+        // Update the current document only if it's not already set
+        if (
+            currentDocument &&
+            doc.information.template !== currentDocument?.information.template
+        ) {
+            const template = getAllResumeTemplates(doc, true);
+            const updatedDoc = updateDocument(
+                doc,
+                doc.information.template,
+                true
+            );
+            setCurrentTemplate(
+                template[doc.information.template as keyof typeof template]
+                    ?.editorComponent
+            );
+            setCurrentDocument(updatedDoc);
+        } else {
+            const template = getAllResumeTemplates(doc, false);
+            const updatedDoc = updateDocument(
+                doc,
+                doc.information.template,
+                false
+            );
+            setCurrentTemplate(
+                template[doc.information.template as keyof typeof template]
+                    ?.editorComponent
+            );
+            setCurrentDocument(updatedDoc);
+        }
     }, [documentArray]);
 
     const handleUpdate = async (e: any) => {
