@@ -1,0 +1,60 @@
+.resumesContainer {
+    width: 100%;
+}
+
+.resumeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-block-start: 20px;
+    position: relative;
+    width: 100%;
+    height: 8rem;
+    overflow: hidden;
+}
+
+.resumeCard {
+    width: min(15rem, 100%);
+    height: 100%;
+    background-color: rgba(235, 235, 235, 0.623);
+    position: relative;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.resumeInfoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: space-between;
+    position: relative;
+    width: 100%;
+    height: 33%;
+    background-color: white;
+    padding-inline: var(--padding-inline-small);
+}
+
+.resumeInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.resume {
+    aspect-ratio: 8.5 / 11;
+    width: 80%;
+    border: 1px solid rgb(229, 229, 229);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+}
+
+.date {
+    font-size: var(--font-size-small);
+    color: var(--color-grey);
+}

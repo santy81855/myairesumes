@@ -1,0 +1,174 @@
+.itemContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+}
+
+.titleContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-small);
+}
+
+.iconContainer {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleContainer svg {
+    width: 100%;
+    height: 100%;
+    stroke: #7467ff;
+    fill: #7467ff;
+}
+
+.title {
+    font-size: var(--font-size-medium);
+    color: black;
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+}
+
+.description {
+    font-size: var(--font-size-small);
+    color: black;
+    width: 100%;
+    text-align: left;
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-small);
+    padding-inline: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: context-menu;
+}
+
+.pageFunctionContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-block-end: var(--padding-block-small);
+}
+
+.sectionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+.section {
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    padding: var(--padding-block-medium);
+    border-radius: var(--border-radius-xsmall);
+    position: relative;
+}
+
+.sectionText {
+    font-size: var(--font-size-small);
+    color: var(--text-color-rgb);
+    text-align: left;
+}
+
+.addSectionButton {
+    width: 50px;
+    height: 30px;
+    font-size: var(--font-size-medium);
+    background-color: #7467ff;
+    border-radius: var(--border-radius-xsmall);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block-start: -10px;
+    margin-block-end: -10px;
+    z-index: 1;
+}
+
+.addSectionButton:hover {
+    background-color: #5f52e6;
+}
+
+.sectionItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+.horizontalLine {
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    margin-block: var(--padding-block-small);
+}
+
+.dropdown {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-small);
+    padding-inline: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: context-menu;
+    margin-block: var(--padding-block-small);
+}
+
+.dropdown:hover {
+    background-color: #f2f2f2;
+}
+
+/* make it so that when an option is selected there is no added border */
+.dropdown:focus {
+    outline: none;
+}
+
+.deleteButton {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.deleteButton svg {
+    width: 100%;
+    height: 100%;
+    fill: #f97777;
+    stroke: #f97777;
+}
+
+.deleteButton svg:hover {
+    stroke: rgb(134, 70, 70);
+    fill: rgb(134, 70, 70);
+    transform: scale(1.1);
+}

@@ -1,7 +1,7 @@
 "use client";
 import styles from "./Dropdown.module.css";
 import { AnimatePresence, motion } from "framer-motion";
-import { signout } from "@/actions/authentication";
+import { signOutAction } from "@/features/authentication";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -100,7 +100,7 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
 
     const signoutPressed = async () => {
         setIsLoading(true);
-        const response = await signout();
+        const response = await signOutAction();
         if (response.error) {
             toast.warning(response.error);
             setIsLoading(false);

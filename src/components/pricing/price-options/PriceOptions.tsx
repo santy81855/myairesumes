@@ -2,7 +2,7 @@ import styles from "./PriceOptions.module.css";
 import Card from "@/components/pricing/price-card/Card";
 import { getUser } from "@/lib/user";
 import { getCustomerSubscription } from "@/lib/stripe";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { UpdateUrl } from "@/lib/updateUrl";
 import Stripe from "stripe";
 

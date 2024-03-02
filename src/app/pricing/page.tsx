@@ -2,7 +2,7 @@ import styles from "./page.module.css";
 import PriceOptions from "@/components/pricing/price-options/PriceOptions";
 import UpgradeModal from "@/components/modals/payment/upgrade-plan-modal/UpgradeModal";
 import SpecialModal from "@/components/modals/payment/upgrade-special/SpecialModal";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 
 const Page = async ({

@@ -3,13 +3,16 @@ import Title from "@/components/landing-page/title/Title";
 import Blur from "@/components/landing-page/color-blur/Blur";
 import HeroImage from "@/components/landing-page/hero-image/HeroImage";
 import Navbar from "@/components/nav/Navbar";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 import BasicInfoModal from "@/components/landing-page/basic-info-modal/BasicInfoModal";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
     const { user } = await validateRequest();
+    if (user && user.emailVerified === false) {
+        return redirect("/email-verification");
+    }
     const currentUser = user ? await getUser(user.id) : null;
     const showModal =
         currentUser && Object.keys(currentUser.basicInfo).length === 0
