@@ -3,6 +3,7 @@ import Basic from "@/components/resume-templates/basic/Basic";
 import Nexus from "@/components/resume-templates/nexus/Nexus";
 import Impact from "@/components/resume-templates/impact/Impact";
 import Nova from "@/components/resume-templates/nova/Nova";
+import Fresh from "@/components/resume-templates/fresh/Fresh";
 
 export const updateDocument = (
     document: any,
@@ -27,7 +28,6 @@ export const updateDocument = (
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
         // check if the first array in sectionOrder contains 'colBreak' or an element that includes 'nova'
-        console.log(document.information.sectionOrder[0]);
         if (!changedTemplate) {
             // make the newSectionOrder the same as the current array
             newSectionOrder = document.information.sectionOrder;
@@ -64,7 +64,6 @@ export const updateDocument = (
             newSectionOrder = document.information.sectionOrder;
         }
     }
-    console.log(newSectionOrder);
     const updatedDocument = {
         ...document,
         information: {
@@ -220,6 +219,48 @@ export const getAllResumeTemplates = (
                 <Nova
                     isPreview={true}
                     document={updateDocument(document, "nova", changedTemplate)}
+                />
+            ),
+        },
+        fresh: {
+            name: "Fresh",
+            description: "A clean resume template with a touch of color.",
+            keywords: [
+                "fresh",
+                "clean",
+                "modern",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <Fresh
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "fresh",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Fresh
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "fresh",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Fresh
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "fresh",
+                        changedTemplate
+                    )}
                 />
             ),
         },

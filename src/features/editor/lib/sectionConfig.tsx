@@ -67,6 +67,7 @@ export const SectionConfig = (
                     <View
                         style={{
                             ...styles.row,
+                            ...styles.width100,
                             ...styles.alignCenter,
                             ...styles.justifyStart,
                             ...styles.gapMedium,
@@ -98,6 +99,29 @@ export const SectionConfig = (
                             style={{
                                 ...styles.width100,
                                 ...styles.small,
+                                ...styles.bold,
+                                ...styles.uppercase,
+                                ...styles.textLeft,
+                                ...styles.accentBackgroundText,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.horizontalLineBackgroundAccent,
+                                ...styles.marginBottomMedium,
+                            }}
+                        ></View>
+                    </>
+                );
+            case "fresh":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.width100,
+                                ...styles.medium,
                                 ...styles.bold,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
@@ -245,7 +269,7 @@ export const SectionConfig = (
             textAlign: "right",
         },
         extraSmall: {
-            fontSize: fontSize * 0.8,
+            fontSize: fontSize * 0.6,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -253,7 +277,7 @@ export const SectionConfig = (
                 : document.information.style.textColor,
         },
         small: {
-            fontSize: fontSize,
+            fontSize: fontSize * 0.8,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -261,7 +285,7 @@ export const SectionConfig = (
                 : document.information.style.textColor,
         },
         medium: {
-            fontSize: fontSize * 1.2,
+            fontSize: fontSize * 1,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -269,7 +293,7 @@ export const SectionConfig = (
                 : document.information.style.textColor,
         },
         large: {
-            fontSize: fontSize * 1.5,
+            fontSize: fontSize * 1.2,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -295,12 +319,10 @@ export const SectionConfig = (
         row: {
             display: "flex",
             flexDirection: "row",
-            width: "100%",
         },
         col: {
             display: "flex",
             flexDirection: "column",
-            width: "100%",
         },
         alignStart: {
             alignItems: "flex-start",
@@ -541,6 +563,15 @@ export const SectionConfig = (
         paddingLarge: {
             padding: fontSize,
         },
+        flexShrink: {
+            flexShrink: 1,
+        },
+        justifyBetween: {
+            justifyContent: "space-between",
+        },
+        widthAuto: {
+            width: "auto",
+        },
     });
 
     const headerVariants = {
@@ -584,7 +615,7 @@ export const SectionConfig = (
         headerNexus: {
             name: "Nexus Header",
             description:
-                "A header with your name, position, and contact information displayed as a row. Made to match the Nexus template.",
+                "A header with your name, a graphic with your initials, position, and contact information displayed as a row. Made to match the Nexus template.",
             keyWords: [
                 "header",
                 "name",
@@ -752,6 +783,109 @@ export const SectionConfig = (
                 </View>
             ) : null,
         },
+        headerFresh: {
+            name: "Fresh Header",
+            description:
+                "A header with your name, position, and contact information displayed as a row. Made to match the Fresh template.",
+            keyWords: [
+                "header",
+                "name",
+                "position",
+                "title",
+                "contact",
+                "row",
+                "fresh",
+            ],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <View style={styles.rowContainerSpaceBetweenTop}>
+                        <View style={styles.columnGroupLeft}>
+                            <View style={styles.rowContainerBottom}>
+                                <View style={styles.columnGroupLeft}>
+                                    <Text
+                                        style={{
+                                            ...styles.x2Large,
+                                            ...styles.accentBackgroundText,
+                                        }}
+                                    >
+                                        {document.information.firstName}
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.x2Large,
+                                            ...styles.accentBackgroundText,
+                                        }}
+                                    >
+                                        {document.information.lastName}
+                                    </Text>
+                                    <Text style={styles.small}>
+                                        {document.information.position}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View
+                            style={{
+                                ...styles.width100,
+                                ...styles.col,
+                                ...styles.alignStart,
+                                ...styles.justifyStart,
+                                ...styles.gapSmall,
+                            }}
+                        >
+                            <View
+                                style={{
+                                    ...styles.col,
+                                    ...styles.alignEnd,
+                                    ...styles.width100,
+                                }}
+                            >
+                                <Text
+                                    style={{ ...styles.small, ...styles.bold }}
+                                >
+                                    Email
+                                </Text>
+                                <Text style={styles.small}>
+                                    {document.information.contactInfo.email}
+                                </Text>
+                            </View>
+                            <View
+                                style={{
+                                    ...styles.col,
+                                    ...styles.alignEnd,
+                                    ...styles.width100,
+                                }}
+                            >
+                                <Text
+                                    style={{ ...styles.small, ...styles.bold }}
+                                >
+                                    Phone
+                                </Text>
+                                <Text style={styles.small}>
+                                    {document.information.contactInfo.phone}
+                                </Text>
+                            </View>
+                            <View
+                                style={{
+                                    ...styles.col,
+                                    ...styles.alignEnd,
+                                    ...styles.width100,
+                                }}
+                            >
+                                <Text
+                                    style={{ ...styles.small, ...styles.bold }}
+                                >
+                                    Website
+                                </Text>
+                                <Text style={styles.small}>
+                                    {document.information.contactInfo.website}
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            ) : null,
+        },
         headerRow: {
             name: "Impact Header",
             description:
@@ -804,6 +938,7 @@ export const SectionConfig = (
                                 <View
                                     style={{
                                         ...styles.rowSpaceBetween,
+                                        ...styles.width100,
                                         ...styles.flexWrap,
                                     }}
                                 >
@@ -817,8 +952,7 @@ export const SectionConfig = (
                                     </Text>
                                     <Text
                                         style={{
-                                            ...styles.extraSmall,
-                                            ...styles.italic,
+                                            ...styles.small,
                                         }}
                                     >
                                         {formatDateMonthYear(

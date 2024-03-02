@@ -51,16 +51,6 @@ const Menu = () => {
             <section className={styles.staticMenu}>
                 <section
                     className={styles.staticMenuItem}
-                    style={isStyleOpen ? { backgroundColor: "#303045" } : {}}
-                    onClick={() => toggleStyle()}
-                >
-                    <div className={styles.staticIconContainer}>
-                        {styleIcon}
-                    </div>
-                    <p className={styles.staticItemName}>Styles</p>
-                </section>
-                <section
-                    className={styles.staticMenuItem}
                     style={isSectionOpen ? { backgroundColor: "#303045" } : {}}
                     onClick={() => toggleSection()}
                 >
@@ -78,6 +68,16 @@ const Menu = () => {
                         {templateIcon}
                     </div>
                     <p className={styles.staticItemName}>Templates</p>
+                </section>
+                <section
+                    className={styles.staticMenuItem}
+                    style={isStyleOpen ? { backgroundColor: "#303045" } : {}}
+                    onClick={() => toggleStyle()}
+                >
+                    <div className={styles.staticIconContainer}>
+                        {styleIcon}
+                    </div>
+                    <p className={styles.staticItemName}>Styles</p>
                 </section>
             </section>
             {document && (
