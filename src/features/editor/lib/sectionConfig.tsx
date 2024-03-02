@@ -156,6 +156,24 @@ export const SectionConfig = (
                         </Text>
                     </>
                 );
+            case "sharp":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.width100,
+                                ...styles.medium,
+                                ...styles.bold,
+                                ...styles.uppercase,
+                                ...styles.textLeft,
+                                ...styles.accentBackgroundText,
+                                ...styles.marginBottomMedium,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                    </>
+                );
             default:
                 return "Section Title";
         }
@@ -635,6 +653,10 @@ export const SectionConfig = (
         marginRightLarge: {
             marginRight: fontSize,
         },
+        horizontalLineSmall: {
+            width: fontSize * 6,
+            height: fontSize / 12,
+        },
     });
 
     const headerVariants = {
@@ -1018,6 +1040,103 @@ export const SectionConfig = (
                                     </Text>
                                 </View>
                             </View>
+                        </View>
+                    </View>
+                </View>
+            ) : null,
+        },
+        headerSharp: {
+            name: "Sharp Header",
+            description:
+                "A header with your name, position, and contact information displayed as a row. Made to match the Sharp template.",
+            keyWords: [
+                "header",
+                "name",
+                "position",
+                "title",
+                "contact",
+                "row",
+                "sharp",
+            ],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <View
+                        style={{
+                            ...styles.columnGroupCenter,
+                            ...styles.accentBackgroundColor,
+                            ...styles.paddingLarge,
+                        }}
+                    >
+                        <Text
+                            style={{
+                                ...styles.x2Large,
+                                ...styles.accentText,
+                            }}
+                        >
+                            {document.information.firstName}{" "}
+                            {document.information.lastName}
+                        </Text>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                ...styles.accentText,
+                            }}
+                        >
+                            {document.information.position}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.horizontalLineSmall,
+                                ...styles.accentTextBackground,
+                                ...styles.marginTopMedium,
+                                ...styles.marginBottomMedium,
+                            }}
+                        ></View>
+                        <View
+                            style={{
+                                ...styles.rowContainer,
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                {document.information.contactInfo.email}
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                |
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                {document.information.contactInfo.phone}
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                |
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                {document.information.contactInfo.website}
+                            </Text>
                         </View>
                     </View>
                 </View>

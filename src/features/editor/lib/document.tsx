@@ -5,6 +5,7 @@ import Impact from "@/components/resume-templates/impact/Impact";
 import Nova from "@/components/resume-templates/nova/Nova";
 import Fresh from "@/components/resume-templates/fresh/Fresh";
 import Vivid from "@/components/resume-templates/vivid/Vivid";
+import Sharp from "@/components/resume-templates/sharp/Sharp";
 
 export const updateDocument = (
     document: any,
@@ -324,6 +325,42 @@ export const getAllResumeTemplates = (
                     document={updateDocument(
                         document,
                         "vivid",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        sharp: {
+            name: "Sharp",
+            description:
+                "A professional resume template with some color to stand out.",
+            keywords: ["sharp", "professional", "modern", "ats"],
+            editorComponent: (
+                <Sharp
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "sharp",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Sharp
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "sharp",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Sharp
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "sharp",
                         changedTemplate
                     )}
                 />
