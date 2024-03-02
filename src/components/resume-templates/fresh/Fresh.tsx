@@ -175,6 +175,7 @@ const Fresh = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                             ].map((section: string, index: number) => {
                                 return (
                                     <Section
+                                        key={section + index.toString()}
                                         sectionId={section}
                                         document={document}
                                         templateRef={templateRef}
@@ -313,6 +314,10 @@ const Fresh = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                             ) => {
                                                 return (
                                                     <Section
+                                                        key={
+                                                            section +
+                                                            index.toString()
+                                                        }
                                                         sectionId={section}
                                                         document={document}
                                                     />
