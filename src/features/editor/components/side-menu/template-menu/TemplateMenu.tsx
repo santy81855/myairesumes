@@ -3,7 +3,11 @@ import styles from "./TemplateMenu.module.css";
 import { searchIcon } from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { MenuContainer, getAllResumeTemplates } from "@/features/editor";
+import {
+    MenuContainer,
+    getAllResumeTemplates,
+    updateDocumentArray,
+} from "@/features/editor";
 import { useAppContext } from "@/app/providers";
 import { useParams } from "next/navigation";
 
@@ -14,7 +18,7 @@ type TemplateMenuProps = {
 const TemplateMenu = ({ document }: TemplateMenuProps) => {
     const params = useParams();
     const [searchText, setSearchText] = useState("");
-    const { documentArray } = useAppContext();
+    const { documentArray, setDocumentArray } = useAppContext();
     const [currentDocument, setCurrentDocument] = useState<any>(null);
     const [currentTemplate, setCurrentTemplate] = useState<any>(null);
     const [allTemplates, setAllTemplates] = useState<any>([]);
@@ -24,7 +28,7 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
         );
         if (!doc) return;
         setCurrentDocument(doc);
-        const template = getAllResumeTemplates(doc);
+        const template = getAllResumeTemplates(doc, true);
         // get every key in the template object and store it in an array
         const templateKeys = Object.keys(template);
         // get the previewComponent for each template
@@ -33,6 +37,7 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                 component:
                     template[key as keyof typeof template].previewComponent,
                 key,
+                name: template[key as keyof typeof template].name,
             };
         });
         setAllTemplates(templateComponents);
@@ -41,6 +46,24 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                 ?.previewComponent
         );
     }, [documentArray]);
+
+    const handleClick = (template: any) => {
+        if (!currentDocument) return;
+        // update the document with the new template
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                template: template.key,
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+    };
+
     return (
         <MenuContainer>
             <motion.section className={styles.searchBarContainer}>
@@ -60,10 +83,17 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                 <motion.section className={styles.templates}>
                     {allTemplates.map((template: any, index: number) => {
                         return (
-                            <motion.div key={index} className={styles.template}>
+                            <motion.div
+                                key={index}
+                                className={styles.template}
+                                onClick={() => handleClick(template)}
+                            >
                                 <motion.div className={styles.templatePreview}>
                                     {template.component}
                                 </motion.div>
+                                <motion.p className={styles.templateName}>
+                                    {template.name}
+                                </motion.p>
                             </motion.div>
                         );
                     })}

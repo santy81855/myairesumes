@@ -24,7 +24,12 @@ const SectionComponents = ({
     isDownload?: boolean;
 }) => {
     const { documentArray, setDocumentArray } = useAppContext();
-    const sectionConfig = SectionConfig(document, fontSize, font, margin);
+    const sectionConfig = SectionConfig(
+        document,
+        fontSize,
+        font,
+        document.information.template
+    );
 
     const moveSection = (dragIndex: number, hoverIndex: number) => {
         if (!orderArray) return;
@@ -79,7 +84,7 @@ const SectionComponents = ({
                 id={`${section}-${index}`}
                 key={section + index.toString()}
                 orderArray={orderArray}
-                moveSection={moveSection}
+                document={document}
             >
                 {memoizedGetSectionEditor(section)}
             </DraggableContainer>

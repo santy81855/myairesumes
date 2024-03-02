@@ -1,7 +1,7 @@
 "use client";
 import { Text, View, StyleSheet, Font } from "@react-pdf/renderer";
 import {
-    formatDateMonthDayYear,
+    formatDateMonthYear,
     sortObjectArrayByDateEnd,
 } from "../../../lib/date";
 
@@ -9,7 +9,8 @@ export const SectionConfig = (
     document: any,
     fontSize: any,
     font: string,
-    template: string
+    template: string,
+    accentColumn?: boolean
 ) => {
     const hyphenationCallback = (word: string) => {
         // Return word parts in an array
@@ -23,7 +24,13 @@ export const SectionConfig = (
             case "basic":
                 return (
                     <>
-                        <Text style={{ ...styles.medium, ...styles.bold }}>
+                        <Text
+                            style={{
+                                ...styles.textColor,
+                                ...styles.small,
+                                ...styles.bold,
+                            }}
+                        >
                             {title}
                         </Text>
                         <View style={styles.horizontalLine}></View>
@@ -45,7 +52,7 @@ export const SectionConfig = (
                     >
                         <Text
                             style={{
-                                ...styles.medium,
+                                ...styles.small,
                                 ...styles.accentText,
                                 ...styles.textLeftAlign,
                                 ...styles.marginLeftMedium,
@@ -68,7 +75,7 @@ export const SectionConfig = (
                     >
                         <Text
                             style={{
-                                ...styles.medium,
+                                ...styles.small,
                                 ...styles.accentBackgroundText,
                                 ...styles.textLeftAlign,
                                 ...styles.uppercase,
@@ -83,6 +90,29 @@ export const SectionConfig = (
                             }}
                         ></View>
                     </View>
+                );
+            case "nova":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.width100,
+                                ...styles.small,
+                                ...styles.bold,
+                                ...styles.uppercase,
+                                ...styles.textLeft,
+                                ...styles.accentBackgroundText,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.horizontalLineBackgroundAccent,
+                                ...styles.marginBottomMedium,
+                            }}
+                        ></View>
+                    </>
                 );
             default:
                 return "Section Title";
@@ -129,6 +159,33 @@ export const SectionConfig = (
     };
     // Create styles
     const styles = StyleSheet.create({
+        horizontalLineBackgroundAccent: {
+            width: "100%",
+            height: fontSize / 10,
+            backgroundColor: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.accentBackgroundColor,
+        },
+        flexWrap: {
+            flexWrap: "wrap",
+        },
+        textColor: {
+            color: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.textColor,
+        },
+        width100: {
+            width: "100%",
+        },
+        textLeft: {
+            textAlign: "left",
+        },
+        textRight: {
+            textAlign: "right",
+        },
+        textCenter: {
+            textAlign: "center",
+        },
         uppercase: {
             textTransform: "uppercase",
         },
@@ -136,7 +193,9 @@ export const SectionConfig = (
             color: document.information.style.accentTextColor,
         },
         accentBackgroundText: {
-            color: document.information.style.accentBackgroundColor,
+            color: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.accentBackgroundColor,
         },
         accentBackgroundColor: {
             backgroundColor: document.information.style.accentBackgroundColor,
@@ -189,31 +248,49 @@ export const SectionConfig = (
             fontSize: fontSize * 0.8,
             fontFamily: font,
             lineHeight: 1.2,
+            color: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.textColor,
         },
         small: {
             fontSize: fontSize,
             fontFamily: font,
             lineHeight: 1.2,
+            color: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.textColor,
         },
         medium: {
             fontSize: fontSize * 1.2,
             fontFamily: font,
             lineHeight: 1.2,
+            color: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.textColor,
         },
         large: {
             fontSize: fontSize * 1.5,
             fontFamily: font,
             lineHeight: 1.2,
+            color: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.textColor,
         },
         extraLarge: {
             fontFamily: font,
             fontSize: fontSize * 2,
             lineHeight: 1.2,
+            color: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.textColor,
         },
         x2Large: {
             fontFamily: font,
             fontSize: fontSize * 2.5,
             lineHeight: 1.2,
+            color: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.textColor,
         },
         row: {
             display: "flex",
@@ -318,13 +395,20 @@ export const SectionConfig = (
         bullet: {
             minWidth: fontSize / 3,
             minHeight: fontSize / 3,
-            backgroundColor: "black",
+            backgroundColor: accentColumn
+                ? document.information.style.accentTextColor
+                : document.information.style.textColor,
             borderRadius: "50%",
         },
         horizontalLine: {
             width: "100%",
             height: fontSize / 10,
             backgroundColor: "black",
+        },
+        horizontalLineTextAccent: {
+            width: "100%",
+            height: fontSize / 10,
+            backgroundColor: document.information.style.accentTextColor,
         },
         arrayContainer: {
             width: "100%",
@@ -513,6 +597,7 @@ export const SectionConfig = (
                                         style={{
                                             ...styles.firstInitial,
                                             ...styles.x2Large,
+                                            ...styles.accentBackgroundText,
                                         }}
                                     >
                                         {document.information.firstName[0]}
@@ -522,6 +607,7 @@ export const SectionConfig = (
                                         style={{
                                             ...styles.lastInitial,
                                             ...styles.x2Large,
+                                            ...styles.accentBackgroundText,
                                         }}
                                     >
                                         {document.information.lastName[0]}
@@ -613,6 +699,44 @@ export const SectionConfig = (
                 </View>
             ) : null,
         },
+        headerNova: {
+            name: "Nova Header",
+            description:
+                "A header that emphasizes your name. Made to match the Nova template.",
+            keyWords: ["header", "name", "position", "title"],
+            component: fontSize ? (
+                <View
+                    style={{
+                        ...styles.columnGroupLeft,
+                        ...styles.col,
+                        ...styles.alignStart,
+                        ...styles.justifyStart,
+                        ...styles.gapSmall,
+                        ...styles.width100,
+                    }}
+                >
+                    <Text
+                        style={{
+                            ...styles.extraLarge,
+                            ...styles.accentBackgroundText,
+                            ...styles.uppercase,
+                            ...styles.bold,
+                        }}
+                    >
+                        {document.information.firstName}{" "}
+                        {document.information.lastName}
+                    </Text>
+                    <Text
+                        style={{
+                            ...styles.small,
+                            ...styles.textColor,
+                        }}
+                    >
+                        {document.information.position}
+                    </Text>
+                </View>
+            ) : null,
+        },
         headerRow: {
             name: "Impact Header",
             description:
@@ -662,23 +786,33 @@ export const SectionConfig = (
                             -1
                         ).map((education: any, index: number) => (
                             <View key={index} style={styles.arrayItem}>
-                                <View style={styles.rowSpaceBetween}>
+                                <View
+                                    style={{
+                                        ...styles.rowSpaceBetween,
+                                        ...styles.flexWrap,
+                                    }}
+                                >
                                     <Text
                                         style={{
-                                            ...styles.medium,
+                                            ...styles.small,
                                             ...styles.bold,
                                         }}
                                     >
                                         {education.schoolName}
                                     </Text>
-                                    <Text style={styles.small}>
-                                        {formatDateMonthDayYear(
+                                    <Text
+                                        style={{
+                                            ...styles.extraSmall,
+                                            ...styles.italic,
+                                        }}
+                                    >
+                                        {formatDateMonthYear(
                                             education.startDate
                                         )}{" "}
                                         -{" "}
                                         {education.endDate === "Present"
                                             ? "Present"
-                                            : formatDateMonthDayYear(
+                                            : formatDateMonthYear(
                                                   education.endDate
                                               )}
                                     </Text>
@@ -717,23 +851,33 @@ export const SectionConfig = (
                             -1
                         ).map((education: any, index: number) => (
                             <View key={index} style={styles.arrayItem}>
-                                <View style={styles.rowSpaceBetween}>
+                                <View
+                                    style={{
+                                        ...styles.rowSpaceBetween,
+                                        ...styles.flexWrap,
+                                    }}
+                                >
                                     <Text
                                         style={{
-                                            ...styles.medium,
+                                            ...styles.small,
                                             ...styles.bold,
                                         }}
                                     >
                                         {education.schoolName}
                                     </Text>
-                                    <Text style={styles.small}>
-                                        {formatDateMonthDayYear(
+                                    <Text
+                                        style={{
+                                            ...styles.extraSmall,
+                                            ...styles.italic,
+                                        }}
+                                    >
+                                        {formatDateMonthYear(
                                             education.startDate
                                         )}{" "}
                                         -{" "}
                                         {education.endDate === "Present"
                                             ? "Present"
-                                            : formatDateMonthDayYear(
+                                            : formatDateMonthYear(
                                                   education.endDate
                                               )}
                                     </Text>
@@ -967,13 +1111,13 @@ export const SectionConfig = (
                                         {experience.company}
                                     </Text>
                                     <Text style={styles.small}>
-                                        {formatDateMonthDayYear(
+                                        {formatDateMonthYear(
                                             experience.startDate
                                         )}{" "}
                                         -{" "}
                                         {experience.endDate === "Present"
                                             ? "Present"
-                                            : formatDateMonthDayYear(
+                                            : formatDateMonthYear(
                                                   experience.endDate
                                               )}
                                     </Text>

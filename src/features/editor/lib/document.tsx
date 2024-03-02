@@ -2,13 +2,42 @@ import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
 import Basic from "@/components/resume-templates/basic/Basic";
 import Nexus from "@/components/resume-templates/nexus/Nexus";
 import Impact from "@/components/resume-templates/impact/Impact";
+import Nova from "@/components/resume-templates/nova/Nova";
 
-const updateDocument = (document: any, template: string) => {
+const updateDocument = (
+    document: any,
+    template: string,
+    changedTemplate: boolean
+) => {
     // change the template field to the new template
     // search for any items in the document.information.sectionOrder that have the substring 'header', and replace the item with headerTemplate depending on the passed template
-    const newSectionOrder = document.information.sectionOrder.map(
-        (array: any) =>
+    let newSectionOrder = [] as any;
+    if (template === "nova") {
+        // if the template is nova, then the sectionOrder array for the first array should be: ['headerNova', 'summary', 'experience', 'colBreak' 'contactVertical', 'skills', 'education', 'languages']
+        const newArr = [
+            "headerNova",
+            "summary",
+            "experience",
+            "colBreak",
+            "contactVertical",
+            "skillsBullet",
+            "educationShort",
+            "languages",
+        ];
+        // make the first array in sectionOrder equal to newArr
+        // add the newArr to the newSectionOrder
+        newSectionOrder = document.information.sectionOrder.map(
+            (array: any, index: number) => {
+                return index === 0 ? newArr : array;
+            }
+        );
+    } else {
+        newSectionOrder = document.information.sectionOrder.map((array: any) =>
             array.map((item: string) => {
+                //console.log(item);
+                if (item === "colBreak") {
+                    return null;
+                }
                 if (item.includes("header")) {
                     // return 'header' + template but make the first letter of template capitalized
                     return `header${template
@@ -17,19 +46,29 @@ const updateDocument = (document: any, template: string) => {
                 }
                 return item;
             })
-    );
+        );
+        // remove any null values from the first array in newSectionOrder
+        newSectionOrder[0] = newSectionOrder[0].filter(
+            (item: string | null) => item !== null
+        );
+    }
     const updatedDocument = {
         ...document,
         information: {
             ...document.information,
             template,
-            sectionOrder: newSectionOrder,
+            sectionOrder: changedTemplate
+                ? newSectionOrder
+                : document.information.sectionOrder,
         },
     };
     return updatedDocument;
 };
 
-export const getAllResumeTemplates = (document: any) => {
+export const getAllResumeTemplates = (
+    document: any,
+    changedTemplate: boolean
+) => {
     return {
         basic: {
             name: "Basic",
@@ -45,19 +84,31 @@ export const getAllResumeTemplates = (document: any) => {
             editorComponent: (
                 <Basic
                     isEditor={true}
-                    document={updateDocument(document, "basic")}
+                    document={updateDocument(
+                        document,
+                        "basic",
+                        changedTemplate
+                    )}
                 />
             ),
             downloadComponent: (
                 <Basic
                     isDownload={true}
-                    document={updateDocument(document, "basic")}
+                    document={updateDocument(
+                        document,
+                        "basic",
+                        changedTemplate
+                    )}
                 />
             ),
             previewComponent: (
                 <Basic
                     isPreview={true}
-                    document={updateDocument(document, "basic")}
+                    document={updateDocument(
+                        document,
+                        "basic",
+                        changedTemplate
+                    )}
                 />
             ),
         },
@@ -75,19 +126,31 @@ export const getAllResumeTemplates = (document: any) => {
             editorComponent: (
                 <Nexus
                     isEditor={true}
-                    document={updateDocument(document, "nexus")}
+                    document={updateDocument(
+                        document,
+                        "nexus",
+                        changedTemplate
+                    )}
                 />
             ),
             downloadComponent: (
                 <Nexus
                     isDownload={true}
-                    document={updateDocument(document, "nexus")}
+                    document={updateDocument(
+                        document,
+                        "nexus",
+                        changedTemplate
+                    )}
                 />
             ),
             previewComponent: (
                 <Nexus
                     isPreview={true}
-                    document={updateDocument(document, "nexus")}
+                    document={updateDocument(
+                        document,
+                        "nexus",
+                        changedTemplate
+                    )}
                 />
             ),
         },
@@ -98,19 +161,54 @@ export const getAllResumeTemplates = (document: any) => {
             editorComponent: (
                 <Impact
                     isEditor={true}
-                    document={updateDocument(document, "impact")}
+                    document={updateDocument(
+                        document,
+                        "impact",
+                        changedTemplate
+                    )}
                 />
             ),
             downloadComponent: (
                 <Impact
                     isDownload={true}
-                    document={updateDocument(document, "impact")}
+                    document={updateDocument(
+                        document,
+                        "impact",
+                        changedTemplate
+                    )}
                 />
             ),
             previewComponent: (
                 <Impact
                     isPreview={true}
-                    document={updateDocument(document, "impact")}
+                    document={updateDocument(
+                        document,
+                        "impact",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        nova: {
+            name: "Nova",
+            description: "A modern and creative resume template.",
+            keywords: ["nova", "unique", "creative", "modern", "art"],
+            editorComponent: (
+                <Nova
+                    isEditor={true}
+                    document={updateDocument(document, "nova", changedTemplate)}
+                />
+            ),
+            downloadComponent: (
+                <Nova
+                    isDownload={true}
+                    document={updateDocument(document, "nova", changedTemplate)}
+                />
+            ),
+            previewComponent: (
+                <Nova
+                    isPreview={true}
+                    document={updateDocument(document, "nova", changedTemplate)}
                 />
             ),
         },

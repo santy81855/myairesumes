@@ -100,39 +100,44 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
                         </motion.button>
                         {document.information.sectionOrder[
                             document.currentPage - 1
-                        ].map((section: string, index: number) => (
-                            <motion.section
-                                className={styles.sectionItem}
-                                key={index}
-                            >
+                        ].map((section: string, index: number) => {
+                            if (section === "colBreak") return null;
+                            return (
                                 <motion.section
-                                    key={section}
-                                    className={styles.section}
+                                    className={styles.sectionItem}
+                                    key={index}
                                 >
-                                    <motion.button
-                                        className={styles.deleteButton}
-                                        title="remove section"
-                                        onClick={() => {
-                                            handleRemoveSectionClick(index);
-                                        }}
+                                    <motion.section
+                                        key={section}
+                                        className={styles.section}
                                     >
-                                        {circledXFilledIcon}
+                                        <motion.button
+                                            className={styles.deleteButton}
+                                            title="remove section"
+                                            onClick={() => {
+                                                handleRemoveSectionClick(index);
+                                            }}
+                                        >
+                                            {circledXFilledIcon}
+                                        </motion.button>
+                                        <motion.p
+                                            className={styles.sectionText}
+                                        >
+                                            {allSections[section]?.name}
+                                        </motion.p>
+                                    </motion.section>
+                                    <motion.button
+                                        title="add section here"
+                                        className={styles.addSectionButton}
+                                        onClick={() =>
+                                            handleAddSectionClick(index + 1)
+                                        }
+                                    >
+                                        +
                                     </motion.button>
-                                    <motion.p className={styles.sectionText}>
-                                        {allSections[section]?.name}
-                                    </motion.p>
                                 </motion.section>
-                                <motion.button
-                                    title="add section here"
-                                    className={styles.addSectionButton}
-                                    onClick={() =>
-                                        handleAddSectionClick(index + 1)
-                                    }
-                                >
-                                    +
-                                </motion.button>
-                            </motion.section>
-                        ))}
+                            );
+                        })}
                     </motion.section>
                 </>
             )}

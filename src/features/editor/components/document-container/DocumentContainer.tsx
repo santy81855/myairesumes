@@ -21,12 +21,27 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
     useEffect(() => {
         const doc = documentArray.find((document) => document.id === id);
         if (!doc) return;
+
         setCurrentDocument(doc);
-        const template = getAllResumeTemplates(doc);
-        setCurrentTemplate(
-            template[doc.information.template as keyof typeof template]
-                ?.editorComponent
-        );
+        // Update the current document only if it's not already set
+        if (
+            (currentDocument &&
+                doc.information.template !==
+                    currentDocument?.information.template) ||
+            !currentDocument
+        ) {
+            const template = getAllResumeTemplates(doc, true);
+            setCurrentTemplate(
+                template[doc.information.template as keyof typeof template]
+                    ?.editorComponent
+            );
+        } else {
+            const template = getAllResumeTemplates(doc, false);
+            setCurrentTemplate(
+                template[doc.information.template as keyof typeof template]
+                    ?.editorComponent
+            );
+        }
     }, [documentArray]);
 
     useEffect(() => {

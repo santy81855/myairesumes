@@ -6,9 +6,15 @@ type SectionProps = {
     sectionId: string;
     document: any;
     templateRef?: React.RefObject<HTMLDivElement>;
+    accentColumn?: boolean;
 };
 
-const Section = ({ sectionId, document, templateRef }: SectionProps) => {
+const Section = ({
+    sectionId,
+    document,
+    templateRef,
+    accentColumn,
+}: SectionProps) => {
     const [fontSize, setFontSize] = useState(
         document.information.style.baseFontSize
     );
@@ -20,7 +26,8 @@ const Section = ({ sectionId, document, templateRef }: SectionProps) => {
             document,
             document.information.style.baseFontSize,
             document.information.font,
-            document.information.template
+            document.information.template,
+            accentColumn ? true : false
         )
     );
 
@@ -32,7 +39,8 @@ const Section = ({ sectionId, document, templateRef }: SectionProps) => {
                     document,
                     document.information.style.baseFontSize,
                     document.information.font,
-                    document.information.template
+                    document.information.template,
+                    accentColumn ? true : false
                 )
             );
             return;
@@ -50,7 +58,8 @@ const Section = ({ sectionId, document, templateRef }: SectionProps) => {
                 document,
                 size,
                 document.information.font,
-                document.information.template
+                document.information.template,
+                accentColumn ? true : false
             )
         );
 
@@ -71,7 +80,8 @@ const Section = ({ sectionId, document, templateRef }: SectionProps) => {
                     document,
                     size,
                     document.information.font,
-                    document.information.template
+                    document.information.template,
+                    accentColumn ? true : false
                 )
             );
         }
