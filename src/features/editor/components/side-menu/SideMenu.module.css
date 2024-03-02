@@ -1,9 +1,0 @@
-.sideMenu {
-    height: 100%;
-    width: var(--editor-side-menu-width);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-}

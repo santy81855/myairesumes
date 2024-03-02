@@ -1,7 +1,7 @@
 "use client";
 import styles from "./ProfileMenu.module.css";
 import { AnimatePresence, motion } from "framer-motion";
-import { signOutAction } from "@/features/authentication";
+import { signout } from "@/actions/authentication";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -96,7 +96,7 @@ const ProfileMenu = ({ session, user, state, setState }: Props) => {
 
     const signoutPressed = async () => {
         setIsLoading(true);
-        const response = await signOutAction();
+        const response = await signout();
         if (response.error) {
             toast.warning(response.error);
             setIsLoading(false);

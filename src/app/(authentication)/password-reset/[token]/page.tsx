@@ -1,6 +1,6 @@
-import { validateRequest } from "@/features/authentication/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import styles from "./page.module.css";
-import { PasswordResetCard } from "@/features/authentication";
+import Card from "@/components/authentication/password-reset-card/Card";
 import { redirect } from "next/navigation";
 
 const Page = async ({
@@ -16,7 +16,7 @@ const Page = async ({
     }
     return (
         <main className={styles.pageContainer}>
-            <PasswordResetCard token={params.token} />
+            <Card token={params.token} />
         </main>
     );
 };

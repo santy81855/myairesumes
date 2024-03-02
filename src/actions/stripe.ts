@@ -4,7 +4,7 @@ import {
     stripe,
     getStripeSessionUpdatePayment,
 } from "@/lib/stripe";
-import { validateRequest } from "@/features/authentication/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { revalidateTag } from "next/cache";

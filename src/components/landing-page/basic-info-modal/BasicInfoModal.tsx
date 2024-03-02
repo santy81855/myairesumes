@@ -2,17 +2,14 @@ import styles from "./BasicInfoModal.module.css";
 import StaticModal from "@/components/static-modal/StaticModal";
 import Link from "next/link";
 import { magicResumeLogo } from "@/components/icons/iconSVG";
-import { initializeUserBasicInfoAction } from "@/features/dashboard";
+import { initializeUserBasicInfo } from "@/actions/user";
 
 type BasicInfoModalProps = {
     currentUser: any;
 };
 
 const BasicInfoModal = async ({ currentUser }: BasicInfoModalProps) => {
-    const updateBasicInfo = initializeUserBasicInfoAction.bind(
-        null,
-        currentUser
-    );
+    const updateBasicInfo = initializeUserBasicInfo.bind(null, currentUser);
     return (
         <StaticModal>
             <section className={styles.modalContent}>

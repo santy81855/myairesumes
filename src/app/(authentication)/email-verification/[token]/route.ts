@@ -1,6 +1,6 @@
-import { lucia } from "@/features/authentication/lib/auth";
+import { lucia } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { validateEmailVerificationToken } from "@/features/authentication";
+import { validateEmailVerificationToken } from "@/auth/token";
 
 import type { NextRequest } from "next/server";
 

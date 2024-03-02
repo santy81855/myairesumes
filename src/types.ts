@@ -1,3 +1,12 @@
+export type AuthEmailData = {
+    email: string;
+    firstName: string;
+    lastName: string;
+    subject: string;
+    url: string;
+    type: string;
+};
+
 export type FailedPaymentEmailData = {
     email: string;
     firstName: string;

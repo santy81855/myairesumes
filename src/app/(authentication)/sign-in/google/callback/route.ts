@@ -1,4 +1,4 @@
-import { google, lucia } from "@/features/authentication/lib/auth";
+import { google, lucia } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { OAuth2RequestError } from "arctic";
