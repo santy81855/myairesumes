@@ -16,8 +16,15 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const params = useParams();
     const id = params.slug[1];
-    const [color, setColor] = useState<string>("#000000");
+    const [color, setColor] = useState<string>(
+        document.information.style.accentBackgroundColor
+    );
     const [showPicker, setShowPicker] = useState<boolean>(false);
+    const [accentTextColor, setAccentTextColor] = useState<string>(
+        document.information.style.accentTextColor
+    );
+    const [showTextColorPicker, setShowTextColorPicker] =
+        useState<boolean>(false);
 
     const handleFontSizeChange = (size: string) => {
         if (!document) return;
@@ -73,6 +80,25 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
         setDocumentArray(newDocumentArray);
     };
 
+    const handleSectionGapChange = (size: string) => {
+        if (!document) return;
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                style: {
+                    ...document.information.style,
+                    baseSectionGap: parseInt(size),
+                },
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+    };
+
     const handleAccentColorChange = (color: string) => {
         if (!document) return;
         console.log(color);
@@ -83,6 +109,25 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                 style: {
                     ...document.information.style,
                     accentBackgroundColor: color,
+                },
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+    };
+
+    const handleAccentTextColorChange = (color: string) => {
+        if (!document) return;
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                style: {
+                    ...document.information.style,
+                    accentTextColor: color,
                 },
             },
         };
@@ -188,17 +233,67 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                             </motion.option>
                         </motion.select>
                     </motion.section>
-                    <motion.section
-                        className={styles.colorPickerButtonContainer}
-                    >
+                    <motion.section className={styles.sectionContainer}>
                         <motion.p className={styles.description}>
-                            Accent Color
+                            Section Gap
                         </motion.p>
-                        <motion.div
-                            className={styles.colorPickerButton}
-                            style={{ backgroundColor: color }}
-                            onClick={() => setShowPicker(!showPicker)}
-                        ></motion.div>
+                        <motion.select
+                            className={styles.marginSize}
+                            onChange={(e) =>
+                                handleSectionGapChange(e.target.value)
+                            }
+                        >
+                            {Array.from({ length: 60 }).map((_, index) => (
+                                <motion.option
+                                    key={index}
+                                    value={(index + 1).toString()}
+                                    selected={
+                                        document.information.style
+                                            .baseSectionGap ===
+                                        index + 1
+                                    }
+                                >
+                                    {index + 1}
+                                </motion.option>
+                            ))}
+                        </motion.select>
+                    </motion.section>
+                    <motion.section
+                        className={styles.colorPickerOptionsContainer}
+                    >
+                        <motion.section
+                            className={styles.colorPickerButtonContainer}
+                        >
+                            <motion.p className={styles.description}>
+                                Accent Color
+                            </motion.p>
+                            <motion.div
+                                className={styles.colorPickerButton}
+                                style={{ backgroundColor: color }}
+                                onClick={() => {
+                                    setShowPicker(!showPicker);
+                                    setShowTextColorPicker(false);
+                                }}
+                            ></motion.div>
+                        </motion.section>
+
+                        <motion.section
+                            className={styles.colorPickerButtonContainer}
+                        >
+                            <motion.p className={styles.description}>
+                                Text Accent Color
+                            </motion.p>
+                            <motion.div
+                                className={styles.colorPickerButton}
+                                style={{ backgroundColor: accentTextColor }}
+                                onClick={() => {
+                                    setShowTextColorPicker(
+                                        !showTextColorPicker
+                                    );
+                                    setShowPicker(false);
+                                }}
+                            ></motion.div>
+                        </motion.section>
                     </motion.section>
                     {showPicker && (
                         <motion.div className={styles.pickerContainer}>
@@ -207,6 +302,17 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                                 onChange={(color) => {
                                     setColor(color);
                                     handleAccentColorChange(color);
+                                }}
+                            />
+                        </motion.div>
+                    )}
+                    {showTextColorPicker && (
+                        <motion.div className={styles.pickerContainer}>
+                            <HexColorPicker
+                                color={accentTextColor}
+                                onChange={(color) => {
+                                    setAccentTextColor(color);
+                                    handleAccentTextColorChange(color);
                                 }}
                             />
                         </motion.div>

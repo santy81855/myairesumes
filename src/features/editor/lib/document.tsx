@@ -4,7 +4,7 @@ import Nexus from "@/components/resume-templates/nexus/Nexus";
 import Impact from "@/components/resume-templates/impact/Impact";
 import Nova from "@/components/resume-templates/nova/Nova";
 
-const updateDocument = (
+export const updateDocument = (
     document: any,
     template: string,
     changedTemplate: boolean
@@ -26,40 +26,51 @@ const updateDocument = (
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
-        newSectionOrder = document.information.sectionOrder.map(
-            (array: any, index: number) => {
-                return index === 0 ? newArr : array;
-            }
-        );
+        // check if the first array in sectionOrder contains 'colBreak' or an element that includes 'nova'
+        console.log(document.information.sectionOrder[0]);
+        if (!changedTemplate) {
+            // make the newSectionOrder the same as the current array
+            newSectionOrder = document.information.sectionOrder;
+        } else {
+            newSectionOrder = document.information.sectionOrder.map(
+                (array: any, index: number) => {
+                    return index === 0 ? newArr : array;
+                }
+            );
+        }
     } else {
-        newSectionOrder = document.information.sectionOrder.map((array: any) =>
-            array.map((item: string) => {
-                //console.log(item);
-                if (item === "colBreak") {
-                    return null;
-                }
-                if (item.includes("header")) {
-                    // return 'header' + template but make the first letter of template capitalized
-                    return `header${template
-                        .charAt(0)
-                        .toUpperCase()}${template.slice(1)}`;
-                }
-                return item;
-            })
-        );
-        // remove any null values from the first array in newSectionOrder
-        newSectionOrder[0] = newSectionOrder[0].filter(
-            (item: string | null) => item !== null
-        );
+        if (changedTemplate) {
+            newSectionOrder = document.information.sectionOrder.map(
+                (array: any) =>
+                    array.map((item: string) => {
+                        //console.log(item);
+                        if (item === "colBreak") {
+                            return null;
+                        }
+                        if (item.includes("header")) {
+                            // return 'header' + template but make the first letter of template capitalized
+                            return `header${template
+                                .charAt(0)
+                                .toUpperCase()}${template.slice(1)}`;
+                        }
+                        return item;
+                    })
+            );
+            // remove any null values from the first array in newSectionOrder
+            newSectionOrder[0] = newSectionOrder[0].filter(
+                (item: string | null) => item !== null
+            );
+        } else {
+            newSectionOrder = document.information.sectionOrder;
+        }
     }
+    console.log(newSectionOrder);
     const updatedDocument = {
         ...document,
         information: {
             ...document.information,
             template,
-            sectionOrder: changedTemplate
-                ? newSectionOrder
-                : document.information.sectionOrder,
+            sectionOrder: newSectionOrder,
         },
     };
     return updatedDocument;
@@ -370,6 +381,7 @@ export const initializeNewResume = (
         style: {
             baseFontSize: 11,
             baseMarginSize: 11,
+            baseSectionGap: 11,
             backgroundColor: "#ffffff",
             textColor: "#000000",
             accentBackgroundColor: "#5B7FC5",

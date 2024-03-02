@@ -7,6 +7,7 @@ import {
     MenuContainer,
     getAllResumeTemplates,
     updateDocumentArray,
+    updateDocument,
 } from "@/features/editor";
 import { useAppContext } from "@/app/providers";
 import { useParams } from "next/navigation";
@@ -47,16 +48,42 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
         );
     }, [documentArray]);
 
-    const handleClick = (template: any) => {
-        if (!currentDocument) return;
-        // update the document with the new template
+    /*
+        const handleAddSectionClicked = (section: string) => {
+        const index = showComponentModal[id as string];
+        // add given section at given index in the sectionOrder array of the document and update the documentArray
+        if (!document) return;
+        const currentPageIndex = document.currentPage - 1;
+        let newSectionOrder = [...document.information.sectionOrder];
+        // add section at index
+        newSectionOrder[currentPageIndex].splice(index, 0, section);
         const updatedDocument = {
             ...document,
             information: {
                 ...document.information,
-                template: template.key,
+                sectionOrder: newSectionOrder,
             },
         };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        closeComponentModal();
+        setSearchContent("");
+        return;
+    };
+    */
+
+    const handleClick = (template: any) => {
+        if (!currentDocument) return;
+        if (currentDocument.information.template === template.key) return;
+        // update the document with the new template
+        const updatedDocument = updateDocument(
+            currentDocument,
+            template.key,
+            true
+        );
         const newDocumentArray = updateDocumentArray(
             updatedDocument,
             documentArray

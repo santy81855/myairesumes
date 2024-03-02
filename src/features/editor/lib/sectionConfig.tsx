@@ -548,7 +548,14 @@ export const SectionConfig = (
             name: "Basic Header",
             description:
                 "A header with your name, position, and contact information displayed as a column. Made to match the Basic template.",
-            keyWords: ["header", "name", "position", "title", "contact"],
+            keyWords: [
+                "header",
+                "name",
+                "position",
+                "title",
+                "contact",
+                "basic",
+            ],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
                     <Text style={styles.large}>
@@ -655,7 +662,15 @@ export const SectionConfig = (
             name: "Impact Header",
             description:
                 "A header with your name, position, and contact information displayed as a row. Made to match the Impact template.",
-            keyWords: ["header", "name", "position", "title", "contact", "row"],
+            keyWords: [
+                "header",
+                "name",
+                "position",
+                "title",
+                "contact",
+                "row",
+                "impact",
+            ],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
                     <View style={styles.rowSpaceBetween}>
@@ -703,7 +718,7 @@ export const SectionConfig = (
             name: "Nova Header",
             description:
                 "A header that emphasizes your name. Made to match the Nova template.",
-            keyWords: ["header", "name", "position", "title"],
+            keyWords: ["header", "name", "position", "title", "nova"],
             component: fontSize ? (
                 <View
                     style={{

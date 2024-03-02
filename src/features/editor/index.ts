@@ -14,6 +14,7 @@ export {
     initializeNewResume,
     getAllUserResumes,
     getAllResumeTemplates,
+    updateDocument,
 } from "./lib/document";
 export { createResume as createResumeAction } from "./actions/document";
 export { updateResume as updateResumeAction } from "./actions/document";

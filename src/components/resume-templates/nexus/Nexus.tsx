@@ -27,6 +27,9 @@ const Nexus = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const [margin, setMargin] = useState(
         document.information.style.baseMarginSize
     );
+    const [sectionGap, setSectionGap] = useState(
+        document.information.style.baseSectionGap
+    );
 
     useEffect(() => {
         if (isDownload) return;
@@ -38,6 +41,9 @@ const Nexus = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
         let newMargin =
             document.information.style.baseMarginSize * (width / 610);
         setMargin(newMargin);
+        let newSectionGap =
+            document.information.style.baseSectionGap * (width / 610);
+        setSectionGap(newSectionGap);
 
         // handle the text scaling
         function handleResize() {
@@ -50,6 +56,9 @@ const Nexus = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
             let newMargin =
                 document.information.style.baseMarginSize * (width / 610);
             setMargin(newMargin);
+            let newSectionGap =
+                document.information.style.baseSectionGap * (width / 610);
+            setSectionGap(newSectionGap);
         }
 
         window.addEventListener("resize", handleResize);
@@ -78,23 +87,41 @@ const Nexus = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     };
 
     // Create pdfStyles
-    const pdfStyles = StyleSheet.create({
-        page: { width: "100%", height: "100%" },
-        pageContainer: {
-            backgroundColor: "white",
-            width: "100%",
-            height: "100%",
-            paddingLeft: margin,
-            paddingRight: margin,
-            paddingTop: margin,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            gap: fontSize,
-            overflow: "hidden",
-        },
-    });
+    const pdfStyles = isDownload
+        ? StyleSheet.create({
+              page: { width: "100%", height: "100%" },
+              pageContainer: {
+                  backgroundColor: "white",
+                  width: "100%",
+                  height: "100%",
+                  paddingLeft: document.information.style.baseMarginSize,
+                  paddingRight: document.information.style.baseMarginSize,
+                  paddingTop: document.information.style.baseMarginSize,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  gap: document.information.style.baseSectionGap,
+                  overflow: "hidden",
+              },
+          })
+        : StyleSheet.create({
+              page: { width: "100%", height: "100%" },
+              pageContainer: {
+                  backgroundColor: "white",
+                  width: "100%",
+                  height: "100%",
+                  paddingLeft: margin,
+                  paddingRight: margin,
+                  paddingTop: margin,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  gap: sectionGap,
+                  overflow: "hidden",
+              },
+          });
 
     if (isPreview) {
         return (

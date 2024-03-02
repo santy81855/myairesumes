@@ -28,6 +28,9 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const [margin, setMargin] = useState(
         document.information.style.baseMarginSize
     );
+    const [sectionGap, setSectionGap] = useState(
+        document.information.style.baseSectionGap
+    );
 
     useEffect(() => {
         if (isDownload) return;
@@ -39,6 +42,9 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
         let newMargin =
             document.information.style.baseMarginSize * (width / 610);
         setMargin(newMargin);
+        let newSectionGap =
+            document.information.style.baseSectionGap * (width / 610);
+        setSectionGap(newSectionGap);
 
         // handle the text scaling
         function handleResize() {
@@ -51,6 +57,9 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
             let newMargin =
                 document.information.style.baseMarginSize * (width / 610);
             setMargin(newMargin);
+            let newSectionGap =
+                document.information.style.baseSectionGap * (width / 610);
+            setSectionGap(newSectionGap);
         }
 
         window.addEventListener("resize", handleResize);
@@ -102,7 +111,7 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                   flexDirection: "column",
                   justifyContent: "flex-start",
                   alignItems: "center",
-                  gap: document.information.style.baseFontSize,
+                  gap: document.information.style.baseSectionGap,
                   overflow: "hidden",
               },
               pageContainerLeft: {
@@ -116,7 +125,7 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                   flexDirection: "column",
                   justifyContent: "flex-start",
                   alignItems: "center",
-                  gap: fontSize,
+                  gap: document.information.style.baseSectionGap,
                   overflow: "hidden",
               },
               pageContainerRight: {
@@ -131,7 +140,7 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                   flexDirection: "column",
                   justifyContent: "flex-start",
                   alignItems: "center",
-                  gap: fontSize,
+                  gap: document.information.style.baseSectionGap,
                   overflow: "hidden",
               },
           })
@@ -157,7 +166,7 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                   flexDirection: "column",
                   justifyContent: "flex-start",
                   alignItems: "center",
-                  gap: fontSize,
+                  gap: sectionGap,
                   overflow: "hidden",
               },
               pageContainerLeft: {
@@ -171,7 +180,7 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                   flexDirection: "column",
                   justifyContent: "flex-start",
                   alignItems: "center",
-                  gap: fontSize,
+                  gap: sectionGap,
                   overflow: "hidden",
               },
               pageContainerRight: {
@@ -186,7 +195,7 @@ const Nova = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                   flexDirection: "column",
                   justifyContent: "flex-start",
                   alignItems: "center",
-                  gap: fontSize,
+                  gap: sectionGap,
                   overflow: "hidden",
               },
           });

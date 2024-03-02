@@ -5,7 +5,11 @@ import { useAppContext } from "@/app/providers";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { PageButtons, getAllResumeTemplates } from "@/features/editor";
+import {
+    PageButtons,
+    getAllResumeTemplates,
+    updateDocument,
+} from "@/features/editor";
 
 type DocumentContainerProps = {
     document: any;
@@ -22,25 +26,34 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
         const doc = documentArray.find((document) => document.id === id);
         if (!doc) return;
 
-        setCurrentDocument(doc);
         // Update the current document only if it's not already set
         if (
-            (currentDocument &&
-                doc.information.template !==
-                    currentDocument?.information.template) ||
-            !currentDocument
+            currentDocument &&
+            doc.information.template !== currentDocument?.information.template
         ) {
             const template = getAllResumeTemplates(doc, true);
+            const updatedDoc = updateDocument(
+                doc,
+                doc.information.template,
+                true
+            );
             setCurrentTemplate(
                 template[doc.information.template as keyof typeof template]
                     ?.editorComponent
             );
+            setCurrentDocument(updatedDoc);
         } else {
             const template = getAllResumeTemplates(doc, false);
+            const updatedDoc = updateDocument(
+                doc,
+                doc.information.template,
+                false
+            );
             setCurrentTemplate(
                 template[doc.information.template as keyof typeof template]
                     ?.editorComponent
             );
+            setCurrentDocument(updatedDoc);
         }
     }, [documentArray]);
 

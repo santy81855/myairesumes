@@ -75,20 +75,31 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
+    border: 1px solid grey;
 }
 
 .pickerContainer {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    margin-block-start: var(--padding-block-medium);
 }
 
 .colorPickerButtonContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: var(--gap-small);
     margin-block-start: var(--padding-block-small);
+}
+
+.colorPickerOptionsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-large);
 }
