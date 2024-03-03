@@ -414,6 +414,22 @@ export const getResume = async (userId: string, resumeId: string) => {
     return await response.json();
 };
 
+export const getCoverLetter = async (userId: string, coverLetterId: string) => {
+    const response = await fetch(
+        `${process.env.APP_DOMAIN}/api/cover-letter?coverLetterId=${coverLetterId}&userId=${userId}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
+    if (!response.ok) {
+        return null;
+    }
+    return await response.json();
+};
+
 export const initializeNewResume = (
     user: any,
     name: string,

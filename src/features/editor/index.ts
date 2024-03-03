@@ -11,6 +11,7 @@ export { SectionConfig } from "./lib/sectionConfig";
 export {
     updateDocumentArray,
     getResume,
+    getCoverLetter,
     initializeNewResume,
     getAllUserResumes,
     getAllResumeTemplates,

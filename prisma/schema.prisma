@@ -33,6 +33,7 @@ model User {
     passwordToken      PasswordResetToken[]
     subscription       Subscription?
     resume             Resume[]
+    coverLetter        CoverLetter[]
 }
 
 model Session {
@@ -88,6 +89,17 @@ model Subscription {
 }
 
 model Resume {
+    id          String   @id @unique @default(cuid())
+    userId      String
+    information Json
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    user        User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+    @@index([userId])
+}
+
+model CoverLetter {
     id          String   @id @unique @default(cuid())
     userId      String
     information Json
