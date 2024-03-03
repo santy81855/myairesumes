@@ -5,6 +5,7 @@ import {
     AddSectionModal,
     DocumentContainer,
     getResume,
+    getCoverLetter,
     PageUtilBar,
 } from "@/features/editor";
 
@@ -29,12 +30,14 @@ const Page = async ({
     }
 
     const document =
-        documentType === "resume" ? await getResume(user.id, id) : null;
+        documentType === "resume"
+            ? await getResume(user.id, id)
+            : await getCoverLetter(user.id, id);
 
     return (
         <main className={styles.main}>
             <PageUtilBar documentId={id} />
-            <DocumentContainer document={document} />
+            <DocumentContainer document={document} type={documentType} />
         </main>
     );
 };

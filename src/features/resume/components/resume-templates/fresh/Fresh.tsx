@@ -10,8 +10,8 @@ import {
     Font,
 } from "@react-pdf/renderer";
 import { DraggableContainer, updateDocumentArray } from "@/features/editor";
-import Section from "../Section/Section";
-import SectionContainerEditor from "../section-components/section-container-editor/SectionContainerEditor";
+import { Section } from "@/features/resume";
+import SectionContainerEditor from "../../section-container-editor/SectionContainerEditor";
 
 type BasicProps = {
     document: any;
@@ -175,6 +175,7 @@ const Fresh = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                             ].map((section: string, index: number) => {
                                 return (
                                     <Section
+                                        type="resume"
                                         key={section + index.toString()}
                                         sectionId={section}
                                         document={document}
@@ -221,6 +222,7 @@ const Fresh = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                             document={document}
                                         >
                                             <Section
+                                                type="resume"
                                                 sectionId={section}
                                                 document={document}
                                                 templateRef={templateRef}
@@ -268,6 +270,7 @@ const Fresh = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                             document={document}
                                         >
                                             <Section
+                                                type="resume"
                                                 sectionId={section}
                                                 document={document}
                                                 templateRef={templateRef}
@@ -314,6 +317,7 @@ const Fresh = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                             ) => {
                                                 return (
                                                     <Section
+                                                        type="resume"
                                                         key={
                                                             section +
                                                             index.toString()

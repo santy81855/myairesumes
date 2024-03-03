@@ -1,11 +1,15 @@
 import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
-import Basic from "@/components/resume-templates/basic/Basic";
-import Nexus from "@/components/resume-templates/nexus/Nexus";
-import Impact from "@/components/resume-templates/impact/Impact";
-import Nova from "@/components/resume-templates/nova/Nova";
-import Fresh from "@/components/resume-templates/fresh/Fresh";
-import Vivid from "@/components/resume-templates/vivid/Vivid";
-import Sharp from "@/components/resume-templates/sharp/Sharp";
+import {
+    Basic,
+    Fresh,
+    Impact,
+    Nexus,
+    Nova,
+    Sharp,
+    Vivid,
+} from "@/features/resume";
+
+import { BasicL } from "@/features/cover-letter";
 
 export const updateDocument = (
     document: any,
@@ -70,7 +74,6 @@ export const updateDocument = (
             newSectionOrder = document.information.sectionOrder.map(
                 (array: any) =>
                     array.map((item: string) => {
-                        //console.log(item);
                         if (item === "colBreak") {
                             return null;
                         }
@@ -369,6 +372,94 @@ export const getAllResumeTemplates = (
     };
 };
 
+export const updateCoverLetter = (
+    document: any,
+    template: string,
+    changedTemplate: boolean
+) => {
+    // change the template field to the new template
+    // search for any items in the document.information.sectionOrder that have the substring 'header', and replace the item with headerTemplate depending on the passed template
+    let newSectionOrder = [] as any;
+    if (changedTemplate) {
+        newSectionOrder = document.information.sectionOrder.map((array: any) =>
+            array.map((item: string) => {
+                if (item.includes("header")) {
+                    // return 'header' + template but make the first letter of template capitalized
+                    return `header${template
+                        .charAt(0)
+                        .toUpperCase()}${template.slice(1)}`;
+                }
+                return item;
+            })
+        );
+        // remove any null values from the first array in newSectionOrder
+        newSectionOrder[0] = newSectionOrder[0].filter(
+            (item: string | null) => item !== null
+        );
+    } else {
+        newSectionOrder = document.information.sectionOrder;
+    }
+    const updatedDocument = {
+        ...document,
+        information: {
+            ...document.information,
+            template,
+            sectionOrder: newSectionOrder,
+        },
+    };
+    return updatedDocument;
+};
+
+export const getAllCoverLetterTemplates = (
+    document: any,
+    changedTemplate: boolean
+) => {
+    return {
+        basic: {
+            name: "Basic",
+            description: "A simple and clean cover letter template.",
+            keywords: [
+                "basic",
+                "simple",
+                "clean",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "basic",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "basic",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "basic",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+    };
+};
+
 export const updateDocumentArray = (updatedDocument: any, array: any) => {
     const { id } = updatedDocument;
     // update the documentArray with the new information
@@ -397,6 +488,22 @@ export const getAllUserResumes = async (userId: string) => {
     return await response.json();
 };
 
+export const getAllUserCoverLetters = async (userId: string) => {
+    const response = await fetch(
+        `${process.env.APP_DOMAIN}/api/cover-letters?userId=${userId}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
+    if (!response.ok) {
+        return null;
+    }
+    return await response.json();
+};
+
 export const getResume = async (userId: string, resumeId: string) => {
     const response = await fetch(
         `${process.env.APP_DOMAIN}/api/resume?resumeId=${resumeId}&userId=${userId}`,
@@ -412,6 +519,92 @@ export const getResume = async (userId: string, resumeId: string) => {
         return null;
     }
     return await response.json();
+};
+
+export const getCoverLetter = async (userId: string, coverLetterId: string) => {
+    const response = await fetch(
+        `${process.env.APP_DOMAIN}/api/cover-letter?coverLetterId=${coverLetterId}&userId=${userId}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
+    if (!response.ok) {
+        return null;
+    }
+    return await response.json();
+};
+
+export const initializeNewCoverLetter = (
+    user: any,
+    name: string,
+    job: string,
+    description: string
+) => {
+    const { basicInfo } = user;
+    const first = basicInfo ? basicInfo.firstName : user.firstName;
+    const last = basicInfo ? basicInfo.lastName : user.lastName;
+    const email = basicInfo && basicInfo.email ? basicInfo.email : user.email;
+    const phone =
+        basicInfo && basicInfo.phone ? basicInfo.phone : "(123) 456-7890";
+    const website =
+        basicInfo && basicInfo.website
+            ? basicInfo.website
+            : "https://example-website.com";
+    // Get the current date
+    const currentDate = new Date();
+
+    // Format the date as YYYY-MM-DD
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+
+    const data = {
+        currentPage: 1,
+        style: {
+            baseFontSize: 11,
+            baseMarginSize: 11,
+            baseSectionGap: 11,
+            backgroundColor: "#ffffff",
+            textColor: "#000000",
+            accentBackgroundColor: "#5B7FC5",
+            accentTextColor: "white",
+        },
+        documentName: name,
+        jobTitle: job,
+        description,
+        template: "basic",
+        font: "Times-Roman",
+        firstName: first,
+        lastName: last,
+        sectionOrder: [
+            [
+                "headerBasic",
+                "date",
+                "employerInfo",
+                "salutation",
+                "body",
+                "closing",
+            ],
+        ],
+        numPages: 1,
+        position: "Example Position",
+        date: formattedDate,
+        companyName: "Example Company",
+        salutation: "Dear Hiring Manager,",
+        closing: "Sincerely,",
+        body: "I am writing to express my keen interest in the [Job Title] position at [Company Name], as advertised. With a background in [Your Field of Expertise], combined with my strong passion for [Related Skill/Industry], I am confident in my ability to contribute effectively to your team. Throughout my career, I have honed valuable skills in [Key Skill 1], [Key Skill 2], and [Key Skill 3], which I believe align well with the requirements of the role. I am particularly drawn to [Specific Aspect of Company or Position] and am eager to leverage my expertise to [Contribute to Company Goals/Projects/Initiatives]. I am impressed by [Company Name]'s commitment to [Company Value/Initiative] and am excited about the opportunity to be part of a dynamic and innovative team. I am eager to bring my unique perspective and skills to [Company Name] and am confident that my background makes me a strong fit for this role. Thank you for considering my application. I look forward to the possibility of discussing how my skills and experiences align with the needs of [Company Name].",
+        contactInfo: {
+            email,
+            phone,
+            website,
+        },
+        customSectionArray: [],
+    };
+    return data;
 };
 
 export const initializeNewResume = (

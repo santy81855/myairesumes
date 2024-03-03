@@ -32,7 +32,9 @@ const Resumes = async ({ currentUser, searchParams }: ResumesProps) => {
             <DashboardCard key="resumes-card" title="Resumes">
                 {!resumes && <LoadingScreen />}
                 {addResumeButton}
-                {resumes && <DocumentCardDisplay documents={resumes} />}
+                {resumes && (
+                    <DocumentCardDisplay documents={resumes} type="resume" />
+                )}
             </DashboardCard>
         </main>
     );
