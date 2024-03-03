@@ -9,6 +9,7 @@ import {
     Account,
     Profile,
     Resumes,
+    CoverLetters,
 } from "@/features/dashboard";
 import Navbar from "@/components/nav/Navbar";
 import StaticModal from "@/components/static-modal/StaticModal";
@@ -17,6 +18,7 @@ import UpgradeModal from "@/components/modals/payment/upgrade-plan-modal/Upgrade
 import DowngradeModal from "@/components/modals/payment/downgrade-modal/DowngradeModal";
 import ReinstateModal from "@/components/modals/payment/reinstate-modal/ReintstateModal";
 import CreateResumeModal from "@/components/modals/document/create-resume/CreateResumeModal";
+import CreateCoverLetterModal from "@/components/modals/document/create-cover-letter/CreateCoverLetterModal";
 import { UpdateUrl } from "@/lib/updateUrl";
 
 const Page = async ({
@@ -48,6 +50,7 @@ const Page = async ({
     const downgradePlan = searchParams?.downgradePlan || false;
     const reinstatePlan = searchParams?.reinstatePlan || false;
     const createResume = searchParams?.createResume || false;
+    const createCoverLetter = searchParams?.createCoverLetter || false;
 
     return (
         <DashboardWrapper>
@@ -92,6 +95,13 @@ const Page = async ({
                             searchParams={searchParams}
                         />
                     )}
+                    {menuSection === "cover-letters" && (
+                        <CoverLetters
+                            key="coverLettersSection"
+                            currentUser={currentUser}
+                            searchParams={searchParams}
+                        />
+                    )}
                     <div className={styles.circle}></div>
                 </main>
             </section>
@@ -118,6 +128,11 @@ const Page = async ({
             {createResume && (
                 <StaticModal>
                     <CreateResumeModal returnUrl="/dashboard?menu=resumes" />
+                </StaticModal>
+            )}
+            {createCoverLetter && (
+                <StaticModal>
+                    <CreateCoverLetterModal returnUrl="/dashboard?menu=cover-letters" />
                 </StaticModal>
             )}
         </DashboardWrapper>

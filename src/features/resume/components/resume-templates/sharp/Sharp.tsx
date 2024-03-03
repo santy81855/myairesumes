@@ -1,5 +1,4 @@
 "use client";
-import { useAppContext } from "@/app/providers";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import {
     Page,
@@ -10,8 +9,8 @@ import {
     Font,
 } from "@react-pdf/renderer";
 import { DraggableContainer, updateDocumentArray } from "@/features/editor";
-import Section from "../Section/Section";
-import SectionContainerEditor from "../section-components/section-container-editor/SectionContainerEditor";
+import { Section } from "@/features/resume";
+import SectionContainerEditor from "../../section-container-editor/SectionContainerEditor";
 
 type BasicProps = {
     document: any;
@@ -20,7 +19,7 @@ type BasicProps = {
     isPreview?: boolean;
 };
 
-const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
+const Sharp = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(
         document.information.style.baseFontSize
@@ -137,6 +136,7 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                             document.information.currentPage - 1
                         ].map((section: string, index: number) => (
                             <Section
+                                type="resume"
                                 key={section + index.toString()}
                                 sectionId={section}
                                 document={document}
@@ -160,28 +160,27 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                     >
                         {document.information.sectionOrder[
                             document.currentPage - 1
-                        ].map((section: string, index: number) => {
-                            return (
-                                <DraggableContainer
-                                    key={section + index.toString()}
-                                    id={`${section}-${index}`}
-                                    orderArray={
-                                        document.information.sectionOrder[
-                                            document.currentPage - 1
-                                        ]
-                                    }
-                                    document={document}
-                                >
-                                    <SectionContainerEditor document={document}>
-                                        <Section
-                                            sectionId={section}
-                                            document={document}
-                                            templateRef={templateRef}
-                                        />
-                                    </SectionContainerEditor>
-                                </DraggableContainer>
-                            );
-                        })}
+                        ].map((section: string, index: number) => (
+                            <DraggableContainer
+                                key={section + index.toString()}
+                                id={`${section}-${index}`}
+                                orderArray={
+                                    document.information.sectionOrder[
+                                        document.currentPage - 1
+                                    ]
+                                }
+                                document={document}
+                            >
+                                <SectionContainerEditor document={document}>
+                                    <Section
+                                        type="resume"
+                                        sectionId={section}
+                                        document={document}
+                                        templateRef={templateRef}
+                                    />
+                                </SectionContainerEditor>
+                            </DraggableContainer>
+                        ))}
                     </View>
                 </Page>
             </Document>
@@ -201,6 +200,7 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                             <View wrap={false} style={pdfStyles.pageContainer}>
                                 {array.map((section: string, index: number) => (
                                     <Section
+                                        type="resume"
                                         key={section + index.toString()}
                                         sectionId={section}
                                         document={document}
@@ -215,4 +215,4 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     }
 };
 
-export default Basic;
+export default Sharp;

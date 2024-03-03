@@ -9,8 +9,8 @@ import {
     Font,
 } from "@react-pdf/renderer";
 import { DraggableContainer, updateDocumentArray } from "@/features/editor";
-import Section from "../Section/Section";
-import SectionContainerEditor from "../section-components/section-container-editor/SectionContainerEditor";
+import { Section } from "@/features/resume";
+import SectionContainerEditor from "../../section-container-editor/SectionContainerEditor";
 
 type BasicProps = {
     document: any;
@@ -19,7 +19,7 @@ type BasicProps = {
     isPreview?: boolean;
 };
 
-const Impact = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
+const Nexus = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(
         document.information.style.baseFontSize
@@ -136,6 +136,7 @@ const Impact = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                             document.information.currentPage - 1
                         ].map((section: string, index: number) => (
                             <Section
+                                type="resume"
                                 key={section + index.toString()}
                                 sectionId={section}
                                 document={document}
@@ -172,6 +173,7 @@ const Impact = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                             >
                                 <SectionContainerEditor document={document}>
                                     <Section
+                                        type="resume"
                                         sectionId={section}
                                         document={document}
                                         templateRef={templateRef}
@@ -198,6 +200,7 @@ const Impact = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                             <View wrap={false} style={pdfStyles.pageContainer}>
                                 {array.map((section: string, index: number) => (
                                     <Section
+                                        type="resume"
                                         key={section + index.toString()}
                                         sectionId={section}
                                         document={document}
@@ -212,4 +215,4 @@ const Impact = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     }
 };
 
-export default Impact;
+export default Nexus;

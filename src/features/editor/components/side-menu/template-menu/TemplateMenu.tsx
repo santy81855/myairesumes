@@ -6,8 +6,10 @@ import { useState, useEffect } from "react";
 import {
     MenuContainer,
     getAllResumeTemplates,
+    getAllCoverLetterTemplates,
     updateDocumentArray,
     updateDocument,
+    updateCoverLetter,
 } from "@/features/editor";
 import { useAppContext } from "@/app/providers";
 import { useParams } from "next/navigation";
@@ -18,6 +20,7 @@ type TemplateMenuProps = {
 
 const TemplateMenu = ({ document }: TemplateMenuProps) => {
     const params = useParams();
+    const type = params.slug[0];
     const [searchText, setSearchText] = useState("");
     const { documentArray, setDocumentArray } = useAppContext();
     const [currentDocument, setCurrentDocument] = useState<any>(null);
@@ -29,7 +32,10 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
         );
         if (!doc) return;
         setCurrentDocument(doc);
-        const template = getAllResumeTemplates(doc, true);
+        const template =
+            type === "resume"
+                ? getAllResumeTemplates(doc, true)
+                : getAllCoverLetterTemplates(doc, true);
         // get every key in the template object and store it in an array
         const templateKeys = Object.keys(template);
         // get the previewComponent for each template
@@ -53,11 +59,10 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
         if (!currentDocument) return;
         if (currentDocument.information.template === template.key) return;
         // update the document with the new template
-        const updatedDocument = updateDocument(
-            currentDocument,
-            template.key,
-            true
-        );
+        const updatedDocument =
+            type === "resume"
+                ? updateDocument(currentDocument, template.key, true)
+                : updateCoverLetter(currentDocument, template.key, true);
         const newDocumentArray = updateDocumentArray(
             updatedDocument,
             documentArray

@@ -13,6 +13,7 @@ import {
     PageCounter,
     updateDocumentArray,
     SectionConfig,
+    CoverLetterSectionConfig,
 } from "@/features/editor";
 import { MenuContainer } from "@/features/editor";
 
@@ -28,17 +29,29 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
         setShowComponentModal,
     } = useAppContext();
     const params = useParams();
+    const type = params.slug[0];
     const id = params.slug[1];
     const [allSections, setAllSections] = useState<any>([]);
     useEffect(() => {
         const doc = documentArray.find((document) => document.id === id);
         if (!doc) return;
-        const sectionConfig = SectionConfig(
-            document,
-            null,
-            "",
-            doc.information.template
-        );
+        let sectionConfig = {};
+
+        if (type === "resume") {
+            sectionConfig = SectionConfig(
+                document,
+                null,
+                "",
+                doc.information.template
+            );
+        } else {
+            sectionConfig = CoverLetterSectionConfig(
+                document,
+                null,
+                "",
+                doc.information.template
+            );
+        }
         setAllSections(sectionConfig);
     }, [documentArray]);
 

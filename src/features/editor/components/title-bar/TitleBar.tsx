@@ -17,15 +17,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import {
     updateResumeAction,
+    updateCoverLetterAction,
     getAllResumeTemplates,
+    getAllCoverLetterTemplates,
     updateDocument,
+    updateCoverLetter,
 } from "@/features/editor";
-import Basic from "@/components/resume-templates/basic/Basic";
 
 const TitleBar = () => {
     const { documentArray, isDocumentLoading, setIsDocumentLoading } =
         useAppContext();
     const params = useParams();
+    const type = params.slug[0];
     const [currentDocument, setCurrentDocument] = useState<any>(null);
     const [currentTemplate, setCurrentTemplate] = useState<any>(null);
     useEffect(() => {
@@ -38,24 +41,29 @@ const TitleBar = () => {
             currentDocument &&
             doc.information.template !== currentDocument?.information.template
         ) {
-            const template = getAllResumeTemplates(doc, true);
-            const updatedDoc = updateDocument(
-                doc,
-                doc.information.template,
-                true
-            );
+            const template =
+                type === "resume"
+                    ? getAllResumeTemplates(doc, true)
+                    : getAllCoverLetterTemplates(doc, true);
+            const updatedDoc =
+                type === "resume"
+                    ? updateDocument(doc, doc.information.template, true)
+                    : updateCoverLetter(doc, doc.information.template, true);
+
             setCurrentTemplate(
                 template[doc.information.template as keyof typeof template]
                     ?.downloadComponent
             );
             setCurrentDocument(updatedDoc);
         } else {
-            const template = getAllResumeTemplates(doc, false);
-            const updatedDoc = updateDocument(
-                doc,
-                doc.information.template,
-                false
-            );
+            const template =
+                type === "resume"
+                    ? getAllResumeTemplates(doc, false)
+                    : getAllCoverLetterTemplates(doc, false);
+            const updatedDoc =
+                type === "resume"
+                    ? updateDocument(doc, doc.information.template, false)
+                    : updateCoverLetter(doc, doc.information.template, false);
             setCurrentTemplate(
                 template[doc.information.template as keyof typeof template]
                     ?.downloadComponent
@@ -69,8 +77,11 @@ const TitleBar = () => {
         if (!currentDocument) return;
         setIsDocumentLoading(true);
         const formData = new FormData();
-        formData.append("currentDocument", JSON.stringify(currentDocument));
-        const response = await updateResumeAction(formData);
+        formData.append("document", JSON.stringify(currentDocument));
+        const response =
+            type === "resume"
+                ? await updateResumeAction(formData)
+                : await updateCoverLetterAction(formData);
         if (response.error) {
             toast.error("Error saving currentDocument.");
             setIsDocumentLoading(false);

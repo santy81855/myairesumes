@@ -37,7 +37,7 @@ const Page = async ({
     return (
         <main className={styles.main}>
             <PageUtilBar documentId={id} />
-            <DocumentContainer document={document} />
+            <DocumentContainer document={document} type={documentType} />
         </main>
     );
 };

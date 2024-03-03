@@ -7,6 +7,7 @@ export { default as DashboardWrapper } from "./components/dashboard-wrapper/Dash
 export { default as Account } from "./components/account/Account";
 export { default as Profile } from "./components/profile/Profile";
 export { default as Resumes } from "./components/resumes/Resumes";
+export { default as CoverLetters } from "./components/cover-letters/CoverLetters";
 export { default as DocumentCardDisplay } from "./components/document-card-display/DocumentCardDisplay";
 export { default as Plan } from "./components/account/plan-details/Plan";
 export { default as Bill } from "./components/account/bill/Bill";

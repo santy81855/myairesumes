@@ -101,7 +101,6 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
 
     const handleAccentColorChange = (color: string) => {
         if (!document) return;
-        console.log(color);
         const updatedDocument = {
             ...document,
             information: {

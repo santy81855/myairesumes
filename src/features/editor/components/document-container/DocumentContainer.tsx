@@ -8,14 +8,17 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import {
     PageButtons,
     getAllResumeTemplates,
+    getAllCoverLetterTemplates,
     updateDocument,
+    updateCoverLetter,
 } from "@/features/editor";
 
 type DocumentContainerProps = {
     document: any;
+    type: string;
 };
 
-const DocumentContainer = ({ document }: DocumentContainerProps) => {
+const DocumentContainer = ({ document, type }: DocumentContainerProps) => {
     const id = document.id;
     const { documentArray, setDocumentArray, isDocumentLoading } =
         useAppContext();
@@ -31,24 +34,28 @@ const DocumentContainer = ({ document }: DocumentContainerProps) => {
             currentDocument &&
             doc.information.template !== currentDocument?.information.template
         ) {
-            const template = getAllResumeTemplates(doc, true);
-            const updatedDoc = updateDocument(
-                doc,
-                doc.information.template,
-                true
-            );
+            const template =
+                type === "resume"
+                    ? getAllResumeTemplates(doc, true)
+                    : getAllCoverLetterTemplates(doc, true);
+            const updatedDoc =
+                type === "resume"
+                    ? updateDocument(doc, doc.information.template, true)
+                    : updateCoverLetter(doc, doc.information.template, true);
             setCurrentTemplate(
                 template[doc.information.template as keyof typeof template]
                     ?.editorComponent
             );
             setCurrentDocument(updatedDoc);
         } else {
-            const template = getAllResumeTemplates(doc, false);
-            const updatedDoc = updateDocument(
-                doc,
-                doc.information.template,
-                false
-            );
+            const template =
+                type === "resume"
+                    ? getAllResumeTemplates(doc, false)
+                    : getAllCoverLetterTemplates(doc, false);
+            const updatedDoc =
+                type === "resume"
+                    ? updateDocument(doc, doc.information.template, false)
+                    : updateCoverLetter(doc, doc.information.template, false);
             setCurrentTemplate(
                 template[doc.information.template as keyof typeof template]
                     ?.editorComponent
