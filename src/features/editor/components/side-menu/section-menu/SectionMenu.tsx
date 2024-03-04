@@ -117,7 +117,7 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
                                     className={styles.horizontalLine}
                                 ></motion.div>
                                 <motion.p className={styles.sectionTitle}>
-                                    COLUMN 1
+                                    PRIMARY COLUMN
                                 </motion.p>
                             </motion.div>
                         ) : (
@@ -165,7 +165,7 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
                                             <motion.p
                                                 className={styles.sectionTitle}
                                             >
-                                                COLUMN 2
+                                                SECONDARY COLUMN
                                             </motion.p>
                                         </motion.div>
                                         <motion.button
