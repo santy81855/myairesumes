@@ -144,61 +144,38 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                     {textIcon}
                     <motion.p className={styles.title}>Text style</motion.p>
                 </motion.section>
-                <motion.section className={styles.dropdownContainer}>
-                    <motion.section className={styles.topRow}>
-                        <motion.section className={styles.sectionContainer}>
-                            <motion.p className={styles.description}>
-                                Font Size
-                            </motion.p>
-                            <motion.select
-                                className={styles.fontSize}
-                                onChange={(e) =>
-                                    handleFontSizeChange(e.target.value)
-                                }
-                            >
-                                <motion.option disabled selected>
-                                    Size
+                <motion.div className={styles.sectionTitleContainer}>
+                    <motion.div className={styles.horizontalBar}></motion.div>
+                    <motion.p className={styles.sectionTitle}>FONT</motion.p>
+                </motion.div>
+                <motion.section className={styles.section}>
+                    <motion.section className={styles.sectionContainer}>
+                        <motion.p className={styles.description}>
+                            Font Size
+                        </motion.p>
+                        <motion.select
+                            className={styles.fontSize}
+                            onChange={(e) =>
+                                handleFontSizeChange(e.target.value)
+                            }
+                        >
+                            <motion.option disabled selected>
+                                Size
+                            </motion.option>
+                            {Array.from({ length: 60 }).map((_, index) => (
+                                <motion.option
+                                    key={index}
+                                    value={(index + 1).toString()}
+                                    selected={
+                                        document.information.style
+                                            .baseFontSize ===
+                                        index + 1
+                                    }
+                                >
+                                    {index + 1}
                                 </motion.option>
-                                {Array.from({ length: 60 }).map((_, index) => (
-                                    <motion.option
-                                        key={index}
-                                        value={(index + 1).toString()}
-                                        selected={
-                                            document.information.style
-                                                .baseFontSize ===
-                                            index + 1
-                                        }
-                                    >
-                                        {index + 1}
-                                    </motion.option>
-                                ))}
-                            </motion.select>
-                        </motion.section>
-                        <motion.section className={styles.sectionContainer}>
-                            <motion.p className={styles.description}>
-                                Margin
-                            </motion.p>
-                            <motion.select
-                                className={styles.marginSize}
-                                onChange={(e) =>
-                                    handleMarginSizeChange(e.target.value)
-                                }
-                            >
-                                {Array.from({ length: 60 }).map((_, index) => (
-                                    <motion.option
-                                        key={index}
-                                        value={(index + 1).toString()}
-                                        selected={
-                                            document.information.style
-                                                .baseMarginSize ===
-                                            index + 1
-                                        }
-                                    >
-                                        {index + 1}
-                                    </motion.option>
-                                ))}
-                            </motion.select>
-                        </motion.section>
+                            ))}
+                        </motion.select>
                     </motion.section>
                     <motion.section className={styles.sectionContainer}>
                         <motion.p className={styles.description}>Font</motion.p>
@@ -232,6 +209,39 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                             </motion.option>
                         </motion.select>
                     </motion.section>
+                </motion.section>
+                <motion.div className={styles.sectionTitleContainer}>
+                    <motion.div className={styles.horizontalBar}></motion.div>
+                    <motion.p className={styles.sectionTitle}>SPACING</motion.p>
+                </motion.div>
+                <motion.section className={styles.section}>
+                    <motion.section className={styles.sectionContainer}>
+                        <motion.p className={styles.description}>
+                            Margin
+                        </motion.p>
+                        <motion.select
+                            className={styles.marginSize}
+                            onChange={(e) =>
+                                handleMarginSizeChange(e.target.value)
+                            }
+                        >
+                            {Array.from({ length: 60 }).map((_, index) => (
+                                <motion.option
+                                    key={index}
+                                    value={(index + 1).toString()}
+                                    selected={
+                                        document.information.style
+                                            .baseMarginSize ===
+                                        index + 1
+                                    }
+                                >
+                                    {index + 1}
+                                </motion.option>
+                            ))}
+                        </motion.select>
+                    </motion.section>
+                </motion.section>
+                <motion.section className={styles.dropdownContainer}>
                     <motion.section className={styles.sectionContainer}>
                         <motion.p className={styles.description}>
                             Section Gap
@@ -257,66 +267,80 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                             ))}
                         </motion.select>
                     </motion.section>
-                    <motion.section
-                        className={styles.colorPickerOptionsContainer}
-                    >
+                </motion.section>
+                <motion.div className={styles.sectionTitleContainer}>
+                    <motion.div className={styles.horizontalBar}></motion.div>
+                    <motion.p className={styles.sectionTitle}>PALETTE</motion.p>
+                </motion.div>
+                <motion.section className={styles.section}>
+                    <motion.section className={styles.colorPickerContainer}>
+                        <motion.p className={styles.description}>
+                            Accent Color
+                        </motion.p>
                         <motion.section
                             className={styles.colorPickerButtonContainer}
                         >
-                            <motion.p className={styles.description}>
-                                Accent Color
-                            </motion.p>
                             <motion.div
-                                className={styles.colorPickerButton}
-                                style={{ backgroundColor: color }}
-                                onClick={() => {
-                                    setShowPicker(!showPicker);
-                                    setShowTextColorPicker(false);
-                                }}
-                            ></motion.div>
-                        </motion.section>
-
-                        <motion.section
-                            className={styles.colorPickerButtonContainer}
-                        >
-                            <motion.p className={styles.description}>
-                                Text Accent Color
-                            </motion.p>
-                            <motion.div
-                                className={styles.colorPickerButton}
-                                style={{ backgroundColor: accentTextColor }}
-                                onClick={() => {
-                                    setShowTextColorPicker(
-                                        !showTextColorPicker
-                                    );
-                                    setShowPicker(false);
-                                }}
-                            ></motion.div>
+                                className={styles.colorPickerButtonWrapper}
+                            >
+                                <motion.div
+                                    className={styles.colorPickerButton}
+                                    style={{ backgroundColor: color }}
+                                    onClick={() => {
+                                        setShowPicker(!showPicker);
+                                        setShowTextColorPicker(false);
+                                    }}
+                                ></motion.div>
+                            </motion.div>
                         </motion.section>
                     </motion.section>
-                    {showPicker && (
-                        <motion.div className={styles.pickerContainer}>
-                            <HexColorPicker
-                                color={color}
-                                onChange={(color) => {
-                                    setColor(color);
-                                    handleAccentColorChange(color);
-                                }}
-                            />
-                        </motion.div>
-                    )}
-                    {showTextColorPicker && (
-                        <motion.div className={styles.pickerContainer}>
-                            <HexColorPicker
-                                color={accentTextColor}
-                                onChange={(color) => {
-                                    setAccentTextColor(color);
-                                    handleAccentTextColorChange(color);
-                                }}
-                            />
-                        </motion.div>
-                    )}
+
+                    <motion.section className={styles.colorPickerContainer}>
+                        <motion.p className={styles.description}>
+                            Text Accent Color
+                        </motion.p>
+                        <motion.section
+                            className={styles.colorPickerButtonContainer}
+                        >
+                            <motion.div
+                                className={styles.colorPickerButtonWrapper}
+                            >
+                                <motion.div
+                                    className={styles.colorPickerButton}
+                                    style={{ backgroundColor: accentTextColor }}
+                                    onClick={() => {
+                                        setShowTextColorPicker(
+                                            !showTextColorPicker
+                                        );
+                                        setShowPicker(false);
+                                    }}
+                                ></motion.div>
+                            </motion.div>
+                        </motion.section>
+                    </motion.section>
                 </motion.section>
+                {showPicker && (
+                    <motion.div className={styles.pickerContainer}>
+                        <HexColorPicker
+                            color={color}
+                            onChange={(color) => {
+                                setColor(color);
+                                handleAccentColorChange(color);
+                            }}
+                        />
+                    </motion.div>
+                )}
+                {showTextColorPicker && (
+                    <motion.div className={styles.pickerContainer}>
+                        <HexColorPicker
+                            color={accentTextColor}
+                            onChange={(color) => {
+                                setAccentTextColor(color);
+                                handleAccentTextColorChange(color);
+                            }}
+                        />
+                    </motion.div>
+                )}
             </motion.section>
         </MenuContainer>
     );

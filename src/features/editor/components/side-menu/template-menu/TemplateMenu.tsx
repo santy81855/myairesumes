@@ -26,6 +26,9 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
     const [currentDocument, setCurrentDocument] = useState<any>(null);
     const [currentTemplate, setCurrentTemplate] = useState<any>(null);
     const [allTemplates, setAllTemplates] = useState<any>([]);
+    const [allKeywords, setAllKeywords] = useState<string[]>([]);
+    const [results, setResults] = useState<any[]>([]);
+
     useEffect(() => {
         const doc = documentArray.find(
             (currentDocument) => currentDocument.id === params.slug[1]
@@ -37,9 +40,15 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                 ? getAllResumeTemplates(doc, true)
                 : getAllCoverLetterTemplates(doc, true);
         // get every key in the template object and store it in an array
-        const templateKeys = Object.keys(template);
+        const uniqueKeys = Object.keys(template);
+        const uniqueKeywords = new Set<string>();
         // get the previewComponent for each template
-        const templateComponents = templateKeys.map((key) => {
+        const templateComponents = uniqueKeys.map((key) => {
+            template[key as keyof typeof template].keywords.forEach(
+                (keyword: string) => {
+                    uniqueKeywords.add(keyword);
+                }
+            );
             return {
                 component:
                     template[key as keyof typeof template].previewComponent,
@@ -48,6 +57,8 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                 keywords: template[key as keyof typeof template].keywords,
             };
         });
+        setAllKeywords(Array.from(uniqueKeys));
+        setResults(templateComponents);
         setAllTemplates(templateComponents);
         setCurrentTemplate(
             template[doc.information.template as keyof typeof template]
@@ -70,6 +81,29 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
         setDocumentArray(newDocumentArray);
     };
 
+    const searchContentChanged = (content: string) => {
+        setSearchText(content);
+        if (content === "") {
+            setResults(allTemplates);
+            return;
+        }
+        const tempArray = [...allTemplates];
+        const results = tempArray.filter((item: { keywords: string[] }) =>
+            // check if each word of the content is one of hte keywords
+            content
+                .split(" ")
+                .every((word) =>
+                    item.keywords.some((keyword) =>
+                        keyword.toLowerCase().includes(word.toLowerCase())
+                    )
+                )
+        );
+        // make the results be in alphabetical order by name
+        results.sort((a, b) => a.name.localeCompare(b.name));
+        setResults(results);
+        console.log(results);
+    };
+
     return (
         <MenuContainer>
             <motion.section className={styles.searchBarContainer}>
@@ -79,97 +113,36 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                 <motion.input
                     type="text"
                     value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
+                    onChange={(e) => searchContentChanged(e.target.value)}
                     className={styles.searchBarInput}
                     placeholder="Search Templates"
                 />
             </motion.section>
-            <motion.section className={styles.templateContainer}>
-                <motion.section className={styles.rowContainer}>
-                    <motion.p className={styles.rowTitle}>
-                        All Templates
-                    </motion.p>
-                    <motion.section className={styles.templates}>
-                        {allTemplates.map((template: any, index: number) => {
-                            return (
-                                <motion.div
-                                    key={index}
-                                    className={styles.template}
-                                    onClick={() => handleClick(template)}
-                                >
-                                    <motion.div
-                                        className={styles.templatePreview}
-                                    >
-                                        {template.component}
-                                    </motion.div>
-                                    <motion.p className={styles.templateName}>
-                                        {template.name}
-                                    </motion.p>
-                                </motion.div>
-                            );
-                        })}
-                    </motion.section>
-                </motion.section>
-                <motion.section className={styles.rowContainer}>
-                    <motion.p className={styles.rowTitle}>
-                        Professional
-                    </motion.p>
-                    <motion.section className={styles.templates}>
-                        {allTemplates
-                            .filter((item: any) =>
-                                item.keywords.includes("professional")
-                            )
-                            .map((template: any, index: number) => {
-                                return (
-                                    <motion.div
-                                        key={index}
-                                        className={styles.template}
-                                        onClick={() => handleClick(template)}
-                                    >
-                                        <motion.div
-                                            className={styles.templatePreview}
-                                        >
-                                            {template.component}
-                                        </motion.div>
-                                        <motion.p
-                                            className={styles.templateName}
-                                        >
-                                            {template.name}
-                                        </motion.p>
-                                    </motion.div>
-                                );
-                            })}
-                    </motion.section>
-                </motion.section>
-                <motion.section className={styles.rowContainer}>
-                    <motion.p className={styles.rowTitle}>Modern</motion.p>
-                    <motion.section className={styles.templates}>
-                        {allTemplates
-                            .filter((item: any) =>
-                                item.keywords.includes("modern")
-                            )
-                            .map((template: any, index: number) => {
-                                return (
-                                    <motion.div
-                                        key={index}
-                                        className={styles.template}
-                                        onClick={() => handleClick(template)}
-                                    >
-                                        <motion.div
-                                            className={styles.templatePreview}
-                                        >
-                                            {template.component}
-                                        </motion.div>
-                                        <motion.p
-                                            className={styles.templateName}
-                                        >
-                                            {template.name}
-                                        </motion.p>
-                                    </motion.div>
-                                );
-                            })}
-                    </motion.section>
-                </motion.section>
+            <motion.section className={styles.keywordContainer}>
+                {allKeywords.map((keyword, index) => {
+                    return (
+                        <motion.div key={index} className={styles.keywordItem}>
+                            <motion.p className={styles.keyword}>
+                                {keyword}
+                            </motion.p>
+                        </motion.div>
+                    );
+                })}
+            </motion.section>
+            <motion.section className={styles.grid}>
+                {results.map((template: any, index: number) => {
+                    return (
+                        <motion.div
+                            key={index}
+                            className={styles.template}
+                            onClick={() => handleClick(template)}
+                        >
+                            <motion.div className={styles.templatePreview}>
+                                {template.component}
+                            </motion.div>
+                        </motion.div>
+                    );
+                })}
             </motion.section>
         </MenuContainer>
     );

@@ -7,11 +7,6 @@
     --border-radius: 25px;
     --border-radius-small: 10px;
     --border-radius-xsmall: 5px;
-    --background-color-rgb: 255, 255, 255;
-    --accent-color: #b4a5ff;
-    --accent-blue: 164, 179, 222;
-    --accent-pink: 184, 170, 219;
-    --text-color-rgb: 41, 41, 41;
     --font-size-xsmall: 0.5rem;
     --font-size-small: 0.75rem;
     --font-size-medium: 1rem;
@@ -34,6 +29,21 @@
     --gap-large: 2rem;
     --gap-xlarge: 3rem;
     --gap-x2large: 4rem;
+    /* Colors */
+    --background-color-rgb: 255, 255, 255;
+    --accent-color: #b4a5ff;
+    --accent-blue: 164, 179, 222;
+    --accent-pink: 184, 170, 219;
+    --text-color-rgb: 41, 41, 41;
+    /* Editor */
+    --editor-side-menu-background-rgb: 0, 0, 0;
+    --editor-side-menu-text-rgb: 200, 200, 200;
+    --editor-side-menu-accent-rgb: 116, 103, 255;
+    --editor-side-menu-accent-hover-rgb: 164, 147, 255;
+    --editor-side-menu-contrast-background-rgb: 255, 255, 255;
+    --editor-side-menu-contrast-text-rgb: 0, 0, 0;
+    --editor-side-menu-low-contrast-text-rgb: 150, 150, 150;
+    --editor-side-menu-low-contrast-background-rgb: 200, 200, 200;
 }
 
 * {

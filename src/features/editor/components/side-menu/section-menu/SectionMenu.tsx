@@ -36,7 +36,6 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
         const doc = documentArray.find((document) => document.id === id);
         if (!doc) return;
         let sectionConfig = {};
-
         if (type === "resume") {
             sectionConfig = SectionConfig(
                 document,
@@ -61,6 +60,7 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
             [id as string]: index,
         });
     };
+
     const handleRemoveSectionClick = (index: number) => {
         if (!document) return;
         const currentPageIndex = document.currentPage - 1;
@@ -90,20 +90,48 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
                 </motion.div>
                 <motion.p className={styles.title}>Sections</motion.p>
             </motion.section>
-            <motion.p className={styles.description}>
-                Add or remove sections from your document.
-            </motion.p>
-            <motion.div className={styles.horizontalLine}></motion.div>
             {document && (
                 <>
                     <motion.section className={styles.pageFunctionContainer}>
-                        <PageCounter
-                            documentId={id as string}
-                            fullWidth={true}
-                        />
+                        <motion.p className={styles.pageInfo}>
+                            PAGE {document.currentPage}
+                        </motion.p>
                     </motion.section>
 
                     <motion.section className={styles.sectionContainer}>
+                        {document.information.sectionOrder[
+                            document.currentPage - 1
+                        ].includes("colBreak") ? (
+                            <motion.div
+                                className={styles.sectionTitleContainer}
+                                style={{
+                                    marginBlockEnd:
+                                        "var(--padding-block-small)",
+                                }}
+                            >
+                                <motion.div
+                                    className={styles.horizontalLine}
+                                ></motion.div>
+                                <motion.p className={styles.sectionTitle}>
+                                    COLUMN 1
+                                </motion.p>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                className={styles.sectionTitleContainer}
+                                style={{
+                                    marginBlockEnd:
+                                        "var(--padding-block-small)",
+                                }}
+                            >
+                                <motion.div
+                                    className={styles.horizontalLine}
+                                ></motion.div>
+                                <motion.p className={styles.sectionTitle}>
+                                    SECTIONS
+                                </motion.p>
+                            </motion.div>
+                        )}
                         <motion.button
                             title="add section here"
                             className={styles.addSectionButton}
@@ -114,7 +142,39 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
                         {document.information.sectionOrder[
                             document.currentPage - 1
                         ].map((section: string, index: number) => {
-                            if (section === "colBreak") return null;
+                            if (section === "colBreak")
+                                return (
+                                    <motion.section
+                                        className={styles.newColumnContainer}
+                                        key={index}
+                                    >
+                                        <motion.div
+                                            className={
+                                                styles.sectionTitleContainer
+                                            }
+                                        >
+                                            <motion.div
+                                                className={
+                                                    styles.horizontalLine
+                                                }
+                                            ></motion.div>
+                                            <motion.p
+                                                className={styles.sectionTitle}
+                                            >
+                                                COLUMN 2
+                                            </motion.p>
+                                        </motion.div>
+                                        <motion.button
+                                            title="add section here"
+                                            className={styles.addSectionButton}
+                                            onClick={() =>
+                                                handleAddSectionClick(index + 1)
+                                            }
+                                        >
+                                            +
+                                        </motion.button>
+                                    </motion.section>
+                                );
                             return (
                                 <motion.section
                                     className={styles.sectionItem}
