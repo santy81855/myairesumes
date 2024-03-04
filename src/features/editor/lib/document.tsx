@@ -757,9 +757,9 @@ export const initializeNewResume = (
             sectionTitle: "Summary",
         },
         skillArray: [
-            "Example Long Skill 1.",
-            "Example Long Skill 2.",
-            "Example Long Skill 3.",
+            "Example Skill 1.",
+            "Example Skill 2.",
+            "Example Skill 3.",
         ],
         experienceArray: newExperienceArray,
         educationArray: newEducationArray,

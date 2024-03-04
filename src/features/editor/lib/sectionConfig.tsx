@@ -1381,16 +1381,57 @@ export const SectionConfig = (
             keyWords: ["contact", "email", "phone", "website", "vertical"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <View style={styles.columnGroupLeft}>
-                        <Text style={styles.small}>
-                            {document.information.contactInfo.email}
-                        </Text>
-                        <Text style={styles.small}>
-                            {document.information.contactInfo.phone}
-                        </Text>
-                        <Text style={styles.small}>
-                            {document.information.contactInfo.website}
-                        </Text>
+                    <View
+                        style={{
+                            ...styles.width100,
+                            ...styles.col,
+                            ...styles.alignStart,
+                            ...styles.justifyStart,
+                            ...styles.gapSmall,
+                        }}
+                    >
+                        <View
+                            style={{
+                                ...styles.col,
+                                ...styles.alignStart,
+                                ...styles.width100,
+                            }}
+                        >
+                            <Text style={{ ...styles.small, ...styles.bold }}>
+                                Email
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.email}
+                            </Text>
+                        </View>
+                        <View
+                            style={{
+                                ...styles.col,
+                                ...styles.alignStart,
+                                ...styles.width100,
+                            }}
+                        >
+                            <Text style={{ ...styles.small, ...styles.bold }}>
+                                Phone
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.phone}
+                            </Text>
+                        </View>
+                        <View
+                            style={{
+                                ...styles.col,
+                                ...styles.alignStart,
+                                ...styles.width100,
+                            }}
+                        >
+                            <Text style={{ ...styles.small, ...styles.bold }}>
+                                Website
+                            </Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.website}
+                            </Text>
+                        </View>
                     </View>
                 </View>
             ) : null,

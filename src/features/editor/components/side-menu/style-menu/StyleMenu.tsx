@@ -1,6 +1,6 @@
 "use client";
 import styles from "./StyleMenu.module.css";
-import { textIcon } from "@/components/icons/iconSVG";
+import { textIcon, minusIcon, plusIcon } from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/app/providers";
@@ -23,11 +23,25 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
     const [accentTextColor, setAccentTextColor] = useState<string>(
         document.information.style.accentTextColor
     );
+    const [fontSize, setFontSize] = useState<string>(
+        document.information.style.baseFontSize
+    );
+    const [marginSize, setMarginSize] = useState<string>(
+        document.information.style.baseMarginSize
+    );
+    const [sectionGap, setSectionGap] = useState<string>(
+        document.information.style.baseSectionGap
+    );
     const [showTextColorPicker, setShowTextColorPicker] =
         useState<boolean>(false);
 
     const handleFontSizeChange = (size: string) => {
         if (!document) return;
+        // if it is not a number, return
+        if (size === "") size = "12";
+        if (parseInt(size) < 1) size = "12";
+        if (isNaN(parseInt(size))) return;
+        setFontSize(size);
         const updatedDocument = {
             ...document,
             information: {
@@ -47,6 +61,11 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
 
     const handleMarginSizeChange = (size: string) => {
         if (!document) return;
+        // if it is not a number, return
+        if (size === "") size = "12";
+        if (parseInt(size) < 1) size = "12";
+        if (isNaN(parseInt(size))) return;
+        setMarginSize(size);
         const updatedDocument = {
             ...document,
             information: {
@@ -82,6 +101,11 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
 
     const handleSectionGapChange = (size: string) => {
         if (!document) return;
+        // if it is not a number, return
+        if (size === "") size = "12";
+        if (parseInt(size) < 1) size = "12";
+        if (isNaN(parseInt(size))) return;
+        setSectionGap(size);
         const updatedDocument = {
             ...document,
             information: {
@@ -150,34 +174,6 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                 </motion.div>
                 <motion.section className={styles.section}>
                     <motion.section className={styles.sectionContainer}>
-                        <motion.p className={styles.description}>
-                            Font Size
-                        </motion.p>
-                        <motion.select
-                            className={styles.fontSize}
-                            onChange={(e) =>
-                                handleFontSizeChange(e.target.value)
-                            }
-                        >
-                            <motion.option disabled selected>
-                                Size
-                            </motion.option>
-                            {Array.from({ length: 60 }).map((_, index) => (
-                                <motion.option
-                                    key={index}
-                                    value={(index + 1).toString()}
-                                    selected={
-                                        document.information.style
-                                            .baseFontSize ===
-                                        index + 1
-                                    }
-                                >
-                                    {index + 1}
-                                </motion.option>
-                            ))}
-                        </motion.select>
-                    </motion.section>
-                    <motion.section className={styles.sectionContainer}>
                         <motion.p className={styles.description}>Font</motion.p>
                         <motion.select
                             className={styles.font}
@@ -209,6 +205,41 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                             </motion.option>
                         </motion.select>
                     </motion.section>
+                    <motion.section className={styles.sectionContainer}>
+                        <motion.p className={styles.description}>
+                            Font Size
+                        </motion.p>
+                        <motion.section className={styles.inputContainer}>
+                            <motion.button
+                                className={`${styles.button} ${styles.left}`}
+                                onClick={() =>
+                                    handleFontSizeChange(
+                                        (parseInt(fontSize) - 1).toString()
+                                    )
+                                }
+                            >
+                                {minusIcon}
+                            </motion.button>
+                            <motion.input
+                                type="number"
+                                className={styles.fontSize}
+                                value={fontSize}
+                                onChange={(e) =>
+                                    handleFontSizeChange(e.target.value)
+                                }
+                            />
+                            <motion.button
+                                className={`${styles.button} ${styles.right}`}
+                                onClick={() =>
+                                    handleFontSizeChange(
+                                        (parseInt(fontSize) + 1).toString()
+                                    )
+                                }
+                            >
+                                {plusIcon}
+                            </motion.button>
+                        </motion.section>
+                    </motion.section>
                 </motion.section>
                 <motion.div className={styles.sectionTitleContainer}>
                     <motion.div className={styles.horizontalBar}></motion.div>
@@ -219,53 +250,73 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                         <motion.p className={styles.description}>
                             Margin
                         </motion.p>
-                        <motion.select
-                            className={styles.marginSize}
-                            onChange={(e) =>
-                                handleMarginSizeChange(e.target.value)
-                            }
-                        >
-                            {Array.from({ length: 60 }).map((_, index) => (
-                                <motion.option
-                                    key={index}
-                                    value={(index + 1).toString()}
-                                    selected={
-                                        document.information.style
-                                            .baseMarginSize ===
-                                        index + 1
-                                    }
-                                >
-                                    {index + 1}
-                                </motion.option>
-                            ))}
-                        </motion.select>
+                        <motion.section className={styles.inputContainer}>
+                            <motion.button
+                                className={`${styles.button} ${styles.left}`}
+                                onClick={() =>
+                                    handleMarginSizeChange(
+                                        (parseInt(marginSize) - 1).toString()
+                                    )
+                                }
+                            >
+                                {minusIcon}
+                            </motion.button>
+                            <motion.input
+                                type="number"
+                                className={styles.marginSize}
+                                value={marginSize}
+                                onChange={(e) =>
+                                    handleMarginSizeChange(e.target.value)
+                                }
+                            />
+                            <motion.button
+                                className={`${styles.button} ${styles.right}`}
+                                onClick={() =>
+                                    handleMarginSizeChange(
+                                        (parseInt(fontSize) + 1).toString()
+                                    )
+                                }
+                            >
+                                {plusIcon}
+                            </motion.button>
+                        </motion.section>
                     </motion.section>
                 </motion.section>
-                <motion.section className={styles.dropdownContainer}>
+                <motion.section className={styles.section}>
                     <motion.section className={styles.sectionContainer}>
                         <motion.p className={styles.description}>
                             Section Gap
                         </motion.p>
-                        <motion.select
-                            className={styles.marginSize}
-                            onChange={(e) =>
-                                handleSectionGapChange(e.target.value)
-                            }
-                        >
-                            {Array.from({ length: 60 }).map((_, index) => (
-                                <motion.option
-                                    key={index}
-                                    value={(index + 1).toString()}
-                                    selected={
-                                        document.information.style
-                                            .baseSectionGap ===
-                                        index + 1
-                                    }
-                                >
-                                    {index + 1}
-                                </motion.option>
-                            ))}
-                        </motion.select>
+                        <motion.section className={styles.inputContainer}>
+                            <motion.button
+                                className={`${styles.button} ${styles.left}`}
+                                onClick={() =>
+                                    handleSectionGapChange(
+                                        (parseInt(sectionGap) - 1).toString()
+                                    )
+                                }
+                            >
+                                {minusIcon}
+                            </motion.button>
+                            <motion.input
+                                type="number"
+                                className={styles.sectionGap}
+                                value={sectionGap}
+                                onChange={(e) =>
+                                    handleSectionGapChange(e.target.value)
+                                }
+                            />
+                            <motion.button
+                                className={`${styles.button} ${styles.right}`}
+                                onClick={() =>
+                                    handleSectionGapChange(
+                                        (parseInt(sectionGap) + 1).toString()
+                                    )
+                                }
+                            >
+                                {plusIcon}
+                            </motion.button>
+                        </motion.section>
                     </motion.section>
                 </motion.section>
                 <motion.div className={styles.sectionTitleContainer}>

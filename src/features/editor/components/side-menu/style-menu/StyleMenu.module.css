@@ -48,23 +48,79 @@
     gap: var(--gap-small);
 }
 
-.font,
-.fontSize,
-.marginSize {
-    width: 50%;
+.font {
+    width: 60%;
     padding-block: var(--padding-block-small);
-    padding-inline: var(--padding-inline-small);
+    padding-inline-start: var(--padding-inline-small);
     border-radius: var(--border-radius-xsmall);
     background-color: rgb(var(--editor-side-menu-contrast-background-rgb));
     border: 1px solid rgb(var(--editor-side-menu-contrast-background-rgb));
     color: rgb(var(--editor-side-menu-contrast-text-rgb));
+    text-align: left;
+}
+
+.fontSize,
+.marginSize,
+.sectionGap {
+    max-width: 3rem;
+    padding-inline: var(--padding-inline-small);
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-small);
+    background-color: rgb(var(--editor-side-menu-contrast-background-rgb));
+    border: 1px solid rgb(var(--editor-side-menu-contrast-background-rgb));
+    color: rgb(var(--editor-side-menu-contrast-text-rgb));
+    text-align: center;
+}
+
+.button {
+    background-color: rgb(var(--editor-side-menu-contrast-background-rgb));
+    border: 1px solid rgb(var(--editor-side-menu-low-contrast-background-rgb));
+    padding-inline: var(--padding-inline-small);
+    padding-block: var(--padding-block-small);
+    color: rgb(var(--editor-side-menu-contrast-text-rgb));
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button svg {
+    width: 10px;
+    height: 10px;
+    stroke: rgb(var(--editor-side-menu-contrast-text-rgb));
+    fill: rgb(var(--editor-side-menu-contrast-text-rgb));
+}
+
+.button:hover {
+    background-color: rgb(var(--editor-side-menu-low-contrast-background-rgb));
+}
+
+.right {
+    border-top-right-radius: var(--border-radius-xsmall);
+    border-bottom-right-radius: var(--border-radius-xsmall);
+}
+
+.left {
+    border-top-left-radius: var(--border-radius-xsmall);
+    border-bottom-left-radius: var(--border-radius-xsmall);
 }
 
 .font:focus,
 .fontSize:focus,
-.marginSize:focus {
+.marginSize:focus,
+.sectionGap:focus {
     outline: none;
-    border: none;
+    border: 1px solid rgb(var(--editor-side-menu-contrast-background-rgb));
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Optional: Remove margin */
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .colorPickerContainer {
