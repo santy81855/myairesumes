@@ -36,7 +36,9 @@
     --accent-pink: 184, 170, 219;
     --text-color-rgb: 41, 41, 41;
     /* Editor */
-    --editor-side-menu-background-rgb: 0, 0, 0;
+    --editor-side-menu-closed-background-color-rgb: 255, 255, 255;
+    --editor-side-menu-closed-text-color-rgb: 41, 41, 41;
+    --editor-side-menu-background-rgb: 48, 48, 69;
     --editor-side-menu-text-rgb: 200, 200, 200;
     --editor-side-menu-accent-rgb: 116, 103, 255;
     --editor-side-menu-accent-hover-rgb: 164, 147, 255;

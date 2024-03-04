@@ -1,8 +1,13 @@
 "use client";
 import styles from "./TemplateMenu.module.css";
-import { searchIcon } from "@/components/icons/iconSVG";
+import {
+    searchIcon,
+    forwardArrow,
+    backArrow,
+    templateIcon,
+} from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
     MenuContainer,
     getAllResumeTemplates,
@@ -19,6 +24,7 @@ type TemplateMenuProps = {
 };
 
 const TemplateMenu = ({ document }: TemplateMenuProps) => {
+    const keyWordContainerRef = useRef<HTMLDivElement>(null);
     const params = useParams();
     const type = params.slug[0];
     const [searchText, setSearchText] = useState("");
@@ -34,19 +40,28 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
             (currentDocument) => currentDocument.id === params.slug[1]
         );
         if (!doc) return;
-        setCurrentDocument(doc);
         const template =
             type === "resume"
                 ? getAllResumeTemplates(doc, true)
                 : getAllCoverLetterTemplates(doc, true);
         // get every key in the template object and store it in an array
-        const uniqueKeys = Object.keys(template);
+        const keys = Object.keys(template);
         const uniqueKeywords = new Set<string>();
         // get the previewComponent for each template
-        const templateComponents = uniqueKeys.map((key) => {
+        const templateComponents = keys.map((key: any) => {
             template[key as keyof typeof template].keywords.forEach(
                 (keyword: string) => {
-                    uniqueKeywords.add(keyword);
+                    if (
+                        keyword !==
+                        template[
+                            key as keyof typeof template
+                        ].name.toLowerCase()
+                    ) {
+                        // add the keyword but with a capital first letter
+                        uniqueKeywords.add(
+                            keyword.charAt(0).toUpperCase() + keyword.slice(1)
+                        );
+                    }
                 }
             );
             return {
@@ -57,14 +72,35 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                 keywords: template[key as keyof typeof template].keywords,
             };
         });
-        setAllKeywords(Array.from(uniqueKeys));
-        setResults(templateComponents);
+        setAllKeywords(Array.from(uniqueKeywords));
         setAllTemplates(templateComponents);
+        setResults(templateComponents);
         setCurrentTemplate(
             template[doc.information.template as keyof typeof template]
                 ?.previewComponent
         );
+        setCurrentDocument(doc);
     }, [documentArray]);
+
+    const searchContentChanged = (content: string) => {
+        setSearchText(content);
+        if (content === "" || content === "all") {
+            setResults(allTemplates);
+            return;
+        }
+        const tempArray = [...allTemplates];
+        const results = tempArray.filter((item: { keywords: string[] }) =>
+            // check if each word of the content is one of hte keywords
+            content
+                .split(" ")
+                .every((word) =>
+                    item.keywords.some((keyword) =>
+                        keyword.toLowerCase().includes(word.toLowerCase())
+                    )
+                )
+        );
+        setResults(results);
+    };
 
     const handleClick = (template: any) => {
         if (!currentDocument) return;
@@ -81,31 +117,28 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
         setDocumentArray(newDocumentArray);
     };
 
-    const searchContentChanged = (content: string) => {
-        setSearchText(content);
-        if (content === "") {
-            setResults(allTemplates);
-            return;
+    const scrollRight = () => {
+        const container = keyWordContainerRef.current;
+        if (container) {
+            // Scroll the container to the right by its full width
+            container.scrollLeft += container.offsetWidth;
         }
-        const tempArray = [...allTemplates];
-        const results = tempArray.filter((item: { keywords: string[] }) =>
-            // check if each word of the content is one of hte keywords
-            content
-                .split(" ")
-                .every((word) =>
-                    item.keywords.some((keyword) =>
-                        keyword.toLowerCase().includes(word.toLowerCase())
-                    )
-                )
-        );
-        // make the results be in alphabetical order by name
-        results.sort((a, b) => a.name.localeCompare(b.name));
-        setResults(results);
-        console.log(results);
+    };
+
+    const scrollLeft = () => {
+        const container = keyWordContainerRef.current;
+        if (container) {
+            // Scroll the container to the left by its full width
+            container.scrollLeft -= container.offsetWidth;
+        }
     };
 
     return (
         <MenuContainer>
+            <motion.section className={styles.titleContainer}>
+                {templateIcon}
+                <motion.p className={styles.title}>Templates</motion.p>
+            </motion.section>
             <motion.section className={styles.searchBarContainer}>
                 <motion.div className={styles.searchIconContainer}>
                     {searchIcon}
@@ -118,18 +151,65 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                     placeholder="Search Templates"
                 />
             </motion.section>
-            <motion.section className={styles.keywordContainer}>
-                {allKeywords.map((keyword, index) => {
-                    return (
-                        <motion.div key={index} className={styles.keywordItem}>
-                            <motion.p className={styles.keyword}>
-                                {keyword}
-                            </motion.p>
-                        </motion.div>
-                    );
-                })}
+            <motion.section className={styles.keywordFunctionContainer}>
+                <motion.section className={styles.buttonContainer}>
+                    <motion.button
+                        className={styles.button}
+                        onClick={scrollLeft}
+                    >
+                        {backArrow}
+                    </motion.button>
+                    <motion.button
+                        className={styles.button}
+                        onClick={scrollRight}
+                    >
+                        {forwardArrow}
+                    </motion.button>
+                </motion.section>
+                <motion.section
+                    className={styles.keywordContainer}
+                    ref={keyWordContainerRef}
+                >
+                    <motion.div
+                        className={
+                            searchText.toLowerCase() === "all"
+                                ? styles.keywordItemActive
+                                : styles.keywordItem
+                        }
+                        onClick={() => {
+                            searchContentChanged("all");
+                        }}
+                    >
+                        <motion.p className={styles.keyword}>All</motion.p>
+                    </motion.div>
+                    {allKeywords.map((keyword, index) => {
+                        return (
+                            <motion.div
+                                key={index}
+                                className={
+                                    searchText.toLowerCase() ===
+                                    keyword.toLowerCase()
+                                        ? styles.keywordItemActive
+                                        : styles.keywordItem
+                                }
+                                onClick={() => {
+                                    searchContentChanged(keyword.toLowerCase());
+                                }}
+                            >
+                                <motion.p className={styles.keyword}>
+                                    {keyword}
+                                </motion.p>
+                            </motion.div>
+                        );
+                    })}
+                </motion.section>
             </motion.section>
             <motion.section className={styles.grid}>
+                <motion.div className={styles.template}>
+                    <motion.div className={styles.templatePreview}>
+                        {currentTemplate}
+                    </motion.div>
+                </motion.div>
                 {results.map((template: any, index: number) => {
                     return (
                         <motion.div
