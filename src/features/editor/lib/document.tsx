@@ -7,6 +7,7 @@ import {
     Nova,
     Sharp,
     Vivid,
+    Luminary,
 } from "@/features/resume";
 
 import { BasicL } from "@/features/cover-letter";
@@ -55,6 +56,31 @@ export const updateDocument = (
             "skillsVivid",
             "educationShort",
             "languages",
+        ];
+        // make the first array in sectionOrder equal to newArr
+        // add the newArr to the newSectionOrder
+        // check if the first array in sectionOrder contains 'colBreak' or an element that includes 'nova'
+        if (!changedTemplate) {
+            // make the newSectionOrder the same as the current array
+            newSectionOrder = document.information.sectionOrder;
+        } else {
+            newSectionOrder = document.information.sectionOrder.map(
+                (array: any, index: number) => {
+                    return index === 0 ? newArr : array;
+                }
+            );
+        }
+    } else if (template === "luminary") {
+        // if the template is nova, then the sectionOrder array for the first array should be: ['headerNova', 'summary', 'experience', 'colBreak' 'contactVertical', 'skills', 'education', 'languages']
+        const newArr = [
+            "contactVertical",
+            "educationShort",
+            "skillsBullet",
+            "languages",
+            "colBreak",
+            "headerLuminary",
+            "summary",
+            "experience",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -364,6 +390,50 @@ export const getAllResumeTemplates = (
                     document={updateDocument(
                         document,
                         "sharp",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        luminary: {
+            name: "Luminary",
+            description:
+                "A professional resume template with a modern design and a touch of flair.",
+            keywords: [
+                "luminary",
+                "professional",
+                "modern",
+                "pretty",
+                "cute",
+                "art",
+                "color",
+            ],
+            editorComponent: (
+                <Luminary
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Luminary
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Luminary
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "luminary",
                         changedTemplate
                     )}
                 />

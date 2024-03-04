@@ -60,6 +60,7 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
     };
 
     const handleMarginSizeChange = (size: string) => {
+        console.log(size);
         if (!document) return;
         // if it is not a number, return
         if (size === "") size = "12";
@@ -224,6 +225,9 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                                 type="number"
                                 className={styles.fontSize}
                                 value={fontSize}
+                                onClick={(e) =>
+                                    (e.target as HTMLInputElement).select()
+                                }
                                 onChange={(e) =>
                                     handleFontSizeChange(e.target.value)
                                 }
@@ -265,6 +269,9 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                                 type="number"
                                 className={styles.marginSize}
                                 value={marginSize}
+                                onClick={(e) =>
+                                    (e.target as HTMLInputElement).select()
+                                }
                                 onChange={(e) =>
                                     handleMarginSizeChange(e.target.value)
                                 }
@@ -273,7 +280,7 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                                 className={`${styles.button} ${styles.right}`}
                                 onClick={() =>
                                     handleMarginSizeChange(
-                                        (parseInt(fontSize) + 1).toString()
+                                        (parseInt(marginSize) + 1).toString()
                                     )
                                 }
                             >
@@ -302,6 +309,9 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                                 type="number"
                                 className={styles.sectionGap}
                                 value={sectionGap}
+                                onClick={(e) =>
+                                    (e.target as HTMLInputElement).select()
+                                }
                                 onChange={(e) =>
                                     handleSectionGapChange(e.target.value)
                                 }
