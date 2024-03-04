@@ -25,20 +25,22 @@ const Section = ({
     );
     const [sectionConfig, setSectionConfig] = useState<any>(
         type === "resume"
-            ? SectionConfig(
+            ? SectionConfig({
                   document,
-                  document.information.style.baseFontSize,
-                  document.information.font,
-                  document.information.template,
-                  accentColumn ? true : false
-              )
-            : CoverLetterSectionConfig(
+                  fontSize: document.information.style.baseFontSize,
+                  font: document.information.font,
+                  template: document.information.template,
+                  isDownload: templateRef ? false : true,
+                  accentColumn: accentColumn ? true : false,
+              })
+            : CoverLetterSectionConfig({
                   document,
-                  document.information.style.baseFontSize,
-                  document.information.font,
-                  document.information.template,
-                  accentColumn ? true : false
-              )
+                  fontSize: document.information.style.baseFontSize,
+                  font: document.information.font,
+                  template: document.information.template,
+                  isDownload: templateRef ? false : true,
+                  accentColumn: accentColumn ? true : false,
+              })
     );
 
     useEffect(() => {
@@ -46,20 +48,22 @@ const Section = ({
             // if there is no templateRef, then it is a download template, and we want to make sure we update the sectionConfig with any updated values
             setSectionConfig(
                 type === "resume"
-                    ? SectionConfig(
+                    ? SectionConfig({
                           document,
-                          document.information.style.baseFontSize,
-                          document.information.font,
-                          document.information.template,
-                          accentColumn ? true : false
-                      )
-                    : CoverLetterSectionConfig(
+                          fontSize: document.information.style.baseFontSize,
+                          font: document.information.font,
+                          template: document.information.template,
+                          isDownload: templateRef ? false : true,
+                          accentColumn: accentColumn ? true : false,
+                      })
+                    : CoverLetterSectionConfig({
                           document,
-                          document.information.style.baseFontSize,
-                          document.information.font,
-                          document.information.template,
-                          accentColumn ? true : false
-                      )
+                          fontSize: document.information.style.baseFontSize,
+                          font: document.information.font,
+                          template: document.information.template,
+                          isDownload: templateRef ? false : true,
+                          accentColumn: accentColumn ? true : false,
+                      })
             );
             return;
         }
@@ -73,20 +77,22 @@ const Section = ({
         setMargin(newMargin);
         setSectionConfig(
             type === "resume"
-                ? SectionConfig(
+                ? SectionConfig({
                       document,
-                      size,
-                      document.information.font,
-                      document.information.template,
-                      accentColumn ? true : false
-                  )
-                : CoverLetterSectionConfig(
+                      fontSize: size,
+                      font: document.information.font,
+                      template: document.information.template,
+                      accentColumn: accentColumn ? true : false,
+                      isDownload: templateRef ? false : true,
+                  })
+                : CoverLetterSectionConfig({
                       document,
-                      size,
-                      document.information.font,
-                      document.information.template,
-                      accentColumn ? true : false
-                  )
+                      fontSize: size,
+                      font: document.information.font,
+                      template: document.information.template,
+                      accentColumn: accentColumn ? true : false,
+                      isDownload: templateRef ? false : true,
+                  })
         );
 
         // handle the text scaling
@@ -103,20 +109,22 @@ const Section = ({
             setMargin(newMargin);
             setSectionConfig(
                 type === "resume"
-                    ? SectionConfig(
+                    ? SectionConfig({
                           document,
-                          size,
-                          document.information.font,
-                          document.information.template,
-                          accentColumn ? true : false
-                      )
-                    : CoverLetterSectionConfig(
+                          fontSize: size,
+                          font: document.information.font,
+                          template: document.information.template,
+                          accentColumn: accentColumn ? true : false,
+                          isDownload: templateRef ? false : true,
+                      })
+                    : CoverLetterSectionConfig({
                           document,
-                          size,
-                          document.information.font,
-                          document.information.template,
-                          accentColumn ? true : false
-                      )
+                          fontSize: size,
+                          font: document.information.font,
+                          template: document.information.template,
+                          accentColumn: accentColumn ? true : false,
+                          isDownload: templateRef ? false : true,
+                      })
             );
         }
 

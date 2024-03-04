@@ -37,19 +37,23 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
         if (!doc) return;
         let sectionConfig = {};
         if (type === "resume") {
-            sectionConfig = SectionConfig(
+            sectionConfig = SectionConfig({
                 document,
-                null,
-                "",
-                doc.information.template
-            );
+                fontSize: null,
+                font: "",
+                template: doc.information.template,
+                isDownload: false,
+                accentColumn: false,
+            });
         } else {
-            sectionConfig = CoverLetterSectionConfig(
+            sectionConfig = CoverLetterSectionConfig({
                 document,
-                null,
-                "",
-                doc.information.template
-            );
+                fontSize: null,
+                font: "",
+                template: doc.information.template,
+                isDownload: false,
+                accentColumn: false,
+            });
         }
         setAllSections(sectionConfig);
     }, [documentArray]);

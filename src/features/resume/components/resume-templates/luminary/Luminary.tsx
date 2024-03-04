@@ -120,9 +120,13 @@ const Luminary = ({
                   overflow: "hidden",
               },
               pageContainerLeft: {
-                  backgroundColor: "white",
-                  width: "25%",
+                  backgroundColor: "#fafafa",
+                  width: "30%",
                   height: "100%",
+                  borderRightWidth: document.information.style.baseFontSize / 5,
+                  borderRightColor:
+                      document.information.style.accentBackgroundColor,
+                  borderRightStyle: "solid",
                   paddingLeft: document.information.style.baseMarginSize,
                   paddingTop: document.information.style.baseMarginSize,
                   paddingRight: document.information.style.baseFontSize,
@@ -134,9 +138,8 @@ const Luminary = ({
                   overflow: "hidden",
               },
               pageContainerRight: {
-                  backgroundColor:
-                      document.information.style.accentBackgroundColor,
-                  width: "75%",
+                  backgroundColor: "white",
+                  width: "70%",
                   height: "100%",
                   paddingLeft: fontSize,
                   paddingRight: document.information.style.baseMarginSize,
@@ -175,12 +178,16 @@ const Luminary = ({
                   overflow: "hidden",
               },
               pageContainerLeft: {
-                  backgroundColor: "white",
-                  width: "25%",
+                  backgroundColor: "#fafafa",
+                  width: "30%",
                   height: "100%",
                   paddingLeft: margin,
                   paddingTop: margin,
                   paddingRight: fontSize,
+                  borderRightWidth: fontSize / 5,
+                  borderRightColor:
+                      document.information.style.accentBackgroundColor,
+                  borderRightStyle: "solid",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-start",
@@ -189,9 +196,8 @@ const Luminary = ({
                   overflow: "hidden",
               },
               pageContainerRight: {
-                  backgroundColor:
-                      document.information.style.accentBackgroundColor,
-                  width: "75%",
+                  backgroundColor: "white",
+                  width: "70%",
                   height: "100%",
                   paddingLeft: fontSize,
                   paddingRight: margin,
@@ -212,10 +218,10 @@ const Luminary = ({
     ): string[] => {
         if (arr.length === 0) return arr;
         if (!arr.includes(condition)) return arr;
-        if (arr.indexOf(condition) === 0 && isLeft) return [];
-        if (arr.indexOf(condition) === arr.length - 1 && !isLeft) return [];
+        if (arr.indexOf(condition) === 0 && !isLeft) return [];
+        if (arr.indexOf(condition) === arr.length - 1 && isLeft) return [];
         const index = arr.indexOf(condition);
-        if (isLeft) {
+        if (!isLeft) {
             return arr.slice(0, index);
         } else {
             return arr.slice(index + 1, arr.length);
@@ -265,7 +271,6 @@ const Luminary = ({
                                         sectionId={section}
                                         document={document}
                                         templateRef={templateRef}
-                                        accentColumn={true}
                                     />
                                 );
                             })}
@@ -359,17 +364,13 @@ const Luminary = ({
                             })}
                         </View>
                         <View wrap={false} style={pdfStyles.pageContainerRight}>
-                            {document.information.sectionOrder[
-                                document.currentPage - 1
-                            ].map((section: string, index: number) => {
-                                if (
-                                    index <=
-                                    document.information.sectionOrder[
-                                        document.currentPage - 1
-                                    ].indexOf("colBreak")
-                                ) {
-                                    return null;
-                                }
+                            {cutArray(
+                                document.information.sectionOrder[
+                                    document.currentPage - 1
+                                ],
+                                "colBreak",
+                                false
+                            ).map((section: string, index: number) => {
                                 return (
                                     <DraggableContainer
                                         key={section + index.toString()}
@@ -389,7 +390,6 @@ const Luminary = ({
                                                 sectionId={section}
                                                 document={document}
                                                 templateRef={templateRef}
-                                                accentColumn={true}
                                             />
                                         </SectionContainerEditor>
                                     </DraggableContainer>
@@ -459,7 +459,6 @@ const Luminary = ({
                                                         }
                                                         sectionId={section}
                                                         document={document}
-                                                        accentColumn={true}
                                                     />
                                                 );
                                             }

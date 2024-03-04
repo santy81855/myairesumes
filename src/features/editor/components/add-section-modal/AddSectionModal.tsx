@@ -63,19 +63,23 @@ const AddSectionModal = () => {
         setDocument(doc);
         let temp = {};
         if (type === "resume") {
-            temp = SectionConfig(
-                doc,
-                null,
-                doc.information.font,
-                doc.information.template
-            );
+            temp = SectionConfig({
+                document: doc,
+                fontSize: null,
+                font: doc.information.font,
+                template: doc.information.template,
+                isDownload: false,
+                accentColumn: false,
+            });
         } else {
-            temp = CoverLetterSectionConfig(
-                doc,
-                null,
-                doc.information.font,
-                doc.information.template
-            );
+            temp = CoverLetterSectionConfig({
+                document: doc,
+                fontSize: null,
+                font: doc.information.font,
+                template: doc.information.template,
+                isDownload: false,
+                accentColumn: false,
+            });
         }
         let sectionConfigArray = Object.entries(temp).map(([id, config]) => ({
             id,

@@ -2,13 +2,16 @@
 import { Text, View, StyleSheet, Font, Image } from "@react-pdf/renderer";
 import { formatDateMonthYear } from "../../../lib/date";
 
-export const CoverLetterSectionConfig = (
-    document: any,
-    fontSize: any,
-    font: string,
-    template: string,
-    accentColumn?: boolean
-) => {
+export const CoverLetterSectionConfig = (data: {
+    document: any;
+    fontSize: any;
+    font: string;
+    template: string;
+    accentColumn: boolean;
+    isDownload: boolean;
+}) => {
+    const { document, fontSize, font, template, accentColumn, isDownload } =
+        data;
     const hyphenationCallback = (word: string) => {
         // Return word parts in an array
         return [word];

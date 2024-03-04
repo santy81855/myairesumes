@@ -73,14 +73,14 @@ export const updateDocument = (
     } else if (template === "luminary") {
         // if the template is nova, then the sectionOrder array for the first array should be: ['headerNova', 'summary', 'experience', 'colBreak' 'contactVertical', 'skills', 'education', 'languages']
         const newArr = [
-            "contactVertical",
-            "educationShort",
-            "skillsBullet",
-            "languages",
-            "colBreak",
             "headerLuminary",
             "summary",
             "experience",
+            "colBreak",
+            "contactLuminary",
+            "skillsBullet",
+            "educationShort",
+            "languages",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
