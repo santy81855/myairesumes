@@ -211,6 +211,7 @@
     gap: calc(var(--padding-block-medium) / 2);
     overflow-y: auto;
     scrollbar-width: none;
+    margin-block-start: -0.5rem;
 }
 
 grid::-webkit-scrollbar {

@@ -59,27 +59,31 @@ const PageCounter = ({ documentId, fullWidth }: PageCounterProps) => {
             {document ? (
                 <>
                     <p>Page</p>
+                    <button
+                        title="previous"
+                        className={
+                            document.currentPage > 1
+                                ? styles.pageChanger
+                                : styles.disabled
+                        }
+                        onClick={handleBack}
+                    >
+                        {backArrow}
+                    </button>
                     <p>{document.currentPage}</p>
                     <p>of</p>
                     <p>{document.information.numPages}</p>
-                    {document.currentPage > 1 && (
-                        <button
-                            title="previous"
-                            className={styles.pageChanger}
-                            onClick={handleBack}
-                        >
-                            {backArrow}
-                        </button>
-                    )}
-                    {document.currentPage < document.information.numPages && (
-                        <button
-                            title="next"
-                            className={styles.pageChanger}
-                            onClick={handleForward}
-                        >
-                            {forwardArrow}
-                        </button>
-                    )}
+                    <button
+                        title="next"
+                        className={
+                            document.currentPage < document.information.numPages
+                                ? styles.pageChanger
+                                : styles.disabled
+                        }
+                        onClick={handleForward}
+                    >
+                        {forwardArrow}
+                    </button>
                 </>
             ) : (
                 <p>Page ...</p>

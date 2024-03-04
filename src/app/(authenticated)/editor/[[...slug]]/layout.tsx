@@ -16,6 +16,7 @@ import {
     getResume,
     SideMenu,
     TitleBar,
+    SubTitleBar,
 } from "@/features/editor";
 import { redirect } from "next/navigation";
 import { ResumeContext } from "@/app/providers";
@@ -61,6 +62,7 @@ export default async function RootLayout({
                         <SideMenu />
                         <section className={styles.columnContainer}>
                             <TitleBar />
+                            <SubTitleBar />
                             {children}
                         </section>
                     </section>

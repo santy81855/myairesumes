@@ -144,6 +144,7 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                     {searchIcon}
                 </motion.div>
                 <motion.input
+                    id="templateSeachBar"
                     type="text"
                     value={searchText}
                     onChange={(e) => searchContentChanged(e.target.value)}

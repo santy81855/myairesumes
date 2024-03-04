@@ -32,6 +32,11 @@ const Menu = () => {
         setIsTemplateOpen(!isTemplateOpen);
         setIsStyleOpen(false);
         setIsSectionOpen(false);
+        // get the search bar to focus
+        const searchBar = window.document.getElementById("templateSeachBar");
+        if (searchBar) {
+            searchBar.focus();
+        }
     };
 
     const toggleStyle = () => {

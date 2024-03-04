@@ -1,6 +1,6 @@
-.functionButtonContainer {
+.pageCounter {
     display: flex;
-    flex-direction: row;
+    width: 12rem;
     gap: var(--gap-medium);
     align-items: center;
     justify-content: center;
@@ -10,34 +10,25 @@
     border-radius: var(--border-radius-xsmall);
 }
 
-.button {
+.pageCounter p {
+    color: rgb(var(--editor-text-contrast-color-rgb));
+    font-size: 0.6rem;
+    margin: 0;
+    padding: 0;
+}
+
+.pageChanger {
     background-color: transparent;
     border: none;
-    width: 15px;
-    height: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
 
-.button svg {
-    width: 100%;
-    height: 100%;
-    stroke: rgb(var(--editor-text-contrast-color-rgb));
-    fill: rgb(var(--editor-text-contrast-color-rgb));
-}
-
-.button svg:hover {
-    stroke: rgb(var(--editor-text-contrast-color-rgb), 0.5);
-    fill: rgb(var(--editor-text-contrast-color-rgb), 0.5);
-}
-
-.disabledButton {
+.disabled {
     background-color: transparent;
     border: none;
-    width: 15px;
-    height: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,9 +37,28 @@
     opacity: 0.5;
 }
 
-.disabledButton svg {
+.pageChanger svg {
+    stroke: rgb(var(--editor-text-contrast-color-rgb));
+    fill: rgb(var(--editor-text-contrast-color-rgb));
+    width: 15px;
+    height: 15px;
+}
+
+.pageChanger svg {
+    stroke: rgb(var(--editor-text-contrast-color-rgb));
+    fill: rgb(var(--editor-text-contrast-color-rgb));
+    width: 15px;
+    height: 15px;
+}
+
+.pageChanger svg:hover {
     stroke: rgb(var(--editor-text-contrast-color-rgb), 0.5);
     fill: rgb(var(--editor-text-contrast-color-rgb), 0.5);
-    width: 100%;
-    height: 100%;
+}
+
+.disabled svg {
+    stroke: rgb(var(--editor-text-contrast-color-rgb), 0.5);
+    fill: rgb(var(--editor-text-contrast-color-rgb), 0.5);
+    width: 15px;
+    height: 15px;
 }

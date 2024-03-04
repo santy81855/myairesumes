@@ -97,7 +97,6 @@ const DocumentContainer = ({ document, type }: DocumentContainerProps) => {
                     </DndProvider>
                 )}
             </section>
-            <PageButtons documentId={id} />
         </section>
     );
 };
