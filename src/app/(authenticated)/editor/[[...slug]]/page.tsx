@@ -34,6 +34,14 @@ const Page = async ({
             ? await getResume(user.id, id)
             : await getCoverLetter(user.id, id);
 
+    if (!document) {
+        if (documentType === "resume") {
+            redirect("/dashboard?menu=resumes");
+        } else {
+            redirect("/dashboard?menu=cover-letters");
+        }
+    }
+
     return (
         <main className={styles.main}>
             <PageUtilBar documentId={id} />

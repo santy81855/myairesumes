@@ -14,6 +14,7 @@ import { validateRequest } from "@/features/authentication/lib/auth";
 import {
     AddSectionModal,
     getResume,
+    getCoverLetter,
     SideMenu,
     TitleBar,
     SubTitleBar,
@@ -44,11 +45,6 @@ export default async function RootLayout({
     if (documentType !== "resume" && documentType !== "cover-letter") {
         redirect("/");
     }
-
-    const document =
-        documentType === "resume"
-            ? await getResume(user.id, params.slug[1])
-            : null;
 
     return (
         <html lang="en">

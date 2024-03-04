@@ -480,6 +480,7 @@ export const getAllUserResumes = async (userId: string) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            next: { tags: [userId] },
         }
     );
     if (!response.ok) {
@@ -496,6 +497,7 @@ export const getAllUserCoverLetters = async (userId: string) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            next: { tags: [userId] },
         }
     );
     if (!response.ok) {
@@ -512,7 +514,7 @@ export const getResume = async (userId: string, resumeId: string) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            //next: { tags: ["currentResume"] },
+            next: { tags: [userId] },
         }
     );
     if (!response.ok) {
@@ -529,6 +531,7 @@ export const getCoverLetter = async (userId: string, coverLetterId: string) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            next: { tags: [userId] },
         }
     );
     if (!response.ok) {

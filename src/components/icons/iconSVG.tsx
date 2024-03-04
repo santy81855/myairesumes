@@ -351,6 +351,18 @@ export const textIcon = (
     </svg>
 );
 
+export const basicLeftArrow = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+        <path
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={4}
+            d="M31 36L19 24l12-12"
+        ></path>
+    </svg>
+);
+
 export const magicResumeLogo = (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
         <g fillRule="evenodd" stroke="none">

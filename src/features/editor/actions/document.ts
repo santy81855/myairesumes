@@ -1,6 +1,6 @@
 "use server";
 import { prisma } from "@/lib/prisma";
-import { revalidateTag } from "next/cache";
+import { revalidateTag, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { validateRequest } from "@/features/authentication/lib/auth";
 import {
@@ -163,6 +163,88 @@ export const updateCoverLetter = async (formData: any) => {
         };
     }
     // revalidateTag("currentCoverLetter");
+    return {
+        success: true,
+    };
+};
+
+export const deleteResume = async (id: string) => {
+    "use server";
+    // get the current user
+    const { user } = await validateRequest();
+    if (!user) {
+        return redirect("/sign-in");
+    }
+    // get the user
+    const updatedUser = await prisma.user.update({
+        where: {
+            id: user.id,
+        },
+        data: {
+            numberResumes: {
+                decrement: 1,
+            },
+        },
+    });
+    if (!updatedUser) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    // delete the resume
+    const deletedResume = await prisma.resume.delete({
+        where: {
+            id,
+        },
+    });
+    if (!deletedResume) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag(updatedUser.id);
+
+    return {
+        success: true,
+    };
+};
+
+export const deleteCoverLetter = async (id: string) => {
+    "use server";
+    // get the current user
+    const { user } = await validateRequest();
+    if (!user) {
+        return redirect("/sign-in");
+    }
+    // get the user
+    const updatedUser = await prisma.user.update({
+        where: {
+            id: user.id,
+        },
+        data: {
+            numberCoverLetters: {
+                decrement: 1,
+            },
+        },
+    });
+    if (!updatedUser) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    // delete the cover letter
+    const deletedCoverLetter = await prisma.coverLetter.delete({
+        where: {
+            id,
+        },
+    });
+    if (!deletedCoverLetter) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag(updatedUser.id);
+
     return {
         success: true,
     };

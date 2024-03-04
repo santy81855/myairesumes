@@ -1,6 +1,6 @@
 "use client";
 import styles from "./ExpandedMenu.module.css";
-import { trapezoid } from "@/components/icons/iconSVG";
+import { basicLeftArrow } from "@/components/icons/iconSVG";
 import { useSearchParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -62,10 +62,15 @@ const ExpandedMenu = ({
                       }
             }
         >
-            <div className={styles.closeTab} onClick={() => setState(false)}>
-                close
-            </div>
-            <section className={styles.container}>{children}</section>
+            <section className={styles.container}>
+                <button
+                    className={styles.closeButton}
+                    onClick={() => setState(false)}
+                >
+                    {basicLeftArrow}
+                </button>
+                {children}
+            </section>
         </motion.aside>
     );
 };

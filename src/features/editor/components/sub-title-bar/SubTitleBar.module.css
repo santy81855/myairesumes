@@ -5,82 +5,16 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding-inline: var(--padding-inline-medium);
     color: white;
     gap: var(--gap-medium);
 }
 
-.title {
-    color: white;
-}
-
-.pageCounter {
-    font-size: var(--font-size-small);
-}
-
-.pageFunctionContainer {
-    display: flex;
-    gap: var(--gap-small);
-    justify-content: center;
-    align-items: center;
-}
-
-.functionButtonContainer {
-    display: flex;
-    gap: var(--gap-medium);
-    align-items: center;
-    justify-content: center;
-    background-color: #7367ff;
-    padding-inline: var(--padding-block-small);
-    padding-block: var(--padding-block-small);
-    border-radius: var(--border-radius-xsmall);
-}
-
-.deletePageButton {
-    background-color: transparent;
-    border: none;
-    width: 15px;
-    height: 15px;
+.right {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-}
-
-.deletePageButton svg {
-    width: 100%;
-    height: 100%;
-    stroke: white;
-    fill: white;
-}
-
-.deletePageButton svg:hover {
-    fill: #a4a0d1;
-    stroke: #a4a0d1;
-}
-
-.addPageButton {
-    background-color: transparent;
-    border: none;
-    width: 15px;
-    height: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.addPageButton svg {
-    stroke: white;
-    fill: white;
-    width: 100%;
-    height: 100%;
-}
-
-.addPageButton svg:hover {
-    fill: #a4a0d1;
-    stroke: #a4a0d1;
 }
 
 @media screen and (max-width: 768px) {
@@ -97,15 +31,13 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     gap: var(--gap-small);
     background-color: rgb(var(--editor-subtitlebar-background-color-rgb));
 }
 
 .iconContainer p {
     font-size: var(--font-size-small);
-    margin: 0;
-    padding: 0;
     color: black;
 }
 
@@ -126,4 +58,17 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+.deleteIcon svg {
+    stroke: rgb(238, 119, 98);
+    fill: rgb(238, 119, 98);
+    width: 15px;
+    height: 15px;
+}
+
+@media screen and (max-width: 500px) {
+    .iconContainer p {
+        display: none;
+    }
 }

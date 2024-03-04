@@ -1,12 +1,16 @@
 "use client";
 import styles from "./SubTitleBar.module.css";
-import { downloadIcon, saveIcon, orderIcon } from "@/components/icons/iconSVG";
+import {
+    downloadIcon,
+    saveIcon,
+    orderIcon,
+    trashIcon,
+} from "@/components/icons/iconSVG";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { useAppContext } from "@/app/providers";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, permanentRedirect } from "next/navigation";
 // import PDFDownloadLink dynamically to avoid SSR
 import dynamic from "next/dynamic";
 const PDFDownloadLink = dynamic(
@@ -19,6 +23,8 @@ const PDFDownloadLink = dynamic(
 import {
     updateResumeAction,
     updateCoverLetterAction,
+    deleteResumeAction,
+    deleteCoverLetterAction,
     getAllResumeTemplates,
     getAllCoverLetterTemplates,
     updateDocument,
@@ -35,6 +41,7 @@ const SubTitleBar = () => {
     } = useAppContext();
     const [currentDocument, setCurrentDocument] = useState<any>(null);
     const [currentTemplate, setCurrentTemplate] = useState<any>(null);
+    const router = useRouter();
     const params = useParams();
     const type = params.slug[0];
     const id = params.slug[1];
@@ -99,43 +106,86 @@ const SubTitleBar = () => {
         }
     };
 
+    const handleDelete = async () => {
+        setIsDocumentLoading(true);
+        if (!currentDocument) {
+            setIsDocumentLoading(false);
+            return;
+        }
+        const response =
+            type === "resume"
+                ? await deleteResumeAction(currentDocument.id)
+                : await deleteCoverLetterAction(currentDocument.id);
+        if (response.error) {
+            toast.error("Error deleting currentDocument.");
+            setIsDocumentLoading(false);
+        } else {
+            // wait for 1 second and then redirect to the dashboard
+            if (type === "resume") {
+                // wait for 1 second and then redirect to the dashboard
+                setTimeout(() => {
+                    permanentRedirect("/dashboard?menu=resumes");
+                }, 1000);
+            } else {
+                // wait for 1 second and then redirect to the dashboard
+                setTimeout(() => {
+                    permanentRedirect("/dashboard?menu=cover-letters");
+                }, 1000);
+            }
+        }
+    };
+
     return (
         <section className={styles.container}>
             {currentDocument && (
                 <>
-                    <button
-                        title="reorder"
-                        className={styles.iconContainer}
-                        onClick={() => setIsReordering(!isReordering)}
-                    >
-                        {orderIcon}
-                        {!isReordering && <p>Reorder Mode</p>}
-                        {isReordering && <p>Exit Reorder Mode</p>}
-                    </button>
-                    <form title="save" onSubmit={handleUpdate}>
-                        <button type="submit" className={styles.iconContainer}>
-                            {saveIcon}
-                            <p>Save</p>
+                    <form title="delete" action={handleDelete}>
+                        <button
+                            type="submit"
+                            className={`${styles.iconContainer} ${styles.deleteIcon}`}
+                        >
+                            {trashIcon}
+                            <p>Delete</p>
                         </button>
                     </form>
-                    <PDFDownloadLink
-                        document={currentTemplate}
-                        fileName={`${currentDocument.information.documentName}.pdf`}
-                    >
-                        {({ blob, url, loading, error }) =>
-                            loading ? (
-                                ""
-                            ) : (
-                                <button
-                                    className={styles.iconContainer}
-                                    title="download"
-                                >
-                                    {downloadIcon}
-                                    <p>Download</p>
-                                </button>
-                            )
-                        }
-                    </PDFDownloadLink>
+                    <section className={styles.right}>
+                        <button
+                            title="reorder"
+                            className={styles.iconContainer}
+                            onClick={() => setIsReordering(!isReordering)}
+                        >
+                            {orderIcon}
+                            {!isReordering && <p>Reorder Mode</p>}
+                            {isReordering && <p>Exit Reorder Mode</p>}
+                        </button>
+                        <form title="save" onSubmit={handleUpdate}>
+                            <button
+                                type="submit"
+                                className={styles.iconContainer}
+                            >
+                                {saveIcon}
+                                <p>Save</p>
+                            </button>
+                        </form>
+                        <PDFDownloadLink
+                            document={currentTemplate}
+                            fileName={`${currentDocument.information.documentName}.pdf`}
+                        >
+                            {({ blob, url, loading, error }) =>
+                                loading ? (
+                                    ""
+                                ) : (
+                                    <button
+                                        className={styles.iconContainer}
+                                        title="download"
+                                    >
+                                        {downloadIcon}
+                                        <p>Download</p>
+                                    </button>
+                                )
+                            }
+                        </PDFDownloadLink>
+                    </section>
                 </>
             )}
         </section>

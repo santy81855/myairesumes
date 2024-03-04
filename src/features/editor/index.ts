@@ -27,3 +27,5 @@ export { createResume as createResumeAction } from "./actions/document";
 export { updateResume as updateResumeAction } from "./actions/document";
 export { createCoverLetter as createCoverLetterAction } from "./actions/document";
 export { updateCoverLetter as updateCoverLetterAction } from "./actions/document";
+export { deleteResume as deleteResumeAction } from "./actions/document";
+export { deleteCoverLetter as deleteCoverLetterAction } from "./actions/document";
