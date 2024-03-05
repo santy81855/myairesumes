@@ -47,12 +47,17 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.textColor,
                                 ...styles.small,
-                                ...styles.bold,
+                                ...styles.uppercase,
                             }}
                         >
                             {title}
                         </Text>
-                        <View style={styles.horizontalLine}></View>
+                        <View
+                            style={{
+                                ...styles.horizontalLine,
+                                ...styles.marginBottomMedium,
+                            }}
+                        ></View>
                     </>
                 );
             case "nexus":
@@ -118,7 +123,6 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.small,
-                                ...styles.bold,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -141,7 +145,6 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.medium,
-                                ...styles.bold,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -152,7 +155,7 @@ export const SectionConfig = (data: {
                         <View
                             style={{
                                 ...styles.horizontalLineBackgroundAccent,
-                                ...styles.marginBottomSmall,
+                                ...styles.marginBottomMedium,
                             }}
                         ></View>
                     </>
@@ -164,7 +167,6 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.large,
-                                ...styles.bold,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -182,7 +184,6 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.medium,
-                                ...styles.bold,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -207,7 +208,6 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.medium,
-                                ...styles.bold,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,

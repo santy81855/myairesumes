@@ -98,9 +98,9 @@
 
 .templateName {
     font-size: var(--font-size-small);
-    padding-block: var(--padding-block-small);
     font-weight: bold;
-    color: rgb(var(--editor-side-menu-contrast-text-rgb));
+    padding-block: calc(var(--padding-block-small) / 2);
+    color: rgb(var(--editor-side-menu-text-rgb));
 }
 
 .rowContainer {
@@ -116,9 +116,9 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin-inline: auto;
     gap: var(--padding-inline-small);
     padding-block: var(--padding-block-small);
+    padding-inline: 2px;
     overflow-x: auto;
     scrollbar-width: none;
     scroll-behavior: smooth;
@@ -168,11 +168,6 @@
     height: 100%;
     left: 0;
     top: 0;
-    background: linear-gradient(
-        to left,
-        rgba(var(--editor-side-menu-background-rgb), 0),
-        rgba(var(--editor-side-menu-background-rgb), 1)
-    );
     border: none;
     cursor: pointer;
 }
@@ -184,7 +179,7 @@
 .button {
     width: 2rem;
     height: 100%;
-    background-color: rgb(var(--editor-side-menu-background-rgb));
+    background-color: transparent;
     border: none;
     cursor: pointer;
 }
@@ -221,10 +216,8 @@ grid::-webkit-scrollbar {
 .keywordFunctionContainer {
     width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--padding-block-small);
 }
 
 .buttonContainer {

@@ -162,6 +162,9 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
         setDocumentArray(newDocumentArray);
     };
 
+    const backgroundColorPresets = ["#b5b357", "#b38758", "#5d906c", "#698bd7"];
+    const textAccentColorPresets = ["#000000", "#e0e0e0", "#e0e0e0", "#ffffff"];
+
     return (
         <MenuContainer>
             <motion.section className={styles.stylesContainer}>
@@ -341,6 +344,24 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                         <motion.section
                             className={styles.colorPickerButtonContainer}
                         >
+                            {backgroundColorPresets.map((color, index) => (
+                                <motion.div
+                                    key={index}
+                                    className={styles.colorPickerButtonWrapper}
+                                >
+                                    <motion.div
+                                        className={styles.colorPickerButton}
+                                        style={{
+                                            backgroundColor: color,
+                                            width: "100%",
+                                            height: "100%",
+                                        }}
+                                        onClick={() => {
+                                            handleAccentColorChange(color);
+                                        }}
+                                    ></motion.div>
+                                </motion.div>
+                            ))}
                             <motion.div
                                 className={styles.colorPickerButtonWrapper}
                             >
@@ -355,7 +376,6 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                             </motion.div>
                         </motion.section>
                     </motion.section>
-
                     <motion.section className={styles.colorPickerContainer}>
                         <motion.p className={styles.description}>
                             Text Accent Color
@@ -363,6 +383,24 @@ const StyleMenu = ({ document }: StyleMenuProps) => {
                         <motion.section
                             className={styles.colorPickerButtonContainer}
                         >
+                            {textAccentColorPresets.map((color, index) => (
+                                <motion.div
+                                    key={index}
+                                    className={styles.colorPickerButtonWrapper}
+                                >
+                                    <motion.div
+                                        className={styles.colorPickerButton}
+                                        style={{
+                                            backgroundColor: color,
+                                            width: "100%",
+                                            height: "100%",
+                                        }}
+                                        onClick={() => {
+                                            handleAccentTextColorChange(color);
+                                        }}
+                                    ></motion.div>
+                                </motion.div>
+                            ))}
                             <motion.div
                                 className={styles.colorPickerButtonWrapper}
                             >

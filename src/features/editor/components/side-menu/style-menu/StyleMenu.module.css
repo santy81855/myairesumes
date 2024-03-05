@@ -132,26 +132,25 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .colorPickerButtonContainer {
+    flex-grow: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     gap: var(--gap-small);
 }
 
 .colorPickerButtonWrapper {
-    width: 30px;
-    height: 30px;
-    background-color: rgb(
-        var(--editor-side-menu-low-contrast-background-rgb),
-        0.3
-    );
+    width: 25px;
+    height: 25px;
+    background-color: rgb(var(--editor-side-menu-low-contrast-text-rgb));
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: var(--border-radius-xsmall);
+    border-radius: 50%;
 }
 
 .colorPickerButton {
+    border-radius: 50%;
     width: 60%;
     height: 60%;
     border: none;

@@ -5,6 +5,8 @@ import {
     forwardArrow,
     backArrow,
     templateIcon,
+    basicLeftArrow,
+    basicRightArrow,
 } from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
@@ -77,7 +79,6 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
         setResults(templateComponents);
         setCurrentTemplate(
             template[doc.information.template as keyof typeof template]
-                ?.previewComponent
         );
         setCurrentDocument(doc);
     }, [documentArray]);
@@ -158,58 +159,63 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                         className={styles.button}
                         onClick={scrollLeft}
                     >
-                        {backArrow}
+                        {basicLeftArrow}
                     </motion.button>
+                    <motion.section
+                        className={styles.keywordContainer}
+                        ref={keyWordContainerRef}
+                    >
+                        <motion.div
+                            className={
+                                searchText.toLowerCase() === "all"
+                                    ? styles.keywordItemActive
+                                    : styles.keywordItem
+                            }
+                            onClick={() => {
+                                searchContentChanged("all");
+                            }}
+                        >
+                            <motion.p className={styles.keyword}>All</motion.p>
+                        </motion.div>
+                        {allKeywords.map((keyword, index) => {
+                            return (
+                                <motion.div
+                                    key={index}
+                                    className={
+                                        searchText.toLowerCase() ===
+                                        keyword.toLowerCase()
+                                            ? styles.keywordItemActive
+                                            : styles.keywordItem
+                                    }
+                                    onClick={() => {
+                                        searchContentChanged(
+                                            keyword.toLowerCase()
+                                        );
+                                    }}
+                                >
+                                    <motion.p className={styles.keyword}>
+                                        {keyword}
+                                    </motion.p>
+                                </motion.div>
+                            );
+                        })}
+                    </motion.section>
                     <motion.button
                         className={styles.button}
                         onClick={scrollRight}
                     >
-                        {forwardArrow}
+                        {basicRightArrow}
                     </motion.button>
-                </motion.section>
-                <motion.section
-                    className={styles.keywordContainer}
-                    ref={keyWordContainerRef}
-                >
-                    <motion.div
-                        className={
-                            searchText.toLowerCase() === "all"
-                                ? styles.keywordItemActive
-                                : styles.keywordItem
-                        }
-                        onClick={() => {
-                            searchContentChanged("all");
-                        }}
-                    >
-                        <motion.p className={styles.keyword}>All</motion.p>
-                    </motion.div>
-                    {allKeywords.map((keyword, index) => {
-                        return (
-                            <motion.div
-                                key={index}
-                                className={
-                                    searchText.toLowerCase() ===
-                                    keyword.toLowerCase()
-                                        ? styles.keywordItemActive
-                                        : styles.keywordItem
-                                }
-                                onClick={() => {
-                                    searchContentChanged(keyword.toLowerCase());
-                                }}
-                            >
-                                <motion.p className={styles.keyword}>
-                                    {keyword}
-                                </motion.p>
-                            </motion.div>
-                        );
-                    })}
                 </motion.section>
             </motion.section>
             <motion.section className={styles.grid}>
                 <motion.div className={styles.template}>
                     <motion.div className={styles.templatePreview}>
-                        {currentTemplate}
+                        {currentTemplate?.previewComponent}
                     </motion.div>
+                    <p className={styles.templateName}>
+                        {currentTemplate?.name}
+                    </p>
                 </motion.div>
                 {results.map((template: any, index: number) => {
                     return (
@@ -221,6 +227,9 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                             <motion.div className={styles.templatePreview}>
                                 {template.component}
                             </motion.div>
+                            <p className={styles.templateName}>
+                                {template.name}
+                            </p>
                         </motion.div>
                     );
                 })}
