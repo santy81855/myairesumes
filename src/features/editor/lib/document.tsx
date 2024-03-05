@@ -1,6 +1,8 @@
 import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
 import {
     Basic,
+    Velocity,
+    Triumph,
     Fresh,
     Impact,
     Nexus,
@@ -176,6 +178,93 @@ export const getAllResumeTemplates = (
                     document={updateDocument(
                         document,
                         "basic",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        velocity: {
+            name: "Velocity",
+            description:
+                "A simple and clean resume template that prioritizes readability.",
+            keywords: [
+                "velocity",
+                "simple",
+                "clean",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <Velocity
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Velocity
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Velocity
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        triumph: {
+            name: "Triumph",
+            description:
+                "A modern and sleek resume template that focuses on readability while maintaining a modern aesthetic.",
+            keywords: [
+                "triumph",
+                "modern",
+                "sleek",
+                "professional",
+                "smart",
+                "ats",
+                "design",
+            ],
+            editorComponent: (
+                <Triumph
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Triumph
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Triumph
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "triumph",
                         changedTemplate
                     )}
                 />

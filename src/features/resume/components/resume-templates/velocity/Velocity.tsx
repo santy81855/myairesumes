@@ -20,7 +20,12 @@ type BasicProps = {
     isPreview?: boolean;
 };
 
-const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
+const Velocity = ({
+    document,
+    isEditor,
+    isDownload,
+    isPreview,
+}: BasicProps) => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(
         document.information.style.baseFontSize
@@ -218,4 +223,4 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     }
 };
 
-export default Basic;
+export default Velocity;

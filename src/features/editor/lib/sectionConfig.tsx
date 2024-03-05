@@ -38,192 +38,6 @@ export const SectionConfig = (data: {
     // function to handle work break
     Font.registerHyphenationCallback(hyphenationCallback);
 
-    const getSectionTitleComponent = (title: string) => {
-        switch (template) {
-            case "basic":
-                return (
-                    <>
-                        <Text
-                            style={{
-                                ...styles.textColor,
-                                ...styles.small,
-                                ...styles.uppercase,
-                            }}
-                        >
-                            {title}
-                        </Text>
-                        <View
-                            style={{
-                                ...styles.horizontalLine,
-                                ...styles.marginBottomMedium,
-                            }}
-                        ></View>
-                    </>
-                );
-            case "nexus":
-                return (
-                    <View
-                        style={{
-                            backgroundColor:
-                                document.information.style
-                                    .accentBackgroundColor,
-                            width: "100%",
-                            maxHeight: fontSize * 1.6,
-                            display: "flex",
-                            justifyContent: "flex-start",
-                            alignItems: "center",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                ...styles.small,
-                                ...styles.accentText,
-                                ...styles.textLeftAlign,
-                                ...styles.marginLeftMedium,
-                            }}
-                        >
-                            {title}
-                        </Text>
-                    </View>
-                );
-            case "impact":
-                return (
-                    <View
-                        style={{
-                            ...styles.row,
-                            ...styles.width100,
-                            ...styles.alignCenter,
-                            ...styles.justifyStart,
-                            ...styles.gapMedium,
-                            ...styles.marginBottomMedium,
-                        }}
-                    >
-                        <Text
-                            style={{
-                                ...styles.small,
-                                ...styles.accentBackgroundText,
-                                ...styles.textLeftAlign,
-                                ...styles.uppercase,
-                            }}
-                        >
-                            {title}
-                        </Text>
-                        <View
-                            style={{
-                                ...styles.flexGrow,
-                                ...styles.dottedHorizontalLineAccent,
-                            }}
-                        ></View>
-                    </View>
-                );
-            case "nova":
-                return (
-                    <>
-                        <Text
-                            style={{
-                                ...styles.width100,
-                                ...styles.small,
-                                ...styles.uppercase,
-                                ...styles.textLeft,
-                                ...styles.accentBackgroundText,
-                            }}
-                        >
-                            {title}
-                        </Text>
-                        <View
-                            style={{
-                                ...styles.horizontalLineBackgroundAccent,
-                                ...styles.marginBottomMedium,
-                            }}
-                        ></View>
-                    </>
-                );
-            case "fresh":
-                return (
-                    <>
-                        <Text
-                            style={{
-                                ...styles.width100,
-                                ...styles.medium,
-                                ...styles.uppercase,
-                                ...styles.textLeft,
-                                ...styles.accentBackgroundText,
-                            }}
-                        >
-                            {title}
-                        </Text>
-                        <View
-                            style={{
-                                ...styles.horizontalLineBackgroundAccent,
-                                ...styles.marginBottomMedium,
-                            }}
-                        ></View>
-                    </>
-                );
-            case "vivid":
-                return (
-                    <>
-                        <Text
-                            style={{
-                                ...styles.width100,
-                                ...styles.large,
-                                ...styles.uppercase,
-                                ...styles.textLeft,
-                                ...styles.accentBackgroundText,
-                                ...styles.marginBottomMedium,
-                            }}
-                        >
-                            {title}
-                        </Text>
-                    </>
-                );
-            case "sharp":
-                return (
-                    <>
-                        <Text
-                            style={{
-                                ...styles.width100,
-                                ...styles.medium,
-                                ...styles.uppercase,
-                                ...styles.textLeft,
-                                ...styles.accentBackgroundText,
-                                ...styles.marginBottomMedium,
-                            }}
-                        >
-                            {title}
-                        </Text>
-                    </>
-                );
-            case "luminary":
-                return (
-                    <>
-                        <View
-                            style={{
-                                ...styles.horizontalLineBackgroundAccent,
-                                ...styles.marginBottomSmall,
-                                ...styles.opacity80,
-                            }}
-                        ></View>
-                        <Text
-                            style={{
-                                ...styles.width100,
-                                ...styles.medium,
-                                ...styles.uppercase,
-                                ...styles.textLeft,
-                                ...styles.accentBackgroundText,
-                                ...styles.marginBottomMedium,
-                                ...styles.opacity80,
-                            }}
-                        >
-                            {title}
-                        </Text>
-                    </>
-                );
-            default:
-                return "Section Title";
-        }
-    };
-
     const getBoldFont = () => {
         switch (font) {
             case "Times-Roman":
@@ -262,6 +76,7 @@ export const SectionConfig = (data: {
                 return "Times-BoldItalic";
         }
     };
+
     const accentEmailIcon = isDownload ? (
         <Svg
             viewBox="0 0 24 24"
@@ -834,6 +649,234 @@ export const SectionConfig = (data: {
         },
     });
 
+    const getSectionTitleComponent = (title: string) => {
+        switch (template) {
+            case "basic":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.textColor,
+                                ...styles.small,
+                                ...styles.uppercase,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.horizontalLine,
+                                ...styles.marginBottomMedium,
+                            }}
+                        ></View>
+                    </>
+                );
+            case "velocity":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.textColor,
+                                ...styles.small,
+                                ...styles.uppercase,
+                                ...styles.width100,
+                                ...styles.textLeft,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.horizontalLine,
+                                ...styles.marginBottomMedium,
+                            }}
+                        ></View>
+                    </>
+                );
+            case "triumph":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.textColor,
+                                ...styles.small,
+                                ...styles.uppercase,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.horizontalLine,
+                                ...styles.marginBottomMedium,
+                            }}
+                        ></View>
+                    </>
+                );
+            case "nexus":
+                return (
+                    <View
+                        style={{
+                            backgroundColor:
+                                document.information.style
+                                    .accentBackgroundColor,
+                            width: "100%",
+                            maxHeight: fontSize * 1.6,
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Text
+                            style={{
+                                ...styles.small,
+                                ...styles.accentText,
+                                ...styles.textLeftAlign,
+                                ...styles.marginLeftMedium,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                    </View>
+                );
+            case "impact":
+                return (
+                    <View
+                        style={{
+                            ...styles.row,
+                            ...styles.width100,
+                            ...styles.alignCenter,
+                            ...styles.justifyStart,
+                            ...styles.gapMedium,
+                            ...styles.marginBottomMedium,
+                        }}
+                    >
+                        <Text
+                            style={{
+                                ...styles.small,
+                                ...styles.accentBackgroundText,
+                                ...styles.textLeftAlign,
+                                ...styles.uppercase,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.flexGrow,
+                                ...styles.dottedHorizontalLineAccent,
+                            }}
+                        ></View>
+                    </View>
+                );
+            case "nova":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.width100,
+                                ...styles.small,
+                                ...styles.uppercase,
+                                ...styles.textLeft,
+                                ...styles.accentBackgroundText,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.horizontalLineBackgroundAccent,
+                                ...styles.marginBottomMedium,
+                            }}
+                        ></View>
+                    </>
+                );
+            case "fresh":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.width100,
+                                ...styles.medium,
+                                ...styles.uppercase,
+                                ...styles.textLeft,
+                                ...styles.accentBackgroundText,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.horizontalLineBackgroundAccent,
+                                ...styles.marginBottomMedium,
+                            }}
+                        ></View>
+                    </>
+                );
+            case "vivid":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.width100,
+                                ...styles.large,
+                                ...styles.uppercase,
+                                ...styles.textLeft,
+                                ...styles.accentBackgroundText,
+                                ...styles.marginBottomMedium,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                    </>
+                );
+            case "sharp":
+                return (
+                    <>
+                        <Text
+                            style={{
+                                ...styles.width100,
+                                ...styles.medium,
+                                ...styles.uppercase,
+                                ...styles.textLeft,
+                                ...styles.accentBackgroundText,
+                                ...styles.marginBottomMedium,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                    </>
+                );
+            case "luminary":
+                return (
+                    <>
+                        <View
+                            style={{
+                                ...styles.horizontalLineBackgroundAccent,
+                                ...styles.marginBottomSmall,
+                                ...styles.opacity80,
+                            }}
+                        ></View>
+                        <Text
+                            style={{
+                                ...styles.width100,
+                                ...styles.medium,
+                                ...styles.uppercase,
+                                ...styles.textLeft,
+                                ...styles.accentBackgroundText,
+                                ...styles.marginBottomMedium,
+                                ...styles.opacity80,
+                            }}
+                        >
+                            {title}
+                        </Text>
+                    </>
+                );
+            default:
+                return "Section Title";
+        }
+    };
+
     const headerVariants = {
         headerBasic: {
             name: "Basic Header",
@@ -868,6 +911,143 @@ export const SectionConfig = (data: {
                         <Text style={styles.small}>
                             {document.information.contactInfo.website}
                         </Text>
+                    </View>
+                </View>
+            ) : null,
+        },
+        headerVelocity: {
+            name: "Velocity Header",
+            description:
+                "A header with your name, position, and contact information displayed as a column. Made to match the Velocity template.",
+            keyWords: [
+                "header",
+                "name",
+                "position",
+                "title",
+                "contact",
+                "column",
+                "velocity",
+            ],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <View
+                        style={{
+                            ...styles.width100,
+                            ...styles.col,
+                            ...styles.alignStart,
+                            ...styles.justifyStart,
+                        }}
+                    >
+                        <Text style={styles.large}>
+                            {document.information.firstName}{" "}
+                            {document.information.lastName}
+                        </Text>
+                        <Text style={styles.small}>
+                            {document.information.position}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.rowContainer,
+                                ...styles.justifyStart,
+                                ...styles.marginTopMedium,
+                            }}
+                        >
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.email}
+                            </Text>
+                            <Text style={styles.small}>|</Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.phone}
+                            </Text>
+                            <Text style={styles.small}>|</Text>
+                            <Text style={styles.small}>
+                                {document.information.contactInfo.website}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            ) : null,
+        },
+        headerTriumph: {
+            name: "Triumph Header",
+            description:
+                "A header with your name, position, and contact information displayed as a column. It puts an emphasis on your contact information. Made to match the Triumph template.",
+            keyWords: [
+                "header",
+                "name",
+                "position",
+                "title",
+                "contact",
+                "column",
+                "triumph",
+            ],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    <View
+                        style={{
+                            ...styles.width100,
+                            ...styles.col,
+                            ...styles.alignCenter,
+                            ...styles.justifyStart,
+                        }}
+                    >
+                        <Text style={styles.x2Large}>
+                            {document.information.firstName}{" "}
+                            {document.information.lastName}
+                        </Text>
+                        <Text style={styles.small}>
+                            {document.information.position}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.rowContainer,
+                                ...styles.justifyCenter,
+                                ...styles.marginTopMedium,
+                                ...styles.accentBackgroundColor,
+                                ...styles.minHeightSmall,
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                {document.information.contactInfo.email}
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                |
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                {document.information.contactInfo.phone}
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                |
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                {document.information.contactInfo.website}
+                            </Text>
+                        </View>
                     </View>
                 </View>
             ) : null,
@@ -1891,9 +2071,18 @@ export const SectionConfig = (data: {
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="summaryPdf">
                     {getSectionTitleComponent("Summary")}
-                    <Text style={styles.small}>
-                        {document.information.summary}
-                    </Text>
+                    <View
+                        style={{
+                            ...styles.width100,
+                            ...styles.col,
+                            ...styles.alignStart,
+                            ...styles.justifyStart,
+                        }}
+                    >
+                        <Text style={styles.small}>
+                            {document.information.summary}
+                        </Text>
+                    </View>
                 </View>
             ) : null,
         },

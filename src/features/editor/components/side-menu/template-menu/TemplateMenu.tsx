@@ -72,6 +72,7 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                 key,
                 name: template[key as keyof typeof template].name,
                 keywords: template[key as keyof typeof template].keywords,
+                description: template[key as keyof typeof template].description,
             };
         });
         setAllKeywords(Array.from(uniqueKeywords));
@@ -89,6 +90,7 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
             setResults(allTemplates);
             return;
         }
+
         const tempArray = [...allTemplates];
         const results = tempArray.filter((item: { keywords: string[] }) =>
             // check if each word of the content is one of hte keywords
@@ -182,8 +184,10 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                                 <motion.div
                                     key={index}
                                     className={
-                                        searchText.toLowerCase() ===
-                                        keyword.toLowerCase()
+                                        searchText
+                                            .toLowerCase()
+                                            .split(" ")
+                                            .includes(keyword.toLowerCase())
                                             ? styles.keywordItemActive
                                             : styles.keywordItem
                                     }

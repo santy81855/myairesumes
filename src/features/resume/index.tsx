@@ -1,4 +1,6 @@
 export { default as Basic } from "./components/resume-templates/basic/Basic";
+export { default as Velocity } from "./components/resume-templates/velocity/Velocity";
+export { default as Triumph } from "./components/resume-templates/triumph/Triumph";
 export { default as Fresh } from "./components/resume-templates/fresh/Fresh";
 export { default as Impact } from "./components/resume-templates/impact/Impact";
 export { default as Nexus } from "./components/resume-templates/nexus/Nexus";
