@@ -69,6 +69,7 @@
     background-color: rgb(var(--editor-side-menu-contrast-background-rgb));
     border: 1px solid rgb(var(--editor-side-menu-contrast-background-rgb));
     color: rgb(var(--editor-side-menu-contrast-text-rgb));
+    border-radius: 0;
     text-align: center;
 }
 

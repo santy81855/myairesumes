@@ -5,7 +5,8 @@
     margin-inline: auto;
     margin-block-end: var(--padding-block-small);
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     gap: var(--gap-small);
 }

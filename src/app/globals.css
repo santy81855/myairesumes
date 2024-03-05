@@ -41,6 +41,7 @@
     --editor-accent-color-hover-rgb: 220, 120, 100;
     --editor-text-color-rgb: 0, 0, 0;
     --editor-background-color-rgb: 48, 48, 69;
+    --editor-low-contrast-text-color-rgb: 150, 150, 150;
     --editor-text-contrast-color-rgb: 255, 255, 255;
     --editor-side-menu-closed-background-color-rgb: 255, 255, 255;
     --editor-side-menu-closed-text-color-rgb: 41, 41, 41;

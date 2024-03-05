@@ -58,7 +58,6 @@ const PageCounter = ({ documentId, fullWidth }: PageCounterProps) => {
         >
             {document ? (
                 <>
-                    <p>Page</p>
                     <button
                         title="previous"
                         className={
