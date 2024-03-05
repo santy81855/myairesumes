@@ -6,7 +6,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-inline: var(--padding-inline-medium);
+    padding-inline: var(--padding-inline-small);
     color: white;
     gap: var(--gap-medium);
 }
@@ -16,12 +16,6 @@
     justify-content: center;
     align-items: center;
     gap: var(--gap-medium);
-}
-
-@media screen and (max-width: 768px) {
-    .container {
-        width: 90%;
-    }
 }
 
 .iconContainer {
@@ -71,5 +65,10 @@
 @media screen and (max-width: 560px) {
     .iconContainer p {
         display: none;
+    }
+
+    .container {
+        width: 100%;
+        padding-inline: 5px;
     }
 }

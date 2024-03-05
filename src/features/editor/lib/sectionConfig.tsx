@@ -1938,17 +1938,17 @@ export const SectionConfig = (data: {
                 </View>
             ) : null,
         },
-        contactLuminary: {
-            name: "Contact: Email, Phone, Website",
+        contactVerticalIcons: {
+            name: "Contact Details with Icons",
             description:
-                "Your email, phone number, and website displayed as a row. Defaults to the left side, but can be changed to be center or right aligned. You can choose to omit any of the three contact details.",
+                "Your email, phone number, and website displayed with their respective icons as a column. Defaults to the left side, but can be changed to be center or right aligned. You can choose to omit any of the three contact details.",
             keyWords: [
                 "contact",
                 "email",
                 "phone",
                 "website",
-                "luminary",
                 "icons",
+                "vertical",
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
@@ -2141,6 +2141,90 @@ export const SectionConfig = (data: {
         },
     };
 
+    const languagesVariants = {
+        languagesComma: {
+            name: "Languages - Comma Separated",
+            description: "Your languages in a comma separated list.",
+            keyWords: ["languages", "comma"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    {getSectionTitleComponent("Languages")}
+                    <Text
+                        style={{
+                            ...styles.small,
+                            ...styles.width100,
+                            ...styles.textLeftAlign,
+                        }}
+                    >
+                        {document.information.languageArray.join(", ")}
+                    </Text>
+                </View>
+            ) : null,
+        },
+        languagesBullet: {
+            name: "Languages - Bullet Points",
+            description: "Your languages in a bullet point list.",
+            keyWords: ["languages", "bullet"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    {getSectionTitleComponent("Languages")}
+                    <View style={styles.bulletItemContainer}>
+                        {document.information.languageArray.map(
+                            (skill: string, index: number) => (
+                                <View style={styles.bulletItem} key={index}>
+                                    <View style={styles.bullet}></View>
+                                    <Text style={styles.small}>{skill}</Text>
+                                </View>
+                            )
+                        )}
+                    </View>
+                </View>
+            ) : null,
+        },
+    };
+
+    const interestsVariants = {
+        interestsBullet: {
+            name: "Interests - Bullet Points",
+            description: "Your interests in a bullet point list.",
+            keyWords: ["interests", "hobbies", "bullet"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer} id="interestsPdf">
+                    {getSectionTitleComponent("Interests")}
+                    <View style={styles.bulletItemContainer}>
+                        {document.information.interestArray.map(
+                            (skill: string, index: number) => (
+                                <View style={styles.bulletItem} key={index}>
+                                    <View style={styles.bullet}></View>
+                                    <Text style={styles.small}>{skill}</Text>
+                                </View>
+                            )
+                        )}
+                    </View>
+                </View>
+            ) : null,
+        },
+        interestsComma: {
+            name: "Interests - Comma Separated",
+            description: "Your interests in a comma separated list.",
+            keyWords: ["interests", "hobbies", "comma"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer} id="interestsPdf">
+                    {getSectionTitleComponent("Interests")}
+                    <Text
+                        style={{
+                            ...styles.small,
+                            ...styles.width100,
+                            ...styles.textLeftAlign,
+                        }}
+                    >
+                        {document.information.interestArray.join(", ")}
+                    </Text>
+                </View>
+            ) : null,
+        },
+    };
+
     return {
         ...headerVariants,
         ...nameVariants,
@@ -2148,6 +2232,8 @@ export const SectionConfig = (data: {
         ...educationVariants,
         ...contactVariants,
         ...skillsVariants,
+        ...languagesVariants,
+        ...interestsVariants,
         summary: {
             name: "Summary",
             description:
@@ -2246,76 +2332,6 @@ export const SectionConfig = (data: {
                             </View>
                         ))}
                     </View>
-                </View>
-            ) : null,
-        },
-        languages: {
-            name: "Languages",
-            description: "Your languages in a bullet point list.",
-            keyWords: ["languages"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="languagesPdf">
-                    {getSectionTitleComponent("Languages")}
-                    <View style={styles.arrayContainer}>
-                        <View style={styles.bulletItemContainer}>
-                            {document.information.languageArray.map(
-                                (skill: string, index: number) => (
-                                    <View style={styles.bulletItem} key={index}>
-                                        <View style={styles.bullet}></View>
-                                        <Text style={styles.small}>
-                                            {skill}
-                                        </Text>
-                                    </View>
-                                )
-                            )}
-                        </View>
-                    </View>
-                </View>
-            ) : null,
-        },
-        languagesShort: {
-            name: "Languages",
-            description: "Your languages in a comma separated list.",
-            keyWords: ["languages"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="languagesPdf">
-                    {getSectionTitleComponent("Languages")}
-                    <Text style={styles.small}>
-                        {document.information.languageArray.join(", ")}
-                    </Text>
-                </View>
-            ) : null,
-        },
-        interests: {
-            name: "Interests",
-            description: "Your interests in a bullet point list.",
-            keyWords: ["interests", "hobbies"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="interests">
-                    {getSectionTitleComponent("Interests")}
-                    <View style={styles.bulletItemContainer}>
-                        {document.information.interestArray.map(
-                            (skill: string, index: number) => (
-                                <View style={styles.bulletItem} key={index}>
-                                    <View style={styles.bullet}></View>
-                                    <Text style={styles.small}>{skill}</Text>
-                                </View>
-                            )
-                        )}
-                    </View>
-                </View>
-            ) : null,
-        },
-        interestsShort: {
-            name: "Interests",
-            description: "Your interests in a comma separated list.",
-            keyWords: ["interests", "hobbies"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="interests">
-                    {getSectionTitleComponent("Interests")}
-                    <Text style={styles.small}>
-                        {document.information.interestArray.join(", ")}
-                    </Text>
                 </View>
             ) : null,
         },

@@ -32,7 +32,7 @@ export const updateDocument = (
             "contactVertical",
             "skillsBullet",
             "educationShort",
-            "languages",
+            "languagesBullet",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -57,7 +57,7 @@ export const updateDocument = (
             "contactVertical",
             "skillsVivid",
             "educationShort",
-            "languages",
+            "languagesBullet",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -79,10 +79,10 @@ export const updateDocument = (
             "summary",
             "experience",
             "colBreak",
-            "contactLuminary",
+            "contactVerticalIcons",
             "skillsBullet",
             "educationShort",
-            "languages",
+            "languagesBullet",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -1242,6 +1242,64 @@ export const initializeNewResume = (
             accentBackgroundColor: "#5B7FC5",
             accentTextColor: "white",
         },
+        sectionEdit: {
+            name: {
+                fontRatio: 2,
+                textAlignment: "center",
+            },
+            position: {
+                fontRatio: 1,
+                textAlignment: "center",
+            },
+            summary: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            experience: {
+                fontRatio: 1,
+                dateFormat: "MonthYear",
+                showStartDate: true,
+                showSummary: true,
+            },
+            educationDetailed: {
+                fontRatio: 1,
+                dateFormat: "MonthYear",
+                showStartDate: true,
+                showGpa: false,
+                showBullets: true,
+            },
+            educationShort: {
+                fontRatio: 1,
+                dateFormat: "MonthYear",
+                showStartDate: true,
+            },
+            contactVertical: {
+                fontRatio: 1,
+                showEmail: true,
+                showPhone: true,
+                showWebsite: true,
+                textAlignment: "left",
+            },
+            contactHorizontal: {
+                fontRatio: 1,
+                showEmail: true,
+                showPhone: true,
+                showWebsite: true,
+                separator: "|",
+            },
+            skills: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            languages: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            interests: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+        },
         documentName: name,
         jobTitle: job,
         description,
@@ -1273,7 +1331,7 @@ export const initializeNewResume = (
             sectionTitle: "Summary",
         },
         skillArray: [
-            "Example Skill 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.",
+            "Example Skill 1.",
             "Example Skill 2.",
             "Example Skill 3.",
         ],

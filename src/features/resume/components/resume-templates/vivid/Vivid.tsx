@@ -294,7 +294,10 @@ const Vivid = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                     }
                                     document={document}
                                 >
-                                    <SectionContainerEditor document={document}>
+                                    <SectionContainerEditor
+                                        sectionId={section}
+                                        document={document}
+                                    >
                                         <Section
                                             type="resume"
                                             sectionId={section}
@@ -340,6 +343,7 @@ const Vivid = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                         document={document}
                                     >
                                         <SectionContainerEditor
+                                            sectionId={section}
                                             document={document}
                                         >
                                             <Section
@@ -377,6 +381,7 @@ const Vivid = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                         document={document}
                                     >
                                         <SectionContainerEditor
+                                            sectionId={section}
                                             document={document}
                                         >
                                             <Section

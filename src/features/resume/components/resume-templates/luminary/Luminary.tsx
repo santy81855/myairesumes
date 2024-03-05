@@ -307,7 +307,10 @@ const Luminary = ({
                                     }
                                     document={document}
                                 >
-                                    <SectionContainerEditor document={document}>
+                                    <SectionContainerEditor
+                                        sectionId={section}
+                                        document={document}
+                                    >
                                         <Section
                                             type="resume"
                                             sectionId={section}
@@ -359,6 +362,7 @@ const Luminary = ({
                                         document={document}
                                     >
                                         <SectionContainerEditor
+                                            sectionId={section}
                                             document={document}
                                         >
                                             <Section
@@ -392,6 +396,7 @@ const Luminary = ({
                                         document={document}
                                     >
                                         <SectionContainerEditor
+                                            sectionId={section}
                                             document={document}
                                         >
                                             <Section
