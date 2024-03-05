@@ -209,7 +209,7 @@
     margin-block-start: -0.5rem;
 }
 
-grid::-webkit-scrollbar {
+.grid::-webkit-scrollbar {
     display: none;
 }
 
