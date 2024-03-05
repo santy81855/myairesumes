@@ -111,8 +111,12 @@
     border: 1px solid rgb(var(--editor-side-menu-contrast-background-rgb));
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+.fontSize::-webkit-inner-spin-button,
+.marginSize::-webkit-inner-spin-button,
+.sectionGap::-webkit-inner-spin-button,
+.fontSize::-webkit-outer-spin-button,
+.marginSize::-webkit-outer-spin-button,
+.sectionGap::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0; /* Optional: Remove margin */
 }
