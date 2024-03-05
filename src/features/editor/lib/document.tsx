@@ -1314,7 +1314,7 @@ export const initializeNewResume = (
                 "experience",
                 "educationDetailed",
                 "skillsBullet",
-                "languages",
+                "languagesComma",
             ],
         ],
         numPages: 1,
@@ -1334,6 +1334,24 @@ export const initializeNewResume = (
             "Example Skill 1.",
             "Example Skill 2.",
             "Example Skill 3.",
+        ],
+        skillCategoryArray: [
+            {
+                category: "Example Category 1",
+                skills: [
+                    "Example Skill 1",
+                    "Example Skill 2",
+                    "Example Skill 3",
+                ],
+            },
+            {
+                category: "Example Category 2",
+                skills: [
+                    "Example Skill 1",
+                    "Example Skill 2",
+                    "Example Skill 3",
+                ],
+            },
         ],
         experienceArray: newExperienceArray,
         educationArray: newEducationArray,

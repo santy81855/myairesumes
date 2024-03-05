@@ -2139,6 +2139,51 @@ export const SectionConfig = (data: {
                 </View>
             ) : null,
         },
+        skillsCategory: {
+            name: "Skills - Specialized",
+            description:
+                "Your skills sectioned into categories. Ideal for a list of specialized skills.",
+            keyWords: [
+                "skills",
+                "abilities",
+                "strengths",
+                "categorized",
+                "specialized",
+            ],
+            component: fontSize ? (
+                <View style={styles.sectionContainer} id="skillsPdf">
+                    {getSectionTitleComponent("Skills")}
+                    {document.information.skillCategoryArray.map(
+                        (category: any, index: number) => (
+                            <View
+                                key={index}
+                                style={{
+                                    ...styles.row,
+                                    ...styles.width100,
+                                    ...styles.justifyStart,
+                                    ...styles.alignStart,
+                                    ...styles.gapMedium,
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        flexShrink: 0,
+                                        ...styles.small,
+                                        ...styles.bold,
+                                    }}
+                                >
+                                    {category.category}
+                                    {":"}
+                                </Text>
+                                <Text style={styles.small}>
+                                    {category.skills.join(", ")}
+                                </Text>
+                            </View>
+                        )
+                    )}
+                </View>
+            ) : null,
+        },
     };
 
     const languagesVariants = {
@@ -2153,7 +2198,7 @@ export const SectionConfig = (data: {
                         style={{
                             ...styles.small,
                             ...styles.width100,
-                            ...styles.textLeftAlign,
+                            ...styles.textLeft,
                         }}
                     >
                         {document.information.languageArray.join(", ")}
@@ -2215,7 +2260,7 @@ export const SectionConfig = (data: {
                         style={{
                             ...styles.small,
                             ...styles.width100,
-                            ...styles.textLeftAlign,
+                            ...styles.textLeft,
                         }}
                     >
                         {document.information.interestArray.join(", ")}
@@ -2257,7 +2302,19 @@ export const SectionConfig = (data: {
                             ...styles.justifyStart,
                         }}
                     >
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                ...styles.width100,
+                                ...(document.information.sectionEdit.summary
+                                    .textAlignment === "left"
+                                    ? styles.textLeft
+                                    : document.information.sectionEdit.summary
+                                          .textAlignment === "center"
+                                    ? styles.textCenter
+                                    : styles.textRight),
+                            }}
+                        >
                             {document.information.summary}
                         </Text>
                     </View>
