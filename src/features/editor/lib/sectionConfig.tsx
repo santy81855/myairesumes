@@ -1115,15 +1115,60 @@ export const SectionConfig = (data: {
                             </View>
                         </View>
                         <View style={styles.columnGroupRight}>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.email}
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.phone}
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.website}
-                            </Text>
+                            <View
+                                style={{
+                                    ...styles.col,
+                                    ...styles.alignEnd,
+                                    ...styles.justifyStart,
+                                    ...styles.gapSmall,
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        ...styles.row,
+                                        ...styles.alignCenter,
+                                        ...styles.justifyEnd,
+                                        ...styles.gapSmall,
+                                        ...styles.width100,
+                                    }}
+                                >
+                                    <Text style={styles.small}>
+                                        {document.information.contactInfo.email}
+                                    </Text>
+                                    {accentEmailIcon}
+                                </View>
+                                <View
+                                    style={{
+                                        ...styles.row,
+                                        ...styles.alignCenter,
+                                        ...styles.justifyEnd,
+                                        ...styles.gapSmall,
+                                        ...styles.width100,
+                                    }}
+                                >
+                                    <Text style={styles.small}>
+                                        {document.information.contactInfo.phone}
+                                    </Text>
+                                    {accentPhoneIcon}
+                                </View>
+                                <View
+                                    style={{
+                                        ...styles.row,
+                                        ...styles.alignCenter,
+                                        ...styles.justifyEnd,
+                                        ...styles.gapSmall,
+                                        ...styles.width100,
+                                    }}
+                                >
+                                    <Text style={styles.small}>
+                                        {
+                                            document.information.contactInfo
+                                                .website
+                                        }
+                                    </Text>
+                                    {accentWebsiteIcon}
+                                </View>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -1171,15 +1216,60 @@ export const SectionConfig = (data: {
                             </Text>
                         </View>
                         <View style={styles.columnGroupRight}>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.email}
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.phone}
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.website}
-                            </Text>
+                            <View
+                                style={{
+                                    ...styles.col,
+                                    ...styles.alignEnd,
+                                    ...styles.justifyStart,
+                                    ...styles.gapSmall,
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        ...styles.row,
+                                        ...styles.alignCenter,
+                                        ...styles.justifyEnd,
+                                        ...styles.gapSmall,
+                                        ...styles.width100,
+                                    }}
+                                >
+                                    <Text style={styles.small}>
+                                        {document.information.contactInfo.email}
+                                    </Text>
+                                    {accentEmailIcon}
+                                </View>
+                                <View
+                                    style={{
+                                        ...styles.row,
+                                        ...styles.alignCenter,
+                                        ...styles.justifyEnd,
+                                        ...styles.gapSmall,
+                                        ...styles.width100,
+                                    }}
+                                >
+                                    <Text style={styles.small}>
+                                        {document.information.contactInfo.phone}
+                                    </Text>
+                                    {accentPhoneIcon}
+                                </View>
+                                <View
+                                    style={{
+                                        ...styles.row,
+                                        ...styles.alignCenter,
+                                        ...styles.justifyEnd,
+                                        ...styles.gapSmall,
+                                        ...styles.width100,
+                                    }}
+                                >
+                                    <Text style={styles.small}>
+                                        {
+                                            document.information.contactInfo
+                                                .website
+                                        }
+                                    </Text>
+                                    {accentWebsiteIcon}
+                                </View>
+                            </View>
                         </View>
                     </View>
                 </View>

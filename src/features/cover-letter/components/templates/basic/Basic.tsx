@@ -20,7 +20,7 @@ type BasicProps = {
     isPreview?: boolean;
 };
 
-const BasicL = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
+const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     const templateRef = useRef(null);
     const [fontSize, setFontSize] = useState(
         document.information.style.baseFontSize
@@ -218,4 +218,4 @@ const BasicL = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
     }
 };
 
-export default BasicL;
+export default Basic;

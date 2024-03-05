@@ -12,7 +12,7 @@ import {
     Luminary,
 } from "@/features/resume";
 
-import { BasicL } from "@/features/cover-letter";
+import { BasicL, FreshL } from "@/features/cover-letter";
 
 export const updateDocument = (
     document: any,
@@ -616,6 +616,363 @@ export const getAllCoverLetterTemplates = (
                 />
             ),
         },
+        velocity: {
+            name: "Velocity",
+            description:
+                "A simple and clean cover letter template that prioritizes readability.",
+            keywords: [
+                "velocity",
+                "simple",
+                "clean",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        triumph: {
+            name: "Triumph",
+            description:
+                "A modern and sleek cover letter template that focuses on readability while maintaining a modern aesthetic.",
+            keywords: [
+                "triumph",
+                "modern",
+                "sleek",
+                "professional",
+                "smart",
+                "ats",
+                "design",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        nexus: {
+            name: "Nexus",
+            description: "A modern and sleek cover letter template.",
+            keywords: [
+                "nexus",
+                "modern",
+                "sleek",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nexus",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nexus",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nexus",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        impact: {
+            name: "Impact",
+            description: "A bold and impactful cover letter template.",
+            keywords: ["impact", "bold", "professional", "smart", "ats"],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "impact",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "impact",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "impact",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        nova: {
+            name: "Nova",
+            description: "A modern and creative cover letter template.",
+            keywords: ["nova", "unique", "creative", "modern", "art"],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nova",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nova",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nova",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        fresh: {
+            name: "Fresh",
+            description: "A clean cover letter template with a touch of color.",
+            keywords: [
+                "fresh",
+                "clean",
+                "modern",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <FreshL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "fresh",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <FreshL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "fresh",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <FreshL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "fresh",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        vivid: {
+            name: "Vivid",
+            description:
+                "A unique cover letter template with two columns, and a touch of flair with your initials.",
+            keywords: ["vivid", "colorful", "modern", "unique", "art"],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "vivid",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "vivid",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "vivid",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        sharp: {
+            name: "Sharp",
+            description:
+                "A professional cover letter template with some color to stand out.",
+            keywords: ["sharp", "professional", "modern", "ats"],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "sharp",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "sharp",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "sharp",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        luminary: {
+            name: "Luminary",
+            description:
+                "A professional cover letter template with a modern design and a touch of flair.",
+            keywords: [
+                "luminary",
+                "professional",
+                "modern",
+                "pretty",
+                "cute",
+                "art",
+                "color",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
     };
 };
 
@@ -727,8 +1084,8 @@ export const initializeNewCoverLetter = (
     const data = {
         currentPage: 1,
         style: {
-            baseFontSize: 11,
-            baseMarginSize: 11,
+            baseFontSize: 12,
+            baseMarginSize: 22,
             baseSectionGap: 11,
             backgroundColor: "#ffffff",
             textColor: "#000000",
