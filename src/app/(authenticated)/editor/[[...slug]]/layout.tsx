@@ -14,8 +14,10 @@ import { validateRequest } from "@/features/authentication/lib/auth";
 import {
     AddSectionModal,
     getResume,
+    getCoverLetter,
     SideMenu,
     TitleBar,
+    SubTitleBar,
 } from "@/features/editor";
 import { redirect } from "next/navigation";
 import { ResumeContext } from "@/app/providers";
@@ -44,11 +46,6 @@ export default async function RootLayout({
         redirect("/");
     }
 
-    const document =
-        documentType === "resume"
-            ? await getResume(user.id, params.slug[1])
-            : null;
-
     return (
         <html lang="en">
             <body className={poppins.className}>
@@ -61,6 +58,7 @@ export default async function RootLayout({
                         <SideMenu />
                         <section className={styles.columnContainer}>
                             <TitleBar />
+                            <SubTitleBar />
                             {children}
                         </section>
                     </section>

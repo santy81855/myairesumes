@@ -24,13 +24,13 @@
 .titleContainer svg {
     width: 100%;
     height: 100%;
-    stroke: #7467ff;
-    fill: #7467ff;
+    stroke: rgb(var(--editor-side-menu-accent-rgb));
+    fill: rgb(var(--editor-side-menu-accent-rgb));
 }
 
 .title {
     font-size: var(--font-size-medium);
-    color: black;
+    color: rgb(var(--editor-side-menu-text-rgb));
     width: 100%;
     text-align: left;
     font-weight: bold;
@@ -38,7 +38,7 @@
 
 .description {
     font-size: var(--font-size-small);
-    color: black;
+    color: rgb(var(--editor-side-menu-text-rgb));
     width: 100%;
     text-align: left;
 }
@@ -51,7 +51,6 @@
     gap: var(--gap-small);
     padding-inline: var(--padding-inline-medium);
     padding-block: var(--padding-block-small);
-    background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     cursor: context-menu;
 }
@@ -61,7 +60,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-block-end: var(--padding-block-small);
 }
 
 .sectionContainer {
@@ -75,38 +73,40 @@
 
 .section {
     width: 100%;
-    background-color: white;
+    background-color: rgb(var(--editor-side-menu-contrast-background-rgb));
     border: 1px solid black;
     padding: var(--padding-block-medium);
-    border-radius: var(--border-radius-xsmall);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .sectionText {
     font-size: var(--font-size-small);
-    color: var(--text-color-rgb);
+    color: rgb(var(--editor-side-menu-contrast-text-rgb));
     text-align: left;
 }
 
 .addSectionButton {
-    width: 50px;
-    height: 30px;
+    width: 100%;
+    height: 15px;
     font-size: var(--font-size-medium);
-    background-color: #7467ff;
+    background-color: rgb(var(--editor-side-menu-accent-rgb));
     border-radius: var(--border-radius-xsmall);
-    color: white;
+    color: rgb(var(--editor-side-menu-text-rgb));
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-block-start: -10px;
-    margin-block-end: -10px;
     z-index: 1;
+    margin-block: var(--padding-block-small);
 }
 
 .addSectionButton:hover {
-    background-color: #5f52e6;
+    background-color: rgb(var(--editor-side-menu-accent-hover-rgb));
 }
 
 .sectionItem {
@@ -121,31 +121,8 @@
 .horizontalLine {
     width: 100%;
     height: 1px;
-    background-color: black;
+    background-color: rgb(var(--editor-side-menu-text-rgb));
     margin-block: var(--padding-block-small);
-}
-
-.dropdown {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--gap-small);
-    padding-inline: var(--padding-inline-medium);
-    padding-block: var(--padding-block-small);
-    background-color: white;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    cursor: context-menu;
-    margin-block: var(--padding-block-small);
-}
-
-.dropdown:hover {
-    background-color: #f2f2f2;
-}
-
-/* make it so that when an option is selected there is no added border */
-.dropdown:focus {
-    outline: none;
 }
 
 .deleteButton {
@@ -171,4 +148,39 @@
     stroke: rgb(134, 70, 70);
     fill: rgb(134, 70, 70);
     transform: scale(1.1);
+}
+
+.sectionTitleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--gap-small);
+    padding-block-start: var(--padding-block-small);
+}
+
+.sectionTitle {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--editor-side-menu-low-contrast-text-rgb));
+    letter-spacing: 3px;
+}
+
+.newColumnContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-block-start: var(--padding-block-small);
+    gap: var(--gap-small);
+}
+
+.pageInfo {
+    width: 100%;
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--editor-side-menu-low-contrast-text-rgb));
+    letter-spacing: 3px;
 }

@@ -63,21 +63,24 @@ const PageButtons = ({ documentId }: PageButtonsProps) => {
         document && (
             <section className={styles.functionButtonContainer}>
                 <button
+                    title="delete page"
+                    className={
+                        document.information.numPages > 1
+                            ? styles.button
+                            : styles.disabledButton
+                    }
+                    onClick={handleDeletePage}
+                >
+                    {minusIcon}
+                </button>
+
+                <button
                     title="add page"
-                    className={styles.addPageButton}
+                    className={styles.button}
                     onClick={handleAddPage}
                 >
                     {plusIcon}
                 </button>
-                {document.information.numPages > 1 && (
-                    <button
-                        title="delete page"
-                        className={styles.deletePageButton}
-                        onClick={handleDeletePage}
-                    >
-                        {minusIcon}
-                    </button>
-                )}
             </section>
         )
     );

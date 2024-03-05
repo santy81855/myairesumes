@@ -1,20 +1,16 @@
 .functionButtonContainer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translateX(calc(100% + var(--padding-block-small)));
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: var(--gap-medium);
     align-items: center;
     justify-content: center;
-    background-color: #7367ff;
+    background-color: rgb(var(--editor-accent-color-rgb));
     padding-inline: var(--padding-block-small);
     padding-block: var(--padding-block-small);
     border-radius: var(--border-radius-xsmall);
 }
 
-.deletePageButton {
+.button {
     background-color: transparent;
     border: none;
     width: 15px;
@@ -25,19 +21,19 @@
     cursor: pointer;
 }
 
-.deletePageButton svg {
+.button svg {
     width: 100%;
     height: 100%;
-    stroke: white;
-    fill: white;
+    stroke: rgb(var(--editor-text-contrast-color-rgb));
+    fill: rgb(var(--editor-text-contrast-color-rgb));
 }
 
-.deletePageButton svg:hover {
-    fill: #a4a0d1;
-    stroke: #a4a0d1;
+.button svg:hover {
+    stroke: rgb(var(--editor-text-contrast-color-rgb), 0.5);
+    fill: rgb(var(--editor-text-contrast-color-rgb), 0.5);
 }
 
-.addPageButton {
+.disabledButton {
     background-color: transparent;
     border: none;
     width: 15px;
@@ -46,16 +42,13 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    pointer-events: none;
+    opacity: 0.5;
 }
 
-.addPageButton svg {
-    stroke: white;
-    fill: white;
+.disabledButton svg {
+    stroke: rgb(var(--editor-text-contrast-color-rgb), 0.5);
+    fill: rgb(var(--editor-text-contrast-color-rgb), 0.5);
     width: 100%;
     height: 100%;
-}
-
-.addPageButton svg:hover {
-    fill: #a4a0d1;
-    stroke: #a4a0d1;
 }

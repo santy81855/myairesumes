@@ -15,24 +15,119 @@
 .titleContainer svg {
     width: 30px;
     height: 30px;
-    stroke: #7467ff;
-    fill: #7467ff;
+    stroke: rgb(var(--editor-side-menu-accent-rgb));
+    fill: rgb(var(--editor-side-menu-accent-rgb));
 }
 
 .title {
     font-size: var(--font-size-medium);
     font-weight: bold;
+    color: rgb(var(--editor-side-menu-text-rgb));
 }
 
-.dropdownContainer {
+.section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    gap: var(--gap-medium);
+}
+
+.description {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--editor-side-menu-text-rgb));
+}
+
+.sectionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: var(--gap-small);
 }
 
-.topRow {
+.font {
+    width: 60%;
+    padding-block: var(--padding-block-small);
+    padding-inline-start: var(--padding-inline-small);
+    border-radius: var(--border-radius-xsmall);
+    background-color: rgb(var(--editor-side-menu-contrast-background-rgb));
+    border: 1px solid rgb(var(--editor-side-menu-contrast-background-rgb));
+    color: rgb(var(--editor-side-menu-contrast-text-rgb));
+    text-align: left;
+}
+
+.fontSize,
+.marginSize,
+.sectionGap {
+    max-width: 3rem;
+    padding-inline: var(--padding-inline-small);
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-small);
+    background-color: rgb(var(--editor-side-menu-contrast-background-rgb));
+    border: 1px solid rgb(var(--editor-side-menu-contrast-background-rgb));
+    color: rgb(var(--editor-side-menu-contrast-text-rgb));
+    text-align: center;
+}
+
+.button {
+    background-color: rgb(var(--editor-side-menu-contrast-background-rgb));
+    border: 1px solid rgb(var(--editor-side-menu-low-contrast-background-rgb));
+    padding-inline: var(--padding-inline-small);
+    padding-block: var(--padding-block-small);
+    color: rgb(var(--editor-side-menu-contrast-text-rgb));
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button svg {
+    width: 10px;
+    height: 10px;
+    stroke: rgb(var(--editor-side-menu-contrast-text-rgb));
+    fill: rgb(var(--editor-side-menu-contrast-text-rgb));
+}
+
+.button:hover {
+    background-color: rgb(var(--editor-side-menu-low-contrast-background-rgb));
+}
+
+.right {
+    border-top-right-radius: var(--border-radius-xsmall);
+    border-bottom-right-radius: var(--border-radius-xsmall);
+}
+
+.left {
+    border-top-left-radius: var(--border-radius-xsmall);
+    border-bottom-left-radius: var(--border-radius-xsmall);
+}
+
+.font:focus,
+.fontSize:focus,
+.marginSize:focus,
+.sectionGap:focus {
+    outline: none;
+    border: 1px solid rgb(var(--editor-side-menu-contrast-background-rgb));
+}
+
+.fontSize::-webkit-inner-spin-button,
+.marginSize::-webkit-inner-spin-button,
+.sectionGap::-webkit-inner-spin-button,
+.fontSize::-webkit-outer-spin-button,
+.marginSize::-webkit-outer-spin-button,
+.sectionGap::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Optional: Remove margin */
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.colorPickerContainer {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -40,42 +135,30 @@
     gap: var(--gap-small);
 }
 
-.description {
-    font-size: var(--font-size-small);
-    font-weight: bold;
-}
-
-.sectionContainer {
-    width: 100%;
+.colorPickerButtonContainer {
+    flex-grow: 1;
     display: flex;
-    flex-direction: column;
-    gap: calc(var(--gap-small) / 2);
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--gap-small);
 }
 
-.font,
-.fontSize,
-.marginSize {
-    width: 100%;
-    padding-block: var(--padding-block-small);
-    padding-inline: var(--padding-inline-small);
-    border-radius: var(--border-radius-xsmall);
-    border: 1px solid lightgrey;
-}
-
-.font:focus,
-.fontSize:focus,
-.marginSize:focus {
-    outline: none;
-    border: 1px solid #7467ff;
+.colorPickerButtonWrapper {
+    width: 25px;
+    height: 25px;
+    background-color: rgb(var(--editor-side-menu-low-contrast-text-rgb));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
 }
 
 .colorPickerButton {
-    width: 30px;
-    height: 30px;
     border-radius: 50%;
+    width: 60%;
+    height: 60%;
     border: none;
     cursor: pointer;
-    border: 1px solid grey;
 }
 
 .pickerContainer {
@@ -86,20 +169,25 @@
     margin-block-start: var(--padding-block-medium);
 }
 
-.colorPickerButtonContainer {
+.sectionTitleContainer {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--gap-small);
-    margin-block-start: var(--padding-block-small);
+    padding-block-start: var(--padding-block-small);
 }
 
-.colorPickerOptionsContainer {
+.horizontalBar {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--gap-large);
+    height: 1px;
+    background-color: rgb(var(--editor-side-menu-low-contrast-text-rgb));
+}
+
+.sectionTitle {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--editor-side-menu-low-contrast-text-rgb));
+    letter-spacing: 3px;
 }

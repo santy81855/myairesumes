@@ -1,0 +1,74 @@
+.container {
+    height: var(--editor-subtitlebar-height);
+    width: 100%;
+    background-color: var(--editor-subtitlebar-background-background-color-rgb);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--padding-inline-medium);
+    color: white;
+    gap: var(--gap-medium);
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+
+.iconContainer {
+    border: none;
+    padding-inline: var(--padding-block-small);
+    padding-block: calc(var(--padding-block-small));
+    border-radius: var(--border-radius-xsmall);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: var(--gap-small);
+    background-color: rgb(var(--editor-subtitlebar-background-color-rgb));
+}
+
+.iconContainer p {
+    font-size: var(--font-size-small);
+    color: black;
+}
+
+.iconContainer:hover {
+    background-color: rgb(
+        var(--editor-subtitlebar-button-hover-background-color-rgb)
+    );
+}
+
+.iconContainer svg {
+    stroke: black;
+    fill: black;
+    width: 15px;
+    height: 15px;
+}
+
+.iconContainer button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteIcon svg {
+    stroke: rgb(238, 119, 98);
+    fill: rgb(238, 119, 98);
+    width: 15px;
+    height: 15px;
+}
+
+@media screen and (max-width: 500px) {
+    .iconContainer p {
+        display: none;
+    }
+}

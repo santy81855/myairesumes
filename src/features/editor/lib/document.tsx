@@ -1,11 +1,18 @@
 import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
-import Basic from "@/components/resume-templates/basic/Basic";
-import Nexus from "@/components/resume-templates/nexus/Nexus";
-import Impact from "@/components/resume-templates/impact/Impact";
-import Nova from "@/components/resume-templates/nova/Nova";
-import Fresh from "@/components/resume-templates/fresh/Fresh";
-import Vivid from "@/components/resume-templates/vivid/Vivid";
-import Sharp from "@/components/resume-templates/sharp/Sharp";
+import {
+    Basic,
+    Velocity,
+    Triumph,
+    Fresh,
+    Impact,
+    Nexus,
+    Nova,
+    Sharp,
+    Vivid,
+    Luminary,
+} from "@/features/resume";
+
+import { BasicL, FreshL } from "@/features/cover-letter";
 
 export const updateDocument = (
     document: any,
@@ -65,12 +72,36 @@ export const updateDocument = (
                 }
             );
         }
+    } else if (template === "luminary") {
+        // if the template is nova, then the sectionOrder array for the first array should be: ['headerNova', 'summary', 'experience', 'colBreak' 'contactVertical', 'skills', 'education', 'languages']
+        const newArr = [
+            "headerLuminary",
+            "summary",
+            "experience",
+            "colBreak",
+            "contactLuminary",
+            "skillsBullet",
+            "educationShort",
+            "languages",
+        ];
+        // make the first array in sectionOrder equal to newArr
+        // add the newArr to the newSectionOrder
+        // check if the first array in sectionOrder contains 'colBreak' or an element that includes 'nova'
+        if (!changedTemplate) {
+            // make the newSectionOrder the same as the current array
+            newSectionOrder = document.information.sectionOrder;
+        } else {
+            newSectionOrder = document.information.sectionOrder.map(
+                (array: any, index: number) => {
+                    return index === 0 ? newArr : array;
+                }
+            );
+        }
     } else {
         if (changedTemplate) {
             newSectionOrder = document.information.sectionOrder.map(
                 (array: any) =>
                     array.map((item: string) => {
-                        //console.log(item);
                         if (item === "colBreak") {
                             return null;
                         }
@@ -147,6 +178,93 @@ export const getAllResumeTemplates = (
                     document={updateDocument(
                         document,
                         "basic",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        velocity: {
+            name: "Velocity",
+            description:
+                "A simple and clean resume template that prioritizes readability.",
+            keywords: [
+                "velocity",
+                "simple",
+                "clean",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <Velocity
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Velocity
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Velocity
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        triumph: {
+            name: "Triumph",
+            description:
+                "A modern and sleek resume template that focuses on readability while maintaining a modern aesthetic.",
+            keywords: [
+                "triumph",
+                "modern",
+                "sleek",
+                "professional",
+                "smart",
+                "ats",
+                "design",
+            ],
+            editorComponent: (
+                <Triumph
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Triumph
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Triumph
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "triumph",
                         changedTemplate
                     )}
                 />
@@ -366,6 +484,495 @@ export const getAllResumeTemplates = (
                 />
             ),
         },
+        luminary: {
+            name: "Luminary",
+            description:
+                "A professional resume template with a modern design and a touch of flair.",
+            keywords: [
+                "luminary",
+                "professional",
+                "modern",
+                "pretty",
+                "cute",
+                "art",
+                "color",
+            ],
+            editorComponent: (
+                <Luminary
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Luminary
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Luminary
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+    };
+};
+
+export const updateCoverLetter = (
+    document: any,
+    template: string,
+    changedTemplate: boolean
+) => {
+    // change the template field to the new template
+    // search for any items in the document.information.sectionOrder that have the substring 'header', and replace the item with headerTemplate depending on the passed template
+    let newSectionOrder = [] as any;
+    if (changedTemplate) {
+        newSectionOrder = document.information.sectionOrder.map((array: any) =>
+            array.map((item: string) => {
+                if (item.includes("header")) {
+                    // return 'header' + template but make the first letter of template capitalized
+                    return `header${template
+                        .charAt(0)
+                        .toUpperCase()}${template.slice(1)}`;
+                }
+                return item;
+            })
+        );
+        // remove any null values from the first array in newSectionOrder
+        newSectionOrder[0] = newSectionOrder[0].filter(
+            (item: string | null) => item !== null
+        );
+    } else {
+        newSectionOrder = document.information.sectionOrder;
+    }
+    const updatedDocument = {
+        ...document,
+        information: {
+            ...document.information,
+            template,
+            sectionOrder: newSectionOrder,
+        },
+    };
+    return updatedDocument;
+};
+
+export const getAllCoverLetterTemplates = (
+    document: any,
+    changedTemplate: boolean
+) => {
+    return {
+        basic: {
+            name: "Basic",
+            description: "A simple and clean cover letter template.",
+            keywords: [
+                "basic",
+                "simple",
+                "clean",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "basic",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "basic",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "basic",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        velocity: {
+            name: "Velocity",
+            description:
+                "A simple and clean cover letter template that prioritizes readability.",
+            keywords: [
+                "velocity",
+                "simple",
+                "clean",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "velocity",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        triumph: {
+            name: "Triumph",
+            description:
+                "A modern and sleek cover letter template that focuses on readability while maintaining a modern aesthetic.",
+            keywords: [
+                "triumph",
+                "modern",
+                "sleek",
+                "professional",
+                "smart",
+                "ats",
+                "design",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "triumph",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        nexus: {
+            name: "Nexus",
+            description: "A modern and sleek cover letter template.",
+            keywords: [
+                "nexus",
+                "modern",
+                "sleek",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nexus",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nexus",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nexus",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        impact: {
+            name: "Impact",
+            description: "A bold and impactful cover letter template.",
+            keywords: ["impact", "bold", "professional", "smart", "ats"],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "impact",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "impact",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "impact",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        nova: {
+            name: "Nova",
+            description: "A modern and creative cover letter template.",
+            keywords: ["nova", "unique", "creative", "modern", "art"],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nova",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nova",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "nova",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        fresh: {
+            name: "Fresh",
+            description: "A clean cover letter template with a touch of color.",
+            keywords: [
+                "fresh",
+                "clean",
+                "modern",
+                "professional",
+                "smart",
+                "ats",
+            ],
+            editorComponent: (
+                <FreshL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "fresh",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <FreshL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "fresh",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <FreshL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "fresh",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        vivid: {
+            name: "Vivid",
+            description:
+                "A unique cover letter template with two columns, and a touch of flair with your initials.",
+            keywords: ["vivid", "colorful", "modern", "unique", "art"],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "vivid",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "vivid",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "vivid",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        sharp: {
+            name: "Sharp",
+            description:
+                "A professional cover letter template with some color to stand out.",
+            keywords: ["sharp", "professional", "modern", "ats"],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "sharp",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "sharp",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "sharp",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        luminary: {
+            name: "Luminary",
+            description:
+                "A professional cover letter template with a modern design and a touch of flair.",
+            keywords: [
+                "luminary",
+                "professional",
+                "modern",
+                "pretty",
+                "cute",
+                "art",
+                "color",
+            ],
+            editorComponent: (
+                <BasicL
+                    isEditor={true}
+                    document={updateCoverLetter(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <BasicL
+                    isDownload={true}
+                    document={updateCoverLetter(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <BasicL
+                    isPreview={true}
+                    document={updateCoverLetter(
+                        document,
+                        "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
     };
 };
 
@@ -389,6 +996,24 @@ export const getAllUserResumes = async (userId: string) => {
             headers: {
                 "Content-Type": "application/json",
             },
+            next: { tags: [userId] },
+        }
+    );
+    if (!response.ok) {
+        return null;
+    }
+    return await response.json();
+};
+
+export const getAllUserCoverLetters = async (userId: string) => {
+    const response = await fetch(
+        `${process.env.APP_DOMAIN}/api/cover-letters?userId=${userId}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            next: { tags: [userId] },
         }
     );
     if (!response.ok) {
@@ -405,13 +1030,100 @@ export const getResume = async (userId: string, resumeId: string) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            //next: { tags: ["currentResume"] },
+            next: { tags: [userId] },
         }
     );
     if (!response.ok) {
         return null;
     }
     return await response.json();
+};
+
+export const getCoverLetter = async (userId: string, coverLetterId: string) => {
+    const response = await fetch(
+        `${process.env.APP_DOMAIN}/api/cover-letter?coverLetterId=${coverLetterId}&userId=${userId}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            next: { tags: [userId] },
+        }
+    );
+    if (!response.ok) {
+        return null;
+    }
+    return await response.json();
+};
+
+export const initializeNewCoverLetter = (
+    user: any,
+    name: string,
+    job: string,
+    description: string
+) => {
+    const { basicInfo } = user;
+    const first = basicInfo ? basicInfo.firstName : user.firstName;
+    const last = basicInfo ? basicInfo.lastName : user.lastName;
+    const email = basicInfo && basicInfo.email ? basicInfo.email : user.email;
+    const phone =
+        basicInfo && basicInfo.phone ? basicInfo.phone : "(123) 456-7890";
+    const website =
+        basicInfo && basicInfo.website
+            ? basicInfo.website
+            : "https://example-website.com";
+    // Get the current date
+    const currentDate = new Date();
+
+    // Format the date as YYYY-MM-DD
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+
+    const data = {
+        currentPage: 1,
+        style: {
+            baseFontSize: 12,
+            baseMarginSize: 22,
+            baseSectionGap: 11,
+            backgroundColor: "#ffffff",
+            textColor: "#000000",
+            accentBackgroundColor: "#5B7FC5",
+            accentTextColor: "white",
+        },
+        documentName: name,
+        jobTitle: job,
+        description,
+        template: "basic",
+        font: "Times-Roman",
+        firstName: first,
+        lastName: last,
+        sectionOrder: [
+            [
+                "headerBasic",
+                "date",
+                "employerInfo",
+                "salutation",
+                "body",
+                "closing",
+            ],
+        ],
+        numPages: 1,
+        position: "Example Position",
+        date: formattedDate,
+        companyName: "Example Company",
+        salutation: "Dear Hiring Manager,",
+        closing: "Sincerely,",
+        body: "I am writing to express my keen interest in the [Job Title] position at [Company Name], as advertised. With a background in [Your Field of Expertise], combined with my strong passion for [Related Skill/Industry], I am confident in my ability to contribute effectively to your team. Throughout my career, I have honed valuable skills in [Key Skill 1], [Key Skill 2], and [Key Skill 3], which I believe align well with the requirements of the role. I am particularly drawn to [Specific Aspect of Company or Position] and am eager to leverage my expertise to [Contribute to Company Goals/Projects/Initiatives]. I am impressed by [Company Name]'s commitment to [Company Value/Initiative] and am excited about the opportunity to be part of a dynamic and innovative team. I am eager to bring my unique perspective and skills to [Company Name] and am confident that my background makes me a strong fit for this role. Thank you for considering my application. I look forward to the possibility of discussing how my skills and experiences align with the needs of [Company Name].",
+        contactInfo: {
+            email,
+            phone,
+            website,
+        },
+        customSectionArray: [],
+    };
+    return data;
 };
 
 export const initializeNewResume = (
@@ -561,9 +1273,9 @@ export const initializeNewResume = (
             sectionTitle: "Summary",
         },
         skillArray: [
-            "Example Long Skill 1.",
-            "Example Long Skill 2.",
-            "Example Long Skill 3.",
+            "Example Skill 1.",
+            "Example Skill 2.",
+            "Example Skill 3.",
         ],
         experienceArray: newExperienceArray,
         educationArray: newEducationArray,

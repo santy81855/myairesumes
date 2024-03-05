@@ -32,6 +32,11 @@ const Menu = () => {
         setIsTemplateOpen(!isTemplateOpen);
         setIsStyleOpen(false);
         setIsSectionOpen(false);
+        // get the search bar to focus
+        const searchBar = window.document.getElementById("templateSeachBar");
+        if (searchBar) {
+            searchBar.focus();
+        }
     };
 
     const toggleStyle = () => {
@@ -51,7 +56,14 @@ const Menu = () => {
             <section className={styles.staticMenu}>
                 <section
                     className={styles.staticMenuItem}
-                    style={isSectionOpen ? { backgroundColor: "#303045" } : {}}
+                    style={
+                        isSectionOpen
+                            ? {
+                                  backgroundColor:
+                                      "rgb(var(--editor-side-menu-background-rgb))",
+                              }
+                            : {}
+                    }
                     onClick={() => toggleSection()}
                 >
                     <div className={styles.staticIconContainer}>
@@ -61,7 +73,14 @@ const Menu = () => {
                 </section>
                 <section
                     className={styles.staticMenuItem}
-                    style={isTemplateOpen ? { backgroundColor: "#303045" } : {}}
+                    style={
+                        isTemplateOpen
+                            ? {
+                                  backgroundColor:
+                                      "rgb(var(--editor-side-menu-background-rgb))",
+                              }
+                            : {}
+                    }
                     onClick={() => toggleTemplate()}
                 >
                     <div className={styles.staticIconContainer}>
@@ -71,7 +90,14 @@ const Menu = () => {
                 </section>
                 <section
                     className={styles.staticMenuItem}
-                    style={isStyleOpen ? { backgroundColor: "#303045" } : {}}
+                    style={
+                        isStyleOpen
+                            ? {
+                                  backgroundColor:
+                                      "rgb(var(--editor-side-menu-background-rgb))",
+                              }
+                            : {}
+                    }
                     onClick={() => toggleStyle()}
                 >
                     <div className={styles.staticIconContainer}>

@@ -5,8 +5,12 @@ import { useAppContext } from "@/app/providers";
 import { useParams } from "next/navigation";
 import { circledXIcon, searchIcon } from "@/components/icons/iconSVG";
 import { motion, AnimatePresence } from "framer-motion";
-import { updateDocumentArray, SectionConfig } from "@/features/editor";
-import Section from "@/components/resume-templates/Section/Section";
+import {
+    updateDocumentArray,
+    SectionConfig,
+    CoverLetterSectionConfig,
+} from "@/features/editor";
+import { Section } from "@/features/resume";
 
 const AddSectionModal = () => {
     const {
@@ -16,6 +20,7 @@ const AddSectionModal = () => {
         setShowComponentModal,
     } = useAppContext();
     const params = useParams();
+    const type = params.slug[0];
     const id = params.slug[1];
     const [document, setDocument] = useState<any>(null);
     const [searchContent, setSearchContent] = useState("");
@@ -56,15 +61,29 @@ const AddSectionModal = () => {
         const doc = documentArray.find((document) => document.id === id);
         if (!doc) return;
         setDocument(doc);
-        const temp = SectionConfig(
-            doc,
-            null,
-            doc.information.font,
-            doc.information.template
-        );
+        let temp = {};
+        if (type === "resume") {
+            temp = SectionConfig({
+                document: doc,
+                fontSize: null,
+                font: doc.information.font,
+                template: doc.information.template,
+                isDownload: false,
+                accentColumn: false,
+            });
+        } else {
+            temp = CoverLetterSectionConfig({
+                document: doc,
+                fontSize: null,
+                font: doc.information.font,
+                template: doc.information.template,
+                isDownload: false,
+                accentColumn: false,
+            });
+        }
         let sectionConfigArray = Object.entries(temp).map(([id, config]) => ({
             id,
-            ...config,
+            ...(config as object),
         }));
         setAllSections(sectionConfigArray);
     }, [documentArray]);
@@ -213,6 +232,7 @@ const AddSectionModal = () => {
                                             className={styles.exampleContainer}
                                         >
                                             <Section
+                                                type={type}
                                                 key={
                                                     result.id + index.toString()
                                                 }

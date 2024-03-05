@@ -1,10 +1,14 @@
 "use client";
 import styles from "./PageUtilBar.module.css";
-import ReorderButton from "./reorder-button/ReorderButton";
+
 import { minusIcon, plusIcon } from "@/components/icons/iconSVG";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/app/providers";
-import { updateDocumentArray, PageCounter } from "@/features/editor";
+import {
+    updateDocumentArray,
+    PageCounter,
+    PageButtons,
+} from "@/features/editor";
 
 type PageUtilBarProps = {
     documentId: string;
@@ -22,10 +26,9 @@ const PageUtilBar = ({ documentId }: PageUtilBarProps) => {
         <section className={styles.container}>
             {document && (
                 <>
-                    <ReorderButton />
-                    <section className={styles.pageFunctionContainer}>
-                        <PageCounter documentId={documentId} />
-                    </section>
+                    <PageButtons documentId={documentId} />
+
+                    <PageCounter documentId={documentId} />
                 </>
             )}
         </section>

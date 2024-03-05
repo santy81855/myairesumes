@@ -1,6 +1,8 @@
 .main {
     width: 100%;
-    height: calc(100% - var(--editor-titlebar-height));
+    height: calc(
+        100% - var(--editor-titlebar-height) - var(--editor-subtitlebar-height)
+    );
     background-color: #f2f2f2;
     overflow-x: auto;
     overflow-y: auto;

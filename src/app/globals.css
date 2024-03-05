@@ -3,15 +3,11 @@
     --doc-height: 100%;
     --nav-height: 65px;
     --editor-titlebar-height: 40px;
+    --editor-subtitlebar-height: 35px;
     --editor-side-menu-width: 60px;
     --border-radius: 25px;
     --border-radius-small: 10px;
     --border-radius-xsmall: 5px;
-    --background-color-rgb: 255, 255, 255;
-    --accent-color: #b4a5ff;
-    --accent-blue: 164, 179, 222;
-    --accent-pink: 184, 170, 219;
-    --text-color-rgb: 41, 41, 41;
     --font-size-xsmall: 0.5rem;
     --font-size-small: 0.75rem;
     --font-size-medium: 1rem;
@@ -34,6 +30,30 @@
     --gap-large: 2rem;
     --gap-xlarge: 3rem;
     --gap-x2large: 4rem;
+    /* Colors */
+    --background-color-rgb: 255, 255, 255;
+    --accent-color: #b4a5ff;
+    --accent-blue: 164, 179, 222;
+    --accent-pink: 184, 170, 219;
+    --text-color-rgb: 41, 41, 41;
+    /* Editor */
+    --editor-accent-color-rgb: 184, 80, 66;
+    --editor-accent-color-hover-rgb: 220, 120, 100;
+    --editor-text-color-rgb: 0, 0, 0;
+    --editor-background-color-rgb: 48, 48, 69;
+    --editor-text-contrast-color-rgb: 255, 255, 255;
+    --editor-side-menu-closed-background-color-rgb: 255, 255, 255;
+    --editor-side-menu-closed-text-color-rgb: 41, 41, 41;
+    --editor-side-menu-background-rgb: 48, 48, 69;
+    --editor-side-menu-text-rgb: 200, 200, 200;
+    --editor-side-menu-accent-rgb: var(--editor-accent-color-rgb);
+    --editor-side-menu-accent-hover-rgb: var(--editor-accent-color-hover-rgb);
+    --editor-side-menu-contrast-background-rgb: 255, 255, 255;
+    --editor-side-menu-contrast-text-rgb: 0, 0, 0;
+    --editor-side-menu-low-contrast-text-rgb: 150, 150, 150;
+    --editor-side-menu-low-contrast-background-rgb: 200, 200, 200;
+    --editor-subtitlebar-background-background-color-rgb: 255, 255, 255;
+    --editor-subtitlebar-button-hover-background-color-rgb: 227, 227, 227;
 }
 
 * {
