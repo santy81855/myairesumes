@@ -721,7 +721,7 @@ export const SectionConfig = (data: {
                                 document.information.style
                                     .accentBackgroundColor,
                             width: "100%",
-                            maxHeight: fontSize * 1.6,
+                            minHeight: fontSize * 1.6,
                             display: "flex",
                             justifyContent: "flex-start",
                             alignItems: "center",

@@ -12,23 +12,26 @@
 }
 
 .titleContainer {
+    width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: var(--gap-small);
+    gap: var(--gap-medium);
     position: relative;
 }
 
 .title {
     font-size: var(--font-size-medium);
     color: white;
+    flex-grow: 1;
+    /*show ellipses on overflow*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .iconContainer {
-    position: absolute;
-    right: 0;
-    top: 0;
-    transform: translateX(150%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,6 +39,13 @@
     background-color: transparent;
     border-radius: 0;
     border: none;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-medium);
 }
 
 .iconContainer svg {
@@ -54,10 +64,19 @@
     flex-direction: row;
     align-items: center;
     gap: var(--gap-medium);
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 .inputContainer input {
+    flex-grow: 1;
+    padding-block: calc(var(--padding-block-small) / 2);
+    padding-inline-start: var(--padding-inline-small);
+    border: none;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.inputContainer input:focus {
+    outline: none;
 }
 
 .saveIconContainer {
@@ -78,8 +97,8 @@
 }
 
 .saveIconContainer:hover svg {
-    fill: rgba(255, 255, 255, 0.724);
-    stroke: rgba(255, 255, 255, 0.724);
+    fill: rgba(255, 255, 255, 0.5);
+    stroke: rgba(255, 255, 255, 0.5);
 }
 
 .cancelIconContainer svg {

@@ -79,22 +79,24 @@ const TitleBar = () => {
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                         />
-                        <button
-                            className={`${styles.saveIconContainer} ${styles.cancelIconContainer}`}
-                            title="Cancel editing"
-                            onClick={() => {
-                                setIsEditing(false);
-                            }}
-                        >
-                            {cancelIcon}
-                        </button>
-                        <button
-                            type="submit"
-                            className={styles.saveIconContainer}
-                            title="Save document name"
-                        >
-                            {checkOutlineIcon}
-                        </button>
+                        <section className={styles.buttonContainer}>
+                            <button
+                                className={`${styles.saveIconContainer} ${styles.cancelIconContainer}`}
+                                title="Cancel editing"
+                                onClick={() => {
+                                    setIsEditing(false);
+                                }}
+                            >
+                                {cancelIcon}
+                            </button>
+                            <button
+                                type="submit"
+                                className={styles.saveIconContainer}
+                                title="Save document name"
+                            >
+                                {checkOutlineIcon}
+                            </button>
+                        </section>
                     </form>
                 ) : (
                     <section className={styles.titleContainer}>

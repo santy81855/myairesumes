@@ -377,7 +377,7 @@ export const basicRightArrow = (
 
 export const checkOutlineIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"></path>
+        <path d="m9.55 17.308l-4.97-4.97l.714-.713l4.256 4.256l9.156-9.156l.713.713z"></path>
     </svg>
 );
 
