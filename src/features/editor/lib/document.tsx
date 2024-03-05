@@ -1273,7 +1273,7 @@ export const initializeNewResume = (
             sectionTitle: "Summary",
         },
         skillArray: [
-            "Example Skill 1.",
+            "Example Skill 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.Example bullet 1.",
             "Example Skill 2.",
             "Example Skill 3.",
         ],

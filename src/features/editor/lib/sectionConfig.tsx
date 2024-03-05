@@ -447,6 +447,7 @@ export const SectionConfig = (data: {
                 ? document.information.style.accentTextColor
                 : document.information.style.textColor,
             borderRadius: "50%",
+            marginTop: fontSize / 3,
         },
         horizontalLine: {
             width: "100%",
@@ -494,7 +495,8 @@ export const SectionConfig = (data: {
             display: "flex",
             flexDirection: "row",
             justifyContent: "flex-start",
-            alignItems: "center",
+            // align items to the top
+            alignItems: "flex-start",
             paddingLeft: fontSize / 4,
             gap: fontSize / 2,
         },
@@ -503,7 +505,7 @@ export const SectionConfig = (data: {
             display: "flex",
             flexDirection: "row",
             justifyContent: "flex-start",
-            alignItems: "center",
+            alignItems: "flex-start",
             gap: fontSize / 2,
         },
         rowContainerWrap: {
