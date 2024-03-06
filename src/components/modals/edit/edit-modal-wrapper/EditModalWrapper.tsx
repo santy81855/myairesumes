@@ -39,6 +39,9 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
         case sectionId.includes("position"):
             ratio = document.information.sectionEdit.position.fontRatio;
             break;
+        case sectionId.includes("contact"):
+            ratio = document.information.sectionEdit.contact.fontRatio;
+            break;
         default:
             break;
     }
@@ -112,6 +115,27 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
                     documentArray
                 );
                 break;
+            case sectionId.includes("contact"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            contact: {
+                                ...document.information.sectionEdit.contact,
+                                fontRatio:
+                                    document.information.sectionEdit.contact
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
             default:
                 break;
         }
@@ -162,6 +186,9 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
             break;
         case sectionId.includes("position"):
             alignment = document.information.sectionEdit.position.textAlignment;
+            break;
+        case sectionId.includes("contact"):
+            alignment = document.information.sectionEdit.contact.textAlignment;
             break;
         default:
             break;
@@ -219,6 +246,25 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
                             ...document.information.sectionEdit,
                             position: {
                                 ...document.information.sectionEdit.position,
+                                textAlignment: alignment,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("contact"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            contact: {
+                                ...document.information.sectionEdit.contact,
                                 textAlignment: alignment,
                             },
                         },
@@ -418,6 +464,157 @@ const Summary = ({ sectionId, document }: SectionProps) => {
     );
 };
 
+const Contact = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [email, setEmail] = useState(document.information.contactInfo.email);
+    const [phone, setPhone] = useState(document.information.contactInfo.phone);
+    const [website, setWebsite] = useState(
+        document.information.contactInfo.website
+    );
+    const [showEmail, setShowEmail] = useState(
+        document.information.sectionEdit.contact.showEmail
+    );
+    const [showPhone, setShowPhone] = useState(
+        document.information.sectionEdit.contact.showPhone
+    );
+    const [showWebsite, setShowWebsite] = useState(
+        document.information.sectionEdit.contact.showWebsite
+    );
+
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                contactInfo: {
+                    email:
+                        showEmail === true
+                            ? email
+                            : document.information.contactInfo.email,
+                    phone:
+                        showPhone === true
+                            ? phone
+                            : document.information.contactInfo.phone,
+                    website:
+                        showWebsite === true
+                            ? website
+                            : document.information.contactInfo.website,
+                    sectionEdit: {
+                        ...document.information.sectionEdit,
+                        contact: {
+                            ...document.information.sectionEdit.contact,
+                            showEmail,
+                            showPhone,
+                            showWebsite,
+                        },
+                    },
+                },
+                sectionEdit: {
+                    ...document.information.sectionEdit,
+                    contact: {
+                        ...document.information.sectionEdit.contact,
+                        showEmail,
+                        showPhone,
+                        showWebsite,
+                    },
+                },
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+
+    return (
+        <>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <label
+                        htmlFor="email"
+                        className={`${styles.inputLabel} ${
+                            !showEmail && styles.disabled
+                        }`}
+                    >
+                        Email
+                    </label>
+                    <input
+                        id="email"
+                        disabled={!showEmail}
+                        className={styles.textInput}
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                </section>
+                <section className={styles.inputItemContainer}>
+                    <section className={styles.toggleContainer}>
+                        <label
+                            htmlFor="phone"
+                            className={`${styles.inputLabel} ${
+                                !showPhone && styles.disabled
+                            }`}
+                        >
+                            Phone
+                        </label>
+                        <input
+                            type="checkbox"
+                            id="phone"
+                            className={styles.toggleInput}
+                            checked={showPhone}
+                            onChange={(event) =>
+                                setShowPhone(event.target.checked)
+                            }
+                        />
+                    </section>
+                    <input
+                        id="phone"
+                        disabled={!showPhone}
+                        className={styles.textInput}
+                        value={phone}
+                        onChange={(event) => setPhone(event.target.value)}
+                    />
+                </section>
+                <section className={styles.inputItemContainer}>
+                    <section className={styles.toggleContainer}>
+                        <label
+                            htmlFor="website"
+                            className={`${styles.inputLabel} ${
+                                !showWebsite && styles.disabled
+                            }`}
+                        >
+                            Website
+                        </label>
+                        <input
+                            type="checkbox"
+                            id="website"
+                            className={styles.toggleInput}
+                            checked={showWebsite}
+                            onChange={(event) =>
+                                setShowWebsite(event.target.checked)
+                            }
+                        />
+                    </section>
+                    <input
+                        id="website"
+                        disabled={!showWebsite}
+                        className={styles.textInput}
+                        value={website}
+                        onChange={(event) => setWebsite(event.target.value)}
+                    />
+                </section>
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
 const TitleBar = ({ sectionId }: { sectionId: string }) => {
     let title = "";
     sectionId = sectionId.toLowerCase();
@@ -488,6 +685,9 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
         case sectionId.includes("position"):
             options = Object.keys(document.information.sectionEdit.position);
             break;
+        case sectionId.includes("contact"):
+            options = Object.keys(document.information.sectionEdit.contact);
+            break;
         default:
             break;
     }
@@ -513,7 +713,7 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
                             />
                         );
                     default:
-                        return <>{option}</>;
+                        return null;
                 }
             })}
         </section>
@@ -554,6 +754,9 @@ export default function EditModalWrapper({
             break;
         case sectionId.includes("position"):
             section = <Position document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("contact"):
+            section = <Contact document={document} sectionId={sectionId} />;
             break;
         default:
             break;

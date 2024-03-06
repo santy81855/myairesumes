@@ -201,6 +201,17 @@
     outline: none;
 }
 
+.toggleContainer {
+    display: flex;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.disabled {
+    color: rgba(0, 0, 0, 0.3);
+}
+
 @media screen and (max-width: 425px) {
     .modal {
         width: 95%;

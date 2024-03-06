@@ -2114,47 +2114,97 @@ export const SectionConfig = (data: {
             keyWords: ["contact", "email", "phone", "website", "horizontal"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <View style={styles.rowContainer}>
-                        <Text
-                            style={{
-                                ...styles.small,
-                                fontSize: fontSize * 0.8,
-                            }}
-                        >
-                            {document.information.contactInfo.email}
-                        </Text>
-                        <Text
-                            style={{
-                                ...styles.small,
-                                fontSize: fontSize * 0.8,
-                            }}
-                        >
-                            |
-                        </Text>
-                        <Text
-                            style={{
-                                ...styles.small,
-                                fontSize: fontSize * 0.8,
-                            }}
-                        >
-                            {document.information.contactInfo.phone}
-                        </Text>
-                        <Text
-                            style={{
-                                ...styles.small,
-                                fontSize: fontSize * 0.8,
-                            }}
-                        >
-                            |
-                        </Text>
-                        <Text
-                            style={{
-                                ...styles.small,
-                                fontSize: fontSize * 0.8,
-                            }}
-                        >
-                            {document.information.contactInfo.website}
-                        </Text>
+                    <View
+                        style={{
+                            ...styles.row,
+                            ...styles.alignCenter,
+                            ...styles.width100,
+                            ...styles.gapSmall,
+                            justifyContent:
+                                document.information.sectionEdit.contact
+                                    .textAlignment === "left"
+                                    ? "flex-start"
+                                    : document.information.sectionEdit.contact
+                                          .textAlignment === "center"
+                                    ? "center"
+                                    : "flex-end",
+                        }}
+                    >
+                        {document.information.sectionEdit.contact.showEmail ===
+                            true && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.contact
+                                            .fontRatio,
+                                }}
+                            >
+                                {document.information.contactInfo.email}
+                            </Text>
+                        )}
+                        {document.information.sectionEdit.contact.showEmail &&
+                            document.information.sectionEdit.contact
+                                .showPhone && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                    }}
+                                >
+                                    |
+                                </Text>
+                            )}
+                        {document.information.sectionEdit.contact.showPhone && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.contact
+                                            .fontRatio,
+                                }}
+                            >
+                                {document.information.contactInfo.phone}
+                            </Text>
+                        )}
+                        {document.information.sectionEdit.contact
+                            .showWebsite && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.contact
+                                            .fontRatio,
+                                }}
+                            >
+                                |
+                            </Text>
+                        )}
+                        {document.information.sectionEdit.contact
+                            .showWebsite && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.contact
+                                            .fontRatio,
+                                }}
+                            >
+                                {document.information.contactInfo.website}
+                            </Text>
+                        )}
                     </View>
                 </View>
             ) : null,
@@ -2170,86 +2220,140 @@ export const SectionConfig = (data: {
                         style={{
                             ...styles.width100,
                             ...styles.col,
-                            ...styles.alignStart,
+                            ...styles.alignCenter,
                             ...styles.justifyStart,
                             ...styles.gapSmall,
                         }}
                     >
-                        <View
-                            style={{
-                                ...styles.col,
-                                ...styles.alignStart,
-                                ...styles.width100,
-                            }}
-                        >
-                            <Text
+                        {document.information.sectionEdit.contact.showEmail ===
+                            true && (
+                            <View
                                 style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
-                                    ...styles.bold,
+                                    ...styles.col,
+                                    ...styles.width100,
                                 }}
                             >
-                                Email
-                            </Text>
-                            <Text
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.bold,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    Email
+                                </Text>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    {document.information.contactInfo.email}
+                                </Text>
+                            </View>
+                        )}
+                        {document.information.sectionEdit.contact.showPhone ===
+                            true && (
+                            <View
                                 style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
+                                    ...styles.col,
+                                    ...styles.width100,
                                 }}
                             >
-                                {document.information.contactInfo.email}
-                            </Text>
-                        </View>
-                        <View
-                            style={{
-                                ...styles.col,
-                                ...styles.alignStart,
-                                ...styles.width100,
-                            }}
-                        >
-                            <Text
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.bold,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    Phone
+                                </Text>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    {document.information.contactInfo.phone}
+                                </Text>
+                            </View>
+                        )}
+                        {document.information.sectionEdit.contact
+                            .showWebsite === true && (
+                            <View
                                 style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
-                                    ...styles.bold,
+                                    ...styles.col,
+                                    ...styles.width100,
                                 }}
                             >
-                                Phone
-                            </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
-                                }}
-                            >
-                                {document.information.contactInfo.phone}
-                            </Text>
-                        </View>
-                        <View
-                            style={{
-                                ...styles.col,
-                                ...styles.alignStart,
-                                ...styles.width100,
-                            }}
-                        >
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
-                                    ...styles.bold,
-                                }}
-                            >
-                                Website
-                            </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
-                                }}
-                            >
-                                {document.information.contactInfo.website}
-                            </Text>
-                        </View>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.bold,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    Website
+                                </Text>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    {document.information.contactInfo.website}
+                                </Text>
+                            </View>
+                        )}
                     </View>
                 </View>
             ) : null,
@@ -2272,68 +2376,134 @@ export const SectionConfig = (data: {
                         style={{
                             ...styles.width100,
                             ...styles.col,
-                            ...styles.alignStart,
+                            ...styles.alignCenter,
                             ...styles.justifyStart,
                             ...styles.gapSmall,
                         }}
                     >
-                        <View
-                            style={{
-                                ...styles.row,
-                                ...styles.alignCenter,
-                                ...styles.justifyStart,
-                                ...styles.gapSmall,
-                                ...styles.width100,
-                            }}
-                        >
-                            {accentEmailIcon}
-                            <Text
+                        {document.information.sectionEdit.contact.showEmail ===
+                            true && (
+                            <View
                                 style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
+                                    ...styles.row,
+                                    ...styles.alignCenter,
+                                    justifyContent:
+                                        document.information.sectionEdit.contact
+                                            .textAlignment === "left"
+                                            ? "flex-start"
+                                            : document.information.sectionEdit
+                                                  .contact.textAlignment ===
+                                              "center"
+                                            ? "center"
+                                            : "flex-end",
+                                    ...styles.gapSmall,
+                                    ...styles.width100,
                                 }}
                             >
-                                {document.information.contactInfo.email}
-                            </Text>
-                        </View>
-                        <View
-                            style={{
-                                ...styles.row,
-                                ...styles.alignCenter,
-                                ...styles.justifyStart,
-                                ...styles.gapSmall,
-                                ...styles.width100,
-                            }}
-                        >
-                            {accentPhoneIcon}
-                            <Text
+                                {(document.information.sectionEdit.contact
+                                    .textAlignment === "left" ||
+                                    document.information.sectionEdit.contact
+                                        .textAlignment === "center") &&
+                                    accentEmailIcon}
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                    }}
+                                >
+                                    {document.information.contactInfo.email}
+                                </Text>
+                                {document.information.sectionEdit.contact
+                                    .textAlignment === "right" &&
+                                    accentEmailIcon}
+                            </View>
+                        )}
+                        {document.information.sectionEdit.contact.showPhone ===
+                            true && (
+                            <View
                                 style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
+                                    ...styles.row,
+                                    ...styles.alignCenter,
+                                    justifyContent:
+                                        document.information.sectionEdit.contact
+                                            .textAlignment === "left"
+                                            ? "flex-start"
+                                            : document.information.sectionEdit
+                                                  .contact.textAlignment ===
+                                              "center"
+                                            ? "center"
+                                            : "flex-end",
+                                    ...styles.gapSmall,
+                                    ...styles.width100,
                                 }}
                             >
-                                {document.information.contactInfo.phone}
-                            </Text>
-                        </View>
-                        <View
-                            style={{
-                                ...styles.row,
-                                ...styles.alignCenter,
-                                ...styles.justifyStart,
-                                ...styles.gapSmall,
-                                ...styles.width100,
-                            }}
-                        >
-                            {accentWebsiteIcon}
-                            <Text
+                                {(document.information.sectionEdit.contact
+                                    .textAlignment === "left" ||
+                                    document.information.sectionEdit.contact
+                                        .textAlignment === "center") &&
+                                    accentPhoneIcon}
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                    }}
+                                >
+                                    {document.information.contactInfo.phone}
+                                </Text>
+                                {document.information.sectionEdit.contact
+                                    .textAlignment === "right" &&
+                                    accentPhoneIcon}
+                            </View>
+                        )}
+                        {document.information.sectionEdit.contact
+                            .showWebsite === true && (
+                            <View
                                 style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
+                                    ...styles.row,
+                                    ...styles.alignCenter,
+                                    justifyContent:
+                                        document.information.sectionEdit.contact
+                                            .textAlignment === "left"
+                                            ? "flex-start"
+                                            : document.information.sectionEdit
+                                                  .contact.textAlignment ===
+                                              "center"
+                                            ? "center"
+                                            : "flex-end",
+                                    ...styles.gapSmall,
+                                    ...styles.width100,
                                 }}
                             >
-                                {document.information.contactInfo.website}
-                            </Text>
-                        </View>
+                                {(document.information.sectionEdit.contact
+                                    .textAlignment === "left" ||
+                                    document.information.sectionEdit.contact
+                                        .textAlignment === "center") &&
+                                    accentWebsiteIcon}
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                    }}
+                                >
+                                    {document.information.contactInfo.website}
+                                </Text>
+                                {document.information.sectionEdit.contact
+                                    .textAlignment === "right" &&
+                                    accentWebsiteIcon}
+                            </View>
+                        )}
                     </View>
                 </View>
             ) : null,

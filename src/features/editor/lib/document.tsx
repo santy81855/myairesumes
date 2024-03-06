@@ -1273,19 +1273,12 @@ export const initializeNewResume = (
                 dateFormat: "MonthYear",
                 showStartDate: true,
             },
-            contactVertical: {
+            contact: {
                 fontRatio: 1,
                 showEmail: true,
                 showPhone: true,
                 showWebsite: true,
                 textAlignment: "left",
-            },
-            contactHorizontal: {
-                fontRatio: 1,
-                showEmail: true,
-                showPhone: true,
-                showWebsite: true,
-                separator: "|",
             },
             skills: {
                 fontRatio: 1,
