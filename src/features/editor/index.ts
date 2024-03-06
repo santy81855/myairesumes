@@ -10,6 +10,27 @@ export { default as TitleBar } from "./components/title-bar/TitleBar";
 export { default as SubTitleBar } from "./components/sub-title-bar/SubTitleBar";
 export { SectionConfig } from "./lib/sectionConfig";
 export { CoverLetterSectionConfig } from "./lib/coverLetterSectionConfig";
+export { default as getSectionTitleComponent } from "./lib/section-variants/titleVariants";
+export {
+    getAccentEmailIcon,
+    getAccentPhoneIcon,
+    getAccentWebsiteIcon,
+} from "./lib/section-icons/SectionIcons";
+export { default as getSectionStyles } from "./lib/section-styles/getSectionStyles";
+export { default as getHeaderVariants } from "./lib/section-variants/headerVariants";
+export { default as getEducationVariants } from "./lib/section-variants/educationVariants";
+export { default as getNameVariants } from "./lib/section-variants/nameVariants";
+export { default as getPositionVariants } from "./lib/section-variants/positionVariants";
+export { default as getContactVariants } from "./lib/section-variants/contactVariants";
+export { default as getSkillsVariants } from "./lib/section-variants/skillsVariants";
+export { default as getLanguagesVariants } from "./lib/section-variants/languagesVariants";
+export { default as getInterestsVariants } from "./lib/section-variants/interestsVariants";
+export { default as getExperienceVariants } from "./lib/section-variants/experienceVariants";
+export { default as getSummaryVariants } from "./lib/section-variants/summaryVariants";
+export { default as getProjectsVariants } from "./lib/section-variants/projectsVariants";
+export { default as getSalutationVariants } from "./lib/section-variants/salutationVariants";
+export { default as getClosingVariants } from "./lib/section-variants/closingVariants";
+export { default as getBodyVariants } from "./lib/section-variants/bodyVariants";
 export {
     updateDocumentArray,
     getResume,

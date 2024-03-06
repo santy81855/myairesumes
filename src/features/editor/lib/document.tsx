@@ -1117,16 +1117,7 @@ export const initializeNewCoverLetter = (
         font: "Times-Roman",
         firstName: first,
         lastName: last,
-        sectionOrder: [
-            [
-                "headerBasic",
-                "date",
-                "employerInfo",
-                "salutation",
-                "body",
-                "closing",
-            ],
-        ],
+        sectionOrder: [["headerBasic", "salutation", "body", "closing"]],
         numPages: 1,
         position: "Example Position",
         date: formattedDate,
