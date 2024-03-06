@@ -205,6 +205,7 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
                 onClick={() => {
                     changeFontRatio(-0.1);
                 }}
+                title="scale text down"
             >
                 {fontDecreaseIcon}
             </button>
@@ -214,6 +215,7 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
                 onClick={() => {
                     changeFontRatio(0.1);
                 }}
+                title="scale text up"
             >
                 {fontIncreaseIcon}
             </button>
@@ -365,6 +367,7 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
                 className={`${styles.option} ${
                     alignment === "left" && styles.selected
                 }`}
+                title="align left"
                 onClick={() => {
                     changeTextAlign("left");
                 }}
@@ -378,6 +381,7 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
                 onClick={() => {
                     changeTextAlign("center");
                 }}
+                title="align center"
             >
                 {alignCenterIcon}
             </button>
@@ -388,9 +392,90 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
                 onClick={() => {
                     changeTextAlign("right");
                 }}
+                title="align right"
             >
                 {alignRightIcon}
             </button>
+        </section>
+    );
+};
+
+const DateFormatOption = ({ document, sectionId }: SectionProps) => {
+    const {
+        documentArray,
+        setDocumentArray,
+        showComponentModal,
+        setShowComponentModal,
+    } = useAppContext();
+
+    sectionId = sectionId.toLowerCase();
+    let dateFormat = "";
+
+    switch (true) {
+        case sectionId.includes("experience"):
+            dateFormat = document.information.sectionEdit.experience.dateFormat;
+            break;
+        default:
+            break;
+    }
+
+    const changeDateFormat = (format: string) => {
+        if (!document) return;
+        let updatedDocument = {} as any;
+        let newDocumentArray = [] as any;
+        switch (true) {
+            case sectionId.includes("experience"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            experience: {
+                                ...document.information.sectionEdit.experience,
+                                dateFormat: format,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            default:
+                break;
+        }
+        setDocumentArray(newDocumentArray);
+    };
+
+    return (
+        <section className={`${styles.optionContainer}`}>
+            <p className={styles.optionLabel}>Date Format</p>
+            <section className={styles.dateButtonContainer}>
+                <button
+                    className={`${styles.option} ${styles.dateButton} ${
+                        styles.leftButton
+                    } ${dateFormat === "short" && styles.selectedDate}`}
+                    title="Short date - Jan 2024"
+                    onClick={() => {
+                        changeDateFormat("short");
+                    }}
+                >
+                    <p>Short</p>
+                </button>
+                <button
+                    className={`${styles.option} ${styles.dateButton} ${
+                        styles.rightButton
+                    } ${dateFormat === "long" && styles.selectedDate}`}
+                    title="Long date - January 2024"
+                    onClick={() => {
+                        changeDateFormat("long");
+                    }}
+                >
+                    <p>Long</p>
+                </button>
+            </section>
         </section>
     );
 };
@@ -1341,6 +1426,64 @@ const Header = ({
     );
 };
 
+const Experience = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [firstName, setFirstName] = useState(document.information.firstName);
+    const [lastName, setLastName] = useState(document.information.lastName);
+
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                firstName,
+                lastName,
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+
+    return (
+        <>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <label htmlFor="firstName" className={styles.inputLabel}>
+                        First Name
+                    </label>
+                    <input
+                        id="firstName"
+                        className={styles.textInput}
+                        value={firstName}
+                        onChange={(event) => setFirstName(event.target.value)}
+                    />
+                </section>
+                <section className={styles.inputItemContainer}>
+                    <label htmlFor="lastName" className={styles.inputLabel}>
+                        Last Name
+                    </label>
+                    <input
+                        id="lastName"
+                        className={styles.textInput}
+                        value={lastName}
+                        onChange={(event) => setLastName(event.target.value)}
+                    />
+                </section>
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
 const TitleBar = ({ sectionId }: { sectionId: string }) => {
     let title = "";
     sectionId = sectionId.toLowerCase();
@@ -1417,6 +1560,9 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
         case sectionId.includes("skills"):
             options = Object.keys(document.information.sectionEdit.skills);
             break;
+        case sectionId.includes("experience"):
+            options = Object.keys(document.information.sectionEdit.experience);
+            break;
         case sectionId.includes("header"):
             options = Object.keys(document.information.sectionEdit.header);
             break;
@@ -1444,6 +1590,16 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
                         return (
                             <section className={styles.optionItem}>
                                 <FontRatioOption
+                                    key={index}
+                                    document={document}
+                                    sectionId={sectionId}
+                                />
+                            </section>
+                        );
+                    case "dateFormat":
+                        return (
+                            <section className={styles.optionItem}>
+                                <DateFormatOption
                                     key={index}
                                     document={document}
                                     sectionId={sectionId}
@@ -1503,6 +1659,9 @@ export default function EditModalWrapper({
             section = (
                 <SkillsCategory document={document} sectionId={sectionId} />
             );
+            break;
+        case sectionId.includes("experience"):
+            section = <Experience document={document} sectionId={sectionId} />;
             break;
         case (sectionId.includes("header") &&
             (sectionId.includes("basic") ||

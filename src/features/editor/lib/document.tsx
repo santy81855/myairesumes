@@ -1270,20 +1270,20 @@ export const initializeNewResume = (
             },
             experience: {
                 fontRatio: 1,
-                dateFormat: "MonthYear",
+                dateFormat: "long",
                 showStartDate: true,
                 showSummary: true,
             },
             educationDetailed: {
                 fontRatio: 1,
-                dateFormat: "MonthYear",
+                dateFormat: "long",
                 showStartDate: true,
                 showGpa: false,
                 showBullets: true,
             },
             educationShort: {
                 fontRatio: 1,
-                dateFormat: "MonthYear",
+                dateFormat: "long",
                 showStartDate: true,
             },
             skills: {
