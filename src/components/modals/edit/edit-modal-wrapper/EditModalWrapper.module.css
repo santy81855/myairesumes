@@ -59,10 +59,6 @@
     fill: rgb(var(--editor-accent-color-contrast-rgb));
 }
 
-.closeButton:hover svg {
-    fill: rgb(var(--editor-accent-color-contrast-hover-rgb));
-}
-
 .optionsBar {
     width: 100%;
     background-color: white;
@@ -135,10 +131,6 @@
     border-bottom-right-radius: 5px;
 }
 
-.dateButton:hover {
-    background-color: rgb(var(--editor-accent-color-hover-rgb));
-}
-
 .option p {
     font-size: var(--font-size-small);
     color: rgb(var(--editor-text-color-rgb));
@@ -174,10 +166,6 @@
     fill: rgb(var(--editor-text-color-rgb));
 }
 
-.option:hover svg {
-    fill: rgb(var(--editor-accent-color-rgb));
-}
-
 .saveButtonContainer {
     width: 100%;
     display: flex;
@@ -198,10 +186,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.saveButton:hover {
-    background-color: rgb(var(--editor-accent-color-hover-rgb));
 }
 
 .sectionContainer {
@@ -329,10 +313,6 @@
     fill: rgb(var(--editor-accent-color-contrast-rgb));
 }
 
-.addButton:hover {
-    background-color: rgb(var(--editor-accent-color-hover-rgb));
-}
-
 .columnList {
     width: 100%;
     display: flex;
@@ -388,10 +368,6 @@
     fill: rgb(var(--editor-text-color-rgb));
 }
 
-.editButton:hover svg {
-    fill: rgb(var(--editor-accent-color-rgb));
-}
-
 .cancelButton {
     background-color: transparent;
     border: none;
@@ -405,10 +381,6 @@
     width: 0.8rem;
     height: 0.8rem;
     fill: rgb(227, 115, 84);
-}
-
-.cancelButton:hover svg {
-    fill: rgb(var(--editor-accent-color-rgb));
 }
 
 .rowContainer {
@@ -427,5 +399,35 @@
     .container {
         padding-block: var(--padding-block-medium);
         padding-inline: var(--padding-inline-medium);
+    }
+}
+
+@media (hover: hover) {
+    .cancelButton:hover svg {
+        fill: rgb(var(--editor-accent-color-rgb));
+    }
+
+    .editButton:hover svg {
+        fill: rgb(var(--editor-accent-color-rgb));
+    }
+
+    .addButton:hover {
+        background-color: rgb(var(--editor-accent-color-hover-rgb));
+    }
+
+    .saveButton:hover {
+        background-color: rgb(var(--editor-accent-color-hover-rgb));
+    }
+
+    .option:hover svg {
+        fill: rgb(var(--editor-accent-color-rgb));
+    }
+
+    .closeButton:hover svg {
+        fill: rgb(var(--editor-accent-color-contrast-hover-rgb));
+    }
+
+    .dateButton:hover {
+        background-color: rgb(var(--editor-accent-color-hover-rgb));
     }
 }
