@@ -42,6 +42,12 @@
     );
 }
 
+.active {
+    background-color: rgb(
+        var(--editor-subtitlebar-button-hover-background-color-rgb)
+    );
+}
+
 .iconContainer svg {
     stroke: black;
     fill: black;

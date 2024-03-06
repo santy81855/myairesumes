@@ -164,7 +164,9 @@ const SubTitleBar = () => {
                     <section className={styles.right}>
                         <button
                             title="edit mode"
-                            className={styles.iconContainer}
+                            className={`${styles.iconContainer} ${
+                                isEditing && styles.active
+                            }`}
                             onClick={handleClickEdit}
                         >
                             {editIcon}
@@ -173,7 +175,9 @@ const SubTitleBar = () => {
                         </button>
                         <button
                             title="reorder mode"
-                            className={styles.iconContainer}
+                            className={`${styles.iconContainer} ${
+                                isReordering && styles.active
+                            }`}
                             onClick={handleClickReorder}
                         >
                             {orderIcon}
