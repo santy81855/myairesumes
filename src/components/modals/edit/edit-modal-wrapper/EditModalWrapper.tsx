@@ -36,6 +36,9 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
         case sectionId.includes("name"):
             ratio = document.information.sectionEdit.name.fontRatio;
             break;
+        case sectionId.includes("position"):
+            ratio = document.information.sectionEdit.position.fontRatio;
+            break;
         default:
             break;
     }
@@ -78,6 +81,27 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
                                 ...document.information.sectionEdit.name,
                                 fontRatio:
                                     document.information.sectionEdit.name
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("position"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            position: {
+                                ...document.information.sectionEdit.position,
+                                fontRatio:
+                                    document.information.sectionEdit.position
                                         .fontRatio + change,
                             },
                         },
@@ -136,6 +160,9 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
         case sectionId.includes("name"):
             alignment = document.information.sectionEdit.name.textAlignment;
             break;
+        case sectionId.includes("position"):
+            alignment = document.information.sectionEdit.position.textAlignment;
+            break;
         default:
             break;
     }
@@ -173,6 +200,25 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
                             ...document.information.sectionEdit,
                             name: {
                                 ...document.information.sectionEdit.name,
+                                textAlignment: alignment,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("position"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            position: {
+                                ...document.information.sectionEdit.position,
                                 textAlignment: alignment,
                             },
                         },
@@ -223,6 +269,51 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
                 {alignRightIcon}
             </button>
         </section>
+    );
+};
+
+const Position = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [position, setPosition] = useState(document.information.position);
+
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                position,
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+
+    return (
+        <>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <label htmlFor="position" className={styles.inputLabel}>
+                        Position
+                    </label>
+                    <input
+                        id="position"
+                        className={styles.textInput}
+                        value={position}
+                        onChange={(event) => setPosition(event.target.value)}
+                    />
+                </section>
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
     );
 };
 
@@ -394,6 +485,9 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
         case sectionId.includes("name"):
             options = Object.keys(document.information.sectionEdit.name);
             break;
+        case sectionId.includes("position"):
+            options = Object.keys(document.information.sectionEdit.position);
+            break;
         default:
             break;
     }
@@ -457,6 +551,9 @@ export default function EditModalWrapper({
             break;
         case sectionId.includes("name"):
             section = <Name document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("position"):
+            section = <Position document={document} sectionId={sectionId} />;
             break;
         default:
             break;

@@ -2093,6 +2093,10 @@ export const SectionConfig = (data: {
                                 0.8 *
                                 document.information.sectionEdit.position
                                     .fontRatio,
+                            ...styles.width100,
+                            textAlign:
+                                document.information.sectionEdit.position
+                                    .textAlignment,
                         }}
                     >
                         {document.information.position}
