@@ -1092,6 +1092,24 @@ export const initializeNewCoverLetter = (
             accentBackgroundColor: "#5B7FC5",
             accentTextColor: "white",
         },
+        sectionEdit: {
+            header: {
+                fontRatio: 1,
+                showPosition: true,
+                showSummary: true,
+                showSocial: true,
+            },
+            body: {
+                fontRatio: 1,
+            },
+            contact: {
+                fontRatio: 1,
+                showEmail: true,
+                showPhone: true,
+                showWebsite: true,
+                textAlignment: "left",
+            },
+        },
         documentName: name,
         jobTitle: job,
         description,
