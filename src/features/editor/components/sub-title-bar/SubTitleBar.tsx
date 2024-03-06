@@ -138,6 +138,16 @@ const SubTitleBar = () => {
         }
     };
 
+    const handleClickReorder = () => {
+        setIsEditing(false);
+        setIsReordering(!isReordering);
+    };
+
+    const handleClickEdit = () => {
+        setIsReordering(false);
+        setIsEditing(!isEditing);
+    };
+
     return (
         <section className={styles.container}>
             {currentDocument && (
@@ -154,8 +164,10 @@ const SubTitleBar = () => {
                     <section className={styles.right}>
                         <button
                             title="edit mode"
-                            className={styles.iconContainer}
-                            onClick={() => setIsEditing(!isEditing)}
+                            className={`${styles.iconContainer} ${
+                                isEditing && styles.active
+                            }`}
+                            onClick={handleClickEdit}
                         >
                             {editIcon}
                             {!isEditing && <p>Edit Mode</p>}
@@ -163,8 +175,10 @@ const SubTitleBar = () => {
                         </button>
                         <button
                             title="reorder mode"
-                            className={styles.iconContainer}
-                            onClick={() => setIsReordering(!isReordering)}
+                            className={`${styles.iconContainer} ${
+                                isReordering && styles.active
+                            }`}
+                            onClick={handleClickReorder}
                         >
                             {orderIcon}
                             {!isReordering && <p>Reorder Mode</p>}

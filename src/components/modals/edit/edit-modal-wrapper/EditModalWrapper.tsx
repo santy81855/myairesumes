@@ -209,7 +209,7 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
             >
                 {fontDecreaseIcon}
             </button>
-            <p className={styles.optionLabel}>{ratio.toFixed(1)}</p>
+            <p className={styles.optionLabelPermanent}>{ratio.toFixed(1)}</p>
             <button
                 className={`${styles.option} ${styles.increaseOption}`}
                 onClick={() => {
@@ -608,15 +608,26 @@ const Summary = ({ sectionId, document }: SectionProps) => {
 
     return (
         <>
-            <textarea
-                className={styles.textArea}
-                style={{
-                    textAlign:
-                        document.information.sectionEdit.summary.textAlignment,
-                }}
-                value={summaryText}
-                onChange={(event) => setSummaryText(event.target.value)}
-            />
+            <section className={styles.inputItemContainer100}>
+                <label
+                    htmlFor="summary"
+                    className={`${styles.inputLabel}
+                                    
+                                `}
+                >
+                    Summary
+                </label>
+                <textarea
+                    className={styles.textArea}
+                    style={{
+                        textAlign:
+                            document.information.sectionEdit.summary
+                                .textAlignment,
+                    }}
+                    value={summaryText}
+                    onChange={(event) => setSummaryText(event.target.value)}
+                />
+            </section>
             <SaveButton
                 sectionId={sectionId}
                 document={document}

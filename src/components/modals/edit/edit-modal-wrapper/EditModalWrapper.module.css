@@ -96,6 +96,11 @@
     color: rgb(var(--editor-text-color-rgb));
 }
 
+.optionLabelPermanent {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
 @media screen and (max-width: 425px) {
     .optionItem {
         padding-inline: var(--padding-inline-medium);
