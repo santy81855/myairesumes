@@ -80,7 +80,7 @@
 
 .template {
     aspect-ratio: 8.5/11;
-    width: 95px;
+    width: 145px;
 }
 
 .templatePreview {
@@ -88,6 +88,7 @@
     height: 100%;
     border: 1px solid rgba(198, 198, 198, 0.416);
     cursor: pointer;
+    position: relative;
 }
 
 @media (hover: hover) {
@@ -196,7 +197,7 @@
     stroke: rgb(var(--editor-side-menu-accent-hover-rgb));
 }
 
-.grid {
+.row {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -225,4 +226,31 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.templateDiagonalContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(91, 91, 91, 0.4);
+}
+
+.templateDiagonal {
+    position: absolute;
+    font-size: var(--font-size-medium);
+    color: rgb(var(--editor-side-menu-accent-rgb));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background-color: white;
+    padding-block: var(--padding-block-small);
+    width: 100%;
+    text-align: center;
 }
