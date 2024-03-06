@@ -1,18 +1,5 @@
 "use client";
 import {
-    Text,
-    View,
-    StyleSheet,
-    Font,
-    Svg,
-    Path,
-    G,
-} from "@react-pdf/renderer";
-import {
-    formatDateMonthYear,
-    sortObjectArrayByDateEnd,
-} from "../../../lib/date";
-import {
     getHeaderVariants,
     getEducationVariants,
     getNameVariants,

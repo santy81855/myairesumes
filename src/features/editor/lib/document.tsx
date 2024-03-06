@@ -13,6 +13,7 @@ import {
 } from "@/features/resume";
 
 import { BasicL, FreshL } from "@/features/cover-letter";
+import { text } from "stream/consumers";
 
 export const updateDocument = (
     document: any,
@@ -1102,6 +1103,14 @@ export const initializeNewCoverLetter = (
             body: {
                 fontRatio: 1,
             },
+            salutation: {
+                fontRatio: 1,
+                textAlignment: "left",
+                showCompanyName: true,
+                showAddress1: true,
+                showAddress2: false,
+                showAddress3: true,
+            },
             contact: {
                 fontRatio: 1,
                 showEmail: true,
@@ -1122,6 +1131,9 @@ export const initializeNewCoverLetter = (
         position: "Example Position",
         date: formattedDate,
         companyName: "Example Company",
+        address1: "123 Example St.",
+        address2: "Suite 123",
+        address3: "Example City, EX 12345",
         salutation: "Dear Hiring Manager,",
         closing: "Sincerely,",
         body: "I am writing to express my keen interest in the [Job Title] position at [Company Name], as advertised. With a background in [Your Field of Expertise], combined with my strong passion for [Related Skill/Industry], I am confident in my ability to contribute effectively to your team. Throughout my career, I have honed valuable skills in [Key Skill 1], [Key Skill 2], and [Key Skill 3], which I believe align well with the requirements of the role. I am particularly drawn to [Specific Aspect of Company or Position] and am eager to leverage my expertise to [Contribute to Company Goals/Projects/Initiatives]. I am impressed by [Company Name]'s commitment to [Company Value/Initiative] and am excited about the opportunity to be part of a dynamic and innovative team. I am eager to bring my unique perspective and skills to [Company Name] and am confident that my background makes me a strong fit for this role. Thank you for considering my application. I look forward to the possibility of discussing how my skills and experiences align with the needs of [Company Name].",

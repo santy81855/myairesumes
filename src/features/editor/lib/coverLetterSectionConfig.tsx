@@ -1,16 +1,5 @@
 "use client";
 import {
-    Text,
-    View,
-    StyleSheet,
-    Font,
-    Image,
-    Svg,
-    Path,
-    G,
-} from "@react-pdf/renderer";
-import { formatDateMonthYear, formatDateMonthDayYear } from "../../../lib/date";
-import {
     getHeaderVariants,
     getSectionStyles,
     getSalutationVariants,
