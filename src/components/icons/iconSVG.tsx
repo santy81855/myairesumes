@@ -381,6 +381,36 @@ export const checkOutlineIcon = (
     </svg>
 );
 
+export const alignLeftIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M13.93 11h-10a.75.75 0 1 1 0-1.5h10a.75.75 0 0 1 0 1.5m6.14-4h-16a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5m0 8h-16a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5m-6.14 4h-10a.75.75 0 1 1 0-1.5h10a.75.75 0 0 1 0 1.5"></path>
+    </svg>
+);
+
+export const alignRightIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M20 10.75H10a.75.75 0 0 1 0-1.5h10a.75.75 0 0 1 0 1.5m.07-4h-16a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5m0 8h-16a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5m-.07 4H10a.75.75 0 0 1 0-1.5h10a.75.75 0 0 1 0 1.5"></path>
+    </svg>
+);
+
+export const alignCenterIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M17 10.75H7a.75.75 0 0 1 0-1.5h10a.75.75 0 0 1 0 1.5m3-4H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5m0 8H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 0 1.5m-3 4H7a.75.75 0 0 1 0-1.5h10a.75.75 0 0 1 0 1.5"></path>
+    </svg>
+);
+
+export const fontIncreaseIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M16.625 5.78a1 1 0 0 1-1.25-1.56l2.5-2a1 1 0 0 1 1.25 0l2.5 2a1 1 0 0 1-1.25 1.56L18.5 4.28zm-3.706-1.174a1 1 0 0 0-1.838 0l-6 14a1 1 0 0 0 1.838.788L8.803 15h6.395l1.883 4.394a1 1 0 0 0 1.838-.788zM12 7.54L14.34 13H9.66z"></path>
+    </svg>
+);
+
+export const fontDecreaseIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M16.625 2.22a1 1 0 1 0-1.25 1.56l2.5 2a1 1 0 0 0 1.25 0l2.5-2a1 1 0 0 0-1.25-1.56L18.5 3.72zM12 4a1 1 0 0 1 .92.606l5.999 14a1 1 0 0 1-1.838.788L15.198 15H8.802L6.92 19.394a1 1 0 0 1-1.838-.788l6-14A1 1 0 0 1 12 4m0 3.539l-2.34 5.46h4.68z"></path>
+    </svg>
+);
+
 export const magicResumeLogo = (
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 400 400">
         <g fillRule="evenodd" stroke="none">

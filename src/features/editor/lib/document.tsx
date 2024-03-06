@@ -30,7 +30,7 @@ export const updateDocument = (
             "experience",
             "colBreak",
             "contactVertical",
-            "skillsBullet",
+            "skillsCategory",
             "educationShort",
             "languagesBullet",
         ];
@@ -80,7 +80,7 @@ export const updateDocument = (
             "experience",
             "colBreak",
             "contactVerticalIcons",
-            "skillsBullet",
+            "skillsCategory",
             "educationShort",
             "languagesBullet",
         ];
@@ -112,7 +112,7 @@ export const updateDocument = (
                                 .toUpperCase()}${template.slice(1)}`;
                         }
                         if (item.includes("skills")) {
-                            return "skillsBullet";
+                            return "skillsCategory";
                         }
                         return item;
                     })
@@ -1244,7 +1244,7 @@ export const initializeNewResume = (
         },
         sectionEdit: {
             name: {
-                fontRatio: 2,
+                fontRatio: 1,
                 textAlignment: "center",
             },
             position: {

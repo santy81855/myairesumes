@@ -1,0 +1,213 @@
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    padding-block: var(--padding-block-large);
+    padding-inline: var(--padding-inline-large);
+    overflow-y: auto;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+}
+
+.modal {
+    background-color: white;
+    margin: auto;
+    width: 100%;
+    max-width: 800px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.titleContainer {
+    display: flex;
+    gap: var(--gap-small);
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(var(--editor-accent-color-rgb));
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-inline-large);
+}
+
+.sectionTitle {
+    font-size: var(--font-size-medium);
+    color: rgb(var(--editor-accent-color-contrast-rgb));
+}
+
+.closeButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closeButton svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: rgb(var(--editor-accent-color-contrast-rgb));
+}
+
+.closeButton:hover svg {
+    fill: rgb(var(--editor-accent-color-contrast-hover-rgb));
+}
+
+.optionsBar {
+    width: 100%;
+    background-color: white;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--gap-medium);
+    border-bottom: 1px solid rgba(224, 224, 224, 1);
+}
+
+.optionContainer {
+    display: flex;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: center;
+}
+
+.optionLabel {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.option {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: rgb(var(--editor-text-color-rgb));
+}
+
+.selected svg {
+    fill: rgb(var(--editor-accent-color-rgb));
+}
+
+.decreaseOption svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    fill: rgb(var(--editor-text-color-rgb));
+}
+
+.increaseOption svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    fill: rgb(var(--editor-text-color-rgb));
+}
+
+.option:hover svg {
+    fill: rgb(var(--editor-accent-color-rgb));
+}
+
+.saveButtonContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-small);
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.sectionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-inline-large);
+    gap: var(--gap-medium);
+}
+
+.textArea {
+    width: 100%;
+    border: none;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgba(224, 224, 224, 0.3);
+    border-radius: 5px;
+    font-size: var(--font-size-small);
+    /*it is a text area, make sure it has at least 5 lines of height*/
+    min-height: 8rem;
+}
+
+.textArea:focus {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    outline: none;
+}
+
+.inputRowContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.inputItemContainer {
+    flex-grow: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+}
+
+.inputLabel {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+    font-weight: bold;
+}
+
+.textInput {
+    width: 100%;
+    border: none;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgba(224, 224, 224, 0.3);
+    border-radius: 5px;
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+    font-size: var(--font-size-small);
+}
+
+.textInput:focus {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    outline: none;
+}
+
+@media screen and (max-width: 425px) {
+    .modal {
+        width: 95%;
+    }
+
+    .container {
+        padding-block: var(--padding-block-medium);
+        padding-inline: var(--padding-inline-medium);
+    }
+}

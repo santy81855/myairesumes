@@ -12,6 +12,8 @@ import {
     updateDocument,
     updateCoverLetter,
 } from "@/features/editor";
+import { useSearchParams } from "next/navigation";
+import EditModalWrapper from "@/components/modals/edit/edit-modal-wrapper/EditModalWrapper";
 
 type DocumentContainerProps = {
     document: any;
@@ -19,6 +21,9 @@ type DocumentContainerProps = {
 };
 
 const DocumentContainer = ({ document, type }: DocumentContainerProps) => {
+    const searchParams = useSearchParams();
+    const showEditModal = searchParams.get("edit") || null;
+    //  const search = searchParams.get('search')
     const id = document.id;
     const { documentArray, setDocumentArray, isDocumentLoading } =
         useAppContext();
@@ -88,16 +93,26 @@ const DocumentContainer = ({ document, type }: DocumentContainerProps) => {
     }, []);
 
     return (
-        <section className={styles.documentContainer}>
-            <section className={styles.document}>
-                {(isDocumentLoading || !currentDocument) && <LoadingScreen />}
-                {currentDocument && (
-                    <DndProvider backend={HTML5Backend}>
-                        {currentTemplate}
-                    </DndProvider>
-                )}
+        <>
+            <section className={styles.documentContainer}>
+                <section className={styles.document}>
+                    {(isDocumentLoading || !currentDocument) && (
+                        <LoadingScreen />
+                    )}
+                    {currentDocument && (
+                        <DndProvider backend={HTML5Backend}>
+                            {currentTemplate}
+                        </DndProvider>
+                    )}
+                </section>
             </section>
-        </section>
+            {showEditModal && currentDocument && (
+                <EditModalWrapper
+                    document={currentDocument}
+                    sectionId={showEditModal}
+                />
+            )}
+        </>
     );
 };
 

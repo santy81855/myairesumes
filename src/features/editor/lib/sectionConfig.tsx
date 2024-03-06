@@ -295,7 +295,6 @@ export const SectionConfig = (data: {
             textAlign: "right",
         },
         extraSmall: {
-            fontSize: fontSize * 0.6,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -303,7 +302,6 @@ export const SectionConfig = (data: {
                 : document.information.style.textColor,
         },
         small: {
-            fontSize: fontSize * 0.8,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -311,7 +309,6 @@ export const SectionConfig = (data: {
                 : document.information.style.textColor,
         },
         medium: {
-            fontSize: fontSize * 1,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -319,7 +316,6 @@ export const SectionConfig = (data: {
                 : document.information.style.textColor,
         },
         large: {
-            fontSize: fontSize * 1.2,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -328,7 +324,6 @@ export const SectionConfig = (data: {
         },
         extraLarge: {
             fontFamily: font,
-            fontSize: fontSize * 2,
             lineHeight: 1.2,
             color: accentColumn
                 ? document.information.style.accentTextColor
@@ -336,7 +331,6 @@ export const SectionConfig = (data: {
         },
         x2Large: {
             fontFamily: font,
-            fontSize: fontSize * 2.5,
             lineHeight: 1.2,
             color: accentColumn
                 ? document.information.style.accentTextColor
@@ -660,6 +654,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.textColor,
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.uppercase,
                             }}
                         >
@@ -680,6 +675,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.textColor,
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.uppercase,
                                 ...styles.width100,
                                 ...styles.textLeft,
@@ -702,6 +698,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.textColor,
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.uppercase,
                             }}
                         >
@@ -732,6 +729,7 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.accentText,
                                 ...styles.textLeftAlign,
                                 ...styles.marginLeftMedium,
@@ -756,6 +754,7 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.accentBackgroundText,
                                 ...styles.textLeftAlign,
                                 ...styles.uppercase,
@@ -778,6 +777,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -800,6 +800,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.medium,
+                                fontSize: fontSize * 1,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -822,6 +823,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.large,
+                                fontSize: fontSize * 1.2,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -839,6 +841,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.medium,
+                                fontSize: fontSize * 1,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -863,6 +866,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.medium,
+                                fontSize: fontSize * 1,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -894,23 +898,52 @@ export const SectionConfig = (data: {
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <Text style={styles.large}>
+                    <Text style={{ ...styles.large, fontSize: fontSize * 1.2 }}>
                         {document.information.firstName}{" "}
                         {document.information.lastName}
                     </Text>
-                    <Text style={styles.small}>
+                    <Text style={{ ...styles.small, fontSize: fontSize * 0.8 }}>
                         {document.information.position}
                     </Text>
                     <View style={styles.rowContainer}>
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
                             {document.information.contactInfo.email}
                         </Text>
-                        <Text style={styles.small}>|</Text>
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
+                            |
+                        </Text>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
                             {document.information.contactInfo.phone}
                         </Text>
-                        <Text style={styles.small}>|</Text>
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
+                            |
+                        </Text>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
                             {document.information.contactInfo.website}
                         </Text>
                     </View>
@@ -940,11 +973,21 @@ export const SectionConfig = (data: {
                             ...styles.justifyStart,
                         }}
                     >
-                        <Text style={styles.large}>
+                        <Text
+                            style={{
+                                ...styles.large,
+                                fontSize: fontSize * 1.2,
+                            }}
+                        >
                             {document.information.firstName}{" "}
                             {document.information.lastName}
                         </Text>
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
                             {document.information.position}
                         </Text>
                         <View
@@ -954,15 +997,44 @@ export const SectionConfig = (data: {
                                 ...styles.marginTopMedium,
                             }}
                         >
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.email}
                             </Text>
-                            <Text style={styles.small}>|</Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
+                                |
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.phone}
                             </Text>
-                            <Text style={styles.small}>|</Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
+                                |
+                            </Text>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.website}
                             </Text>
                         </View>
@@ -993,11 +1065,21 @@ export const SectionConfig = (data: {
                             ...styles.justifyStart,
                         }}
                     >
-                        <Text style={styles.x2Large}>
+                        <Text
+                            style={{
+                                ...styles.x2Large,
+                                fontSize: fontSize * 2.5,
+                            }}
+                        >
                             {document.information.firstName}{" "}
                             {document.information.lastName}
                         </Text>
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
                             {document.information.position}
                         </Text>
                         <View
@@ -1012,6 +1094,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1020,6 +1103,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1028,6 +1112,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1036,6 +1121,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1044,6 +1130,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1077,6 +1164,7 @@ export const SectionConfig = (data: {
                                         style={{
                                             ...styles.firstInitial,
                                             ...styles.x2Large,
+                                            fontSize: fontSize * 2.5,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1087,6 +1175,7 @@ export const SectionConfig = (data: {
                                         style={{
                                             ...styles.lastInitial,
                                             ...styles.x2Large,
+                                            fontSize: fontSize * 2.5,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1097,6 +1186,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.extraLarge,
+                                            fontSize: fontSize * 2,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1105,12 +1195,18 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.extraLarge,
+                                            fontSize: fontSize * 2,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
                                         {document.information.lastName}
                                     </Text>
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {document.information.position}
                                     </Text>
                                 </View>
@@ -1134,7 +1230,12 @@ export const SectionConfig = (data: {
                                         ...styles.width100,
                                     }}
                                 >
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {document.information.contactInfo.email}
                                     </Text>
                                     {accentEmailIcon}
@@ -1148,7 +1249,12 @@ export const SectionConfig = (data: {
                                         ...styles.width100,
                                     }}
                                 >
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {document.information.contactInfo.phone}
                                     </Text>
                                     {accentPhoneIcon}
@@ -1162,7 +1268,12 @@ export const SectionConfig = (data: {
                                         ...styles.width100,
                                     }}
                                 >
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {
                                             document.information.contactInfo
                                                 .website
@@ -1202,6 +1313,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.extraLarge,
+                                    fontSize: fontSize * 2,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1211,6 +1323,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1235,7 +1348,12 @@ export const SectionConfig = (data: {
                                         ...styles.width100,
                                     }}
                                 >
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {document.information.contactInfo.email}
                                     </Text>
                                     {accentEmailIcon}
@@ -1249,7 +1367,12 @@ export const SectionConfig = (data: {
                                         ...styles.width100,
                                     }}
                                 >
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {document.information.contactInfo.phone}
                                     </Text>
                                     {accentPhoneIcon}
@@ -1263,7 +1386,12 @@ export const SectionConfig = (data: {
                                         ...styles.width100,
                                     }}
                                 >
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {
                                             document.information.contactInfo
                                                 .website
@@ -1296,6 +1424,7 @@ export const SectionConfig = (data: {
                     <Text
                         style={{
                             ...styles.extraLarge,
+                            fontSize: fontSize * 2,
                             ...styles.accentBackgroundText,
                             ...styles.uppercase,
                             ...styles.bold,
@@ -1307,6 +1436,7 @@ export const SectionConfig = (data: {
                     <Text
                         style={{
                             ...styles.small,
+                            fontSize: fontSize * 0.8,
                             ...styles.textColor,
                         }}
                     >
@@ -1337,6 +1467,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.x2Large,
+                                            fontSize: fontSize * 2.5,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1345,12 +1476,18 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.x2Large,
+                                            fontSize: fontSize * 2.5,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
                                         {document.information.lastName}
                                     </Text>
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {document.information.position}
                                     </Text>
                                 </View>
@@ -1373,11 +1510,20 @@ export const SectionConfig = (data: {
                                 }}
                             >
                                 <Text
-                                    style={{ ...styles.small, ...styles.bold }}
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                        ...styles.bold,
+                                    }}
                                 >
                                     Email
                                 </Text>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {document.information.contactInfo.email}
                                 </Text>
                             </View>
@@ -1389,11 +1535,20 @@ export const SectionConfig = (data: {
                                 }}
                             >
                                 <Text
-                                    style={{ ...styles.small, ...styles.bold }}
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                        ...styles.bold,
+                                    }}
                                 >
                                     Phone
                                 </Text>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {document.information.contactInfo.phone}
                                 </Text>
                             </View>
@@ -1405,11 +1560,20 @@ export const SectionConfig = (data: {
                                 }}
                             >
                                 <Text
-                                    style={{ ...styles.small, ...styles.bold }}
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                        ...styles.bold,
+                                    }}
                                 >
                                     Website
                                 </Text>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {document.information.contactInfo.website}
                                 </Text>
                             </View>
@@ -1440,6 +1604,7 @@ export const SectionConfig = (data: {
                                         style={{
                                             ...styles.firstInitial,
                                             ...styles.x2Large,
+                                            fontSize: fontSize * 2.5,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1450,6 +1615,7 @@ export const SectionConfig = (data: {
                                         style={{
                                             ...styles.lastInitial,
                                             ...styles.x2Large,
+                                            fontSize: fontSize * 2.5,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1464,6 +1630,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.large,
+                                            fontSize: fontSize * 1.2,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1473,6 +1640,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
+                                            fontSize: fontSize * 0.8,
                                         }}
                                     >
                                         {document.information.position}
@@ -1480,6 +1648,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
+                                            fontSize: fontSize * 0.8,
                                             ...styles.marginTopSmall,
                                         }}
                                     >
@@ -1517,6 +1686,7 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.x2Large,
+                                fontSize: fontSize * 2.5,
                                 ...styles.accentText,
                             }}
                         >
@@ -1526,6 +1696,7 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.accentText,
                             }}
                         >
@@ -1547,6 +1718,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1555,6 +1727,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1563,6 +1736,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1571,6 +1745,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1579,6 +1754,7 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize: fontSize * 0.8,
                                     ...styles.accentText,
                                 }}
                             >
@@ -1617,6 +1793,7 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.extraLarge,
+                                fontSize: fontSize * 2,
                                 ...styles.textColor,
                                 ...styles.uppercase,
                             }}
@@ -1626,6 +1803,7 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.extraLarge,
+                                fontSize: fontSize * 2,
                                 ...styles.accentBackgroundText,
                                 ...styles.uppercase,
                             }}
@@ -1636,6 +1814,7 @@ export const SectionConfig = (data: {
                     <Text
                         style={{
                             ...styles.small,
+                            fontSize: fontSize * 0.8,
                             ...styles.textColor,
                         }}
                     >
@@ -1653,22 +1832,47 @@ export const SectionConfig = (data: {
                 <View style={styles.sectionContainer}>
                     <View style={styles.rowSpaceBetween}>
                         <View style={styles.columnGroupLeft}>
-                            <Text style={styles.large}>
+                            <Text
+                                style={{
+                                    ...styles.large,
+                                    fontSize: fontSize * 1.2,
+                                }}
+                            >
                                 {document.information.firstName}{" "}
                                 {document.information.lastName}
                             </Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.position}
                             </Text>
                         </View>
                         <View style={styles.columnGroupRight}>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.email}
                             </Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.phone}
                             </Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.website}
                             </Text>
                         </View>
@@ -1703,6 +1907,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
+                                            fontSize: fontSize * 0.8,
                                             ...styles.bold,
                                         }}
                                     >
@@ -1711,6 +1916,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
+                                            fontSize: fontSize * 0.8,
                                         }}
                                     >
                                         {formatDateMonthYear(
@@ -1724,7 +1930,12 @@ export const SectionConfig = (data: {
                                               )}
                                     </Text>
                                 </View>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {education.degreeType} in{" "}
                                     {education.degreeField}
                                 </Text>
@@ -1767,6 +1978,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
+                                            fontSize: fontSize * 0.8,
                                             ...styles.bold,
                                         }}
                                     >
@@ -1775,6 +1987,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.extraSmall,
+                                            fontSize: fontSize * 0.6,
                                             ...styles.italic,
                                         }}
                                     >
@@ -1789,11 +2002,21 @@ export const SectionConfig = (data: {
                                               )}
                                     </Text>
                                 </View>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {education.degreeType} in{" "}
                                     {education.degreeField}
                                 </Text>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     GPA: {education.gpa}
                                 </Text>
                                 <View style={styles.bulletItemContainer}>
@@ -1806,7 +2029,13 @@ export const SectionConfig = (data: {
                                                 <View
                                                     style={styles.bullet}
                                                 ></View>
-                                                <Text style={styles.small}>
+                                                <Text
+                                                    style={{
+                                                        ...styles.small,
+                                                        fontSize:
+                                                            fontSize * 0.8,
+                                                    }}
+                                                >
                                                     {bullet}
                                                 </Text>
                                             </View>
@@ -1828,7 +2057,19 @@ export const SectionConfig = (data: {
             keyWords: ["name", "first", "last"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <Text style={styles.large}>
+                    <Text
+                        style={{
+                            ...styles.large,
+                            fontSize:
+                                fontSize *
+                                1.2 *
+                                document.information.sectionEdit.name.fontRatio,
+                            ...styles.width100,
+                            textAlign:
+                                document.information.sectionEdit.name
+                                    .textAlignment,
+                        }}
+                    >
                         {document.information.firstName}{" "}
                         {document.information.lastName}
                     </Text>
@@ -1844,7 +2085,16 @@ export const SectionConfig = (data: {
             keyWords: ["position", "job", "title"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <Text style={styles.small}>
+                    <Text
+                        style={{
+                            ...styles.small,
+                            fontSize:
+                                fontSize *
+                                0.8 *
+                                document.information.sectionEdit.position
+                                    .fontRatio,
+                        }}
+                    >
                         {document.information.position}
                     </Text>
                 </View>
@@ -1861,15 +2111,44 @@ export const SectionConfig = (data: {
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
                     <View style={styles.rowContainer}>
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
                             {document.information.contactInfo.email}
                         </Text>
-                        <Text style={styles.small}>|</Text>
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
+                            |
+                        </Text>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
                             {document.information.contactInfo.phone}
                         </Text>
-                        <Text style={styles.small}>|</Text>
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
+                            |
+                        </Text>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize: fontSize * 0.8,
+                            }}
+                        >
                             {document.information.contactInfo.website}
                         </Text>
                     </View>
@@ -1899,10 +2178,21 @@ export const SectionConfig = (data: {
                                 ...styles.width100,
                             }}
                         >
-                            <Text style={{ ...styles.small, ...styles.bold }}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                    ...styles.bold,
+                                }}
+                            >
                                 Email
                             </Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.email}
                             </Text>
                         </View>
@@ -1913,10 +2203,21 @@ export const SectionConfig = (data: {
                                 ...styles.width100,
                             }}
                         >
-                            <Text style={{ ...styles.small, ...styles.bold }}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                    ...styles.bold,
+                                }}
+                            >
                                 Phone
                             </Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.phone}
                             </Text>
                         </View>
@@ -1927,10 +2228,21 @@ export const SectionConfig = (data: {
                                 ...styles.width100,
                             }}
                         >
-                            <Text style={{ ...styles.small, ...styles.bold }}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                    ...styles.bold,
+                                }}
+                            >
                                 Website
                             </Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.website}
                             </Text>
                         </View>
@@ -1971,7 +2283,12 @@ export const SectionConfig = (data: {
                             }}
                         >
                             {accentEmailIcon}
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.email}
                             </Text>
                         </View>
@@ -1985,7 +2302,12 @@ export const SectionConfig = (data: {
                             }}
                         >
                             {accentPhoneIcon}
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.phone}
                             </Text>
                         </View>
@@ -1999,7 +2321,12 @@ export const SectionConfig = (data: {
                             }}
                         >
                             {accentWebsiteIcon}
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.website}
                             </Text>
                         </View>
@@ -2061,6 +2388,7 @@ export const SectionConfig = (data: {
                                                       ...styles.marginTopSmall,
                                                       ...styles.marginBottomSmall,
                                                       ...styles.small,
+                                                      fontSize: fontSize * 0.8,
                                                       ...styles.backgroundAccentForText,
                                                   }
                                                 : {
@@ -2069,6 +2397,7 @@ export const SectionConfig = (data: {
                                                       ...styles.marginTopSmall,
                                                       ...styles.marginBottomSmall,
                                                       ...styles.small,
+                                                      fontSize: fontSize * 0.8,
                                                       ...styles.accentText,
                                                   }
                                         }
@@ -2095,7 +2424,14 @@ export const SectionConfig = (data: {
                             (skill: string, index: number) => (
                                 <View style={styles.bulletItem30} key={index}>
                                     <View style={styles.bullet}></View>
-                                    <Text style={styles.small}>{skill}</Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
+                                        {skill}
+                                    </Text>
                                 </View>
                             )
                         )}
@@ -2116,7 +2452,14 @@ export const SectionConfig = (data: {
                             (skill: string, index: number) => (
                                 <View style={styles.bulletItem} key={index}>
                                     <View style={styles.bullet}></View>
-                                    <Text style={styles.small}>{skill}</Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
+                                        {skill}
+                                    </Text>
                                 </View>
                             )
                         )}
@@ -2133,7 +2476,7 @@ export const SectionConfig = (data: {
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="shortSkillsPdf">
                     {getSectionTitleComponent("Skills")}
-                    <Text style={styles.small}>
+                    <Text style={{ ...styles.small, fontSize: fontSize * 0.8 }}>
                         {document.information.skillArray.join(", ")}
                     </Text>
                 </View>
@@ -2151,7 +2494,10 @@ export const SectionConfig = (data: {
                 "specialized",
             ],
             component: fontSize ? (
-                <View style={styles.sectionContainer} id="skillsPdf">
+                <View
+                    style={{ ...styles.sectionContainer, ...styles.gapSmall }}
+                    id="skillsPdf"
+                >
                     {getSectionTitleComponent("Skills")}
                     {document.information.skillCategoryArray.map(
                         (category: any, index: number) => (
@@ -2162,20 +2508,24 @@ export const SectionConfig = (data: {
                                     ...styles.width100,
                                     ...styles.justifyStart,
                                     ...styles.alignStart,
-                                    ...styles.gapMedium,
                                 }}
                             >
                                 <Text
                                     style={{
-                                        flexShrink: 0,
                                         ...styles.small,
-                                        ...styles.bold,
+                                        fontSize: fontSize * 0.8,
                                     }}
                                 >
-                                    {category.category}
-                                    {":"}
-                                </Text>
-                                <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                            ...styles.bold,
+                                        }}
+                                    >
+                                        {category.category}
+                                        {": "}
+                                    </Text>
                                     {category.skills.join(", ")}
                                 </Text>
                             </View>
@@ -2197,6 +2547,7 @@ export const SectionConfig = (data: {
                     <Text
                         style={{
                             ...styles.small,
+                            fontSize: fontSize * 0.8,
                             ...styles.width100,
                             ...styles.textLeft,
                         }}
@@ -2218,7 +2569,14 @@ export const SectionConfig = (data: {
                             (skill: string, index: number) => (
                                 <View style={styles.bulletItem} key={index}>
                                     <View style={styles.bullet}></View>
-                                    <Text style={styles.small}>{skill}</Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
+                                        {skill}
+                                    </Text>
                                 </View>
                             )
                         )}
@@ -2241,7 +2599,14 @@ export const SectionConfig = (data: {
                             (skill: string, index: number) => (
                                 <View style={styles.bulletItem} key={index}>
                                     <View style={styles.bullet}></View>
-                                    <Text style={styles.small}>{skill}</Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
+                                        {skill}
+                                    </Text>
                                 </View>
                             )
                         )}
@@ -2259,6 +2624,7 @@ export const SectionConfig = (data: {
                     <Text
                         style={{
                             ...styles.small,
+                            fontSize: fontSize * 0.8,
                             ...styles.width100,
                             ...styles.textLeft,
                         }}
@@ -2305,14 +2671,15 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.small,
+                                fontSize:
+                                    fontSize *
+                                    0.8 *
+                                    document.information.sectionEdit.summary
+                                        .fontRatio,
                                 ...styles.width100,
-                                ...(document.information.sectionEdit.summary
-                                    .textAlignment === "left"
-                                    ? styles.textLeft
-                                    : document.information.sectionEdit.summary
-                                          .textAlignment === "center"
-                                    ? styles.textCenter
-                                    : styles.textRight),
+                                textAlign:
+                                    document.information.sectionEdit.summary
+                                        .textAlignment,
                             }}
                         >
                             {document.information.summary}
@@ -2346,12 +2713,18 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.medium,
+                                            fontSize: fontSize * 1,
                                             ...styles.bold,
                                         }}
                                     >
                                         {experience.company}
                                     </Text>
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {formatDateMonthYear(
                                             experience.startDate
                                         )}{" "}
@@ -2363,10 +2736,20 @@ export const SectionConfig = (data: {
                                               )}
                                     </Text>
                                 </View>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {experience.position}
                                 </Text>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {experience.summary}
                                 </Text>
                                 <View style={styles.bulletItemContainer}>
@@ -2379,7 +2762,13 @@ export const SectionConfig = (data: {
                                                 <View
                                                     style={styles.bullet}
                                                 ></View>
-                                                <Text style={styles.small}>
+                                                <Text
+                                                    style={{
+                                                        ...styles.small,
+                                                        fontSize:
+                                                            fontSize * 0.8,
+                                                    }}
+                                                >
                                                     {bullet}
                                                 </Text>
                                             </View>
