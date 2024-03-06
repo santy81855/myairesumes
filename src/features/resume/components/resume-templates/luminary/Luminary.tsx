@@ -36,6 +36,9 @@ const Luminary = ({
     const [sectionGap, setSectionGap] = useState(
         document.information.style.baseSectionGap
     );
+    const [sectionOrder, setSectionOrder] = useState(
+        document.information.sectionOrder[document.currentPage - 1]
+    );
 
     useEffect(() => {
         if (isDownload) return;
@@ -304,7 +307,10 @@ const Luminary = ({
                                     }
                                     document={document}
                                 >
-                                    <SectionContainerEditor document={document}>
+                                    <SectionContainerEditor
+                                        sectionId={section}
+                                        document={document}
+                                    >
                                         <Section
                                             type="resume"
                                             sectionId={section}
@@ -338,10 +344,16 @@ const Luminary = ({
                                 "colBreak",
                                 true
                             ).map((section: string, index: number) => {
+                                const breakIndex =
+                                    document.information.sectionOrder[
+                                        document.currentPage - 1
+                                    ].indexOf("colBreak");
                                 return (
                                     <DraggableContainer
                                         key={section + index.toString()}
-                                        id={`${section}-${index}`}
+                                        id={`${section}-${
+                                            breakIndex + 1 + index
+                                        }`}
                                         orderArray={
                                             document.information.sectionOrder[
                                                 document.currentPage - 1
@@ -350,6 +362,7 @@ const Luminary = ({
                                         document={document}
                                     >
                                         <SectionContainerEditor
+                                            sectionId={section}
                                             document={document}
                                         >
                                             <Section
@@ -383,6 +396,7 @@ const Luminary = ({
                                         document={document}
                                     >
                                         <SectionContainerEditor
+                                            sectionId={section}
                                             document={document}
                                         >
                                             <Section

@@ -23,6 +23,14 @@ export const formatDateYear = (date: string) => {
     });
 };
 
+export const formatDateMonYear = (date: string) => {
+    const d = new Date(date);
+    return d.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+    });
+};
+
 export const formatDateMMDDYYYY = (date: string) => {
     const d = new Date(date);
     return d.toLocaleDateString("en-US", {

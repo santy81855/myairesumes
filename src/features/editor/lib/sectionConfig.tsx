@@ -295,7 +295,6 @@ export const SectionConfig = (data: {
             textAlign: "right",
         },
         extraSmall: {
-            fontSize: fontSize * 0.6,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -303,7 +302,6 @@ export const SectionConfig = (data: {
                 : document.information.style.textColor,
         },
         small: {
-            fontSize: fontSize * 0.8,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -311,7 +309,6 @@ export const SectionConfig = (data: {
                 : document.information.style.textColor,
         },
         medium: {
-            fontSize: fontSize * 1,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -319,7 +316,6 @@ export const SectionConfig = (data: {
                 : document.information.style.textColor,
         },
         large: {
-            fontSize: fontSize * 1.2,
             fontFamily: font,
             lineHeight: 1.2,
             color: accentColumn
@@ -328,7 +324,6 @@ export const SectionConfig = (data: {
         },
         extraLarge: {
             fontFamily: font,
-            fontSize: fontSize * 2,
             lineHeight: 1.2,
             color: accentColumn
                 ? document.information.style.accentTextColor
@@ -336,7 +331,6 @@ export const SectionConfig = (data: {
         },
         x2Large: {
             fontFamily: font,
-            fontSize: fontSize * 2.5,
             lineHeight: 1.2,
             color: accentColumn
                 ? document.information.style.accentTextColor
@@ -447,6 +441,7 @@ export const SectionConfig = (data: {
                 ? document.information.style.accentTextColor
                 : document.information.style.textColor,
             borderRadius: "50%",
+            marginTop: fontSize / 3,
         },
         horizontalLine: {
             width: "100%",
@@ -494,7 +489,8 @@ export const SectionConfig = (data: {
             display: "flex",
             flexDirection: "row",
             justifyContent: "flex-start",
-            alignItems: "center",
+            // align items to the top
+            alignItems: "flex-start",
             paddingLeft: fontSize / 4,
             gap: fontSize / 2,
         },
@@ -503,7 +499,7 @@ export const SectionConfig = (data: {
             display: "flex",
             flexDirection: "row",
             justifyContent: "flex-start",
-            alignItems: "center",
+            alignItems: "flex-start",
             gap: fontSize / 2,
         },
         rowContainerWrap: {
@@ -658,6 +654,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.textColor,
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.uppercase,
                             }}
                         >
@@ -678,6 +675,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.textColor,
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.uppercase,
                                 ...styles.width100,
                                 ...styles.textLeft,
@@ -700,6 +698,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.textColor,
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.uppercase,
                             }}
                         >
@@ -721,7 +720,7 @@ export const SectionConfig = (data: {
                                 document.information.style
                                     .accentBackgroundColor,
                             width: "100%",
-                            maxHeight: fontSize * 1.6,
+                            minHeight: fontSize * 1.6,
                             display: "flex",
                             justifyContent: "flex-start",
                             alignItems: "center",
@@ -730,6 +729,7 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.accentText,
                                 ...styles.textLeftAlign,
                                 ...styles.marginLeftMedium,
@@ -754,6 +754,7 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.accentBackgroundText,
                                 ...styles.textLeftAlign,
                                 ...styles.uppercase,
@@ -776,6 +777,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.small,
+                                fontSize: fontSize * 0.8,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -798,6 +800,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.medium,
+                                fontSize: fontSize * 1,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -820,6 +823,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.large,
+                                fontSize: fontSize * 1.2,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -837,6 +841,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.medium,
+                                fontSize: fontSize * 1,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -861,6 +866,7 @@ export const SectionConfig = (data: {
                             style={{
                                 ...styles.width100,
                                 ...styles.medium,
+                                fontSize: fontSize * 1,
                                 ...styles.uppercase,
                                 ...styles.textLeft,
                                 ...styles.accentBackgroundText,
@@ -892,25 +898,103 @@ export const SectionConfig = (data: {
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <Text style={styles.large}>
+                    <Text
+                        style={{
+                            ...styles.large,
+                            fontSize:
+                                fontSize *
+                                1.2 *
+                                document.information.sectionEdit.header
+                                    .fontRatio,
+                        }}
+                    >
                         {document.information.firstName}{" "}
                         {document.information.lastName}
                     </Text>
-                    <Text style={styles.small}>
-                        {document.information.position}
-                    </Text>
+                    {document.information.sectionEdit.header.showPosition && (
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize:
+                                    fontSize *
+                                    0.8 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
+                            }}
+                        >
+                            {document.information.position}
+                        </Text>
+                    )}
                     <View style={styles.rowContainer}>
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize:
+                                    fontSize *
+                                    0.8 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
+                            }}
+                        >
                             {document.information.contactInfo.email}
                         </Text>
-                        <Text style={styles.small}>|</Text>
-                        <Text style={styles.small}>
-                            {document.information.contactInfo.phone}
-                        </Text>
-                        <Text style={styles.small}>|</Text>
-                        <Text style={styles.small}>
-                            {document.information.contactInfo.website}
-                        </Text>
+                        {document.information.sectionEdit.contact.showPhone && (
+                            <>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                    }}
+                                >
+                                    |
+                                </Text>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                    }}
+                                >
+                                    {document.information.contactInfo.phone}
+                                </Text>
+                            </>
+                        )}
+                        {document.information.sectionEdit.contact
+                            .showWebsite && (
+                            <>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                    }}
+                                >
+                                    |
+                                </Text>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                    }}
+                                >
+                                    {document.information.contactInfo.website}
+                                </Text>
+                            </>
+                        )}
                     </View>
                 </View>
             ) : null,
@@ -938,13 +1022,34 @@ export const SectionConfig = (data: {
                             ...styles.justifyStart,
                         }}
                     >
-                        <Text style={styles.large}>
+                        <Text
+                            style={{
+                                ...styles.large,
+                                fontSize:
+                                    fontSize *
+                                    1.2 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
+                            }}
+                        >
                             {document.information.firstName}{" "}
                             {document.information.lastName}
                         </Text>
-                        <Text style={styles.small}>
-                            {document.information.position}
-                        </Text>
+                        {document.information.sectionEdit.header
+                            .showPosition && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
+                                }}
+                            >
+                                {document.information.position}
+                            </Text>
+                        )}
                         <View
                             style={{
                                 ...styles.rowContainer,
@@ -952,17 +1057,79 @@ export const SectionConfig = (data: {
                                 ...styles.marginTopMedium,
                             }}
                         >
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
+                                }}
+                            >
                                 {document.information.contactInfo.email}
                             </Text>
-                            <Text style={styles.small}>|</Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.phone}
-                            </Text>
-                            <Text style={styles.small}>|</Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.website}
-                            </Text>
+                            {document.information.sectionEdit.contact
+                                .showPhone && (
+                                <>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                        }}
+                                    >
+                                        |
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                        }}
+                                    >
+                                        {document.information.contactInfo.phone}
+                                    </Text>
+                                </>
+                            )}
+                            {document.information.sectionEdit.contact
+                                .showWebsite && (
+                                <>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                        }}
+                                    >
+                                        |
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                        }}
+                                    >
+                                        {
+                                            document.information.contactInfo
+                                                .website
+                                        }
+                                    </Text>
+                                </>
+                            )}
                         </View>
                     </View>
                 </View>
@@ -991,13 +1158,34 @@ export const SectionConfig = (data: {
                             ...styles.justifyStart,
                         }}
                     >
-                        <Text style={styles.x2Large}>
+                        <Text
+                            style={{
+                                ...styles.x2Large,
+                                fontSize:
+                                    fontSize *
+                                    2.5 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
+                            }}
+                        >
                             {document.information.firstName}{" "}
                             {document.information.lastName}
                         </Text>
-                        <Text style={styles.small}>
-                            {document.information.position}
-                        </Text>
+                        {document.information.sectionEdit.header
+                            .showPosition && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
+                                }}
+                            >
+                                {document.information.position}
+                            </Text>
+                        )}
                         <View
                             style={{
                                 ...styles.rowContainer,
@@ -1010,43 +1198,81 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
                                     ...styles.accentText,
                                 }}
                             >
                                 {document.information.contactInfo.email}
                             </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    ...styles.accentText,
-                                }}
-                            >
-                                |
-                            </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    ...styles.accentText,
-                                }}
-                            >
-                                {document.information.contactInfo.phone}
-                            </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    ...styles.accentText,
-                                }}
-                            >
-                                |
-                            </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    ...styles.accentText,
-                                }}
-                            >
-                                {document.information.contactInfo.website}
-                            </Text>
+                            {document.information.sectionEdit.contact
+                                .showPhone && (
+                                <>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.accentText,
+                                        }}
+                                    >
+                                        |
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.accentText,
+                                        }}
+                                    >
+                                        {document.information.contactInfo.phone}
+                                    </Text>
+                                </>
+                            )}
+                            {document.information.sectionEdit.contact
+                                .showWebsite && (
+                                <>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.accentText,
+                                        }}
+                                    >
+                                        |
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.accentText,
+                                        }}
+                                    >
+                                        {
+                                            document.information.contactInfo
+                                                .website
+                                        }
+                                    </Text>
+                                </>
+                            )}
                         </View>
                     </View>
                 </View>
@@ -1067,7 +1293,7 @@ export const SectionConfig = (data: {
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <View style={styles.rowContainerSpaceBetweenTop}>
+                    <View style={styles.rowContainerSpaceBetweenBottom}>
                         <View style={styles.columnGroupLeft}>
                             <View style={styles.rowContainerBottom}>
                                 <View style={styles.initialsBox}>
@@ -1075,6 +1301,11 @@ export const SectionConfig = (data: {
                                         style={{
                                             ...styles.firstInitial,
                                             ...styles.x2Large,
+                                            fontSize:
+                                                fontSize *
+                                                2.5 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1085,6 +1316,11 @@ export const SectionConfig = (data: {
                                         style={{
                                             ...styles.lastInitial,
                                             ...styles.x2Large,
+                                            fontSize:
+                                                fontSize *
+                                                2.5 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1095,6 +1331,11 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.extraLarge,
+                                            fontSize:
+                                                fontSize *
+                                                2 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1103,14 +1344,32 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.extraLarge,
+                                            fontSize:
+                                                fontSize *
+                                                2 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
                                         {document.information.lastName}
                                     </Text>
-                                    <Text style={styles.small}>
-                                        {document.information.position}
-                                    </Text>
+                                    {document.information.sectionEdit.header
+                                        .showPosition && (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.header
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {document.information.position}
+                                        </Text>
+                                    )}
                                 </View>
                             </View>
                         </View>
@@ -1132,42 +1391,80 @@ export const SectionConfig = (data: {
                                         ...styles.width100,
                                     }}
                                 >
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                        }}
+                                    >
                                         {document.information.contactInfo.email}
                                     </Text>
                                     {accentEmailIcon}
                                 </View>
-                                <View
-                                    style={{
-                                        ...styles.row,
-                                        ...styles.alignCenter,
-                                        ...styles.justifyEnd,
-                                        ...styles.gapSmall,
-                                        ...styles.width100,
-                                    }}
-                                >
-                                    <Text style={styles.small}>
-                                        {document.information.contactInfo.phone}
-                                    </Text>
-                                    {accentPhoneIcon}
-                                </View>
-                                <View
-                                    style={{
-                                        ...styles.row,
-                                        ...styles.alignCenter,
-                                        ...styles.justifyEnd,
-                                        ...styles.gapSmall,
-                                        ...styles.width100,
-                                    }}
-                                >
-                                    <Text style={styles.small}>
-                                        {
-                                            document.information.contactInfo
-                                                .website
-                                        }
-                                    </Text>
-                                    {accentWebsiteIcon}
-                                </View>
+                                {document.information.sectionEdit.contact
+                                    .showPhone && (
+                                    <View
+                                        style={{
+                                            ...styles.row,
+                                            ...styles.alignCenter,
+                                            ...styles.justifyEnd,
+                                            ...styles.gapSmall,
+                                            ...styles.width100,
+                                        }}
+                                    >
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.header
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {
+                                                document.information.contactInfo
+                                                    .phone
+                                            }
+                                        </Text>
+                                        {accentPhoneIcon}
+                                    </View>
+                                )}
+                                {document.information.sectionEdit.contact
+                                    .showWebsite && (
+                                    <View
+                                        style={{
+                                            ...styles.row,
+                                            ...styles.alignCenter,
+                                            ...styles.justifyEnd,
+                                            ...styles.gapSmall,
+                                            ...styles.width100,
+                                        }}
+                                    >
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.header
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {
+                                                document.information.contactInfo
+                                                    .website
+                                            }
+                                        </Text>
+                                        {accentWebsiteIcon}
+                                    </View>
+                                )}
                             </View>
                         </View>
                     </View>
@@ -1189,7 +1486,12 @@ export const SectionConfig = (data: {
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <View style={styles.rowSpaceBetween}>
+                    <View
+                        style={{
+                            ...styles.rowSpaceBetween,
+                            ...styles.alignEnd,
+                        }}
+                    >
                         <View
                             style={{
                                 ...styles.columnGroupLeft,
@@ -1200,22 +1502,39 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.extraLarge,
+                                    fontSize:
+                                        fontSize *
+                                        2 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
                                     ...styles.accentText,
                                 }}
                             >
                                 {document.information.firstName}{" "}
                                 {document.information.lastName}
                             </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    ...styles.accentText,
-                                }}
-                            >
-                                {document.information.position}
-                            </Text>
+                            {document.information.sectionEdit.header
+                                .showPosition && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                        ...styles.accentText,
+                                    }}
+                                >
+                                    {document.information.position}
+                                </Text>
+                            )}
                         </View>
-                        <View style={styles.columnGroupRight}>
+                        <View
+                            style={{
+                                ...styles.columnGroupRight,
+                            }}
+                        >
                             <View
                                 style={{
                                     ...styles.col,
@@ -1233,42 +1552,80 @@ export const SectionConfig = (data: {
                                         ...styles.width100,
                                     }}
                                 >
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                        }}
+                                    >
                                         {document.information.contactInfo.email}
                                     </Text>
                                     {accentEmailIcon}
                                 </View>
-                                <View
-                                    style={{
-                                        ...styles.row,
-                                        ...styles.alignCenter,
-                                        ...styles.justifyEnd,
-                                        ...styles.gapSmall,
-                                        ...styles.width100,
-                                    }}
-                                >
-                                    <Text style={styles.small}>
-                                        {document.information.contactInfo.phone}
-                                    </Text>
-                                    {accentPhoneIcon}
-                                </View>
-                                <View
-                                    style={{
-                                        ...styles.row,
-                                        ...styles.alignCenter,
-                                        ...styles.justifyEnd,
-                                        ...styles.gapSmall,
-                                        ...styles.width100,
-                                    }}
-                                >
-                                    <Text style={styles.small}>
-                                        {
-                                            document.information.contactInfo
-                                                .website
-                                        }
-                                    </Text>
-                                    {accentWebsiteIcon}
-                                </View>
+                                {document.information.sectionEdit.contact
+                                    .showPhone && (
+                                    <View
+                                        style={{
+                                            ...styles.row,
+                                            ...styles.alignCenter,
+                                            ...styles.justifyEnd,
+                                            ...styles.gapSmall,
+                                            ...styles.width100,
+                                        }}
+                                    >
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.header
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {
+                                                document.information.contactInfo
+                                                    .phone
+                                            }
+                                        </Text>
+                                        {accentPhoneIcon}
+                                    </View>
+                                )}
+                                {document.information.sectionEdit.contact
+                                    .showWebsite && (
+                                    <View
+                                        style={{
+                                            ...styles.row,
+                                            ...styles.alignCenter,
+                                            ...styles.justifyEnd,
+                                            ...styles.gapSmall,
+                                            ...styles.width100,
+                                        }}
+                                    >
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.header
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {
+                                                document.information.contactInfo
+                                                    .website
+                                            }
+                                        </Text>
+                                        {accentWebsiteIcon}
+                                    </View>
+                                )}
                             </View>
                         </View>
                     </View>
@@ -1294,6 +1651,11 @@ export const SectionConfig = (data: {
                     <Text
                         style={{
                             ...styles.extraLarge,
+                            fontSize:
+                                fontSize *
+                                2 *
+                                document.information.sectionEdit.header
+                                    .fontRatio,
                             ...styles.accentBackgroundText,
                             ...styles.uppercase,
                             ...styles.bold,
@@ -1302,14 +1664,21 @@ export const SectionConfig = (data: {
                         {document.information.firstName}{" "}
                         {document.information.lastName}
                     </Text>
-                    <Text
-                        style={{
-                            ...styles.small,
-                            ...styles.textColor,
-                        }}
-                    >
-                        {document.information.position}
-                    </Text>
+                    {document.information.sectionEdit.header.showPosition && (
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize:
+                                    fontSize *
+                                    0.8 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
+                                ...styles.textColor,
+                            }}
+                        >
+                            {document.information.position}
+                        </Text>
+                    )}
                 </View>
             ) : null,
         },
@@ -1328,13 +1697,18 @@ export const SectionConfig = (data: {
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <View style={styles.rowContainerSpaceBetweenTop}>
+                    <View style={styles.rowContainerSpaceBetweenBottom}>
                         <View style={styles.columnGroupLeft}>
                             <View style={styles.rowContainerBottom}>
                                 <View style={styles.columnGroupLeft}>
                                     <Text
                                         style={{
                                             ...styles.x2Large,
+                                            fontSize:
+                                                fontSize *
+                                                2.5 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1343,14 +1717,32 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.x2Large,
+                                            fontSize:
+                                                fontSize *
+                                                2.5 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
                                         {document.information.lastName}
                                     </Text>
-                                    <Text style={styles.small}>
-                                        {document.information.position}
-                                    </Text>
+                                    {document.information.sectionEdit.header
+                                        .showPosition && (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.header
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {document.information.position}
+                                        </Text>
+                                    )}
                                 </View>
                             </View>
                         </View>
@@ -1371,46 +1763,106 @@ export const SectionConfig = (data: {
                                 }}
                             >
                                 <Text
-                                    style={{ ...styles.small, ...styles.bold }}
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                        ...styles.bold,
+                                    }}
                                 >
                                     Email
                                 </Text>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                    }}
+                                >
                                     {document.information.contactInfo.email}
                                 </Text>
                             </View>
-                            <View
-                                style={{
-                                    ...styles.col,
-                                    ...styles.alignEnd,
-                                    ...styles.width100,
-                                }}
-                            >
-                                <Text
-                                    style={{ ...styles.small, ...styles.bold }}
+                            {document.information.sectionEdit.contact
+                                .showPhone && (
+                                <View
+                                    style={{
+                                        ...styles.col,
+                                        ...styles.alignEnd,
+                                        ...styles.width100,
+                                    }}
                                 >
-                                    Phone
-                                </Text>
-                                <Text style={styles.small}>
-                                    {document.information.contactInfo.phone}
-                                </Text>
-                            </View>
-                            <View
-                                style={{
-                                    ...styles.col,
-                                    ...styles.alignEnd,
-                                    ...styles.width100,
-                                }}
-                            >
-                                <Text
-                                    style={{ ...styles.small, ...styles.bold }}
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.bold,
+                                        }}
+                                    >
+                                        Phone
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                        }}
+                                    >
+                                        {document.information.contactInfo.phone}
+                                    </Text>
+                                </View>
+                            )}
+                            {document.information.sectionEdit.contact
+                                .showWebsite && (
+                                <View
+                                    style={{
+                                        ...styles.col,
+                                        ...styles.alignEnd,
+                                        ...styles.width100,
+                                    }}
                                 >
-                                    Website
-                                </Text>
-                                <Text style={styles.small}>
-                                    {document.information.contactInfo.website}
-                                </Text>
-                            </View>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.bold,
+                                        }}
+                                    >
+                                        Website
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                        }}
+                                    >
+                                        {
+                                            document.information.contactInfo
+                                                .website
+                                        }
+                                    </Text>
+                                </View>
+                            )}
                         </View>
                     </View>
                 </View>
@@ -1438,6 +1890,11 @@ export const SectionConfig = (data: {
                                         style={{
                                             ...styles.firstInitial,
                                             ...styles.x2Large,
+                                            fontSize:
+                                                fontSize *
+                                                2.5 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1448,6 +1905,11 @@ export const SectionConfig = (data: {
                                         style={{
                                             ...styles.lastInitial,
                                             ...styles.x2Large,
+                                            fontSize:
+                                                fontSize *
+                                                2.5 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
@@ -1461,28 +1923,51 @@ export const SectionConfig = (data: {
                                 >
                                     <Text
                                         style={{
-                                            ...styles.large,
+                                            ...styles.extraLarge,
+                                            fontSize:
+                                                fontSize *
+                                                2 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
                                             ...styles.accentBackgroundText,
                                         }}
                                     >
                                         {document.information.firstName}{" "}
                                         {document.information.lastName}
                                     </Text>
-                                    <Text
-                                        style={{
-                                            ...styles.small,
-                                        }}
-                                    >
-                                        {document.information.position}
-                                    </Text>
-                                    <Text
-                                        style={{
-                                            ...styles.small,
-                                            ...styles.marginTopSmall,
-                                        }}
-                                    >
-                                        {document.information.summary}
-                                    </Text>
+                                    {document.information.sectionEdit.header
+                                        .showPosition && (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.header
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {document.information.position}
+                                        </Text>
+                                    )}
+                                    {document.information.sectionEdit.header
+                                        .showSummary && (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.header
+                                                        .fontRatio,
+                                                ...styles.marginTopSmall,
+                                            }}
+                                        >
+                                            {document.information.summary}
+                                        </Text>
+                                    )}
                                 </View>
                             </View>
                         </View>
@@ -1515,20 +2000,33 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.x2Large,
+                                fontSize:
+                                    fontSize *
+                                    2.5 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
                                 ...styles.accentText,
                             }}
                         >
                             {document.information.firstName}{" "}
                             {document.information.lastName}
                         </Text>
-                        <Text
-                            style={{
-                                ...styles.small,
-                                ...styles.accentText,
-                            }}
-                        >
-                            {document.information.position}
-                        </Text>
+                        {document.information.sectionEdit.header
+                            .showPosition && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
+                                    ...styles.accentText,
+                                }}
+                            >
+                                {document.information.position}
+                            </Text>
+                        )}
                         <View
                             style={{
                                 ...styles.horizontalLineSmall,
@@ -1545,43 +2043,81 @@ export const SectionConfig = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
                                     ...styles.accentText,
                                 }}
                             >
                                 {document.information.contactInfo.email}
                             </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    ...styles.accentText,
-                                }}
-                            >
-                                |
-                            </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    ...styles.accentText,
-                                }}
-                            >
-                                {document.information.contactInfo.phone}
-                            </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    ...styles.accentText,
-                                }}
-                            >
-                                |
-                            </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    ...styles.accentText,
-                                }}
-                            >
-                                {document.information.contactInfo.website}
-                            </Text>
+                            {document.information.sectionEdit.contact
+                                .showPhone && (
+                                <>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.accentText,
+                                        }}
+                                    >
+                                        |
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.accentText,
+                                        }}
+                                    >
+                                        {document.information.contactInfo.phone}
+                                    </Text>
+                                </>
+                            )}
+                            {document.information.sectionEdit.contact
+                                .showWebsite && (
+                                <>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.accentText,
+                                        }}
+                                    >
+                                        |
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .header.fontRatio,
+                                            ...styles.accentText,
+                                        }}
+                                    >
+                                        {
+                                            document.information.contactInfo
+                                                .website
+                                        }
+                                    </Text>
+                                </>
+                            )}
                         </View>
                     </View>
                 </View>
@@ -1615,6 +2151,11 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.extraLarge,
+                                fontSize:
+                                    fontSize *
+                                    2 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
                                 ...styles.textColor,
                                 ...styles.uppercase,
                             }}
@@ -1624,6 +2165,11 @@ export const SectionConfig = (data: {
                         <Text
                             style={{
                                 ...styles.extraLarge,
+                                fontSize:
+                                    fontSize *
+                                    2 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
                                 ...styles.accentBackgroundText,
                                 ...styles.uppercase,
                             }}
@@ -1631,14 +2177,21 @@ export const SectionConfig = (data: {
                             {document.information.lastName}
                         </Text>
                     </View>
-                    <Text
-                        style={{
-                            ...styles.small,
-                            ...styles.textColor,
-                        }}
-                    >
-                        {document.information.position}
-                    </Text>
+                    {document.information.sectionEdit.header.showPosition && (
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize:
+                                    fontSize *
+                                    0.8 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
+                                ...styles.textColor,
+                            }}
+                        >
+                            {document.information.position}
+                        </Text>
+                    )}
                 </View>
             ) : null,
         },
@@ -1651,22 +2204,47 @@ export const SectionConfig = (data: {
                 <View style={styles.sectionContainer}>
                     <View style={styles.rowSpaceBetween}>
                         <View style={styles.columnGroupLeft}>
-                            <Text style={styles.large}>
+                            <Text
+                                style={{
+                                    ...styles.large,
+                                    fontSize: fontSize * 1.2,
+                                }}
+                            >
                                 {document.information.firstName}{" "}
                                 {document.information.lastName}
                             </Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.position}
                             </Text>
                         </View>
                         <View style={styles.columnGroupRight}>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.email}
                             </Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.phone}
                             </Text>
-                            <Text style={styles.small}>
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize: fontSize * 0.8,
+                                }}
+                            >
                                 {document.information.contactInfo.website}
                             </Text>
                         </View>
@@ -1701,6 +2279,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
+                                            fontSize: fontSize * 0.8,
                                             ...styles.bold,
                                         }}
                                     >
@@ -1709,6 +2288,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
+                                            fontSize: fontSize * 0.8,
                                         }}
                                     >
                                         {formatDateMonthYear(
@@ -1722,7 +2302,12 @@ export const SectionConfig = (data: {
                                               )}
                                     </Text>
                                 </View>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {education.degreeType} in{" "}
                                     {education.degreeField}
                                 </Text>
@@ -1765,6 +2350,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
+                                            fontSize: fontSize * 0.8,
                                             ...styles.bold,
                                         }}
                                     >
@@ -1773,6 +2359,7 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.extraSmall,
+                                            fontSize: fontSize * 0.6,
                                             ...styles.italic,
                                         }}
                                     >
@@ -1787,11 +2374,21 @@ export const SectionConfig = (data: {
                                               )}
                                     </Text>
                                 </View>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {education.degreeType} in{" "}
                                     {education.degreeField}
                                 </Text>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     GPA: {education.gpa}
                                 </Text>
                                 <View style={styles.bulletItemContainer}>
@@ -1804,7 +2401,13 @@ export const SectionConfig = (data: {
                                                 <View
                                                     style={styles.bullet}
                                                 ></View>
-                                                <Text style={styles.small}>
+                                                <Text
+                                                    style={{
+                                                        ...styles.small,
+                                                        fontSize:
+                                                            fontSize * 0.8,
+                                                    }}
+                                                >
                                                     {bullet}
                                                 </Text>
                                             </View>
@@ -1826,7 +2429,19 @@ export const SectionConfig = (data: {
             keyWords: ["name", "first", "last"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <Text style={styles.large}>
+                    <Text
+                        style={{
+                            ...styles.large,
+                            fontSize:
+                                fontSize *
+                                1.2 *
+                                document.information.sectionEdit.name.fontRatio,
+                            ...styles.width100,
+                            textAlign:
+                                document.information.sectionEdit.name
+                                    .textAlignment,
+                        }}
+                    >
                         {document.information.firstName}{" "}
                         {document.information.lastName}
                     </Text>
@@ -1842,7 +2457,20 @@ export const SectionConfig = (data: {
             keyWords: ["position", "job", "title"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <Text style={styles.small}>
+                    <Text
+                        style={{
+                            ...styles.small,
+                            fontSize:
+                                fontSize *
+                                0.8 *
+                                document.information.sectionEdit.position
+                                    .fontRatio,
+                            ...styles.width100,
+                            textAlign:
+                                document.information.sectionEdit.position
+                                    .textAlignment,
+                        }}
+                    >
                         {document.information.position}
                     </Text>
                 </View>
@@ -1858,18 +2486,97 @@ export const SectionConfig = (data: {
             keyWords: ["contact", "email", "phone", "website", "horizontal"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <View style={styles.rowContainer}>
-                        <Text style={styles.small}>
-                            {document.information.contactInfo.email}
-                        </Text>
-                        <Text style={styles.small}>|</Text>
-                        <Text style={styles.small}>
-                            {document.information.contactInfo.phone}
-                        </Text>
-                        <Text style={styles.small}>|</Text>
-                        <Text style={styles.small}>
-                            {document.information.contactInfo.website}
-                        </Text>
+                    <View
+                        style={{
+                            ...styles.row,
+                            ...styles.alignCenter,
+                            ...styles.width100,
+                            ...styles.gapSmall,
+                            justifyContent:
+                                document.information.sectionEdit.contact
+                                    .textAlignment === "left"
+                                    ? "flex-start"
+                                    : document.information.sectionEdit.contact
+                                          .textAlignment === "center"
+                                    ? "center"
+                                    : "flex-end",
+                        }}
+                    >
+                        {document.information.sectionEdit.contact.showEmail ===
+                            true && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.contact
+                                            .fontRatio,
+                                }}
+                            >
+                                {document.information.contactInfo.email}
+                            </Text>
+                        )}
+                        {document.information.sectionEdit.contact.showEmail &&
+                            document.information.sectionEdit.contact
+                                .showPhone && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                    }}
+                                >
+                                    |
+                                </Text>
+                            )}
+                        {document.information.sectionEdit.contact.showPhone && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.contact
+                                            .fontRatio,
+                                }}
+                            >
+                                {document.information.contactInfo.phone}
+                            </Text>
+                        )}
+                        {document.information.sectionEdit.contact
+                            .showWebsite && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.contact
+                                            .fontRatio,
+                                }}
+                            >
+                                |
+                            </Text>
+                        )}
+                        {document.information.sectionEdit.contact
+                            .showWebsite && (
+                            <Text
+                                style={{
+                                    ...styles.small,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.contact
+                                            .fontRatio,
+                                }}
+                            >
+                                {document.information.contactInfo.website}
+                            </Text>
+                        )}
                     </View>
                 </View>
             ) : null,
@@ -1885,68 +2592,155 @@ export const SectionConfig = (data: {
                         style={{
                             ...styles.width100,
                             ...styles.col,
-                            ...styles.alignStart,
+                            ...styles.alignCenter,
                             ...styles.justifyStart,
                             ...styles.gapSmall,
                         }}
                     >
-                        <View
-                            style={{
-                                ...styles.col,
-                                ...styles.alignStart,
-                                ...styles.width100,
-                            }}
-                        >
-                            <Text style={{ ...styles.small, ...styles.bold }}>
-                                Email
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.email}
-                            </Text>
-                        </View>
-                        <View
-                            style={{
-                                ...styles.col,
-                                ...styles.alignStart,
-                                ...styles.width100,
-                            }}
-                        >
-                            <Text style={{ ...styles.small, ...styles.bold }}>
-                                Phone
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.phone}
-                            </Text>
-                        </View>
-                        <View
-                            style={{
-                                ...styles.col,
-                                ...styles.alignStart,
-                                ...styles.width100,
-                            }}
-                        >
-                            <Text style={{ ...styles.small, ...styles.bold }}>
-                                Website
-                            </Text>
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.website}
-                            </Text>
-                        </View>
+                        {document.information.sectionEdit.contact.showEmail ===
+                            true && (
+                            <View
+                                style={{
+                                    ...styles.col,
+                                    ...styles.width100,
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.bold,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    Email
+                                </Text>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    {document.information.contactInfo.email}
+                                </Text>
+                            </View>
+                        )}
+                        {document.information.sectionEdit.contact.showPhone ===
+                            true && (
+                            <View
+                                style={{
+                                    ...styles.col,
+                                    ...styles.width100,
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.bold,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    Phone
+                                </Text>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    {document.information.contactInfo.phone}
+                                </Text>
+                            </View>
+                        )}
+                        {document.information.sectionEdit.contact
+                            .showWebsite === true && (
+                            <View
+                                style={{
+                                    ...styles.col,
+                                    ...styles.width100,
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.bold,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    Website
+                                </Text>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                        ...styles.width100,
+                                        textAlign:
+                                            document.information.sectionEdit
+                                                .contact.textAlignment,
+                                    }}
+                                >
+                                    {document.information.contactInfo.website}
+                                </Text>
+                            </View>
+                        )}
                     </View>
                 </View>
             ) : null,
         },
-        contactLuminary: {
-            name: "Contact: Email, Phone, Website",
+        contactVerticalIcons: {
+            name: "Contact Details with Icons",
             description:
-                "Your email, phone number, and website displayed as a row. Defaults to the left side, but can be changed to be center or right aligned. You can choose to omit any of the three contact details.",
+                "Your email, phone number, and website displayed with their respective icons as a column. Defaults to the left side, but can be changed to be center or right aligned. You can choose to omit any of the three contact details.",
             keyWords: [
                 "contact",
                 "email",
                 "phone",
                 "website",
-                "luminary",
                 "icons",
+                "vertical",
             ],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
@@ -1954,53 +2748,134 @@ export const SectionConfig = (data: {
                         style={{
                             ...styles.width100,
                             ...styles.col,
-                            ...styles.alignStart,
+                            ...styles.alignCenter,
                             ...styles.justifyStart,
                             ...styles.gapSmall,
                         }}
                     >
-                        <View
-                            style={{
-                                ...styles.row,
-                                ...styles.alignCenter,
-                                ...styles.justifyStart,
-                                ...styles.gapSmall,
-                                ...styles.width100,
-                            }}
-                        >
-                            {accentEmailIcon}
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.email}
-                            </Text>
-                        </View>
-                        <View
-                            style={{
-                                ...styles.row,
-                                ...styles.alignCenter,
-                                ...styles.justifyStart,
-                                ...styles.gapSmall,
-                                ...styles.width100,
-                            }}
-                        >
-                            {accentPhoneIcon}
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.phone}
-                            </Text>
-                        </View>
-                        <View
-                            style={{
-                                ...styles.row,
-                                ...styles.alignCenter,
-                                ...styles.justifyStart,
-                                ...styles.gapSmall,
-                                ...styles.width100,
-                            }}
-                        >
-                            {accentWebsiteIcon}
-                            <Text style={styles.small}>
-                                {document.information.contactInfo.website}
-                            </Text>
-                        </View>
+                        {document.information.sectionEdit.contact.showEmail ===
+                            true && (
+                            <View
+                                style={{
+                                    ...styles.row,
+                                    ...styles.alignCenter,
+                                    justifyContent:
+                                        document.information.sectionEdit.contact
+                                            .textAlignment === "left"
+                                            ? "flex-start"
+                                            : document.information.sectionEdit
+                                                  .contact.textAlignment ===
+                                              "center"
+                                            ? "center"
+                                            : "flex-end",
+                                    ...styles.gapSmall,
+                                    ...styles.width100,
+                                }}
+                            >
+                                {(document.information.sectionEdit.contact
+                                    .textAlignment === "left" ||
+                                    document.information.sectionEdit.contact
+                                        .textAlignment === "center") &&
+                                    accentEmailIcon}
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                    }}
+                                >
+                                    {document.information.contactInfo.email}
+                                </Text>
+                                {document.information.sectionEdit.contact
+                                    .textAlignment === "right" &&
+                                    accentEmailIcon}
+                            </View>
+                        )}
+                        {document.information.sectionEdit.contact.showPhone ===
+                            true && (
+                            <View
+                                style={{
+                                    ...styles.row,
+                                    ...styles.alignCenter,
+                                    justifyContent:
+                                        document.information.sectionEdit.contact
+                                            .textAlignment === "left"
+                                            ? "flex-start"
+                                            : document.information.sectionEdit
+                                                  .contact.textAlignment ===
+                                              "center"
+                                            ? "center"
+                                            : "flex-end",
+                                    ...styles.gapSmall,
+                                    ...styles.width100,
+                                }}
+                            >
+                                {(document.information.sectionEdit.contact
+                                    .textAlignment === "left" ||
+                                    document.information.sectionEdit.contact
+                                        .textAlignment === "center") &&
+                                    accentPhoneIcon}
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                    }}
+                                >
+                                    {document.information.contactInfo.phone}
+                                </Text>
+                                {document.information.sectionEdit.contact
+                                    .textAlignment === "right" &&
+                                    accentPhoneIcon}
+                            </View>
+                        )}
+                        {document.information.sectionEdit.contact
+                            .showWebsite === true && (
+                            <View
+                                style={{
+                                    ...styles.row,
+                                    ...styles.alignCenter,
+                                    justifyContent:
+                                        document.information.sectionEdit.contact
+                                            .textAlignment === "left"
+                                            ? "flex-start"
+                                            : document.information.sectionEdit
+                                                  .contact.textAlignment ===
+                                              "center"
+                                            ? "center"
+                                            : "flex-end",
+                                    ...styles.gapSmall,
+                                    ...styles.width100,
+                                }}
+                            >
+                                {(document.information.sectionEdit.contact
+                                    .textAlignment === "left" ||
+                                    document.information.sectionEdit.contact
+                                        .textAlignment === "center") &&
+                                    accentWebsiteIcon}
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .contact.fontRatio,
+                                    }}
+                                >
+                                    {document.information.contactInfo.website}
+                                </Text>
+                                {document.information.sectionEdit.contact
+                                    .textAlignment === "right" &&
+                                    accentWebsiteIcon}
+                            </View>
+                        )}
                     </View>
                 </View>
             ) : null,
@@ -2032,7 +2907,19 @@ export const SectionConfig = (data: {
                                             ? {
                                                   ...styles.col,
                                                   ...styles.justifyCenter,
-                                                  ...styles.alignStart,
+                                                  alignItems:
+                                                      document.information
+                                                          .sectionEdit.skills
+                                                          .textAlignment ===
+                                                      "left"
+                                                          ? "flex-start"
+                                                          : document.information
+                                                                .sectionEdit
+                                                                .skills
+                                                                .textAlignment ===
+                                                            "center"
+                                                          ? "center"
+                                                          : "flex-end",
                                                   ...styles.width100,
                                                   ...styles.minHeightMedium,
                                                   ...styles.accentTextBackground,
@@ -2041,7 +2928,19 @@ export const SectionConfig = (data: {
                                             : {
                                                   ...styles.col,
                                                   ...styles.justifyCenter,
-                                                  ...styles.alignStart,
+                                                  alignItems:
+                                                      document.information
+                                                          .sectionEdit.skills
+                                                          .textAlignment ===
+                                                      "left"
+                                                          ? "flex-start"
+                                                          : document.information
+                                                                .sectionEdit
+                                                                .skills
+                                                                .textAlignment ===
+                                                            "center"
+                                                          ? "center"
+                                                          : "flex-end",
                                                   ...styles.width100,
                                                   ...styles.minHeightMedium,
                                                   ...styles.accentBackgroundColor,
@@ -2059,6 +2958,12 @@ export const SectionConfig = (data: {
                                                       ...styles.marginTopSmall,
                                                       ...styles.marginBottomSmall,
                                                       ...styles.small,
+                                                      fontSize:
+                                                          fontSize *
+                                                          0.8 *
+                                                          document.information
+                                                              .sectionEdit
+                                                              .skills.fontRatio,
                                                       ...styles.backgroundAccentForText,
                                                   }
                                                 : {
@@ -2067,6 +2972,12 @@ export const SectionConfig = (data: {
                                                       ...styles.marginTopSmall,
                                                       ...styles.marginBottomSmall,
                                                       ...styles.small,
+                                                      fontSize:
+                                                          fontSize *
+                                                          0.8 *
+                                                          document.information
+                                                              .sectionEdit
+                                                              .skills.fontRatio,
                                                       ...styles.accentText,
                                                   }
                                         }
@@ -2088,12 +2999,37 @@ export const SectionConfig = (data: {
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="skillsPdf">
                     {getSectionTitleComponent("Skills")}
-                    <View style={{ ...styles.rowContainerWrap }}>
+                    <View
+                        style={{
+                            ...styles.width100,
+                            ...styles.row,
+                            ...styles.flexWrap,
+                            justifyContent:
+                                document.information.sectionEdit.skills
+                                    .textAlignment === "left"
+                                    ? "flex-start"
+                                    : document.information.sectionEdit.skills
+                                          .textAlignment === "center"
+                                    ? "center"
+                                    : "flex-end",
+                        }}
+                    >
                         {document.information.skillArray.map(
                             (skill: string, index: number) => (
                                 <View style={styles.bulletItem30} key={index}>
                                     <View style={styles.bullet}></View>
-                                    <Text style={styles.small}>{skill}</Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .skills.fontRatio,
+                                        }}
+                                    >
+                                        {skill}
+                                    </Text>
                                 </View>
                             )
                         )}
@@ -2107,14 +3043,25 @@ export const SectionConfig = (data: {
                 "Your skills in a vertical bullet point list. Ideal for a list of detailed skills.",
             keyWords: ["skills", "abilities", "strengths", "bullet"],
             component: fontSize ? (
-                <View style={styles.sectionContainer} id="skillsPdf">
+                <View style={styles.sectionContainer}>
                     {getSectionTitleComponent("Skills")}
                     <View style={styles.bulletItemContainer}>
                         {document.information.skillArray.map(
                             (skill: string, index: number) => (
                                 <View style={styles.bulletItem} key={index}>
                                     <View style={styles.bullet}></View>
-                                    <Text style={styles.small}>{skill}</Text>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .skills.fontRatio,
+                                        }}
+                                    >
+                                        {skill}
+                                    </Text>
                                 </View>
                             )
                         )}
@@ -2131,8 +3078,181 @@ export const SectionConfig = (data: {
             component: fontSize ? (
                 <View style={styles.sectionContainer} id="shortSkillsPdf">
                     {getSectionTitleComponent("Skills")}
-                    <Text style={styles.small}>
+                    <Text
+                        style={{
+                            ...styles.small,
+                            fontSize:
+                                fontSize *
+                                0.8 *
+                                document.information.sectionEdit.skills
+                                    .fontRatio,
+                            ...styles.width100,
+                            textAlign:
+                                document.information.sectionEdit.skills
+                                    .textAlignment,
+                        }}
+                    >
                         {document.information.skillArray.join(", ")}
+                    </Text>
+                </View>
+            ) : null,
+        },
+        skillsCategory: {
+            name: "Skills - Specialized",
+            description:
+                "Your skills sectioned into categories. Ideal for a list of specialized skills.",
+            keyWords: [
+                "skills",
+                "abilities",
+                "strengths",
+                "categorized",
+                "specialized",
+            ],
+            component: fontSize ? (
+                <View
+                    style={{ ...styles.sectionContainer, ...styles.gapSmall }}
+                    id="skillsPdf"
+                >
+                    {getSectionTitleComponent("Skills")}
+                    {document.information.skillCategoryArray.map(
+                        (category: any, index: number) => (
+                            <View
+                                key={index}
+                                style={{
+                                    ...styles.row,
+                                    ...styles.width100,
+                                    ...styles.justifyStart,
+                                    ...styles.alignStart,
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .skills.fontRatio,
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .skills.fontRatio,
+                                            ...styles.bold,
+                                        }}
+                                    >
+                                        {category.category}
+                                        {": "}
+                                    </Text>
+                                    {category.skills.join(", ")}
+                                </Text>
+                            </View>
+                        )
+                    )}
+                </View>
+            ) : null,
+        },
+    };
+
+    const languagesVariants = {
+        languagesComma: {
+            name: "Languages - Comma Separated",
+            description: "Your languages in a comma separated list.",
+            keyWords: ["languages", "comma"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    {getSectionTitleComponent("Languages")}
+                    <Text
+                        style={{
+                            ...styles.small,
+                            fontSize: fontSize * 0.8,
+                            ...styles.width100,
+                            ...styles.textLeft,
+                        }}
+                    >
+                        {document.information.languageArray.join(", ")}
+                    </Text>
+                </View>
+            ) : null,
+        },
+        languagesBullet: {
+            name: "Languages - Bullet Points",
+            description: "Your languages in a bullet point list.",
+            keyWords: ["languages", "bullet"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer}>
+                    {getSectionTitleComponent("Languages")}
+                    <View style={styles.bulletItemContainer}>
+                        {document.information.languageArray.map(
+                            (skill: string, index: number) => (
+                                <View style={styles.bulletItem} key={index}>
+                                    <View style={styles.bullet}></View>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
+                                        {skill}
+                                    </Text>
+                                </View>
+                            )
+                        )}
+                    </View>
+                </View>
+            ) : null,
+        },
+    };
+
+    const interestsVariants = {
+        interestsBullet: {
+            name: "Interests - Bullet Points",
+            description: "Your interests in a bullet point list.",
+            keyWords: ["interests", "hobbies", "bullet"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer} id="interestsPdf">
+                    {getSectionTitleComponent("Interests")}
+                    <View style={styles.bulletItemContainer}>
+                        {document.information.interestArray.map(
+                            (skill: string, index: number) => (
+                                <View style={styles.bulletItem} key={index}>
+                                    <View style={styles.bullet}></View>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
+                                        {skill}
+                                    </Text>
+                                </View>
+                            )
+                        )}
+                    </View>
+                </View>
+            ) : null,
+        },
+        interestsComma: {
+            name: "Interests - Comma Separated",
+            description: "Your interests in a comma separated list.",
+            keyWords: ["interests", "hobbies", "comma"],
+            component: fontSize ? (
+                <View style={styles.sectionContainer} id="interestsPdf">
+                    {getSectionTitleComponent("Interests")}
+                    <Text
+                        style={{
+                            ...styles.small,
+                            fontSize: fontSize * 0.8,
+                            ...styles.width100,
+                            ...styles.textLeft,
+                        }}
+                    >
+                        {document.information.interestArray.join(", ")}
                     </Text>
                 </View>
             ) : null,
@@ -2146,6 +3266,8 @@ export const SectionConfig = (data: {
         ...educationVariants,
         ...contactVariants,
         ...skillsVariants,
+        ...languagesVariants,
+        ...interestsVariants,
         summary: {
             name: "Summary",
             description:
@@ -2169,7 +3291,20 @@ export const SectionConfig = (data: {
                             ...styles.justifyStart,
                         }}
                     >
-                        <Text style={styles.small}>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize:
+                                    fontSize *
+                                    0.8 *
+                                    document.information.sectionEdit.summary
+                                        .fontRatio,
+                                ...styles.width100,
+                                textAlign:
+                                    document.information.sectionEdit.summary
+                                        .textAlignment,
+                            }}
+                        >
                             {document.information.summary}
                         </Text>
                     </View>
@@ -2201,12 +3336,18 @@ export const SectionConfig = (data: {
                                     <Text
                                         style={{
                                             ...styles.medium,
+                                            fontSize: fontSize * 1,
                                             ...styles.bold,
                                         }}
                                     >
                                         {experience.company}
                                     </Text>
-                                    <Text style={styles.small}>
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize: fontSize * 0.8,
+                                        }}
+                                    >
                                         {formatDateMonthYear(
                                             experience.startDate
                                         )}{" "}
@@ -2218,10 +3359,20 @@ export const SectionConfig = (data: {
                                               )}
                                     </Text>
                                 </View>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {experience.position}
                                 </Text>
-                                <Text style={styles.small}>
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize: fontSize * 0.8,
+                                    }}
+                                >
                                     {experience.summary}
                                 </Text>
                                 <View style={styles.bulletItemContainer}>
@@ -2234,7 +3385,13 @@ export const SectionConfig = (data: {
                                                 <View
                                                     style={styles.bullet}
                                                 ></View>
-                                                <Text style={styles.small}>
+                                                <Text
+                                                    style={{
+                                                        ...styles.small,
+                                                        fontSize:
+                                                            fontSize * 0.8,
+                                                    }}
+                                                >
                                                     {bullet}
                                                 </Text>
                                             </View>
@@ -2244,76 +3401,6 @@ export const SectionConfig = (data: {
                             </View>
                         ))}
                     </View>
-                </View>
-            ) : null,
-        },
-        languages: {
-            name: "Languages",
-            description: "Your languages in a bullet point list.",
-            keyWords: ["languages"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="languagesPdf">
-                    {getSectionTitleComponent("Languages")}
-                    <View style={styles.arrayContainer}>
-                        <View style={styles.bulletItemContainer}>
-                            {document.information.languageArray.map(
-                                (skill: string, index: number) => (
-                                    <View style={styles.bulletItem} key={index}>
-                                        <View style={styles.bullet}></View>
-                                        <Text style={styles.small}>
-                                            {skill}
-                                        </Text>
-                                    </View>
-                                )
-                            )}
-                        </View>
-                    </View>
-                </View>
-            ) : null,
-        },
-        languagesShort: {
-            name: "Languages",
-            description: "Your languages in a comma separated list.",
-            keyWords: ["languages"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="languagesPdf">
-                    {getSectionTitleComponent("Languages")}
-                    <Text style={styles.small}>
-                        {document.information.languageArray.join(", ")}
-                    </Text>
-                </View>
-            ) : null,
-        },
-        interests: {
-            name: "Interests",
-            description: "Your interests in a bullet point list.",
-            keyWords: ["interests", "hobbies"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="interests">
-                    {getSectionTitleComponent("Interests")}
-                    <View style={styles.bulletItemContainer}>
-                        {document.information.interestArray.map(
-                            (skill: string, index: number) => (
-                                <View style={styles.bulletItem} key={index}>
-                                    <View style={styles.bullet}></View>
-                                    <Text style={styles.small}>{skill}</Text>
-                                </View>
-                            )
-                        )}
-                    </View>
-                </View>
-            ) : null,
-        },
-        interestsShort: {
-            name: "Interests",
-            description: "Your interests in a comma separated list.",
-            keyWords: ["interests", "hobbies"],
-            component: fontSize ? (
-                <View style={styles.sectionContainer} id="interests">
-                    {getSectionTitleComponent("Interests")}
-                    <Text style={styles.small}>
-                        {document.information.interestArray.join(", ")}
-                    </Text>
                 </View>
             ) : null,
         },

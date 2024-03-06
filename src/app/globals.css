@@ -39,8 +39,11 @@
     /* Editor */
     --editor-accent-color-rgb: 184, 80, 66;
     --editor-accent-color-hover-rgb: 220, 120, 100;
+    --editor-accent-color-contrast-rgb: 255, 255, 255;
+    --editor-accent-color-contrast-hover-rgb: 215, 215, 215;
     --editor-text-color-rgb: 0, 0, 0;
     --editor-background-color-rgb: 48, 48, 69;
+    --editor-low-contrast-text-color-rgb: 150, 150, 150;
     --editor-text-contrast-color-rgb: 255, 255, 255;
     --editor-side-menu-closed-background-color-rgb: 255, 255, 255;
     --editor-side-menu-closed-text-color-rgb: 41, 41, 41;

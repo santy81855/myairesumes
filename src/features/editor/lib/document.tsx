@@ -30,9 +30,9 @@ export const updateDocument = (
             "experience",
             "colBreak",
             "contactVertical",
-            "skillsBullet",
+            "skillsCategory",
             "educationShort",
-            "languages",
+            "languagesBullet",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -57,7 +57,7 @@ export const updateDocument = (
             "contactVertical",
             "skillsVivid",
             "educationShort",
-            "languages",
+            "languagesBullet",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -79,10 +79,10 @@ export const updateDocument = (
             "summary",
             "experience",
             "colBreak",
-            "contactLuminary",
-            "skillsBullet",
+            "contactVerticalIcons",
+            "skillsCategory",
             "educationShort",
-            "languages",
+            "languagesBullet",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -112,7 +112,7 @@ export const updateDocument = (
                                 .toUpperCase()}${template.slice(1)}`;
                         }
                         if (item.includes("skills")) {
-                            return "skillsBullet";
+                            return "skillsCategory";
                         }
                         return item;
                     })
@@ -1242,6 +1242,63 @@ export const initializeNewResume = (
             accentBackgroundColor: "#5B7FC5",
             accentTextColor: "white",
         },
+        sectionEdit: {
+            header: {
+                fontRatio: 1,
+                showPosition: true,
+                showSummary: true,
+                showSocial: true,
+            },
+            name: {
+                fontRatio: 1,
+                textAlignment: "center",
+            },
+            position: {
+                fontRatio: 1,
+                textAlignment: "center",
+            },
+            summary: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            contact: {
+                fontRatio: 1,
+                showEmail: true,
+                showPhone: true,
+                showWebsite: true,
+                textAlignment: "left",
+            },
+            experience: {
+                fontRatio: 1,
+                dateFormat: "long",
+                showStartDate: true,
+                showSummary: true,
+            },
+            educationDetailed: {
+                fontRatio: 1,
+                dateFormat: "long",
+                showStartDate: true,
+                showGpa: false,
+                showBullets: true,
+            },
+            educationShort: {
+                fontRatio: 1,
+                dateFormat: "long",
+                showStartDate: true,
+            },
+            skills: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            languages: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            interests: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+        },
         documentName: name,
         jobTitle: job,
         description,
@@ -1256,7 +1313,7 @@ export const initializeNewResume = (
                 "experience",
                 "educationDetailed",
                 "skillsBullet",
-                "languages",
+                "languagesComma",
             ],
         ],
         numPages: 1,
@@ -1276,6 +1333,24 @@ export const initializeNewResume = (
             "Example Skill 1.",
             "Example Skill 2.",
             "Example Skill 3.",
+        ],
+        skillCategoryArray: [
+            {
+                category: "Example Category 1",
+                skills: [
+                    "Example Skill 1",
+                    "Example Skill 2",
+                    "Example Skill 3",
+                ],
+            },
+            {
+                category: "Example Category 2",
+                skills: [
+                    "Example Skill 1",
+                    "Example Skill 2",
+                    "Example Skill 3",
+                ],
+            },
         ],
         experienceArray: newExperienceArray,
         educationArray: newEducationArray,

@@ -219,6 +219,7 @@ const Fresh = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                         document={document}
                                     >
                                         <SectionContainerEditor
+                                            sectionId={section}
                                             document={document}
                                         >
                                             <Section
@@ -267,6 +268,7 @@ const Fresh = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                         document={document}
                                     >
                                         <SectionContainerEditor
+                                            sectionId={section}
                                             document={document}
                                         >
                                             <Section
