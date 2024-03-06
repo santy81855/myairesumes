@@ -1243,6 +1243,12 @@ export const initializeNewResume = (
             accentTextColor: "white",
         },
         sectionEdit: {
+            header: {
+                fontRatio: 1,
+                showPosition: true,
+                showSummary: true,
+                showSocial: true,
+            },
             name: {
                 fontRatio: 1,
                 textAlignment: "center",
@@ -1253,6 +1259,13 @@ export const initializeNewResume = (
             },
             summary: {
                 fontRatio: 1,
+                textAlignment: "left",
+            },
+            contact: {
+                fontRatio: 1,
+                showEmail: true,
+                showPhone: true,
+                showWebsite: true,
                 textAlignment: "left",
             },
             experience: {
@@ -1272,13 +1285,6 @@ export const initializeNewResume = (
                 fontRatio: 1,
                 dateFormat: "MonthYear",
                 showStartDate: true,
-            },
-            contact: {
-                fontRatio: 1,
-                showEmail: true,
-                showPhone: true,
-                showWebsite: true,
-                textAlignment: "left",
             },
             skills: {
                 fontRatio: 1,

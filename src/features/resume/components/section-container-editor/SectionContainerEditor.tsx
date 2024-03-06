@@ -15,7 +15,8 @@ const SectionContainerEditor = ({
     sectionId: string;
 }) => {
     const router = useRouter();
-    const { documentArray, setDocumentArray, isReordering } = useAppContext();
+    const { documentArray, setDocumentArray, isReordering, isEditing } =
+        useAppContext();
 
     const sectionClicked = () => {
         // Get the current URL
@@ -31,9 +32,16 @@ const SectionContainerEditor = ({
     return (
         <div
             className={styles.container}
-            style={!isReordering ? { cursor: "auto" } : {}}
-            title={sectionId}
-            onClick={sectionClicked}
+            style={
+                !isReordering
+                    ? isEditing
+                        ? { cursor: "pointer" }
+                        : { cursor: "auto" }
+                    : {}
+            }
+            onClick={
+                isReordering ? () => {} : isEditing ? sectionClicked : () => {}
+            }
         >
             {children}
         </div>

@@ -5,6 +5,7 @@ import {
     saveIcon,
     orderIcon,
     trashIcon,
+    editIcon,
 } from "@/components/icons/iconSVG";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -38,6 +39,8 @@ const SubTitleBar = () => {
         setIsDocumentLoading,
         isReordering,
         setIsReordering,
+        setIsEditing,
+        isEditing,
     } = useAppContext();
     const [currentDocument, setCurrentDocument] = useState<any>(null);
     const [currentTemplate, setCurrentTemplate] = useState<any>(null);
@@ -150,7 +153,16 @@ const SubTitleBar = () => {
                     </form>
                     <section className={styles.right}>
                         <button
-                            title="reorder"
+                            title="edit mode"
+                            className={styles.iconContainer}
+                            onClick={() => setIsEditing(!isEditing)}
+                        >
+                            {editIcon}
+                            {!isEditing && <p>Edit Mode</p>}
+                            {isEditing && <p>Exit Edit Mode</p>}
+                        </button>
+                        <button
+                            title="reorder mode"
                             className={styles.iconContainer}
                             onClick={() => setIsReordering(!isReordering)}
                         >

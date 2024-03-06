@@ -32,7 +32,7 @@
 }
 
 .iconContainer p {
-    font-size: var(--font-size-small);
+    font-size: calc(var(--font-size-small) / 1.1);
     color: black;
 }
 
@@ -62,7 +62,7 @@
     height: 15px;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 630px) {
     .iconContainer p {
         display: none;
     }

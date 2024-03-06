@@ -66,12 +66,16 @@
 .optionsBar {
     width: 100%;
     background-color: white;
-    padding-block: var(--padding-block-small);
-    padding-inline: var(--padding-inline-medium);
     display: flex;
     justify-content: flex-end;
-    gap: var(--gap-medium);
+    gap: calc(var(--gap-small) / 2);
     border-bottom: 1px solid rgba(224, 224, 224, 1);
+}
+
+.optionItem {
+    background-color: rgb(250, 250, 250);
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-small);
 }
 
 .optionContainer {
@@ -162,7 +166,8 @@
 .inputRowContainer {
     width: 100%;
     display: flex;
-    gap: var(--gap-small);
+    column-gap: var(--gap-small);
+    row-gap: var(--gap-medium);
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -176,6 +181,21 @@
     gap: var(--gap-small);
 }
 
+.inputItemContainer100 {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+}
+
+.inputItemRow {
+    display: flex;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .inputLabel {
     font-size: var(--font-size-small);
     color: rgb(var(--editor-text-color-rgb));
@@ -183,7 +203,7 @@
 }
 
 .textInput {
-    width: 100%;
+    flex-grow: 1;
     border: none;
     padding-block: var(--padding-block-small);
     padding-inline: var(--padding-inline-medium);
@@ -210,6 +230,122 @@
 
 .disabled {
     color: rgba(0, 0, 0, 0.3);
+}
+
+.addButton {
+    background-color: rgb(var(--editor-accent-color-rgb));
+    color: rgb(var(--editor-accent-color-contrast-rgb));
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: var(--font-size-small);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addButton svg {
+    width: 1rem;
+    height: 1rem;
+    fill: rgb(var(--editor-accent-color-contrast-rgb));
+}
+
+.addButtonSmall svg {
+    width: 0.7rem;
+    height: 0.7rem;
+    fill: rgb(var(--editor-accent-color-contrast-rgb));
+}
+
+.addButton:hover {
+    background-color: rgb(var(--editor-accent-color-hover-rgb));
+}
+
+.columnList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--gap-small);
+}
+
+.columnListRowItem {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-small);
+}
+
+.columnListRowItem p {
+    width: 100%;
+    text-align: left;
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.columnListRowItem h3 {
+    font-size: var(--font-size-medium);
+    color: rgb(var(--editor-text-color-rgb));
+    font-weight: bold;
+}
+
+.innerColumnList {
+    width: 100%;
+    padding-inline-start: var(--padding-inline-medium);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--gap-small);
+}
+
+.editButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editButton svg {
+    width: 0.8rem;
+    height: 0.8rem;
+    fill: rgb(var(--editor-text-color-rgb));
+}
+
+.editButton:hover svg {
+    fill: rgb(var(--editor-accent-color-rgb));
+}
+
+.cancelButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancelButton svg {
+    width: 0.8rem;
+    height: 0.8rem;
+    fill: rgb(227, 115, 84);
+}
+
+.cancelButton:hover svg {
+    fill: rgb(var(--editor-accent-color-rgb));
+}
+
+.rowContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-small);
 }
 
 @media screen and (max-width: 425px) {
