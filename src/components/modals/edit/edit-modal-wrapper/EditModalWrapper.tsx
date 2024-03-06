@@ -209,7 +209,7 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
             >
                 {fontDecreaseIcon}
             </button>
-            <p className={styles.optionLabel}>{ratio.toFixed(1)}</p>
+            <p className={styles.optionLabelPermanent}>{ratio.toFixed(1)}</p>
             <button
                 className={`${styles.option} ${styles.increaseOption}`}
                 onClick={() => {
