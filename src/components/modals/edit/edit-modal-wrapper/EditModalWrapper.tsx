@@ -15,6 +15,7 @@ import {
 } from "@/components/icons/iconSVG";
 import { updateDocumentArray } from "@/features/editor";
 import { useAppContext } from "@/app/providers";
+import { formatDateMonYear, formatDateMonthYear } from "@/lib/date";
 
 type SectionProps = {
     document: any;
@@ -52,8 +53,23 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
         case sectionId.includes("skills"):
             ratio = document.information.sectionEdit.skills.fontRatio;
             break;
+        case sectionId.includes("languages"):
+            ratio = document.information.sectionEdit.languages.fontRatio;
+            break;
+        case sectionId.includes("interests"):
+            ratio = document.information.sectionEdit.interests.fontRatio;
+            break;
         case sectionId.includes("header"):
             ratio = document.information.sectionEdit.header.fontRatio;
+            break;
+        case sectionId.includes("experience"):
+            ratio = document.information.sectionEdit.experience.fontRatio;
+            break;
+        case sectionId.includes("education"):
+            ratio = document.information.sectionEdit.education.fontRatio;
+            break;
+        case sectionId.includes("projects"):
+            ratio = document.information.sectionEdit.projects.fontRatio;
             break;
         default:
             break;
@@ -170,6 +186,48 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
                     documentArray
                 );
                 break;
+            case sectionId.includes("languages"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            languages: {
+                                ...document.information.sectionEdit.languages,
+                                fontRatio:
+                                    document.information.sectionEdit.languages
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("interests"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            interests: {
+                                ...document.information.sectionEdit.interests,
+                                fontRatio:
+                                    document.information.sectionEdit.interests
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
             case sectionId.includes("header"):
                 updatedDocument = {
                     ...document,
@@ -181,6 +239,69 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
                                 ...document.information.sectionEdit.header,
                                 fontRatio:
                                     document.information.sectionEdit.header
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("experience"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            experience: {
+                                ...document.information.sectionEdit.experience,
+                                fontRatio:
+                                    document.information.sectionEdit.experience
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("education"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            education: {
+                                ...document.information.sectionEdit.education,
+                                fontRatio:
+                                    document.information.sectionEdit.education
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("projects"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            projects: {
+                                ...document.information.sectionEdit.projects,
+                                fontRatio:
+                                    document.information.sectionEdit.projects
                                         .fontRatio + change,
                             },
                         },
@@ -249,6 +370,14 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
             break;
         case sectionId.includes("skills"):
             alignment = document.information.sectionEdit.skills.textAlignment;
+            break;
+        case sectionId.includes("languages"):
+            alignment =
+                document.information.sectionEdit.languages.textAlignment;
+            break;
+        case sectionId.includes("interests"):
+            alignment =
+                document.information.sectionEdit.interests.textAlignment;
             break;
         default:
             break;
@@ -354,6 +483,44 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
                     documentArray
                 );
                 break;
+            case sectionId.includes("languages"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            languages: {
+                                ...document.information.sectionEdit.languages,
+                                textAlignment: alignment,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("interests"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            interests: {
+                                ...document.information.sectionEdit.interests,
+                                textAlignment: alignment,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
             default:
                 break;
         }
@@ -396,86 +563,6 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
             >
                 {alignRightIcon}
             </button>
-        </section>
-    );
-};
-
-const DateFormatOption = ({ document, sectionId }: SectionProps) => {
-    const {
-        documentArray,
-        setDocumentArray,
-        showComponentModal,
-        setShowComponentModal,
-    } = useAppContext();
-
-    sectionId = sectionId.toLowerCase();
-    let dateFormat = "";
-
-    switch (true) {
-        case sectionId.includes("experience"):
-            dateFormat = document.information.sectionEdit.experience.dateFormat;
-            break;
-        default:
-            break;
-    }
-
-    const changeDateFormat = (format: string) => {
-        if (!document) return;
-        let updatedDocument = {} as any;
-        let newDocumentArray = [] as any;
-        switch (true) {
-            case sectionId.includes("experience"):
-                updatedDocument = {
-                    ...document,
-                    information: {
-                        ...document.information,
-                        sectionEdit: {
-                            ...document.information.sectionEdit,
-                            experience: {
-                                ...document.information.sectionEdit.experience,
-                                dateFormat: format,
-                            },
-                        },
-                    },
-                };
-                newDocumentArray = updateDocumentArray(
-                    updatedDocument,
-                    documentArray
-                );
-                break;
-            default:
-                break;
-        }
-        setDocumentArray(newDocumentArray);
-    };
-
-    return (
-        <section className={`${styles.optionContainer}`}>
-            <p className={styles.optionLabel}>Date Format</p>
-            <section className={styles.dateButtonContainer}>
-                <button
-                    className={`${styles.option} ${styles.dateButton} ${
-                        styles.leftButton
-                    } ${dateFormat === "short" && styles.selectedDate}`}
-                    title="Short date - Jan 2024"
-                    onClick={() => {
-                        changeDateFormat("short");
-                    }}
-                >
-                    <p>Short</p>
-                </button>
-                <button
-                    className={`${styles.option} ${styles.dateButton} ${
-                        styles.rightButton
-                    } ${dateFormat === "long" && styles.selectedDate}`}
-                    title="Long date - January 2024"
-                    onClick={() => {
-                        changeDateFormat("long");
-                    }}
-                >
-                    <p>Long</p>
-                </button>
-            </section>
         </section>
     );
 };
@@ -863,7 +950,209 @@ const Skills = ({ document, sectionId }: SectionProps) => {
                         >
                             {editIcon}
                         </button>
-                        <p>{skill}</p>
+                        <p className={styles.smallText}>{skill}</p>
+                    </section>
+                ))}
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
+const Languages = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [languageInput, setLanguageInput] = useState("");
+    const [languageArray, setLanguageArray] = useState(
+        document.information.languageArray
+    );
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                languageArray,
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+    return (
+        <>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <label
+                        htmlFor="languageInput"
+                        className={styles.inputLabel}
+                    >
+                        Language
+                    </label>
+                    <section className={styles.inputItemRow}>
+                        <input
+                            id="languageInput"
+                            placeholder="E.g. English"
+                            className={styles.textInput}
+                            value={languageInput}
+                            onChange={(event) =>
+                                setLanguageInput(event.target.value)
+                            }
+                        />
+                        <button
+                            title="Add Language"
+                            className={styles.addButton}
+                            onClick={() => {
+                                setLanguageArray([
+                                    ...languageArray,
+                                    languageInput,
+                                ]);
+                                setLanguageInput("");
+                            }}
+                        >
+                            {plusIcon}
+                        </button>
+                    </section>
+                </section>
+            </section>
+            <section className={styles.columnList}>
+                {languageArray.map((language: any, index: number) => (
+                    <section key={index} className={styles.columnListRowItem}>
+                        <button
+                            title="delete"
+                            className={styles.cancelButton}
+                            onClick={() => {
+                                setLanguageArray(
+                                    languageArray.filter(
+                                        (_: any, i: number) => i !== index
+                                    )
+                                );
+                            }}
+                        >
+                            {cancelIcon}
+                        </button>
+                        <button
+                            title="edit"
+                            className={styles.editButton}
+                            onClick={() => {
+                                setLanguageInput(language);
+                                setLanguageArray(
+                                    languageArray.filter(
+                                        (_: any, i: number) => i !== index
+                                    )
+                                );
+                            }}
+                        >
+                            {editIcon}
+                        </button>
+                        <p className={styles.smallText}>{language}</p>
+                    </section>
+                ))}
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
+const Interests = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [interestInput, setInterestInput] = useState("");
+    const [interestArray, setInterestArray] = useState(
+        document.information.interestArray
+    );
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                interestArray,
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+    return (
+        <>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <label
+                        htmlFor="interestInput"
+                        className={styles.inputLabel}
+                    >
+                        Interest
+                    </label>
+                    <section className={styles.inputItemRow}>
+                        <input
+                            id="interestInput"
+                            placeholder="E.g. Reading"
+                            className={styles.textInput}
+                            value={interestInput}
+                            onChange={(event) =>
+                                setInterestInput(event.target.value)
+                            }
+                        />
+                        <button
+                            title="Add Interest"
+                            className={styles.addButton}
+                            onClick={() => {
+                                setInterestArray([
+                                    ...interestArray,
+                                    interestInput,
+                                ]);
+                                setInterestInput("");
+                            }}
+                        >
+                            {plusIcon}
+                        </button>
+                    </section>
+                </section>
+            </section>
+            <section className={styles.columnList}>
+                {interestArray.map((interest: any, index: number) => (
+                    <section key={index} className={styles.columnListRowItem}>
+                        <button
+                            title="delete"
+                            className={styles.cancelButton}
+                            onClick={() => {
+                                setInterestArray(
+                                    interestArray.filter(
+                                        (_: any, i: number) => i !== index
+                                    )
+                                );
+                            }}
+                        >
+                            {cancelIcon}
+                        </button>
+                        <button
+                            title="edit"
+                            className={styles.editButton}
+                            onClick={() => {
+                                setInterestInput(interest);
+                                setInterestArray(
+                                    interestArray.filter(
+                                        (_: any, i: number) => i !== index
+                                    )
+                                );
+                            }}
+                        >
+                            {editIcon}
+                        </button>
+                        <p className={styles.smallText}>{interest}</p>
                     </section>
                 ))}
             </section>
@@ -887,6 +1176,7 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
     const [editSkillId, setEditSkillId] = useState("");
     const [addCategoryClicked, setAddCategoryClicked] = useState(false);
     const [addSkillIndex, setAddSkillIndex] = useState(-1);
+    const [editSectionIndex, setEditSectionIndex] = useState(-1);
 
     const saveClicked = () => {
         const updatedDocument = {
@@ -964,188 +1254,245 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
             )}
             <section className={styles.columnList}>
                 {skillArray.map((item: any, index: number) => (
-                    <>
-                        <section
-                            key={index}
-                            className={styles.columnListRowItem}
-                        >
+                    <section
+                        key={index}
+                        className={styles.skillCategoryCardContainer}
+                    >
+                        <section className={styles.cardButtonContainer}>
                             <button
-                                title="delete category"
-                                className={styles.cancelButton}
+                                title="Edit Category"
+                                className={`${styles.cardEditButton} ${
+                                    editSectionIndex === index &&
+                                    styles.cardEditButtonActive
+                                }`}
                                 onClick={() => {
-                                    setSkillArray(
-                                        skillArray.filter(
-                                            (_: any, i: number) => i !== index
-                                        )
-                                    );
+                                    setEditSectionIndex(index);
                                 }}
                             >
-                                {cancelIcon}
+                                <p className={styles.smallText}>Edit</p>
+                                {editIcon}
                             </button>
-                            {editCategoryIndex === index ? (
-                                <button
-                                    title="save"
-                                    className={styles.editButton}
-                                    onClick={() => {
-                                        const newCategoryArray = [
-                                            ...skillArray,
-                                        ];
-                                        newCategoryArray[index].category =
-                                            categoryInput;
-                                        setCategoryInput("");
-                                        setEditCategoryIndex(-1);
-                                    }}
-                                >
-                                    {checkIcon}
-                                </button>
-                            ) : (
-                                <button
-                                    title="edit category"
-                                    className={styles.editButton}
-                                    onClick={() => {
-                                        setCategoryInput(item.category);
-                                        setEditCategoryIndex(index);
-                                    }}
-                                >
-                                    {editIcon}
-                                </button>
-                            )}
-                            {editCategoryIndex === index ? (
-                                <input
-                                    type="text"
-                                    placeholder="E.g. Adobe Creative Suite"
-                                    className={styles.textInput}
-                                    value={categoryInput}
-                                    onChange={(event) =>
-                                        setCategoryInput(event.target.value)
-                                    }
-                                />
-                            ) : (
-                                <h3>{item.category}</h3>
-                            )}
                         </section>
-                        <section className={styles.innerColumnList}>
-                            {item.skills.map((skill: any, subIndex: number) => (
-                                <section
-                                    key={subIndex}
-                                    className={styles.columnListRowItem}
-                                >
+                        <section className={styles.skillCategoryCard}>
+                            <section className={styles.columnListRowItem}>
+                                {editSectionIndex === index && (
                                     <button
-                                        title="delete skill"
+                                        title="delete category"
                                         className={styles.cancelButton}
                                         onClick={() => {
-                                            const newCategoryArray = [
-                                                ...skillArray,
-                                            ];
-                                            newCategoryArray[index].skills =
-                                                newCategoryArray[
-                                                    index
-                                                ].skills.filter(
+                                            setSkillArray(
+                                                skillArray.filter(
                                                     (_: any, i: number) =>
-                                                        i !== subIndex
-                                                );
-                                            setSkillArray(newCategoryArray);
+                                                        i !== index
+                                                )
+                                            );
                                         }}
                                     >
                                         {cancelIcon}
                                     </button>
-                                    {editSkillId ===
-                                    index.toString() + subIndex.toString() ? (
+                                )}
+                                {editCategoryIndex === index ? (
+                                    <button
+                                        title="save"
+                                        className={styles.editButton}
+                                        onClick={() => {
+                                            const newCategoryArray = [
+                                                ...skillArray,
+                                            ];
+                                            newCategoryArray[index].category =
+                                                categoryInput;
+                                            setCategoryInput("");
+                                            setEditCategoryIndex(-1);
+                                        }}
+                                    >
+                                        {checkIcon}
+                                    </button>
+                                ) : (
+                                    editSectionIndex === index && (
                                         <button
-                                            title="save"
+                                            title="edit category"
                                             className={styles.editButton}
                                             onClick={() => {
-                                                const newCategoryArray = [
-                                                    ...skillArray,
-                                                ];
-                                                newCategoryArray[index].skills[
-                                                    subIndex
-                                                ] = skillInput;
-                                                setSkillArray(newCategoryArray);
-                                                setSkillInput("");
-                                                setEditSkillId("");
-                                            }}
-                                        >
-                                            {checkIcon}
-                                        </button>
-                                    ) : (
-                                        <button
-                                            title="edit skill"
-                                            className={styles.editButton}
-                                            onClick={() => {
-                                                setEditSkillId(
-                                                    index.toString() +
-                                                        subIndex.toString()
-                                                );
-                                                setSkillInput(skill);
+                                                setCategoryInput(item.category);
+                                                setEditCategoryIndex(index);
                                             }}
                                         >
                                             {editIcon}
                                         </button>
-                                    )}
-                                    {editSkillId ===
-                                    index.toString() + subIndex.toString() ? (
-                                        <input
-                                            type="text"
-                                            className={styles.textInput}
-                                            value={skillInput}
-                                            onChange={(event) => {
-                                                setSkillInput(
-                                                    event.target.value
-                                                );
-                                            }}
-                                        />
-                                    ) : (
-                                        <p>{skill}</p>
-                                    )}
-                                </section>
-                            ))}
-                            <section className={styles.addSkillButtonContainer}>
-                                {addSkillIndex === index ? (
-                                    <section className={styles.inputItemRow}>
-                                        <input
-                                            type="text"
-                                            placeholder="E.g. Adobe Creative Suite"
-                                            className={styles.textInput}
-                                            value={skillInput}
-                                            onChange={(event) =>
-                                                setSkillInput(
-                                                    event.target.value
-                                                )
-                                            }
-                                        />
-                                        <button
-                                            title="Add Skill"
-                                            className={`${styles.addButton} ${styles.addButtonSmall}`}
-                                            onClick={() => {
-                                                const newCategoryArray = [
-                                                    ...skillArray,
-                                                ];
-                                                newCategoryArray[
-                                                    index
-                                                ].skills.push(skillInput);
-                                                setSkillArray(newCategoryArray);
-                                                setSkillInput("");
-                                                setAddSkillIndex(-1);
-                                            }}
-                                        >
-                                            {plusIcon}
-                                        </button>
-                                    </section>
+                                    )
+                                )}
+                                {editCategoryIndex === index ? (
+                                    <input
+                                        type="text"
+                                        placeholder="E.g. Adobe Creative Suite"
+                                        className={styles.textInput}
+                                        value={categoryInput}
+                                        onChange={(event) =>
+                                            setCategoryInput(event.target.value)
+                                        }
+                                    />
                                 ) : (
-                                    <button
-                                        title="Add Skill"
-                                        className={`${styles.addButton} ${styles.addButtonSmall}`}
-                                        onClick={() => {
-                                            setAddSkillIndex(index);
-                                        }}
-                                    >
-                                        {plusIcon}
-                                    </button>
+                                    <h3>{item.category}</h3>
                                 )}
                             </section>
+                            <section className={styles.innerColumnList}>
+                                {item.skills.map(
+                                    (skill: any, subIndex: number) => (
+                                        <section
+                                            key={subIndex}
+                                            className={styles.columnListRowItem}
+                                        >
+                                            {editSectionIndex === index && (
+                                                <button
+                                                    title="delete skill"
+                                                    className={
+                                                        styles.cancelButton
+                                                    }
+                                                    onClick={() => {
+                                                        const newCategoryArray =
+                                                            [...skillArray];
+                                                        newCategoryArray[
+                                                            index
+                                                        ].skills =
+                                                            newCategoryArray[
+                                                                index
+                                                            ].skills.filter(
+                                                                (
+                                                                    _: any,
+                                                                    i: number
+                                                                ) =>
+                                                                    i !==
+                                                                    subIndex
+                                                            );
+                                                        setSkillArray(
+                                                            newCategoryArray
+                                                        );
+                                                    }}
+                                                >
+                                                    {cancelIcon}
+                                                </button>
+                                            )}
+                                            {editSkillId ===
+                                            index.toString() +
+                                                subIndex.toString() ? (
+                                                <button
+                                                    title="save"
+                                                    className={
+                                                        styles.editButton
+                                                    }
+                                                    onClick={() => {
+                                                        const newCategoryArray =
+                                                            [...skillArray];
+                                                        newCategoryArray[
+                                                            index
+                                                        ].skills[subIndex] =
+                                                            skillInput;
+                                                        setSkillArray(
+                                                            newCategoryArray
+                                                        );
+                                                        setSkillInput("");
+                                                        setEditSkillId("");
+                                                    }}
+                                                >
+                                                    {checkIcon}
+                                                </button>
+                                            ) : (
+                                                editSectionIndex === index && (
+                                                    <button
+                                                        title="edit skill"
+                                                        className={
+                                                            styles.editButton
+                                                        }
+                                                        onClick={() => {
+                                                            setEditSkillId(
+                                                                index.toString() +
+                                                                    subIndex.toString()
+                                                            );
+                                                            setSkillInput(
+                                                                skill
+                                                            );
+                                                        }}
+                                                    >
+                                                        {editIcon}
+                                                    </button>
+                                                )
+                                            )}
+                                            {editSkillId ===
+                                            index.toString() +
+                                                subIndex.toString() ? (
+                                                <input
+                                                    type="text"
+                                                    className={styles.textInput}
+                                                    value={skillInput}
+                                                    onChange={(event) => {
+                                                        setSkillInput(
+                                                            event.target.value
+                                                        );
+                                                    }}
+                                                />
+                                            ) : (
+                                                <p className={styles.smallText}>
+                                                    {skill}
+                                                </p>
+                                            )}
+                                        </section>
+                                    )
+                                )}
+                                <section
+                                    className={styles.addSkillButtonContainer}
+                                >
+                                    {addSkillIndex === index ? (
+                                        <section
+                                            className={styles.inputItemRow}
+                                        >
+                                            <input
+                                                type="text"
+                                                placeholder="E.g. Adobe Creative Suite"
+                                                className={styles.textInput}
+                                                value={skillInput}
+                                                onChange={(event) =>
+                                                    setSkillInput(
+                                                        event.target.value
+                                                    )
+                                                }
+                                            />
+                                            <button
+                                                title="Add Skill"
+                                                className={`${styles.addButton} ${styles.addButtonSmall}`}
+                                                onClick={() => {
+                                                    const newCategoryArray = [
+                                                        ...skillArray,
+                                                    ];
+                                                    newCategoryArray[
+                                                        index
+                                                    ].skills.push(skillInput);
+                                                    setSkillArray(
+                                                        newCategoryArray
+                                                    );
+                                                    setSkillInput("");
+                                                    setAddSkillIndex(-1);
+                                                }}
+                                            >
+                                                {plusIcon}
+                                            </button>
+                                        </section>
+                                    ) : (
+                                        editSectionIndex === index && (
+                                            <button
+                                                title="Add Skill"
+                                                className={`${styles.addButton} ${styles.addButtonSmall}`}
+                                                onClick={() => {
+                                                    setAddSkillIndex(index);
+                                                }}
+                                            >
+                                                {plusIcon}
+                                            </button>
+                                        )
+                                    )}
+                                </section>
+                            </section>
                         </section>
-                    </>
+                    </section>
                 ))}
             </section>
             <SaveButton
@@ -1439,16 +1786,55 @@ const Header = ({
 
 const Experience = ({ document, sectionId }: SectionProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
-    const [firstName, setFirstName] = useState(document.information.firstName);
-    const [lastName, setLastName] = useState(document.information.lastName);
+    const [experienceArray, setExperienceArray] = useState(
+        document.information.experienceArray
+    );
+    const [isCurrent, setIsCurrent] = useState(false);
+    const [companyName, setCompanyName] = useState("");
+    const [position, setPosition] = useState("");
+    const [startDate, setStartDate] = useState(
+        new Date().toISOString().split("T")[0]
+    );
+    const [endDate, setEndDate] = useState(
+        new Date().toISOString().split("T")[0]
+    );
+    const [summary, setSummary] = useState("");
+    const [bulletPoints, setBulletPoints] = useState([""]);
+    const [editSectionIndex, setEditSectionIndex] = useState(-1);
+    const [addItemClicked, setAddItemClicked] = useState(false);
+    const [showStartDate, setShowStartDate] = useState(
+        document.information.sectionEdit.experience.showStartDate
+    );
+    const [showSummary, setShowSummary] = useState(
+        document.information.sectionEdit.experience.showSummary
+    );
+    const [dateFormat, setDateFormat] = useState(
+        document.information.sectionEdit.experience.dateFormat
+    );
+
+    const showDate = (date: string) => {
+        if (dateFormat === "short") {
+            return formatDateMonYear(date);
+        } else {
+            return formatDateMonthYear(date);
+        }
+    };
 
     const saveClicked = () => {
         const updatedDocument = {
             ...document,
             information: {
                 ...document.information,
-                firstName,
-                lastName,
+                experienceArray,
+                sectionEdit: {
+                    ...document.information.sectionEdit,
+                    experience: {
+                        ...document.information.sectionEdit.experience,
+                        showStartDate,
+                        showSummary,
+                        dateFormat,
+                    },
+                },
             },
         };
         const newDocumentArray = updateDocumentArray(
@@ -1460,31 +1846,2144 @@ const Experience = ({ document, sectionId }: SectionProps) => {
         history.replaceState(null, "", newUrl);
     };
 
+    const handleBulletPointChange = (index: number, value: string) => {
+        const updatedBulletPoints = [...bulletPoints];
+        updatedBulletPoints[index] = value;
+        setBulletPoints(updatedBulletPoints);
+    };
+
+    const handleAddBulletPoint = () => {
+        setBulletPoints([...bulletPoints, ""]);
+    };
+
+    const handleRemoveBulletPoint = (index: number) => {
+        const updatedBulletPoints = [...bulletPoints];
+        updatedBulletPoints.splice(index, 1);
+        setBulletPoints(updatedBulletPoints);
+    };
+
     return (
         <>
-            <section className={styles.inputRowContainer}>
-                <section className={styles.inputItemContainer}>
-                    <label htmlFor="firstName" className={styles.inputLabel}>
-                        First Name
-                    </label>
-                    <input
-                        id="firstName"
-                        className={styles.textInput}
-                        value={firstName}
-                        onChange={(event) => setFirstName(event.target.value)}
-                    />
-                </section>
-                <section className={styles.inputItemContainer}>
-                    <label htmlFor="lastName" className={styles.inputLabel}>
-                        Last Name
-                    </label>
-                    <input
-                        id="lastName"
-                        className={styles.textInput}
-                        value={lastName}
-                        onChange={(event) => setLastName(event.target.value)}
-                    />
-                </section>
+            <section className={styles.columnList}>
+                {addItemClicked ? (
+                    <section className={styles.skillCategoryCard}>
+                        <section className={styles.columnListRowItem}>
+                            <section className={styles.experienceItem}>
+                                <p className={styles.editTitle}>Add new job:</p>
+                                <section className={styles.inputRowContainer}>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="companyName"
+                                            className={styles.inputLabel}
+                                        >
+                                            Company Name
+                                        </label>
+                                        <input
+                                            id="companyName"
+                                            className={styles.textInput}
+                                            value={companyName}
+                                            onChange={(event) =>
+                                                setCompanyName(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="position"
+                                            className={styles.inputLabel}
+                                        >
+                                            Position
+                                        </label>
+                                        <input
+                                            id="position"
+                                            className={styles.textInput}
+                                            value={position}
+                                            onChange={(event) =>
+                                                setPosition(event.target.value)
+                                            }
+                                        />
+                                    </section>
+                                </section>
+                                <section className={styles.checkboxContainer}>
+                                    <section className={styles.checkboxItem}>
+                                        <input
+                                            type="checkbox"
+                                            id="isCurrent"
+                                            className={styles.toggleInput}
+                                            checked={isCurrent}
+                                            onChange={(event) =>
+                                                setIsCurrent(
+                                                    event.target.checked
+                                                )
+                                            }
+                                        />
+                                        <label
+                                            htmlFor="isCurrent"
+                                            className={styles.inputLabel}
+                                        >
+                                            Current Job
+                                        </label>
+                                    </section>
+                                </section>
+                                <section className={styles.inputRowContainer}>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="startDate"
+                                            className={styles.inputLabel}
+                                        >
+                                            Start Date
+                                        </label>
+                                        <input
+                                            id="startDate"
+                                            type="date"
+                                            className={styles.textInput}
+                                            onChange={(event) =>
+                                                setStartDate(event.target.value)
+                                            }
+                                            value={startDate}
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="endDate"
+                                            className={`${styles.inputLabel} ${
+                                                isCurrent && styles.disabled
+                                            }`}
+                                        >
+                                            End Date
+                                        </label>
+                                        <input
+                                            id="endDate"
+                                            type="date"
+                                            disabled={isCurrent}
+                                            className={styles.textInput}
+                                            onChange={(event) => {
+                                                console.log(event.target.value);
+                                                setEndDate(event.target.value);
+                                            }}
+                                            value={endDate}
+                                        />
+                                    </section>
+                                </section>
+                                <section
+                                    className={styles.inputItemContainer100}
+                                >
+                                    <label
+                                        htmlFor="summary"
+                                        className={`${styles.inputLabel}`}
+                                    >
+                                        Summary
+                                    </label>
+                                    <textarea
+                                        id="summary"
+                                        className={styles.textArea}
+                                        value={summary}
+                                        onChange={(event) =>
+                                            setSummary(event.target.value)
+                                        }
+                                    />
+                                </section>
+                                <section
+                                    className={styles.inputItemContainer100}
+                                >
+                                    <label className={styles.inputLabel}>
+                                        Bullet Points:
+                                    </label>
+                                    {bulletPoints.map((bulletPoint, index) => (
+                                        <div
+                                            className={styles.inputRowContainer}
+                                            key={index}
+                                        >
+                                            <div
+                                                className={styles.bulletPoint}
+                                            ></div>
+                                            <input
+                                                type="text"
+                                                className={styles.textInput}
+                                                value={bulletPoint}
+                                                onChange={(e) =>
+                                                    handleBulletPointChange(
+                                                        index,
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                            <button
+                                                className={styles.addButton}
+                                                onClick={() =>
+                                                    handleRemoveBulletPoint(
+                                                        index
+                                                    )
+                                                }
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    ))}
+                                    <button
+                                        onClick={handleAddBulletPoint}
+                                        className={styles.addBulletButton}
+                                    >
+                                        Add Bullet Point
+                                    </button>
+                                </section>
+                                <section
+                                    className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                >
+                                    <button
+                                        title="Cancel"
+                                        className={styles.cancelEditButton}
+                                        onClick={() => {
+                                            setCompanyName("");
+                                            setPosition("");
+                                            setStartDate("");
+                                            setEndDate("");
+                                            setIsCurrent(false);
+                                            setSummary("");
+                                            setBulletPoints([""]);
+                                            setAddItemClicked(false);
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        title="Add Job"
+                                        className={styles.saveEditButton}
+                                        onClick={() => {
+                                            const newExperienceArray = [
+                                                ...experienceArray,
+                                            ];
+                                            newExperienceArray.push({
+                                                company: companyName,
+                                                position,
+                                                startDate,
+                                                currentEmployer: isCurrent,
+                                                endDate: isCurrent
+                                                    ? "Present"
+                                                    : endDate,
+                                                summary,
+                                                bullets: bulletPoints,
+                                            });
+                                            setExperienceArray(
+                                                newExperienceArray
+                                            );
+                                            setCompanyName("");
+                                            setPosition("");
+                                            setStartDate("");
+                                            setIsCurrent(false);
+                                            setEndDate("");
+                                            setSummary("");
+                                            setBulletPoints([""]);
+                                            setAddItemClicked(false);
+                                        }}
+                                    >
+                                        Save
+                                    </button>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                ) : (
+                    <section className={styles.experienceTitleContainer}>
+                        <section className={styles.rowContainer}>
+                            <h3 style={{ textDecoration: "underline" }}>
+                                Experience
+                            </h3>
+                            <button
+                                title="Add Job"
+                                className={styles.addButton}
+                                onClick={() => {
+                                    setEditSectionIndex(-1);
+                                    setCompanyName("");
+                                    setPosition("");
+                                    setStartDate(
+                                        new Date().toISOString().split("T")[0]
+                                    );
+                                    setEndDate(
+                                        new Date().toISOString().split("T")[0]
+                                    );
+                                    setIsCurrent(false);
+                                    setSummary("");
+                                    setBulletPoints([""]);
+                                    setAddItemClicked(true);
+                                }}
+                            >
+                                {plusIcon}
+                            </button>
+                        </section>
+                        <section className={styles.checkboxContainer}>
+                            <section className={styles.checkboxItem}>
+                                <input
+                                    type="checkbox"
+                                    id="showStartDate"
+                                    className={styles.toggleInput}
+                                    checked={showStartDate}
+                                    onChange={(event) =>
+                                        setShowStartDate(event.target.checked)
+                                    }
+                                />
+                                <label
+                                    htmlFor="showStartDate"
+                                    className={styles.inputLabel}
+                                >
+                                    Show Start Date
+                                </label>
+                            </section>
+                            <section className={styles.checkboxItem}>
+                                <input
+                                    type="checkbox"
+                                    id="showSummary"
+                                    className={styles.toggleInput}
+                                    checked={showSummary}
+                                    onChange={(event) =>
+                                        setShowSummary(event.target.checked)
+                                    }
+                                />
+                                <label
+                                    htmlFor="showSummary"
+                                    className={styles.inputLabel}
+                                >
+                                    Show Summary
+                                </label>
+                            </section>
+                            <section className={`${styles.optionContainer}`}>
+                                <p className={styles.optionLabel}>Date</p>
+                                <section className={styles.dateButtonContainer}>
+                                    <button
+                                        className={`${styles.option} ${
+                                            styles.dateButton
+                                        } ${styles.leftButton} ${
+                                            dateFormat === "short" &&
+                                            styles.selectedDate
+                                        }`}
+                                        title="Short date - Jan 2024"
+                                        onClick={() => {
+                                            setDateFormat("short");
+                                        }}
+                                    >
+                                        <p>Short</p>
+                                    </button>
+                                    <button
+                                        className={`${styles.option} ${
+                                            styles.dateButton
+                                        } ${styles.rightButton} ${
+                                            dateFormat === "long" &&
+                                            styles.selectedDate
+                                        }`}
+                                        title="Long date - January 2024"
+                                        onClick={() => {
+                                            setDateFormat("long");
+                                        }}
+                                    >
+                                        <p>Long</p>
+                                    </button>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                )}
+                {experienceArray.map((experience: any, index: number) => {
+                    return editSectionIndex === index ? (
+                        <section className={styles.skillCategoryCard}>
+                            <section className={styles.columnListRowItem}>
+                                <section className={styles.experienceItem}>
+                                    <p className={styles.editTitle}>
+                                        Edit job:
+                                    </p>
+                                    <section
+                                        className={styles.inputRowContainer}
+                                    >
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="companyName"
+                                                className={styles.inputLabel}
+                                            >
+                                                Company Name
+                                            </label>
+                                            <input
+                                                id="companyName"
+                                                className={styles.textInput}
+                                                value={companyName}
+                                                onChange={(event) =>
+                                                    setCompanyName(
+                                                        event.target.value
+                                                    )
+                                                }
+                                            />
+                                        </section>
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="position"
+                                                className={styles.inputLabel}
+                                            >
+                                                Position
+                                            </label>
+                                            <input
+                                                id="position"
+                                                className={styles.textInput}
+                                                value={position}
+                                                onChange={(event) =>
+                                                    setPosition(
+                                                        event.target.value
+                                                    )
+                                                }
+                                            />
+                                        </section>
+                                    </section>
+                                    <section
+                                        className={styles.checkboxContainer}
+                                    >
+                                        <section
+                                            className={styles.checkboxItem}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                id="isCurrent"
+                                                className={styles.toggleInput}
+                                                checked={isCurrent}
+                                                onChange={(event) =>
+                                                    setIsCurrent(
+                                                        event.target.checked
+                                                    )
+                                                }
+                                            />
+                                            <label
+                                                htmlFor="isCurrent"
+                                                className={styles.inputLabel}
+                                            >
+                                                Current Job
+                                            </label>
+                                        </section>
+                                    </section>
+                                    <section
+                                        className={styles.inputRowContainer}
+                                    >
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="startDate"
+                                                className={styles.inputLabel}
+                                            >
+                                                Start Date
+                                            </label>
+                                            <input
+                                                id="startDate"
+                                                type="date"
+                                                className={styles.textInput}
+                                                onChange={(event) =>
+                                                    setStartDate(
+                                                        event.target.value
+                                                    )
+                                                }
+                                                value={startDate}
+                                            />
+                                        </section>
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="endDate"
+                                                className={`${
+                                                    styles.inputLabel
+                                                } ${
+                                                    isCurrent && styles.disabled
+                                                }`}
+                                            >
+                                                End Date
+                                            </label>
+                                            <input
+                                                id="endDate"
+                                                type="date"
+                                                disabled={isCurrent}
+                                                className={styles.textInput}
+                                                onChange={(event) => {
+                                                    console.log(
+                                                        event.target.value
+                                                    );
+                                                    setEndDate(
+                                                        event.target.value
+                                                    );
+                                                }}
+                                                value={endDate}
+                                            />
+                                        </section>
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer100}
+                                    >
+                                        <label
+                                            htmlFor="summary"
+                                            className={`${styles.inputLabel}`}
+                                        >
+                                            Summary
+                                        </label>
+                                        <textarea
+                                            id="summary"
+                                            className={styles.textArea}
+                                            value={summary}
+                                            onChange={(event) =>
+                                                setSummary(event.target.value)
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer100}
+                                    >
+                                        <label className={styles.inputLabel}>
+                                            Bullet Points:
+                                        </label>
+                                        {bulletPoints.map(
+                                            (bulletPoint, index) => (
+                                                <div
+                                                    className={
+                                                        styles.inputRowContainer
+                                                    }
+                                                    key={index}
+                                                >
+                                                    <div
+                                                        className={
+                                                            styles.bulletPoint
+                                                        }
+                                                    ></div>
+                                                    <input
+                                                        type="text"
+                                                        className={
+                                                            styles.textInput
+                                                        }
+                                                        value={bulletPoint}
+                                                        onChange={(e) =>
+                                                            handleBulletPointChange(
+                                                                index,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                    <button
+                                                        className={
+                                                            styles.addButton
+                                                        }
+                                                        onClick={() =>
+                                                            handleRemoveBulletPoint(
+                                                                index
+                                                            )
+                                                        }
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            )
+                                        )}
+                                        <button
+                                            onClick={handleAddBulletPoint}
+                                            className={styles.addBulletButton}
+                                        >
+                                            Add Bullet Point
+                                        </button>
+                                    </section>
+                                    <section
+                                        className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                    >
+                                        <button
+                                            title="Cancel"
+                                            className={styles.cancelEditButton}
+                                            onClick={() => {
+                                                setCompanyName("");
+                                                setPosition("");
+                                                setStartDate("");
+                                                setIsCurrent(false);
+                                                setEndDate("");
+                                                setSummary("");
+                                                setEditSectionIndex(-1);
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            title="Add Job"
+                                            className={styles.saveEditButton}
+                                            onClick={() => {
+                                                const newExperienceArray = [
+                                                    ...experienceArray,
+                                                ];
+                                                // replace the job at index editSectionIndex with the new job
+                                                newExperienceArray[
+                                                    editSectionIndex
+                                                ] = {
+                                                    company: companyName,
+                                                    position,
+                                                    startDate,
+                                                    currentEmployer: isCurrent,
+                                                    endDate: isCurrent
+                                                        ? "Present"
+                                                        : endDate,
+                                                    summary,
+                                                    bullets: bulletPoints,
+                                                };
+                                                setExperienceArray(
+                                                    newExperienceArray
+                                                );
+                                                setCompanyName("");
+                                                setPosition("");
+                                                setStartDate("");
+                                                setEndDate("");
+                                                setIsCurrent(false);
+                                                setSummary("");
+                                                setBulletPoints([""]);
+                                                setAddItemClicked(false);
+                                                setEditSectionIndex(-1);
+                                            }}
+                                        >
+                                            Update
+                                        </button>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    ) : (
+                        <section
+                            key={index}
+                            className={styles.skillCategoryCardContainer}
+                        >
+                            <section className={styles.cardButtonContainer}>
+                                <button
+                                    title="Delete Job"
+                                    className={styles.cardDeleteButton}
+                                    onClick={() => {
+                                        setExperienceArray(
+                                            experienceArray.filter(
+                                                (_: any, i: number) =>
+                                                    i !== index
+                                            )
+                                        );
+                                    }}
+                                >
+                                    <p className={styles.smallText}>Delete</p>
+                                    {cancelIcon}
+                                </button>
+
+                                <button
+                                    title="Edit Job"
+                                    className={styles.cardEditButton}
+                                    onClick={() => {
+                                        setAddItemClicked(false);
+                                        setCompanyName(experience.company);
+                                        setPosition(experience.position);
+                                        setStartDate(experience.startDate);
+                                        setIsCurrent(
+                                            experience.endDate === "Present"
+                                        );
+                                        setEndDate(
+                                            experience.endDate === "Present"
+                                                ? new Date()
+                                                      .toISOString()
+                                                      .split("T")[0]
+                                                : experience.endDate
+                                        );
+                                        setSummary(experience.summary);
+                                        setBulletPoints(experience.bullets);
+                                        setEditSectionIndex(index);
+                                    }}
+                                >
+                                    <p className={styles.smallText}>Edit</p>
+                                    {editIcon}
+                                </button>
+                            </section>
+                            <section className={styles.skillCategoryCard}>
+                                <section className={styles.columnListRowItem}>
+                                    <section className={styles.experienceItem}>
+                                        <section className={styles.topRow}>
+                                            <p className={styles.companyName}>
+                                                {experience.company}
+                                            </p>
+                                            <section
+                                                className={styles.dateContainer}
+                                            >
+                                                {showStartDate ? (
+                                                    <p className={styles.date}>
+                                                        {showDate(
+                                                            experience.startDate
+                                                        )}{" "}
+                                                        -{" "}
+                                                        {showDate(
+                                                            experience.endDate
+                                                        )}
+                                                    </p>
+                                                ) : (
+                                                    <p className={styles.date}>
+                                                        {showDate(
+                                                            experience.endDate
+                                                        )}
+                                                    </p>
+                                                )}
+                                            </section>
+                                        </section>
+                                        <p className={styles.position}>
+                                            {experience.position}
+                                        </p>
+                                        {showSummary && (
+                                            <p className={styles.jobSummary}>
+                                                {experience.summary}
+                                            </p>
+                                        )}
+                                        <ul
+                                            className={
+                                                styles.bulletListContainer
+                                            }
+                                        >
+                                            {experience.bullets.map(
+                                                (
+                                                    bullet: any,
+                                                    index: number
+                                                ) => (
+                                                    <li
+                                                        key={index}
+                                                        className={
+                                                            styles.bullet
+                                                        }
+                                                    >
+                                                        {bullet}
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    );
+                })}
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
+const Education = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [isCurrent, setIsCurrent] = useState(false);
+    const [educationArray, setEducationArray] = useState(
+        document.information.educationArray
+    );
+    const [schoolName, setSchoolName] = useState("");
+    const [degreeType, setDegreeType] = useState("");
+    const [gpa, setGpa] = useState("");
+    const [degreeField, setDegreeField] = useState("");
+    const [startDate, setStartDate] = useState(
+        new Date().toISOString().split("T")[0]
+    );
+    const [endDate, setEndDate] = useState(
+        new Date().toISOString().split("T")[0]
+    );
+
+    const [bulletPoints, setBulletPoints] = useState([""]);
+    const [editSectionIndex, setEditSectionIndex] = useState(-1);
+    const [addItemClicked, setAddItemClicked] = useState(false);
+    const [showStartDate, setShowStartDate] = useState(
+        document.information.sectionEdit.education.showStartDate
+    );
+    const [showGpa, setShowGpa] = useState(
+        document.information.sectionEdit.education.showGpa
+    );
+    const [showBullets, setShowBullets] = useState(
+        document.information.sectionEdit.education.showBullets
+    );
+    const [dateFormat, setDateFormat] = useState(
+        document.information.sectionEdit.education.dateFormat
+    );
+
+    const showDate = (date: string) => {
+        if (dateFormat === "short") {
+            return formatDateMonYear(date);
+        } else {
+            return formatDateMonthYear(date);
+        }
+    };
+
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                educationArray,
+                sectionEdit: {
+                    ...document.information.sectionEdit,
+                    education: {
+                        ...document.information.sectionEdit.education,
+                        showStartDate,
+                        showGpa,
+                        showBullets,
+                        dateFormat,
+                    },
+                },
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+
+    const handleBulletPointChange = (index: number, value: string) => {
+        const updatedBulletPoints = [...bulletPoints];
+        updatedBulletPoints[index] = value;
+        setBulletPoints(updatedBulletPoints);
+    };
+
+    const handleAddBulletPoint = () => {
+        setBulletPoints([...bulletPoints, ""]);
+    };
+
+    const handleRemoveBulletPoint = (index: number) => {
+        const updatedBulletPoints = [...bulletPoints];
+        updatedBulletPoints.splice(index, 1);
+        setBulletPoints(updatedBulletPoints);
+    };
+
+    return (
+        <>
+            <section className={styles.columnList}>
+                {addItemClicked ? (
+                    <section className={styles.skillCategoryCard}>
+                        <section className={styles.columnListRowItem}>
+                            <section className={styles.experienceItem}>
+                                <p className={styles.editTitle}>
+                                    Add new school:
+                                </p>
+                                <section className={styles.inputRowContainer}>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="schoolName"
+                                            className={styles.inputLabel}
+                                        >
+                                            School Name
+                                        </label>
+                                        <input
+                                            id="schoolName"
+                                            className={styles.textInput}
+                                            value={schoolName}
+                                            onChange={(event) =>
+                                                setSchoolName(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="degreeType"
+                                            className={styles.inputLabel}
+                                        >
+                                            Degree Type
+                                        </label>
+                                        <input
+                                            id="degreeType"
+                                            placeholder="E.g. Bachelor's Degree"
+                                            className={styles.textInput}
+                                            value={degreeType}
+                                            onChange={(event) =>
+                                                setDegreeType(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="degreeField"
+                                            className={styles.inputLabel}
+                                        >
+                                            Degree Field
+                                        </label>
+                                        <input
+                                            id="degreeField"
+                                            placeholder="E.g. Computer Science"
+                                            className={styles.textInput}
+                                            value={degreeField}
+                                            onChange={(event) =>
+                                                setDegreeField(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="gpa"
+                                            className={styles.inputLabel}
+                                        >
+                                            GPA
+                                        </label>
+                                        <input
+                                            id="gpa"
+                                            placeholder="E.g. 3.8"
+                                            className={styles.textInput}
+                                            value={gpa}
+                                            onChange={(event) =>
+                                                setGpa(event.target.value)
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.checkboxContainer}
+                                    >
+                                        <section
+                                            className={styles.checkboxItem}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                id="isCurrent"
+                                                className={styles.toggleInput}
+                                                checked={isCurrent}
+                                                onChange={(event) =>
+                                                    setIsCurrent(
+                                                        event.target.checked
+                                                    )
+                                                }
+                                            />
+                                            <label
+                                                htmlFor="isCurrent"
+                                                className={styles.inputLabel}
+                                            >
+                                                Currently Attending
+                                            </label>
+                                        </section>
+                                    </section>
+                                </section>
+                                <section className={styles.inputRowContainer}>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="startDate"
+                                            className={styles.inputLabel}
+                                        >
+                                            Start Date
+                                        </label>
+                                        <input
+                                            id="startDate"
+                                            type="date"
+                                            className={styles.textInput}
+                                            onChange={(event) =>
+                                                setStartDate(event.target.value)
+                                            }
+                                            value={startDate}
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="endDate"
+                                            className={`${styles.inputLabel} ${
+                                                isCurrent && styles.disabled
+                                            }`}
+                                        >
+                                            End Date
+                                        </label>
+                                        <input
+                                            disabled={isCurrent}
+                                            id="endDate"
+                                            type="date"
+                                            className={styles.textInput}
+                                            onChange={(event) => {
+                                                console.log(event.target.value);
+                                                setEndDate(event.target.value);
+                                            }}
+                                            value={endDate}
+                                        />
+                                    </section>
+                                </section>
+                                <section
+                                    className={styles.inputItemContainer100}
+                                >
+                                    <label className={styles.inputLabel}>
+                                        Bullet Points:
+                                    </label>
+                                    {bulletPoints.map((bulletPoint, index) => (
+                                        <div
+                                            className={styles.inputRowContainer}
+                                            key={index}
+                                        >
+                                            <div
+                                                className={styles.bulletPoint}
+                                            ></div>
+                                            <input
+                                                type="text"
+                                                className={styles.textInput}
+                                                value={bulletPoint}
+                                                onChange={(e) =>
+                                                    handleBulletPointChange(
+                                                        index,
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                            <button
+                                                className={styles.addButton}
+                                                onClick={() =>
+                                                    handleRemoveBulletPoint(
+                                                        index
+                                                    )
+                                                }
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    ))}
+                                    <button
+                                        onClick={handleAddBulletPoint}
+                                        className={styles.addBulletButton}
+                                    >
+                                        Add Bullet Point
+                                    </button>
+                                </section>
+                                <section
+                                    className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                >
+                                    <button
+                                        title="Cancel"
+                                        className={styles.cancelEditButton}
+                                        onClick={() => {
+                                            setSchoolName("");
+                                            setDegreeType("");
+                                            setDegreeField("");
+                                            setStartDate("");
+                                            setEndDate("");
+                                            setGpa("");
+                                            setIsCurrent(false);
+                                            setBulletPoints([""]);
+                                            setAddItemClicked(false);
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        title="Add School"
+                                        className={styles.saveEditButton}
+                                        onClick={() => {
+                                            const newExperienceArray = [
+                                                ...educationArray,
+                                            ];
+                                            newExperienceArray.push({
+                                                id: educationArray.length + 1,
+                                                schoolName,
+                                                degreeType,
+                                                degreeField,
+                                                startDate,
+                                                currentEnrollment: isCurrent,
+                                                endDate: isCurrent
+                                                    ? "Present"
+                                                    : endDate,
+                                                gpa,
+                                                bullets: bulletPoints,
+                                            });
+                                            setEducationArray(
+                                                newExperienceArray
+                                            );
+                                            setSchoolName("");
+                                            setDegreeType("");
+                                            setDegreeField("");
+                                            setGpa("");
+                                            setStartDate("");
+                                            setEndDate("");
+                                            setIsCurrent(false);
+                                            setBulletPoints([""]);
+                                            setAddItemClicked(false);
+                                        }}
+                                    >
+                                        Save
+                                    </button>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                ) : (
+                    <section className={styles.experienceTitleContainer}>
+                        <section className={styles.rowContainer}>
+                            <h3 style={{ textDecoration: "underline" }}>
+                                Education
+                            </h3>
+                            <button
+                                title="Add School"
+                                className={styles.addButton}
+                                onClick={() => {
+                                    setEditSectionIndex(-1);
+                                    setSchoolName("");
+                                    setDegreeType("");
+                                    setDegreeField("");
+                                    setGpa("");
+                                    setStartDate(
+                                        new Date().toISOString().split("T")[0]
+                                    );
+                                    setEndDate(
+                                        new Date().toISOString().split("T")[0]
+                                    );
+                                    setBulletPoints([""]);
+                                    setAddItemClicked(true);
+                                }}
+                            >
+                                {plusIcon}
+                            </button>
+                        </section>
+                        <section className={styles.checkboxContainer}>
+                            <section className={styles.checkboxItem}>
+                                <input
+                                    type="checkbox"
+                                    id="showStartDate"
+                                    className={styles.toggleInput}
+                                    checked={showStartDate}
+                                    onChange={(event) =>
+                                        setShowStartDate(event.target.checked)
+                                    }
+                                />
+                                <label
+                                    htmlFor="showStartDate"
+                                    className={styles.inputLabel}
+                                >
+                                    Show Start Date
+                                </label>
+                            </section>
+                            <section className={styles.checkboxItem}>
+                                <input
+                                    type="checkbox"
+                                    id="showGPA"
+                                    className={styles.toggleInput}
+                                    checked={showGpa}
+                                    onChange={(event) =>
+                                        setShowGpa(event.target.checked)
+                                    }
+                                />
+                                <label
+                                    htmlFor="showSummary"
+                                    className={styles.inputLabel}
+                                >
+                                    Show GPA
+                                </label>
+                            </section>
+                            <section className={styles.checkboxItem}>
+                                <input
+                                    type="checkbox"
+                                    id="showBullets"
+                                    className={styles.toggleInput}
+                                    checked={showBullets}
+                                    onChange={(event) =>
+                                        setShowBullets(event.target.checked)
+                                    }
+                                />
+                                <label
+                                    htmlFor="showBullets"
+                                    className={styles.inputLabel}
+                                >
+                                    Show Bullet Points
+                                </label>
+                            </section>
+                            <section className={`${styles.optionContainer}`}>
+                                <p className={styles.optionLabel}>Date</p>
+                                <section className={styles.dateButtonContainer}>
+                                    <button
+                                        className={`${styles.option} ${
+                                            styles.dateButton
+                                        } ${styles.leftButton} ${
+                                            dateFormat === "short" &&
+                                            styles.selectedDate
+                                        }`}
+                                        title="Short date - Jan 2024"
+                                        onClick={() => {
+                                            setDateFormat("short");
+                                        }}
+                                    >
+                                        <p>Short</p>
+                                    </button>
+                                    <button
+                                        className={`${styles.option} ${
+                                            styles.dateButton
+                                        } ${styles.rightButton} ${
+                                            dateFormat === "long" &&
+                                            styles.selectedDate
+                                        }`}
+                                        title="Long date - January 2024"
+                                        onClick={() => {
+                                            setDateFormat("long");
+                                        }}
+                                    >
+                                        <p>Long</p>
+                                    </button>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                )}
+                {educationArray.map((experience: any, index: number) => {
+                    return editSectionIndex === index ? (
+                        <section className={styles.skillCategoryCard}>
+                            <section className={styles.columnListRowItem}>
+                                <section className={styles.experienceItem}>
+                                    <p className={styles.editTitle}>
+                                        Edit school:
+                                    </p>
+                                    <section
+                                        className={styles.inputRowContainer}
+                                    >
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="schoolName"
+                                                className={styles.inputLabel}
+                                            >
+                                                School Name
+                                            </label>
+                                            <input
+                                                id="schoolName"
+                                                className={styles.textInput}
+                                                value={schoolName}
+                                                onChange={(event) =>
+                                                    setSchoolName(
+                                                        event.target.value
+                                                    )
+                                                }
+                                            />
+                                        </section>
+
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="degreeType"
+                                                className={styles.inputLabel}
+                                            >
+                                                Degree Type
+                                            </label>
+                                            <input
+                                                id="degreeType"
+                                                placeholder="E.g. Bachelor's Degree"
+                                                className={styles.textInput}
+                                                value={degreeType}
+                                                onChange={(event) =>
+                                                    setDegreeType(
+                                                        event.target.value
+                                                    )
+                                                }
+                                            />
+                                        </section>
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="degreeField"
+                                                className={styles.inputLabel}
+                                            >
+                                                Degree Field
+                                            </label>
+                                            <input
+                                                id="degreeField"
+                                                placeholder="E.g. Computer Science"
+                                                className={styles.textInput}
+                                                value={degreeField}
+                                                onChange={(event) =>
+                                                    setDegreeField(
+                                                        event.target.value
+                                                    )
+                                                }
+                                            />
+                                        </section>
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="gpa"
+                                                className={styles.inputLabel}
+                                            >
+                                                GPA
+                                            </label>
+                                            <input
+                                                id="gpa"
+                                                placeholder="E.g. 3.8"
+                                                className={styles.textInput}
+                                                value={gpa}
+                                                onChange={(event) =>
+                                                    setGpa(event.target.value)
+                                                }
+                                            />
+                                        </section>
+                                        <section
+                                            className={styles.checkboxContainer}
+                                        >
+                                            <section
+                                                className={styles.checkboxItem}
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    id="isCurrent"
+                                                    className={
+                                                        styles.toggleInput
+                                                    }
+                                                    checked={isCurrent}
+                                                    onChange={(event) =>
+                                                        setIsCurrent(
+                                                            event.target.checked
+                                                        )
+                                                    }
+                                                />
+                                                <label
+                                                    htmlFor="isCurrent"
+                                                    className={
+                                                        styles.inputLabel
+                                                    }
+                                                >
+                                                    Currently Attending
+                                                </label>
+                                            </section>
+                                        </section>
+                                    </section>
+                                    <section
+                                        className={styles.inputRowContainer}
+                                    >
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="startDate"
+                                                className={styles.inputLabel}
+                                            >
+                                                Start Date
+                                            </label>
+                                            <input
+                                                id="startDate"
+                                                type="date"
+                                                className={styles.textInput}
+                                                onChange={(event) =>
+                                                    setStartDate(
+                                                        event.target.value
+                                                    )
+                                                }
+                                                value={startDate}
+                                            />
+                                        </section>
+                                        <section
+                                            className={
+                                                styles.inputItemContainer
+                                            }
+                                        >
+                                            <label
+                                                htmlFor="endDate"
+                                                className={`${
+                                                    styles.inputLabel
+                                                } ${
+                                                    isCurrent && styles.disabled
+                                                }`}
+                                            >
+                                                End Date
+                                            </label>
+                                            <input
+                                                id="endDate"
+                                                type="date"
+                                                disabled={isCurrent}
+                                                className={styles.textInput}
+                                                onChange={(event) => {
+                                                    console.log(
+                                                        event.target.value
+                                                    );
+                                                    setEndDate(
+                                                        event.target.value
+                                                    );
+                                                }}
+                                                value={endDate}
+                                            />
+                                        </section>
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer100}
+                                    >
+                                        <label className={styles.inputLabel}>
+                                            Bullet Points:
+                                        </label>
+                                        {bulletPoints.map(
+                                            (bulletPoint, index) => (
+                                                <div
+                                                    className={
+                                                        styles.inputRowContainer
+                                                    }
+                                                    key={index}
+                                                >
+                                                    <div
+                                                        className={
+                                                            styles.bulletPoint
+                                                        }
+                                                    ></div>
+                                                    <input
+                                                        type="text"
+                                                        className={
+                                                            styles.textInput
+                                                        }
+                                                        value={bulletPoint}
+                                                        onChange={(e) =>
+                                                            handleBulletPointChange(
+                                                                index,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                    <button
+                                                        className={
+                                                            styles.addButton
+                                                        }
+                                                        onClick={() =>
+                                                            handleRemoveBulletPoint(
+                                                                index
+                                                            )
+                                                        }
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            )
+                                        )}
+                                        <button
+                                            onClick={handleAddBulletPoint}
+                                            className={styles.addBulletButton}
+                                        >
+                                            Add Bullet Point
+                                        </button>
+                                    </section>
+                                    <section
+                                        className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                    >
+                                        <button
+                                            title="Cancel"
+                                            className={styles.cancelEditButton}
+                                            onClick={() => {
+                                                setSchoolName("");
+                                                setDegreeType("");
+                                                setDegreeField("");
+                                                setGpa("");
+                                                setIsCurrent(false);
+                                                setStartDate("");
+                                                setEndDate("");
+                                                setBulletPoints([""]);
+                                                setEditSectionIndex(-1);
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            title="Add School"
+                                            className={styles.saveEditButton}
+                                            onClick={() => {
+                                                const newExperienceArray = [
+                                                    ...educationArray,
+                                                ];
+                                                // replace the job at index editSectionIndex with the new job
+                                                newExperienceArray[
+                                                    editSectionIndex
+                                                ] = {
+                                                    schoolName,
+                                                    degreeType,
+                                                    degreeField,
+                                                    gpa,
+                                                    startDate,
+                                                    currentEnrollment:
+                                                        isCurrent,
+                                                    endDate: isCurrent
+                                                        ? "Present"
+                                                        : endDate,
+                                                    bullets: bulletPoints,
+                                                };
+                                                setEducationArray(
+                                                    newExperienceArray
+                                                );
+                                                setSchoolName("");
+                                                setDegreeType("");
+                                                setDegreeField("");
+                                                setGpa("");
+                                                setStartDate("");
+                                                setEndDate("");
+                                                setIsCurrent(false);
+                                                setBulletPoints([""]);
+                                                setAddItemClicked(false);
+                                                setEditSectionIndex(-1);
+                                            }}
+                                        >
+                                            Update
+                                        </button>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    ) : (
+                        <section
+                            key={index}
+                            className={styles.skillCategoryCardContainer}
+                        >
+                            <section className={styles.cardButtonContainer}>
+                                <button
+                                    title="Delete School"
+                                    className={styles.cardDeleteButton}
+                                    onClick={() => {
+                                        setEducationArray(
+                                            educationArray.filter(
+                                                (_: any, i: number) =>
+                                                    i !== index
+                                            )
+                                        );
+                                    }}
+                                >
+                                    <p className={styles.smallText}>Delete</p>
+                                    {cancelIcon}
+                                </button>
+
+                                <button
+                                    title="Edit School"
+                                    className={styles.cardEditButton}
+                                    onClick={() => {
+                                        setAddItemClicked(false);
+                                        setSchoolName(experience.schoolName);
+                                        setDegreeType(experience.degreeType);
+                                        setDegreeField(experience.degreeField);
+                                        setIsCurrent(
+                                            experience.currentEnrollment
+                                        );
+                                        setGpa(experience.gpa);
+                                        setStartDate(experience.startDate);
+                                        setEndDate(
+                                            experience.endDate === "Present"
+                                                ? new Date()
+                                                      .toISOString()
+                                                      .split("T")[0]
+                                                : experience.endDate
+                                        );
+                                        setBulletPoints(experience.bullets);
+                                        setEditSectionIndex(index);
+                                    }}
+                                >
+                                    <p className={styles.smallText}>Edit</p>
+                                    {editIcon}
+                                </button>
+                            </section>
+                            <section className={styles.skillCategoryCard}>
+                                <section className={styles.columnListRowItem}>
+                                    <section className={styles.experienceItem}>
+                                        <section className={styles.topRow}>
+                                            <p className={styles.schoolName}>
+                                                {experience.schoolName}
+                                            </p>
+                                            <section
+                                                className={styles.dateContainer}
+                                            >
+                                                {showStartDate ? (
+                                                    <p className={styles.date}>
+                                                        {showDate(
+                                                            experience.startDate
+                                                        )}{" "}
+                                                        -{" "}
+                                                        {showDate(
+                                                            experience.endDate
+                                                        )}
+                                                    </p>
+                                                ) : (
+                                                    <p className={styles.date}>
+                                                        {showDate(
+                                                            experience.endDate
+                                                        )}
+                                                    </p>
+                                                )}
+                                            </section>
+                                        </section>
+                                        <p className={styles.degreeType}>
+                                            {experience.degreeType} in{" "}
+                                            {experience.degreeField}
+                                        </p>
+                                        {showGpa && (
+                                            <p className={styles.gpa}>
+                                                GPA: {experience.gpa}
+                                            </p>
+                                        )}
+                                        {showBullets && (
+                                            <ul
+                                                className={
+                                                    styles.bulletListContainer
+                                                }
+                                            >
+                                                {experience.bullets.map(
+                                                    (
+                                                        bullet: any,
+                                                        index: number
+                                                    ) => (
+                                                        <li
+                                                            key={index}
+                                                            className={
+                                                                styles.bullet
+                                                            }
+                                                        >
+                                                            {bullet}
+                                                        </li>
+                                                    )
+                                                )}
+                                            </ul>
+                                        )}
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    );
+                })}
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
+const Project = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [projectArray, setProjectArray] = useState(
+        document.information.projectArray
+    );
+    const [projectName, setProjectName] = useState("");
+    const [projectSource, setProjectSource] = useState("");
+    const [projectSummary, setProjectSummary] = useState("");
+    const [projectBullets, setProjectBullets] = useState([""]);
+    const [editSectionIndex, setEditSectionIndex] = useState(-1);
+    const [addItemClicked, setAddItemClicked] = useState(false);
+    const [showSummary, setShowSummary] = useState(
+        document.information.sectionEdit.projects.showSummary
+    );
+
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                projectArray,
+                sectionEdit: {
+                    ...document.information.sectionEdit,
+                    projects: {
+                        ...document.information.sectionEdit.projects,
+                        showSummary,
+                    },
+                },
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+
+    const handleBulletPointChange = (index: number, value: string) => {
+        const updatedBulletPoints = [...projectBullets];
+        updatedBulletPoints[index] = value;
+        setProjectBullets(updatedBulletPoints);
+    };
+
+    const handleAddBulletPoint = () => {
+        setProjectBullets([...projectBullets, ""]);
+    };
+
+    const handleRemoveBulletPoint = (index: number) => {
+        const updatedBulletPoints = [...projectBullets];
+        updatedBulletPoints.splice(index, 1);
+        setProjectBullets(updatedBulletPoints);
+    };
+
+    return (
+        <>
+            <section className={styles.columnList}>
+                {addItemClicked ? (
+                    <section className={styles.skillCategoryCard}>
+                        <section className={styles.columnListRowItem}>
+                            <section className={styles.experienceItem}>
+                                <p className={styles.editTitle}>
+                                    Add new project:
+                                </p>
+                                <section className={styles.inputItemContainer}>
+                                    <label
+                                        htmlFor="projectName"
+                                        className={styles.inputLabel}
+                                    >
+                                        Project Name
+                                    </label>
+                                    <input
+                                        id="projectName"
+                                        className={styles.textInput}
+                                        value={projectName}
+                                        onChange={(event) =>
+                                            setProjectName(event.target.value)
+                                        }
+                                    />
+                                </section>
+                                <section className={styles.inputItemContainer}>
+                                    <label
+                                        htmlFor="projectSource"
+                                        className={styles.inputLabel}
+                                    >
+                                        Project Source
+                                    </label>
+                                    <input
+                                        id="projectSource"
+                                        className={styles.textInput}
+                                        value={projectSource}
+                                        onChange={(event) =>
+                                            setProjectSource(event.target.value)
+                                        }
+                                    />
+                                </section>
+                                <section
+                                    className={styles.inputItemContainer100}
+                                >
+                                    <label
+                                        htmlFor="projectSummary"
+                                        className={`${styles.inputLabel}`}
+                                    >
+                                        Project Summary
+                                    </label>
+                                    <textarea
+                                        id="projectSummary"
+                                        className={styles.textArea}
+                                        value={projectSummary}
+                                        onChange={(event) =>
+                                            setProjectSummary(
+                                                event.target.value
+                                            )
+                                        }
+                                    />
+                                </section>
+                                <section
+                                    className={styles.inputItemContainer100}
+                                >
+                                    <label className={styles.inputLabel}>
+                                        Bullet Points:
+                                    </label>
+                                    {projectBullets.map(
+                                        (bulletPoint, index) => (
+                                            <div
+                                                className={
+                                                    styles.inputRowContainer
+                                                }
+                                                key={index}
+                                            >
+                                                <div
+                                                    className={
+                                                        styles.bulletPoint
+                                                    }
+                                                ></div>
+                                                <input
+                                                    type="text"
+                                                    className={styles.textInput}
+                                                    value={bulletPoint}
+                                                    onChange={(e) =>
+                                                        handleBulletPointChange(
+                                                            index,
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+                                                <button
+                                                    className={styles.addButton}
+                                                    onClick={() =>
+                                                        handleRemoveBulletPoint(
+                                                            index
+                                                        )
+                                                    }
+                                                >
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        )
+                                    )}
+                                    <button
+                                        onClick={handleAddBulletPoint}
+                                        className={styles.addBulletButton}
+                                    >
+                                        Add Bullet Point
+                                    </button>
+                                </section>
+                                <section
+                                    className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                >
+                                    <button
+                                        title="Cancel"
+                                        className={styles.cancelEditButton}
+                                        onClick={() => {
+                                            setProjectName("");
+                                            setProjectSource("");
+                                            setProjectSummary("");
+                                            setProjectBullets([""]);
+                                            setAddItemClicked(false);
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        title="Add Project"
+                                        className={styles.saveEditButton}
+                                        onClick={() => {
+                                            const newProjectArray = [
+                                                ...projectArray,
+                                            ];
+                                            newProjectArray.push({
+                                                name: projectName,
+                                                source: projectSource,
+                                                summary: projectSummary,
+                                                bullets: projectBullets,
+                                            });
+                                            setProjectArray(newProjectArray);
+                                            setProjectName("");
+                                            setProjectSource("");
+                                            setProjectSummary("");
+                                            setProjectBullets([""]);
+                                            setAddItemClicked(false);
+                                        }}
+                                    >
+                                        Save
+                                    </button>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                ) : (
+                    <section className={styles.experienceTitleContainer}>
+                        <section className={styles.rowContainer}>
+                            <h3 style={{ textDecoration: "underline" }}>
+                                Projects
+                            </h3>
+                            <button
+                                title="Add Project"
+                                className={styles.addButton}
+                                onClick={() => {
+                                    setEditSectionIndex(-1);
+                                    setProjectName("");
+                                    setProjectSource("");
+                                    setProjectSummary("");
+                                    setProjectBullets([""]);
+                                    setAddItemClicked(true);
+                                }}
+                            >
+                                {plusIcon}
+                            </button>
+                        </section>
+                        <section className={styles.checkboxContainer}>
+                            <section className={styles.checkboxItem}>
+                                <input
+                                    type="checkbox"
+                                    id="showSummary"
+                                    className={styles.toggleInput}
+                                    checked={showSummary}
+                                    onChange={(event) =>
+                                        setShowSummary(event.target.checked)
+                                    }
+                                />
+                                <label
+                                    htmlFor="showSummary"
+                                    className={styles.inputLabel}
+                                >
+                                    Show Summary
+                                </label>
+                            </section>
+                        </section>
+                    </section>
+                )}
+                {projectArray.map((project: any, index: number) => {
+                    return editSectionIndex === index ? (
+                        <section className={styles.skillCategoryCard}>
+                            <section className={styles.columnListRowItem}>
+                                <section className={styles.experienceItem}>
+                                    <p className={styles.editTitle}>
+                                        Edit project:
+                                    </p>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="projectName"
+                                            className={styles.inputLabel}
+                                        >
+                                            Project Name
+                                        </label>
+                                        <input
+                                            id="projectName"
+                                            className={styles.textInput}
+                                            value={projectName}
+                                            onChange={(event) =>
+                                                setProjectName(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="projectSource"
+                                            className={styles.inputLabel}
+                                        >
+                                            Project Source
+                                        </label>
+                                        <input
+                                            id="projectSource"
+                                            className={styles.textInput}
+                                            value={projectSource}
+                                            onChange={(event) =>
+                                                setProjectSource(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer100}
+                                    >
+                                        <label
+                                            htmlFor="projectSummary"
+                                            className={`${styles.inputLabel}`}
+                                        >
+                                            Project Summary
+                                        </label>
+                                        <textarea
+                                            id="projectSummary"
+                                            className={styles.textArea}
+                                            value={projectSummary}
+                                            onChange={(event) =>
+                                                setProjectSummary(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer100}
+                                    >
+                                        <label className={styles.inputLabel}>
+                                            Bullet Points:
+                                        </label>
+                                        {projectBullets.map(
+                                            (bulletPoint, index) => (
+                                                <div
+                                                    className={
+                                                        styles.inputRowContainer
+                                                    }
+                                                    key={index}
+                                                >
+                                                    <div
+                                                        className={
+                                                            styles.bulletPoint
+                                                        }
+                                                    ></div>
+                                                    <input
+                                                        type="text"
+                                                        className={
+                                                            styles.textInput
+                                                        }
+                                                        value={bulletPoint}
+                                                        onChange={(e) =>
+                                                            handleBulletPointChange(
+                                                                index,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                    <button
+                                                        className={
+                                                            styles.addButton
+                                                        }
+                                                        onClick={() =>
+                                                            handleRemoveBulletPoint(
+                                                                index
+                                                            )
+                                                        }
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            )
+                                        )}
+                                        <button
+                                            onClick={handleAddBulletPoint}
+                                            className={styles.addBulletButton}
+                                        >
+                                            Add Bullet Point
+                                        </button>
+                                    </section>
+                                    <section
+                                        className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                    >
+                                        <button
+                                            title="Cancel"
+                                            className={styles.cancelEditButton}
+                                            onClick={() => {
+                                                setProjectName("");
+                                                setProjectSource("");
+                                                setProjectSummary("");
+                                                setProjectBullets([""]);
+                                                setEditSectionIndex(-1);
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            title="Update Project"
+                                            className={styles.saveEditButton}
+                                            onClick={() => {
+                                                const newProjectArray = [
+                                                    ...projectArray,
+                                                ];
+                                                newProjectArray[
+                                                    editSectionIndex
+                                                ] = {
+                                                    name: projectName,
+                                                    source: projectSource,
+                                                    summary: projectSummary,
+                                                    bullets: projectBullets,
+                                                };
+                                                setProjectArray(
+                                                    newProjectArray
+                                                );
+                                                setProjectName("");
+                                                setProjectSource("");
+                                                setProjectSummary("");
+                                                setProjectBullets([""]);
+                                                setEditSectionIndex(-1);
+                                            }}
+                                        >
+                                            Update
+                                        </button>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    ) : (
+                        <section
+                            key={index}
+                            className={styles.skillCategoryCardContainer}
+                        >
+                            <section className={styles.cardButtonContainer}>
+                                <button
+                                    title="Delete Project"
+                                    className={styles.cardDeleteButton}
+                                    onClick={() => {
+                                        setProjectArray(
+                                            projectArray.filter(
+                                                (_: any, i: number) =>
+                                                    i !== index
+                                            )
+                                        );
+                                    }}
+                                >
+                                    <p className={styles.smallText}>Delete</p>
+                                    {cancelIcon}
+                                </button>
+                                <button
+                                    title="Edit Project"
+                                    className={styles.cardEditButton}
+                                    onClick={() => {
+                                        setAddItemClicked(false);
+                                        setProjectName(project.name);
+                                        setProjectSource(project.source);
+                                        setProjectSummary(project.summary);
+                                        setProjectBullets(project.bullets);
+                                        setEditSectionIndex(index);
+                                    }}
+                                >
+                                    <p className={styles.smallText}>Edit</p>
+                                    {editIcon}
+                                </button>
+                            </section>
+                            <section className={styles.skillCategoryCard}>
+                                <section className={styles.columnListRowItem}>
+                                    <section className={styles.experienceItem}>
+                                        <p className={styles.companyName}>
+                                            {project.name}
+                                        </p>
+                                        <p className={styles.position}>
+                                            {project.source}
+                                        </p>
+                                        {showSummary && (
+                                            <p className={styles.jobSummary}>
+                                                {project.summary}
+                                            </p>
+                                        )}
+                                        <ul
+                                            className={
+                                                styles.bulletListContainer
+                                            }
+                                        >
+                                            {project.bullets.map(
+                                                (
+                                                    bullet: any,
+                                                    index: number
+                                                ) => (
+                                                    <li
+                                                        key={index}
+                                                        className={
+                                                            styles.bullet
+                                                        }
+                                                    >
+                                                        {bullet}
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    );
+                })}
             </section>
             <SaveButton
                 sectionId={sectionId}
@@ -1574,6 +4073,18 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
         case sectionId.includes("experience"):
             options = Object.keys(document.information.sectionEdit.experience);
             break;
+        case sectionId.includes("education"):
+            options = Object.keys(document.information.sectionEdit.education);
+            break;
+        case sectionId.includes("projects"):
+            options = Object.keys(document.information.sectionEdit.projects);
+            break;
+        case sectionId.includes("languages"):
+            options = Object.keys(document.information.sectionEdit.languages);
+            break;
+        case sectionId.includes("interests"):
+            options = Object.keys(document.information.sectionEdit.interests);
+            break;
         case sectionId.includes("header"):
             options = Object.keys(document.information.sectionEdit.header);
             break;
@@ -1601,16 +4112,6 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
                         return (
                             <section className={styles.optionItem}>
                                 <FontRatioOption
-                                    key={index}
-                                    document={document}
-                                    sectionId={sectionId}
-                                />
-                            </section>
-                        );
-                    case "dateFormat":
-                        return (
-                            <section className={styles.optionItem}>
-                                <DateFormatOption
                                     key={index}
                                     document={document}
                                     sectionId={sectionId}
@@ -1673,6 +4174,18 @@ export default function EditModalWrapper({
             break;
         case sectionId.includes("experience"):
             section = <Experience document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("education"):
+            section = <Education document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("projects"):
+            section = <Project document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("languages"):
+            section = <Languages document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("interests"):
+            section = <Interests document={document} sectionId={sectionId} />;
             break;
         case (sectionId.includes("header") &&
             (sectionId.includes("basic") ||

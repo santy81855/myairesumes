@@ -9,6 +9,9 @@ export const formatDateMonthDayYear = (date: string) => {
 };
 
 export const formatDateMonthYear = (date: string) => {
+    if (date === "Present") {
+        return date;
+    }
     const d = new Date(date);
     return d.toLocaleDateString("en-US", {
         year: "numeric",
@@ -24,6 +27,9 @@ export const formatDateYear = (date: string) => {
 };
 
 export const formatDateMonYear = (date: string) => {
+    if (date === "Present") {
+        return date;
+    }
     const d = new Date(date);
     return d.toLocaleDateString("en-US", {
         year: "numeric",

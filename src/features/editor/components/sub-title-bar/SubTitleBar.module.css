@@ -36,10 +36,12 @@
     color: black;
 }
 
-.iconContainer:hover {
-    background-color: rgb(
-        var(--editor-subtitlebar-button-hover-background-color-rgb)
-    );
+@media (hover: hover) {
+    .iconContainer:hover {
+        background-color: rgb(
+            var(--editor-subtitlebar-button-hover-background-color-rgb)
+        );
+    }
 }
 
 .active {

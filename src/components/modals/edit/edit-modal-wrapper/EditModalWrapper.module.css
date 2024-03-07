@@ -59,10 +59,6 @@
     fill: rgb(var(--editor-accent-color-contrast-rgb));
 }
 
-.closeButton:hover svg {
-    fill: rgb(var(--editor-accent-color-contrast-hover-rgb));
-}
-
 .optionsBar {
     width: 100%;
     background-color: white;
@@ -73,7 +69,6 @@
 }
 
 .optionItem {
-    padding-block: var(--padding-block-small);
     padding-inline: var(--padding-inline-small);
 }
 
@@ -105,8 +100,8 @@
     .optionItem {
         padding-inline: var(--padding-inline-medium);
     }
-    .optionLabel {
-        display: none;
+    .optionsBar {
+        justify-content: center;
     }
 }
 
@@ -133,10 +128,6 @@
 .rightButton {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-}
-
-.dateButton:hover {
-    background-color: rgb(var(--editor-accent-color-hover-rgb));
 }
 
 .option p {
@@ -174,10 +165,6 @@
     fill: rgb(var(--editor-text-color-rgb));
 }
 
-.option:hover svg {
-    fill: rgb(var(--editor-accent-color-rgb));
-}
-
 .saveButtonContainer {
     width: 100%;
     display: flex;
@@ -198,10 +185,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.saveButton:hover {
-    background-color: rgb(var(--editor-accent-color-hover-rgb));
 }
 
 .sectionContainer {
@@ -329,17 +312,13 @@
     fill: rgb(var(--editor-accent-color-contrast-rgb));
 }
 
-.addButton:hover {
-    background-color: rgb(var(--editor-accent-color-hover-rgb));
-}
-
 .columnList {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: var(--gap-small);
+    gap: var(--gap-medium);
 }
 
 .columnListRowItem {
@@ -353,6 +332,10 @@
 .columnListRowItem p {
     width: 100%;
     text-align: left;
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.smallText {
     font-size: var(--font-size-small);
     color: rgb(var(--editor-text-color-rgb));
 }
@@ -388,10 +371,6 @@
     fill: rgb(var(--editor-text-color-rgb));
 }
 
-.editButton:hover svg {
-    fill: rgb(var(--editor-accent-color-rgb));
-}
-
 .cancelButton {
     background-color: transparent;
     border: none;
@@ -407,10 +386,6 @@
     fill: rgb(227, 115, 84);
 }
 
-.cancelButton:hover svg {
-    fill: rgb(var(--editor-accent-color-rgb));
-}
-
 .rowContainer {
     width: 100%;
     display: flex;
@@ -419,13 +394,304 @@
     gap: var(--gap-small);
 }
 
+.skillCategoryCardContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+}
+
+.cardButtonContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-small);
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.skillCategoryCard {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    border-radius: 5px;
+    background-color: rgb(251, 251, 251);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.cardEditButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-small);
+}
+
+.cardEditButton svg {
+    margin-bottom: 2px;
+    width: 0.8rem;
+    height: 0.8rem;
+    fill: rgb(var(--editor-text-color-rgb));
+}
+
+.cardEditButton p {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.cardEditButtonActive p {
+    color: rgb(var(--editor-accent-color-hover-rgb));
+}
+
+.cardEditButtonActive svg {
+    fill: rgb(var(--editor-accent-color-hover-rgb));
+}
+
+.cardDeleteButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.cardDeleteButton svg {
+    width: 0.8rem;
+    height: 0.8rem;
+    fill: rgb(227, 115, 84);
+}
+
+.experienceItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+}
+
+.companyName {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+    font-weight: bold;
+}
+
+.schoolName {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+    font-weight: bold;
+}
+
+.degreeType {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.gpa {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.position {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.editTitle {
+    font-size: var(--font-size-medium);
+    color: rgb(var(--editor-text-color-rgb));
+    font-weight: bold;
+    margin-bottom: var(--gap-small);
+}
+
+.date {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.jobSummary {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.bulletListContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gap-small) / 2);
+}
+
+.bullet {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+    margin-inline-start: var(--padding-inline-medium);
+}
+
+.topRow {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--gap-small);
+}
+
+.dateContainer {
+    display: flex;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: center;
+}
+
+.experienceButtonContainer {
+    margin-block-start: var(--gap-medium);
+}
+
+.cancelEditButton {
+    width: 80px;
+    background-color: rgb(215, 215, 215);
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(95, 95, 95);
+}
+
+.saveEditButton {
+    width: 80px;
+    background-color: rgb(var(--editor-accent-color-rgb));
+    color: rgb(var(--editor-accent-color-contrast-rgb));
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bulletPoint {
+    height: 0.5rem;
+    width: 0.5rem;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.addBulletButton {
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    background-color: rgb(var(--editor-accent-color-rgb));
+    color: rgb(var(--editor-accent-color-contrast-rgb));
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.experienceTitleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-small);
+}
+
+.checkboxContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-medium);
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.checkboxItem {
+    display: flex;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: flex-start;
+}
+
 @media screen and (max-width: 425px) {
     .modal {
         width: 95%;
     }
-
     .container {
         padding-block: var(--padding-block-medium);
-        padding-inline: var(--padding-inline-medium);
+        padding-inline: var(--padding-inline-small);
+    }
+}
+
+@media (hover: hover) {
+    .addBulletButton:hover {
+        background-color: rgb(var(--editor-accent-color-hover-rgb));
+    }
+
+    .cancelEditButton:hover {
+        background-color: rgb(200, 200, 200);
+    }
+
+    .cancelButton:hover svg {
+        fill: rgb(var(--editor-accent-color-rgb));
+    }
+
+    .editButton:hover svg {
+        fill: rgb(var(--editor-accent-color-rgb));
+    }
+
+    .saveEditButton:hover {
+        background-color: rgb(var(--editor-accent-color-hover-rgb));
+    }
+
+    .addButton:hover {
+        background-color: rgb(var(--editor-accent-color-hover-rgb));
+    }
+
+    .saveButton:hover {
+        background-color: rgb(var(--editor-accent-color-hover-rgb));
+    }
+
+    .option:hover svg {
+        fill: rgb(var(--editor-accent-color-rgb));
+    }
+
+    .closeButton:hover svg {
+        fill: rgb(var(--editor-accent-color-contrast-hover-rgb));
+    }
+
+    .dateButton:hover {
+        background-color: rgb(var(--editor-accent-color-hover-rgb));
+    }
+
+    .cardEditButton:hover p {
+        color: rgb(var(--editor-accent-color-hover-rgb));
+    }
+
+    .cardEditButton:hover svg {
+        fill: rgb(var(--editor-accent-color-hover-rgb));
+    }
+
+    .cardDeleteButton:hover svg {
+        fill: rgb(227, 115, 84);
+    }
+
+    .cardDeleteButton:hover p {
+        color: rgb(227, 115, 84);
+    }
+
+    .selectedDate:hover {
+        background-color: rgb(var(--editor-accent-color-rgb));
     }
 }

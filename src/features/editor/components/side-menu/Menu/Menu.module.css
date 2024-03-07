@@ -23,8 +23,10 @@
     gap: var(--padding-block-small);
 }
 
-.staticMenuItem:hover {
-    background-color: #303045;
+@media (hover: hover) {
+    .staticMenuItem:hover {
+        background-color: #303045;
+    }
 }
 
 .staticIconContainer {
