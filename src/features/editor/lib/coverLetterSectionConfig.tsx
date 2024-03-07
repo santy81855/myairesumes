@@ -5,6 +5,7 @@ import {
     getSalutationVariants,
     getClosingVariants,
     getBodyVariants,
+    getContactVariants,
 } from "@/features/editor";
 
 export const CoverLetterSectionConfig = (data: {
@@ -16,6 +17,7 @@ export const CoverLetterSectionConfig = (data: {
     isDownload: boolean;
 }) => {
     const styles = getSectionStyles({ ...data });
+    const contactVariants = getContactVariants({ ...data, styles });
     const headerVariants = getHeaderVariants({ ...data, styles });
     const salutationVariants = getSalutationVariants({ ...data, styles });
     const bodyVariants = getBodyVariants({ ...data, styles });
@@ -26,5 +28,6 @@ export const CoverLetterSectionConfig = (data: {
         ...salutationVariants,
         ...bodyVariants,
         ...closingVariants,
+        ...contactVariants,
     };
 };

@@ -51,6 +51,7 @@ const getProjectsVariants = (data: {
                                             style={{
                                                 ...styles.rowSpaceBetween,
                                                 ...styles.width100,
+                                                ...styles.flexWrap,
                                             }}
                                         >
                                             <Text

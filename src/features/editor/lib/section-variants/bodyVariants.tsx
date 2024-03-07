@@ -36,7 +36,16 @@ const getBodyVariants = (data: {
             keyWords: ["body", "content", "main", "paragraph"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <Text style={styles.medium}>
+                    <Text
+                        style={{
+                            whiteSpace: "pre-line",
+                            ...styles.small,
+                            fontSize:
+                                fontSize *
+                                0.8 *
+                                document.information.sectionEdit.body.fontRatio,
+                        }}
+                    >
                         {document.information.body}
                     </Text>
                 </View>

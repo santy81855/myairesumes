@@ -132,7 +132,7 @@ export const updateResume = async (formData: any) => {
             error: "An unknown error occurred. Please try again.",
         };
     }
-    // revalidateTag("currentResume");
+    revalidateTag("currentResume");
     return {
         success: true,
     };
@@ -162,7 +162,7 @@ export const updateCoverLetter = async (formData: any) => {
             error: "An unknown error occurred. Please try again.",
         };
     }
-    // revalidateTag("currentCoverLetter");
+    revalidateTag("currentCoverLetter");
     return {
         success: true,
     };

@@ -71,6 +71,15 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
         case sectionId.includes("projects"):
             ratio = document.information.sectionEdit.projects.fontRatio;
             break;
+        case sectionId.includes("salutation"):
+            ratio = document.information.sectionEdit.salutation.fontRatio;
+            break;
+        case sectionId.includes("body"):
+            ratio = document.information.sectionEdit.body.fontRatio;
+            break;
+        case sectionId.includes("closing"):
+            ratio = document.information.sectionEdit.closing.fontRatio;
+            break;
         default:
             break;
     }
@@ -302,6 +311,69 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
                                 ...document.information.sectionEdit.projects,
                                 fontRatio:
                                     document.information.sectionEdit.projects
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("salutation"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            salutation: {
+                                ...document.information.sectionEdit.salutation,
+                                fontRatio:
+                                    document.information.sectionEdit.salutation
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("body"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            body: {
+                                ...document.information.sectionEdit.body,
+                                fontRatio:
+                                    document.information.sectionEdit.body
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("closing"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            closing: {
+                                ...document.information.sectionEdit.closing,
+                                fontRatio:
+                                    document.information.sectionEdit.closing
                                         .fontRatio + change,
                             },
                         },
@@ -705,6 +777,7 @@ const Summary = ({ sectionId, document }: SectionProps) => {
                     Summary
                 </label>
                 <textarea
+                    id="summary"
                     className={styles.textArea}
                     style={{
                         textAlign:
@@ -1231,7 +1304,7 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
                                     setAddCategoryClicked(false);
                                 }}
                             >
-                                {plusIcon}
+                                Add Category
                             </button>
                         </section>
                     </section>
@@ -1260,11 +1333,22 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
                     >
                         <section className={styles.cardButtonContainer}>
                             <button
+                                title="Delete Category"
+                                className={styles.cardDeleteButton}
+                                onClick={() => {
+                                    setSkillArray(
+                                        skillArray.filter(
+                                            (_: any, i: number) => i !== index
+                                        )
+                                    );
+                                }}
+                            >
+                                <p className={styles.smallText}>Delete</p>
+                                {cancelIcon}
+                            </button>
+                            <button
                                 title="Edit Category"
-                                className={`${styles.cardEditButton} ${
-                                    editSectionIndex === index &&
-                                    styles.cardEditButtonActive
-                                }`}
+                                className={`${styles.cardEditButton}`}
                                 onClick={() => {
                                     setEditSectionIndex(index);
                                 }}
@@ -1275,22 +1359,6 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
                         </section>
                         <section className={styles.skillCategoryCard}>
                             <section className={styles.columnListRowItem}>
-                                {editSectionIndex === index && (
-                                    <button
-                                        title="delete category"
-                                        className={styles.cancelButton}
-                                        onClick={() => {
-                                            setSkillArray(
-                                                skillArray.filter(
-                                                    (_: any, i: number) =>
-                                                        i !== index
-                                                )
-                                            );
-                                        }}
-                                    >
-                                        {cancelIcon}
-                                    </button>
-                                )}
                                 {editCategoryIndex === index ? (
                                     <button
                                         title="save"
@@ -1478,15 +1546,47 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
                                         </section>
                                     ) : (
                                         editSectionIndex === index && (
-                                            <button
-                                                title="Add Skill"
-                                                className={`${styles.addButton} ${styles.addButtonSmall}`}
-                                                onClick={() => {
-                                                    setAddSkillIndex(index);
-                                                }}
-                                            >
-                                                {plusIcon}
-                                            </button>
+                                            <>
+                                                <button
+                                                    title="Add Skill"
+                                                    className={`${styles.addButton} ${styles.addButtonSmall}`}
+                                                    onClick={() => {
+                                                        setAddSkillIndex(index);
+                                                    }}
+                                                >
+                                                    {plusIcon}
+                                                </button>
+                                                <section
+                                                    className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                                >
+                                                    <button
+                                                        title="Cancel"
+                                                        className={
+                                                            styles.cancelEditButton
+                                                        }
+                                                        onClick={() => {
+                                                            setEditSectionIndex(
+                                                                -1
+                                                            );
+                                                        }}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    <button
+                                                        title="Save Category"
+                                                        className={
+                                                            styles.saveEditButton
+                                                        }
+                                                        onClick={() => {
+                                                            setEditSectionIndex(
+                                                                -1
+                                                            );
+                                                        }}
+                                                    >
+                                                        Save
+                                                    </button>
+                                                </section>
+                                            </>
                                         )
                                     )}
                                 </section>
@@ -3994,6 +4094,338 @@ const Project = ({ document, sectionId }: SectionProps) => {
     );
 };
 
+// cover letter specific components
+const Salutation = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [date, setDate] = useState(document.information.date);
+    const [companyName, setCompanyName] = useState(
+        document.information.companyName
+    );
+    const [address1, setAddress1] = useState(document.information.address1);
+    const [address2, setAddress2] = useState(document.information.address2);
+    const [address3, setAddress3] = useState(document.information.address3);
+    const [showCompanyName, setShowCompanyName] = useState(
+        document.information.sectionEdit.salutation.showCompanyName
+    );
+    const [salutation, setSalutation] = useState(
+        document.information.salutation
+    );
+    const [showAddress1, setShowAddress1] = useState(
+        document.information.sectionEdit.salutation.showAddress1
+    );
+    const [showAddress2, setShowAddress2] = useState(
+        document.information.sectionEdit.salutation.showAddress2
+    );
+    const [showAddress3, setShowAddress3] = useState(
+        document.information.sectionEdit.salutation.showAddress3
+    );
+    const [email, setEmail] = useState(document.information.contactInfo.email);
+    const [phone, setPhone] = useState(document.information.contactInfo.phone);
+    const [website, setWebsite] = useState(
+        document.information.contactInfo.website
+    );
+    const [showEmail, setShowEmail] = useState(
+        document.information.sectionEdit.contact.showEmail
+    );
+    const [showPhone, setShowPhone] = useState(
+        document.information.sectionEdit.contact.showPhone
+    );
+    const [showWebsite, setShowWebsite] = useState(
+        document.information.sectionEdit.contact.showWebsite
+    );
+
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                date,
+                companyName,
+                address1,
+                address2,
+                address3,
+                salutation,
+                sectionEdit: {
+                    ...document.information.sectionEdit,
+                    salutation: {
+                        ...document.information.sectionEdit.salutation,
+                        showCompanyName,
+                        showAddress1,
+                        showAddress2,
+                        showAddress3,
+                    },
+                },
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+
+    return (
+        <>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <label
+                        htmlFor="date"
+                        className={`${styles.inputLabel} ${
+                            !showEmail && styles.disabled
+                        }`}
+                    >
+                        Date
+                    </label>
+                    <input
+                        id="date"
+                        type="date"
+                        className={styles.textInput}
+                        value={date}
+                        onChange={(event) => setDate(event.target.value)}
+                    />
+                </section>
+                <section className={styles.inputItemContainer}>
+                    <section className={styles.toggleContainer}>
+                        <label
+                            htmlFor="companyName"
+                            className={`${styles.inputLabel} ${
+                                !showCompanyName && styles.disabled
+                            }`}
+                        >
+                            Company Name
+                        </label>
+                        <input
+                            type="checkbox"
+                            id="companyNameCheckbox"
+                            className={styles.toggleInput}
+                            checked={showCompanyName}
+                            onChange={(event) =>
+                                setShowCompanyName(event.target.checked)
+                            }
+                        />
+                    </section>
+                    <input
+                        id="companyName"
+                        disabled={!showCompanyName}
+                        className={styles.textInput}
+                        value={companyName}
+                        onChange={(event) => setCompanyName(event.target.value)}
+                    />
+                </section>
+            </section>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <section className={styles.toggleContainer}>
+                        <label
+                            htmlFor="address1"
+                            className={`${styles.inputLabel} ${
+                                !showAddress1 && styles.disabled
+                            }`}
+                        >
+                            Address Line 1
+                        </label>
+                        <input
+                            type="checkbox"
+                            id="address1Checkbox"
+                            className={styles.toggleInput}
+                            checked={showAddress1}
+                            onChange={(event) =>
+                                setShowAddress1(event.target.checked)
+                            }
+                        />
+                    </section>
+                    <input
+                        id="address1"
+                        disabled={!showAddress1}
+                        className={styles.textInput}
+                        value={address1}
+                        onChange={(event) => setAddress1(event.target.value)}
+                    />
+                </section>
+                <section className={styles.inputItemContainer}>
+                    <section className={styles.toggleContainer}>
+                        <label
+                            htmlFor="address2"
+                            className={`${styles.inputLabel} ${
+                                !showAddress2 && styles.disabled
+                            }`}
+                        >
+                            Address Line 2
+                        </label>
+                        <input
+                            type="checkbox"
+                            id="address2Checkbox"
+                            className={styles.toggleInput}
+                            checked={showAddress2}
+                            onChange={(event) =>
+                                setShowAddress2(event.target.checked)
+                            }
+                        />
+                    </section>
+                    <input
+                        id="address2"
+                        disabled={!showAddress2}
+                        className={styles.textInput}
+                        value={address2}
+                        onChange={(event) => setAddress2(event.target.value)}
+                    />
+                </section>
+                <section className={styles.inputItemContainer}>
+                    <section className={styles.toggleContainer}>
+                        <label
+                            htmlFor="address3"
+                            className={`${styles.inputLabel} ${
+                                !showAddress3 && styles.disabled
+                            }`}
+                        >
+                            Address Line 3
+                        </label>
+                        <input
+                            type="checkbox"
+                            id="address3Checkbox"
+                            className={styles.toggleInput}
+                            checked={showAddress3}
+                            onChange={(event) =>
+                                setShowAddress3(event.target.checked)
+                            }
+                        />
+                    </section>
+                    <input
+                        id="address3"
+                        disabled={!showAddress3}
+                        className={styles.textInput}
+                        value={address3}
+                        onChange={(event) => setAddress3(event.target.value)}
+                    />
+                </section>
+            </section>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <section className={styles.toggleContainer}>
+                        <label
+                            htmlFor="salutation"
+                            className={styles.inputLabel}
+                        >
+                            Salutation
+                        </label>
+                    </section>
+                    <input
+                        id="salutation"
+                        className={styles.textInput}
+                        value={salutation}
+                        onChange={(event) => setSalutation(event.target.value)}
+                    />
+                </section>
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
+const Body = ({ sectionId, document }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [bodyText, setBodyText] = useState(document.information.body);
+
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                body: bodyText,
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+
+    return (
+        <>
+            <section className={styles.inputItemContainer100}>
+                <label
+                    htmlFor="body"
+                    className={`${styles.inputLabel}
+                                    
+                                `}
+                >
+                    Letter Body
+                </label>
+                <textarea
+                    id="body"
+                    className={styles.textArea}
+                    value={bodyText}
+                    onChange={(event) => setBodyText(event.target.value)}
+                />
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
+const Closing = ({ sectionId, document }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [closingText, setClosingText] = useState(
+        document.information.closing
+    );
+
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                closing: closingText,
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+
+    return (
+        <>
+            <section className={styles.inputItemContainer100}>
+                <label
+                    htmlFor="closing"
+                    className={`${styles.inputLabel}
+                                    
+                                `}
+                >
+                    Closing
+                </label>
+                <textarea
+                    id="closing"
+                    className={styles.closingTextArea}
+                    value={closingText}
+                    onChange={(event) => setClosingText(event.target.value)}
+                />
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
 const TitleBar = ({ sectionId }: { sectionId: string }) => {
     let title = "";
     sectionId = sectionId.toLowerCase();
@@ -4030,6 +4462,15 @@ const TitleBar = ({ sectionId }: { sectionId: string }) => {
             break;
         case sectionId.includes("contact"):
             title = "Edit Contact";
+            break;
+        case sectionId.includes("salutation"):
+            title = "Edit Salutation";
+            break;
+        case sectionId.includes("body"):
+            title = "Edit Body";
+            break;
+        case sectionId.includes("closing"):
+            title = "Edit Closing";
             break;
         default:
             break;
@@ -4087,6 +4528,15 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
             break;
         case sectionId.includes("header"):
             options = Object.keys(document.information.sectionEdit.header);
+            break;
+        case sectionId.includes("salutation"):
+            options = Object.keys(document.information.sectionEdit.salutation);
+            break;
+        case sectionId.includes("body"):
+            options = Object.keys(document.information.sectionEdit.body);
+            break;
+        case sectionId.includes("closing"):
+            options = Object.keys(document.information.sectionEdit.closing);
             break;
         default:
             break;
@@ -4186,6 +4636,15 @@ export default function EditModalWrapper({
             break;
         case sectionId.includes("interests"):
             section = <Interests document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("salutation"):
+            section = <Salutation document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("body"):
+            section = <Body document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("closing"):
+            section = <Closing document={document} sectionId={sectionId} />;
             break;
         case (sectionId.includes("header") &&
             (sectionId.includes("basic") ||
