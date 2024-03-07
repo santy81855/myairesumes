@@ -35,7 +35,9 @@ export const ResumeContext = ({ children }: { children: React.ReactNode }) => {
     >({});
 
     useEffect(() => {
+        console.log(JSON.parse(localStorage.getItem("documentArray") || "[]"));
         setLocalStorage("documentArray", documentArray);
+        console.log(JSON.parse(localStorage.getItem("documentArray") || "[]"));
     }, [documentArray]);
 
     function setLocalStorage(key: string, value: any) {

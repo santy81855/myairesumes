@@ -2,11 +2,11 @@ import styles from "./page.module.css";
 import { validateRequest } from "@/features/authentication/lib/auth";
 import { redirect } from "next/navigation";
 import {
-    AddSectionModal,
     DocumentContainer,
     getResume,
     getCoverLetter,
     PageUtilBar,
+    LastSavedDisplay,
 } from "@/features/editor";
 
 const Page = async ({
@@ -46,6 +46,7 @@ const Page = async ({
         <main className={styles.main}>
             <PageUtilBar documentId={id} />
             <DocumentContainer document={document} type={documentType} />
+            <LastSavedDisplay document={document} />
         </main>
     );
 };

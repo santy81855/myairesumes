@@ -1304,7 +1304,7 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
                                     setAddCategoryClicked(false);
                                 }}
                             >
-                                {plusIcon}
+                                Add Category
                             </button>
                         </section>
                     </section>
@@ -1333,11 +1333,22 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
                     >
                         <section className={styles.cardButtonContainer}>
                             <button
+                                title="Delete Category"
+                                className={styles.cardDeleteButton}
+                                onClick={() => {
+                                    setSkillArray(
+                                        skillArray.filter(
+                                            (_: any, i: number) => i !== index
+                                        )
+                                    );
+                                }}
+                            >
+                                <p className={styles.smallText}>Delete</p>
+                                {cancelIcon}
+                            </button>
+                            <button
                                 title="Edit Category"
-                                className={`${styles.cardEditButton} ${
-                                    editSectionIndex === index &&
-                                    styles.cardEditButtonActive
-                                }`}
+                                className={`${styles.cardEditButton}`}
                                 onClick={() => {
                                     setEditSectionIndex(index);
                                 }}
@@ -1348,22 +1359,6 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
                         </section>
                         <section className={styles.skillCategoryCard}>
                             <section className={styles.columnListRowItem}>
-                                {editSectionIndex === index && (
-                                    <button
-                                        title="delete category"
-                                        className={styles.cancelButton}
-                                        onClick={() => {
-                                            setSkillArray(
-                                                skillArray.filter(
-                                                    (_: any, i: number) =>
-                                                        i !== index
-                                                )
-                                            );
-                                        }}
-                                    >
-                                        {cancelIcon}
-                                    </button>
-                                )}
                                 {editCategoryIndex === index ? (
                                     <button
                                         title="save"
@@ -1551,15 +1546,47 @@ const SkillsCategory = ({ document, sectionId }: SectionProps) => {
                                         </section>
                                     ) : (
                                         editSectionIndex === index && (
-                                            <button
-                                                title="Add Skill"
-                                                className={`${styles.addButton} ${styles.addButtonSmall}`}
-                                                onClick={() => {
-                                                    setAddSkillIndex(index);
-                                                }}
-                                            >
-                                                {plusIcon}
-                                            </button>
+                                            <>
+                                                <button
+                                                    title="Add Skill"
+                                                    className={`${styles.addButton} ${styles.addButtonSmall}`}
+                                                    onClick={() => {
+                                                        setAddSkillIndex(index);
+                                                    }}
+                                                >
+                                                    {plusIcon}
+                                                </button>
+                                                <section
+                                                    className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                                >
+                                                    <button
+                                                        title="Cancel"
+                                                        className={
+                                                            styles.cancelEditButton
+                                                        }
+                                                        onClick={() => {
+                                                            setEditSectionIndex(
+                                                                -1
+                                                            );
+                                                        }}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    <button
+                                                        title="Save Category"
+                                                        className={
+                                                            styles.saveEditButton
+                                                        }
+                                                        onClick={() => {
+                                                            setEditSectionIndex(
+                                                                -1
+                                                            );
+                                                        }}
+                                                    >
+                                                        Save
+                                                    </button>
+                                                </section>
+                                            </>
                                         )
                                     )}
                                 </section>

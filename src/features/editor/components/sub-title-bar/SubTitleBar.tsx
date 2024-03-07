@@ -44,6 +44,7 @@ const SubTitleBar = () => {
     } = useAppContext();
     const [currentDocument, setCurrentDocument] = useState<any>(null);
     const [currentTemplate, setCurrentTemplate] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const params = useParams();
     const type = params.slug[0];
@@ -109,31 +110,32 @@ const SubTitleBar = () => {
         }
     };
 
-    const handleDelete = async () => {
-        setIsDocumentLoading(true);
+    const handleDelete = async (e: any) => {
+        e.preventDefault();
         if (!currentDocument) {
-            setIsDocumentLoading(false);
             return;
         }
+        setIsDocumentLoading(true);
+        // remove the current document from the documentArray and set the new documentArray
+        const newDocumentArray = documentArray.filter(
+            (doc) => doc.id !== currentDocument.id
+        );
+        setDocumentArray(newDocumentArray);
         const response =
             type === "resume"
                 ? await deleteResumeAction(currentDocument.id)
                 : await deleteCoverLetterAction(currentDocument.id);
         if (response.error) {
-            toast.error("Error deleting currentDocument.");
+            toast.error("Error deleting document.");
             setIsDocumentLoading(false);
         } else {
             // wait for 1 second and then redirect to the dashboard
             if (type === "resume") {
                 // wait for 1 second and then redirect to the dashboard
-                setTimeout(() => {
-                    permanentRedirect("/dashboard?menu=resumes");
-                }, 1000);
+                router.push("/dashboard?menu=resumes");
             } else {
                 // wait for 1 second and then redirect to the dashboard
-                setTimeout(() => {
-                    permanentRedirect("/dashboard?menu=cover-letters");
-                }, 1000);
+                router.push("/dashboard?menu=cover-letters");
             }
         }
     };
@@ -152,7 +154,7 @@ const SubTitleBar = () => {
         <section className={styles.container}>
             {currentDocument && (
                 <>
-                    <form title="delete" action={handleDelete}>
+                    <form title="delete" onSubmit={handleDelete}>
                         <button
                             type="submit"
                             className={`${styles.iconContainer} ${styles.deleteIcon}`}
