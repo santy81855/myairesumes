@@ -211,6 +211,25 @@
     min-height: 8rem;
 }
 
+.closingTextArea {
+    width: 100%;
+    border: none;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgba(224, 224, 224, 0.3);
+    border-radius: 5px;
+    font-size: var(--font-size-small);
+    /*it is a text area, make sure it has at least 5 lines of height*/
+    min-height: 4rem;
+}
+
+.closingTextArea:focus {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    outline: none;
+}
+
 .textArea:focus {
     border: 1px solid rgba(0, 0, 0, 0.1);
     background-color: white;

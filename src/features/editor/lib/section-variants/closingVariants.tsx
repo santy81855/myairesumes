@@ -37,9 +37,15 @@ const getClosingVariants = (data: {
                 <View style={styles.sectionContainer}>
                     <Text
                         style={{
-                            ...styles.medium,
+                            ...styles.small,
                             ...styles.width100,
                             ...styles.textLeftAlign,
+                            whiteSpace: "pre-line",
+                            fontSize:
+                                fontSize *
+                                0.8 *
+                                document.information.sectionEdit.closing
+                                    .fontRatio,
                         }}
                     >
                         {document.information.closing}

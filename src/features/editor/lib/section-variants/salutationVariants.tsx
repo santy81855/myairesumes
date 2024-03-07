@@ -6,7 +6,11 @@ import {
     getAccentWebsiteIcon,
 } from "../section-icons/SectionIcons";
 
-import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
+import {
+    formatDateMonthYear,
+    sortObjectArrayByDateEnd,
+    formatDateMonthDayYear,
+} from "@/lib/date";
 import { getSectionTitleComponent } from "@/features/editor";
 
 const getSalutationVariants = (data: {
@@ -36,15 +40,110 @@ const getSalutationVariants = (data: {
             keyWords: ["salutation", "greeting", "dear"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
-                    <Text
+                    <View
                         style={{
-                            ...styles.medium,
                             ...styles.width100,
-                            ...styles.textLeftAlign,
+                            ...styles.col,
+                            ...styles.justifyStart,
+                            ...styles.gapMedium,
+                            ...styles.marginTopMedium,
                         }}
                     >
-                        {document.information.salutation}
-                    </Text>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                ...styles.width100,
+                                fontSize:
+                                    fontSize *
+                                    0.8 *
+                                    document.information.sectionEdit.salutation
+                                        .fontRatio,
+                            }}
+                        >
+                            {formatDateMonthDayYear(document.information.date)}
+                        </Text>
+                        <View
+                            style={{
+                                ...styles.col,
+                                ...styles.width100,
+                                ...styles.justifyStart,
+                                ...styles.gapSmall,
+                            }}
+                        >
+                            {document.information.sectionEdit.salutation
+                                .showCompanyName && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .salutation.fontRatio,
+                                    }}
+                                >
+                                    {document.information.companyName}
+                                </Text>
+                            )}
+                            {document.information.sectionEdit.salutation
+                                .showAddress1 && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .salutation.fontRatio,
+                                    }}
+                                >
+                                    {document.information.address1}
+                                </Text>
+                            )}
+                            {document.information.sectionEdit.salutation
+                                .showAddress2 && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .salutation.fontRatio,
+                                    }}
+                                >
+                                    {document.information.address2}
+                                </Text>
+                            )}
+                            {document.information.sectionEdit.salutation
+                                .showAddress3 && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .salutation.fontRatio,
+                                    }}
+                                >
+                                    {document.information.address3}
+                                </Text>
+                            )}
+                        </View>
+                        <Text
+                            style={{
+                                ...styles.small,
+                                fontSize:
+                                    fontSize *
+                                    0.8 *
+                                    document.information.sectionEdit.salutation
+                                        .fontRatio,
+                            }}
+                        >
+                            {document.information.salutation}
+                        </Text>
+                    </View>
                 </View>
             ) : null,
         },
