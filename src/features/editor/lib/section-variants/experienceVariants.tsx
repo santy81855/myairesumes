@@ -54,7 +54,11 @@ const getExperienceVariants = (data: {
                                     <Text
                                         style={{
                                             ...styles.medium,
-                                            fontSize: fontSize * 1,
+                                            fontSize:
+                                                fontSize *
+                                                1 *
+                                                document.information.sectionEdit
+                                                    .experience.fontRatio,
                                             ...styles.bold,
                                         }}
                                     >
@@ -63,14 +67,25 @@ const getExperienceVariants = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
-                                            fontSize: fontSize * 0.8,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .experience.fontRatio,
                                         }}
                                     >
-                                        {formatDateMonthYear(
-                                            experience.startDate
-                                        )}{" "}
-                                        -{" "}
-                                        {experience.endDate === "Present"
+                                        {document.information.sectionEdit
+                                            .experience.showStartDate
+                                            ? formatDateMonthYear(
+                                                  experience.startDate
+                                              ) +
+                                              " - " +
+                                              (experience.endDate === "Present"
+                                                  ? "Present"
+                                                  : formatDateMonthYear(
+                                                        experience.endDate
+                                                    ))
+                                            : experience.endDate === "Present"
                                             ? "Present"
                                             : formatDateMonthYear(
                                                   experience.endDate
@@ -80,19 +95,30 @@ const getExperienceVariants = (data: {
                                 <Text
                                     style={{
                                         ...styles.small,
-                                        fontSize: fontSize * 0.8,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .experience.fontRatio,
                                     }}
                                 >
                                     {experience.position}
                                 </Text>
-                                <Text
-                                    style={{
-                                        ...styles.small,
-                                        fontSize: fontSize * 0.8,
-                                    }}
-                                >
-                                    {experience.summary}
-                                </Text>
+                                {document.information.sectionEdit.experience
+                                    .showSummary && (
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .experience.fontRatio,
+                                        }}
+                                    >
+                                        {experience.summary}
+                                    </Text>
+                                )}
                                 <View style={styles.bulletItemContainer}>
                                     {experience.bullets.map(
                                         (bullet: string, index: number) => (
@@ -107,7 +133,12 @@ const getExperienceVariants = (data: {
                                                     style={{
                                                         ...styles.small,
                                                         fontSize:
-                                                            fontSize * 0.8,
+                                                            fontSize *
+                                                            0.8 *
+                                                            document.information
+                                                                .sectionEdit
+                                                                .experience
+                                                                .fontRatio,
                                                     }}
                                                 >
                                                     {bullet}
