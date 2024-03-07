@@ -612,10 +612,9 @@
     .modal {
         width: 95%;
     }
-
     .container {
         padding-block: var(--padding-block-medium);
-        padding-inline: var(--padding-inline-medium);
+        padding-inline: var(--padding-inline-small);
     }
 }
 
