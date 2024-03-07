@@ -39,9 +39,15 @@ const getLanguagesVariants = (data: {
                     <Text
                         style={{
                             ...styles.small,
-                            fontSize: fontSize * 0.8,
+                            fontSize:
+                                fontSize *
+                                0.8 *
+                                document.information.sectionEdit.languages
+                                    .fontRatio,
                             ...styles.width100,
-                            ...styles.textLeft,
+                            textAlign:
+                                document.information.sectionEdit.languages
+                                    .textAlignment,
                         }}
                     >
                         {document.information.languageArray.join(", ")}
@@ -64,7 +70,11 @@ const getLanguagesVariants = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
-                                            fontSize: fontSize * 0.8,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .languages.fontRatio,
                                         }}
                                     >
                                         {skill}

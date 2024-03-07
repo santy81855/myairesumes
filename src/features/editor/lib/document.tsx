@@ -1316,6 +1316,7 @@ export const initializeNewResume = (
             },
             projects: {
                 fontRatio: 1,
+                showSummary: true,
             },
         },
         documentName: name,
@@ -1383,6 +1384,17 @@ export const initializeNewResume = (
         projectArray: [
             {
                 name: "Example Project Name",
+                demo: "https://example-demo-link.com",
+                source: "https://example-source-link.com",
+                summary: "Example summary.",
+                bullets: [
+                    "Example bullet 1.",
+                    "Example bullet 2.",
+                    "Example bullet 3.",
+                ],
+            },
+            {
+                name: "Example Project Name 2",
                 demo: "https://example-demo-link.com",
                 source: "https://example-source-link.com",
                 summary: "Example summary.",

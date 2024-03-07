@@ -53,6 +53,12 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
         case sectionId.includes("skills"):
             ratio = document.information.sectionEdit.skills.fontRatio;
             break;
+        case sectionId.includes("languages"):
+            ratio = document.information.sectionEdit.languages.fontRatio;
+            break;
+        case sectionId.includes("interests"):
+            ratio = document.information.sectionEdit.interests.fontRatio;
+            break;
         case sectionId.includes("header"):
             ratio = document.information.sectionEdit.header.fontRatio;
             break;
@@ -61,6 +67,9 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
             break;
         case sectionId.includes("education"):
             ratio = document.information.sectionEdit.education.fontRatio;
+            break;
+        case sectionId.includes("projects"):
+            ratio = document.information.sectionEdit.projects.fontRatio;
             break;
         default:
             break;
@@ -177,6 +186,48 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
                     documentArray
                 );
                 break;
+            case sectionId.includes("languages"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            languages: {
+                                ...document.information.sectionEdit.languages,
+                                fontRatio:
+                                    document.information.sectionEdit.languages
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("interests"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            interests: {
+                                ...document.information.sectionEdit.interests,
+                                fontRatio:
+                                    document.information.sectionEdit.interests
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
             case sectionId.includes("header"):
                 updatedDocument = {
                     ...document,
@@ -209,6 +260,48 @@ const FontRatioOption = ({ document, sectionId }: SectionProps) => {
                                 ...document.information.sectionEdit.experience,
                                 fontRatio:
                                     document.information.sectionEdit.experience
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("education"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            education: {
+                                ...document.information.sectionEdit.education,
+                                fontRatio:
+                                    document.information.sectionEdit.education
+                                        .fontRatio + change,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("projects"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            projects: {
+                                ...document.information.sectionEdit.projects,
+                                fontRatio:
+                                    document.information.sectionEdit.projects
                                         .fontRatio + change,
                             },
                         },
@@ -277,6 +370,14 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
             break;
         case sectionId.includes("skills"):
             alignment = document.information.sectionEdit.skills.textAlignment;
+            break;
+        case sectionId.includes("languages"):
+            alignment =
+                document.information.sectionEdit.languages.textAlignment;
+            break;
+        case sectionId.includes("interests"):
+            alignment =
+                document.information.sectionEdit.interests.textAlignment;
             break;
         default:
             break;
@@ -372,6 +473,44 @@ const TextAlignmentOption = ({ document, sectionId }: SectionProps) => {
                             ...document.information.sectionEdit,
                             skills: {
                                 ...document.information.sectionEdit.skills,
+                                textAlignment: alignment,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("languages"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            languages: {
+                                ...document.information.sectionEdit.languages,
+                                textAlignment: alignment,
+                            },
+                        },
+                    },
+                };
+                newDocumentArray = updateDocumentArray(
+                    updatedDocument,
+                    documentArray
+                );
+                break;
+            case sectionId.includes("interests"):
+                updatedDocument = {
+                    ...document,
+                    information: {
+                        ...document.information,
+                        sectionEdit: {
+                            ...document.information.sectionEdit,
+                            interests: {
+                                ...document.information.sectionEdit.interests,
                                 textAlignment: alignment,
                             },
                         },
@@ -812,6 +951,208 @@ const Skills = ({ document, sectionId }: SectionProps) => {
                             {editIcon}
                         </button>
                         <p className={styles.smallText}>{skill}</p>
+                    </section>
+                ))}
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
+const Languages = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [languageInput, setLanguageInput] = useState("");
+    const [languageArray, setLanguageArray] = useState(
+        document.information.languageArray
+    );
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                languageArray,
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+    return (
+        <>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <label
+                        htmlFor="languageInput"
+                        className={styles.inputLabel}
+                    >
+                        Language
+                    </label>
+                    <section className={styles.inputItemRow}>
+                        <input
+                            id="languageInput"
+                            placeholder="E.g. English"
+                            className={styles.textInput}
+                            value={languageInput}
+                            onChange={(event) =>
+                                setLanguageInput(event.target.value)
+                            }
+                        />
+                        <button
+                            title="Add Language"
+                            className={styles.addButton}
+                            onClick={() => {
+                                setLanguageArray([
+                                    ...languageArray,
+                                    languageInput,
+                                ]);
+                                setLanguageInput("");
+                            }}
+                        >
+                            {plusIcon}
+                        </button>
+                    </section>
+                </section>
+            </section>
+            <section className={styles.columnList}>
+                {languageArray.map((language: any, index: number) => (
+                    <section key={index} className={styles.columnListRowItem}>
+                        <button
+                            title="delete"
+                            className={styles.cancelButton}
+                            onClick={() => {
+                                setLanguageArray(
+                                    languageArray.filter(
+                                        (_: any, i: number) => i !== index
+                                    )
+                                );
+                            }}
+                        >
+                            {cancelIcon}
+                        </button>
+                        <button
+                            title="edit"
+                            className={styles.editButton}
+                            onClick={() => {
+                                setLanguageInput(language);
+                                setLanguageArray(
+                                    languageArray.filter(
+                                        (_: any, i: number) => i !== index
+                                    )
+                                );
+                            }}
+                        >
+                            {editIcon}
+                        </button>
+                        <p className={styles.smallText}>{language}</p>
+                    </section>
+                ))}
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
+const Interests = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [interestInput, setInterestInput] = useState("");
+    const [interestArray, setInterestArray] = useState(
+        document.information.interestArray
+    );
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                interestArray,
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+    return (
+        <>
+            <section className={styles.inputRowContainer}>
+                <section className={styles.inputItemContainer}>
+                    <label
+                        htmlFor="interestInput"
+                        className={styles.inputLabel}
+                    >
+                        Interest
+                    </label>
+                    <section className={styles.inputItemRow}>
+                        <input
+                            id="interestInput"
+                            placeholder="E.g. Reading"
+                            className={styles.textInput}
+                            value={interestInput}
+                            onChange={(event) =>
+                                setInterestInput(event.target.value)
+                            }
+                        />
+                        <button
+                            title="Add Interest"
+                            className={styles.addButton}
+                            onClick={() => {
+                                setInterestArray([
+                                    ...interestArray,
+                                    interestInput,
+                                ]);
+                                setInterestInput("");
+                            }}
+                        >
+                            {plusIcon}
+                        </button>
+                    </section>
+                </section>
+            </section>
+            <section className={styles.columnList}>
+                {interestArray.map((interest: any, index: number) => (
+                    <section key={index} className={styles.columnListRowItem}>
+                        <button
+                            title="delete"
+                            className={styles.cancelButton}
+                            onClick={() => {
+                                setInterestArray(
+                                    interestArray.filter(
+                                        (_: any, i: number) => i !== index
+                                    )
+                                );
+                            }}
+                        >
+                            {cancelIcon}
+                        </button>
+                        <button
+                            title="edit"
+                            className={styles.editButton}
+                            onClick={() => {
+                                setInterestInput(interest);
+                                setInterestArray(
+                                    interestArray.filter(
+                                        (_: any, i: number) => i !== index
+                                    )
+                                );
+                            }}
+                        >
+                            {editIcon}
+                        </button>
+                        <p className={styles.smallText}>{interest}</p>
                     </section>
                 ))}
             </section>
@@ -3144,6 +3485,515 @@ const Education = ({ document, sectionId }: SectionProps) => {
     );
 };
 
+const Project = ({ document, sectionId }: SectionProps) => {
+    const { documentArray, setDocumentArray } = useAppContext();
+    const [projectArray, setProjectArray] = useState(
+        document.information.projectArray
+    );
+    const [projectName, setProjectName] = useState("");
+    const [projectSource, setProjectSource] = useState("");
+    const [projectSummary, setProjectSummary] = useState("");
+    const [projectBullets, setProjectBullets] = useState([""]);
+    const [editSectionIndex, setEditSectionIndex] = useState(-1);
+    const [addItemClicked, setAddItemClicked] = useState(false);
+    const [showSummary, setShowSummary] = useState(
+        document.information.sectionEdit.projects.showSummary
+    );
+
+    const saveClicked = () => {
+        const updatedDocument = {
+            ...document,
+            information: {
+                ...document.information,
+                projectArray,
+                sectionEdit: {
+                    ...document.information.sectionEdit,
+                    projects: {
+                        ...document.information.sectionEdit.projects,
+                        showSummary,
+                    },
+                },
+            },
+        };
+        const newDocumentArray = updateDocumentArray(
+            updatedDocument,
+            documentArray
+        );
+        setDocumentArray(newDocumentArray);
+        const newUrl = window.location.href.split("?")[0]; // Remove search parameters
+        history.replaceState(null, "", newUrl);
+    };
+
+    const handleBulletPointChange = (index: number, value: string) => {
+        const updatedBulletPoints = [...projectBullets];
+        updatedBulletPoints[index] = value;
+        setProjectBullets(updatedBulletPoints);
+    };
+
+    const handleAddBulletPoint = () => {
+        setProjectBullets([...projectBullets, ""]);
+    };
+
+    const handleRemoveBulletPoint = (index: number) => {
+        const updatedBulletPoints = [...projectBullets];
+        updatedBulletPoints.splice(index, 1);
+        setProjectBullets(updatedBulletPoints);
+    };
+
+    return (
+        <>
+            <section className={styles.columnList}>
+                {addItemClicked ? (
+                    <section className={styles.skillCategoryCard}>
+                        <section className={styles.columnListRowItem}>
+                            <section className={styles.experienceItem}>
+                                <p className={styles.editTitle}>
+                                    Add new project:
+                                </p>
+                                <section className={styles.inputItemContainer}>
+                                    <label
+                                        htmlFor="projectName"
+                                        className={styles.inputLabel}
+                                    >
+                                        Project Name
+                                    </label>
+                                    <input
+                                        id="projectName"
+                                        className={styles.textInput}
+                                        value={projectName}
+                                        onChange={(event) =>
+                                            setProjectName(event.target.value)
+                                        }
+                                    />
+                                </section>
+                                <section className={styles.inputItemContainer}>
+                                    <label
+                                        htmlFor="projectSource"
+                                        className={styles.inputLabel}
+                                    >
+                                        Project Source
+                                    </label>
+                                    <input
+                                        id="projectSource"
+                                        className={styles.textInput}
+                                        value={projectSource}
+                                        onChange={(event) =>
+                                            setProjectSource(event.target.value)
+                                        }
+                                    />
+                                </section>
+                                <section
+                                    className={styles.inputItemContainer100}
+                                >
+                                    <label
+                                        htmlFor="projectSummary"
+                                        className={`${styles.inputLabel}`}
+                                    >
+                                        Project Summary
+                                    </label>
+                                    <textarea
+                                        id="projectSummary"
+                                        className={styles.textArea}
+                                        value={projectSummary}
+                                        onChange={(event) =>
+                                            setProjectSummary(
+                                                event.target.value
+                                            )
+                                        }
+                                    />
+                                </section>
+                                <section
+                                    className={styles.inputItemContainer100}
+                                >
+                                    <label className={styles.inputLabel}>
+                                        Bullet Points:
+                                    </label>
+                                    {projectBullets.map(
+                                        (bulletPoint, index) => (
+                                            <div
+                                                className={
+                                                    styles.inputRowContainer
+                                                }
+                                                key={index}
+                                            >
+                                                <div
+                                                    className={
+                                                        styles.bulletPoint
+                                                    }
+                                                ></div>
+                                                <input
+                                                    type="text"
+                                                    className={styles.textInput}
+                                                    value={bulletPoint}
+                                                    onChange={(e) =>
+                                                        handleBulletPointChange(
+                                                            index,
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+                                                <button
+                                                    className={styles.addButton}
+                                                    onClick={() =>
+                                                        handleRemoveBulletPoint(
+                                                            index
+                                                        )
+                                                    }
+                                                >
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        )
+                                    )}
+                                    <button
+                                        onClick={handleAddBulletPoint}
+                                        className={styles.addBulletButton}
+                                    >
+                                        Add Bullet Point
+                                    </button>
+                                </section>
+                                <section
+                                    className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                >
+                                    <button
+                                        title="Cancel"
+                                        className={styles.cancelEditButton}
+                                        onClick={() => {
+                                            setProjectName("");
+                                            setProjectSource("");
+                                            setProjectSummary("");
+                                            setProjectBullets([""]);
+                                            setAddItemClicked(false);
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        title="Add Project"
+                                        className={styles.saveEditButton}
+                                        onClick={() => {
+                                            const newProjectArray = [
+                                                ...projectArray,
+                                            ];
+                                            newProjectArray.push({
+                                                name: projectName,
+                                                source: projectSource,
+                                                summary: projectSummary,
+                                                bullets: projectBullets,
+                                            });
+                                            setProjectArray(newProjectArray);
+                                            setProjectName("");
+                                            setProjectSource("");
+                                            setProjectSummary("");
+                                            setProjectBullets([""]);
+                                            setAddItemClicked(false);
+                                        }}
+                                    >
+                                        Save
+                                    </button>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                ) : (
+                    <section className={styles.experienceTitleContainer}>
+                        <section className={styles.rowContainer}>
+                            <h3 style={{ textDecoration: "underline" }}>
+                                Projects
+                            </h3>
+                            <button
+                                title="Add Project"
+                                className={styles.addButton}
+                                onClick={() => {
+                                    setEditSectionIndex(-1);
+                                    setProjectName("");
+                                    setProjectSource("");
+                                    setProjectSummary("");
+                                    setProjectBullets([""]);
+                                    setAddItemClicked(true);
+                                }}
+                            >
+                                {plusIcon}
+                            </button>
+                        </section>
+                        <section className={styles.checkboxContainer}>
+                            <section className={styles.checkboxItem}>
+                                <input
+                                    type="checkbox"
+                                    id="showSummary"
+                                    className={styles.toggleInput}
+                                    checked={showSummary}
+                                    onChange={(event) =>
+                                        setShowSummary(event.target.checked)
+                                    }
+                                />
+                                <label
+                                    htmlFor="showSummary"
+                                    className={styles.inputLabel}
+                                >
+                                    Show Summary
+                                </label>
+                            </section>
+                        </section>
+                    </section>
+                )}
+                {projectArray.map((project: any, index: number) => {
+                    return editSectionIndex === index ? (
+                        <section className={styles.skillCategoryCard}>
+                            <section className={styles.columnListRowItem}>
+                                <section className={styles.experienceItem}>
+                                    <p className={styles.editTitle}>
+                                        Edit project:
+                                    </p>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="projectName"
+                                            className={styles.inputLabel}
+                                        >
+                                            Project Name
+                                        </label>
+                                        <input
+                                            id="projectName"
+                                            className={styles.textInput}
+                                            value={projectName}
+                                            onChange={(event) =>
+                                                setProjectName(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer}
+                                    >
+                                        <label
+                                            htmlFor="projectSource"
+                                            className={styles.inputLabel}
+                                        >
+                                            Project Source
+                                        </label>
+                                        <input
+                                            id="projectSource"
+                                            className={styles.textInput}
+                                            value={projectSource}
+                                            onChange={(event) =>
+                                                setProjectSource(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer100}
+                                    >
+                                        <label
+                                            htmlFor="projectSummary"
+                                            className={`${styles.inputLabel}`}
+                                        >
+                                            Project Summary
+                                        </label>
+                                        <textarea
+                                            id="projectSummary"
+                                            className={styles.textArea}
+                                            value={projectSummary}
+                                            onChange={(event) =>
+                                                setProjectSummary(
+                                                    event.target.value
+                                                )
+                                            }
+                                        />
+                                    </section>
+                                    <section
+                                        className={styles.inputItemContainer100}
+                                    >
+                                        <label className={styles.inputLabel}>
+                                            Bullet Points:
+                                        </label>
+                                        {projectBullets.map(
+                                            (bulletPoint, index) => (
+                                                <div
+                                                    className={
+                                                        styles.inputRowContainer
+                                                    }
+                                                    key={index}
+                                                >
+                                                    <div
+                                                        className={
+                                                            styles.bulletPoint
+                                                        }
+                                                    ></div>
+                                                    <input
+                                                        type="text"
+                                                        className={
+                                                            styles.textInput
+                                                        }
+                                                        value={bulletPoint}
+                                                        onChange={(e) =>
+                                                            handleBulletPointChange(
+                                                                index,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                    <button
+                                                        className={
+                                                            styles.addButton
+                                                        }
+                                                        onClick={() =>
+                                                            handleRemoveBulletPoint(
+                                                                index
+                                                            )
+                                                        }
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            )
+                                        )}
+                                        <button
+                                            onClick={handleAddBulletPoint}
+                                            className={styles.addBulletButton}
+                                        >
+                                            Add Bullet Point
+                                        </button>
+                                    </section>
+                                    <section
+                                        className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
+                                    >
+                                        <button
+                                            title="Cancel"
+                                            className={styles.cancelEditButton}
+                                            onClick={() => {
+                                                setProjectName("");
+                                                setProjectSource("");
+                                                setProjectSummary("");
+                                                setProjectBullets([""]);
+                                                setEditSectionIndex(-1);
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            title="Update Project"
+                                            className={styles.saveEditButton}
+                                            onClick={() => {
+                                                const newProjectArray = [
+                                                    ...projectArray,
+                                                ];
+                                                newProjectArray[
+                                                    editSectionIndex
+                                                ] = {
+                                                    name: projectName,
+                                                    source: projectSource,
+                                                    summary: projectSummary,
+                                                    bullets: projectBullets,
+                                                };
+                                                setProjectArray(
+                                                    newProjectArray
+                                                );
+                                                setProjectName("");
+                                                setProjectSource("");
+                                                setProjectSummary("");
+                                                setProjectBullets([""]);
+                                                setEditSectionIndex(-1);
+                                            }}
+                                        >
+                                            Update
+                                        </button>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    ) : (
+                        <section
+                            key={index}
+                            className={styles.skillCategoryCardContainer}
+                        >
+                            <section className={styles.cardButtonContainer}>
+                                <button
+                                    title="Delete Project"
+                                    className={styles.cardDeleteButton}
+                                    onClick={() => {
+                                        setProjectArray(
+                                            projectArray.filter(
+                                                (_: any, i: number) =>
+                                                    i !== index
+                                            )
+                                        );
+                                    }}
+                                >
+                                    <p className={styles.smallText}>Delete</p>
+                                    {cancelIcon}
+                                </button>
+                                <button
+                                    title="Edit Project"
+                                    className={styles.cardEditButton}
+                                    onClick={() => {
+                                        setAddItemClicked(false);
+                                        setProjectName(project.name);
+                                        setProjectSource(project.source);
+                                        setProjectSummary(project.summary);
+                                        setProjectBullets(project.bullets);
+                                        setEditSectionIndex(index);
+                                    }}
+                                >
+                                    <p className={styles.smallText}>Edit</p>
+                                    {editIcon}
+                                </button>
+                            </section>
+                            <section className={styles.skillCategoryCard}>
+                                <section className={styles.columnListRowItem}>
+                                    <section className={styles.experienceItem}>
+                                        <p className={styles.companyName}>
+                                            {project.name}
+                                        </p>
+                                        <p className={styles.position}>
+                                            {project.source}
+                                        </p>
+                                        {showSummary && (
+                                            <p className={styles.jobSummary}>
+                                                {project.summary}
+                                            </p>
+                                        )}
+                                        <ul
+                                            className={
+                                                styles.bulletListContainer
+                                            }
+                                        >
+                                            {project.bullets.map(
+                                                (
+                                                    bullet: any,
+                                                    index: number
+                                                ) => (
+                                                    <li
+                                                        key={index}
+                                                        className={
+                                                            styles.bullet
+                                                        }
+                                                    >
+                                                        {bullet}
+                                                    </li>
+                                                )
+                                            )}
+                                        </ul>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    );
+                })}
+            </section>
+            <SaveButton
+                sectionId={sectionId}
+                document={document}
+                onClick={saveClicked}
+            />
+        </>
+    );
+};
+
 const TitleBar = ({ sectionId }: { sectionId: string }) => {
     let title = "";
     sectionId = sectionId.toLowerCase();
@@ -3223,6 +4073,18 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
         case sectionId.includes("experience"):
             options = Object.keys(document.information.sectionEdit.experience);
             break;
+        case sectionId.includes("education"):
+            options = Object.keys(document.information.sectionEdit.education);
+            break;
+        case sectionId.includes("projects"):
+            options = Object.keys(document.information.sectionEdit.projects);
+            break;
+        case sectionId.includes("languages"):
+            options = Object.keys(document.information.sectionEdit.languages);
+            break;
+        case sectionId.includes("interests"):
+            options = Object.keys(document.information.sectionEdit.interests);
+            break;
         case sectionId.includes("header"):
             options = Object.keys(document.information.sectionEdit.header);
             break;
@@ -3256,16 +4118,6 @@ const OptionsBar = ({ sectionId, document }: SectionProps) => {
                                 />
                             </section>
                         );
-                    // case "dateFormat":
-                    //     return (
-                    //         <section className={styles.optionItem}>
-                    //             <DateFormatOption
-                    //                 key={index}
-                    //                 document={document}
-                    //                 sectionId={sectionId}
-                    //             />
-                    //         </section>
-                    //     );
                     default:
                         return null;
                 }
@@ -3325,6 +4177,15 @@ export default function EditModalWrapper({
             break;
         case sectionId.includes("education"):
             section = <Education document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("projects"):
+            section = <Project document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("languages"):
+            section = <Languages document={document} sectionId={sectionId} />;
+            break;
+        case sectionId.includes("interests"):
+            section = <Interests document={document} sectionId={sectionId} />;
             break;
         case (sectionId.includes("header") &&
             (sectionId.includes("basic") ||

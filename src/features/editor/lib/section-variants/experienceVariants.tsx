@@ -57,10 +57,10 @@ const getExperienceVariants = (data: {
                                 <View style={styles.rowSpaceBetween}>
                                     <Text
                                         style={{
-                                            ...styles.medium,
+                                            ...styles.small,
                                             fontSize:
                                                 fontSize *
-                                                1 *
+                                                0.8 *
                                                 document.information.sectionEdit
                                                     .experience.fontRatio,
                                             ...styles.bold,

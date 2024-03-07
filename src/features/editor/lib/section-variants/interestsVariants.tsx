@@ -44,7 +44,11 @@ const getInterestsVariants = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
-                                            fontSize: fontSize * 0.8,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .interests.fontRatio,
                                         }}
                                     >
                                         {skill}
@@ -66,9 +70,15 @@ const getInterestsVariants = (data: {
                     <Text
                         style={{
                             ...styles.small,
-                            fontSize: fontSize * 0.8,
+                            fontSize:
+                                fontSize *
+                                0.8 *
+                                document.information.sectionEdit.interests
+                                    .fontRatio,
                             ...styles.width100,
-                            ...styles.textLeft,
+                            textAlign:
+                                document.information.sectionEdit.interests
+                                    .textAlignment,
                         }}
                     >
                         {document.information.interestArray.join(", ")}
