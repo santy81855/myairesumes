@@ -6,7 +6,11 @@ import {
     getAccentWebsiteIcon,
 } from "../section-icons/SectionIcons";
 
-import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
+import {
+    formatDateMonthYear,
+    formatDateMonYear,
+    sortObjectArrayByDateEnd,
+} from "@/lib/date";
 import { getSectionTitleComponent } from "@/features/editor";
 
 const getExperienceVariants = (data: {
@@ -64,33 +68,70 @@ const getExperienceVariants = (data: {
                                     >
                                         {experience.company}
                                     </Text>
-                                    <Text
-                                        style={{
-                                            ...styles.small,
-                                            fontSize:
-                                                fontSize *
-                                                0.8 *
-                                                document.information.sectionEdit
-                                                    .experience.fontRatio,
-                                        }}
-                                    >
-                                        {document.information.sectionEdit
-                                            .experience.showStartDate
-                                            ? formatDateMonthYear(
-                                                  experience.startDate
-                                              ) +
-                                              " - " +
-                                              (experience.endDate === "Present"
-                                                  ? "Present"
-                                                  : formatDateMonthYear(
-                                                        experience.endDate
-                                                    ))
-                                            : experience.endDate === "Present"
-                                            ? "Present"
-                                            : formatDateMonthYear(
-                                                  experience.endDate
-                                              )}
-                                    </Text>
+                                    {document.information.sectionEdit.experience
+                                        .dateFormat === "long" ? (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.experience
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {document.information.sectionEdit
+                                                .experience.showStartDate
+                                                ? formatDateMonthYear(
+                                                      experience.startDate
+                                                  ) +
+                                                  " - " +
+                                                  (experience.endDate ===
+                                                  "Present"
+                                                      ? "Present"
+                                                      : formatDateMonthYear(
+                                                            experience.endDate
+                                                        ))
+                                                : experience.endDate ===
+                                                  "Present"
+                                                ? "Present"
+                                                : formatDateMonthYear(
+                                                      experience.endDate
+                                                  )}
+                                        </Text>
+                                    ) : (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.experience
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {document.information.sectionEdit
+                                                .experience.showStartDate
+                                                ? formatDateMonYear(
+                                                      experience.startDate
+                                                  ) +
+                                                  " - " +
+                                                  (experience.endDate ===
+                                                  "Present"
+                                                      ? "Present"
+                                                      : formatDateMonYear(
+                                                            experience.endDate
+                                                        ))
+                                                : experience.endDate ===
+                                                  "Present"
+                                                ? "Present"
+                                                : formatDateMonYear(
+                                                      experience.endDate
+                                                  )}
+                                        </Text>
+                                    )}
                                 </View>
                                 <Text
                                     style={{

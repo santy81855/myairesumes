@@ -6,7 +6,11 @@ import {
     getAccentWebsiteIcon,
 } from "../section-icons/SectionIcons";
 
-import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
+import {
+    formatDateMonthYear,
+    formatDateMonYear,
+    sortObjectArrayByDateEnd,
+} from "@/lib/date";
 import { getSectionTitleComponent } from "@/features/editor";
 
 const getEducationVariants = (data: {
@@ -53,33 +57,84 @@ const getEducationVariants = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
-                                            fontSize: fontSize * 0.8,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .education.fontRatio,
                                             ...styles.bold,
                                         }}
                                     >
                                         {education.schoolName}
                                     </Text>
-                                    <Text
-                                        style={{
-                                            ...styles.small,
-                                            fontSize: fontSize * 0.8,
-                                        }}
-                                    >
-                                        {formatDateMonthYear(
-                                            education.startDate
-                                        )}{" "}
-                                        -{" "}
-                                        {education.endDate === "Present"
-                                            ? "Present"
-                                            : formatDateMonthYear(
-                                                  education.endDate
-                                              )}
-                                    </Text>
+                                    {document.information.sectionEdit.education
+                                        .showStartDate ? (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.education
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {document.information.sectionEdit
+                                                .education.dateFormat === "long"
+                                                ? formatDateMonthYear(
+                                                      education.startDate
+                                                  )
+                                                : formatDateMonYear(
+                                                      education.startDate
+                                                  )}{" "}
+                                            -{" "}
+                                            {education.endDate === "Present"
+                                                ? "Present"
+                                                : document.information
+                                                      .sectionEdit.education
+                                                      .dateFormat === "long"
+                                                ? formatDateMonthYear(
+                                                      education.endDate
+                                                  )
+                                                : formatDateMonYear(
+                                                      education.endDate
+                                                  )}
+                                        </Text>
+                                    ) : (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.education
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {education.endDate === "Present"
+                                                ? "Present"
+                                                : document.information
+                                                      .sectionEdit.education
+                                                      .dateFormat === "long"
+                                                ? formatDateMonthYear(
+                                                      education.endDate
+                                                  )
+                                                : formatDateMonYear(
+                                                      education.endDate
+                                                  )}
+                                        </Text>
+                                    )}
                                 </View>
                                 <Text
                                     style={{
                                         ...styles.small,
-                                        fontSize: fontSize * 0.8,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .education.fontRatio,
                                     }}
                                 >
                                     {education.degreeType} in{" "}
@@ -124,70 +179,136 @@ const getEducationVariants = (data: {
                                     <Text
                                         style={{
                                             ...styles.small,
-                                            fontSize: fontSize * 0.8,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .education.fontRatio,
                                             ...styles.bold,
                                         }}
                                     >
                                         {education.schoolName}
                                     </Text>
-                                    <Text
-                                        style={{
-                                            ...styles.extraSmall,
-                                            fontSize: fontSize * 0.6,
-                                            ...styles.italic,
-                                        }}
-                                    >
-                                        {formatDateMonthYear(
-                                            education.startDate
-                                        )}{" "}
-                                        -{" "}
-                                        {education.endDate === "Present"
-                                            ? "Present"
-                                            : formatDateMonthYear(
-                                                  education.endDate
-                                              )}
-                                    </Text>
+                                    {document.information.sectionEdit.education
+                                        .showStartDate ? (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.education
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {document.information.sectionEdit
+                                                .education.dateFormat === "long"
+                                                ? formatDateMonthYear(
+                                                      education.startDate
+                                                  )
+                                                : formatDateMonYear(
+                                                      education.startDate
+                                                  )}{" "}
+                                            -{" "}
+                                            {education.endDate === "Present"
+                                                ? "Present"
+                                                : document.information
+                                                      .sectionEdit.education
+                                                      .dateFormat === "long"
+                                                ? formatDateMonthYear(
+                                                      education.endDate
+                                                  )
+                                                : formatDateMonYear(
+                                                      education.endDate
+                                                  )}
+                                        </Text>
+                                    ) : (
+                                        <Text
+                                            style={{
+                                                ...styles.small,
+                                                fontSize:
+                                                    fontSize *
+                                                    0.8 *
+                                                    document.information
+                                                        .sectionEdit.education
+                                                        .fontRatio,
+                                            }}
+                                        >
+                                            {education.endDate === "Present"
+                                                ? "Present"
+                                                : document.information
+                                                      .sectionEdit.education
+                                                      .dateFormat === "long"
+                                                ? formatDateMonthYear(
+                                                      education.endDate
+                                                  )
+                                                : formatDateMonYear(
+                                                      education.endDate
+                                                  )}
+                                        </Text>
+                                    )}
                                 </View>
                                 <Text
                                     style={{
                                         ...styles.small,
-                                        fontSize: fontSize * 0.8,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .education.fontRatio,
                                     }}
                                 >
                                     {education.degreeType} in{" "}
                                     {education.degreeField}
                                 </Text>
-                                <Text
-                                    style={{
-                                        ...styles.small,
-                                        fontSize: fontSize * 0.8,
-                                    }}
-                                >
-                                    GPA: {education.gpa}
-                                </Text>
-                                <View style={styles.bulletItemContainer}>
-                                    {education.bullets.map(
-                                        (bullet: string, index: number) => (
-                                            <View
-                                                key={index}
-                                                style={styles.bulletItem}
-                                            >
+                                {document.information.sectionEdit.education
+                                    .showGpa && (
+                                    <Text
+                                        style={{
+                                            ...styles.small,
+                                            fontSize:
+                                                fontSize *
+                                                0.8 *
+                                                document.information.sectionEdit
+                                                    .education.fontRatio,
+                                        }}
+                                    >
+                                        GPA: {education.gpa}
+                                    </Text>
+                                )}
+                                {document.information.sectionEdit.education
+                                    .showBullets && (
+                                    <View style={styles.bulletItemContainer}>
+                                        {education.bullets.map(
+                                            (bullet: string, index: number) => (
                                                 <View
-                                                    style={styles.bullet}
-                                                ></View>
-                                                <Text
-                                                    style={{
-                                                        ...styles.small,
-                                                        fontSize:
-                                                            fontSize * 0.8,
-                                                    }}
+                                                    key={index}
+                                                    style={styles.bulletItem}
                                                 >
-                                                    {bullet}
-                                                </Text>
-                                            </View>
-                                        )
-                                    )}
-                                </View>
+                                                    <View
+                                                        style={styles.bullet}
+                                                    ></View>
+                                                    <Text
+                                                        style={{
+                                                            ...styles.small,
+                                                            fontSize:
+                                                                fontSize *
+                                                                0.8 *
+                                                                document
+                                                                    .information
+                                                                    .sectionEdit
+                                                                    .education
+                                                                    .fontRatio,
+                                                        }}
+                                                    >
+                                                        {bullet}
+                                                    </Text>
+                                                </View>
+                                            )
+                                        )}
+                                    </View>
+                                )}
                             </View>
                         ))}
                     </View>

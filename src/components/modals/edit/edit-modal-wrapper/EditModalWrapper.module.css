@@ -480,6 +480,22 @@
     font-weight: bold;
 }
 
+.schoolName {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+    font-weight: bold;
+}
+
+.degreeType {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.gpa {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
 .position {
     font-size: var(--font-size-small);
     color: rgb(var(--editor-text-color-rgb));

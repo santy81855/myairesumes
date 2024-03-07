@@ -1295,17 +1295,12 @@ export const initializeNewResume = (
                 showStartDate: true,
                 showSummary: true,
             },
-            educationDetailed: {
+            education: {
                 fontRatio: 1,
                 dateFormat: "long",
                 showStartDate: true,
                 showGpa: false,
                 showBullets: true,
-            },
-            educationShort: {
-                fontRatio: 1,
-                dateFormat: "long",
-                showStartDate: true,
             },
             skills: {
                 fontRatio: 1,
@@ -1318,6 +1313,9 @@ export const initializeNewResume = (
             interests: {
                 fontRatio: 1,
                 textAlignment: "left",
+            },
+            projects: {
+                fontRatio: 1,
             },
         },
         documentName: name,
