@@ -45,7 +45,7 @@ export {
     updateDocument,
     updateCoverLetter,
 } from "./lib/document";
-export { getPropmt } from "./lib/ai";
+export { getPrompt } from "./lib/ai";
 export { createResume as createResumeAction } from "./actions/document";
 export { updateResume as updateResumeAction } from "./actions/document";
 export { createCoverLetter as createCoverLetterAction } from "./actions/document";

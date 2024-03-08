@@ -12,12 +12,10 @@ import {
     editIcon,
     cancelIcon,
     checkIcon,
+    brainIcon,
+    magicIcon,
 } from "@/components/icons/iconSVG";
-import {
-    updateDocumentArray,
-    getResumeCompletionAction,
-    getResume,
-} from "@/features/editor";
+import { updateDocumentArray, getResume, getPrompt } from "@/features/editor";
 import { useAppContext } from "@/app/providers";
 import { formatDateMonYear, formatDateMonthYear } from "@/lib/date";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
@@ -36,6 +34,18 @@ type SectionProps = {
 type LoadingProps = {
     isLoading: boolean;
     setIsLoading: (isLoading: boolean) => void;
+};
+
+type AIButtonsProps = {
+    promptId: string;
+    document: any;
+    isLoading: boolean;
+    setIsLoading: (isLoading: boolean) => void;
+    text: string;
+    setText: (
+        text: string | ((prev: string) => string) | ((prev: string) => void)
+    ) => void;
+    length: number;
 };
 
 const FontRatioOption = ({ document, sectionId }: SectionProps) => {
@@ -754,6 +764,129 @@ const Name = ({ document, sectionId }: SectionProps) => {
     );
 };
 
+const AIButtons = ({
+    promptId,
+    document,
+    isLoading,
+    setIsLoading,
+    text,
+    setText,
+    length,
+}: AIButtonsProps) => {
+    const handleGenerate = async (e: any) => {
+        e.preventDefault();
+        const initialText = text;
+        setText("");
+        let data = {
+            promptId,
+            document,
+            generate: true,
+            enhance: false,
+            length: length,
+        };
+        const prompt = getPrompt(data);
+        setIsLoading(true);
+        try {
+            const response = await fetch("/api/completion", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ prompt }),
+            });
+            if (!response.ok) {
+                toast.error(
+                    "An error occurred while generating a response. Please try again."
+                );
+            }
+            setIsLoading(false);
+            const reader = response.body?.getReader();
+            while (true) {
+                const { done, value } =
+                    (await reader?.read()) as ReadableStreamReadResult<Uint8Array>;
+                if (done) break;
+                let stringChunk = new TextDecoder().decode(value);
+                setText((prev) => prev + stringChunk);
+            }
+        } catch (error) {
+            setIsLoading(false);
+            setText(initialText);
+            toast.error(
+                "An error occurred while generating a response. Please try again."
+            );
+        }
+    };
+
+    const handleEnhance = async (e: any) => {
+        e.preventDefault();
+        const initialText = text;
+        setText("");
+        let data = {
+            promptId,
+            document,
+            generate: false,
+            enhance: true,
+            length: length,
+            currentText: initialText,
+        };
+        const prompt = getPrompt(data);
+        setIsLoading(true);
+        try {
+            const response = await fetch("/api/completion", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ prompt }),
+            });
+            if (!response.ok) {
+                toast.error(
+                    "An error occurred while enhancing a response. Please try again."
+                );
+            }
+            setIsLoading(false);
+            const reader = response.body?.getReader();
+            while (true) {
+                const { done, value } =
+                    (await reader?.read()) as ReadableStreamReadResult<Uint8Array>;
+                if (done) break;
+                let stringChunk = new TextDecoder().decode(value);
+                setText((prev) => prev + stringChunk);
+            }
+        } catch (error) {
+            setIsLoading(false);
+            setText(initialText);
+            toast.error(
+                "An error occurred while generating a response. Please try again."
+            );
+        }
+    };
+
+    return (
+        <form className={styles.aiButtonContainer} onSubmit={handleGenerate}>
+            <button
+                title="Generate with AI"
+                className={`${styles.aiButton} ${styles.enhance}`}
+                onClick={handleEnhance}
+                disabled={isLoading}
+            >
+                {magicIcon}
+                enhance
+            </button>
+            <button
+                title="Enhance with AI"
+                className={`${styles.aiButton} ${styles.generate}`}
+                type="submit"
+                onSubmit={handleGenerate}
+                disabled={isLoading}
+            >
+                {brainIcon}
+                generate
+            </button>
+        </form>
+    );
+};
+
 const Summary = ({
     sectionId,
     document,
@@ -782,98 +915,21 @@ const Summary = ({
         history.replaceState(null, "", newUrl);
     };
 
-    // const handleGenerate = async (e: any) => {
-    //     e.preventDefault();
-    //     setSummaryText(""); // Clear the summary text before generating a new one
-    //     let data = {
-    //         sectionId,
-    //         document,
-    //         generate: true,
-    //         enhance: false,
-    //     };
-    //     setIsLoading(true);
-    //     try {
-    //         const response = await fetch("/api/completion", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(data),
-    //         });
-
-    //         if (!response.ok) {
-    //             throw new Error(`HTTP error! status: ${response.status}`);
-    //         }
-
-    //         const reader = response.body?.getReader();
-    //         while (true) {
-    //             const { done, value } = await reader?.read();
-    //             if (done) break;
-    //             console.log(new TextDecoder().decode(value));
-    //             let stringChunk = new TextDecoder().decode(value);
-    //             setSummaryText((prev: string) => prev + stringChunk);
-    //         }
-    //     } catch (error) {
-    //         console.error("Error in handleGenerate:", error);
-    //         // Handle the error, e.g., display an error message to the user
-    //         alert(
-    //             "An error occurred while generating the summary. Please try again."
-    //         );
-    //     } finally {
-    //         setIsLoading(false);
-    //     }
-    // };
-
-    const handleGenerate = async (e: any) => {
-        e.preventDefault();
-        setSummaryText(""); // Clear the summary text before generating a new one
-
-        let data = {
-            sectionId,
-            document,
-            generate: true,
-            enhance: false,
-        };
-        setIsLoading(true);
-        try {
-            const response = await fetch("/api/completion", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
-            if (!response.ok) {
-                toast.error(
-                    "An error occurred while generating the summary. Please try again."
-                );
-            }
-            const reader = response.body?.getReader();
-            while (true) {
-                const { done, value } =
-                    (await reader?.read()) as ReadableStreamReadResult<Uint8Array>;
-                if (done) break;
-                console.log(new TextDecoder().decode(value));
-                let stringChunk = new TextDecoder().decode(value);
-                setSummaryText((prev: string) => prev + stringChunk);
-            }
-        } catch (error) {
-            console.error("Error in handleGenerate:", error);
-            // Handle the error, e.g., display an error message to the user
-            toast.error(
-                "An error occurred while generating the summary. Please try again."
-            );
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     return (
         <>
             <section className={styles.inputItemContainer100}>
                 <label htmlFor="summary" className={styles.inputLabel}>
                     Summary
                 </label>
+                <AIButtons
+                    promptId="summary"
+                    document={document}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                    text={summaryText}
+                    setText={setSummaryText}
+                    length={50}
+                />
                 <textarea
                     id="summary"
                     className={styles.textArea}
@@ -885,9 +941,6 @@ const Summary = ({
                     value={summaryText}
                     onChange={(event) => setSummaryText(event.target.value)}
                 />
-                <form onSubmit={handleGenerate}>
-                    <button disabled={isLoading}>generate</button>
-                </form>
             </section>
             <SaveButton
                 sectionId={sectionId}
@@ -1046,6 +1099,8 @@ const Skills = ({ document, sectionId }: SectionProps) => {
     const [skillArray, setSkillArray] = useState(
         document.information.skillArray
     );
+    const [isAddSkill, setIsAddSkill] = useState(false);
+    const [editItemId, setEditItemId] = useState(-1);
 
     const saveClicked = () => {
         const updatedDocument = {
@@ -1066,67 +1121,159 @@ const Skills = ({ document, sectionId }: SectionProps) => {
 
     return (
         <>
-            <section className={styles.inputRowContainer}>
-                <section className={styles.inputItemContainer}>
-                    <label htmlFor="skillInput" className={styles.inputLabel}>
-                        Skill
-                    </label>
-                    <section className={styles.inputItemRow}>
-                        <input
-                            id="skillInput"
-                            placeholder="E.g. Adobe Creative Suite"
-                            className={styles.textInput}
-                            value={skillInput}
-                            onChange={(event) =>
-                                setSkillInput(event.target.value)
-                            }
-                        />
-                        <button
-                            title="Add Skill"
-                            className={styles.addButton}
-                            onClick={() => {
-                                setSkillArray([...skillArray, skillInput]);
-                                setSkillInput("");
-                            }}
+            {isAddSkill ? (
+                <section className={styles.inputRowContainer}>
+                    <section className={styles.inputItemContainer}>
+                        <label
+                            htmlFor="skillInput"
+                            className={styles.inputLabel}
                         >
-                            {plusIcon}
-                        </button>
+                            Skill
+                        </label>
+                        <section className={styles.aiInputItem}>
+                            {/* add ai here*/}
+                            <textarea
+                                id="skillInput"
+                                placeholder="E.g. Adobe Creative Suite"
+                                className={styles.closingTextArea}
+                                value={skillInput}
+                                onChange={(event) =>
+                                    setSkillInput(event.target.value)
+                                }
+                            />
+                            <section className={styles.cardButtonContainer}>
+                                <button
+                                    title="Cancel"
+                                    className={styles.cancelEditButton}
+                                    onClick={() => {
+                                        setSkillInput("");
+                                        setIsAddSkill(false);
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    title="Add Skill"
+                                    className={styles.saveEditButton}
+                                    onClick={() => {
+                                        setSkillArray([
+                                            ...skillArray,
+                                            skillInput,
+                                        ]);
+                                        setSkillInput("");
+                                    }}
+                                >
+                                    Add
+                                </button>
+                            </section>
+                        </section>
                     </section>
                 </section>
-            </section>
-            <section className={styles.columnList}>
-                {skillArray.map((skill: any, index: number) => (
-                    <section key={index} className={styles.columnListRowItem}>
-                        <button
-                            title="delete"
-                            className={styles.cancelButton}
-                            onClick={() => {
-                                setSkillArray(
-                                    skillArray.filter(
-                                        (_: any, i: number) => i !== index
-                                    )
-                                );
-                            }}
-                        >
-                            {cancelIcon}
-                        </button>
-                        <button
-                            title="edit"
-                            className={styles.editButton}
-                            onClick={() => {
-                                setSkillInput(skill);
-                                setSkillArray(
-                                    skillArray.filter(
-                                        (_: any, i: number) => i !== index
-                                    )
-                                );
-                            }}
-                        >
-                            {editIcon}
-                        </button>
-                        <p className={styles.smallText}>{skill}</p>
-                    </section>
-                ))}
+            ) : (
+                <section className={styles.rowContainer}>
+                    <h3>Skills</h3>
+                    <button
+                        title="Add Skill"
+                        className={styles.addButton}
+                        onClick={() => {
+                            setIsAddSkill(true);
+                            setSkillInput("");
+                            setEditItemId(-1);
+                        }}
+                    >
+                        {plusIcon}
+                    </button>
+                </section>
+            )}
+            <section className={styles.skillCategoryCardContainer}>
+                {skillArray.map((skill: any, index: number) =>
+                    editItemId === index ? (
+                        <section className={styles.aiInputItem}>
+                            {/* add ai here*/}
+                            <label
+                                htmlFor="skillInput"
+                                className={styles.inputLabel}
+                            >
+                                Edit Skill
+                            </label>
+                            <textarea
+                                id="skillInput"
+                                placeholder="E.g. Adobe Creative Suite"
+                                className={styles.closingTextArea}
+                                value={skillInput}
+                                onChange={(event) =>
+                                    setSkillInput(event.target.value)
+                                }
+                            />
+                            <section className={styles.cardButtonContainer}>
+                                <button
+                                    title="Cancel"
+                                    className={styles.cancelEditButton}
+                                    onClick={() => {
+                                        setSkillInput("");
+                                        setEditItemId(-1);
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    title="Update Skill"
+                                    className={styles.saveEditButton}
+                                    onClick={() => {
+                                        // update the skill at the index with the new skill
+                                        let newSkillArray = [...skillArray];
+                                        newSkillArray[index] = skillInput;
+                                        setSkillArray(newSkillArray);
+                                        setSkillInput("");
+                                        setEditItemId(-1);
+                                    }}
+                                >
+                                    Update
+                                </button>
+                            </section>
+                        </section>
+                    ) : (
+                        <>
+                            <section className={styles.cardButtonContainer}>
+                                <button
+                                    title="delete"
+                                    className={styles.cardDeleteButton}
+                                    onClick={() => {
+                                        setSkillArray(
+                                            skillArray.filter(
+                                                (_: any, i: number) =>
+                                                    i !== index
+                                            )
+                                        );
+                                    }}
+                                >
+                                    {cancelIcon}
+                                    <p className={styles.smallText}>Delete</p>
+                                </button>
+                                <button
+                                    title="edit"
+                                    className={styles.cardEditButton}
+                                    onClick={() => {
+                                        setIsAddSkill(false);
+                                        setSkillInput(skill);
+                                        setEditItemId(index);
+                                    }}
+                                >
+                                    {editIcon}
+                                    <p className={styles.smallText}>Edit</p>
+                                </button>
+                            </section>
+                            <section className={styles.skillCategoryCard}>
+                                <section
+                                    key={index}
+                                    className={styles.columnListRowItem}
+                                >
+                                    <p className={styles.smallText}>{skill}</p>
+                                </section>
+                            </section>
+                        </>
+                    )
+                )}
             </section>
             <SaveButton
                 sectionId={sectionId}

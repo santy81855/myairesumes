@@ -3,6 +3,7 @@ if (!process.env.OPEN_AI_API_KEY) {
 }
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import { getPrompt } from "@/features/editor";
 
 // Create an OpenAI API client (that's edge friendly!)
 const openai = new OpenAI({
@@ -15,8 +16,8 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
     try {
-        const { sectionId, document, generate, enhance } = await request.json();
-        const data = { sectionId, document, generate, enhance };
+        // prompt is a string that was passed in like body: prompt
+        const { prompt } = await request.json();
 
         const response = await openai.chat.completions.create({
             messages: [
@@ -27,8 +28,7 @@ export async function POST(request: Request) {
                 },
                 {
                     role: "user",
-                    content:
-                        "write a summary section for a generic resume. 30 words.",
+                    content: prompt,
                 },
             ],
             model: "gpt-3.5-turbo",
