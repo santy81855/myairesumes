@@ -1,6 +1,6 @@
 "use client";
 import styles from "./EditModalWrapper.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
     circledXFilledIcon,
     alignLeftIcon,
@@ -13,9 +13,16 @@ import {
     cancelIcon,
     checkIcon,
 } from "@/components/icons/iconSVG";
-import { updateDocumentArray } from "@/features/editor";
+import {
+    updateDocumentArray,
+    getResumeCompletionAction,
+    getResume,
+} from "@/features/editor";
 import { useAppContext } from "@/app/providers";
 import { formatDateMonYear, formatDateMonthYear } from "@/lib/date";
+import LoadingScreen from "@/components/loading-screen/LoadingScreen";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type SectionProps = {
     document: any;
@@ -24,6 +31,11 @@ type SectionProps = {
     isPosition?: boolean;
     isContact?: boolean;
     isSummary?: boolean;
+};
+
+type LoadingProps = {
+    isLoading: boolean;
+    setIsLoading: (isLoading: boolean) => void;
 };
 
 const FontRatioOption = ({ document, sectionId }: SectionProps) => {
@@ -742,7 +754,12 @@ const Name = ({ document, sectionId }: SectionProps) => {
     );
 };
 
-const Summary = ({ sectionId, document }: SectionProps) => {
+const Summary = ({
+    sectionId,
+    document,
+    isLoading,
+    setIsLoading,
+}: SectionProps & LoadingProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const [summaryText, setSummaryText] = useState(
         document.information.summary
@@ -765,15 +782,96 @@ const Summary = ({ sectionId, document }: SectionProps) => {
         history.replaceState(null, "", newUrl);
     };
 
+    // const handleGenerate = async (e: any) => {
+    //     e.preventDefault();
+    //     setSummaryText(""); // Clear the summary text before generating a new one
+    //     let data = {
+    //         sectionId,
+    //         document,
+    //         generate: true,
+    //         enhance: false,
+    //     };
+    //     setIsLoading(true);
+    //     try {
+    //         const response = await fetch("/api/completion", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify(data),
+    //         });
+
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! status: ${response.status}`);
+    //         }
+
+    //         const reader = response.body?.getReader();
+    //         while (true) {
+    //             const { done, value } = await reader?.read();
+    //             if (done) break;
+    //             console.log(new TextDecoder().decode(value));
+    //             let stringChunk = new TextDecoder().decode(value);
+    //             setSummaryText((prev: string) => prev + stringChunk);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error in handleGenerate:", error);
+    //         // Handle the error, e.g., display an error message to the user
+    //         alert(
+    //             "An error occurred while generating the summary. Please try again."
+    //         );
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
+    const handleGenerate = async (e: any) => {
+        e.preventDefault();
+        setSummaryText(""); // Clear the summary text before generating a new one
+
+        let data = {
+            sectionId,
+            document,
+            generate: true,
+            enhance: false,
+        };
+        setIsLoading(true);
+        try {
+            const response = await fetch("/api/completion", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            if (!response.ok) {
+                toast.error(
+                    "An error occurred while generating the summary. Please try again."
+                );
+            }
+            const reader = response.body?.getReader();
+            while (true) {
+                const { done, value } =
+                    (await reader?.read()) as ReadableStreamReadResult<Uint8Array>;
+                if (done) break;
+                console.log(new TextDecoder().decode(value));
+                let stringChunk = new TextDecoder().decode(value);
+                setSummaryText((prev: string) => prev + stringChunk);
+            }
+        } catch (error) {
+            console.error("Error in handleGenerate:", error);
+            // Handle the error, e.g., display an error message to the user
+            toast.error(
+                "An error occurred while generating the summary. Please try again."
+            );
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <>
             <section className={styles.inputItemContainer100}>
-                <label
-                    htmlFor="summary"
-                    className={`${styles.inputLabel}
-                                    
-                                `}
-                >
+                <label htmlFor="summary" className={styles.inputLabel}>
                     Summary
                 </label>
                 <textarea
@@ -787,6 +885,9 @@ const Summary = ({ sectionId, document }: SectionProps) => {
                     value={summaryText}
                     onChange={(event) => setSummaryText(event.target.value)}
                 />
+                <form onSubmit={handleGenerate}>
+                    <button disabled={isLoading}>generate</button>
+                </form>
             </section>
             <SaveButton
                 sectionId={sectionId}
@@ -4593,6 +4694,7 @@ export default function EditModalWrapper({
     document: any;
     sectionId: string;
 }) {
+    const [isLoading, setIsLoading] = useState(false);
     const closeClicked = (event: any) => {
         if (event.target.id !== "modalContainer") return;
         const newUrl = window.location.href.split("?")[0]; // Remove search parameters
@@ -4603,7 +4705,14 @@ export default function EditModalWrapper({
     sectionId = sectionId.toLowerCase();
     switch (true) {
         case sectionId.includes("summary"):
-            section = <Summary document={document} sectionId={sectionId} />;
+            section = (
+                <Summary
+                    document={document}
+                    sectionId={sectionId}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                />
+            );
             break;
         case sectionId.includes("name"):
             section = <Name document={document} sectionId={sectionId} />;
@@ -4686,7 +4795,6 @@ export default function EditModalWrapper({
         default:
             break;
     }
-
     return (
         <section
             id="modalContainer"
@@ -4697,6 +4805,7 @@ export default function EditModalWrapper({
                 <TitleBar sectionId={sectionId} />
                 <OptionsBar sectionId={sectionId} document={document} />
                 <section className={styles.sectionContainer}>{section}</section>
+                {isLoading && <LoadingScreen />}
             </section>
         </section>
     );
