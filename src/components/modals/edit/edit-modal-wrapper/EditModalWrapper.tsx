@@ -948,16 +948,18 @@ const AIButtons = ({
                 {magicIcon}
                 enhance
             </button>
-            <button
-                title="Generate with AI"
-                className={`${styles.aiButton} ${styles.generate}`}
-                type="submit"
-                onSubmit={handleGenerate}
-                disabled={isLoading}
-            >
-                {brainIcon}
-                generate
-            </button>
+            {promptId !== "projectSummary" && (
+                <button
+                    title="Generate with AI"
+                    className={`${styles.aiButton} ${styles.generate}`}
+                    type="submit"
+                    onSubmit={handleGenerate}
+                    disabled={isLoading}
+                >
+                    {brainIcon}
+                    generate
+                </button>
+            )}
         </form>
     );
 };
@@ -4161,12 +4163,25 @@ const Project = ({
                                 <section
                                     className={styles.inputItemContainer100}
                                 >
-                                    <label
-                                        htmlFor="projectSummary"
-                                        className={`${styles.inputLabel}`}
-                                    >
-                                        Project Summary
-                                    </label>
+                                    <section className={styles.aiButtonRow}>
+                                        <label
+                                            htmlFor="projectSummary"
+                                            className={`${styles.inputLabel}`}
+                                        >
+                                            Project Summary
+                                        </label>
+                                        <AIButtons
+                                            promptId="projectSummary"
+                                            document={document}
+                                            isLoading={isLoading}
+                                            setIsLoading={setIsLoading}
+                                            text={projectSummary}
+                                            setText={setProjectSummary as any}
+                                            length={20}
+                                            positionTitle=""
+                                            array={[]}
+                                        />
+                                    </section>
                                     <textarea
                                         id="projectSummary"
                                         className={styles.textArea}
@@ -4364,12 +4379,27 @@ const Project = ({
                                     <section
                                         className={styles.inputItemContainer100}
                                     >
-                                        <label
-                                            htmlFor="projectSummary"
-                                            className={`${styles.inputLabel}`}
-                                        >
-                                            Project Summary
-                                        </label>
+                                        <section className={styles.aiButtonRow}>
+                                            <label
+                                                htmlFor="projectSummary"
+                                                className={`${styles.inputLabel}`}
+                                            >
+                                                Project Summary
+                                            </label>
+                                            <AIButtons
+                                                promptId="projectSummary"
+                                                document={document}
+                                                isLoading={isLoading}
+                                                setIsLoading={setIsLoading}
+                                                text={projectSummary}
+                                                setText={
+                                                    setProjectSummary as any
+                                                }
+                                                length={20}
+                                                positionTitle=""
+                                                array={[]}
+                                            />
+                                        </section>
                                         <textarea
                                             id="projectSummary"
                                             className={styles.textArea}
