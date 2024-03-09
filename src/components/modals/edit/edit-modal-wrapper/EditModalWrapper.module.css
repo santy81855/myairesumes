@@ -26,6 +26,7 @@
     align-items: center;
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .titleContainer {
@@ -269,10 +270,61 @@
     flex-wrap: wrap;
 }
 
+.bulletContainerSpaced {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-medium);
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.columnClose {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--gap-small);
+    justify-content: flex-end;
+}
+
+.aiInputItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.aiInputItem label {
+    text-align: left;
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+    font-weight: bold;
+}
+
 .inputLabel {
     font-size: var(--font-size-small);
     color: rgb(var(--editor-text-color-rgb));
     font-weight: bold;
+}
+
+.rightButtonContainer {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--gap-medium);
+}
+
+.inputColumn100 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .textInput {
@@ -288,10 +340,37 @@
     font-size: var(--font-size-small);
 }
 
+.textInput100 {
+    width: 100%;
+    border: none;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgba(224, 224, 224, 0.3);
+    border-radius: 5px;
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+    font-size: var(--font-size-small);
+}
+
+.textInput100:focus {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    outline: none;
+}
+
 .textInput:focus {
     border: 1px solid rgba(0, 0, 0, 0.1);
     background-color: white;
     outline: none;
+}
+
+.addSkillButtonContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .toggleContainer {
@@ -367,7 +446,6 @@
 
 .innerColumnList {
     width: 100%;
-    padding-inline-start: var(--padding-inline-medium);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -417,7 +495,23 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: var(--gap-medium);
+}
+
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     gap: var(--gap-small);
+}
+
+.aiButtonRow {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-medium);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .cardButtonContainer {
@@ -426,13 +520,14 @@
     gap: var(--gap-small);
     justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .skillCategoryCard {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-small);
+    gap: var(--gap-medium);
     padding-block: var(--padding-block-small);
     padding-inline: var(--padding-inline-medium);
     border-radius: 5px;
@@ -643,6 +738,37 @@
     justify-content: flex-start;
 }
 
+.aiButtonContainer {
+    display: flex;
+    gap: var(--gap-medium);
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.aiButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-small);
+    color: rgb(var(--editor-text-color-rgb));
+    font-size: var(--font-size-small);
+}
+
+.aiButton svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.tipText {
+    font-size: var(--font-size-xsmall);
+    color: grey;
+    flex-grow: 1;
+    text-align: right;
+}
+
 @media screen and (max-width: 425px) {
     .modal {
         width: 95%;
@@ -654,6 +780,9 @@
 }
 
 @media (hover: hover) {
+    .aiButton:hover {
+        text-decoration: underline;
+    }
     .addBulletButton:hover {
         background-color: rgb(var(--editor-accent-color-hover-rgb));
     }
