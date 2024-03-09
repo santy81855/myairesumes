@@ -35,8 +35,10 @@ const TitleBar = () => {
     }, [documentArray]);
 
     const handleSave = async (e: any) => {
+        e.preventDefault();
         if (!currentDocument) return;
         // update the orderArray in the document
+        setIsDocumentLoading(true);
         const updatedDocument = {
             ...currentDocument,
             information: {
@@ -50,19 +52,18 @@ const TitleBar = () => {
             documentArray
         );
         setDocumentArray(newDocumentArray);
-        setIsDocumentLoading(true);
         const formData = new FormData();
         formData.append("document", JSON.stringify(updatedDocument));
-        const response =
-            type === "resume"
-                ? await updateResumeAction(formData)
-                : await updateCoverLetterAction(formData);
-        if (response.error) {
-            toast.error("Error updating document.");
+        try {
+            const response =
+                type === "resume"
+                    ? await updateResumeAction(formData)
+                    : await updateCoverLetterAction(formData);
+            toast.success("Document name updated successfully.");
             setIsEditing(false);
             setIsDocumentLoading(false);
-        } else {
-            toast.success("Document updated successfully.");
+        } catch (error) {
+            toast.error("Error updating document name.");
             setIsEditing(false);
             setIsDocumentLoading(false);
         }
@@ -72,7 +73,10 @@ const TitleBar = () => {
         <section className={styles.container}>
             {currentDocument &&
                 (isEditing ? (
-                    <form className={styles.inputContainer} action={handleSave}>
+                    <form
+                        className={styles.inputContainer}
+                        onSubmit={handleSave}
+                    >
                         <input
                             type="text"
                             className={styles.titleInput}
