@@ -797,6 +797,7 @@ const AIButtons = ({
         e.preventDefault();
         const initialText = text;
         if (!setText) {
+            console.log(bulletPointList);
             const updatedBulletPoints = [...(bulletPointList as string[])];
             updatedBulletPoints[bulletIndex as number] = "";
             setBulletPointList(updatedBulletPoints);
@@ -1447,15 +1448,13 @@ const SkillsCategory = ({
 }: SectionProps & LoadingProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const [categoryInput, setCategoryInput] = useState("");
-    const [skillInput, setSkillInput] = useState("");
     const [skillArray, setSkillArray] = useState(
         document.information.skillCategoryArray
     );
-    const [editCategoryIndex, setEditCategoryIndex] = useState(-1);
-    const [editSkillId, setEditSkillId] = useState("");
     const [addCategoryClicked, setAddCategoryClicked] = useState(false);
-    const [addSkillIndex, setAddSkillIndex] = useState(-1);
     const [editSectionIndex, setEditSectionIndex] = useState(-1);
+    const [aiText, setAiText] = useState("");
+    const [bulletPointList, setBulletPointList] = useState([""]);
 
     const saveClicked = () => {
         const updatedDocument = {
@@ -1577,9 +1576,8 @@ const SkillsCategory = ({
                                             >
                                                 Edit Category
                                             </label>
-                                            {/* This does not work */}
                                             <AIButtons
-                                                promptId={"skillCategorySkill"}
+                                                promptId={"skillCategory"}
                                                 document={document}
                                                 isLoading={isLoading}
                                                 setIsLoading={setIsLoading}
@@ -1587,7 +1585,7 @@ const SkillsCategory = ({
                                                 setText={
                                                     setCategoryInput as any
                                                 }
-                                                length={15}
+                                                length={3}
                                                 positionTitle=""
                                                 array={skillArray}
                                             />
@@ -1596,29 +1594,20 @@ const SkillsCategory = ({
                                             id="itemInput"
                                             placeholder={`E.g. Technical Skills`}
                                             className={styles.textInput100}
-                                            value={skillArray[index].category}
+                                            value={categoryInput}
                                             onChange={(event) =>
-                                                setSkillArray((prev: any) => {
-                                                    const newCategoryArray = [
-                                                        ...prev,
-                                                    ];
-                                                    newCategoryArray[
-                                                        index
-                                                    ].category =
-                                                        event.target.value;
-                                                    return newCategoryArray;
-                                                })
+                                                setCategoryInput(
+                                                    event.target.value
+                                                )
                                             }
                                         />
                                     </section>
-                                    {item.skills.map(
+                                    {bulletPointList.map(
                                         (skill: any, subIndex: number) => (
                                             <section
                                                 key={subIndex}
                                                 className={styles.aiInputItem}
                                             >
-                                                {/* add ai here*/}
-
                                                 <section
                                                     className={
                                                         styles.aiButtonRow
@@ -1641,7 +1630,6 @@ const SkillsCategory = ({
                                                             styles.rightButtonContainer
                                                         }
                                                     >
-                                                        {/* This does not work yet */}
                                                         <AIButtons
                                                             promptId={
                                                                 "skillCategorySkill"
@@ -1653,13 +1641,34 @@ const SkillsCategory = ({
                                                             setIsLoading={
                                                                 setIsLoading
                                                             }
-                                                            text={categoryInput}
-                                                            setText={
-                                                                setCategoryInput as any
+                                                            text={
+                                                                bulletPointList[
+                                                                    subIndex
+                                                                ]
                                                             }
-                                                            length={15}
+                                                            bulletPointList={
+                                                                bulletPointList
+                                                            }
+                                                            bulletIndex={
+                                                                subIndex
+                                                            }
+                                                            setBulletPointList={
+                                                                setBulletPointList as any
+                                                            }
+                                                            length={5}
                                                             positionTitle=""
-                                                            array={skillArray}
+                                                            // pass the category as the first index followed by the skills
+                                                            array={[
+                                                                categoryInput,
+                                                                ...bulletPointList.filter(
+                                                                    (
+                                                                        _,
+                                                                        index
+                                                                    ) =>
+                                                                        index !==
+                                                                        subIndex
+                                                                ),
+                                                            ]}
                                                         />
                                                         <button
                                                             title="Delete Skill"
@@ -1667,25 +1676,15 @@ const SkillsCategory = ({
                                                                 styles.cardDeleteButton
                                                             }
                                                             onClick={() => {
-                                                                const newCategoryArray =
-                                                                    [
-                                                                        ...skillArray,
-                                                                    ];
-                                                                newCategoryArray[
-                                                                    index
-                                                                ].skills =
-                                                                    newCategoryArray[
-                                                                        index
-                                                                    ].skills.filter(
+                                                                setBulletPointList(
+                                                                    bulletPointList.filter(
                                                                         (
-                                                                            _: any,
-                                                                            i: number
+                                                                            _,
+                                                                            i
                                                                         ) =>
                                                                             i !==
                                                                             subIndex
-                                                                    );
-                                                                setSkillArray(
-                                                                    newCategoryArray
+                                                                    )
                                                                 );
                                                             }}
                                                         >
@@ -1710,49 +1709,38 @@ const SkillsCategory = ({
                                                         styles.closingTextArea
                                                     }
                                                     value={
-                                                        skillArray[index]
-                                                            .skills[subIndex]
+                                                        bulletPointList[
+                                                            subIndex
+                                                        ]
                                                     }
-                                                    onChange={(event) =>
-                                                        setSkillArray(
-                                                            (prev: any) => {
-                                                                const newCategoryArray =
-                                                                    [...prev];
-                                                                newCategoryArray[
-                                                                    index
-                                                                ].skills[
-                                                                    subIndex
-                                                                ] =
-                                                                    event.target.value;
-                                                                return newCategoryArray;
-                                                            }
-                                                        )
-                                                    }
+                                                    onChange={(event) => {
+                                                        const newBulletPointList =
+                                                            [
+                                                                ...bulletPointList,
+                                                            ];
+                                                        newBulletPointList[
+                                                            subIndex
+                                                        ] = event.target.value;
+                                                        setBulletPointList(
+                                                            newBulletPointList
+                                                        );
+                                                    }}
                                                 />
                                             </section>
                                         )
                                     )}
-                                    <section
-                                        className={
-                                            styles.addSkillButtonContainer
-                                        }
+                                    <button
+                                        title="Add another skill"
+                                        className={styles.addButton}
+                                        onClick={() => {
+                                            setBulletPointList([
+                                                ...bulletPointList,
+                                                "",
+                                            ]);
+                                        }}
                                     >
-                                        <button
-                                            title="Add New Skill"
-                                            className={styles.addButton}
-                                            onClick={() => {
-                                                const newCategoryArray = [
-                                                    ...skillArray,
-                                                ];
-                                                newCategoryArray[
-                                                    index
-                                                ].skills.push("");
-                                                setSkillArray(newCategoryArray);
-                                            }}
-                                        >
-                                            Add skill
-                                        </button>
-                                    </section>
+                                        {plusIcon}
+                                    </button>
                                     <section
                                         className={styles.cardButtonContainer}
                                     >
@@ -1760,15 +1748,25 @@ const SkillsCategory = ({
                                             title="Cancel"
                                             className={styles.cancelEditButton}
                                             onClick={() => {
+                                                setCategoryInput("");
                                                 setEditSectionIndex(-1);
                                             }}
                                         >
                                             Cancel
                                         </button>
                                         <button
-                                            title={`Update Skill`}
+                                            title="Update Category"
                                             className={styles.saveEditButton}
                                             onClick={() => {
+                                                const newCategoryArray = [
+                                                    ...skillArray,
+                                                ];
+                                                newCategoryArray[index] = {
+                                                    category: categoryInput,
+                                                    skills: bulletPointList,
+                                                };
+                                                setSkillArray(newCategoryArray);
+                                                setCategoryInput("");
                                                 setEditSectionIndex(-1);
                                             }}
                                         >
@@ -1802,6 +1800,12 @@ const SkillsCategory = ({
                                         className={`${styles.cardEditButton}`}
                                         onClick={() => {
                                             setAddCategoryClicked(false);
+                                            setCategoryInput(
+                                                skillArray[index].category
+                                            );
+                                            setBulletPointList(
+                                                skillArray[index].skills
+                                            );
                                             setEditSectionIndex(index);
                                         }}
                                     >
@@ -1813,58 +1817,7 @@ const SkillsCategory = ({
                                     <section
                                         className={styles.columnListRowItem}
                                     >
-                                        {editCategoryIndex === index ? (
-                                            <button
-                                                title="save"
-                                                className={styles.editButton}
-                                                onClick={() => {
-                                                    const newCategoryArray = [
-                                                        ...skillArray,
-                                                    ];
-                                                    newCategoryArray[
-                                                        index
-                                                    ].category = categoryInput;
-                                                    setCategoryInput("");
-                                                    setEditCategoryIndex(-1);
-                                                }}
-                                            >
-                                                {checkIcon}
-                                            </button>
-                                        ) : (
-                                            editSectionIndex === index && (
-                                                <button
-                                                    title="edit category"
-                                                    className={
-                                                        styles.editButton
-                                                    }
-                                                    onClick={() => {
-                                                        setCategoryInput(
-                                                            item.category
-                                                        );
-                                                        setEditCategoryIndex(
-                                                            index
-                                                        );
-                                                    }}
-                                                >
-                                                    {editIcon}
-                                                </button>
-                                            )
-                                        )}
-                                        {editCategoryIndex === index ? (
-                                            <input
-                                                type="text"
-                                                placeholder="E.g. Adobe Creative Suite"
-                                                className={styles.textInput}
-                                                value={categoryInput}
-                                                onChange={(event) =>
-                                                    setCategoryInput(
-                                                        event.target.value
-                                                    )
-                                                }
-                                            />
-                                        ) : (
-                                            <h3>{item.category}</h3>
-                                        )}
+                                        <h3>{item.category}</h3>
                                     </section>
                                     <section className={styles.innerColumnList}>
                                         {item.skills.map(
@@ -1875,218 +1828,16 @@ const SkillsCategory = ({
                                                         styles.columnListRowItem
                                                     }
                                                 >
-                                                    {editSectionIndex ===
-                                                        index && (
-                                                        <button
-                                                            title="delete skill"
-                                                            className={
-                                                                styles.cancelButton
-                                                            }
-                                                            onClick={() => {
-                                                                const newCategoryArray =
-                                                                    [
-                                                                        ...skillArray,
-                                                                    ];
-                                                                newCategoryArray[
-                                                                    index
-                                                                ].skills =
-                                                                    newCategoryArray[
-                                                                        index
-                                                                    ].skills.filter(
-                                                                        (
-                                                                            _: any,
-                                                                            i: number
-                                                                        ) =>
-                                                                            i !==
-                                                                            subIndex
-                                                                    );
-                                                                setSkillArray(
-                                                                    newCategoryArray
-                                                                );
-                                                            }}
-                                                        >
-                                                            {cancelIcon}
-                                                        </button>
-                                                    )}
-                                                    {editSkillId ===
-                                                    index.toString() +
-                                                        subIndex.toString() ? (
-                                                        <button
-                                                            title="save"
-                                                            className={
-                                                                styles.editButton
-                                                            }
-                                                            onClick={() => {
-                                                                const newCategoryArray =
-                                                                    [
-                                                                        ...skillArray,
-                                                                    ];
-                                                                newCategoryArray[
-                                                                    index
-                                                                ].skills[
-                                                                    subIndex
-                                                                ] = skillInput;
-                                                                setSkillArray(
-                                                                    newCategoryArray
-                                                                );
-                                                                setSkillInput(
-                                                                    ""
-                                                                );
-                                                                setEditSkillId(
-                                                                    ""
-                                                                );
-                                                            }}
-                                                        >
-                                                            {checkIcon}
-                                                        </button>
-                                                    ) : (
-                                                        editSectionIndex ===
-                                                            index && (
-                                                            <button
-                                                                title="edit skill"
-                                                                className={
-                                                                    styles.editButton
-                                                                }
-                                                                onClick={() => {
-                                                                    setEditSkillId(
-                                                                        index.toString() +
-                                                                            subIndex.toString()
-                                                                    );
-                                                                    setSkillInput(
-                                                                        skill
-                                                                    );
-                                                                }}
-                                                            >
-                                                                {editIcon}
-                                                            </button>
-                                                        )
-                                                    )}
-                                                    {editSkillId ===
-                                                    index.toString() +
-                                                        subIndex.toString() ? (
-                                                        <input
-                                                            type="text"
-                                                            className={
-                                                                styles.textInput
-                                                            }
-                                                            value={skillInput}
-                                                            onChange={(
-                                                                event
-                                                            ) => {
-                                                                setSkillInput(
-                                                                    event.target
-                                                                        .value
-                                                                );
-                                                            }}
-                                                        />
-                                                    ) : (
-                                                        <p
-                                                            className={
-                                                                styles.smallText
-                                                            }
-                                                        >
-                                                            {skill}
-                                                        </p>
-                                                    )}
+                                                    <p
+                                                        className={
+                                                            styles.smallText
+                                                        }
+                                                    >
+                                                        {skill}
+                                                    </p>
                                                 </section>
                                             )
                                         )}
-                                        <section
-                                            className={
-                                                styles.addSkillButtonContainer
-                                            }
-                                        >
-                                            {addSkillIndex === index ? (
-                                                <section
-                                                    className={
-                                                        styles.inputItemRow
-                                                    }
-                                                >
-                                                    <input
-                                                        type="text"
-                                                        placeholder="E.g. Adobe Creative Suite"
-                                                        className={
-                                                            styles.textInput
-                                                        }
-                                                        value={skillInput}
-                                                        onChange={(event) =>
-                                                            setSkillInput(
-                                                                event.target
-                                                                    .value
-                                                            )
-                                                        }
-                                                    />
-                                                    <button
-                                                        title="Add Skill"
-                                                        className={`${styles.addButton} ${styles.addButtonSmall}`}
-                                                        onClick={() => {
-                                                            const newCategoryArray =
-                                                                [...skillArray];
-                                                            newCategoryArray[
-                                                                index
-                                                            ].skills.push(
-                                                                skillInput
-                                                            );
-                                                            setSkillArray(
-                                                                newCategoryArray
-                                                            );
-                                                            setSkillInput("");
-                                                            setAddSkillIndex(
-                                                                -1
-                                                            );
-                                                        }}
-                                                    >
-                                                        {plusIcon}
-                                                    </button>
-                                                </section>
-                                            ) : (
-                                                editSectionIndex === index && (
-                                                    <>
-                                                        <button
-                                                            title="Add Skill"
-                                                            className={`${styles.addButton} ${styles.addButtonSmall}`}
-                                                            onClick={() => {
-                                                                setAddSkillIndex(
-                                                                    index
-                                                                );
-                                                            }}
-                                                        >
-                                                            {plusIcon}
-                                                        </button>
-                                                        <section
-                                                            className={`${styles.saveButtonContainer} ${styles.experienceButtonContainer}`}
-                                                        >
-                                                            <button
-                                                                title="Cancel"
-                                                                className={
-                                                                    styles.cancelEditButton
-                                                                }
-                                                                onClick={() => {
-                                                                    setEditSectionIndex(
-                                                                        -1
-                                                                    );
-                                                                }}
-                                                            >
-                                                                Cancel
-                                                            </button>
-                                                            <button
-                                                                title="Save Category"
-                                                                className={
-                                                                    styles.saveEditButton
-                                                                }
-                                                                onClick={() => {
-                                                                    setEditSectionIndex(
-                                                                        -1
-                                                                    );
-                                                                }}
-                                                            >
-                                                                Save
-                                                            </button>
-                                                        </section>
-                                                    </>
-                                                )
-                                            )}
-                                        </section>
                                     </section>
                                 </section>
                             </section>
