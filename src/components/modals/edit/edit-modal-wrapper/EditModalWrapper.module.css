@@ -280,7 +280,6 @@
 }
 
 .aiInputItem label {
-    width: 100%;
     text-align: left;
     font-size: var(--font-size-small);
     color: rgb(var(--editor-text-color-rgb));
@@ -291,6 +290,15 @@
     font-size: var(--font-size-small);
     color: rgb(var(--editor-text-color-rgb));
     font-weight: bold;
+}
+
+.inputColumn100 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .textInput {
@@ -306,10 +314,37 @@
     font-size: var(--font-size-small);
 }
 
+.textInput100 {
+    width: 100%;
+    border: none;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgba(224, 224, 224, 0.3);
+    border-radius: 5px;
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+    font-size: var(--font-size-small);
+}
+
+.textInput100:focus {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    outline: none;
+}
+
 .textInput:focus {
     border: 1px solid rgba(0, 0, 0, 0.1);
     background-color: white;
     outline: none;
+}
+
+.addSkillButtonContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-small);
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .toggleContainer {
@@ -385,7 +420,6 @@
 
 .innerColumnList {
     width: 100%;
-    padding-inline-start: var(--padding-inline-medium);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -435,7 +469,23 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: var(--gap-medium);
+}
+
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     gap: var(--gap-small);
+}
+
+.aiButtonRow {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-medium);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .cardButtonContainer {
@@ -444,13 +494,14 @@
     gap: var(--gap-small);
     justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .skillCategoryCard {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-small);
+    gap: var(--gap-medium);
     padding-block: var(--padding-block-small);
     padding-inline: var(--padding-inline-medium);
     border-radius: 5px;
@@ -662,7 +713,6 @@
 }
 
 .aiButtonContainer {
-    width: 100%;
     display: flex;
     gap: var(--gap-medium);
     align-items: center;
@@ -684,6 +734,13 @@
 .aiButton svg {
     width: 1rem;
     height: 1rem;
+}
+
+.tipText {
+    font-size: var(--font-size-xsmall);
+    color: grey;
+    flex-grow: 1;
+    text-align: right;
 }
 
 @media screen and (max-width: 425px) {
