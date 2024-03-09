@@ -20,7 +20,9 @@ You are applying for the position of [Job Title] at [Company Name]. Write a summ
         case "experienceSummary":
             return `${promptStart} Write a highlight summary for the role of ${positionTitle}. Incorporate good key responsibilities as well as quantifiable achievements. ${promptEnd}`;
         case "experienceBullet":
-            return `${promptStart} Write a bullet point for the experience section of the role of ${positionTitle}. Incorporate good key responsibilities as well as quantifiable achievements. ${promptEnd}`;
+            return `${promptStart} Write a bullet point for the experience section of the role of ${positionTitle}. The current bullet points are ${array.join(
+                ", "
+            )}Incorporate good key responsibilities as well as quantifiable achievements. ${promptEnd}`;
         case "skills":
             return `${promptStart} Write a professional skill for a ${jobTitle} resume. The current skills are ${array.join(
                 ", "
@@ -52,6 +54,8 @@ const getEnhancePrompt = (
             return `${promptStart} Enhance the following resume summary: ${currentText} ${promptEnd}`;
         case "experienceSummary":
             return `${promptStart} Enhance the following highlight summary for the role of ${positionTitle}: ${currentText}. Incorporate good key responsibilities as well as quantifiable achievements. ${promptEnd}`;
+        case "experienceBullet":
+            return `${promptStart} Enhance the following bullet point for the experience section of the role of ${positionTitle}: ${currentText}. Incorporate good key responsibilities as well as quantifiable achievements. ${promptEnd}`;
         case "skills":
             return `${promptStart} Enhance the following skill for a ${jobTitle} resume: ${currentText}. The current skills are ${array.join(
                 ", "

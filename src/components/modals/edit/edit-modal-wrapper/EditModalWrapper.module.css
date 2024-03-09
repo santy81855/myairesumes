@@ -270,6 +270,24 @@
     flex-wrap: wrap;
 }
 
+.bulletContainerSpaced {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-medium);
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.columnClose {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--gap-small);
+    justify-content: flex-end;
+}
+
 .aiInputItem {
     width: 100%;
     display: flex;

@@ -47,7 +47,8 @@ type AIButtonsProps = {
     ) => void;
     length: number;
     positionTitle: string;
-    setBulletPointList?: (prev: (prev: string[]) => void) => void;
+    bulletPointList?: string[];
+    setBulletPointList?: any;
     array: string[];
     bulletIndex?: number;
 };
@@ -787,6 +788,7 @@ const AIButtons = ({
     setText,
     length,
     positionTitle,
+    bulletPointList,
     setBulletPointList,
     bulletIndex,
     array,
@@ -794,10 +796,10 @@ const AIButtons = ({
     const handleGenerate = async (e: any) => {
         e.preventDefault();
         const initialText = text;
-        if (setBulletPointList && bulletIndex) {
-            setBulletPointList((prev: string[]) => {
-                prev[bulletIndex] = "";
-            });
+        if (!setText) {
+            const updatedBulletPoints = [...(bulletPointList as string[])];
+            updatedBulletPoints[bulletIndex as number] = "";
+            setBulletPointList(updatedBulletPoints);
         } else if (setText) {
             setText("");
         }
@@ -811,7 +813,6 @@ const AIButtons = ({
             positionTitle,
             array,
         };
-        console.log(array);
         const prompt = getPrompt(data);
         console.log(prompt);
         setIsLoading(true);
@@ -835,9 +836,13 @@ const AIButtons = ({
                     (await reader?.read()) as ReadableStreamReadResult<Uint8Array>;
                 if (done) break;
                 let stringChunk = new TextDecoder().decode(value);
-                if (setBulletPointList && bulletIndex) {
+                if (!setText) {
                     setBulletPointList((prev: string[]) => {
-                        prev[bulletIndex] = prev[bulletIndex] + stringChunk;
+                        const updatedBulletPoints = [...prev];
+                        updatedBulletPoints[bulletIndex as number] =
+                            updatedBulletPoints[bulletIndex as number] +
+                            stringChunk;
+                        return updatedBulletPoints;
                     });
                 } else if (setText) {
                     setText((prev) => prev + stringChunk);
@@ -845,9 +850,9 @@ const AIButtons = ({
             }
         } catch (error) {
             setIsLoading(false);
-            if (setBulletPointList && bulletIndex) {
+            if (!setText) {
                 setBulletPointList((prev: string[]) => {
-                    prev[bulletIndex] = initialText;
+                    prev[bulletIndex as number] = initialText;
                 });
             } else if (setText) {
                 setText(initialText);
@@ -861,9 +866,11 @@ const AIButtons = ({
     const handleEnhance = async (e: any) => {
         e.preventDefault();
         const initialText = text;
-        if (setBulletPointList && bulletIndex) {
+        if (!setText) {
             setBulletPointList((prev: string[]) => {
-                prev[bulletIndex] = "";
+                const updatedBulletPoints = [...prev];
+                updatedBulletPoints[bulletIndex as number] = "";
+                return updatedBulletPoints;
             });
         } else if (setText) {
             setText("");
@@ -900,9 +907,13 @@ const AIButtons = ({
                     (await reader?.read()) as ReadableStreamReadResult<Uint8Array>;
                 if (done) break;
                 let stringChunk = new TextDecoder().decode(value);
-                if (setBulletPointList && bulletIndex) {
+                if (!setText) {
                     setBulletPointList((prev: string[]) => {
-                        prev[bulletIndex] = prev[bulletIndex] + stringChunk;
+                        const updatedBulletPoints = [...prev];
+                        updatedBulletPoints[bulletIndex as number] =
+                            updatedBulletPoints[bulletIndex as number] +
+                            stringChunk;
+                        return updatedBulletPoints;
                     });
                 } else if (setText) {
                     setText((prev) => prev + stringChunk);
@@ -910,9 +921,11 @@ const AIButtons = ({
             }
         } catch (error) {
             setIsLoading(false);
-            if (setBulletPointList && bulletIndex) {
+            if (!setText) {
                 setBulletPointList((prev: string[]) => {
-                    prev[bulletIndex] = initialText;
+                    const updatedBulletPoints = [...prev];
+                    updatedBulletPoints[bulletIndex as number] = initialText;
+                    return updatedBulletPoints;
                 });
             } else if (setText) {
                 setText(initialText);
@@ -2635,13 +2648,16 @@ const Experience = ({
                                                             setIsLoading
                                                         }
                                                         text={bulletPoint}
+                                                        bulletPointList={
+                                                            bulletPoints
+                                                        }
                                                         setBulletPointList={
                                                             setBulletPoints as any
                                                         }
                                                         bulletIndex={index}
                                                         length={15}
                                                         positionTitle={position}
-                                                        array={[]}
+                                                        array={bulletPoints}
                                                     />
                                                 )}
                                                 <button
@@ -2678,7 +2694,7 @@ const Experience = ({
                                                 <input
                                                     type="text"
                                                     className={styles.textInput}
-                                                    value={bulletPoint}
+                                                    value={bulletPoints[index]}
                                                     onChange={(e) =>
                                                         handleBulletPointChange(
                                                             index,
@@ -3034,47 +3050,108 @@ const Experience = ({
                                         <label className={styles.inputLabel}>
                                             Bullet Points:
                                         </label>
-                                        {bulletPoints.map(
-                                            (bulletPoint, index) => (
-                                                <div
-                                                    className={
-                                                        styles.inputRowContainer
-                                                    }
-                                                    key={index}
-                                                >
-                                                    <div
+                                        <section
+                                            className={
+                                                styles.bulletContainerSpaced
+                                            }
+                                        >
+                                            {bulletPoints.map(
+                                                (bulletPoint, index) => (
+                                                    <section
                                                         className={
-                                                            styles.bulletPoint
-                                                        }
-                                                    ></div>
-                                                    <input
-                                                        type="text"
-                                                        className={
-                                                            styles.textInput
-                                                        }
-                                                        value={bulletPoint}
-                                                        onChange={(e) =>
-                                                            handleBulletPointChange(
-                                                                index,
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                    />
-                                                    <button
-                                                        className={
-                                                            styles.addButton
-                                                        }
-                                                        onClick={() =>
-                                                            handleRemoveBulletPoint(
-                                                                index
-                                                            )
+                                                            styles.columnClose
                                                         }
                                                     >
-                                                        Remove
-                                                    </button>
-                                                </div>
-                                            )
-                                        )}
+                                                        {!position ? (
+                                                            <h4
+                                                                className={
+                                                                    styles.tipText
+                                                                }
+                                                            >
+                                                                Fill in the
+                                                                position to get
+                                                                AI help.
+                                                            </h4>
+                                                        ) : (
+                                                            <AIButtons
+                                                                promptId="experienceBullet"
+                                                                document={
+                                                                    document
+                                                                }
+                                                                isLoading={
+                                                                    isLoading
+                                                                }
+                                                                setIsLoading={
+                                                                    setIsLoading
+                                                                }
+                                                                text={
+                                                                    bulletPoint
+                                                                }
+                                                                bulletPointList={
+                                                                    bulletPoints
+                                                                }
+                                                                setBulletPointList={
+                                                                    setBulletPoints as any
+                                                                }
+                                                                bulletIndex={
+                                                                    index
+                                                                }
+                                                                length={15}
+                                                                positionTitle={
+                                                                    position
+                                                                }
+                                                                array={
+                                                                    bulletPoints
+                                                                }
+                                                            />
+                                                        )}
+
+                                                        <div
+                                                            className={
+                                                                styles.inputRowContainer
+                                                            }
+                                                            key={index}
+                                                        >
+                                                            <div
+                                                                className={
+                                                                    styles.bulletPoint
+                                                                }
+                                                            ></div>
+                                                            <input
+                                                                type="text"
+                                                                className={
+                                                                    styles.textInput
+                                                                }
+                                                                value={
+                                                                    bulletPoints[
+                                                                        index
+                                                                    ]
+                                                                }
+                                                                onChange={(e) =>
+                                                                    handleBulletPointChange(
+                                                                        index,
+                                                                        e.target
+                                                                            .value
+                                                                    )
+                                                                }
+                                                            />
+                                                            <button
+                                                                className={
+                                                                    styles.addButton
+                                                                }
+                                                                onClick={() =>
+                                                                    handleRemoveBulletPoint(
+                                                                        index
+                                                                    )
+                                                                }
+                                                            >
+                                                                Remove
+                                                            </button>
+                                                        </div>
+                                                    </section>
+                                                )
+                                            )}
+                                        </section>
                                         <button
                                             onClick={handleAddBulletPoint}
                                             className={styles.addBulletButton}
