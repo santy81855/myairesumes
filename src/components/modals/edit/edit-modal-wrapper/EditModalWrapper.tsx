@@ -811,6 +811,7 @@ const AIButtons = ({
             positionTitle,
             array,
         };
+        console.log(array);
         const prompt = getPrompt(data);
         console.log(prompt);
         setIsLoading(true);
@@ -1274,7 +1275,7 @@ const GenericSection = ({
             <section className={styles.skillCategoryCardContainer}>
                 {itemArray.map((item: any, index: number) =>
                     editItemId === index ? (
-                        <section className={styles.aiInputItem}>
+                        <section key={index} className={styles.aiInputItem}>
                             <section className={styles.aiButtonRow}>
                                 <label htmlFor="itemInput">
                                     Edit {singularName}
@@ -1331,7 +1332,7 @@ const GenericSection = ({
                             </section>
                         </section>
                     ) : (
-                        <section className={styles.card}>
+                        <section key={index} className={styles.card}>
                             <section className={styles.cardButtonContainer}>
                                 <button
                                     title="delete"
@@ -1465,12 +1466,25 @@ const SkillsCategory = ({
             {addCategoryClicked ? (
                 <section className={styles.inputRowContainer}>
                     <section className={styles.inputItemContainer}>
-                        <label
-                            htmlFor="categoryInput"
-                            className={styles.inputLabel}
-                        >
-                            Skill Category
-                        </label>
+                        <section className={styles.aiButtonRow}>
+                            <label
+                                htmlFor="categoryInput"
+                                className={styles.inputLabel}
+                            >
+                                Skill Category
+                            </label>
+                            <AIButtons
+                                promptId={"skillCategory"}
+                                document={document}
+                                isLoading={isLoading}
+                                setIsLoading={setIsLoading}
+                                text={categoryInput}
+                                setText={setCategoryInput as any}
+                                length={3}
+                                positionTitle=""
+                                array={skillArray}
+                            />
+                        </section>
                         <section className={styles.aiInputItem}>
                             <textarea
                                 id="categoryInput"
@@ -1543,13 +1557,28 @@ const SkillsCategory = ({
                             <section className={styles.card}>
                                 <section className={styles.skillCategoryCard}>
                                     <section className={styles.aiInputItem}>
-                                        {/* add ai here*/}
-                                        <label
-                                            htmlFor="itemInput"
-                                            className={styles.inputLabel}
-                                        >
-                                            Edit Category
-                                        </label>
+                                        <section className={styles.aiButtonRow}>
+                                            <label
+                                                htmlFor="itemInput"
+                                                className={styles.inputLabel}
+                                            >
+                                                Edit Category
+                                            </label>
+                                            {/* This does not work */}
+                                            <AIButtons
+                                                promptId={"skillCategorySkill"}
+                                                document={document}
+                                                isLoading={isLoading}
+                                                setIsLoading={setIsLoading}
+                                                text={categoryInput}
+                                                setText={
+                                                    setCategoryInput as any
+                                                }
+                                                length={15}
+                                                positionTitle=""
+                                                array={skillArray}
+                                            />
+                                        </section>
                                         <input
                                             id="itemInput"
                                             placeholder={`E.g. Technical Skills`}
@@ -1579,7 +1608,7 @@ const SkillsCategory = ({
 
                                                 <section
                                                     className={
-                                                        styles.cardButtonContainer
+                                                        styles.aiButtonRow
                                                     }
                                                 >
                                                     <label
@@ -1594,41 +1623,69 @@ const SkillsCategory = ({
                                                         Edit Skill{" "}
                                                         {subIndex + 1}
                                                     </label>
-                                                    <button
-                                                        title="Delete Skill"
+                                                    <section
                                                         className={
-                                                            styles.cardDeleteButton
+                                                            styles.rightButtonContainer
                                                         }
-                                                        onClick={() => {
-                                                            const newCategoryArray =
-                                                                [...skillArray];
-                                                            newCategoryArray[
-                                                                index
-                                                            ].skills =
+                                                    >
+                                                        {/* This does not work yet */}
+                                                        <AIButtons
+                                                            promptId={
+                                                                "skillCategorySkill"
+                                                            }
+                                                            document={document}
+                                                            isLoading={
+                                                                isLoading
+                                                            }
+                                                            setIsLoading={
+                                                                setIsLoading
+                                                            }
+                                                            text={categoryInput}
+                                                            setText={
+                                                                setCategoryInput as any
+                                                            }
+                                                            length={15}
+                                                            positionTitle=""
+                                                            array={skillArray}
+                                                        />
+                                                        <button
+                                                            title="Delete Skill"
+                                                            className={
+                                                                styles.cardDeleteButton
+                                                            }
+                                                            onClick={() => {
+                                                                const newCategoryArray =
+                                                                    [
+                                                                        ...skillArray,
+                                                                    ];
                                                                 newCategoryArray[
                                                                     index
-                                                                ].skills.filter(
-                                                                    (
-                                                                        _: any,
-                                                                        i: number
-                                                                    ) =>
-                                                                        i !==
-                                                                        subIndex
+                                                                ].skills =
+                                                                    newCategoryArray[
+                                                                        index
+                                                                    ].skills.filter(
+                                                                        (
+                                                                            _: any,
+                                                                            i: number
+                                                                        ) =>
+                                                                            i !==
+                                                                            subIndex
+                                                                    );
+                                                                setSkillArray(
+                                                                    newCategoryArray
                                                                 );
-                                                            setSkillArray(
-                                                                newCategoryArray
-                                                            );
-                                                        }}
-                                                    >
-                                                        <p
-                                                            className={
-                                                                styles.smallText
-                                                            }
+                                                            }}
                                                         >
-                                                            Delete
-                                                        </p>
-                                                        {cancelIcon}
-                                                    </button>
+                                                            <p
+                                                                className={
+                                                                    styles.smallText
+                                                                }
+                                                            >
+                                                                Delete
+                                                            </p>
+                                                            {cancelIcon}
+                                                        </button>
+                                                    </section>
                                                 </section>
                                                 <textarea
                                                     id={

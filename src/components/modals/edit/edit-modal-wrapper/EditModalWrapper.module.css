@@ -292,6 +292,14 @@
     font-weight: bold;
 }
 
+.rightButtonContainer {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--gap-medium);
+}
+
 .inputColumn100 {
     width: 100%;
     display: flex;
