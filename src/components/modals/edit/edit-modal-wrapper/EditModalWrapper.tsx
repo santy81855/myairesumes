@@ -2626,6 +2626,7 @@ const Experience = ({
                                     {bulletPoints.map((bulletPoint, index) => (
                                         <>
                                             <section
+                                                key={index}
                                                 className={
                                                     styles.cardButtonContainer
                                                 }
@@ -2869,7 +2870,10 @@ const Experience = ({
                 )}
                 {experienceArray.map((experience: any, index: number) => {
                     return editSectionIndex === index ? (
-                        <section className={styles.skillCategoryCard}>
+                        <section
+                            key={index}
+                            className={styles.skillCategoryCard}
+                        >
                             <section className={styles.columnListRowItem}>
                                 <section className={styles.experienceItem}>
                                     <p className={styles.editTitle}>
@@ -3058,6 +3062,7 @@ const Experience = ({
                                             {bulletPoints.map(
                                                 (bulletPoint, index) => (
                                                     <section
+                                                        key={index}
                                                         className={
                                                             styles.columnClose
                                                         }
