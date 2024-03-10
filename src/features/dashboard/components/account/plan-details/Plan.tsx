@@ -35,7 +35,7 @@ const Plan = async ({ currentUser, searchParams }: PlanProps) => {
               ],
               "/dashboard"
           );
-
+    console.log(subscription);
     return (
         <Card key="plan-card" gridArea="plan" title="Plan Details">
             <section className={styles.container}>
@@ -45,6 +45,7 @@ const Plan = async ({ currentUser, searchParams }: PlanProps) => {
                             <p className={styles.title}>Ai Resume - {status}</p>
                             {subscription && (
                                 <Link
+                                    title="Manage Plan"
                                     href={manageLink}
                                     className={styles.managePlanButton}
                                 >
@@ -56,14 +57,25 @@ const Plan = async ({ currentUser, searchParams }: PlanProps) => {
                             <section className={styles.priceContainer}>
                                 <p className={styles.dollarSign}>$</p>
                                 <p className={styles.price}>
-                                    {status === "free" ? "0" : "4.99"}
+                                    {status === "free"
+                                        ? "0"
+                                        : (subscription as any)?.plan?.amount /
+                                          100}
                                 </p>
                             </section>
-                            <p className={styles.description}>/ month</p>
+                            <p className={styles.description}>
+                                {subscription
+                                    ? (subscription as any)?.plan
+                                          ?.interval_count === 6
+                                        ? "/ 6 months"
+                                        : "/ month"
+                                    : "/ month"}
+                            </p>
                         </section>
                     </section>
                     {status === "free" && (
                         <Link
+                            title="Upgrade Plan"
                             href={UpdateUrl(
                                 searchParams ? searchParams : {},
                                 [

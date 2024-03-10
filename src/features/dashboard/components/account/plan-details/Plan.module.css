@@ -41,7 +41,7 @@
 .managePlanButton {
     font-size: var(--font-size-small);
     font-weight: 700;
-    color: #d299ff;
+    color: rgb(var(--dashboard-accent-color-rgb));
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -74,19 +74,14 @@
 }
 
 .upgradeButton {
-    color: #d299ff;
+    color: rgb(var(--dashboard-accent-color-rgb));
     font-size: var(--font-size-small);
     font-weight: 700;
     padding-block: var(--padding-block-small);
     padding-inline: var(--padding-inline-small);
-    border: 1px solid #d299ff;
+    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.upgradeButton:hover {
-    background-color: #d299ff;
-    color: white;
 }
 
 .itemContainer {
@@ -126,7 +121,7 @@
 .progressBar {
     width: 100%;
     height: 10px;
-    background-color: #e1e1e1;
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
     border-radius: 5px;
     position: relative;
 }
@@ -134,8 +129,15 @@
 .full {
     width: 100%;
     height: 100%;
-    background-color: #d299ff;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
     border-radius: 5px;
+}
+
+@media screen and (hover: hover) {
+    .upgradeButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+        color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    }
 }
 
 @media screen and (max-width: 600px) {

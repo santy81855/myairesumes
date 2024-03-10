@@ -18,6 +18,7 @@
 .title {
     font-size: var(--font-size-medium);
     font-weight: 600;
+    color: rgb(var(--dashboard-accent-color-rgb));
 }
 
 .list {
@@ -50,19 +51,21 @@
 
 .iconContainer svg {
     fill: transparent;
-    stroke: #d299ff;
+    stroke: rgb(var(--dashboard-accent-color-rgb));
     stroke-width: 1;
 }
 
 .text {
     font-size: var(--font-size-medium);
     font-weight: 600;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .subText {
     font-size: var(--font-size-medium);
     width: 100%;
     text-align: left;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .paymentInfo {
@@ -79,6 +82,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .paymentText {
@@ -86,16 +90,13 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .updateLink {
     font-size: var(--font-size-small);
-    color: #d299ff;
+    color: rgb(var(--dashboard-accent-color-rgb));
     cursor: pointer;
-}
-
-.updateLink:hover {
-    text-decoration: underline;
 }
 
 .cancelledContainer {
@@ -110,8 +111,8 @@
 
 .renewButton {
     width: 100%;
-    background-color: #d299ff;
-    color: white;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
     height: 40px;
     border: none;
     cursor: pointer;
@@ -120,8 +121,14 @@
     align-items: center;
 }
 
-.renewButton:hover {
-    background-color: #a183cf;
+@media screen and (hover: hover) {
+    .renewButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+
+    .updateLink:hover {
+        text-decoration: underline;
+    }
 }
 
 @media screen and (max-width: 480px) {

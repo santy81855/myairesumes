@@ -16,6 +16,8 @@
     padding-inline: var(--padding-block-medium);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     position: relative;
+    background-color: white;
+    border-radius: var(--border-radius-xsmall);
 }
 
 .educationItemInfo {
@@ -27,7 +29,7 @@
 .schoolName {
     font-size: var(--font-size-small);
     font-weight: bold;
-    color: rgb(22, 22, 22);
+    color: rgb(var(--dashboard-text-color-rgb));
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -36,7 +38,7 @@
 
 .degreeType {
     font-size: var(--font-size-small);
-    color: #9f9f9f;
+    color: rgb(var(--dashboard-text-color-rgb), 0.5);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -46,7 +48,7 @@
 
 .dateRange {
     font-size: var(--font-size-small);
-    color: #9f9f9f;
+    color: rgb(var(--dashboard-text-color-rgb), 0.5);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -58,15 +60,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #eaeaea;
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
     height: 160px;
     border: none;
-
+    border-radius: var(--border-radius-xsmall);
     cursor: pointer;
-}
-
-.addEducationButton:hover {
-    background-color: #d1d1d1;
 }
 
 .svgContainer {
@@ -76,7 +74,7 @@
 }
 
 .svgContainer svg {
-    fill: rgb(22, 22, 22);
+    fill: rgb(var(--dashboard-accent-color-rgb));
     width: 100%;
     height: 100%;
 }
@@ -84,7 +82,7 @@
 .addTitle {
     font-size: var(--font-size-medium);
     font-weight: bold;
-    color: rgb(22, 22, 22);
+    color: rgb(var(--dashboard-text-color-rgb));
     margin-block-start: var(--padding-block-small);
 }
 
@@ -123,7 +121,7 @@
 .label {
     font-size: var(--font-size-small);
     font-weight: bold;
-    color: rgb(22, 22, 22);
+    color: rgb(var(--dashboard-text-color-rgb));
     margin-block-end: var(--padding-block-small);
 }
 
@@ -140,11 +138,12 @@
     border-radius: var(--border-radius-xsmall);
     padding-inline-start: var(--padding-block-small);
     font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .input:focus {
     outline: none;
-    border: 1px solid #a183cf;
+    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
 }
 
 .buttonContainer {
@@ -156,31 +155,25 @@
 
 .cancelButton {
     width: 100%;
-    background-color: #eaeaea;
-    color: rgb(22, 22, 22);
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
+    color: rgb(var(--dashboard-text-color-rgb));
     height: 40px;
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.cancelButton:hover {
-    background-color: #ffbcbc;
+    border-radius: var(--border-radius-xsmall);
 }
 
 .saveButton {
     width: 100%;
-    background-color: #a183cf;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
     color: white;
     height: 40px;
     border: none;
     cursor: pointer;
-}
-
-.saveButton:hover {
-    background-color: #8a6fbf;
+    border-radius: var(--border-radius-xsmall);
 }
 
 .removeButton {
@@ -190,10 +183,7 @@
     height: 40px;
     border: none;
     cursor: pointer;
-}
-
-.removeButton:hover {
-    background-color: #dc8a8a;
+    border-radius: var(--border-radius-xsmall);
 }
 
 .endDateTitle {
@@ -210,7 +200,7 @@
 
 .editButton {
     width: 100%;
-    background-color: #a183cf;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
     height: 30px;
     font-size: var(--font-size-small);
     display: flex;
@@ -218,10 +208,7 @@
     align-items: center;
     color: white;
     cursor: pointer;
-}
-
-.editButton:hover {
-    background-color: #8a6fbf;
+    border-radius: var(--border-radius-xsmall);
 }
 
 .degreeInfoInput {
@@ -230,6 +217,34 @@
     justify-content: center;
     align-items: center;
     gap: var(--padding-block-small);
+}
+
+@media screen and (hover: hover) {
+    .editButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+
+    .removeButton:hover {
+        background-color: #dc8a8a;
+    }
+
+    .saveButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+
+    .cancelButton:hover {
+        background-color: rgb(
+            var(--dashboard-background-color-contrast-rgb),
+            0.5
+        );
+    }
+
+    .addEducationButton:hover {
+        background-color: rgb(
+            var(--dashboard-background-color-contrast-rgb),
+            0.5
+        );
+    }
 }
 
 @media screen and (max-width: 480px) {

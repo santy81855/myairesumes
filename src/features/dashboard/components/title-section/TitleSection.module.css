@@ -20,7 +20,7 @@
     font-size: var(--font-size-small);
     width: 100%;
     text-align: left;
-    color: rgb(var(--dashboard-accent-color-rgb));
+    color: rgb(var(--dashboard-text-color-rgb));
     font-weight: bold;
 }
 

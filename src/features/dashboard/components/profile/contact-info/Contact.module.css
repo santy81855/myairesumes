@@ -86,7 +86,7 @@
 
 .cancelButton {
     width: 100%;
-    background-color: rgb(var(--dashboard-background-color-rgb));
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
     color: rgb(var(--dashboard-text-color-rgb));
     height: 40px;
     border: none;
@@ -105,7 +105,10 @@
     }
 
     .cancelButton:hover {
-        background-color: rgb(var(--dashboard-background-color-rgb), 0.5);
+        background-color: rgb(
+            var(--dashboard-background-color-contrast-rgb),
+            0.5
+        );
     }
 }
 
