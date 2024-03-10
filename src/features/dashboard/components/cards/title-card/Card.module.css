@@ -2,16 +2,13 @@
     border-radius: var(--border-radius-xsmall);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     display: flex;
-    background-color: blue;
+    background-color: white;
     aspect-ratio: 3/2;
-    padding: var(--padding-block-small);
+
     position: relative;
     cursor: pointer;
     border: none;
-}
-
-.container:hover {
-    filter: blur(1px);
+    overflow: hidden;
 }
 
 .title {
@@ -25,6 +22,7 @@
     text-shadow: -1px 0 #9551ad, 0 1px #9551ad, 1px 0 #9551ad, 0 -1px #9551ad;
     width: 100%;
     text-align: center;
+    z-index: 1;
 }
 
 .number {
@@ -40,4 +38,95 @@
     text-align: right;
     padding-inline-end: var(--padding-block-small);
     text-shadow: -1px 0 #9551ad, 0 1px #9551ad, 1px 0 #9551ad, 0 -1px #9551ad;
+}
+
+.overlayTouch {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: var(--border-radius-xsmall);
+    background-color: rgb(0, 0, 0, 0.5);
+    position: relative;
+    padding: var(--padding-block-small);
+}
+
+.overlayTouch svg {
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    transform: translate(-60%, -70%);
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke: rgb(var(--dashboard-accent-color-contrast-rgb));
+    stroke-width: 1;
+}
+
+.textTouch {
+    font-size: var(--font-size-xlarge);
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    font-weight: bold;
+    text-align: center;
+}
+
+.numberTextTouch {
+    font-size: var(--font-size-x2large);
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    font-weight: bold;
+    text-align: center;
+}
+
+.overlay {
+    display: none;
+}
+
+@media screen and (hover: hover) {
+    .overlayTouch {
+        display: none;
+    }
+    .overlay {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: var(--padding-block-small);
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        border-radius: var(--border-radius-xsmall);
+        background-color: rgb(0, 0, 0, 0.5);
+        position: relative;
+        padding: var(--padding-block-small);
+    }
+
+    .overlay svg {
+        position: absolute;
+        top: 100%;
+        left: 100%;
+        transform: translate(-60%, -70%);
+        width: 100%;
+        height: 100%;
+        fill: transparent;
+        stroke: rgb(var(--dashboard-accent-color-contrast-rgb));
+        stroke-width: 1;
+    }
+
+    .text {
+        font-size: var(--font-size-xlarge);
+        color: rgb(var(--dashboard-accent-color-contrast-rgb));
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .numberText {
+        font-size: var(--font-size-x2large);
+        color: rgb(var(--dashboard-accent-color-contrast-rgb));
+        font-weight: bold;
+        text-align: center;
+    }
 }
