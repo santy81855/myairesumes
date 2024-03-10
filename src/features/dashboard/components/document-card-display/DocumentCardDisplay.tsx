@@ -1,60 +1,61 @@
-"use client";
 import {
     getAllResumeTemplates,
     getAllCoverLetterTemplates,
 } from "@/features/editor";
 import styles from "./DocumentCardDisplay.module.css";
-import {
-    Basic,
-    Fresh,
-    Impact,
-    Nexus,
-    Nova,
-    Sharp,
-    Vivid,
-} from "@/features/resume";
-import { formatDateMonthDayYear } from "@/lib/date";
-import { useState, useEffect } from "react";
+import { UpdateUrl } from "@/lib/updateUrl";
+import { DocumentCard } from "@/features/dashboard";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import { nextIcon, previousIcon } from "@/components/icons/iconSVG";
 
 type DocumentCardDisplayProps = {
     documents: any[];
     type: string;
+    searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-const DocumentCardDisplay = ({ documents, type }: DocumentCardDisplayProps) => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [documentsPerPage, setDocumentsPerPage] = useState(10);
-    const indexOfLastDocument = currentPage * documentsPerPage;
-    const indexOfFirstDocument = indexOfLastDocument - documentsPerPage;
-    const currentDocuments = documents.slice(
-        indexOfFirstDocument,
-        indexOfLastDocument
+const DocumentCardDisplay = ({
+    searchParams,
+    documents,
+    type,
+}: DocumentCardDisplayProps) => {
+    const maxDocuments = 10;
+    const documentPage = searchParams?.documentPage || null;
+    if (!documentPage) {
+        redirect(
+            UpdateUrl(
+                searchParams ? searchParams : {},
+                [{ key: "documentPage", value: "1" }],
+                "/dashboard"
+            )
+        );
+    }
+    const start = documentPage
+        ? (parseInt(documentPage as string) - 1) * maxDocuments
+        : 0;
+    const end = documentPage ? start + maxDocuments : maxDocuments;
+    const paginatedDocuments =
+        documents && documents.length > 0
+            ? documents
+                  .sort(
+                      (a, b) =>
+                          new Date(b.updatedAt).getTime() -
+                          new Date(a.updatedAt).getTime()
+                  )
+                  .slice(start, end)
+            : [];
+    const pages = Array.from(
+        { length: Math.ceil(documents.length / maxDocuments) },
+        (_, i) => i + 1
     );
-
-    const handleNextPage = () => {
-        if (indexOfLastDocument < documents.length) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
-
-    const handlePreviousPage = () => {
-        if (indexOfFirstDocument > 0) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
-
-    const handleFirstPage = () => {
-        setCurrentPage(1);
-    };
-
-    const handleLastPage = () => {
-        setCurrentPage(Math.ceil(documents.length / documentsPerPage));
-    };
+    const nextPage = parseInt(documentPage as string) + 1;
+    const prevPage = parseInt(documentPage as string) - 1;
 
     return (
-        <>
+        <section className={styles.container}>
             <section className={styles.resumesContainer}>
-                {currentDocuments.map((doc: any) => {
+                {paginatedDocuments.map((doc: any) => {
                     // update the resume object to include a 'currentPage' field set to 1
                     doc.currentPage = 1;
                     const templates =
@@ -62,58 +63,105 @@ const DocumentCardDisplay = ({ documents, type }: DocumentCardDisplayProps) => {
                             ? getAllResumeTemplates(doc, false)
                             : getAllCoverLetterTemplates(doc, false);
                     return (
-                        <section className={styles.resumeCard} key={doc.id}>
-                            <div className={styles.resumeContainer}>
-                                <div className={styles.resume}>
-                                    {
-                                        templates[
-                                            doc.information
-                                                .template as keyof typeof templates
-                                        ]?.previewComponent
-                                    }
-                                </div>
-                            </div>
-                            <div className={styles.resumeInfoContainer}>
-                                <div className={styles.resumeInfo}>
-                                    <p className={styles.title}>
-                                        {doc.information.documentName}
-                                    </p>
-                                    <p className={styles.date}>
-                                        {formatDateMonthDayYear(doc.updatedAt)}
-                                    </p>
-                                </div>
-                            </div>
-                        </section>
+                        <DocumentCard
+                            key={doc.id}
+                            templates={templates}
+                            doc={doc}
+                            type={type}
+                        />
                     );
                 })}
             </section>
-            <section className={styles.paginationContainer}>
-                <button
-                    className={styles.paginationButton}
-                    onClick={handleFirstPage}
-                >
-                    First
-                </button>
-                <button
-                    className={styles.paginationButton}
-                    onClick={handlePreviousPage}
-                >
-                    Previous
-                </button>
-                <button
-                    className={styles.paginationButton}
-                    onClick={handleNextPage}
-                >
-                    Next
-                </button>
-                <button
-                    className={styles.paginationButton}
-                    onClick={handleLastPage}
-                >
-                    Last
-                </button>
-            </section>
-        </>
+            {pages.length > 1 && (
+                <section className={styles.paginationContainer}>
+                    <Link
+                        href={UpdateUrl(
+                            searchParams ? searchParams : {},
+                            [{ key: "documentPage", value: "1" }],
+                            "/dashboard"
+                        )}
+                        className={styles.longButton}
+                    >
+                        First
+                    </Link>
+                    <Link
+                        href={UpdateUrl(
+                            searchParams ? searchParams : {},
+                            [
+                                {
+                                    key: "documentPage",
+                                    value: (prevPage > 0
+                                        ? prevPage
+                                        : pages.length
+                                    ).toString(),
+                                },
+                            ],
+                            "/dashboard"
+                        )}
+                        className={styles.button}
+                    >
+                        <div className={styles.iconContainer}>
+                            {previousIcon}
+                        </div>
+                    </Link>
+                    {pages.map((page: number) => (
+                        <Link
+                            key={page}
+                            href={UpdateUrl(
+                                searchParams ? searchParams : {},
+                                [
+                                    {
+                                        key: "documentPage",
+                                        value: page.toString(),
+                                    },
+                                ],
+                                "/dashboard"
+                            )}
+                            className={`${
+                                parseInt(documentPage as string) === page
+                                    ? styles.active
+                                    : styles.buttonNumber
+                            }`}
+                        >
+                            {page}
+                        </Link>
+                    ))}
+                    <Link
+                        href={UpdateUrl(
+                            searchParams ? searchParams : {},
+                            [
+                                {
+                                    key: "documentPage",
+                                    value: (nextPage <= pages.length
+                                        ? nextPage
+                                        : 1
+                                    ).toString(),
+                                },
+                            ],
+                            "/dashboard"
+                        )}
+                        className={styles.button}
+                    >
+                        <div className={styles.iconContainer}>{nextIcon}</div>
+                    </Link>
+                    <Link
+                        href={UpdateUrl(
+                            searchParams ? searchParams : {},
+                            [
+                                {
+                                    key: "documentPage",
+                                    value: pages.length.toString(),
+                                },
+                            ],
+                            "/dashboard"
+                        )}
+                        className={styles.longButton}
+                    >
+                        Last
+                    </Link>
+                </section>
+            )}
+        </section>
     );
 };
 

@@ -70,14 +70,12 @@
 .textTouch {
     font-size: var(--font-size-xlarge);
     color: rgb(var(--dashboard-accent-color-contrast-rgb));
-    font-weight: bold;
     text-align: center;
 }
 
 .numberTextTouch {
     font-size: var(--font-size-x2large);
     color: rgb(var(--dashboard-accent-color-contrast-rgb));
-    font-weight: bold;
     text-align: center;
 }
 
@@ -119,14 +117,12 @@
     .text {
         font-size: var(--font-size-xlarge);
         color: rgb(var(--dashboard-accent-color-contrast-rgb));
-        font-weight: bold;
         text-align: center;
     }
 
     .numberText {
         font-size: var(--font-size-x2large);
         color: rgb(var(--dashboard-accent-color-contrast-rgb));
-        font-weight: bold;
         text-align: center;
     }
 }

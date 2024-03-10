@@ -37,6 +37,7 @@ const CoverLetters = async ({
                 {addCoverLetterButton}
                 {coverLetters && (
                     <DocumentCardDisplay
+                        searchParams={searchParams}
                         documents={coverLetters}
                         type="cover-letter"
                     />

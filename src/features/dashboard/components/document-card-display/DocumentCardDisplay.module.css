@@ -1,60 +1,153 @@
-.resumesContainer {
+.container {
     width: 100%;
-}
-
-.resumeContainer {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-block-start: 20px;
-    position: relative;
-    width: 100%;
-    height: 8rem;
-    overflow: hidden;
+    gap: var(--padding-block-medium);
+    padding-block: var(--padding-block-medium);
 }
 
-.resumeCard {
-    width: min(15rem, 100%);
-    height: 100%;
-    background-color: rgba(235, 235, 235, 0.623);
-    position: relative;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+.resumesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: var(--gap-large); /* Adjust as needed */
+    width: 100%; /* Set a maximum width if necessary */
+    margin: 0 auto; /* Center the grid horizontally */
 }
 
-.resumeInfoContainer {
+.paginationContainer {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-inline-small);
+}
+
+.button {
+    font-size: var(--font-size-small);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    padding: var(--padding-block-medium);
+}
+
+.buttonNumber {
+    font-size: var(--font-size-small);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    padding: var(--padding-block-medium);
+    color: rgb(var(--dashboard-text-color-rgb));
+    background-color: rgb(var(--dashboard-background-contrast-color-rgb));
+}
+
+.longButton {
+    font-size: var(--font-size-small);
+    font-weight: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 20px;
+    padding: var(--padding-block-medium);
+}
+
+.iconContainer {
+    width: 20px;
+    height: 20px;
+}
+
+.button svg {
+    stroke: rgb(158, 158, 158);
+    fill: rgb(158, 158, 158);
+    width: 20px;
+    height: 20px;
+    stroke-width: 0.1;
+}
+
+.active {
+    font-size: var(--font-size-small);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    padding: var(--padding-block-medium);
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+}
+
+.empty {
+    display: flex;
     justify-content: flex-start;
-    align-items: space-between;
-    position: relative;
+    align-items: center;
     width: 100%;
-    height: 33%;
-    background-color: white;
-    padding-inline: var(--padding-inline-small);
+    gap: var(--padding-block-small);
 }
 
-.resumeInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    height: 100%;
-}
-
-.resume {
-    aspect-ratio: 8.5 / 11;
-    width: 80%;
-    border: 1px solid rgb(229, 229, 229);
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-}
-
-.title {
+.empty p {
     font-size: var(--font-size-small);
-    font-weight: bold;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
-.date {
-    font-size: var(--font-size-small);
-    color: var(--color-grey);
+@media screen and (hover: hover) {
+    .active:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+        color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    }
+
+    .button:hover svg {
+        stroke: rgb(var(--dashboard-accent-color-rgb));
+        fill: rgb(var(--dashboard-accent-color-rgb));
+    }
+
+    .longButton:hover {
+        color: rgb(var(--dashboard-accent-color-rgb));
+    }
+
+    .buttonNumber:hover {
+        background-color: rgb(
+            var(--dashboard-background-contrast-color-rgb),
+            0.5
+        );
+    }
+}
+
+@media screen and (max-width: 564px) {
+    .label {
+        font-size: var(--font-size-xsmall);
+    }
+    .value {
+        font-size: var(--font-size-xsmall);
+    }
+    .statusContainer {
+        gap: 0.2rem;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .item {
+        flex-direction: column;
+        gap: var(--padding-block-medium);
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .itemContainer p {
+        font-size: var(--font-size-medium);
+    }
+    .column {
+        gap: var(--padding-block-xsmall);
+    }
+    .longButton {
+        display: none;
+    }
+    .buttonNumber {
+        display: none;
+    }
 }

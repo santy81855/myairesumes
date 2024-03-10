@@ -13,6 +13,7 @@ export { default as Plan } from "./components/account/plan-details/Plan";
 export { default as Bill } from "./components/account/bill/Bill";
 export { default as Upgrade } from "./components/account/upgrade/Upgrade";
 export { default as Payments } from "./components/account/payments/Payments";
+export { default as DocumentCard } from "./components/document-card/DocumentCard";
 export { addUserWorkInfo as addUserWorkInfoAction } from "./actions/dashboard";
 export { updateUserWorkInfo as updateUserWorkInfoAction } from "./actions/dashboard";
 export { removeUserWorkInfo as removeUserWorkInfoAction } from "./actions/dashboard";

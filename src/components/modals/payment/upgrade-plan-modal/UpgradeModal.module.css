@@ -11,12 +11,12 @@
 .iconContainer {
     width: 8rem;
     height: 8rem;
-    fill: #a183cf;
+    fill: rgb(var(--dashboard-accent-color-rgb));
 }
 
 .title {
     font-size: var(--font-size-xlarge);
-    color: #a183cf;
+    color: rgb(var(--dashboard-accent-color-rgb));
     margin-block-start: var(--padding-block-small);
 }
 
@@ -45,7 +45,7 @@
 .checkIconContainer {
     width: 20px;
     height: 20px;
-    fill: #a183cf;
+    fill: rgb(var(--dashboard-accent-color-rgb));
     stroke-width: 0.2;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .subTitle span {
-    color: #a183cf;
+    color: rgb(var(--dashboard-accent-color-rgb));
     font-weight: 700;
     text-decoration: underline;
 }
@@ -71,7 +71,7 @@
 
 .button {
     width: 100%;
-    background-color: #a183cf;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
     color: white;
     border-radius: var(--border-radius-small);
     height: 40px;
@@ -81,10 +81,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: var(--font-size-small);
 }
 
 .button:hover {
-    background-color: #8a6fbf;
+    background-color: rgb(var(--dashboard-accent-color-hover-rgb));
 }
 
 .cancelButton {
@@ -99,6 +100,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: var(--font-size-small);
 }
 
 .cancelButton:hover {
@@ -115,7 +117,7 @@
 
 .continueText {
     font-weight: 600;
-    color: #a183cf;
+    color: rgb(var(--dashboard-accent-color-rgb));
 }
 
 .cancelText {
