@@ -58,7 +58,7 @@ const Page = async ({
             <section className={styles.rightSideContainer}>
                 <Navbar
                     style={{
-                        backgroundColor: "#f4e9ff",
+                        backgroundColor: "white",
                         color: "black",
                     }}
                 />
@@ -66,12 +66,12 @@ const Page = async ({
                     <p
                         className={`${styles.topHeading} ${styles.largeHeading}`}
                     >
-                        DASH
+                        {currentUser?.firstName}
                     </p>
                     <p
                         className={`${styles.bottomHeading} ${styles.largeHeading}`}
                     >
-                        BOARD
+                        {currentUser?.lastName}
                     </p>
                     <TitleSection currentUser={currentUser} />
                     {menuSection === "profile" && (

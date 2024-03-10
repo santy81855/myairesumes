@@ -15,7 +15,7 @@ const Card = ({ children, gridArea, title }: CardProps) => {
             <section className={styles.titleRow}>
                 <p className={styles.title}>{title}</p>
             </section>
-            {children}
+            <section className={styles.childrenContainer}>{children}</section>
         </form>
     );
 };

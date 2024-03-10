@@ -9,51 +9,12 @@
     gap: var(--padding-block-medium);
 }
 
-.profileImage {
-    width: 100%;
-    max-width: 130px;
-    aspect-ratio: 1/1;
-    position: relative;
-    z-index: 1;
-    opacity: 0.8;
-    border-radius: 50%;
-}
-
-.image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 50%;
-    background-color: rgb(242, 242, 242);
-}
-
 .label {
     font-size: var(--font-size-small);
     z-index: 1;
     width: 100%;
     text-align: left;
-    color: #797979;
-}
-
-.nameInfo {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: var(--padding-block-small);
-}
-
-.nameLabel {
-    text-align: center;
-}
-
-.name {
-    font-size: var(--font-size-medium);
-    font-weight: 600;
-    z-index: 1;
-    max-width: 20ch;
-    text-align: center;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .contactInfo {
@@ -63,7 +24,6 @@
     justify-content: flex-start;
     align-items: center;
     text-align: left;
-    margin-block-start: var(--padding-block-small);
     gap: var(--padding-block-small);
 }
 
@@ -73,7 +33,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 0.4rem;
+    gap: var(--gap-small);
 }
 
 .item {
@@ -82,71 +42,38 @@
     z-index: 1;
     width: 100%;
     height: 30px;
-    background-color: rgb(242, 242, 242);
+    background-color: rgb(var(--dashboard-background-color-rgb));
     border-radius: var(--border-radius-xsmall);
     padding-block: var(--padding-block-small);
     padding-inline-start: var(--padding-block-small);
-}
-
-.profileImagecontainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--padding-block-medium);
-    z-index: 1;
-    border-radius: var(--border-radius-xsmall);
-    padding-block: var(--padding-block-medium);
-    position: relative;
-}
-
-.nameInputContainer {
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--padding-block-small);
-}
-
-.nameInput {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--padding-block-small);
 }
 
 .input {
     width: 100%;
     height: 30px;
     border: 1px solid #e1e1e1;
-
     padding-inline-start: var(--padding-block-small);
     font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .input:focus {
     outline: none;
-    border: 1px solid #a183cf;
+    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
 }
 
 .submitButton {
     width: 100%;
-    background-color: #a183cf;
-    color: white;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    border-radius: var(--border-radius-xsmall);
     min-height: 40px;
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.submitButton:hover {
-    background-color: #8a6fbf;
+    font-size: var(--font-size-small);
 }
 
 .buttonContainer {
@@ -159,18 +86,27 @@
 
 .cancelButton {
     width: 100%;
-    background-color: #eaeaea;
-    color: rgb(22, 22, 22);
+    background-color: rgb(var(--dashboard-background-color-rgb));
+    color: rgb(var(--dashboard-text-color-rgb));
     height: 40px;
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: var(--border-radius-xsmall);
+    font-size: var(--font-size-small);
 }
 
-.cancelButton:hover {
-    background-color: #ffbcbc;
+/*add media query for hoverable devices */
+@media (hover: hover) {
+    .submitButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+
+    .cancelButton:hover {
+        background-color: rgb(var(--dashboard-background-color-rgb), 0.5);
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -204,9 +140,5 @@
 @media screen and (max-width: 500px) {
     .item {
         font-size: var(--font-size-small);
-    }
-    .profileSection {
-        padding-inline: var(--padding-block-medium);
-        padding-block: var(--padding-block-medium);
     }
 }

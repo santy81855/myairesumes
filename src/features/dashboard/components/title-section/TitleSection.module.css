@@ -9,16 +9,19 @@
 }
 
 .pageHeading {
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-xlarge);
     font-weight: bold;
     width: 100%;
     text-align: left;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .subHeading {
     font-size: var(--font-size-small);
     width: 100%;
     text-align: left;
+    color: rgb(var(--dashboard-accent-color-rgb));
+    font-weight: bold;
 }
 
 .cardContainer {
