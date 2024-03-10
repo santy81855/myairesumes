@@ -14,7 +14,7 @@
 }
 
 .logo svg {
-    fill: #a36bff;
+    fill: rgb(var(--dashboard-accent-color-rgb));
 }
 
 .buttonContainer {
@@ -37,39 +37,26 @@
     padding-inline: var(--padding-inline-medium);
     align-items: center;
     gap: var(--padding-inline-small);
-    color: black;
-}
-
-.menuItem:hover {
-    background-color: #f5f5f5;
-}
-
-.menuItem svg:hover {
-    stroke: #a36bff;
-    transform: scale(1.05);
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .menuItem svg {
     width: 1.5rem;
     height: 1.5rem;
     fill: transparent;
-    stroke: #989898;
+    stroke: rgb(var(--dashboard-text-color-rgb));
     stroke-width: 1;
 }
 
 .active {
-    color: #a36bff;
+    color: rgb(var(--dashboard-accent-color-rgb));
 }
 
 .active svg {
-    stroke: #a36bff;
+    stroke: rgb(var(--dashboard-accent-color-rgb));
 }
 
 .logoutButton svg {
-    stroke: rgb(255, 167, 167);
-}
-
-.logoutButton svg:hover {
     stroke: rgb(255, 167, 167);
 }
 
@@ -86,7 +73,7 @@
 .openMenuButton {
     width: 4rem;
     height: 4rem;
-    background-color: #a36bff;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
     border: none;
     border-radius: 50%;
     position: absolute;
@@ -103,11 +90,30 @@
 .openMenuButton svg {
     width: 2rem;
     height: 2rem;
-    fill: white;
+    fill: rgb(var(--dashboard-accent-color-contrast-rgb));
 }
 
-.openMenuButton:hover {
-    background-color: #8e5ff7;
+@media screen and (hover: hover) {
+    .openMenuButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+
+    .logoutButton:hover svg {
+        stroke: rgb(255, 167, 167);
+    }
+
+    .menuItem:hover {
+        background-color: rgb(
+            var(--dashboard-accent-color-contrast-hover-rgb),
+            0.5
+        );
+        color: rgb(var(--dashboard-accent-color-rgb));
+    }
+
+    .menuItem:hover svg {
+        stroke: rgb(var(--dashboard-accent-color-rgb));
+        transform: scale(1.05);
+    }
 }
 
 @media screen and (max-width: 450px) {

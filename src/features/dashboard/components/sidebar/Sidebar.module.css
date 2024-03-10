@@ -7,9 +7,9 @@
     width: 25%;
     background: linear-gradient(
         180deg,
-        #ca58ff 0%,
-        #7288ff 54%,
-        rgba(202, 88, 255, 0.575) 100%
+        rgb(var(--dashboard-accent-color-hover-rgb)) 0%,
+        rgb(var(--dashboard-accent-color-rgb)) 54%,
+        rgb(var(--dashboard-accent-color-rgb)) 100%
     );
     /* box shadow for a left sidebar */
     box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8),
