@@ -4,9 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import {
-    jobIcon,
-    resumeIcon,
-    coverLetterIcon,
+    coloredJobIcon,
+    coloredResumeIcon,
+    coloredCoverLetterIcon,
 } from "@/components/icons/iconSVG";
 
 type CardProps = {
@@ -27,40 +27,74 @@ const Card = ({ title, number, url, gridArea }: CardProps) => {
         </>
     );
     return (
-        <Link
-            href={`/dashboard?menu=${title.toLowerCase().split(" ").join("-")}`}
-            title={title}
-            className={styles.container}
-            style={{
-                gridArea,
-                backgroundImage: `url(${url})`,
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-            }}
+        <section
+            className={styles.cardContainer}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
-            <motion.div className={styles.overlayTouch}>
-                <motion.p className={styles.textTouch}>{title}</motion.p>
-                <motion.p className={styles.numberTextTouch}>{number}</motion.p>
-                {title === "Jobs" && jobIcon}
-                {title === "Resumes" && resumeIcon}
-                {title === "Cover Letters" && coverLetterIcon}
-            </motion.div>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: hover ? 1 : 0 }}
-                transition={{ duration: 0.2 }}
-                className={styles.overlay}
+            <section className={styles.titleTab}>
+                <p className={styles.tabNumber}>{number}</p>
+                <h3 className={styles.tabTitle}>{title}</h3>
+            </section>
+            <Link
+                href={`/dashboard?menu=${title
+                    .toLowerCase()
+                    .split(" ")
+                    .join("-")}`}
+                title={title}
+                className={styles.container}
+                style={{
+                    gridArea,
+                    backgroundImage: `url(${url})`,
+                    backgroundSize: "contain",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                }}
             >
-                <motion.p className={styles.text}>{title}</motion.p>
-                <motion.p className={styles.numberText}>{number}</motion.p>
-                {title === "Jobs" && jobIcon}
-                {title === "Resumes" && resumeIcon}
-                {title === "Cover Letters" && coverLetterIcon}
-            </motion.div>
-        </Link>
+                <motion.div className={styles.overlayTouch}>
+                    {title === "Jobs" && coloredJobIcon}
+                    {title === "Resumes" && coloredResumeIcon}
+                    {title === "Cover Letters" && coloredCoverLetterIcon}
+                </motion.div>
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: hover ? 1 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className={styles.overlay}
+                >
+                    {title === "Jobs" && (
+                        <motion.div
+                            initial={{ y: "200%" }}
+                            animate={{ y: hover ? "100%" : "200%" }}
+                            transition={{ duration: 0.2 }}
+                            className={styles.iconContainer}
+                        >
+                            {coloredJobIcon}
+                        </motion.div>
+                    )}
+                    {title === "Resumes" && (
+                        <motion.div
+                            initial={{ y: "200%" }}
+                            animate={{ y: hover ? "100%" : "200%" }}
+                            transition={{ duration: 0.2 }}
+                            className={styles.iconContainer}
+                        >
+                            {coloredResumeIcon}
+                        </motion.div>
+                    )}
+                    {title === "Cover Letters" && (
+                        <motion.div
+                            initial={{ y: "200%" }}
+                            animate={{ y: hover ? "100%" : "200%" }}
+                            transition={{ duration: 0.2 }}
+                            className={styles.iconContainer}
+                        >
+                            {coloredCoverLetterIcon}
+                        </motion.div>
+                    )}
+                </motion.div>
+            </Link>
+        </section>
     );
 };
 

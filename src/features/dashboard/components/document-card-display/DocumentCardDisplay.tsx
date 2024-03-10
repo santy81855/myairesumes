@@ -49,6 +49,15 @@ const DocumentCardDisplay = ({
         { length: Math.ceil(documents.length / maxDocuments) },
         (_, i) => i + 1
     );
+    if (documentPage && parseInt(documentPage as string) > pages.length) {
+        redirect(
+            UpdateUrl(
+                searchParams ? searchParams : {},
+                [{ key: "documentPage", value: "1" }],
+                "/dashboard"
+            )
+        );
+    }
     const nextPage = parseInt(documentPage as string) + 1;
     const prevPage = parseInt(documentPage as string) - 1;
 

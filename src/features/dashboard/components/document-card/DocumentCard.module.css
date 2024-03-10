@@ -7,9 +7,10 @@
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    border-radius: var(--border-radius-xsmall);
-    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: var(--border-radius-xsmall);
+    border-top-right-radius: var(--border-radius-xsmall);
+    overflow-y: hidden;
 }
 
 .resumeContainer {
@@ -38,8 +39,8 @@
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    margin-block-start: -60%;
-    padding-inline: var(--padding-inline-small);
+    margin-block-start: -70%;
+    padding-inline: var(--padding-inline-medium);
     padding-block: var(--padding-block-small);
     background-color: rgb(255, 255, 255, 1);
     border-top: 1px solid rgb(var(--dashboard-text-color-rgb));
@@ -105,13 +106,44 @@
 }
 
 .date {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-xsmall);
     color: var(--color-grey);
+    width: 100%;
+    text-align: right;
+}
+
+.optionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    gap: var(--padding-block-small);
+    position: relative;
+    background-color: white;
+}
+
+.option {
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+@media screen and (hover: hover) {
+    .option:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
 }
 
 @media screen and (max-width: 768px) {
     .resumeContainer {
-        padding-block-start: var(--padding-block-medium);
         padding-inline: var(--padding-inline-medium);
     }
 }
