@@ -4,7 +4,7 @@ import {
 } from "@/features/editor";
 import styles from "./DocumentCardDisplay.module.css";
 import { UpdateUrl } from "@/lib/updateUrl";
-import { DocumentCard } from "@/features/dashboard";
+import { DocumentCard, JobCard } from "@/features/dashboard";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { nextIcon, previousIcon } from "@/components/icons/iconSVG";
@@ -23,6 +23,7 @@ const DocumentCardDisplay = ({
     const maxDocuments = 10;
     const documentPage = searchParams?.documentPage || null;
     if (!documentPage) {
+        console.log("here");
         redirect(
             UpdateUrl(
                 searchParams ? searchParams : {},
@@ -63,24 +64,35 @@ const DocumentCardDisplay = ({
 
     return (
         <section className={styles.container}>
-            <section className={styles.resumesContainer}>
-                {paginatedDocuments.map((doc: any) => {
-                    // update the resume object to include a 'currentPage' field set to 1
-                    doc.currentPage = 1;
-                    const templates =
-                        type === "resume"
-                            ? getAllResumeTemplates(doc, false)
-                            : getAllCoverLetterTemplates(doc, false);
-                    return (
-                        <DocumentCard
-                            key={doc.id}
-                            templates={templates}
-                            doc={doc}
-                            type={type}
-                        />
-                    );
-                })}
-            </section>
+            {type === "job" ? (
+                <section className={styles.resumesContainer}>
+                    {paginatedDocuments.map((doc: any) => {
+                        if (doc.resume) {
+                            doc.resume.currentPage = 1;
+                        }
+                        return <JobCard key={doc.id} doc={doc} type={type} />;
+                    })}
+                </section>
+            ) : (
+                <section className={styles.resumesContainer}>
+                    {paginatedDocuments.map((doc: any) => {
+                        // update the resume object to include a 'currentPage' field set to 1
+                        doc.currentPage = 1;
+                        const templates =
+                            type === "resume"
+                                ? getAllResumeTemplates(doc, false)
+                                : getAllCoverLetterTemplates(doc, false);
+                        return (
+                            <DocumentCard
+                                key={doc.id}
+                                templates={templates}
+                                doc={doc}
+                                type={type}
+                            />
+                        );
+                    })}
+                </section>
+            )}
             {pages.length > 1 && (
                 <section className={styles.paginationContainer}>
                     <Link

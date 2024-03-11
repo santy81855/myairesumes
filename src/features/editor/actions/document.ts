@@ -8,6 +8,86 @@ import {
     initializeNewCoverLetter,
 } from "@/features/editor";
 
+export const createJob = async (formData: any) => {
+    "use server";
+    try {
+        // get the current user
+        const { user } = await validateRequest();
+        if (!user) {
+            return redirect("/sign-in");
+        }
+        // get the formData information
+        const color = formData.get("color") as string;
+        const companyName = formData.get("companyName") as string;
+        const job = formData.get("job") as string;
+        const resumeName = formData.get("resumeName") as string;
+        const coverLetter = formData.get("coverLetter") as string;
+        const description = formData.get("description") as string;
+
+        // create the job
+        const createdJob = await prisma.job.create({
+            data: {
+                companyName,
+                jobName: job,
+                color,
+                jobDescription: description || "",
+                userId: user.id,
+            },
+        });
+
+        // update the user's numberJobs field to be the current numberJobs + 1
+        await prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: {
+                numberJobs: {
+                    increment: 1,
+                },
+            },
+        });
+
+        // create the resume
+        await prisma.resume.create({
+            data: {
+                information: initializeNewResume(
+                    user,
+                    resumeName,
+                    job,
+                    "Resume for " + job + " application at " + companyName
+                ),
+                userId: user.id,
+                jobId: createdJob.id,
+            },
+        });
+
+        // if the user has a cover letter create the cover letter
+        if (coverLetter === "on" || coverLetter === "true") {
+            await prisma.coverLetter.create({
+                data: {
+                    information: initializeNewCoverLetter(
+                        user,
+                        formData.get("coverLetterName") as string,
+                        job,
+                        "Cover Letter for " +
+                            job +
+                            " application at " +
+                            companyName
+                    ),
+                    userId: user.id,
+                    jobId: createdJob.id,
+                },
+            });
+        }
+
+        revalidateTag("currentUser");
+    } catch (error) {
+        console.log(error);
+        // return an error that will be caught by the catch block
+        throw new Error("An unknown error occurred. Please try again.");
+    }
+};
+
 export const createCoverLetter = async (formData: any) => {
     "use server";
     // get the current user
@@ -166,6 +246,53 @@ export const updateCoverLetter = async (formData: any) => {
     return {
         success: true,
     };
+};
+
+export const deleteJob = async (id: string) => {
+    "use server";
+
+    try {
+        // get the current user
+        const { user } = await validateRequest();
+        if (!user) {
+            return redirect("/sign-in");
+        }
+        // get the user
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: {
+                numberJobs: {
+                    decrement: 1,
+                },
+            },
+        });
+        if (!updatedUser) {
+            return {
+                error: "An unknown error occurred. Please try again.",
+            };
+        }
+        // delete the job
+        const deletedJob = await prisma.job.delete({
+            where: {
+                id,
+            },
+        });
+        if (!deletedJob) {
+            return {
+                error: "An unknown error occurred. Please try again.",
+            };
+        }
+        revalidatePath("/dashboard");
+        return {
+            success: true,
+        };
+    } catch (error) {
+        console.log(error);
+        // return an error that will be caught by the catch block
+        throw new Error("An unknown error occurred. Please try again.");
+    }
 };
 
 export const deleteResume = async (id: string) => {

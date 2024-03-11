@@ -1,45 +1,37 @@
-import styles from "./Resumes.module.css";
+import styles from "./Jobs.module.css";
 import Link from "next/link";
 import { UpdateUrl } from "@/lib/updateUrl";
 import { getAllUserResumes } from "@/features/editor";
 import { DashboardCard, DocumentCardDisplay } from "@/features/dashboard";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 
-type ResumesProps = {
+type JobsProps = {
     currentUser: any;
     searchParams?: { [key: string]: string | string[] | undefined };
     documents: any[];
 };
 
-const Resumes = async ({
-    documents,
-    currentUser,
-    searchParams,
-}: ResumesProps) => {
+const Jobs = async ({ currentUser, searchParams, documents }: JobsProps) => {
     const addResumeButton = (
         <Link
             href={UpdateUrl(
                 searchParams ? searchParams : {},
-                [
-                    { key: "menu", value: "resumes" },
-                    { key: "createResume", value: "true" },
-                ],
+                [{ key: "createJob", value: "true" }],
                 "/dashboard"
             )}
         >
-            Add Resume
+            Add job
         </Link>
     );
     return (
         <main className={styles.container}>
-            <DashboardCard key="resumes-card" title="Resumes">
-                {!documents && <LoadingScreen />}
+            <DashboardCard key="jobs-card" title="Your Jobs">
                 {addResumeButton}
                 {documents.length > 0 && (
                     <DocumentCardDisplay
                         searchParams={searchParams}
                         documents={documents}
-                        type="resume"
+                        type="job"
                     />
                 )}
             </DashboardCard>
@@ -47,4 +39,4 @@ const Resumes = async ({
     );
 };
 
-export default Resumes;
+export default Jobs;

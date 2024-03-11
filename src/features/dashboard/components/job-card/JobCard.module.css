@@ -1,0 +1,175 @@
+.resumeCard {
+    height: 100%;
+    max-width: 400px;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    background: url("/images/dashboard/job-item-background.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: var(--border-radius-xsmall);
+    border-top-right-radius: var(--border-radius-xsmall);
+    overflow-y: hidden;
+}
+
+.resumeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-block-start: var(--padding-block-large);
+    padding-inline: var(--padding-inline-large);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    backdrop-filter: blur(3px);
+    position: relative;
+    cursor: default;
+}
+
+.resume {
+    aspect-ratio: 8.5 / 11;
+    width: 100%;
+    box-shadow: 0px 0px 10px 0px rgba(138, 138, 138, 0.8);
+    z-index: 2;
+}
+
+.left {
+    margin-left: -110%;
+    aspect-ratio: 8.5 / 11;
+    width: 100%;
+    box-shadow: 0px 0px 10px 0px rgba(138, 138, 138, 0.8);
+    z-index: 2;
+}
+
+.right {
+    position: absolute;
+    top: var(--padding-block-large);
+    left: 55%;
+    aspect-ratio: 8.5 / 11;
+    width: calc(100% - var(--padding-inline-large) * 2);
+    box-shadow: 0px 0px 10px 0px rgba(138, 138, 138, 0.8);
+    z-index: 2;
+}
+
+.resumeInfoContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    padding-inline: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+    background-color: rgb(255, 255, 255, 1);
+}
+
+.colorBar {
+    width: 100%;
+    height: 1.5rem;
+    position: relative;
+    margin-block-start: -70%;
+}
+
+.resumeInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
+}
+
+.textItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.label {
+    font-size: var(--font-size-xsmall);
+    font-weight: bold;
+    color: rgb(var(--dashboard-text-color-rgb));
+}
+
+.title {
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.description {
+    color: rgb(var(--dashboard-text-color-rgb));
+    font-size: var(--font-size-small);
+    display: -webkit-box;
+    height: calc(var(--font-size-small) * 3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    width: 100%;
+    position: relative;
+}
+
+.description::after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70%;
+    height: 1.2em;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 1) 50%
+    );
+}
+
+.date {
+    font-size: var(--font-size-xsmall);
+    color: var(--color-grey);
+    width: 100%;
+    text-align: right;
+}
+
+.optionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    gap: var(--padding-block-small);
+    position: relative;
+    background-color: white;
+}
+
+.option {
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+@media screen and (hover: hover) {
+    .option:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .resumeContainer {
+        padding-inline: var(--padding-inline-medium);
+    }
+}

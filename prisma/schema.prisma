@@ -34,6 +34,7 @@ model User {
     subscription       Subscription?
     resume             Resume[]
     coverLetter        CoverLetter[]
+    job                Job[]
 }
 
 model Session {
@@ -88,26 +89,42 @@ model Subscription {
     userId               String   @unique
 }
 
-// model Job {
-//     id          String   @id @unique @default(cuid())
-//     userId      String
+model Job {
+    id             String       @id @unique @default(cuid())
+    userId         String
+    companyName    String
+    jobName        String
+    color          String
+    hasApplied     Boolean      @default(false)
+    jobDescription String?
+    createdAt      DateTime     @default(now())
+    updatedAt      DateTime     @updatedAt
+    user           User         @relation(references: [id], fields: [userId], onDelete: Cascade)
+    resume         Resume?
+    coverLetter    CoverLetter?
 
-//     information Json
-//     createdAt   DateTime @default(now())
-//     updatedAt   DateTime @updatedAt
-//     user        User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+    @@index([userId])
+}
 
-//     @@index([userId])
-
-// }
+// const job = await prisma.job.findUnique({
+//   where: {
+//     id: jobId, // Replace with the actual job ID you want to fetch
+//   },
+//   include: {
+//     resume: true,
+//     coverLetter: true,
+//   },
+// });
 
 model Resume {
     id          String   @id @unique @default(cuid())
     userId      String
+    jobId       String?  @unique
     information Json
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     user        User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+    job         Job?     @relation(references: [id], fields: [jobId], onDelete: Cascade)
 
     @@index([userId])
 }
@@ -115,10 +132,12 @@ model Resume {
 model CoverLetter {
     id          String   @id @unique @default(cuid())
     userId      String
+    jobId       String?  @unique
     information Json
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     user        User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+    job         Job?     @relation(references: [id], fields: [jobId], onDelete: Cascade)
 
     @@index([userId])
 }

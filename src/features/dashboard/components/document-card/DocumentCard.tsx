@@ -47,7 +47,7 @@ const DocumentCard = ({ templates, doc, type }: DocumentCardProps) => {
                 <motion.div
                     className={styles.resume}
                     initial={{ y: 0 }}
-                    animate={{ y: hover ? "-5%" : 0 }}
+                    animate={{ y: hover ? "-3%" : 0 }}
                     transition={{ duration: 0.2 }}
                 >
                     {

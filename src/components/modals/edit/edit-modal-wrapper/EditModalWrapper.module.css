@@ -210,6 +210,7 @@
     font-size: var(--font-size-small);
     /*it is a text area, make sure it has at least 5 lines of height*/
     min-height: 8rem;
+    resize: vertical;
 }
 
 .closingTextArea {
@@ -223,6 +224,7 @@
     font-size: var(--font-size-small);
     /*it is a text area, make sure it has at least 5 lines of height*/
     min-height: 4rem;
+    resize: vertical;
 }
 
 .closingTextArea:focus {

@@ -5112,6 +5112,7 @@ export default function EditModalWrapper({
     sectionId: string;
 }) {
     const [isLoading, setIsLoading] = useState(false);
+    
     const closeClicked = (event: any) => {
         if (event.target.id !== "modalContainer") return;
         const newUrl = window.location.href.split("?")[0]; // Remove search parameters

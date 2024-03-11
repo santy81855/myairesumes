@@ -12,8 +12,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: var(--gap-large); /* Adjust as needed */
-    width: 100%; /* Set a maximum width if necessary */
+    width: 100%;
     margin: 0 auto; /* Center the grid horizontally */
+    position: relative;
 }
 
 .paginationContainer {
