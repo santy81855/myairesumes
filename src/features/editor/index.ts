@@ -49,6 +49,7 @@ export {
 export { getPrompt } from "./lib/ai";
 export { createResume as createResumeAction } from "./actions/document";
 export { updateResume as updateResumeAction } from "./actions/document";
+export { updateJob as updateJobAction } from "./actions/document";
 export { createJob as createJobAction } from "./actions/document";
 export { createCoverLetter as createCoverLetterAction } from "./actions/document";
 export { updateCoverLetter as updateCoverLetterAction } from "./actions/document";

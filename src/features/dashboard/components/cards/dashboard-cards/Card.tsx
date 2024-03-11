@@ -15,7 +15,12 @@ const Card = ({ children, gridArea, title }: CardProps) => {
             <section className={styles.titleRow}>
                 <p className={styles.title}>{title}</p>
             </section>
-            <section className={styles.childrenContainer}>{children}</section>
+            <section
+                className={styles.childrenContainer}
+                style={title === "Manage Job" ? { padding: 0 } : {}}
+            >
+                {children}
+            </section>
         </form>
     );
 };

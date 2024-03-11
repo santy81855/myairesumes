@@ -13,12 +13,14 @@ type DocumentCardDisplayProps = {
     documents: any[];
     type: string;
     searchParams?: { [key: string]: string | string[] | undefined };
+    setJob: (job: any) => void;
 };
 
 const DocumentCardDisplay = ({
     searchParams,
     documents,
     type,
+    setJob,
 }: DocumentCardDisplayProps) => {
     const maxDocuments = 10;
     const documentPage = searchParams?.documentPage || null;
@@ -70,7 +72,14 @@ const DocumentCardDisplay = ({
                         if (doc.resume) {
                             doc.resume.currentPage = 1;
                         }
-                        return <JobCard key={doc.id} doc={doc} type={type} />;
+                        return (
+                            <JobCard
+                                key={doc.id}
+                                doc={doc}
+                                type={type}
+                                setJob={setJob}
+                            />
+                        );
                     })}
                 </section>
             ) : (

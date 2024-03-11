@@ -188,6 +188,34 @@ export const createResume = async (formData: any) => {
     return redirect(`/editor/resume/${resume.id}`);
 };
 
+export const updateJob = async (jobId: string, data: any) => {
+    "use server";
+    try {
+        // get the current user
+        const { user } = await validateRequest();
+        if (!user) {
+            return redirect("/sign-in");
+        }
+        // update the job
+        const updatedJob = await prisma.job.update({
+            where: {
+                id: jobId,
+            },
+            data,
+        });
+
+        revalidatePath("/dashboard");
+
+        return {
+            success: true,
+        };
+    } catch (error) {
+        console.log(error);
+        // return an error that will be caught by the catch block
+        throw new Error("An unknown error occurred. Please try again.");
+    }
+};
+
 export const updateResume = async (formData: any) => {
     "use server";
     // get the current user

@@ -11,9 +11,10 @@ import {
 type JobCardProps = {
     doc: any;
     type: string;
+    setJob: (job: any) => void;
 };
 
-const JobCard = ({ doc, type }: JobCardProps) => {
+const JobCard = ({ doc, type, setJob }: JobCardProps) => {
     const [hover, setHover] = useState(false);
 
     const getUpdatedTime = (doc: any) => {
@@ -121,15 +122,15 @@ const JobCard = ({ doc, type }: JobCardProps) => {
             </div>
 
             <section className={styles.optionContainer}>
-                <a
+                <button
+                    title="Manage Job"
                     className={styles.option}
-                    title={`Edit ${
-                        type === "resume" ? "Resume" : "Cover Letter"
-                    }`}
-                    href={`/editor/${type}/${doc.id}`}
+                    onClick={() => {
+                        setJob(doc);
+                    }}
                 >
                     Manage
-                </a>
+                </button>
                 <p
                     title={formatDateMonthDayYear(doc.updatedAt)}
                     className={styles.date}

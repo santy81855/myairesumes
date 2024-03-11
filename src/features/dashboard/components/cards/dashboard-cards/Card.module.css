@@ -11,6 +11,7 @@
     position: relative;
     border-radius: var(--border-radius-xsmall);
     z-index: 1;
+    max-width: 1200px;
 }
 
 .childrenContainer {

@@ -1,3 +1,111 @@
 .container {
     width: 100%;
 }
+
+.manageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    gap: var(--padding-block-medium);
+    padding-inline: var(--padding-inline-medium);
+    padding-block: var(--padding-block-medium);
+}
+
+.titleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--padding-block-medium);
+
+    background-color: rgb(var(--dashboard-background-color-rgb));
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-inline-medium);
+    border-radius: var(--border-radius-xsmall);
+}
+
+.labelItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    gap: calc(var(--padding-block-small) / 2);
+}
+
+.label {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--dashboard-text-color-rgb));
+}
+
+.jobTitle {
+    font-size: var(--font-size-medium);
+    color: rgb(var(--dashboard-text-color-rgb));
+    text-align: left;
+    width: 100%;
+}
+
+.jobName {
+    font-size: var(--font-size-medium);
+    color: rgb(var(--dashboard-text-color-rgb));
+    text-align: left;
+    width: 100%;
+}
+
+.documentSection {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: var(--padding-block-large);
+}
+
+.resumesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: var(--gap-large); /* Adjust as needed */
+    width: 100%;
+    margin: 0 auto; /* Center the grid horizontally */
+    position: relative;
+}
+
+.document {
+    aspect-ratio: 8.5 / 11;
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.377);
+    border-radius: var(--border-radius-xsmall);
+    z-index: 2;
+}
+
+.backButton {
+    align-self: flex-start;
+    background-color: transparent;
+    color: rgb(var(--dashboard-accent-color-rgb));
+    border: none;
+    font-size: var(--font-size-small);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.backButton svg {
+    width: 20px;
+    height: 20px;
+    stroke: rgb(var(--dashboard-accent-color-rgb));
+}
+
+@media screen and (hover: hover) {
+    .backButton:hover {
+        color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+    .backButton:hover svg {
+        stroke: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+}

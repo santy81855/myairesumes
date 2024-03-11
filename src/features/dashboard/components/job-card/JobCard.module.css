@@ -7,7 +7,7 @@
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     border-top-left-radius: var(--border-radius-xsmall);
     border-top-right-radius: var(--border-radius-xsmall);
     overflow-y: hidden;
@@ -160,6 +160,7 @@
     color: rgb(var(--dashboard-accent-color-contrast-rgb));
     border-radius: var(--border-radius);
     cursor: pointer;
+    border: none;
 }
 
 @media screen and (hover: hover) {
