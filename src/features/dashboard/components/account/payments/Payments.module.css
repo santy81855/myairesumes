@@ -19,19 +19,6 @@
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 }
 
-/*
-.item::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: -50%;
-    width: 200%;
-    height: 100%;
-    background-color: inherit;
-    z-index: -1;
-}
-*/
-
 .column {
     display: flex;
     flex-direction: column;
@@ -42,6 +29,7 @@
 
 .label {
     font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-accent-color-rgb));
 }
 
 .statusContainer {
@@ -60,6 +48,7 @@
 .value {
     font-size: var(--font-size-small);
     font-weight: 700;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .paginationContainer {
@@ -88,10 +77,8 @@
     width: 20px;
     height: 20px;
     padding: var(--padding-block-medium);
-}
-
-.buttonNumber:hover {
-    background-color: #d299ff;
+    color: rgb(var(--dashboard-text-color-rgb));
+    background-color: rgb(var(--dashboard-background-contrast-color-rgb));
 }
 
 .longButton {
@@ -103,10 +90,6 @@
     width: 40px;
     height: 20px;
     padding: var(--padding-block-medium);
-}
-
-.longButton:hover {
-    color: #d299ff;
 }
 
 .iconContainer {
@@ -122,14 +105,9 @@
     stroke-width: 0.1;
 }
 
-.button svg:hover {
-    stroke: #d299ff;
-    fill: #d299ff;
-}
-
 .active {
-    background-color: #d299ff;
-    color: white;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
 }
 
 .empty {
@@ -142,6 +120,30 @@
 
 .empty p {
     font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
+}
+
+@media screen and (hover: hover) {
+    .active:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+        color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    }
+
+    .button:hover svg {
+        stroke: rgb(var(--dashboard-accent-color-rgb));
+        fill: rgb(var(--dashboard-accent-color-rgb));
+    }
+
+    .longButton:hover {
+        color: rgb(var(--dashboard-accent-color-rgb));
+    }
+
+    .buttonNumber:hover {
+        background-color: rgb(
+            var(--dashboard-background-contrast-color-rgb),
+            0.5
+        );
+    }
 }
 
 @media screen and (max-width: 564px) {
@@ -159,16 +161,17 @@
 @media screen and (max-width: 390px) {
     .item {
         flex-direction: column;
-        gap: var(--padding-block-small);
+        gap: var(--padding-block-medium);
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
     }
     .itemContainer p {
-        width: 100%;
-        text-align: center;
         font-size: var(--font-size-medium);
     }
     .column {
         gap: var(--padding-block-xsmall);
+    }
+    .longButton {
+        display: none;
     }
 }

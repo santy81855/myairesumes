@@ -8,6 +8,100 @@ import {
     initializeNewCoverLetter,
 } from "@/features/editor";
 
+export const createJob = async (formData: any) => {
+    "use server";
+    try {
+        // get the current user
+        const { user } = await validateRequest();
+        if (!user) {
+            return redirect("/sign-in");
+        }
+        // get the formData information
+        const color = formData.get("color") as string;
+        const companyName = formData.get("companyName") as string;
+        const job = formData.get("job") as string;
+        const resumeName = formData.get("resumeName") as string;
+        const coverLetter = formData.get("coverLetter") as string;
+        const description = formData.get("description") as string;
+
+        const information = {
+            jobDescription: description || "",
+            notes: [],
+        };
+
+        // create the job
+        const createdJob = await prisma.job.create({
+            data: {
+                companyName,
+                jobName: job,
+                color,
+                userId: user.id,
+                information,
+            },
+        });
+
+        // create the resume
+        await prisma.resume.create({
+            data: {
+                information: initializeNewResume(
+                    user,
+                    resumeName,
+                    job,
+                    "Resume for " + job + " application at " + companyName
+                ),
+                userId: user.id,
+                jobId: createdJob.id,
+            },
+        });
+
+        // if the user has a cover letter create the cover letter
+        if (coverLetter === "on" || coverLetter === "true") {
+            await prisma.coverLetter.create({
+                data: {
+                    information: initializeNewCoverLetter(
+                        user,
+                        formData.get("coverLetterName") as string,
+                        job,
+                        "Cover Letter for " +
+                            job +
+                            " application at " +
+                            companyName
+                    ),
+                    userId: user.id,
+                    jobId: createdJob.id,
+                },
+            });
+        }
+
+        const updateData = {
+            numberJobs: {
+                increment: 1,
+            },
+            numberResumes: {
+                increment: 1,
+            },
+            numberCoverLetters: {
+                increment:
+                    coverLetter === "on" || coverLetter === "true" ? 1 : 0,
+            },
+        };
+
+        // update the user's numberJobs field to be the current numberJobs + 1
+        await prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: updateData,
+        });
+
+        revalidateTag("currentUser");
+    } catch (error) {
+        console.log(error);
+        // return an error that will be caught by the catch block
+        throw new Error("An unknown error occurred. Please try again.");
+    }
+};
+
 export const createCoverLetter = async (formData: any) => {
     "use server";
     // get the current user
@@ -108,6 +202,35 @@ export const createResume = async (formData: any) => {
     return redirect(`/editor/resume/${resume.id}`);
 };
 
+export const updateJob = async (jobId: string, data: any) => {
+    "use server";
+    try {
+        console.log("here");
+        // get the current user
+        const { user } = await validateRequest();
+        if (!user) {
+            return redirect("/sign-in");
+        }
+        // update the job
+        const updatedJob = await prisma.job.update({
+            where: {
+                id: jobId,
+            },
+            data,
+        });
+
+        revalidatePath("/dashboard");
+
+        return {
+            success: true,
+        };
+    } catch (error) {
+        console.log(error);
+        // return an error that will be caught by the catch block
+        throw new Error("An unknown error occurred. Please try again.");
+    }
+};
+
 export const updateResume = async (formData: any) => {
     "use server";
     // get the current user
@@ -166,6 +289,59 @@ export const updateCoverLetter = async (formData: any) => {
     return {
         success: true,
     };
+};
+
+export const deleteJob = async (id: string) => {
+    "use server";
+
+    try {
+        // get the current user
+        const { user } = await validateRequest();
+        if (!user) {
+            return redirect("/sign-in");
+        }
+
+        // delete the job
+        const deletedJob = await prisma.job.delete({
+            where: {
+                id,
+            },
+            include: {
+                resume: true,
+                coverLetter: true,
+            },
+        });
+
+        revalidatePath("/dashboard");
+
+        const updateData = {
+            numberJobs: {
+                decrement: 1,
+            },
+            numberResumes: {
+                decrement: 1,
+            },
+            numberCoverLetters: {
+                decrement: deletedJob.coverLetter ? 1 : 0,
+            },
+        };
+
+        // get the user
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: updateData,
+        });
+
+        return {
+            success: true,
+        };
+    } catch (error) {
+        console.log("Error in deleteJob action: " + error);
+        // return an error that will be caught by the catch block
+        throw new Error("An unknown error occurred. Please try again.");
+    }
 };
 
 export const deleteResume = async (id: string) => {

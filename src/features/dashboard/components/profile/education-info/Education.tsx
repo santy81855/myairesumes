@@ -56,8 +56,11 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
                         {educationId ? "Edit Degree" : "Add a Degree"}
                     </p>
                     <section className={styles.educationInfo}>
-                        <p className={styles.label}>School Name</p>
+                        <label htmlFor="schoolName" className={styles.label}>
+                            School Name
+                        </label>
                         <input
+                            id="schoolName"
                             type="text"
                             name="schoolName"
                             className={styles.input}
@@ -72,8 +75,14 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
                     </section>
                     <section className={styles.degreeInfoInput}>
                         <section className={styles.educationInfo}>
-                            <p className={styles.label}>Degree Type</p>
+                            <label
+                                htmlFor="degreeType"
+                                className={styles.label}
+                            >
+                                Degree Type
+                            </label>
                             <input
+                                id="degreeType"
                                 type="text"
                                 name="degreeType"
                                 className={styles.input}
@@ -86,8 +95,14 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
                             />
                         </section>
                         <section className={styles.educationInfo}>
-                            <p className={styles.label}>Degree Field</p>
+                            <label
+                                htmlFor="degreeField"
+                                className={styles.label}
+                            >
+                                Degree Field
+                            </label>
                             <input
+                                id="degreeField"
                                 type="text"
                                 name="degreeField"
                                 className={styles.input}
@@ -114,8 +129,11 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
                     </section>
                     <section className={styles.dateInput}>
                         <section className={styles.educationInfo}>
-                            <p className={styles.label}>Start Date</p>
+                            <label htmlFor="startDate" className={styles.label}>
+                                Start Date
+                            </label>
                             <input
+                                id="startDate"
                                 type="date"
                                 name="startDate"
                                 className={styles.input}
@@ -128,8 +146,11 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
                             />
                         </section>
                         <section className={styles.educationInfo}>
-                            <p className={styles.label}>End Date</p>
+                            <label htmlFor="endDate" className={styles.label}>
+                                End Date
+                            </label>
                             <input
+                                id="endDate"
                                 type="date"
                                 name="endDate"
                                 className={styles.input}
@@ -229,6 +250,7 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
                         );
                     })}
                     <Link
+                        title="Add Education"
                         href="/dashboard?menu=profile&addEducation=true"
                         className={styles.addEducationButton}
                     >

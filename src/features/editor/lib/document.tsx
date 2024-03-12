@@ -989,6 +989,23 @@ export const updateDocumentArray = (updatedDocument: any, array: any) => {
     return newDocumentArray;
 };
 
+export const getAllUserJobs = async (userId: string) => {
+    const response = await fetch(
+        `${process.env.APP_DOMAIN}/api/jobs?userId=${userId}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            next: { tags: [userId] },
+        }
+    );
+    if (!response.ok) {
+        return null;
+    }
+    return await response.json();
+};
+
 export const getAllUserResumes = async (userId: string) => {
     const response = await fetch(
         `${process.env.APP_DOMAIN}/api/resumes?userId=${userId}`,
@@ -1090,7 +1107,7 @@ export const initializeNewCoverLetter = (
             baseSectionGap: 11,
             backgroundColor: "#ffffff",
             textColor: "#000000",
-            accentBackgroundColor: "#5B7FC5",
+            accentBackgroundColor: "#b5b357",
             accentTextColor: "white",
         },
         sectionEdit: {
@@ -1124,11 +1141,11 @@ export const initializeNewCoverLetter = (
         documentName: name,
         jobTitle: job,
         description,
-        template: "basic",
+        template: "nova",
         font: "Times-Roman",
         firstName: first,
         lastName: last,
-        sectionOrder: [["headerBasic", "salutation", "body", "closing"]],
+        sectionOrder: [["headerNova", "salutation", "body", "closing"]],
         numPages: 1,
         position: "Example Position",
         date: formattedDate,
@@ -1257,12 +1274,12 @@ export const initializeNewResume = (
     const data = {
         currentPage: 1,
         style: {
-            baseFontSize: 11,
-            baseMarginSize: 11,
-            baseSectionGap: 11,
+            baseFontSize: 12,
+            baseMarginSize: 18,
+            baseSectionGap: 16,
             backgroundColor: "#ffffff",
             textColor: "#000000",
-            accentBackgroundColor: "#5B7FC5",
+            accentBackgroundColor: "#b5b357",
             accentTextColor: "white",
         },
         sectionEdit: {
@@ -1324,13 +1341,13 @@ export const initializeNewResume = (
         documentName: name,
         jobTitle: job,
         description,
-        template: "basic",
+        template: "sharp",
         font: "Times-Roman",
         firstName: first,
         lastName: last,
         sectionOrder: [
             [
-                "headerBasic",
+                "headerSharp",
                 "summary",
                 "experience",
                 "educationDetailed",

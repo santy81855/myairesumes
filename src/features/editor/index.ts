@@ -38,6 +38,7 @@ export {
     getCoverLetter,
     initializeNewResume,
     initializeNewCoverLetter,
+    getAllUserJobs,
     getAllUserResumes,
     getAllUserCoverLetters,
     getAllResumeTemplates,
@@ -48,7 +49,10 @@ export {
 export { getPrompt } from "./lib/ai";
 export { createResume as createResumeAction } from "./actions/document";
 export { updateResume as updateResumeAction } from "./actions/document";
+export { updateJob as updateJobAction } from "./actions/document";
+export { createJob as createJobAction } from "./actions/document";
 export { createCoverLetter as createCoverLetterAction } from "./actions/document";
 export { updateCoverLetter as updateCoverLetterAction } from "./actions/document";
+export { deleteJob as deleteJobAction } from "./actions/document";
 export { deleteResume as deleteResumeAction } from "./actions/document";
 export { deleteCoverLetter as deleteCoverLetterAction } from "./actions/document";

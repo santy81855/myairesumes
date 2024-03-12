@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { useState } from "react";
 import { createSignedUrl, deleteObject } from "@/actions/r2";
+import Card from "@/features/dashboard/components/cards/dashboard-cards/Card";
 
 type ProfilePicProps = {
     currentUser: any;
@@ -102,91 +103,89 @@ const ProfilePic = ({ currentUser }: ProfilePicProps) => {
     };
 
     return (
-        <form
-            className={styles.form}
-            style={edit ? { backgroundColor: "white" } : {}}
-            onSubmit={handleSubmit}
-        >
-            <section className={styles.profileImagecontainer}>
-                {edit ? (
-                    <Upload url={url} setUrl={setUrl} />
-                ) : (
-                    <section className={styles.profileImage}>
-                        <Image
-                            src={url || ""}
-                            alt="profile image"
-                            width={200}
-                            height={200}
-                            className={styles.image}
-                        />
+        <Card title="Name" gridArea="profilePic">
+            <form
+                className={styles.form}
+                style={edit ? { backgroundColor: "white" } : {}}
+                onSubmit={handleSubmit}
+            >
+                <section className={styles.profileImagecontainer}>
+                    {edit ? (
+                        <Upload url={url} setUrl={setUrl} />
+                    ) : (
+                        <section className={styles.profileImage}>
+                            <Image
+                                src={url || ""}
+                                alt="profile image"
+                                width={200}
+                                height={200}
+                                className={styles.image}
+                            />
+                            <Link
+                                href="/dashboard?menu=profile&nameEdit=true"
+                                className={styles.iconContainer}
+                            >
+                                {editIcon}
+                            </Link>
+                        </section>
+                    )}
+                    <section className={styles.nameInfo}>
+                        {edit ? (
+                            <section className={styles.nameInputContainer}>
+                                <section className={styles.nameInput}>
+                                    <p className={styles.label}>first name</p>
+                                    <input
+                                        aria-label="first name"
+                                        type="text"
+                                        name="firstName"
+                                        className={styles.input}
+                                        defaultValue={first}
+                                        autoFocus
+                                        required
+                                    />
+                                </section>
+                                <section className={styles.nameInput}>
+                                    <p className={styles.label}>last name</p>
+                                    <input
+                                        aria-label="last name"
+                                        type="text"
+                                        name="lastName"
+                                        className={styles.input}
+                                        defaultValue={last}
+                                        autoFocus
+                                        required
+                                    />
+                                </section>
+                            </section>
+                        ) : (
+                            <>
+                                <p className={`${styles.label}`}>name</p>
+                                <p className={styles.name}>
+                                    {getSubstringEllipsis(first, 0, 20)}
+                                </p>
+                                <p className={styles.name}>
+                                    {getSubstringEllipsis(last, 0, 20)}
+                                </p>
+                            </>
+                        )}
+                    </section>
+                </section>
+                {edit && (
+                    <section className={styles.buttonContainer}>
                         <Link
-                            href="/dashboard?menu=profile&nameEdit=true"
-                            className={styles.iconContainer}
+                            href="/dashboard?menu=profile"
+                            className={styles.cancelButton}
                         >
-                            {editIcon}
+                            cancel
                         </Link>
+                        <button type="submit" className={styles.submitButton}>
+                            Save
+                        </button>
                     </section>
                 )}
-                <section className={styles.nameInfo}>
-                    {edit ? (
-                        <section className={styles.nameInputContainer}>
-                            <section className={styles.nameInput}>
-                                <p className={styles.label}>first name</p>
-                                <input
-                                    aria-label="first name"
-                                    type="text"
-                                    name="firstName"
-                                    className={styles.input}
-                                    defaultValue={first}
-                                    autoFocus
-                                    required
-                                />
-                            </section>
-                            <section className={styles.nameInput}>
-                                <p className={styles.label}>last name</p>
-                                <input
-                                    aria-label="last name"
-                                    type="text"
-                                    name="lastName"
-                                    className={styles.input}
-                                    defaultValue={last}
-                                    autoFocus
-                                    required
-                                />
-                            </section>
-                        </section>
-                    ) : (
-                        <>
-                            <p
-                                className={`${styles.label} ${styles.nameLabel}`}
-                            >
-                                name
-                            </p>
-                            <p className={styles.name}>
-                                {getSubstringEllipsis(first, 0, 20)}
-                            </p>
-                            <p className={styles.name}>
-                                {getSubstringEllipsis(last, 0, 20)}
-                            </p>
-                        </>
-                    )}
-                </section>
-            </section>
-            {edit && (
-                <section className={styles.buttonContainer}>
-                    <Link
-                        href="/dashboard?menu=profile"
-                        className={styles.cancelButton}
-                    >
-                        cancel
-                    </Link>
-                    <button type="submit" className={styles.submitButton}>
-                        Save
-                    </button>
-                </section>
-            )}
-            {isLoading && <LoadingScreen />}
-        </form>
+                {isLoading && <LoadingScreen />}
+            </form>
+        </Card>
     );
 };
 

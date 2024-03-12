@@ -8,11 +8,14 @@ import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 type ResumesProps = {
     currentUser: any;
     searchParams?: { [key: string]: string | string[] | undefined };
+    documents: any[];
 };
 
-const Resumes = async ({ currentUser, searchParams }: ResumesProps) => {
-    const resumes = await getAllUserResumes(currentUser.id);
-
+const Resumes = async ({
+    documents,
+    currentUser,
+    searchParams,
+}: ResumesProps) => {
     const addResumeButton = (
         <Link
             href={UpdateUrl(
@@ -30,10 +33,14 @@ const Resumes = async ({ currentUser, searchParams }: ResumesProps) => {
     return (
         <main className={styles.container}>
             <DashboardCard key="resumes-card" title="Resumes">
-                {!resumes && <LoadingScreen />}
+                {!documents && <LoadingScreen />}
                 {addResumeButton}
-                {resumes && (
-                    <DocumentCardDisplay documents={resumes} type="resume" />
+                {documents.length > 0 && (
+                    <DocumentCardDisplay
+                        searchParams={searchParams}
+                        documents={documents}
+                        type="resume"
+                    />
                 )}
             </DashboardCard>
         </main>

@@ -8,14 +8,14 @@ import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 type CoverLetterProps = {
     currentUser: any;
     searchParams?: { [key: string]: string | string[] | undefined };
+    documents: any[];
 };
 
 const CoverLetters = async ({
     currentUser,
     searchParams,
+    documents,
 }: CoverLetterProps) => {
-    const coverLetters = await getAllUserCoverLetters(currentUser.id);
-
     const addCoverLetterButton = (
         <Link
             href={UpdateUrl(
@@ -33,11 +33,12 @@ const CoverLetters = async ({
     return (
         <main className={styles.container}>
             <DashboardCard key="cover-letter-card" title="Cover Letters">
-                {!coverLetters && <LoadingScreen />}
+                {!documents && <LoadingScreen />}
                 {addCoverLetterButton}
-                {coverLetters && (
+                {documents.length > 0 && (
                     <DocumentCardDisplay
-                        documents={coverLetters}
+                        searchParams={searchParams}
+                        documents={documents}
                         type="cover-letter"
                     />
                 )}

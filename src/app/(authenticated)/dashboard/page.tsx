@@ -8,6 +8,7 @@ import {
     DashboardWrapper,
     Account,
     Profile,
+    Jobs,
     Resumes,
     CoverLetters,
 } from "@/features/dashboard";
@@ -19,7 +20,13 @@ import DowngradeModal from "@/components/modals/payment/downgrade-modal/Downgrad
 import ReinstateModal from "@/components/modals/payment/reinstate-modal/ReintstateModal";
 import CreateResumeModal from "@/components/modals/document/create-resume/CreateResumeModal";
 import CreateCoverLetterModal from "@/components/modals/document/create-cover-letter/CreateCoverLetterModal";
+import CreateJobModal from "@/components/modals/document/create-job/CreateJobModal";
 import { UpdateUrl } from "@/lib/updateUrl";
+import {
+    getAllUserJobs,
+    getAllUserResumes,
+    getAllUserCoverLetters,
+} from "@/features/editor";
 
 const Page = async ({
     params,
@@ -44,6 +51,10 @@ const Page = async ({
             )
         );
     }
+
+    const jobs = await getAllUserJobs(currentUser.id);
+    const resumes = await getAllUserResumes(currentUser.id);
+    const coverLetters = await getAllUserCoverLetters(currentUser.id);
     const menuSection = searchParams?.menu || "";
     const editPayment = searchParams?.editPayment || false;
     const upgradePlan = searchParams?.upgradePlan || false;
@@ -51,6 +62,7 @@ const Page = async ({
     const reinstatePlan = searchParams?.reinstatePlan || false;
     const createResume = searchParams?.createResume || false;
     const createCoverLetter = searchParams?.createCoverLetter || false;
+    const createJob = searchParams?.createJob || false;
 
     return (
         <DashboardWrapper>
@@ -58,7 +70,7 @@ const Page = async ({
             <section className={styles.rightSideContainer}>
                 <Navbar
                     style={{
-                        backgroundColor: "#f4e9ff",
+                        backgroundColor: "white",
                         color: "black",
                     }}
                 />
@@ -66,12 +78,12 @@ const Page = async ({
                     <p
                         className={`${styles.topHeading} ${styles.largeHeading}`}
                     >
-                        DASH
+                        {currentUser?.firstName}
                     </p>
                     <p
                         className={`${styles.bottomHeading} ${styles.largeHeading}`}
                     >
-                        BOARD
+                        {currentUser?.lastName}
                     </p>
                     <TitleSection currentUser={currentUser} />
                     {menuSection === "profile" && (
@@ -88,18 +100,28 @@ const Page = async ({
                             key="accountSection"
                         />
                     )}
-                    {menuSection === "resumes" && (
+                    {menuSection === "jobs" && jobs && (
+                        <Jobs
+                            key="jobsSection"
+                            currentUser={currentUser}
+                            searchParams={searchParams}
+                            documents={jobs}
+                        />
+                    )}
+                    {menuSection === "resumes" && resumes && (
                         <Resumes
                             key="resumesSection"
                             currentUser={currentUser}
                             searchParams={searchParams}
+                            documents={resumes}
                         />
                     )}
-                    {menuSection === "cover-letters" && (
+                    {menuSection === "cover-letters" && coverLetters && (
                         <CoverLetters
                             key="coverLettersSection"
                             currentUser={currentUser}
                             searchParams={searchParams}
+                            documents={coverLetters}
                         />
                     )}
                     <div className={styles.circle}></div>
@@ -127,12 +149,20 @@ const Page = async ({
             )}
             {createResume && (
                 <StaticModal>
-                    <CreateResumeModal returnUrl="/dashboard?menu=resumes" />
+                    <CreateResumeModal returnUrl="/dashboard?menu=resumes&documentPage=1" />
                 </StaticModal>
             )}
             {createCoverLetter && (
                 <StaticModal>
-                    <CreateCoverLetterModal returnUrl="/dashboard?menu=cover-letters" />
+                    <CreateCoverLetterModal returnUrl="/dashboard?menu=cover-letters&documentPage=1" />
+                </StaticModal>
+            )}
+            {createJob && (
+                <StaticModal>
+                    <CreateJobModal
+                        user={currentUser}
+                        returnUrl="/dashboard?menu=jobs&documentPage=1"
+                    />
                 </StaticModal>
             )}
         </DashboardWrapper>

@@ -88,12 +88,12 @@ const MobileMenu = () => {
                         {magicResumeLogo}
                     </Link>
                     <section className={styles.buttonContainer}>
-                        <button
+                        <Link
                             title="Profile"
                             className={`${styles.menuItem} ${
                                 menuSection === "profile" && styles.active
                             }`}
-                            onClick={() => handleMenuClick("profile")}
+                            href="/dashboard?menu=profile"
                         >
                             {profileIcon}
                             {state && (
@@ -114,13 +114,13 @@ const MobileMenu = () => {
                                         ))}
                                 </motion.p>
                             )}
-                        </button>
-                        <button
+                        </Link>
+                        <Link
                             title="Account"
                             className={`${styles.menuItem} ${
                                 menuSection === "account" && styles.active
                             }`}
-                            onClick={() => handleMenuClick("account")}
+                            href="/dashboard?menu=account&invoicePage=1"
                         >
                             {accountIcon}
                             {state && (
@@ -141,13 +141,13 @@ const MobileMenu = () => {
                                         ))}
                                 </motion.p>
                             )}
-                        </button>
-                        <button
+                        </Link>
+                        <Link
                             title="Jobs"
                             className={`${styles.menuItem} ${
                                 menuSection === "jobs" && styles.active
                             }`}
-                            onClick={() => handleMenuClick("jobs")}
+                            href="/dashboard?menu=jobs&documentPage=1"
                         >
                             {jobIcon}
                             {state && (
@@ -168,13 +168,13 @@ const MobileMenu = () => {
                                         ))}
                                 </motion.p>
                             )}
-                        </button>
-                        <button
+                        </Link>
+                        <Link
                             title="Resumes"
                             className={`${styles.menuItem} ${
                                 menuSection === "resumes" && styles.active
                             }`}
-                            onClick={() => handleMenuClick("resumes")}
+                            href="/dashboard?menu=resumes&documentPage=1"
                         >
                             {resumeIcon}
                             {state && (
@@ -195,13 +195,13 @@ const MobileMenu = () => {
                                         ))}
                                 </motion.p>
                             )}
-                        </button>
-                        <button
+                        </Link>
+                        <Link
                             title="Cover Letters"
                             className={`${styles.menuItem} ${
                                 menuSection === "cover-letters" && styles.active
                             }`}
-                            onClick={() => handleMenuClick("cover-letters")}
+                            href="/dashboard?menu=cover-letters&documentPage=1"
                         >
                             {coverLetterIcon}
                             {state && (
@@ -222,7 +222,7 @@ const MobileMenu = () => {
                                         ))}
                                 </motion.p>
                             )}
-                        </button>
+                        </Link>
                         <button
                             title="Logout"
                             className={`${styles.menuItem} ${styles.logoutButton}`}

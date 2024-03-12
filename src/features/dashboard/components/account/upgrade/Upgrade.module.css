@@ -50,7 +50,7 @@
 .iconContainer {
     width: 20px;
     height: 20px;
-    fill: #d299ff;
+    fill: rgb(var(--dashboard-accent-color-rgb));
 }
 
 .text {
@@ -59,19 +59,21 @@
 }
 
 .upgradeButton {
-    color: #d299ff;
+    color: rgb(var(--dashboard-accent-color-rgb));
     font-size: var(--font-size-small);
     font-weight: 700;
     padding-block: var(--padding-block-small);
     padding-inline: var(--padding-inline-small);
-    border: 1px solid #d299ff;
+    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.upgradeButton:hover {
-    background-color: #d299ff;
-    color: white;
+@media screen and (hover: hover) {
+    .upgradeButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+        color: white;
+    }
 }
 
 @media screen and (max-width: 600px) {

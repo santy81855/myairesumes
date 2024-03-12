@@ -32,9 +32,12 @@ const Contact = async ({ currentUser, searchParams }: ContactProps) => {
             <div className={styles.profileSectionContent}>
                 <section className={styles.contactInfo}>
                     <section className={styles.fieldContainer}>
-                        <p className={styles.label}>email</p>
+                        <label htmlFor="email" className={styles.label}>
+                            email
+                        </label>
                         {edit ? (
                             <input
+                                id="email"
                                 aria-label="email"
                                 type="text"
                                 name="email"
@@ -49,9 +52,12 @@ const Contact = async ({ currentUser, searchParams }: ContactProps) => {
                         )}
                     </section>
                     <section className={styles.fieldContainer}>
-                        <p className={styles.label}>phone</p>
+                        <label htmlFor="phone" className={styles.label}>
+                            phone
+                        </label>
                         {edit ? (
                             <input
+                                id="phone"
                                 aria-label="phone"
                                 type="text"
                                 name="phone"
@@ -66,9 +72,12 @@ const Contact = async ({ currentUser, searchParams }: ContactProps) => {
                         )}
                     </section>
                     <section className={styles.fieldContainer}>
-                        <p className={styles.label}>website</p>
+                        <label htmlFor="website" className={styles.label}>
+                            website
+                        </label>
                         {edit ? (
                             <input
+                                id="website"
                                 aria-label="website"
                                 type="text"
                                 name="website"

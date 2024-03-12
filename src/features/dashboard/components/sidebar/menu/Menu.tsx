@@ -14,6 +14,7 @@ import {
     coverLetterIcon,
     logoutIcon,
 } from "@/components/icons/iconSVG";
+import Link from "next/link";
 
 const Menu = () => {
     const router = useRouter();
@@ -40,58 +41,58 @@ const Menu = () => {
     return (
         <section className={styles.menu}>
             <p className={styles.name}>MAGIC RESUME</p>
-            <button
+            <Link
                 title="Profile"
                 className={
                     menuSection === "profile" ? styles.active : styles.menuItem
                 }
-                onClick={() => handleMenuClick("profile")}
+                href="/dashboard?menu=profile"
             >
                 <div className={styles.iconContainer}>{profileIcon}</div>
                 Profile
-            </button>
-            <button
+            </Link>
+            <Link
                 title="Account"
                 className={
                     menuSection === "account" ? styles.active : styles.menuItem
                 }
-                onClick={() => handleMenuClick("account")}
+                href="/dashboard?menu=account&invoicePage=1"
             >
                 <div className={styles.iconContainer}>{accountIcon}</div>
                 Account
-            </button>
-            <button
+            </Link>
+            <Link
                 title="Jobs"
                 className={
                     menuSection === "jobs" ? styles.active : styles.menuItem
                 }
-                onClick={() => handleMenuClick("jobs")}
+                href="/dashboard?menu=jobs&documentPage=1"
             >
                 <div className={styles.iconContainer}>{jobIcon}</div>
                 Jobs
-            </button>
-            <button
+            </Link>
+            <Link
                 title="Resumes"
                 className={
                     menuSection === "resumes" ? styles.active : styles.menuItem
                 }
-                onClick={() => handleMenuClick("resumes")}
+                href="/dashboard?menu=resumes&documentPage=1"
             >
                 <div className={styles.iconContainer}>{resumeIcon}</div>
                 Resumes
-            </button>
-            <button
+            </Link>
+            <Link
                 title="Cover Letters"
                 className={
                     menuSection === "cover-letters"
                         ? styles.active
                         : styles.menuItem
                 }
-                onClick={() => handleMenuClick("cover-letters")}
+                href="/dashboard?menu=cover-letters&documentPage=1"
             >
                 <div className={styles.iconContainer}>{coverLetterIcon}</div>
                 Cover Letters
-            </button>
+            </Link>
             <button
                 title="Logout"
                 className={styles.menuItem}
