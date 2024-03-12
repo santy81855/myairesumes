@@ -25,7 +25,6 @@ const DocumentCardDisplay = ({
     const maxDocuments = 10;
     const documentPage = searchParams?.documentPage || null;
     if (!documentPage) {
-        console.log("here");
         redirect(
             UpdateUrl(
                 searchParams ? searchParams : {},

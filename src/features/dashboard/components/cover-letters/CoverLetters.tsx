@@ -4,6 +4,7 @@ import { UpdateUrl } from "@/lib/updateUrl";
 import { getAllUserCoverLetters } from "@/features/editor";
 import { DashboardCard, DocumentCardDisplay } from "@/features/dashboard";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
+import { plusIconCircled } from "@/components/icons/iconSVG";
 
 type CoverLetterProps = {
     currentUser: any;
@@ -16,31 +17,35 @@ const CoverLetters = async ({
     searchParams,
     documents,
 }: CoverLetterProps) => {
-    const addCoverLetterButton = (
-        <Link
-            href={UpdateUrl(
-                searchParams ? searchParams : {},
-                [
-                    { key: "menu", value: "cover-letters" },
-                    { key: "createCoverLetter", value: "true" },
-                ],
-                "/dashboard"
-            )}
-        >
-            Add Cover Letter
-        </Link>
-    );
     return (
         <main className={styles.container}>
             <DashboardCard key="cover-letter-card" title="Cover Letters">
                 {!documents && <LoadingScreen />}
-                {addCoverLetterButton}
-                {documents.length > 0 && (
+                <Link
+                    className={styles.addItemButton}
+                    href={UpdateUrl(
+                        searchParams ? searchParams : {},
+                        [
+                            { key: "menu", value: "cover-letters" },
+                            { key: "createCoverLetter", value: "true" },
+                        ],
+                        "/dashboard"
+                    )}
+                >
+                    {plusIconCircled}
+                    <p>Create New Cover Letter</p>
+                </Link>
+                {documents.length > 0 ? (
                     <DocumentCardDisplay
                         searchParams={searchParams}
                         documents={documents}
                         type="cover-letter"
                     />
+                ) : (
+                    <p className={styles.noJobs}>
+                        You don't have any cover letters yet. Click the button
+                        above to create a new cover letter.
+                    </p>
                 )}
             </DashboardCard>
         </main>

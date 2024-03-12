@@ -8,12 +8,14 @@ import { useState, useEffect } from "react";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 type UpgradeModalProps = {
     returnUrl: string;
     user: any;
 };
 const CreateJobModal = ({ returnUrl, user }: UpgradeModalProps) => {
+    const router = useRouter();
     const [showDescription, setShowDescription] = useState(false);
     const [selectedColorIndex, setSelectedColorIndex] = useState(0);
     const [coverLetterChecked, setCoverLetterChecked] = useState(false);

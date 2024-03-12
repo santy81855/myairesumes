@@ -319,7 +319,7 @@ export const deleteJob = async (id: string) => {
                 decrement: 1,
             },
             numberResumes: {
-                decrement: 1,
+                decrement: deletedJob.resume ? 1 : 0,
             },
             numberCoverLetters: {
                 decrement: deletedJob.coverLetter ? 1 : 0,
@@ -424,4 +424,58 @@ export const deleteCoverLetter = async (id: string) => {
     return {
         success: true,
     };
+};
+
+export const isLastJobDocument = async (id: string, type: string) => {
+    "use server";
+
+    try {
+        let job = null;
+        // if the type is resume then get the resume with the given id, and include the job that the resume is associated with
+        if (type === "resume") {
+            const resume = await prisma.resume.findUnique({
+                where: {
+                    id: id,
+                },
+                include: {
+                    job: {
+                        include: {
+                            resume: true,
+                            coverLetter: true,
+                        },
+                    },
+                },
+            });
+            job = resume?.job || null;
+        } else {
+            const coverLetter = await prisma.coverLetter.findUnique({
+                where: {
+                    id: id,
+                },
+                include: {
+                    job: {
+                        include: {
+                            resume: true,
+                            coverLetter: true,
+                        },
+                    },
+                },
+            });
+            job = coverLetter?.job || null;
+        }
+        // if the job is null then return false
+        if (!job) {
+            return null;
+        }
+        // if the job has both a resume and a cover letter then return false
+        if (job.resume && job.coverLetter) {
+            return null;
+        }
+        // since the job only has one document, then it is the last document
+        return job;
+    } catch (error) {
+        console.log("Error in checkLastJobDocument action: " + error);
+        // return an error that will be caught by the catch block
+        throw new Error("An unknown error occurred. Please try again.");
+    }
 };

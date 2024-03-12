@@ -56,3 +56,4 @@ export { updateCoverLetter as updateCoverLetterAction } from "./actions/document
 export { deleteJob as deleteJobAction } from "./actions/document";
 export { deleteResume as deleteResumeAction } from "./actions/document";
 export { deleteCoverLetter as deleteCoverLetterAction } from "./actions/document";
+export { isLastJobDocument as isLastJobDocumentAction } from "./actions/document";

@@ -14,12 +14,14 @@ import {
     deleteJobAction,
 } from "@/features/editor";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     basicLeftArrow,
     downArrowIcon,
     upArrowIcon,
     plusIcon,
+    minusIcon,
+    plusIconCircled,
 } from "@/components/icons/iconSVG";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -61,18 +63,21 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [showColors, setShowColors] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
-
-    const addResumeButton = (
-        <Link
-            href={UpdateUrl(
-                searchParams ? searchParams : {},
-                [{ key: "createJob", value: "true" }],
-                "/dashboard"
-            )}
-        >
-            Add job
-        </Link>
+    const [editJobDescription, setEditJobDescription] = useState(false);
+    const [jobDescription, setJobDescription] = useState(
+        job.information?.jobDescription
     );
+
+    useEffect(() => {
+        if (job.id !== "") {
+            setJobDescription(job.information?.jobDescription);
+        } else {
+            setJobDescription("");
+        }
+        setShowDescription(false);
+        setIsEditing(false);
+        setEditJobDescription(false);
+    }, [job]);
 
     const resumeTemplates = job.resume
         ? getAllResumeTemplates(job.resume, false)
@@ -137,6 +142,33 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
             setIsLoading(false);
         } catch (error) {
             toast.error("Error updating job information.");
+            setIsLoading(false);
+        }
+    };
+
+    const handleUpdateJobDescription = async (e: any) => {
+        e.preventDefault();
+        setIsLoading(true);
+        try {
+            const data = {
+                information: {
+                    jobDescription: jobDescription,
+                    notes: job.information?.notes,
+                },
+            };
+            await updateJobAction(job.id, data);
+            setJob({
+                ...job,
+                information: {
+                    jobDescription: jobDescription,
+                    notes: job.information?.notes,
+                },
+            });
+            setEditJobDescription(false);
+            setIsLoading(false);
+            toast.success("Job description updated.");
+        } catch (error) {
+            toast.error("Error updating job description.");
             setIsLoading(false);
         }
     };
@@ -345,21 +377,63 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                             </section>
                         </section>
                         <section className={styles.resumesContainer}>
-                            {resumeTemplates && (
+                            {resumeTemplates ? (
                                 <DocumentCard
                                     key="resume-card"
                                     doc={job.resume}
                                     type="resume"
                                     templates={resumeTemplates}
                                 />
+                            ) : (
+                                <section
+                                    className={styles.addDocumentContainer}
+                                >
+                                    <Link
+                                        href={UpdateUrl(
+                                            searchParams ? searchParams : {},
+                                            [
+                                                {
+                                                    key: "createResume",
+                                                    value: "true",
+                                                },
+                                            ],
+                                            "/dashboard"
+                                        )}
+                                        className={styles.addItemButton}
+                                    >
+                                        {plusIconCircled}
+                                        <p>Add Resume</p>
+                                    </Link>
+                                </section>
                             )}
-                            {coverLetterTemplates && (
+                            {coverLetterTemplates ? (
                                 <DocumentCard
                                     key="cover-letter-card"
                                     doc={job.coverLetter}
                                     type="cover-letter"
                                     templates={coverLetterTemplates}
                                 />
+                            ) : (
+                                <section
+                                    className={styles.addDocumentContainer}
+                                >
+                                    <Link
+                                        href={UpdateUrl(
+                                            searchParams ? searchParams : {},
+                                            [
+                                                {
+                                                    key: "createCoverLetter",
+                                                    value: "true",
+                                                },
+                                            ],
+                                            "/dashboard"
+                                        )}
+                                        className={styles.addItemButton}
+                                    >
+                                        {plusIconCircled}
+                                        <p>Add Cover Letter</p>
+                                    </Link>
+                                </section>
                             )}
                         </section>
                         <motion.section
@@ -392,16 +466,71 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                     <section
                                         title="Add a job description."
                                         className={styles.checkboxContainer}
-                                        onClick={() => {}}
+                                        onClick={() => {
+                                            setShowDescription(
+                                                !showDescription
+                                            );
+                                            setEditJobDescription(true);
+                                        }}
                                     >
-                                        {plusIcon}
+                                        {showDescription ? minusIcon : plusIcon}
                                     </section>
                                 )}
                             </section>
-
-                            <motion.p className={styles.jobDescription}>
-                                {job.information?.jobDescription}
-                            </motion.p>
+                            {job.information?.jobDescription &&
+                            !editJobDescription ? (
+                                <section className={styles.labelItem}>
+                                    <button
+                                        type="button"
+                                        className={styles.editButton}
+                                        onClick={() => {
+                                            setJobDescription(
+                                                job.information?.jobDescription
+                                            );
+                                            setEditJobDescription(true);
+                                        }}
+                                    >
+                                        Edit
+                                    </button>
+                                    <motion.p className={styles.jobDescription}>
+                                        {job.information?.jobDescription}
+                                    </motion.p>
+                                </section>
+                            ) : (
+                                <>
+                                    <textarea
+                                        id="newDescription"
+                                        className={styles.textArea}
+                                        placeholder="Paste the job description here."
+                                        value={jobDescription}
+                                        onChange={(e) =>
+                                            setJobDescription(e.target.value)
+                                        }
+                                    />
+                                    <section
+                                        className={styles.editButtonContainer}
+                                    >
+                                        <button
+                                            type="button"
+                                            title="Cancel"
+                                            className={styles.cancelButton}
+                                            onClick={() => {
+                                                setEditJobDescription(false);
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            type="button"
+                                            title="Save"
+                                            className={styles.saveButton}
+                                            onClick={handleUpdateJobDescription}
+                                        >
+                                            Save
+                                        </button>
+                                    </section>
+                                </>
+                            )}
                         </motion.section>
                         <section className={styles.deleteButtonContainer}>
                             <button
@@ -416,14 +545,29 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                 </DashboardCard>
             ) : (
                 <DashboardCard key="jobs-card" title="Your Jobs">
-                    {addResumeButton}
-                    {documents.length > 0 && (
+                    <Link
+                        href={UpdateUrl(
+                            searchParams ? searchParams : {},
+                            [{ key: "createJob", value: "true" }],
+                            "/dashboard"
+                        )}
+                        className={styles.addItemButton}
+                    >
+                        {plusIconCircled}
+                        <p>Create New Job</p>
+                    </Link>
+                    {documents.length > 0 ? (
                         <DocumentCardDisplay
                             searchParams={searchParams}
                             documents={documents}
                             type="job"
                             setJob={setJob}
                         />
+                    ) : (
+                        <p className={styles.noJobs}>
+                            You don't have any jobs yet. Click the button above
+                            to create a new job.
+                        </p>
                     )}
                 </DashboardCard>
             )}

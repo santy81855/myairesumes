@@ -122,11 +122,8 @@
 
 @media screen and (max-width: 700px) {
     .resumesContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        width: auto;
     }
 }
 
