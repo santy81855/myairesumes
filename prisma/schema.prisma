@@ -90,32 +90,21 @@ model Subscription {
 }
 
 model Job {
-    id             String       @id @unique @default(cuid())
-    userId         String
-    companyName    String
-    jobName        String
-    color          String
-    hasApplied     Boolean      @default(false)
-    jobDescription String?
-    jobNotes       Json?
-    createdAt      DateTime     @default(now())
-    updatedAt      DateTime     @updatedAt
-    user           User         @relation(references: [id], fields: [userId], onDelete: Cascade)
-    resume         Resume?
-    coverLetter    CoverLetter?
+    id          String       @id @unique @default(cuid())
+    userId      String
+    companyName String
+    jobName     String
+    color       String
+    hasApplied  Boolean      @default(false)
+    information Json?
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+    user        User         @relation(references: [id], fields: [userId], onDelete: Cascade)
+    resume      Resume?
+    coverLetter CoverLetter?
 
     @@index([userId])
 }
-
-// const job = await prisma.job.findUnique({
-//   where: {
-//     id: jobId, // Replace with the actual job ID you want to fetch
-//   },
-//   include: {
-//     resume: true,
-//     coverLetter: true,
-//   },
-// });
 
 model Resume {
     id          String   @id @unique @default(cuid())

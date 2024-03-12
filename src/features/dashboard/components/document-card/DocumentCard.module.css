@@ -117,7 +117,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding-block: var(--padding-block-small);
+    padding-block-start: var(--padding-block-small);
+    padding-block-end: var(--padding-block-medium);
     padding-inline: var(--padding-inline-medium);
     gap: var(--padding-block-small);
     position: relative;

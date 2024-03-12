@@ -23,12 +23,20 @@ const JobCard = ({ doc, type, setJob }: JobCardProps) => {
         const coverLetterUpdated = doc.coverLetter
             ? doc.coverLetter.updatedAt
             : null;
+        // if both resume and cover letter then choose the most recent between job, resume, and cover letter
         if (resumeUpdated && coverLetterUpdated) {
             return resumeUpdated > coverLetterUpdated
-                ? timeAgo(resumeUpdated)
-                : timeAgo(coverLetterUpdated);
+                ? resumeUpdated > doc.updatedAt
+                    ? timeAgo(resumeUpdated)
+                    : timeAgo(doc.updatedAt)
+                : coverLetterUpdated > doc.updatedAt
+                ? timeAgo(coverLetterUpdated)
+                : timeAgo(doc.updatedAt);
         }
-        return timeAgo(resumeUpdated || coverLetterUpdated);
+        // if only a resume then choose the most recent between resume and job
+        return resumeUpdated > doc.updatedAt
+            ? timeAgo(resumeUpdated)
+            : timeAgo(doc.updatedAt);
     };
 
     const timeAgo = (timestamp: string) => {
@@ -106,7 +114,9 @@ const JobCard = ({ doc, type, setJob }: JobCardProps) => {
             </div>
             <div
                 className={styles.colorBar}
-                style={{ backgroundColor: doc.color }}
+                style={{
+                    backgroundColor: doc.color,
+                }}
             />
             <div className={styles.resumeInfoContainer}>
                 <div className={styles.resumeInfo}>
@@ -123,9 +133,11 @@ const JobCard = ({ doc, type, setJob }: JobCardProps) => {
 
             <section className={styles.optionContainer}>
                 <button
+                    type="button"
                     title="Manage Job"
                     className={styles.option}
-                    onClick={() => {
+                    onClick={(e: any) => {
+                        e.preventDefault();
                         setJob(doc);
                     }}
                 >

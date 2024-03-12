@@ -24,26 +24,19 @@ export const createJob = async (formData: any) => {
         const coverLetter = formData.get("coverLetter") as string;
         const description = formData.get("description") as string;
 
+        const information = {
+            jobDescription: description || "",
+            notes: [],
+        };
+
         // create the job
         const createdJob = await prisma.job.create({
             data: {
                 companyName,
                 jobName: job,
                 color,
-                jobDescription: description || "",
                 userId: user.id,
-            },
-        });
-
-        // update the user's numberJobs field to be the current numberJobs + 1
-        await prisma.user.update({
-            where: {
-                id: user.id,
-            },
-            data: {
-                numberJobs: {
-                    increment: 1,
-                },
+                information,
             },
         });
 
@@ -79,6 +72,27 @@ export const createJob = async (formData: any) => {
                 },
             });
         }
+
+        const updateData = {
+            numberJobs: {
+                increment: 1,
+            },
+            numberResumes: {
+                increment: 1,
+            },
+            numberCoverLetters: {
+                increment:
+                    coverLetter === "on" || coverLetter === "true" ? 1 : 0,
+            },
+        };
+
+        // update the user's numberJobs field to be the current numberJobs + 1
+        await prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: updateData,
+        });
 
         revalidateTag("currentUser");
     } catch (error) {
@@ -191,6 +205,7 @@ export const createResume = async (formData: any) => {
 export const updateJob = async (jobId: string, data: any) => {
     "use server";
     try {
+        console.log("here");
         // get the current user
         const { user } = await validateRequest();
         if (!user) {
@@ -285,39 +300,45 @@ export const deleteJob = async (id: string) => {
         if (!user) {
             return redirect("/sign-in");
         }
-        // get the user
-        const updatedUser = await prisma.user.update({
-            where: {
-                id: user.id,
-            },
-            data: {
-                numberJobs: {
-                    decrement: 1,
-                },
-            },
-        });
-        if (!updatedUser) {
-            return {
-                error: "An unknown error occurred. Please try again.",
-            };
-        }
+
         // delete the job
         const deletedJob = await prisma.job.delete({
             where: {
                 id,
             },
+            include: {
+                resume: true,
+                coverLetter: true,
+            },
         });
-        if (!deletedJob) {
-            return {
-                error: "An unknown error occurred. Please try again.",
-            };
-        }
+
         revalidatePath("/dashboard");
+
+        const updateData = {
+            numberJobs: {
+                decrement: 1,
+            },
+            numberResumes: {
+                decrement: 1,
+            },
+            numberCoverLetters: {
+                decrement: deletedJob.coverLetter ? 1 : 0,
+            },
+        };
+
+        // get the user
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: updateData,
+        });
+
         return {
             success: true,
         };
     } catch (error) {
-        console.log(error);
+        console.log("Error in deleteJob action: " + error);
         // return an error that will be caught by the catch block
         throw new Error("An unknown error occurred. Please try again.");
     }

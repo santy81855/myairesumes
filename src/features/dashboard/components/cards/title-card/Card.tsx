@@ -40,7 +40,7 @@ const Card = ({ title, number, url, gridArea }: CardProps) => {
                 href={`/dashboard?menu=${title
                     .toLowerCase()
                     .split(" ")
-                    .join("-")}`}
+                    .join("-")}&documentPage=1`}
                 title={title}
                 className={styles.container}
                 style={{
