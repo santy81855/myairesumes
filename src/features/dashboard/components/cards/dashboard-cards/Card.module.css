@@ -25,6 +25,7 @@
     gap: var(--padding-block-medium);
     position: relative;
     z-index: 1;
+    overflow: hidden;
 }
 
 .title {

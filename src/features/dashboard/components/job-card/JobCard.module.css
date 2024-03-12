@@ -1,5 +1,5 @@
 .resumeCard {
-    height: 100%;
+    height: auto;
     max-width: 400px;
     background-color: rgb(var(--dashboard-accent-color-rgb));
     background: url("/images/dashboard/job-item-background.svg");
