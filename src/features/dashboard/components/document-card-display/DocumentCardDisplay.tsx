@@ -13,7 +13,7 @@ type DocumentCardDisplayProps = {
     documents: any[];
     type: string;
     searchParams?: { [key: string]: string | string[] | undefined };
-    setJob: (job: any) => void;
+    setJob?: (job: any) => void;
 };
 
 const DocumentCardDisplay = ({
@@ -77,7 +77,7 @@ const DocumentCardDisplay = ({
                                 key={doc.id}
                                 doc={doc}
                                 type={type}
-                                setJob={setJob}
+                                setJob={setJob ? setJob : () => {}}
                             />
                         );
                     })}

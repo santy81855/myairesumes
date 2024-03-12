@@ -249,7 +249,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: var(--padding-block-large);
-    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
+    background-color: rgb(var(--dashboard-background-color-rgb));
     padding-block: var(--padding-block-medium);
     padding-inline: var(--padding-inline-medium);
     overflow: hidden;
