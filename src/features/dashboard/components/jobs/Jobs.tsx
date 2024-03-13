@@ -67,6 +67,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
     const [jobDescription, setJobDescription] = useState(
         job.information?.jobDescription
     );
+    const [jobNotes, setJobNotes] = useState(job.information?.notes);
 
     useEffect(() => {
         if (job.id !== "") {
@@ -565,8 +566,8 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                         />
                     ) : (
                         <p className={styles.noJobs}>
-                            You don't have any jobs yet. Click the button above
-                            to create a new job.
+                            You don&apos;t have any jobs yet. Click the button
+                            above to create a new job.
                         </p>
                     )}
                 </DashboardCard>

@@ -43,8 +43,8 @@ const CoverLetters = async ({
                     />
                 ) : (
                     <p className={styles.noJobs}>
-                        You don't have any cover letters yet. Click the button
-                        above to create a new cover letter.
+                        You don&apos;t have any cover letters yet. Click the
+                        button above to create a new cover letter.
                     </p>
                 )}
             </DashboardCard>
