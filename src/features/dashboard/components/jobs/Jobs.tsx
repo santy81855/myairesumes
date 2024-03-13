@@ -68,6 +68,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
         job.information?.jobDescription
     );
     const [jobNotes, setJobNotes] = useState(job.information?.notes);
+    const [newNote, setNewNote] = useState("");
 
     useEffect(() => {
         if (job.id !== "") {
@@ -170,6 +171,34 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
             toast.success("Job description updated.");
         } catch (error) {
             toast.error("Error updating job description.");
+            setIsLoading(false);
+        }
+    };
+
+    const handleUpdateJobNotes = async (e: any) => {
+        e.preventDefault();
+        if (newNote === "") {
+            toast.error("Please enter a note.");
+            return;
+        }
+        setIsLoading(true);
+        try {
+            const data = {
+                information: {
+                    jobDescription: job.information?.jobDescription,
+                    notes: [...job.information?.notes, newNote],
+                },
+            };
+            await updateJobAction(job.id, data);
+            setJob({
+                ...job,
+                information: data.information,
+            });
+            setNewNote("");
+            setIsLoading(false);
+            toast.success("Job notes updated.");
+        } catch (error) {
+            toast.error("Error updating job notes.");
             setIsLoading(false);
         }
     };
@@ -436,6 +465,52 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                     </Link>
                                 </section>
                             )}
+                        </section>
+                        <section className={styles.jobNotesContainer}>
+                            <section className={styles.jobNotesCheckbox}>
+                                <label
+                                    htmlFor="notes"
+                                    className={styles.jobDescriptionLabel}
+                                >
+                                    Job Notes
+                                </label>
+                            </section>
+                            {job.information?.notes.length > 0 && (
+                                <ul className={styles.jobNotesList}>
+                                    {job.information?.notes.map(
+                                        (note: string, index: number) => (
+                                            <li
+                                                key={index}
+                                                className={styles.jobNote}
+                                            >
+                                                {note}
+                                            </li>
+                                        )
+                                    )}
+                                </ul>
+                            )}
+                            <section className={styles.addNoteButtonContainer}>
+                                <input
+                                    type="text"
+                                    id="newNote"
+                                    placeholder="E.g. Interview date and time."
+                                    className={styles.input}
+                                    value={newNote}
+                                    onChange={(e) => {
+                                        setNewNote(e.target.value);
+                                    }}
+                                />
+                                <button
+                                    id="Add Job Note"
+                                    type="button"
+                                    className={styles.addNoteButton}
+                                    onClick={(e: any) => {
+                                        handleUpdateJobNotes(e);
+                                    }}
+                                >
+                                    {plusIconCircled}
+                                </button>
+                            </section>
                         </section>
                         <motion.section
                             className={styles.jobDescriptionContainer}
