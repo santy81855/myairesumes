@@ -8,6 +8,109 @@ import {
     initializeNewCoverLetter,
 } from "@/features/editor";
 
+export const createJobCoverLetter = async (jobObject: any) => {
+    "use server";
+    try {
+        // get the current user
+        const { user } = await validateRequest();
+        if (!user) {
+            return redirect("/sign-in");
+        }
+
+        const coverLetterInformation = initializeNewCoverLetter(
+            user,
+            user.firstName + "-" + user.lastName + "-CoverLetter",
+            jobObject.jobName, // job
+            "Cover Letter for " +
+                jobObject.jobName +
+                " application at " +
+                jobObject.companyName
+        );
+        // create the cover letter
+        const coverLetter = await prisma.coverLetter.create({
+            data: {
+                information: {
+                    ...coverLetterInformation,
+                    jobDescription: jobObject.information.jobDescription,
+                },
+                userId: user.id,
+                jobId: jobObject.id,
+            },
+        });
+
+        // update the user's numberCoverLetters field to be the current numberCoverLetters + 1
+        await prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: {
+                numberCoverLetters: {
+                    increment: 1,
+                },
+            },
+        });
+
+        revalidateTag("currentUser");
+        return coverLetter;
+    } catch (error) {
+        console.log(error);
+        // return an error that will be caught by the catch block
+        throw new Error("An unknown error occurred. Please try again.");
+    }
+};
+
+export const createJobResume = async (jobObject: any) => {
+    "use server";
+    try {
+        // get the current user
+        const { user } = await validateRequest();
+        if (!user) {
+            return redirect("/sign-in");
+        }
+
+        const resumeInformation = initializeNewResume(
+            user,
+            user.firstName + "-" + user.lastName + "-Resume",
+            jobObject.jobName, // job
+            "Resume for " +
+                jobObject.jobName +
+                " application at " +
+                jobObject.companyName
+        );
+
+        // create the resume
+        const resume = await prisma.resume.create({
+            data: {
+                information: {
+                    ...resumeInformation,
+                    jobDescription: jobObject.information.jobDescription,
+                },
+                userId: user.id,
+                jobId: jobObject.id,
+            },
+        });
+
+        // update the user's numberResumes field to be the current numberResumes + 1
+        await prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: {
+                numberResumes: {
+                    increment: 1,
+                },
+            },
+        });
+
+        revalidateTag("currentUser");
+        return resume;
+    } catch (error) {
+        console.log(error);
+        // return an error that will be caught by the catch block
+        throw new Error("An unknown error occurred. Please try again.");
+    }
+};
+
 export const createJob = async (formData: any) => {
     "use server";
     try {
@@ -40,33 +143,40 @@ export const createJob = async (formData: any) => {
             },
         });
 
+        const resumeInformation = initializeNewResume(
+            user,
+            resumeName,
+            job, // job
+            "Resume for " + job + " application at " + companyName
+        );
+
         // create the resume
         await prisma.resume.create({
             data: {
-                information: initializeNewResume(
-                    user,
-                    resumeName,
-                    job,
-                    "Resume for " + job + " application at " + companyName
-                ),
+                information: {
+                    ...resumeInformation,
+                    jobDescription: description || "",
+                },
                 userId: user.id,
                 jobId: createdJob.id,
             },
         });
 
+        const coverLetterInformation = initializeNewCoverLetter(
+            user,
+            formData.get("coverLetterName") as string,
+            job, // job
+            "Cover Letter for " + job + " application at " + companyName
+        );
+
         // if the user has a cover letter create the cover letter
         if (coverLetter === "on" || coverLetter === "true") {
             await prisma.coverLetter.create({
                 data: {
-                    information: initializeNewCoverLetter(
-                        user,
-                        formData.get("coverLetterName") as string,
-                        job,
-                        "Cover Letter for " +
-                            job +
-                            " application at " +
-                            companyName
-                    ),
+                    information: {
+                        ...coverLetterInformation,
+                        jobDescription: description || "",
+                    },
                     userId: user.id,
                     jobId: createdJob.id,
                 },
@@ -205,19 +315,43 @@ export const createResume = async (formData: any) => {
 export const updateJob = async (jobId: string, data: any) => {
     "use server";
     try {
-        console.log("here");
         // get the current user
         const { user } = await validateRequest();
         if (!user) {
             return redirect("/sign-in");
         }
         // update the job
-        const updatedJob = await prisma.job.update({
+        await prisma.job.update({
             where: {
                 id: jobId,
             },
             data,
         });
+
+        // if the data includes jobDescription then update the resume and cover letter information
+        if (data.information?.jobDescription) {
+            await prisma.resume.updateMany({
+                where: {
+                    jobId,
+                },
+                data: {
+                    information: {
+                        jobDescription: data.information.jobDescription,
+                    },
+                },
+            });
+
+            await prisma.coverLetter.updateMany({
+                where: {
+                    jobId,
+                },
+                data: {
+                    information: {
+                        jobDescription: data.information.jobDescription,
+                    },
+                },
+            });
+        }
 
         revalidatePath("/dashboard");
 

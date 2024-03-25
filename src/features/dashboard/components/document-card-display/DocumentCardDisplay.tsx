@@ -8,6 +8,7 @@ import { DocumentCard, JobCard } from "@/features/dashboard";
 import { useState } from "react";
 import { nextIcon, previousIcon } from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
+import { jobCardColorArray } from "@/features/dashboard";
 
 type DocumentCardDisplayProps = {
     searchParams?: { [key: string]: string | string[] | undefined };
@@ -74,19 +75,6 @@ const DocumentCardDisplay = ({
         setCurrentPage(1);
     };
 
-    const colorOptions = [
-        "#4CAF50",
-        "#F44336",
-        "#2196F3",
-        "#FFEB3B",
-        "#FF9800",
-        "#9C27B0",
-        "#009688",
-        "#E91E63",
-        "#3F51B5",
-        "#00BCD4",
-    ];
-
     return (
         <section className={styles.container}>
             <input
@@ -125,7 +113,7 @@ const DocumentCardDisplay = ({
                     >
                         All
                     </button>
-                    {colorOptions.map((color) => (
+                    {jobCardColorArray.map((color) => (
                         <motion.button
                             key={color}
                             type="button"

@@ -12,6 +12,8 @@ import {
     getAllResumeTemplates,
     updateJobAction,
     deleteJobAction,
+    createJobResumeAction,
+    createJobCoverLetterAction,
 } from "@/features/editor";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { useState, useEffect } from "react";
@@ -26,6 +28,7 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
+import { jobCardColorArray } from "@/features/dashboard";
 
 type JobsProps = {
     currentUser: any;
@@ -203,18 +206,33 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
         }
     };
 
-    const colorOptions = [
-        "#4CAF50",
-        "#F44336",
-        "#2196F3",
-        "#FFEB3B",
-        "#FF9800",
-        "#9C27B0",
-        "#009688",
-        "#E91E63",
-        "#3F51B5",
-        "#00BCD4",
-    ];
+    const handleAddResume = async (e: any) => {
+        e.preventDefault();
+        setIsLoading(true);
+        try {
+            const resume = await createJobResumeAction(job);
+            setJob({ ...job, resume: resume });
+            setIsLoading(false);
+            toast.success("Resume added to job.");
+        } catch (error) {
+            toast.error("Error adding resume to job.");
+            setIsLoading(false);
+        }
+    };
+
+    const handleAddCoverLetter = async (e: any) => {
+        e.preventDefault();
+        setIsLoading(true);
+        try {
+            const coverLetter = await createJobCoverLetterAction(job);
+            setJob({ ...job, coverLetter: coverLetter });
+            setIsLoading(false);
+            toast.success("Cover letter added to job.");
+        } catch (error) {
+            toast.error("Error adding cover letter to job.");
+            setIsLoading(false);
+        }
+    };
 
     return (
         <main className={styles.container}>
@@ -280,7 +298,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                                         styles.colorOptions
                                                     }
                                                 >
-                                                    {colorOptions.map(
+                                                    {jobCardColorArray.map(
                                                         (
                                                             color: string,
                                                             index: number
@@ -418,22 +436,14 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                 <section
                                     className={styles.addDocumentContainer}
                                 >
-                                    <Link
-                                        href={UpdateUrl(
-                                            searchParams ? searchParams : {},
-                                            [
-                                                {
-                                                    key: "createResume",
-                                                    value: "true",
-                                                },
-                                            ],
-                                            "/dashboard"
-                                        )}
+                                    <button
+                                        type="button"
                                         className={styles.addItemButton}
+                                        onClick={handleAddResume}
                                     >
                                         {plusIconCircled}
                                         <p>Add Resume</p>
-                                    </Link>
+                                    </button>
                                 </section>
                             )}
                             {coverLetterTemplates ? (
@@ -447,22 +457,14 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                 <section
                                     className={styles.addDocumentContainer}
                                 >
-                                    <Link
-                                        href={UpdateUrl(
-                                            searchParams ? searchParams : {},
-                                            [
-                                                {
-                                                    key: "createCoverLetter",
-                                                    value: "true",
-                                                },
-                                            ],
-                                            "/dashboard"
-                                        )}
+                                    <button
+                                        type="button"
+                                        onClick={handleAddCoverLetter}
                                         className={styles.addItemButton}
                                     >
                                         {plusIconCircled}
                                         <p>Add Cover Letter</p>
-                                    </Link>
+                                    </button>
                                 </section>
                             )}
                         </section>
@@ -475,7 +477,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                     Job Notes
                                 </label>
                             </section>
-                            {job.information?.notes.length > 0 && (
+                            {job.information?.notes?.length > 0 && (
                                 <ul className={styles.jobNotesList}>
                                     {job.information?.notes.map(
                                         (note: string, index: number) => (
@@ -489,6 +491,9 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                     )}
                                 </ul>
                             )}
+                            <label htmlFor="newNote" className={styles.label}>
+                                Add a note:
+                            </label>
                             <section className={styles.addNoteButtonContainer}>
                                 <input
                                     type="text"
