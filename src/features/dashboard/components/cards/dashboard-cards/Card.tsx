@@ -11,7 +11,7 @@ type CardProps = {
 const Card = ({ children, gridArea, title }: CardProps) => {
     const style = gridArea ? { gridArea } : {};
     return (
-        <form className={styles.container} style={style}>
+        <section className={styles.container} style={style}>
             <section className={styles.titleRow}>
                 <p className={styles.title}>{title}</p>
             </section>
@@ -21,7 +21,7 @@ const Card = ({ children, gridArea, title }: CardProps) => {
             >
                 {children}
             </section>
-        </form>
+        </section>
     );
 };
 

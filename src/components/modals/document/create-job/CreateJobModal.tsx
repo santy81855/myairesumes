@@ -8,36 +8,26 @@ import { useState, useEffect } from "react";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
+import { jobCardColorArray } from "@/features/dashboard";
 
 type UpgradeModalProps = {
     returnUrl: string;
     user: any;
 };
 const CreateJobModal = ({ returnUrl, user }: UpgradeModalProps) => {
+    const router = useRouter();
     const [showDescription, setShowDescription] = useState(false);
     const [selectedColorIndex, setSelectedColorIndex] = useState(0);
     const [coverLetterChecked, setCoverLetterChecked] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
-    const colorOptions = [
-        "#4CAF50",
-        "#F44336",
-        "#2196F3",
-        "#FFEB3B",
-        "#FF9800",
-        "#9C27B0",
-        "#009688",
-        "#E91E63",
-        "#3F51B5",
-        "#00BCD4",
-    ];
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
         setIsLoading(true);
         const form = event.target;
         const formData = new FormData(form);
-        formData.append("color", colorOptions[selectedColorIndex]);
+        formData.append("color", jobCardColorArray[selectedColorIndex]);
         try {
             await createJobAction(formData);
             setIsLoading(false);
@@ -69,7 +59,7 @@ const CreateJobModal = ({ returnUrl, user }: UpgradeModalProps) => {
                         <section className={styles.inputContainer}>
                             <p className={styles.label}>Color</p>
                             <section className={styles.colorContainer}>
-                                {colorOptions.map(
+                                {jobCardColorArray.map(
                                     (color: string, index: number) => (
                                         <div
                                             key={index}

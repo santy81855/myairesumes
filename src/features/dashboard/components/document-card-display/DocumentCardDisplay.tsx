@@ -1,18 +1,19 @@
+"use client";
 import {
     getAllResumeTemplates,
     getAllCoverLetterTemplates,
 } from "@/features/editor";
 import styles from "./DocumentCardDisplay.module.css";
-import { UpdateUrl } from "@/lib/updateUrl";
 import { DocumentCard, JobCard } from "@/features/dashboard";
-import { redirect } from "next/navigation";
-import Link from "next/link";
+import { useState } from "react";
 import { nextIcon, previousIcon } from "@/components/icons/iconSVG";
+import { motion } from "framer-motion";
+import { jobCardColorArray } from "@/features/dashboard";
 
 type DocumentCardDisplayProps = {
+    searchParams?: { [key: string]: string | string[] | undefined };
     documents: any[];
     type: string;
-    searchParams?: { [key: string]: string | string[] | undefined };
     setJob?: (job: any) => void;
 };
 
@@ -22,173 +23,201 @@ const DocumentCardDisplay = ({
     type,
     setJob,
 }: DocumentCardDisplayProps) => {
-    const maxDocuments = 10;
-    const documentPage = searchParams?.documentPage || null;
-    if (!documentPage) {
-        console.log("here");
-        redirect(
-            UpdateUrl(
-                searchParams ? searchParams : {},
-                [{ key: "documentPage", value: "1" }],
-                "/dashboard"
-            )
-        );
-    }
-    const start = documentPage
-        ? (parseInt(documentPage as string) - 1) * maxDocuments
-        : 0;
-    const end = documentPage ? start + maxDocuments : maxDocuments;
-    const paginatedDocuments =
-        documents && documents.length > 0
-            ? documents
-                  .sort(
-                      (a, b) =>
-                          new Date(b.updatedAt).getTime() -
-                          new Date(a.updatedAt).getTime()
-                  )
-                  .slice(start, end)
-            : [];
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedColor, setSelectedColor] = useState("");
+    const [showColorOptions, setShowColorOptions] = useState(false);
+    const maxDocuments = 20;
+
+    const filteredDocuments = documents.filter((doc) => {
+        const matchesSearchQuery =
+            // filter jobs by the company name and job name and filter resumes and cover letters by the document name, job title, and position
+            type === "job"
+                ? doc.companyName
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase()) ||
+                  doc.jobName.toLowerCase().includes(searchQuery.toLowerCase())
+                : doc.information.documentName
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase()) ||
+                  doc.information.jobTitle
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase()) ||
+                  doc.information.position
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase());
+
+        const matchesColor = selectedColor ? doc.color === selectedColor : true;
+
+        return matchesSearchQuery && matchesColor;
+    });
+
+    const start = (currentPage - 1) * maxDocuments;
+    const end = start + maxDocuments;
+    const paginatedDocuments = filteredDocuments
+        .sort(
+            (a, b) =>
+                new Date(b.updatedAt).getTime() -
+                new Date(a.updatedAt).getTime()
+        )
+        .slice(start, end);
+
     const pages = Array.from(
-        { length: Math.ceil(documents.length / maxDocuments) },
+        { length: Math.ceil(filteredDocuments.length / maxDocuments) },
         (_, i) => i + 1
     );
-    if (documentPage && parseInt(documentPage as string) > pages.length) {
-        redirect(
-            UpdateUrl(
-                searchParams ? searchParams : {},
-                [{ key: "documentPage", value: "1" }],
-                "/dashboard"
-            )
-        );
-    }
-    const nextPage = parseInt(documentPage as string) + 1;
-    const prevPage = parseInt(documentPage as string) - 1;
+
+    const nextPage = currentPage + 1;
+    const prevPage = currentPage - 1;
+
+    const handleColorFilter = (color: string) => {
+        setSelectedColor(color);
+        setCurrentPage(1);
+    };
 
     return (
         <section className={styles.container}>
-            {type === "job" ? (
-                <section className={styles.resumesContainer}>
-                    {paginatedDocuments.map((doc: any) => {
-                        if (doc.resume) {
-                            doc.resume.currentPage = 1;
-                        }
-                        return (
-                            <JobCard
-                                key={doc.id}
-                                doc={doc}
-                                type={type}
-                                setJob={setJob ? setJob : () => {}}
-                            />
-                        );
-                    })}
-                </section>
-            ) : (
-                <section className={styles.resumesContainer}>
-                    {paginatedDocuments.map((doc: any) => {
-                        // update the resume object to include a 'currentPage' field set to 1
-                        doc.currentPage = 1;
-                        const templates =
-                            type === "resume"
-                                ? getAllResumeTemplates(doc, false)
-                                : getAllCoverLetterTemplates(doc, false);
-                        return (
-                            <DocumentCard
-                                key={doc.id}
-                                templates={templates}
-                                doc={doc}
-                                type={type}
-                            />
-                        );
-                    })}
+            <input
+                type="text"
+                placeholder="Search..."
+                className={styles.searchBar}
+                value={searchQuery}
+                onChange={(e) => {
+                    if (currentPage !== 1) {
+                        setCurrentPage(1);
+                    }
+                    setSearchQuery(e.target.value);
+                }}
+            />
+            {type === "job" && (
+                <section className={styles.sortByColorSection}>
+                    <p className={styles.colorLabel}>Filter By Color: </p>
+                    <motion.button
+                        type="button"
+                        style={{ backgroundColor: selectedColor }}
+                        className={styles.colorFilterContainer}
+                        onClick={() => setShowColorOptions(!showColorOptions)}
+                    ></motion.button>
                 </section>
             )}
+            {showColorOptions && (
+                <motion.section className={styles.buttonOptions}>
+                    <button
+                        type="button"
+                        className={styles.allButton}
+                        onClick={() => {
+                            setSelectedColor("");
+                            setCurrentPage(1);
+                            setShowColorOptions(false);
+                        }}
+                    >
+                        All
+                    </button>
+                    {jobCardColorArray.map((color) => (
+                        <motion.button
+                            key={color}
+                            type="button"
+                            style={{ backgroundColor: color }}
+                            className={styles.colorButton}
+                            onClick={() => {
+                                handleColorFilter(color);
+                                setShowColorOptions(false);
+                            }}
+                        ></motion.button>
+                    ))}
+                </motion.section>
+            )}
+            <section className={styles.resultsContainer}>
+                {type === "job" ? (
+                    <section className={styles.resumesContainer}>
+                        {paginatedDocuments.map((doc: any) => {
+                            if (doc.resume) {
+                                doc.resume.currentPage = 1;
+                            }
+                            return (
+                                <JobCard
+                                    key={doc.id}
+                                    doc={doc}
+                                    type={type}
+                                    setJob={setJob ? setJob : () => {}}
+                                />
+                            );
+                        })}
+                    </section>
+                ) : (
+                    <section className={styles.resumesContainer}>
+                        {paginatedDocuments.map((doc: any) => {
+                            doc.currentPage = 1;
+                            const templates =
+                                type === "resume"
+                                    ? getAllResumeTemplates(doc, false)
+                                    : getAllCoverLetterTemplates(doc, false);
+                            return (
+                                <DocumentCard
+                                    key={doc.id}
+                                    templates={templates}
+                                    doc={doc}
+                                    type={type}
+                                />
+                            );
+                        })}
+                    </section>
+                )}
+            </section>
             {pages.length > 1 && (
                 <section className={styles.paginationContainer}>
-                    <Link
-                        href={UpdateUrl(
-                            searchParams ? searchParams : {},
-                            [{ key: "documentPage", value: "1" }],
-                            "/dashboard"
-                        )}
+                    <button
+                        type="button"
+                        onClick={() => setCurrentPage(1)}
                         className={styles.longButton}
                     >
                         First
-                    </Link>
-                    <Link
-                        href={UpdateUrl(
-                            searchParams ? searchParams : {},
-                            [
-                                {
-                                    key: "documentPage",
-                                    value: (prevPage > 0
-                                        ? prevPage
-                                        : pages.length
-                                    ).toString(),
-                                },
-                            ],
-                            "/dashboard"
-                        )}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() =>
+                            setCurrentPage(
+                                prevPage > 0 ? prevPage : pages.length
+                            )
+                        }
                         className={styles.button}
                     >
                         <div className={styles.iconContainer}>
                             {previousIcon}
                         </div>
-                    </Link>
+                    </button>
                     {pages.map((page: number) => (
-                        <Link
+                        <button
                             key={page}
-                            href={UpdateUrl(
-                                searchParams ? searchParams : {},
-                                [
-                                    {
-                                        key: "documentPage",
-                                        value: page.toString(),
-                                    },
-                                ],
-                                "/dashboard"
-                            )}
+                            type="button"
+                            onClick={() => setCurrentPage(page)}
                             className={`${
-                                parseInt(documentPage as string) === page
+                                currentPage === page
                                     ? styles.active
                                     : styles.buttonNumber
                             }`}
                         >
                             {page}
-                        </Link>
+                        </button>
                     ))}
-                    <Link
-                        href={UpdateUrl(
-                            searchParams ? searchParams : {},
-                            [
-                                {
-                                    key: "documentPage",
-                                    value: (nextPage <= pages.length
-                                        ? nextPage
-                                        : 1
-                                    ).toString(),
-                                },
-                            ],
-                            "/dashboard"
-                        )}
+                    <button
+                        type="button"
+                        onClick={() =>
+                            setCurrentPage(
+                                nextPage <= pages.length ? nextPage : 1
+                            )
+                        }
                         className={styles.button}
                     >
                         <div className={styles.iconContainer}>{nextIcon}</div>
-                    </Link>
-                    <Link
-                        href={UpdateUrl(
-                            searchParams ? searchParams : {},
-                            [
-                                {
-                                    key: "documentPage",
-                                    value: pages.length.toString(),
-                                },
-                            ],
-                            "/dashboard"
-                        )}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setCurrentPage(pages.length)}
                         className={styles.longButton}
                     >
                         Last
-                    </Link>
+                    </button>
                 </section>
             )}
         </section>

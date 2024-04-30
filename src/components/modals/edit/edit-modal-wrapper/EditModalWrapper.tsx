@@ -1005,7 +1005,7 @@ const Summary = ({
                     setIsLoading={setIsLoading}
                     text={summaryText}
                     setText={setSummaryText}
-                    length={50}
+                    length={90}
                     positionTitle=""
                     array={[]}
                 />
@@ -4846,7 +4846,12 @@ const Salutation = ({ document, sectionId }: SectionProps) => {
     );
 };
 
-const Body = ({ sectionId, document }: SectionProps) => {
+const Body = ({
+    sectionId,
+    document,
+    isLoading,
+    setIsLoading,
+}: SectionProps & LoadingProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const [bodyText, setBodyText] = useState(document.information.body);
 
@@ -4878,6 +4883,17 @@ const Body = ({ sectionId, document }: SectionProps) => {
                 >
                     Letter Body
                 </label>
+                <AIButtons
+                    promptId="body"
+                    document={document}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                    text={bodyText}
+                    setText={setBodyText}
+                    length={500}
+                    positionTitle=""
+                    array={[]}
+                />
                 <textarea
                     id="body"
                     className={styles.textArea}
@@ -5112,7 +5128,7 @@ export default function EditModalWrapper({
     sectionId: string;
 }) {
     const [isLoading, setIsLoading] = useState(false);
-    
+
     const closeClicked = (event: any) => {
         if (event.target.id !== "modalContainer") return;
         const newUrl = window.location.href.split("?")[0]; // Remove search parameters
@@ -5201,7 +5217,14 @@ export default function EditModalWrapper({
             section = <Salutation document={document} sectionId={sectionId} />;
             break;
         case sectionId.includes("body"):
-            section = <Body document={document} sectionId={sectionId} />;
+            section = (
+                <Body
+                    document={document}
+                    sectionId={sectionId}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                />
+            );
             break;
         case sectionId.includes("closing"):
             section = <Closing document={document} sectionId={sectionId} />;

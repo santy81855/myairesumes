@@ -1,5 +1,7 @@
 .resumeCard {
     height: auto;
+    min-width: 200px;
+    width: 100%;
     max-width: 400px;
     background-color: rgb(var(--dashboard-accent-color-rgb));
     background: url("/images/dashboard/job-item-background.svg");
@@ -165,6 +167,15 @@
     border: none;
 }
 
+.noTemplatesContainer p {
+    width: 100%;
+    height: 100%;
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
+    text-align: center;
+    margin-block-start: var(--padding-block-medium);
+}
+
 @media screen and (hover: hover) {
     .option:hover {
         background-color: rgb(var(--dashboard-accent-color-hover-rgb));
@@ -174,5 +185,12 @@
 @media screen and (max-width: 768px) {
     .resumeContainer {
         padding-inline: var(--padding-inline-medium);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .resumeCard {
+        min-width: 200px;
+        max-width: 300px;
     }
 }

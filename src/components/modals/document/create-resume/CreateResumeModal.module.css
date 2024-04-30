@@ -73,6 +73,7 @@
     justify-content: center;
     align-items: center;
     font-size: var(--font-size-medium);
+    margin-block-start: var(--padding-block-medium);
 }
 
 .cancelButton:hover {

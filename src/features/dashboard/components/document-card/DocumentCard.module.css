@@ -1,5 +1,7 @@
 .resumeCard {
     height: auto;
+    min-width: 250px;
+    width: 100%;
     max-width: 400px;
     background-color: rgb(var(--dashboard-accent-color-rgb));
     background: url("/images/dashboard/document-background.jpg");
@@ -146,5 +148,12 @@
 @media screen and (max-width: 768px) {
     .resumeContainer {
         padding-inline: var(--padding-inline-medium);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .resumeCard {
+        min-width: 200px;
+        max-width: 300px;
     }
 }

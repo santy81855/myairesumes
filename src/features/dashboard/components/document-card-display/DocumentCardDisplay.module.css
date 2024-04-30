@@ -8,13 +8,23 @@
     padding-block: var(--padding-block-medium);
 }
 
+/*
 .resumesContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: var(--gap-large); /* Adjust as needed */
+    grid-gap: var(--gap-large); 
     width: 100%;
-    margin: 0 auto; /* Center the grid horizontally */
+    margin: 0 auto; 
     position: relative;
+}
+*/
+
+.resumesContainer {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-block-large);
 }
 
 .paginationContainer {
@@ -32,6 +42,9 @@
     align-items: center;
     aspect-ratio: 1/1;
     padding: var(--padding-block-medium);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .buttonNumber {
@@ -45,6 +58,8 @@
     padding: var(--padding-block-medium);
     color: rgb(var(--dashboard-text-color-rgb));
     background-color: rgb(var(--dashboard-background-contrast-color-rgb));
+    border: none;
+    cursor: pointer;
 }
 
 .longButton {
@@ -56,6 +71,9 @@
     width: 40px;
     height: 20px;
     padding: var(--padding-block-medium);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .iconContainer {
@@ -82,6 +100,8 @@
     padding: var(--padding-block-medium);
     background-color: rgb(var(--dashboard-accent-color-rgb));
     color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    border: none;
+    cursor: pointer;
 }
 
 .empty {
@@ -94,6 +114,93 @@
 
 .empty p {
     font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
+}
+
+.searchBar {
+    width: 100%;
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    border: none;
+    border-radius: var(--border-radius-xsmall);
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
+}
+
+.searchBar:focus {
+    outline: none;
+    background-color: rgb(248, 248, 248);
+    border: 1px solid rgb(var(--dashboard-background-color-contrast--rgb));
+}
+
+.resultsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-block-medium);
+    overflow-x: auto;
+    padding-block-end: 3rem;
+    padding-inline: var(--padding-inline-small);
+}
+
+.colorLabel {
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
+}
+
+.sortByColorSection {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-block-small);
+    flex-wrap: wrap;
+}
+
+.colorFilterContainer {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    z-index: 100;
+    align-self: flex-end;
+    border: 1px solid lightgrey;
+}
+
+.buttonOptions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-block-small);
+    z-index: 1;
+}
+
+.colorButton {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1;
+    border: none;
+}
+
+.selectedColor {
+    border: 2px solid rgb(var(--dashboard-text-color-rgb));
+}
+
+.allButton {
+    font-size: var(--font-size-small);
+    border-radius: var(--border-radius-xsmall);
+    padding-block: var(--padding-block-small);
+    padding-inline: var(--padding-inline-medium);
+    cursor: pointer;
+    border: none;
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
     color: rgb(var(--dashboard-text-color-rgb));
 }
 
@@ -120,15 +227,14 @@
     }
 }
 
+/*
 @media screen and (max-width: 700px) {
     .resumesContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        width: auto;
     }
 }
+*/
 
 @media screen and (max-width: 564px) {
     .label {
@@ -139,6 +245,15 @@
     }
     .statusContainer {
         gap: 0.2rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .longButton {
+        display: none;
+    }
+    .buttonNumber {
+        display: none;
     }
 }
 
@@ -154,11 +269,5 @@
     }
     .column {
         gap: var(--padding-block-xsmall);
-    }
-    .longButton {
-        display: none;
-    }
-    .buttonNumber {
-        display: none;
     }
 }
