@@ -27,3 +27,4 @@ export {
     generatePasswordResetToken,
 } from "./lib/token";
 export { generateEmailVerificationCode } from "./lib/code";
+export { sampleResumesArray } from "./lib/document";

@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useAppContext } from "@/app/providers";
 import { updateDocumentArray } from "@/features/editor";
+import { motion } from "framer-motion";
 
 interface DragItem {
     index: number;
@@ -21,6 +22,11 @@ type DraggableContainerProps = {
     id: string;
     orderArray: string[];
     document: any;
+};
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.2 } },
 };
 
 const DraggableContainer = ({
@@ -142,7 +148,10 @@ const DraggableContainer = ({
     drag(isReordering ? containerRef : null);
     drop(isReordering ? containerRef : null);
     return (
-        <div
+        <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
             className={`${styles.sectionContainer} ${
                 isReordering && styles.reorderStyle
             }`}
@@ -157,7 +166,7 @@ const DraggableContainer = ({
             data-handler-id={handlerId}
         >
             {children}
-        </div>
+        </motion.div>
     );
 };
 

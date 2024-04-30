@@ -6,21 +6,17 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-inline: var(--padding-inline-medium);
+    padding-inline: var(--padding-inline-small);
     color: white;
     gap: var(--gap-medium);
+    position: relative;
 }
 
 .right {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@media screen and (max-width: 768px) {
-    .container {
-        width: 90%;
-    }
+    gap: var(--gap-medium);
 }
 
 .iconContainer {
@@ -37,11 +33,19 @@
 }
 
 .iconContainer p {
-    font-size: var(--font-size-small);
+    font-size: calc(var(--font-size-small) / 1.1);
     color: black;
 }
 
-.iconContainer:hover {
+@media (hover: hover) {
+    .iconContainer:hover {
+        background-color: rgb(
+            var(--editor-subtitlebar-button-hover-background-color-rgb)
+        );
+    }
+}
+
+.active {
     background-color: rgb(
         var(--editor-subtitlebar-button-hover-background-color-rgb)
     );
@@ -67,8 +71,67 @@
     height: 15px;
 }
 
-@media screen and (max-width: 500px) {
+.warningModal {
+    position: absolute;
+    width: 250px;
+    top: 100%;
+    left: 0;
+    padding-inline: var(--padding-inline-medium);
+    padding-block: var(--padding-block-small);
+    margin-top: var(--padding-block-medium);
+    margin-left: var(--padding-block-medium);
+    border-radius: var(--border-radius-xsmall);
+    background-color: rgb(249, 249, 249);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6);
+
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.warningModal p {
+    font-size: var(--font-size-small);
+    color: rgb(var(--editor-text-color-rgb));
+}
+
+.warningButtons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--gap-small);
+}
+
+.cancel {
+    background-color: transparent;
+    border: none;
+    padding-inline: var(--padding-block-small);
+    padding-block: var(--padding-block-small);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+}
+
+.delete {
+    background-color: rgb(238, 119, 98);
+    border: none;
+    padding-inline: var(--padding-block-small);
+    padding-block: var(--padding-block-small);
+    font-size: var(--font-size-small);
+    border-radius: var(--border-radius-xsmall);
+    color: white;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 630px) {
     .iconContainer p {
         display: none;
+    }
+
+    .container {
+        width: 100%;
+        padding-inline: 5px;
     }
 }

@@ -11,13 +11,13 @@
 .iconContainer {
     width: 8rem;
     height: 8rem;
-    fill: #a183cf;
+    fill: rgb(var(--dashboard-accent-color-rgb));
     stroke: white;
 }
 
 .title {
     font-size: var(--font-size-xlarge);
-    color: #a183cf;
+    color: rgb(var(--dashboard-accent-color-rgb));
     margin-block-start: var(--padding-block-small);
 }
 
@@ -36,15 +36,15 @@
 }
 
 .subTitle span {
-    color: #a183cf;
+    color: rgb(var(--dashboard-accent-color-rgb));
     font-weight: 700;
     text-decoration: underline;
 }
 
 .button {
     width: 100%;
-    background-color: #a183cf;
-    color: white;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
     border-radius: var(--border-radius-small);
     height: 40px;
     border: none;
@@ -53,10 +53,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: var(--font-size-medium);
 }
 
 .button:hover {
-    background-color: #8a6fbf;
+    background-color: rgb(var(--dashboard-accent-color-hover-rgb));
 }
 
 .cancelButton {
@@ -71,6 +72,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: var(--font-size-medium);
+    margin-block-start: var(--padding-block-medium);
 }
 
 .cancelButton:hover {
@@ -87,7 +90,7 @@
 
 .continueText {
     font-weight: 600;
-    color: #a183cf;
+    color: rgb(var(--dashboard-accent-color-rgb));
 }
 
 .cancelText {
@@ -106,7 +109,7 @@
 
 .label {
     font-size: var(--font-size-medium);
-    color: black;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .input {

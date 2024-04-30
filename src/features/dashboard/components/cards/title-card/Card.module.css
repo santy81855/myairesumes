@@ -1,17 +1,61 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+}
+
+.titleTab {
+    width: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-block-small);
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    padding-inline: var(--padding-inline-medium);
+    border-top-left-radius: var(--border-radius-xsmall);
+    border-top-right-radius: var(--border-radius-xsmall);
+    position: relative;
+    z-index: 1;
+}
+
+.titleTab::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    transform: translateX(30%) skew(45deg);
+    border-top-right-radius: var(--border-radius-xsmall);
+    z-index: -1;
+}
+
+.tabTitle {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+}
+
+.tabNumber {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+}
+
 .container {
-    border-radius: var(--border-radius-xsmall);
+    border-top-right-radius: var(--border-radius-xsmall);
+    border-bottom-right-radius: var(--border-radius-xsmall);
+    border-bottom-left-radius: var(--border-radius-xsmall);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     display: flex;
-    background-color: blue;
+    background-color: white;
     aspect-ratio: 3/2;
-    padding: var(--padding-block-small);
     position: relative;
     cursor: pointer;
     border: none;
-}
-
-.container:hover {
-    filter: blur(1px);
+    overflow: hidden;
 }
 
 .title {
@@ -25,6 +69,7 @@
     text-shadow: -1px 0 #9551ad, 0 1px #9551ad, 1px 0 #9551ad, 0 -1px #9551ad;
     width: 100%;
     text-align: center;
+    z-index: 1;
 }
 
 .number {
@@ -40,4 +85,105 @@
     text-align: right;
     padding-inline-end: var(--padding-block-small);
     text-shadow: -1px 0 #9551ad, 0 1px #9551ad, 1px 0 #9551ad, 0 -1px #9551ad;
+}
+
+.overlayTouch {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-top-right-radius: var(--border-radius-xsmall);
+    border-bottom-right-radius: var(--border-radius-xsmall);
+    border-bottom-left-radius: var(--border-radius-xsmall);
+    background-color: rgb(0, 0, 0, 0.3);
+    position: relative;
+    padding: var(--padding-block-small);
+}
+
+.overlayTouch svg {
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    transform: translate(-60%, -70%);
+    width: 100%;
+    height: 100%;
+}
+
+.textTouch {
+    font-size: var(--font-size-xlarge);
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    text-align: center;
+}
+
+.numberTextTouch {
+    font-size: var(--font-size-x2large);
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
+    text-align: center;
+}
+
+.overlay {
+    display: none;
+}
+
+@media screen and (hover: hover) {
+    .overlayTouch {
+        display: none;
+    }
+    .overlay {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: var(--padding-block-small);
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        border-top-right-radius: var(--border-radius-xsmall);
+        border-bottom-right-radius: var(--border-radius-xsmall);
+        border-bottom-left-radius: var(--border-radius-xsmall);
+        background-color: rgb(0, 0, 0, 0.3);
+        position: relative;
+        padding: var(--padding-block-small);
+    }
+
+    .overlay svg {
+        position: absolute;
+        top: 100%;
+        left: 100%;
+        transform: translate(-60%, -70%);
+        width: 100%;
+        height: 100%;
+    }
+
+    .iconContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .iconContainer svg {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 100%;
+    }
+
+    .text {
+        font-size: var(--font-size-xlarge);
+        color: rgb(var(--dashboard-accent-color-contrast-rgb));
+        text-align: center;
+    }
+
+    .numberText {
+        font-size: var(--font-size-x2large);
+        color: rgb(var(--dashboard-accent-color-contrast-rgb));
+        text-align: center;
+    }
 }

@@ -4,116 +4,223 @@ import {
     getAllCoverLetterTemplates,
 } from "@/features/editor";
 import styles from "./DocumentCardDisplay.module.css";
-import {
-    Basic,
-    Fresh,
-    Impact,
-    Nexus,
-    Nova,
-    Sharp,
-    Vivid,
-} from "@/features/resume";
-import { formatDateMonthDayYear } from "@/lib/date";
-import { useState, useEffect } from "react";
+import { DocumentCard, JobCard } from "@/features/dashboard";
+import { useState } from "react";
+import { nextIcon, previousIcon } from "@/components/icons/iconSVG";
+import { motion } from "framer-motion";
+import { jobCardColorArray } from "@/features/dashboard";
 
 type DocumentCardDisplayProps = {
+    searchParams?: { [key: string]: string | string[] | undefined };
     documents: any[];
     type: string;
+    setJob?: (job: any) => void;
 };
 
-const DocumentCardDisplay = ({ documents, type }: DocumentCardDisplayProps) => {
+const DocumentCardDisplay = ({
+    searchParams,
+    documents,
+    type,
+    setJob,
+}: DocumentCardDisplayProps) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [documentsPerPage, setDocumentsPerPage] = useState(10);
-    const indexOfLastDocument = currentPage * documentsPerPage;
-    const indexOfFirstDocument = indexOfLastDocument - documentsPerPage;
-    const currentDocuments = documents.slice(
-        indexOfFirstDocument,
-        indexOfLastDocument
+    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedColor, setSelectedColor] = useState("");
+    const [showColorOptions, setShowColorOptions] = useState(false);
+    const maxDocuments = 20;
+
+    const filteredDocuments = documents.filter((doc) => {
+        const matchesSearchQuery =
+            // filter jobs by the company name and job name and filter resumes and cover letters by the document name, job title, and position
+            type === "job"
+                ? doc.companyName
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase()) ||
+                  doc.jobName.toLowerCase().includes(searchQuery.toLowerCase())
+                : doc.information.documentName
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase()) ||
+                  doc.information.jobTitle
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase()) ||
+                  doc.information.position
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase());
+
+        const matchesColor = selectedColor ? doc.color === selectedColor : true;
+
+        return matchesSearchQuery && matchesColor;
+    });
+
+    const start = (currentPage - 1) * maxDocuments;
+    const end = start + maxDocuments;
+    const paginatedDocuments = filteredDocuments
+        .sort(
+            (a, b) =>
+                new Date(b.updatedAt).getTime() -
+                new Date(a.updatedAt).getTime()
+        )
+        .slice(start, end);
+
+    const pages = Array.from(
+        { length: Math.ceil(filteredDocuments.length / maxDocuments) },
+        (_, i) => i + 1
     );
 
-    const handleNextPage = () => {
-        if (indexOfLastDocument < documents.length) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
+    const nextPage = currentPage + 1;
+    const prevPage = currentPage - 1;
 
-    const handlePreviousPage = () => {
-        if (indexOfFirstDocument > 0) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
-
-    const handleFirstPage = () => {
+    const handleColorFilter = (color: string) => {
+        setSelectedColor(color);
         setCurrentPage(1);
     };
 
-    const handleLastPage = () => {
-        setCurrentPage(Math.ceil(documents.length / documentsPerPage));
-    };
-
     return (
-        <>
-            <section className={styles.resumesContainer}>
-                {currentDocuments.map((doc: any) => {
-                    // update the resume object to include a 'currentPage' field set to 1
-                    doc.currentPage = 1;
-                    const templates =
-                        type === "resume"
-                            ? getAllResumeTemplates(doc, false)
-                            : getAllCoverLetterTemplates(doc, false);
-                    return (
-                        <section className={styles.resumeCard} key={doc.id}>
-                            <div className={styles.resumeContainer}>
-                                <div className={styles.resume}>
-                                    {
-                                        templates[
-                                            doc.information
-                                                .template as keyof typeof templates
-                                        ]?.previewComponent
-                                    }
-                                </div>
-                            </div>
-                            <div className={styles.resumeInfoContainer}>
-                                <div className={styles.resumeInfo}>
-                                    <p className={styles.title}>
-                                        {doc.information.documentName}
-                                    </p>
-                                    <p className={styles.date}>
-                                        {formatDateMonthDayYear(doc.updatedAt)}
-                                    </p>
-                                </div>
-                            </div>
-                        </section>
-                    );
-                })}
+        <section className={styles.container}>
+            <input
+                type="text"
+                placeholder="Search..."
+                className={styles.searchBar}
+                value={searchQuery}
+                onChange={(e) => {
+                    if (currentPage !== 1) {
+                        setCurrentPage(1);
+                    }
+                    setSearchQuery(e.target.value);
+                }}
+            />
+            {type === "job" && (
+                <section className={styles.sortByColorSection}>
+                    <p className={styles.colorLabel}>Filter By Color: </p>
+                    <motion.button
+                        type="button"
+                        style={{ backgroundColor: selectedColor }}
+                        className={styles.colorFilterContainer}
+                        onClick={() => setShowColorOptions(!showColorOptions)}
+                    ></motion.button>
+                </section>
+            )}
+            {showColorOptions && (
+                <motion.section className={styles.buttonOptions}>
+                    <button
+                        type="button"
+                        className={styles.allButton}
+                        onClick={() => {
+                            setSelectedColor("");
+                            setCurrentPage(1);
+                            setShowColorOptions(false);
+                        }}
+                    >
+                        All
+                    </button>
+                    {jobCardColorArray.map((color) => (
+                        <motion.button
+                            key={color}
+                            type="button"
+                            style={{ backgroundColor: color }}
+                            className={styles.colorButton}
+                            onClick={() => {
+                                handleColorFilter(color);
+                                setShowColorOptions(false);
+                            }}
+                        ></motion.button>
+                    ))}
+                </motion.section>
+            )}
+            <section className={styles.resultsContainer}>
+                {type === "job" ? (
+                    <section className={styles.resumesContainer}>
+                        {paginatedDocuments.map((doc: any) => {
+                            if (doc.resume) {
+                                doc.resume.currentPage = 1;
+                            }
+                            return (
+                                <JobCard
+                                    key={doc.id}
+                                    doc={doc}
+                                    type={type}
+                                    setJob={setJob ? setJob : () => {}}
+                                />
+                            );
+                        })}
+                    </section>
+                ) : (
+                    <section className={styles.resumesContainer}>
+                        {paginatedDocuments.map((doc: any) => {
+                            doc.currentPage = 1;
+                            const templates =
+                                type === "resume"
+                                    ? getAllResumeTemplates(doc, false)
+                                    : getAllCoverLetterTemplates(doc, false);
+                            return (
+                                <DocumentCard
+                                    key={doc.id}
+                                    templates={templates}
+                                    doc={doc}
+                                    type={type}
+                                />
+                            );
+                        })}
+                    </section>
+                )}
             </section>
-            <section className={styles.paginationContainer}>
-                <button
-                    className={styles.paginationButton}
-                    onClick={handleFirstPage}
-                >
-                    First
-                </button>
-                <button
-                    className={styles.paginationButton}
-                    onClick={handlePreviousPage}
-                >
-                    Previous
-                </button>
-                <button
-                    className={styles.paginationButton}
-                    onClick={handleNextPage}
-                >
-                    Next
-                </button>
-                <button
-                    className={styles.paginationButton}
-                    onClick={handleLastPage}
-                >
-                    Last
-                </button>
-            </section>
-        </>
+            {pages.length > 1 && (
+                <section className={styles.paginationContainer}>
+                    <button
+                        type="button"
+                        onClick={() => setCurrentPage(1)}
+                        className={styles.longButton}
+                    >
+                        First
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() =>
+                            setCurrentPage(
+                                prevPage > 0 ? prevPage : pages.length
+                            )
+                        }
+                        className={styles.button}
+                    >
+                        <div className={styles.iconContainer}>
+                            {previousIcon}
+                        </div>
+                    </button>
+                    {pages.map((page: number) => (
+                        <button
+                            key={page}
+                            type="button"
+                            onClick={() => setCurrentPage(page)}
+                            className={`${
+                                currentPage === page
+                                    ? styles.active
+                                    : styles.buttonNumber
+                            }`}
+                        >
+                            {page}
+                        </button>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={() =>
+                            setCurrentPage(
+                                nextPage <= pages.length ? nextPage : 1
+                            )
+                        }
+                        className={styles.button}
+                    >
+                        <div className={styles.iconContainer}>{nextIcon}</div>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setCurrentPage(pages.length)}
+                        className={styles.longButton}
+                    >
+                        Last
+                    </button>
+                </section>
+            )}
+        </section>
     );
 };
 

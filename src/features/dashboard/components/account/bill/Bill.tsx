@@ -121,6 +121,7 @@ const Bill = async ({ currentUser, searchParams }: BillProps) => {
                                 </div>
                                 <p className={styles.text}>Source</p>
                                 <Link
+                                    title="Update Payment Method"
                                     href={UpdateUrl(
                                         searchParams ? searchParams : {},
                                         [
@@ -153,7 +154,9 @@ const Bill = async ({ currentUser, searchParams }: BillProps) => {
                                 </div>
                                 <p className={styles.text}>Total</p>
                             </section>
-                            <p className={styles.subText}>$4.99</p>
+                            <p className={styles.subText}>
+                                ${(subscription as any)?.plan?.amount / 100}
+                            </p>
                         </section>
                     </section>
                 </section>

@@ -13,13 +13,12 @@
     height: 100%;
     object-fit: contain;
     border-radius: 50%;
-    background-color: rgb(242, 242, 242);
+    background-color: rgb(var(--dashboard-background-color-rgb));
 }
 
 .imageInput {
     content: "";
     position: absolute;
-    border: 2px dashed #a183cf;
     border-radius: 50%;
     width: calc(100% + 20px);
     height: calc(100% + 20px);
@@ -38,8 +37,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    stroke: rgb(186, 186, 186);
-    fill: rgb(186, 186, 186);
+    stroke: rgb(var(--dashboard-accent-color-rgb));
+    fill: rgb(var(--dashboard-accent-color-rgb));
     stroke-width: 0.5;
     cursor: pointer;
 }
@@ -52,16 +51,20 @@
     opacity: 0.5;
 }
 
-.iconContainer:hover {
-    stroke: rgb(94, 94, 94);
-    fill: rgb(84, 84, 84);
-    opacity: 1;
-}
-
 .sizeLabel {
     font-size: var(--font-size-small);
     width: 100%;
     text-align: center;
     font-weight: 600;
-    color: #797979;
+    color: rgb(var(--dashboard-text-color-rgb));
+    margin-top: calc(var(--padding-block-small) / 2);
+}
+
+/*hover media query*/
+@media screen and (hover: hover) {
+    .iconContainer:hover {
+        stroke: rgb(var(--dashboard-accent-color-hover-rgb));
+        fill: rgb(var(--dashboard-accent-color-hover-rgb));
+        opacity: 1;
+    }
 }

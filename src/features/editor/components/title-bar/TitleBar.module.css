@@ -5,12 +5,109 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding-inline: var(--padding-inline-medium);
     color: white;
     gap: var(--gap-medium);
 }
 
+.titleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-medium);
+    position: relative;
+}
+
 .title {
+    font-size: var(--font-size-medium);
     color: white;
+    flex-grow: 1;
+    /*show ellipses on overflow*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-medium);
+}
+
+.iconContainer svg {
+    width: 15px;
+    height: 15px;
+    fill: white;
+}
+
+.iconContainer:hover svg {
+    fill: rgba(255, 255, 255, 0.724);
+}
+
+.inputContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-medium);
+    justify-content: space-between;
+}
+
+.inputContainer input {
+    flex-grow: 1;
+    padding-block: calc(var(--padding-block-small) / 2);
+    padding-inline-start: var(--padding-inline-small);
+    border: none;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.inputContainer input:focus {
+    outline: none;
+}
+
+.saveIconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+}
+
+.saveIconContainer svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    stroke: white;
+}
+
+.saveIconContainer:hover svg {
+    fill: rgba(255, 255, 255, 0.5);
+    stroke: rgba(255, 255, 255, 0.5);
+}
+
+.cancelIconContainer svg {
+    width: 15px;
+    height: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    .title {
+        font-size: var(--font-size-small);
+    }
 }

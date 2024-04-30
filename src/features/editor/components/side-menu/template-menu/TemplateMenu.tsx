@@ -36,6 +36,7 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
     const [allTemplates, setAllTemplates] = useState<any>([]);
     const [allKeywords, setAllKeywords] = useState<string[]>([]);
     const [results, setResults] = useState<any[]>([]);
+    const [hoverIndex, setHoverIndex] = useState(-1);
 
     useEffect(() => {
         const doc = documentArray.find(
@@ -212,14 +213,25 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                     </motion.button>
                 </motion.section>
             </motion.section>
-            <motion.section className={styles.grid}>
-                <motion.div className={styles.template}>
+            <motion.section className={styles.row}>
+                <motion.div
+                    className={styles.template}
+                    onMouseEnter={() => setHoverIndex(0)}
+                    onMouseLeave={() => setHoverIndex(-1)}
+                >
                     <motion.div className={styles.templatePreview}>
                         {currentTemplate?.previewComponent}
+                        {hoverIndex === 0 && (
+                            <>
+                                <div
+                                    className={styles.templateDiagonalContainer}
+                                ></div>
+                                <p className={styles.templateDiagonal}>
+                                    {currentTemplate.name}
+                                </p>
+                            </>
+                        )}
                     </motion.div>
-                    <p className={styles.templateName}>
-                        {currentTemplate?.name}
-                    </p>
                 </motion.div>
                 {results.map((template: any, index: number) => {
                     return (
@@ -227,13 +239,24 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                             key={index}
                             className={styles.template}
                             onClick={() => handleClick(template)}
+                            onMouseEnter={() => setHoverIndex(index + 1)}
+                            onMouseLeave={() => setHoverIndex(-1)}
                         >
                             <motion.div className={styles.templatePreview}>
                                 {template.component}
+                                {hoverIndex === index + 1 && (
+                                    <>
+                                        <div
+                                            className={
+                                                styles.templateDiagonalContainer
+                                            }
+                                        ></div>
+                                        <p className={styles.templateDiagonal}>
+                                            {template.name}
+                                        </p>
+                                    </>
+                                )}
                             </motion.div>
-                            <p className={styles.templateName}>
-                                {template.name}
-                            </p>
                         </motion.div>
                     );
                 })}

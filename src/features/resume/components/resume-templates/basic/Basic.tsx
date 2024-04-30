@@ -173,7 +173,10 @@ const Basic = ({ document, isEditor, isDownload, isPreview }: BasicProps) => {
                                     }
                                     document={document}
                                 >
-                                    <SectionContainerEditor document={document}>
+                                    <SectionContainerEditor
+                                        sectionId={section}
+                                        document={document}
+                                    >
                                         <Section
                                             type="resume"
                                             sectionId={section}

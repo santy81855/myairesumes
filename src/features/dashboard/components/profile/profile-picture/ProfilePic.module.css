@@ -9,8 +9,6 @@
     border-radius: var(--border-radius-xsmall);
     padding-block: var(--padding-block-medium);
     position: relative;
-    grid-area: profilePic;
-    background-color: rgba(244, 244, 244, 0.3);
     backdrop-filter: blur(10px);
 }
 
@@ -42,15 +40,15 @@
     height: 100%;
     object-fit: contain;
     border-radius: 50%;
-    background-color: rgb(242, 242, 242);
+    background-color: rgb(var(--dashboard-background-color-rgb));
 }
 
 .label {
     font-size: var(--font-size-small);
     z-index: 1;
     width: 100%;
-    text-align: left;
-    color: #797979;
+    text-align: center;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .nameInfo {
@@ -62,16 +60,13 @@
     gap: var(--padding-block-small);
 }
 
-.nameLabel {
-    text-align: center;
-}
-
 .name {
     font-size: var(--font-size-medium);
     font-weight: 600;
     z-index: 1;
     max-width: 20ch;
     text-align: center;
+    color: rgb(var(--dashboard-text-color-rgb));
 }
 
 .iconContainer {
@@ -84,19 +79,16 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
+    outline: 2px solid rgb(var(--dashboard-background-color-rgb));
     cursor: pointer;
-}
-
-.iconContainer:hover {
-    background-color: rgb(242, 242, 242);
 }
 
 .iconContainer svg {
     width: 30px;
     height: 30px;
-    stroke: rgb(186, 186, 186);
-    fill: rgb(186, 186, 186);
+    stroke: rgb(var(--dashboard-text-color-rgb));
+    fill: rgb(var(--dashboard-text-color-rgb));
     stroke-width: 0.5;
 }
 
@@ -122,30 +114,28 @@
     width: 100%;
     height: 30px;
     border: 1px solid #e1e1e1;
-
+    color: rgb(var(--dashboard-text-color-rgb));
     padding-inline-start: var(--padding-block-small);
     font-size: var(--font-size-small);
 }
 
 .input:focus {
     outline: none;
-    border: 1px solid #a183cf;
+    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
 }
 
 .submitButton {
     width: 100%;
-    background-color: #a183cf;
-    color: white;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    color: rgb(var(--dashboard-accent-color-contrast-rgb));
     min-height: 40px;
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.submitButton:hover {
-    background-color: #8a6fbf;
+    border-radius: var(--border-radius-xsmall);
+    font-size: var(--font-size-small);
 }
 
 .buttonContainer {
@@ -159,7 +149,7 @@
 
 .cancelButton {
     width: 100%;
-    background-color: #eaeaea;
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
     color: rgb(22, 22, 22);
     height: 40px;
     border: none;
@@ -167,8 +157,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: var(--border-radius-xsmall);
+    font-size: var(--font-size-small);
 }
 
-.cancelButton:hover {
-    background-color: #ffbcbc;
+@media screen and (hover: hover) {
+    .cancelButton:hover {
+        background-color: rgb(
+            var(--dashboard-background-color-contrast-rgb),
+            0.5
+        );
+    }
+    .submitButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+    .iconContainer:hover svg {
+        stroke: rgb(var(--dashboard-accent-color-hover-rgb));
+        fill: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
 }

@@ -5,6 +5,7 @@ import {
     saveIcon,
     orderIcon,
     trashIcon,
+    editIcon,
 } from "@/components/icons/iconSVG";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,6 +30,8 @@ import {
     getAllCoverLetterTemplates,
     updateDocument,
     updateCoverLetter,
+    isLastJobDocumentAction,
+    deleteJobAction,
 } from "@/features/editor";
 
 const SubTitleBar = () => {
@@ -38,9 +41,13 @@ const SubTitleBar = () => {
         setIsDocumentLoading,
         isReordering,
         setIsReordering,
+        setIsEditing,
+        isEditing,
     } = useAppContext();
     const [currentDocument, setCurrentDocument] = useState<any>(null);
     const [currentTemplate, setCurrentTemplate] = useState<any>(null);
+    const [warningJob, setWarningJob] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const params = useParams();
     const type = params.slug[0];
@@ -106,43 +113,131 @@ const SubTitleBar = () => {
         }
     };
 
-    const handleDelete = async () => {
+    const handleFinalDelete = async (e: any) => {
+        e.preventDefault();
+        if (!currentDocument) return;
         setIsDocumentLoading(true);
-        if (!currentDocument) {
-            setIsDocumentLoading(false);
-            return;
-        }
-        const response =
-            type === "resume"
-                ? await deleteResumeAction(currentDocument.id)
-                : await deleteCoverLetterAction(currentDocument.id);
-        if (response.error) {
-            toast.error("Error deleting currentDocument.");
-            setIsDocumentLoading(false);
-        } else {
+        try {
+            const jobId = warningJob.id;
+            setWarningJob(null);
+            // remove the current document from the documentArray and set the new documentArray
+            const newDocumentArray = documentArray.filter(
+                (doc) => doc.id !== currentDocument.id
+            );
+            setDocumentArray(newDocumentArray);
+
+            if (type === "resume") {
+                await deleteResumeAction(currentDocument.id);
+            } else {
+                await deleteCoverLetterAction(currentDocument.id);
+            }
+
+            // delete the job
+            await deleteJobAction(jobId);
+
             // wait for 1 second and then redirect to the dashboard
             if (type === "resume") {
                 // wait for 1 second and then redirect to the dashboard
-                setTimeout(() => {
-                    permanentRedirect("/dashboard?menu=resumes");
-                }, 1000);
+                router.push("/dashboard?menu=resumes&documentPage=1");
             } else {
                 // wait for 1 second and then redirect to the dashboard
-                setTimeout(() => {
-                    permanentRedirect("/dashboard?menu=cover-letters");
-                }, 1000);
+                router.push("/dashboard?menu=cover-letters&documentPage=1");
             }
+        } catch (error) {
+            toast.error("Error deleting document.");
+            setIsDocumentLoading(false);
         }
+    };
+
+    const handleInitialDelete = async (e: any) => {
+        e.preventDefault();
+        if (!currentDocument) {
+            return;
+        }
+        setIsDocumentLoading(true);
+        try {
+            // check if it is the last job document
+            const isLastJobDocument = await isLastJobDocumentAction(
+                currentDocument.id,
+                type
+            );
+
+            if (isLastJobDocument) {
+                setWarningJob(isLastJobDocument);
+                setIsDocumentLoading(false);
+                return;
+            }
+
+            // remove the current document from the documentArray and set the new documentArray
+            const newDocumentArray = documentArray.filter(
+                (doc) => doc.id !== currentDocument.id
+            );
+            setDocumentArray(newDocumentArray);
+
+            if (type === "resume") {
+                await deleteResumeAction(currentDocument.id);
+            } else {
+                await deleteCoverLetterAction(currentDocument.id);
+            }
+
+            // wait for 1 second and then redirect to the dashboard
+            if (type === "resume") {
+                // wait for 1 second and then redirect to the dashboard
+                router.push("/dashboard?menu=resumes&documentPage=1");
+            } else {
+                // wait for 1 second and then redirect to the dashboard
+                router.push("/dashboard?menu=cover-letters&documentPage=1");
+            }
+        } catch (error) {
+            toast.error("Error deleting document.");
+            setIsDocumentLoading(false);
+        }
+    };
+
+    const handleClickReorder = () => {
+        setIsEditing(false);
+        setIsReordering(!isReordering);
+    };
+
+    const handleClickEdit = () => {
+        setIsReordering(false);
+        setIsEditing(!isEditing);
     };
 
     return (
         <section className={styles.container}>
             {currentDocument && (
                 <>
-                    <form title="delete" action={handleDelete}>
+                    <form title="delete" onSubmit={handleInitialDelete}>
+                        {warningJob && (
+                            <section className={styles.warningModal}>
+                                <p>
+                                    Since you are going to delete the only
+                                    document for your job application at{" "}
+                                    {warningJob.companyName}, this job will also
+                                    be deleted.
+                                </p>
+                                <p>Continue?</p>
+                                <section className={styles.warningButtons}>
+                                    <button
+                                        onClick={() => setWarningJob(null)}
+                                        className={styles.cancel}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={handleFinalDelete}
+                                        className={styles.delete}
+                                    >
+                                        Delete
+                                    </button>
+                                </section>
+                            </section>
+                        )}
                         <button
                             type="submit"
                             className={`${styles.iconContainer} ${styles.deleteIcon}`}
+                            disabled={warningJob || isLoading}
                         >
                             {trashIcon}
                             <p>Delete</p>
@@ -150,9 +245,22 @@ const SubTitleBar = () => {
                     </form>
                     <section className={styles.right}>
                         <button
-                            title="reorder"
-                            className={styles.iconContainer}
-                            onClick={() => setIsReordering(!isReordering)}
+                            title="edit mode"
+                            className={`${styles.iconContainer} ${
+                                isEditing && styles.active
+                            }`}
+                            onClick={handleClickEdit}
+                        >
+                            {editIcon}
+                            {!isEditing && <p>Edit Mode</p>}
+                            {isEditing && <p>Exit Edit Mode</p>}
+                        </button>
+                        <button
+                            title="reorder mode"
+                            className={`${styles.iconContainer} ${
+                                isReordering && styles.active
+                            }`}
+                            onClick={handleClickReorder}
                         >
                             {orderIcon}
                             {!isReordering && <p>Reorder Mode</p>}

@@ -178,7 +178,10 @@ const Velocity = ({
                                     }
                                     document={document}
                                 >
-                                    <SectionContainerEditor document={document}>
+                                    <SectionContainerEditor
+                                        sectionId={section}
+                                        document={document}
+                                    >
                                         <Section
                                             type="resume"
                                             sectionId={section}

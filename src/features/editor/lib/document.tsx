@@ -13,6 +13,7 @@ import {
 } from "@/features/resume";
 
 import { BasicL, FreshL } from "@/features/cover-letter";
+import { text } from "stream/consumers";
 
 export const updateDocument = (
     document: any,
@@ -30,9 +31,9 @@ export const updateDocument = (
             "experience",
             "colBreak",
             "contactVertical",
-            "skillsBullet",
+            "skillsCategory",
             "educationShort",
-            "languages",
+            "languagesBullet",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -57,7 +58,7 @@ export const updateDocument = (
             "contactVertical",
             "skillsVivid",
             "educationShort",
-            "languages",
+            "languagesBullet",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -79,10 +80,10 @@ export const updateDocument = (
             "summary",
             "experience",
             "colBreak",
-            "contactLuminary",
-            "skillsBullet",
+            "contactVerticalIcons",
+            "skillsCategory",
             "educationShort",
-            "languages",
+            "languagesBullet",
         ];
         // make the first array in sectionOrder equal to newArr
         // add the newArr to the newSectionOrder
@@ -112,7 +113,7 @@ export const updateDocument = (
                                 .toUpperCase()}${template.slice(1)}`;
                         }
                         if (item.includes("skills")) {
-                            return "skillsBullet";
+                            return "skillsCategory";
                         }
                         return item;
                     })
@@ -988,6 +989,23 @@ export const updateDocumentArray = (updatedDocument: any, array: any) => {
     return newDocumentArray;
 };
 
+export const getAllUserJobs = async (userId: string) => {
+    const response = await fetch(
+        `${process.env.APP_DOMAIN}/api/jobs?userId=${userId}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            next: { tags: [userId] },
+        }
+    );
+    if (!response.ok) {
+        return null;
+    }
+    return await response.json();
+};
+
 export const getAllUserResumes = async (userId: string) => {
     const response = await fetch(
         `${process.env.APP_DOMAIN}/api/resumes?userId=${userId}`,
@@ -1089,33 +1107,55 @@ export const initializeNewCoverLetter = (
             baseSectionGap: 11,
             backgroundColor: "#ffffff",
             textColor: "#000000",
-            accentBackgroundColor: "#5B7FC5",
+            accentBackgroundColor: "#b5b357",
             accentTextColor: "white",
+        },
+        sectionEdit: {
+            header: {
+                fontRatio: 1,
+                showPosition: true,
+                showSummary: true,
+                showSocial: true,
+            },
+            body: {
+                fontRatio: 1,
+            },
+            salutation: {
+                fontRatio: 1,
+                showCompanyName: true,
+                showAddress1: true,
+                showAddress2: false,
+                showAddress3: true,
+            },
+            contact: {
+                fontRatio: 1,
+                showEmail: true,
+                showPhone: true,
+                showWebsite: true,
+                textAlignment: "left",
+            },
+            closing: {
+                fontRatio: 1,
+            },
         },
         documentName: name,
         jobTitle: job,
         description,
-        template: "basic",
+        template: "nova",
         font: "Times-Roman",
         firstName: first,
         lastName: last,
-        sectionOrder: [
-            [
-                "headerBasic",
-                "date",
-                "employerInfo",
-                "salutation",
-                "body",
-                "closing",
-            ],
-        ],
+        sectionOrder: [["headerNova", "salutation", "body", "closing"]],
         numPages: 1,
         position: "Example Position",
         date: formattedDate,
         companyName: "Example Company",
+        address1: "123 Example St.",
+        address2: "Suite 123",
+        address3: "Example City, EX 12345",
         salutation: "Dear Hiring Manager,",
-        closing: "Sincerely,",
-        body: "I am writing to express my keen interest in the [Job Title] position at [Company Name], as advertised. With a background in [Your Field of Expertise], combined with my strong passion for [Related Skill/Industry], I am confident in my ability to contribute effectively to your team. Throughout my career, I have honed valuable skills in [Key Skill 1], [Key Skill 2], and [Key Skill 3], which I believe align well with the requirements of the role. I am particularly drawn to [Specific Aspect of Company or Position] and am eager to leverage my expertise to [Contribute to Company Goals/Projects/Initiatives]. I am impressed by [Company Name]'s commitment to [Company Value/Initiative] and am excited about the opportunity to be part of a dynamic and innovative team. I am eager to bring my unique perspective and skills to [Company Name] and am confident that my background makes me a strong fit for this role. Thank you for considering my application. I look forward to the possibility of discussing how my skills and experiences align with the needs of [Company Name].",
+        closing: "Sincerely,\nYour Name",
+        body: "I am writing to express my keen interest in the [Job Title] position at [Company Name], as advertised. With a background in [Your Field of Expertise], combined with my strong passion for [Related Skill/Industry], I am confident in my ability to contribute effectively to your team. Throughout my career, I have honed valuable skills in [Key Skill 1], [Key Skill 2], and [Key Skill 3], which I believe align well with the requirements of the role. \n\nI am particularly drawn to [Specific Aspect of Company or Position] and am eager to leverage my expertise to [Contribute to Company Goals/Projects/Initiatives]. I am impressed by [Company Name]'s commitment to [Company Value/Initiative] and am excited about the opportunity to be part of a dynamic and innovative team. I am eager to bring my unique perspective and skills to [Company Name] and am confident that my background makes me a strong fit for this role. Thank you for considering my application. I look forward to the possibility of discussing how my skills and experiences align with the needs of [Company Name].",
         contactInfo: {
             email,
             phone,
@@ -1234,29 +1274,85 @@ export const initializeNewResume = (
     const data = {
         currentPage: 1,
         style: {
-            baseFontSize: 11,
-            baseMarginSize: 11,
-            baseSectionGap: 11,
+            baseFontSize: 12,
+            baseMarginSize: 18,
+            baseSectionGap: 16,
             backgroundColor: "#ffffff",
             textColor: "#000000",
-            accentBackgroundColor: "#5B7FC5",
+            accentBackgroundColor: "#b5b357",
             accentTextColor: "white",
+        },
+        sectionEdit: {
+            header: {
+                fontRatio: 1,
+                showPosition: true,
+                showSummary: true,
+                showSocial: true,
+            },
+            name: {
+                fontRatio: 1,
+                textAlignment: "center",
+            },
+            position: {
+                fontRatio: 1,
+                textAlignment: "center",
+            },
+            summary: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            contact: {
+                fontRatio: 1,
+                showEmail: true,
+                showPhone: true,
+                showWebsite: true,
+                textAlignment: "left",
+            },
+            experience: {
+                fontRatio: 1,
+                dateFormat: "long",
+                showStartDate: true,
+                showSummary: true,
+            },
+            education: {
+                fontRatio: 1,
+                dateFormat: "long",
+                showStartDate: true,
+                showGpa: false,
+                showBullets: true,
+            },
+            skills: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            languages: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            interests: {
+                fontRatio: 1,
+                textAlignment: "left",
+            },
+            projects: {
+                fontRatio: 1,
+                showSummary: true,
+            },
         },
         documentName: name,
         jobTitle: job,
         description,
-        template: "basic",
+        template: "sharp",
         font: "Times-Roman",
         firstName: first,
         lastName: last,
         sectionOrder: [
             [
-                "headerBasic",
+                "headerSharp",
                 "summary",
                 "experience",
                 "educationDetailed",
                 "skillsBullet",
-                "languages",
+                "languagesComma",
             ],
         ],
         numPages: 1,
@@ -1277,6 +1373,24 @@ export const initializeNewResume = (
             "Example Skill 2.",
             "Example Skill 3.",
         ],
+        skillCategoryArray: [
+            {
+                category: "Example Category 1",
+                skills: [
+                    "Example Skill 1",
+                    "Example Skill 2",
+                    "Example Skill 3",
+                ],
+            },
+            {
+                category: "Example Category 2",
+                skills: [
+                    "Example Skill 1",
+                    "Example Skill 2",
+                    "Example Skill 3",
+                ],
+            },
+        ],
         experienceArray: newExperienceArray,
         educationArray: newEducationArray,
         languageArray: ["langauge 1", "language 2", "language 3"],
@@ -1289,6 +1403,17 @@ export const initializeNewResume = (
         projectArray: [
             {
                 name: "Example Project Name",
+                demo: "https://example-demo-link.com",
+                source: "https://example-source-link.com",
+                summary: "Example summary.",
+                bullets: [
+                    "Example bullet 1.",
+                    "Example bullet 2.",
+                    "Example bullet 3.",
+                ],
+            },
+            {
+                name: "Example Project Name 2",
                 demo: "https://example-demo-link.com",
                 source: "https://example-source-link.com",
                 summary: "Example summary.",

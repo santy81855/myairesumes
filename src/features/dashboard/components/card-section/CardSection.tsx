@@ -11,21 +11,21 @@ const CardSection = ({ currentUser }: CardSectionProps) => {
             <Card
                 title="Jobs"
                 number={currentUser?.numberJobs}
-                url="/images/backgrounds/cloud1.jpg"
+                url="/images/dashboard/job-background.svg"
                 gridArea="jobs"
                 key="jobs"
             />
             <Card
                 title="Resumes"
                 number={currentUser?.numberResumes}
-                url="/images/backgrounds/cloud2.png"
+                url="/images/dashboard/resume-background.svg"
                 gridArea="resumes"
                 key="resumes"
             />
             <Card
                 title="Cover Letters"
                 number={currentUser?.numberCoverLetters}
-                url="/images/backgrounds/cloud3.jpg"
+                url="/images/dashboard/cover-letter-background.svg"
                 gridArea="cover-letters"
                 key="cover-letters"
             />

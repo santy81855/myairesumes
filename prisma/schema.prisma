@@ -6,9 +6,9 @@ generator client {
 }
 
 datasource db {
-    provider     = "mysql"
-    url          = env("DATABASE_URL")
-    relationMode = "prisma"
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
+    directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -34,6 +34,7 @@ model User {
     subscription       Subscription?
     resume             Resume[]
     coverLetter        CoverLetter[]
+    job                Job[]
 }
 
 model Session {
@@ -88,13 +89,32 @@ model Subscription {
     userId               String   @unique
 }
 
+model Job {
+    id          String       @id @unique @default(cuid())
+    userId      String
+    companyName String
+    jobName     String
+    color       String
+    hasApplied  Boolean      @default(false)
+    information Json?
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+    user        User         @relation(references: [id], fields: [userId], onDelete: Cascade)
+    resume      Resume?
+    coverLetter CoverLetter?
+
+    @@index([userId])
+}
+
 model Resume {
     id          String   @id @unique @default(cuid())
     userId      String
+    jobId       String?  @unique
     information Json
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     user        User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+    job         Job?     @relation(references: [id], fields: [jobId], onDelete: Cascade)
 
     @@index([userId])
 }
@@ -102,10 +122,12 @@ model Resume {
 model CoverLetter {
     id          String   @id @unique @default(cuid())
     userId      String
+    jobId       String?  @unique
     information Json
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     user        User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+    job         Job?     @relation(references: [id], fields: [jobId], onDelete: Cascade)
 
     @@index([userId])
 }

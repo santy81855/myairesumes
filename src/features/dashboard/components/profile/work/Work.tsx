@@ -36,6 +36,7 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
         currentUser,
         workId || -1
     );
+    const isToggle = false;
 
     return (
         <Card key="work-card" gridArea="work" title="Work History">
@@ -45,8 +46,11 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                         {workId ? "Edit Job" : "Add a Job"}
                     </p>
                     <section className={styles.workInfo}>
-                        <p className={styles.label}>Company</p>
+                        <label htmlFor="company" className={styles.label}>
+                            Company
+                        </label>
                         <input
+                            id="company"
                             type="text"
                             name="company"
                             className={styles.input}
@@ -56,8 +60,11 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                         />
                     </section>
                     <section className={styles.workInfo}>
-                        <p className={styles.label}>Position</p>
+                        <label htmlFor="position" className={styles.label}>
+                            Position
+                        </label>
                         <input
+                            id="position"
                             type="text"
                             name="position"
                             className={styles.input}
@@ -82,8 +89,11 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                     </section>
                     <section className={styles.dateInput}>
                         <section className={styles.workInfo}>
-                            <p className={styles.label}>Start Date</p>
+                            <label htmlFor="startDate" className={styles.label}>
+                                Start Date
+                            </label>
                             <input
+                                id="startDate"
                                 type="date"
                                 name="startDate"
                                 className={styles.input}
@@ -96,8 +106,11 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                             />
                         </section>
                         <section className={styles.workInfo}>
-                            <p className={styles.label}>End Date</p>
+                            <label htmlFor="endDate" className={styles.label}>
+                                End Date
+                            </label>
                             <input
+                                id="endDate"
                                 type="date"
                                 name="endDate"
                                 className={styles.input}
@@ -192,6 +205,7 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                         );
                     })}
                     <Link
+                        title="Add a Job"
                         href="/dashboard?menu=profile&addJob=true"
                         className={styles.addWorkButton}
                     >
