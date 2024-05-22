@@ -23,12 +23,12 @@ export const EmailVerificationCodeTemplate: React.FC<
             account, please enter the code in the verification page.
         </p>
         <p>
-            Note: If you did not sign up for MyAiResumes, please ignore this
+            Note: If you did not sign up for MyResumeHero, please ignore this
             email.
         </p>
         <p>Verification code expires in 2 hours.</p>
         <br />
-        <p>Thank you for choosing MyAiResumes,</p>
-        <p>MyAiResumes Team</p>
+        <p>Thank you for choosing MyResumeHero,</p>
+        <p>MyResumeHero Team</p>
     </div>
 );
