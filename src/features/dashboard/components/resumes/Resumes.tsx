@@ -21,20 +21,6 @@ const Resumes = async ({
         <main className={styles.container}>
             <DashboardCard key="resumes-card" title="Resumes">
                 {!documents && <LoadingScreen />}
-                <Link
-                    className={styles.addItemButton}
-                    href={UpdateUrl(
-                        searchParams ? searchParams : {},
-                        [
-                            { key: "menu", value: "resumes" },
-                            { key: "createResume", value: "true" },
-                        ],
-                        "/dashboard"
-                    )}
-                >
-                    {plusIconCircled}
-                    <p>Create New Resume</p>
-                </Link>
                 {documents.length > 0 ? (
                     <DocumentCardDisplay
                         searchParams={searchParams}

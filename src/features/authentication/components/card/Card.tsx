@@ -9,6 +9,9 @@ type CardProps = {
 const Card = ({ authType }: CardProps) => {
     return (
         <section className={styles.container}>
+            <div className={styles.circle2}></div>
+            <div className={styles.circle3}></div>
+            <div className={styles.circle4}></div>
             <section className={styles.leftContainer}>
                 <div className={styles.circle}></div>
                 <Resume />

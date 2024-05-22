@@ -5,11 +5,13 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    z-index: 1;
 }
 
 .description {
     font-size: var(--font-size-small);
     font-weight: bold;
+    color: white;
 }
 
 .title {
@@ -17,15 +19,19 @@
     font-weight: bold;
     letter-spacing: -0.1ch;
     text-align: center;
-    max-width: 27ch;
+    width: 100%;
     line-height: 1.2;
+    color: white;
 }
 
-.subtitle {
+.subTitle {
     font-size: var(--font-size-small);
     text-align: center;
-    max-width: 50ch;
-    padding-block-start: var(--padding-block-medium);
+    color: white;
+    width: 100%;
+    max-width: 60ch;
+    margin-block-start: var(--padding-block-medium);
+    opacity: 0.8;
 }
 
 .linkContainer {
@@ -36,6 +42,7 @@
     gap: var(--gap-medium);
     padding-block-start: var(--padding-block-large);
     padding-inline: var(--padding-inline-medium);
+    width: 100%;
 }
 
 .link {
@@ -49,20 +56,14 @@
     gap: var(--gap-small);
     padding-block: var(--padding-block-small);
     padding-inline: var(--padding-inline-medium);
-    border-radius: var(--border-radius);
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
     width: 12rem;
     height: 3rem;
 }
 
 .linkLeft {
-    background-color: #e9d8f7;
-    color: #9066ce;
-}
-
-.linkRight {
-    background-color: #8442da;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .squiggleArrow {
@@ -70,21 +71,26 @@
     width: 100px;
     height: 100px;
     background-image: url("/images/icons/squiggle-arrow.svg");
+    filter: invert(1);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    transform: scaleX(-1) rotate(-50deg) translate(130%, 215%);
+    transform: scaleX(-1) rotate(-70deg) translate(50%, 285%);
+}
+
+.embedContainer {
+    width: 70%;
 }
 
 @media screen and (min-width: 768px) {
     .title {
-        font-size: var(--font-size-x3large);
+        font-size: var(--font-size-xlarge);
     }
     .subtitle {
         font-size: var(--font-size-medium);
     }
     .squiggleArrow {
-        transform: scaleX(-1) rotate(-50deg) translate(130%, 285%);
+        transform: scaleX(-1) rotate(-70deg) translate(80%, 355%);
     }
 }
 

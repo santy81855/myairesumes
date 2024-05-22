@@ -10,7 +10,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-    title: "My AI Resumes - Dashboard",
+    title: "My Resume Hero - Dashboard",
     description: "Create professional resumes in minutes with AI",
 };
 

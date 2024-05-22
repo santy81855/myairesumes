@@ -42,7 +42,9 @@ const Plan = async ({ currentUser, searchParams }: PlanProps) => {
                 <section className={styles.titleRow}>
                     <section className={styles.titleContainer}>
                         <section className={styles.managePlanContainer}>
-                            <p className={styles.title}>Ai Resume - {status}</p>
+                            <p className={styles.title}>
+                                My Resume Hero - {status}
+                            </p>
                             {subscription && (
                                 <Link
                                     title="Manage Plan"

@@ -1,12 +1,13 @@
 import styles from "./page.module.css";
 import Title from "@/components/landing-page/title/Title";
-import Blur from "@/components/landing-page/color-blur/Blur";
-import HeroImage from "@/components/landing-page/hero-image/HeroImage";
 import Navbar from "@/components/nav/Navbar";
 import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 import BasicInfoModal from "@/components/landing-page/basic-info-modal/BasicInfoModal";
 import { redirect } from "next/navigation";
+import VideoEmbed from "@/components/landing-page/video-embed/VideoEmbed";
+import Features from "@/components/landing-page/features/Features";
+import Testimonials from "@/components/landing-page/testimonials/Testimonials";
 
 export default async function Home() {
     const { user } = await validateRequest();
@@ -31,11 +32,18 @@ export default async function Home() {
                 />
                 <section className={styles.heroSectionText}>
                     <Title />
+                    <div className={styles.circle1}></div>
+                    <div className={styles.circle2}></div>
+                    <div className={styles.circle3}></div>
                 </section>
-                <Blur />
-                <HeroImage />
+                <VideoEmbed />
             </section>
-            <section className={styles.section}>hey</section>
+            <section className={styles.featuresSection}>
+                <Features />
+            </section>
+            <section className={styles.testimonialsSection}>
+                <Testimonials />
+            </section>
             {showModal && <BasicInfoModal currentUser={currentUser} />}
         </main>
     );

@@ -6,7 +6,7 @@ import { Inter, Montserrat, Poppins } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "My AI Resumes - Pricing",
+    title: "My Resume Hero - Pricing",
     description: "Choose the best plan for you!",
 };
 

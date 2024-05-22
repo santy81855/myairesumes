@@ -43,7 +43,7 @@
 
 .reportButton {
     background-color: white;
-    color: var(--accent-color);
+    color: #007acc;
     font-weight: bold;
     border-radius: var(--border-radius);
     padding-inline: var(--padding-inline-small);

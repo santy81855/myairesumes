@@ -72,12 +72,18 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
     );
     const [jobNotes, setJobNotes] = useState(job.information?.notes);
     const [newNote, setNewNote] = useState("");
+    const [companyName, setCompanyName] = useState(job.companyName);
+    const [jobName, setJobName] = useState(job.jobName);
 
     useEffect(() => {
         if (job.id !== "") {
             setJobDescription(job.information?.jobDescription);
+            setCompanyName(job.companyName);
+            setJobName(job.jobName);
         } else {
             setJobDescription("");
+            setCompanyName("");
+            setJobName("");
         }
         setShowDescription(false);
         setIsEditing(false);
@@ -95,9 +101,14 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
         e.preventDefault();
         setIsLoading(true);
         try {
+            setJob({
+                ...job,
+                companyName: companyName,
+                jobName: jobName,
+            });
             const data = {
-                companyName: job.companyName,
-                jobName: job.jobName,
+                companyName: companyName,
+                jobName: jobName,
             };
             await updateJobAction(job.id, data);
             setIsEditing(false);
@@ -237,7 +248,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
     return (
         <main className={styles.container}>
             {job.id !== "" ? (
-                <DashboardCard key="job-manage-card" title="Manage Job">
+                <DashboardCard key="job-manage-card" title="Manage Application">
                     {isLoading && <LoadingScreen />}
                     <section className={styles.manageContainer}>
                         <button
@@ -349,13 +360,11 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                                 className={styles.input}
                                                 type="text"
                                                 id="companyName"
-                                                value={job.companyName}
+                                                value={companyName}
                                                 onChange={(e) =>
-                                                    setJob({
-                                                        ...job,
-                                                        companyName:
-                                                            e.target.value,
-                                                    })
+                                                    setCompanyName(
+                                                        e.target.value
+                                                    )
                                                 }
                                             />
                                         </section>
@@ -370,12 +379,9 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                                 className={styles.input}
                                                 type="text"
                                                 id="job"
-                                                value={job.jobName}
+                                                value={jobName}
                                                 onChange={(e) =>
-                                                    setJob({
-                                                        ...job,
-                                                        jobName: e.target.value,
-                                                    })
+                                                    setJobName(e.target.value)
                                                 }
                                             />
                                         </section>
@@ -387,9 +393,13 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                             <button
                                                 title="Cancel"
                                                 className={styles.cancelButton}
-                                                onClick={() =>
-                                                    setIsEditing(false)
-                                                }
+                                                onClick={() => {
+                                                    setCompanyName(
+                                                        job.companyName
+                                                    );
+                                                    setJobName(job.jobName);
+                                                    setIsEditing(false);
+                                                }}
                                             >
                                                 Cancel
                                             </button>
@@ -625,7 +635,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                     </section>
                 </DashboardCard>
             ) : (
-                <DashboardCard key="jobs-card" title="Your Jobs">
+                <DashboardCard key="jobs-card" title="Your Applications">
                     <Link
                         href={UpdateUrl(
                             searchParams ? searchParams : {},
@@ -635,7 +645,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                         className={styles.addItemButton}
                     >
                         {plusIconCircled}
-                        <p>Create New Job</p>
+                        <p>Create New Application</p>
                     </Link>
                     {documents.length > 0 ? (
                         <DocumentCardDisplay
@@ -646,8 +656,8 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                         />
                     ) : (
                         <p className={styles.noJobs}>
-                            You don&apos;t have any jobs yet. Click the button
-                            above to create a new job.
+                            You don&apos;t have any applications yet. Click the
+                            button above to create a new one.
                         </p>
                     )}
                 </DashboardCard>

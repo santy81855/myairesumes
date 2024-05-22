@@ -40,7 +40,7 @@ const Menu = () => {
 
     return (
         <section className={styles.menu}>
-            <p className={styles.name}>MAGIC RESUME</p>
+            <p className={styles.name}>My Resume Hero</p>
             <Link
                 title="Profile"
                 className={

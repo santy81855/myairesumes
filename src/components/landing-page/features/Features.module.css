@@ -1,0 +1,51 @@
+.features {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: white;
+    width: 100%;
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: black;
+}
+
+.featuresGrid {
+    width: fit-content;
+
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.featureItem {
+    background-color: #007acc;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.featureTitle {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+}
+
+.featureDescription {
+    font-size: var(--font-size-small);
+    opacity: 0.8;
+}
+
+.featureItem svg {
+    width: 2rem;
+    height: 2rem;
+    fill: white;
+}
