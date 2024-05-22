@@ -21,6 +21,7 @@ import {
 } from "@/features/editor";
 import { redirect } from "next/navigation";
 import { ResumeContext } from "@/app/providers";
+import { getUser } from "@/lib/user";
 
 export const metadata: Metadata = {
     title: "My Resume Hero - Editor",
@@ -45,6 +46,7 @@ export default async function RootLayout({
     if (documentType !== "resume" && documentType !== "cover-letter") {
         redirect("/");
     }
+    const currentUser = user ? await getUser(user.id) : null;
 
     return (
         <html lang="en">
@@ -55,7 +57,7 @@ export default async function RootLayout({
                         style={{ backgroundColor: "black", color: "white" }}
                     />
                     <section className={styles.rowContainer}>
-                        <SideMenu />
+                        <SideMenu user={currentUser} />
                         <section className={styles.columnContainer}>
                             <TitleBar />
                             <SubTitleBar />

@@ -16,7 +16,11 @@ import SectionMenu from "../section-menu/SectionMenu";
 import { useAppContext } from "@/app/providers";
 import { useParams, useRouter } from "next/navigation";
 
-const Menu = () => {
+type MenuProps = {
+    user: any;
+};
+
+const Menu = ({ user }: MenuProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const params = useParams();
     const router = useRouter();
@@ -129,7 +133,7 @@ const Menu = () => {
                         state={isTemplateOpen}
                         setState={setIsTemplateOpen}
                     >
-                        <TemplateMenu document={document} />
+                        <TemplateMenu document={document} user={user} />
                     </ExpandedMenu>
                     <ExpandedMenu
                         state={isSectionOpen}
