@@ -1,10 +1,14 @@
 import styles from "./SideMenu.module.css";
 import Menu from "./Menu/Menu";
 
-const SideMenu = async () => {
+type SideMenuProps = {
+    user: any;
+};
+
+const SideMenu = async ({ user }: SideMenuProps) => {
     return (
         <section className={styles.sideMenu}>
-            <Menu />
+            <Menu user={user} />
         </section>
     );
 };

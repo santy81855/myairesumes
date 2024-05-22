@@ -91,6 +91,14 @@
     position: relative;
 }
 
+.templatePreview svg {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    fill: rgb(var(--editor-side-menu-accent-rgb));
+    position: absolute;
+}
+
 @media (hover: hover) {
     .templatePreview:hover {
         border: 1px solid rgb(174, 174, 174);
