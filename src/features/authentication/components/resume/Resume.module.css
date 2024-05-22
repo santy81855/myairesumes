@@ -17,6 +17,35 @@
     height: 100%;
 }
 
+.resume {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-medium);
+    padding-block: var(--padding-block-large);
+    border: 1px solid lightgrey;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.staticResume {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap-medium);
+    padding-block: var(--padding-block-large);
+    position: absolute;
+    border: 1px solid lightgrey;
+    border-radius: var(--border-radius-xsmall);
+}
+
 .staticResumeSlanted {
     height: 100%;
     width: 100%;
@@ -48,24 +77,29 @@
     transform: rotate(-3deg);
 }
 
-.template {
-    aspect-ratio: 8.5/11;
-    width: 400px;
-    background-color: white;
-}
-
-.templatePreview {
+.rowContainer {
     width: 100%;
-    height: 100%;
-    border: 1px solid rgba(198, 198, 198, 0.416);
-    cursor: pointer;
-    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.staticTemplate {
-    aspect-ratio: 8.5/11;
-    min-width: 400px;
-    max-width: 400px;
-    background-color: white;
-    position: absolute;
+.image {
+    width: 100px;
+    height: 100px;
+}
+
+.nameContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.name {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.lastName {
+    font-size: 1.5rem;
 }

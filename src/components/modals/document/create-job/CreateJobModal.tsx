@@ -30,8 +30,10 @@ const CreateJobModal = ({ returnUrl, user }: UpgradeModalProps) => {
         formData.append("color", jobCardColorArray[selectedColorIndex]);
         try {
             await createJobAction(formData);
-            setIsLoading(false);
+            //setIsLoading(false);
             toast.success("Job created successfully.");
+            // go to return url
+            router.push(returnUrl);
         } catch (error) {
             toast.error("Error creating job. Try again.");
             setIsLoading(false);

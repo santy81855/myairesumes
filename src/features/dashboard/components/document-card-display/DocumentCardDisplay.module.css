@@ -176,6 +176,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    width: 100%;
     gap: var(--padding-block-small);
     z-index: 1;
 }

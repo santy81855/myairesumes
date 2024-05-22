@@ -17,7 +17,7 @@ const Card = ({ children, gridArea, title }: CardProps) => {
             </section>
             <section
                 className={styles.childrenContainer}
-                style={title === "Manage Job" ? { padding: 0 } : {}}
+                style={title === "Manage Application" ? { padding: 0 } : {}}
             >
                 {children}
             </section>

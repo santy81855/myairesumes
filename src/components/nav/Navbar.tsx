@@ -27,7 +27,7 @@ const Navbar = async ({ style, isAuth }: NavbarProps) => {
                     style={{ alignItems: session ? "flex-end" : "center" }}
                 >
                     <Link href="/">
-                        <p className={styles.companyName}>MyAIResumes</p>
+                        <p className={styles.companyName}>My Resume Hero</p>
                     </Link>
                 </div>
                 <div
