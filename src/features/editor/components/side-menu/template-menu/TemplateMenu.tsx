@@ -7,6 +7,7 @@ import {
     templateIcon,
     basicLeftArrow,
     basicRightArrow,
+    lockIcon,
 } from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
@@ -23,9 +24,10 @@ import { useParams } from "next/navigation";
 
 type TemplateMenuProps = {
     document: any;
+    user: any;
 };
 
-const TemplateMenu = ({ document }: TemplateMenuProps) => {
+const TemplateMenu = ({ document, user }: TemplateMenuProps) => {
     const keyWordContainerRef = useRef<HTMLDivElement>(null);
     const params = useParams();
     const type = params.slug[0];
@@ -109,6 +111,15 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
     const handleClick = (template: any) => {
         if (!currentDocument) return;
         if (currentDocument.information.template === template.key) return;
+        if (
+            user?.status === "free" &&
+            template.name.toLowerCase() !== "basic" &&
+            template.name.toLowerCase() !== "velocity" &&
+            template.name.toLowerCase() !== "triumph" &&
+            template.name.toLowerCase() !== "sharp"
+        ) {
+            return;
+        }
         // update the document with the new template
         const updatedDocument =
             type === "resume"
@@ -241,8 +252,24 @@ const TemplateMenu = ({ document }: TemplateMenuProps) => {
                             onClick={() => handleClick(template)}
                             onMouseEnter={() => setHoverIndex(index + 1)}
                             onMouseLeave={() => setHoverIndex(-1)}
+                            style={
+                                user?.status === "free" &&
+                                template.name.toLowerCase() !== "basic" &&
+                                template.name.toLowerCase() !== "velocity" &&
+                                template.name.toLowerCase() !== "triumph" &&
+                                template.name.toLowerCase() !== "sharp"
+                                    ? { opacity: 0.5, cursor: "default" }
+                                    : {}
+                            }
                         >
                             <motion.div className={styles.templatePreview}>
+                                {user?.status === "free" &&
+                                    template.name.toLowerCase() !== "basic" &&
+                                    template.name.toLowerCase() !==
+                                        "velocity" &&
+                                    template.name.toLowerCase() !== "triumph" &&
+                                    template.name.toLowerCase() !== "sharp" &&
+                                    lockIcon}
                                 {template.component}
                                 {hoverIndex === index + 1 && (
                                     <>
