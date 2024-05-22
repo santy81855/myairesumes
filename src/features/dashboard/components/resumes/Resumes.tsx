@@ -29,8 +29,7 @@ const Resumes = async ({
                     />
                 ) : (
                     <p className={styles.noJobs}>
-                        You don&apos;t have any resumes yet. Click the button
-                        above to create a new resume.
+                        You don&apos;t have any resumes yet.
                     </p>
                 )}
             </DashboardCard>

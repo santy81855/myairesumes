@@ -7,17 +7,19 @@ import {
     templateIcon,
     styleIcon,
     sectionIcon,
+    backIcon,
 } from "@/components/icons/iconSVG";
 import ExpandedMenu from "../expanded-menu/ExpandedMenu";
 import TemplateMenu from "../template-menu/TemplateMenu";
 import StyleMenu from "../style-menu/StyleMenu";
 import SectionMenu from "../section-menu/SectionMenu";
 import { useAppContext } from "@/app/providers";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const Menu = () => {
     const { documentArray, setDocumentArray } = useAppContext();
     const params = useParams();
+    const router = useRouter();
     const id = params.slug[1];
     const [document, setDocument] = useState<any>(null);
     const [isTemplateOpen, setIsTemplateOpen] = useState(false);
@@ -39,6 +41,10 @@ const Menu = () => {
         // }
     };
 
+    const backPressed = () => {
+        router.push("/dashboard?menu=jobs&documentPage=1");
+    };
+
     const toggleStyle = () => {
         setIsStyleOpen(!isStyleOpen);
         setIsTemplateOpen(false);
@@ -56,6 +62,7 @@ const Menu = () => {
             <section className={styles.staticMenu}>
                 <section
                     className={styles.staticMenuItem}
+                    title="sections"
                     style={
                         isSectionOpen
                             ? {
@@ -73,6 +80,7 @@ const Menu = () => {
                 </section>
                 <section
                     className={styles.staticMenuItem}
+                    title="templates"
                     style={
                         isTemplateOpen
                             ? {
@@ -90,6 +98,7 @@ const Menu = () => {
                 </section>
                 <section
                     className={styles.staticMenuItem}
+                    title="styles"
                     style={
                         isStyleOpen
                             ? {
@@ -104,6 +113,14 @@ const Menu = () => {
                         {styleIcon}
                     </div>
                     <p className={styles.staticItemName}>Styles</p>
+                </section>
+                <section
+                    className={`${styles.staticMenuItem} ${styles.backButton}`}
+                    title="Back to dashboard"
+                    onClick={() => backPressed()}
+                >
+                    <div className={styles.staticIconContainer}>{backIcon}</div>
+                    <p className={styles.staticItemName}>Back</p>
                 </section>
             </section>
             {document && (

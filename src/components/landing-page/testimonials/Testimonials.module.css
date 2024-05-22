@@ -3,6 +3,9 @@
     text-align: center;
     padding: 2rem 1rem;
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-medium);
 }
 
 .title {
@@ -16,6 +19,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    position: relative;
 }
 
 .testimonialItem {
@@ -31,8 +35,45 @@
     color: black;
     font-size: var(--font-size-small);
     height: 8rem;
+    z-index: 1;
 }
 
 .name {
     font-weight: bold;
+}
+
+.circle1 {
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    width: 5rem;
+    height: 5rem;
+    background-color: #85c4ee;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 30%;
+}
+
+.circle2 {
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    width: 8rem;
+    height: 8rem;
+    background-color: #85c4ee;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 30%;
+}
+
+.circle3 {
+    position: absolute;
+    top: 7rem;
+    right: 50%;
+    width: 12rem;
+    height: 12rem;
+    background-color: #85c4ee;
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 30%;
 }
