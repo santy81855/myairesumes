@@ -17,7 +17,7 @@ export const PasswordResetTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             Dear {firstName} {lastName},
         </h1>
         <p>
-            We received a request to reset the password for your MyAiResumes
+            We received a request to reset the password for your MyResumeHero
             account. To proceed with the password reset, please click on the
             link below:
         </p>
@@ -30,7 +30,7 @@ export const PasswordResetTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         </p>
         <p>Verification link expires in 2 hours.</p>
         <br />
-        <p>Thank you for choosing MyAiResumes,</p>
-        <p>MyAiResumes Team</p>
+        <p>Thank you for choosing MyResumeHero,</p>
+        <p>MyResumeHero Team</p>
     </div>
 );

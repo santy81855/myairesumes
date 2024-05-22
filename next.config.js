@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: false,
     images: {
-        domains: ["resume-profile-pic.r2.cloudflarestorage.com", "r2.myairesumes.com"],
+        domains: ["resume-profile-pic.r2.cloudflarestorage.com", "r2.myresumehero.com"],
     },
 
 }

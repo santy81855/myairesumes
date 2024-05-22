@@ -19,7 +19,7 @@ export async function send(data: AuthEmailDataType) {
                 lastName: lastName,
                 url: url,
             });
-            from = "MyAiResumes <email-verification@myairesumes.com>";
+            from = "MyResumeHero <email-verification@myresumehero.com>";
         }
         if (type === "password-reset") {
             const url = data.url as string;
@@ -28,14 +28,14 @@ export async function send(data: AuthEmailDataType) {
                 lastName: lastName,
                 url: url,
             });
-            from = "MyAiResumes <password-reset@myairesumes.com>";
+            from = "MyResumeHero <password-reset@myresumehero.com>";
         }
         if (type === "failed-payment") {
             template = FailedPaymentTemplate({
                 firstName: firstName,
                 lastName: lastName,
             });
-            from = "MyAiResumes <payments@myairesumes.com>";
+            from = "MyResumeHero <payments@myresumehero.com>";
         }
         if (type === "email-verification-code") {
             const code = data.code as string;
@@ -44,7 +44,7 @@ export async function send(data: AuthEmailDataType) {
                 lastName: lastName,
                 code: code,
             });
-            from = "MyAiResumes <email-verification@myairesumes.com>";
+            from = "MyResumeHero <email-verification@myresumehero.com>";
         }
         const response = await resend.emails.send({
             from: from,

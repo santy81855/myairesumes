@@ -74,7 +74,7 @@ const ProfilePic = ({ currentUser }: ProfilePicProps) => {
                 });
                 updatedImage = true;
                 // update the url
-                newUrl = `https://r2.myairesumes.com/${id}-${
+                newUrl = `https://r2.myresumehero.com/${id}-${
                     currentUser.numImageUploads + 1
                 }`;
                 setUrl(newUrl);

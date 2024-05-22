@@ -22,7 +22,7 @@ export async function POST(request: Request) {
                 lastName: lastName,
                 url: url,
             });
-            from = "MyAiResumes <email-verification@myairesumes.com>";
+            from = "MyResumeHero <email-verification@myresumehero.com>";
         }
         if (type === "password-reset") {
             const { firstName, lastName, url } = body;
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
                 lastName: lastName,
                 url: url,
             });
-            from = "MyAiResumes <password-reset@myairesumes.com>";
+            from = "MyResumeHero <password-reset@myresumehero.com>";
         }
         if (type === "failed-payment") {
             const { firstName, lastName } = body;
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
                 firstName: firstName,
                 lastName: lastName,
             });
-            from = "MyAiResumes <payments@myairesumes.com>";
+            from = "MyResumeHero <payments@myresumehero.com>";
         }
         if (type === "email-verification-code") {
             const { firstName, lastName, code } = body;
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
                 lastName: lastName,
                 code: code,
             });
-            from = "MyAiResumes <email-verification@myairesumes.com>";
+            from = "MyResumeHero <email-verification@myresumehero.com>";
         }
         const data = await resend.emails.send({
             from: from,
