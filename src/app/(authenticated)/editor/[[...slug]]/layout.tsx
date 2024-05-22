@@ -23,7 +23,7 @@ import { redirect } from "next/navigation";
 import { ResumeContext } from "@/app/providers";
 
 export const metadata: Metadata = {
-    title: "My AI Resumes - Editor",
+    title: "My Resume Hero - Editor",
     description: "Create and edit your resume with our AI-powered editor",
 };
 

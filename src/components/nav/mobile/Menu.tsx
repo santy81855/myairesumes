@@ -36,7 +36,7 @@ const Menu = ({ session, user, style, isAuth }: MenuProps) => {
         <section className={styles.container}>
             <Link href="/">
                 <p className={styles.name} style={extraStyle}>
-                    MyAIResumes
+                    My Resume Hero
                 </p>
             </Link>
             <div

@@ -134,7 +134,7 @@ const JobCard = ({ doc, type, setJob }: JobCardProps) => {
             <section className={styles.optionContainer}>
                 <button
                     type="button"
-                    title="Manage Job"
+                    title="Manage Application"
                     className={styles.option}
                     onClick={(e: any) => {
                         e.preventDefault();

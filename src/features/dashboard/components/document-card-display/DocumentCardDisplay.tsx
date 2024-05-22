@@ -90,17 +90,6 @@ const DocumentCardDisplay = ({
                 }}
             />
             {type === "job" && (
-                <section className={styles.sortByColorSection}>
-                    <p className={styles.colorLabel}>Filter By Color: </p>
-                    <motion.button
-                        type="button"
-                        style={{ backgroundColor: selectedColor }}
-                        className={styles.colorFilterContainer}
-                        onClick={() => setShowColorOptions(!showColorOptions)}
-                    ></motion.button>
-                </section>
-            )}
-            {showColorOptions && (
                 <motion.section className={styles.buttonOptions}>
                     <button
                         type="button"
@@ -108,7 +97,6 @@ const DocumentCardDisplay = ({
                         onClick={() => {
                             setSelectedColor("");
                             setCurrentPage(1);
-                            setShowColorOptions(false);
                         }}
                     >
                         All
@@ -121,7 +109,6 @@ const DocumentCardDisplay = ({
                             className={styles.colorButton}
                             onClick={() => {
                                 handleColorFilter(color);
-                                setShowColorOptions(false);
                             }}
                         ></motion.button>
                     ))}

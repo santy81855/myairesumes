@@ -88,7 +88,7 @@
     height: 50px;
     border: none;
     border-radius: var(--border-radius-small);
-    background-color: #a4b3de;
+    background-color: #007acc;
     color: white;
     font-size: var(--font-size-small);
     font-weight: bold;
@@ -97,7 +97,7 @@
 }
 
 .nextButton:hover {
-    background-color: #8898c2;
+    background-color: #2185c7;
 }
 
 .optionsContainer {
@@ -134,7 +134,7 @@
 }
 
 .selected {
-    background-color: #a4b3de;
+    background-color: #007acc;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     color: white;

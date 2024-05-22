@@ -12,7 +12,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-    title: "My AI Resumes",
+    title: "My Resume Hero",
     description: "Create professional resumes in minutes with AI",
 };
 
@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={poppins.className}>
+            <body className={montserrat.className}>
                 <ToastContainer />
                 {children}
             </body>

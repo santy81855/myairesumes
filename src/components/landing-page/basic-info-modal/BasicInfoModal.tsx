@@ -17,7 +17,7 @@ const BasicInfoModal = async ({ currentUser }: BasicInfoModalProps) => {
         <StaticModal>
             <section className={styles.modalContent}>
                 <div className={styles.logo}>{magicResumeLogo}</div>
-                <h1 className={styles.title}>Welcome to Magic Resume</h1>
+                <h1 className={styles.title}>Welcome to My Resume Hero</h1>
                 <p className={styles.text}>
                     To get started on your personalized resumes and cover
                     letters, we&apos;d love to learn a bit more about you.

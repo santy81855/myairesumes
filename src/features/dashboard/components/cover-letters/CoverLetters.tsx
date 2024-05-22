@@ -21,20 +21,6 @@ const CoverLetters = async ({
         <main className={styles.container}>
             <DashboardCard key="cover-letter-card" title="Cover Letters">
                 {!documents && <LoadingScreen />}
-                <Link
-                    className={styles.addItemButton}
-                    href={UpdateUrl(
-                        searchParams ? searchParams : {},
-                        [
-                            { key: "menu", value: "cover-letters" },
-                            { key: "createCoverLetter", value: "true" },
-                        ],
-                        "/dashboard"
-                    )}
-                >
-                    {plusIconCircled}
-                    <p>Create New Cover Letter</p>
-                </Link>
                 {documents.length > 0 ? (
                     <DocumentCardDisplay
                         searchParams={searchParams}
