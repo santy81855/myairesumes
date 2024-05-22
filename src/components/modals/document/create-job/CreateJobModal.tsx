@@ -1,7 +1,12 @@
 "use client";
 import styles from "./CreateJobModal.module.css";
 import Link from "next/link";
-import { coloredJobIcon, jobIcon } from "@/components/icons/iconSVG";
+import {
+    coloredJobIcon,
+    jobIcon,
+    checkIcon,
+    unlockIcon,
+} from "@/components/icons/iconSVG";
 import FormLoading from "@/components/form-loading/FormLoading";
 import { createJobAction } from "@/features/editor";
 import { useState, useEffect } from "react";
@@ -45,183 +50,297 @@ const CreateJobModal = ({ returnUrl, user }: UpgradeModalProps) => {
             <section id="modalContent" className={styles.modal}>
                 {isLoading && <LoadingScreen />}
                 <section className={styles.container}>
-                    <div className={styles.iconContainer}>{coloredJobIcon}</div>
-
-                    <h1 className={styles.title}>
-                        Start a new job application
-                    </h1>
-                    <section className={styles.benefitsContainer}>
-                        <p className={styles.subTitle}>
-                            Get started by filling out a few basic details about
-                            this job to make it <span>easy</span> to find later.
-                        </p>
-                    </section>
-
-                    <form className={styles.form} onSubmit={handleSubmit}>
-                        <section className={styles.inputContainer}>
-                            <p className={styles.label}>Color</p>
-                            <section className={styles.colorContainer}>
-                                {jobCardColorArray.map(
-                                    (color: string, index: number) => (
+                    {user.status === "free" && user.numberJobs >= 1 && (
+                        <>
+                            <p className={styles.subTitle}>
+                                *Upgrade to the pro plan to be able to create
+                                more than one job application.
+                            </p>
+                            <div className={styles.lockIconContainer}>
+                                {unlockIcon}
+                            </div>
+                            <h1 className={styles.title}>
+                                Unlock Your Account
+                            </h1>
+                            <section className={styles.benefitsContainer}>
+                                <p className={styles.subTitle}>
+                                    Upgrading to the <span>Pro</span> plan will
+                                    give you access to:
+                                </p>
+                                <section className={styles.list}>
+                                    <section className={styles.listItem}>
                                         <div
-                                            key={index}
-                                            id={`color${index}`}
-                                            className={`${styles.colorItem} ${
-                                                index === selectedColorIndex
-                                                    ? styles.selected
-                                                    : ""
-                                            }`}
-                                            style={{ backgroundColor: color }}
-                                            onClick={() => {
-                                                setSelectedColorIndex(index);
-                                            }}
-                                        />
-                                    )
-                                )}
+                                            className={
+                                                styles.checkIconContainer
+                                            }
+                                        >
+                                            {checkIcon}
+                                        </div>
+                                        <p className={styles.text}>
+                                            Unlimited jobs
+                                        </p>
+                                    </section>
+                                    <section className={styles.listItem}>
+                                        <div
+                                            className={
+                                                styles.checkIconContainer
+                                            }
+                                        >
+                                            {checkIcon}
+                                        </div>
+                                        <p className={styles.text}>
+                                            Unlimited resumes
+                                        </p>
+                                    </section>
+                                    <section className={styles.listItem}>
+                                        <div
+                                            className={
+                                                styles.checkIconContainer
+                                            }
+                                        >
+                                            {checkIcon}
+                                        </div>
+                                        <p className={styles.text}>
+                                            Unlimited cover letters
+                                        </p>
+                                    </section>
+                                    <section className={styles.listItem}>
+                                        <div
+                                            className={
+                                                styles.checkIconContainer
+                                            }
+                                        >
+                                            {checkIcon}
+                                        </div>
+                                        <p className={styles.text}>
+                                            Access to every template
+                                        </p>
+                                    </section>
+                                </section>
                             </section>
-                        </section>
-                        <section className={styles.inputRow}>
-                            <section className={styles.inputContainer}>
-                                <label
-                                    htmlFor="companyName"
-                                    className={styles.label}
+                            <section className={styles.buttonContainer}>
+                                <Link
+                                    href={returnUrl}
+                                    className={styles.cancelButton}
                                 >
-                                    Company Name
-                                </label>
-                                <input
-                                    type="text"
-                                    name="companyName"
-                                    id="companyName"
-                                    placeholder="E.g. XYZ Company"
-                                    className={styles.input}
-                                    required
-                                />
-                            </section>
-                            <section className={styles.inputContainer}>
-                                <label htmlFor="job" className={styles.label}>
-                                    Job Title
-                                </label>
-                                <input
-                                    type="text"
-                                    name="job"
-                                    id="job"
-                                    placeholder="E.g. Data analyst"
-                                    className={styles.input}
-                                    required
-                                />
-                            </section>
-                        </section>
-                        <section className={styles.inputRow}>
-                            <section className={styles.inputContainer}>
-                                <label
-                                    htmlFor="resumeName"
-                                    className={styles.label}
+                                    Cancel
+                                </Link>
+                                <Link
+                                    href="/dashboard?menu=account&invoicePage=1"
+                                    className={styles.button}
                                 >
-                                    Resume Name
-                                </label>
-                                <input
-                                    type="text"
-                                    name="resumeName"
-                                    id="resumeName"
-                                    defaultValue={
-                                        user.firstName +
-                                        "-" +
-                                        user.lastName +
-                                        "-Resume"
-                                    }
-                                    placeholder="E.g. XYZ-Company-Resume"
-                                    className={styles.input}
-                                    required
-                                />
+                                    Upgrade
+                                </Link>
                             </section>
-                            <section className={styles.inputContainer}>
-                                <section className={styles.checkboxContainer}>
-                                    <label
-                                        htmlFor="coverLetter"
-                                        className={`${styles.label} ${
-                                            !coverLetterChecked &&
-                                            styles.inactive
-                                        }
-                                        }`}
-                                    >
-                                        Cover Letter
-                                    </label>
-                                    <input
-                                        type="checkbox"
-                                        name="coverLetter"
-                                        id="coverLetter"
-                                        className={styles.checkboxItem}
-                                        onChange={() =>
-                                            setCoverLetterChecked(
-                                                !coverLetterChecked
+                        </>
+                    )}
+                    {user.status !== "free" && (
+                        <>
+                            <div className={styles.iconContainer}>
+                                {coloredJobIcon}
+                            </div>
+                            <h1 className={styles.title}>
+                                Start a new job application
+                            </h1>
+                            <section className={styles.benefitsContainer}>
+                                <p className={styles.subTitle}>
+                                    Get started by filling out a few basic
+                                    details about this job to make it{" "}
+                                    <span>easy</span> to find later.
+                                </p>
+                            </section>
+
+                            <form
+                                className={styles.form}
+                                onSubmit={handleSubmit}
+                            >
+                                <section className={styles.inputContainer}>
+                                    <p className={styles.label}>Color</p>
+                                    <section className={styles.colorContainer}>
+                                        {jobCardColorArray.map(
+                                            (color: string, index: number) => (
+                                                <div
+                                                    key={index}
+                                                    id={`color${index}`}
+                                                    className={`${
+                                                        styles.colorItem
+                                                    } ${
+                                                        index ===
+                                                        selectedColorIndex
+                                                            ? styles.selected
+                                                            : ""
+                                                    }`}
+                                                    style={{
+                                                        backgroundColor: color,
+                                                    }}
+                                                    onClick={() => {
+                                                        setSelectedColorIndex(
+                                                            index
+                                                        );
+                                                    }}
+                                                />
                                             )
-                                        }
-                                        checked={coverLetterChecked}
+                                        )}
+                                    </section>
+                                </section>
+                                <section className={styles.inputRow}>
+                                    <section className={styles.inputContainer}>
+                                        <label
+                                            htmlFor="companyName"
+                                            className={styles.label}
+                                        >
+                                            Company Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="companyName"
+                                            id="companyName"
+                                            placeholder="E.g. XYZ Company"
+                                            className={styles.input}
+                                            required
+                                        />
+                                    </section>
+                                    <section className={styles.inputContainer}>
+                                        <label
+                                            htmlFor="job"
+                                            className={styles.label}
+                                        >
+                                            Job Title
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="job"
+                                            id="job"
+                                            placeholder="E.g. Data analyst"
+                                            className={styles.input}
+                                            required
+                                        />
+                                    </section>
+                                </section>
+                                <section className={styles.inputRow}>
+                                    <section className={styles.inputContainer}>
+                                        <label
+                                            htmlFor="resumeName"
+                                            className={styles.label}
+                                        >
+                                            Resume Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="resumeName"
+                                            id="resumeName"
+                                            defaultValue={
+                                                user.firstName +
+                                                "-" +
+                                                user.lastName +
+                                                "-Resume"
+                                            }
+                                            placeholder="E.g. XYZ-Company-Resume"
+                                            className={styles.input}
+                                            required
+                                        />
+                                    </section>
+                                    <section className={styles.inputContainer}>
+                                        <section
+                                            className={styles.checkboxContainer}
+                                        >
+                                            <label
+                                                htmlFor="coverLetter"
+                                                className={`${styles.label} ${
+                                                    !coverLetterChecked &&
+                                                    styles.inactive
+                                                }
+                                        }`}
+                                            >
+                                                Cover Letter
+                                            </label>
+                                            <input
+                                                type="checkbox"
+                                                name="coverLetter"
+                                                id="coverLetter"
+                                                className={styles.checkboxItem}
+                                                onChange={() =>
+                                                    setCoverLetterChecked(
+                                                        !coverLetterChecked
+                                                    )
+                                                }
+                                                checked={coverLetterChecked}
+                                            />
+                                        </section>
+                                        <input
+                                            type="text"
+                                            name="coverLetterName"
+                                            id="coverLetterName"
+                                            placeholder="E.g. XYZ-Company-Cover-Letter"
+                                            className={`${styles.input} ${
+                                                !coverLetterChecked &&
+                                                styles.inactive
+                                            }`}
+                                            disabled={!coverLetterChecked}
+                                            defaultValue={
+                                                user.firstName +
+                                                "-" +
+                                                user.lastName +
+                                                "-Cover-Letter"
+                                            }
+                                        />
+                                    </section>
+                                </section>
+                                <section className={styles.inputContainer}>
+                                    <section
+                                        className={styles.checkboxContainer}
+                                    >
+                                        <label
+                                            htmlFor="jobDescription"
+                                            className={`${styles.label} ${
+                                                !showDescription &&
+                                                styles.inactive
+                                            }`}
+                                        >
+                                            Job Post Description
+                                        </label>
+                                        <input
+                                            type="checkbox"
+                                            name="jobDescription"
+                                            id="jobDescription"
+                                            className={styles.checkboxItem}
+                                            onChange={() =>
+                                                setShowDescription(
+                                                    !showDescription
+                                                )
+                                            }
+                                            checked={showDescription}
+                                        />
+                                    </section>
+
+                                    <textarea
+                                        name="description"
+                                        id="description"
+                                        placeholder="E.g. Paste the job posting here."
+                                        className={`${styles.textArea} ${
+                                            !showDescription && styles.inactive
+                                        }`}
+                                        disabled={!showDescription}
                                     />
                                 </section>
-                                <input
-                                    type="text"
-                                    name="coverLetterName"
-                                    id="coverLetterName"
-                                    placeholder="E.g. XYZ-Company-Cover-Letter"
-                                    className={`${styles.input} ${
-                                        !coverLetterChecked && styles.inactive
-                                    }`}
-                                    disabled={!coverLetterChecked}
-                                    defaultValue={
-                                        user.firstName +
-                                        "-" +
-                                        user.lastName +
-                                        "-Cover-Letter"
-                                    }
-                                />
-                            </section>
-                        </section>
-                        <section className={styles.inputContainer}>
-                            <section className={styles.checkboxContainer}>
-                                <label
-                                    htmlFor="jobDescription"
-                                    className={`${styles.label} ${
-                                        !showDescription && styles.inactive
-                                    }`}
-                                >
-                                    Job Post Description
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    name="jobDescription"
-                                    id="jobDescription"
-                                    className={styles.checkboxItem}
-                                    onChange={() =>
-                                        setShowDescription(!showDescription)
-                                    }
-                                    checked={showDescription}
-                                />
-                            </section>
-
-                            <textarea
-                                name="description"
-                                id="description"
-                                placeholder="E.g. Paste the job posting here."
-                                className={`${styles.textArea} ${
-                                    !showDescription && styles.inactive
-                                }`}
-                                disabled={!showDescription}
-                            />
-                        </section>
-                        <section className={styles.buttonContainer}>
-                            <Link
-                                href={returnUrl}
-                                className={styles.cancelButton}
-                            >
-                                Cancel
-                            </Link>
-                            <button type="submit" className={styles.button}>
-                                Continue
-                            </button>
-                        </section>
-                        <FormLoading />
-                    </form>
+                                <section className={styles.buttonContainer}>
+                                    <Link
+                                        href={returnUrl}
+                                        className={styles.cancelButton}
+                                    >
+                                        Cancel
+                                    </Link>
+                                    <button
+                                        type="submit"
+                                        className={styles.button}
+                                    >
+                                        Continue
+                                    </button>
+                                </section>
+                                <FormLoading />
+                            </form>
+                        </>
+                    )}
                 </section>
             </section>
         </section>

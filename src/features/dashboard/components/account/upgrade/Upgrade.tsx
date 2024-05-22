@@ -2,6 +2,7 @@ import styles from "./Upgrade.module.css";
 import Card from "@/features/dashboard/components/cards/dashboard-cards/Card";
 import Link from "next/link";
 import { checkIcon } from "@/components/icons/iconSVG";
+import { UpdateUrl } from "@/lib/updateUrl";
 
 type UpgradeProps = {
     currentUser: any;
@@ -48,7 +49,17 @@ const Upgrade = ({ currentUser, searchParams }: UpgradeProps) => {
                             </section>
                         </section>
                     </section>
-                    <Link href="/upgrade" className={styles.upgradeButton}>
+                    <Link
+                        href={UpdateUrl(
+                            searchParams ? searchParams : {},
+                            [
+                                { key: "menu", value: "account" },
+                                { key: "upgradePlan", value: "true" },
+                            ],
+                            "/dashboard"
+                        )}
+                        className={styles.upgradeButton}
+                    >
                         Upgrade Now
                     </Link>
                 </section>

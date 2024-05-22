@@ -5,6 +5,9 @@ const Testimonials = () => {
         <section className={styles.testimonials}>
             <h2 className={styles.title}>Don&apos;t take our word for it</h2>
             <div className={styles.testimonialsGrid}>
+                <div className={styles.circle1}></div>
+                <div className={styles.circle2}></div>
+                <div className={styles.circle3}></div>
                 <div className={styles.testimonialItem}>
                     <p>
                         &quot;Thanks to this app, I was able to make a very high
