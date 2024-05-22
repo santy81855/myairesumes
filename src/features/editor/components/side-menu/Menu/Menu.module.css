@@ -44,3 +44,7 @@
     font-size: var(--font-size-xsmall);
     color: white;
 }
+
+.backButton {
+    margin-block-start: auto;
+}
