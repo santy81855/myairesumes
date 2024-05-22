@@ -1,0 +1,16 @@
+.footer {
+    width: 100%;
+    padding-inline: var(--padding-inline-large);
+    padding-block: var(--padding-block-large);
+    background-color: white;
+    color: black;
+    font-size: var(--font-size-small);
+}
+
+.footerList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-large);
+    justify-content: center;
+    align-items: center;
+}

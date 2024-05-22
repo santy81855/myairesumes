@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import VideoEmbed from "@/components/landing-page/video-embed/VideoEmbed";
 import Features from "@/components/landing-page/features/Features";
 import Testimonials from "@/components/landing-page/testimonials/Testimonials";
+import { Footer } from "@/features/footer";
 
 export default async function Home() {
     const { user } = await validateRequest();
@@ -44,6 +45,7 @@ export default async function Home() {
             <section className={styles.testimonialsSection}>
                 <Testimonials />
             </section>
+            <Footer />
             {showModal && <BasicInfoModal currentUser={currentUser} />}
         </main>
     );

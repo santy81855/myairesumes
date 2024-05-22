@@ -84,7 +84,7 @@
     color: rgb(var(--dashboard-text-color-rgb));
     font-size: var(--font-size-small);
     display: -webkit-box;
-    height: calc(var(--font-size-small) * 3);
+    height: calc(var(--font-size-small) * 2.5);
     overflow: hidden;
     text-overflow: ellipsis;
 

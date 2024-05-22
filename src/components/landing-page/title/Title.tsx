@@ -1,8 +1,9 @@
 import styles from "./Title.module.css";
 import Link from "next/link";
-import Image from "next/image";
+import { validateRequest } from "@/features/authentication/lib/auth";
 
-const Title = () => {
+const Title = async () => {
+    const { user } = await validateRequest();
     return (
         <section className={styles.textContainer}>
             <h1 className={styles.title}>
@@ -14,7 +15,11 @@ const Title = () => {
             </p>
             <section className={styles.linkContainer}>
                 <Link
-                    href="/sign-up"
+                    href={
+                        user
+                            ? "/dashboard?menu=jobs&documentPage=1"
+                            : "/sign-up"
+                    }
                     className={`${styles.linkLeft} ${styles.link}`}
                 >
                     <p>Get Started</p>

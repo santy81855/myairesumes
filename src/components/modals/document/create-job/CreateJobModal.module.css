@@ -41,6 +41,12 @@
     position: relative;
 }
 
+.lockIconContainer {
+    fill: rgb(var(--dashboard-accent-color-rgb));
+    width: 5rem;
+    height: 5rem;
+}
+
 .iconContainer {
     width: 5rem;
     height: 5rem;
@@ -235,6 +241,35 @@
 
 .selected {
     border: 2px solid black;
+}
+
+.benefitsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+    width: 100%;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+    width: 100%;
+    padding-inline-start: var(--padding-block-small);
+}
+
+.listItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+.checkIconContainer {
+    width: 20px;
+    height: 20px;
+    fill: rgb(var(--dashboard-accent-color-rgb));
+    stroke-width: 0.2;
 }
 
 @media screen and (max-width: 768px) {
