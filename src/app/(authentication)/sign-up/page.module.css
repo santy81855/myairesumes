@@ -9,6 +9,7 @@
     padding-inline: var(--padding-inline-large);
     background-color: #007acc;
     overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
 }
 
