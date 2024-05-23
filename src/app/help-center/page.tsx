@@ -7,16 +7,13 @@ import { redirect } from "next/navigation";
 import { FaqComponent, Tutorials } from "@/features/help-center";
 
 const Home = async ({
+    params,
     searchParams,
 }: {
+    params: { slug: string };
     searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
-    // if there is no option query param, add it and set it to faqs
-    if (searchParams && !("option" in searchParams)) {
-        redirect("/help-center?option=faqs");
-    }
-
-    const option = searchParams?.option || "faqs";
+    const option = true ? "faqs" : "tutorials";
 
     return (
         <main id="landingPage" className={styles.main}>
