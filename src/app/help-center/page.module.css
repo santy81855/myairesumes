@@ -134,3 +134,10 @@
     background-color: white;
     max-width: 1200px;
 }
+
+@media screen and (width < 480px) {
+    .contentSection {
+        padding-inline: var(--padding-inline-medium);
+        padding-block: var(--padding-block-medium);
+    }
+}

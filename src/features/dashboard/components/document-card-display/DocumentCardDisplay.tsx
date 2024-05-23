@@ -93,7 +93,9 @@ const DocumentCardDisplay = ({
                 <motion.section className={styles.buttonOptions}>
                     <button
                         type="button"
-                        className={styles.allButton}
+                        className={`${styles.allButton} ${
+                            selectedColor === "" && styles.activeColor
+                        }`}
                         onClick={() => {
                             setSelectedColor("");
                             setCurrentPage(1);
@@ -106,7 +108,9 @@ const DocumentCardDisplay = ({
                             key={color}
                             type="button"
                             style={{ backgroundColor: color }}
-                            className={styles.colorButton}
+                            className={`${styles.colorButton} ${
+                                color === selectedColor && styles.activeColor
+                            }`}
                             onClick={() => {
                                 handleColorFilter(color);
                             }}
