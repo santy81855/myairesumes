@@ -13,7 +13,7 @@ const Home = async ({
     params: { slug: string };
     searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
-    const option = true ? "faqs" : "tutorials";
+    const option = searchParams?.option || "faqs";
 
     return (
         <main id="landingPage" className={styles.main}>
