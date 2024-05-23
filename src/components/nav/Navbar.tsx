@@ -40,7 +40,7 @@ const Navbar = async ({ style, isAuth }: NavbarProps) => {
                     <Link href="/pricing">
                         <p className={styles.navLink}>Pricing</p>
                     </Link>
-                    <Link href="/help-center">
+                    <Link href="/help-center?option=faqs">
                         <p className={styles.navLink}>Help Center</p>
                     </Link>
                     {session && (
