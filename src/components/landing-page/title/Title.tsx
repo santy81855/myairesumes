@@ -22,7 +22,7 @@ const Title = async () => {
                     }
                     className={`${styles.linkLeft} ${styles.link}`}
                 >
-                    <p>Get Started</p>
+                    {user ? <p>Go to Dashboard</p> : <p>Get Started</p>}
                     <i className="fa-solid fa-arrow-right"></i>
                 </Link>
             </section>

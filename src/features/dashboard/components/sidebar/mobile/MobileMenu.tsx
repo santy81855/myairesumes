@@ -143,7 +143,7 @@ const MobileMenu = () => {
                             )}
                         </Link>
                         <Link
-                            title="Jobs"
+                            title="Applications"
                             className={`${styles.menuItem} ${
                                 menuSection === "jobs" && styles.active
                             }`}
@@ -156,7 +156,7 @@ const MobileMenu = () => {
                                     initial="hidden"
                                     animate="visible"
                                 >
-                                    {"jobs"
+                                    {"applications"
                                         .split("")
                                         .map((curLetter, index) => (
                                             <motion.span
