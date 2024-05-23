@@ -56,7 +56,6 @@ const Home = async ({
                 </section>
             </section>
             <section className={styles.contentSection}>
-                {option === "faqs" && <FaqComponent />}
                 {option === "tutorials" && <Tutorials />}
             </section>
             <section className={styles.footerSection}>
