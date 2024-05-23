@@ -62,14 +62,14 @@ const Menu = () => {
                 Account
             </Link>
             <Link
-                title="Jobs"
+                title="Applications"
                 className={
                     menuSection === "jobs" ? styles.active : styles.menuItem
                 }
                 href="/dashboard?menu=jobs&documentPage=1"
             >
                 <div className={styles.iconContainer}>{jobIcon}</div>
-                Jobs
+                Applications
             </Link>
             <Link
                 title="Resumes"
