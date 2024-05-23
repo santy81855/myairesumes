@@ -40,6 +40,9 @@ const Navbar = async ({ style, isAuth }: NavbarProps) => {
                     <Link href="/pricing">
                         <p className={styles.navLink}>Pricing</p>
                     </Link>
+                    <Link href="/help-center">
+                        <p className={styles.navLink}>Help Center</p>
+                    </Link>
                     {session && (
                         <ProfileButton
                             session={session}
