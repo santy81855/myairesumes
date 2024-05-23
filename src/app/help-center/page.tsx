@@ -41,7 +41,7 @@ const Home = async ({
                             }`}
                         >
                             {faqIcon}
-                            <p className={styles.optionText}>FAQ's</p>
+                            <p className={styles.optionText}>FAQ&apos;s</p>
                         </Link>
                         <Link
                             href="/help-center?option=tutorials"

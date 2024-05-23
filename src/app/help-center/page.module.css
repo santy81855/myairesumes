@@ -103,16 +103,17 @@
 }
 
 .optionButton:hover {
-    outline: 2px solid #85c4ee;
+    outline: 3px solid #eebb45;
 }
 
 .active {
-    outline: 2px solid #85c4ee;
+    outline: 3px solid #eebb45;
 }
 
 .optionText {
     font-size: var(--font-size-small);
     color: black;
+    font-weight: bold;
 }
 
 .optionButton svg {
