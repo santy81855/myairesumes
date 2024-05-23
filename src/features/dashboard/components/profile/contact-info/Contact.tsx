@@ -29,95 +29,97 @@ const Contact = async ({ currentUser, searchParams }: ContactProps) => {
 
     return (
         <Card gridArea="profile" title="Contact" key="contact-card">
-            <div className={styles.profileSectionContent}>
-                <section className={styles.contactInfo}>
-                    <section className={styles.fieldContainer}>
-                        <label htmlFor="email" className={styles.label}>
-                            email
-                        </label>
-                        {edit ? (
-                            <input
-                                id="email"
-                                aria-label="email"
-                                type="text"
-                                name="email"
-                                className={styles.input}
-                                defaultValue={profileEmail}
-                                required
-                            />
-                        ) : (
-                            <p className={styles.item}>
-                                {getSubstringEllipsis(email, 0, 25)}
-                            </p>
-                        )}
+            <form className={styles.formContainer}>
+                <div className={styles.profileSectionContent}>
+                    <section className={styles.contactInfo}>
+                        <section className={styles.fieldContainer}>
+                            <label htmlFor="email" className={styles.label}>
+                                email
+                            </label>
+                            {edit ? (
+                                <input
+                                    id="email"
+                                    aria-label="email"
+                                    type="text"
+                                    name="email"
+                                    className={styles.input}
+                                    defaultValue={profileEmail}
+                                    required
+                                />
+                            ) : (
+                                <p className={styles.item}>
+                                    {getSubstringEllipsis(email, 0, 25)}
+                                </p>
+                            )}
+                        </section>
+                        <section className={styles.fieldContainer}>
+                            <label htmlFor="phone" className={styles.label}>
+                                phone
+                            </label>
+                            {edit ? (
+                                <input
+                                    id="phone"
+                                    aria-label="phone"
+                                    type="text"
+                                    name="phone"
+                                    className={styles.input}
+                                    defaultValue={phone}
+                                    required
+                                />
+                            ) : (
+                                <p className={styles.item}>
+                                    {getSubstringEllipsis(phone, 0, 25)}
+                                </p>
+                            )}
+                        </section>
+                        <section className={styles.fieldContainer}>
+                            <label htmlFor="website" className={styles.label}>
+                                website
+                            </label>
+                            {edit ? (
+                                <input
+                                    id="website"
+                                    aria-label="website"
+                                    type="text"
+                                    name="website"
+                                    className={styles.input}
+                                    defaultValue={website}
+                                />
+                            ) : (
+                                <p className={styles.item}>
+                                    {getSubstringEllipsis(website, 0, 25)}
+                                </p>
+                            )}
+                        </section>
                     </section>
-                    <section className={styles.fieldContainer}>
-                        <label htmlFor="phone" className={styles.label}>
-                            phone
-                        </label>
-                        {edit ? (
-                            <input
-                                id="phone"
-                                aria-label="phone"
-                                type="text"
-                                name="phone"
-                                className={styles.input}
-                                defaultValue={phone}
-                                required
-                            />
-                        ) : (
-                            <p className={styles.item}>
-                                {getSubstringEllipsis(phone, 0, 25)}
-                            </p>
-                        )}
+                </div>
+                {edit ? (
+                    <section className={styles.buttonContainer}>
+                        <Link
+                            href="/dashboard?menu=profile"
+                            className={styles.cancelButton}
+                        >
+                            cancel
+                        </Link>
+                        <button
+                            type="submit"
+                            className={styles.submitButton}
+                            formAction={updateBasicInfo}
+                        >
+                            Save
+                        </button>
                     </section>
-                    <section className={styles.fieldContainer}>
-                        <label htmlFor="website" className={styles.label}>
-                            website
-                        </label>
-                        {edit ? (
-                            <input
-                                id="website"
-                                aria-label="website"
-                                type="text"
-                                name="website"
-                                className={styles.input}
-                                defaultValue={website}
-                            />
-                        ) : (
-                            <p className={styles.item}>
-                                {getSubstringEllipsis(website, 0, 25)}
-                            </p>
-                        )}
-                    </section>
-                </section>
-            </div>
-            {edit ? (
-                <section className={styles.buttonContainer}>
+                ) : (
                     <Link
-                        href="/dashboard?menu=profile"
-                        className={styles.cancelButton}
-                    >
-                        cancel
-                    </Link>
-                    <button
-                        type="submit"
+                        href="/dashboard?menu=profile&contactEdit=true"
+                        type="button"
                         className={styles.submitButton}
-                        formAction={updateBasicInfo}
                     >
-                        Save
-                    </button>
-                </section>
-            ) : (
-                <Link
-                    href="/dashboard?menu=profile&contactEdit=true"
-                    type="button"
-                    className={styles.submitButton}
-                >
-                    Edit
-                </Link>
-            )}
-            <FormLoading />
+                        Edit
+                    </Link>
+                )}
+                <FormLoading />
+            </form>
         </Card>
     );
 };
