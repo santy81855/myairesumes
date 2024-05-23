@@ -1,0 +1,56 @@
+.tutorialContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--padding-block-large);
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
+}
+
+.title {
+    font-size: var(--font-size-xlarge);
+    font-weight: bold;
+    color: black;
+}
+
+.description {
+    font-size: var(--font-size-medium);
+    color: black;
+    opacity: 0.7;
+}
+
+.tutorial {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.tutorialTitle {
+    font-size: var(--font-size-large);
+    font-weight: bold;
+    color: black;
+}
+
+.tutorialDescription {
+    font-size: var(--font-size-medium);
+    color: black;
+    opacity: 0.7;
+}
+
+.horizontalLine {
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    opacity: 0.2;
+    margin-block: var(--padding-block-small);
+}
