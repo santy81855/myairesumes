@@ -43,6 +43,7 @@
     padding-block-start: var(--padding-block-large);
     padding-inline: var(--padding-inline-medium);
     width: 100%;
+    margin-block-end: 3rem;
 }
 
 .link {
