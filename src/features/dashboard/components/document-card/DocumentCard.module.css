@@ -1,8 +1,8 @@
 .resumeCard {
-    height: auto;
     min-width: 250px;
     width: 100%;
     max-width: 400px;
+    height: min-content;
     background-color: rgb(var(--dashboard-accent-color-rgb));
     background: url("/images/dashboard/document-background.jpg");
     background-size: cover;

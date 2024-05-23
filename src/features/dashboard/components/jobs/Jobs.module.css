@@ -349,8 +349,9 @@
     align-items: center;
     gap: var(--padding-block-small);
     padding-block: var(--padding-block-medium);
+    min-width: 250px;
     width: 100%;
-    height: 100%;
+    max-width: 400px;
     border: 1px dashed rgb(var(--dashboard-accent-color-rgb));
 }
 
