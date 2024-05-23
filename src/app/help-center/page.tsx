@@ -6,7 +6,18 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { FaqComponent, Tutorials } from "@/features/help-center";
 
-const Home = async () => {
+const Home = async ({
+    searchParams,
+}: {
+    searchParams?: { [key: string]: string | string[] | undefined };
+}) => {
+    // if there is no option query param, add it and set it to faqs
+    if (searchParams && !("option" in searchParams)) {
+        redirect("/help-center?option=faqs");
+    }
+
+    const option = searchParams?.option || "faqs";
+
     return (
         <main id="landingPage" className={styles.main}>
             <section className={styles.heroSection}>
@@ -23,14 +34,18 @@ const Home = async () => {
                     <section className={styles.buttonContainer}>
                         <Link
                             href="/help-center?option=faqs"
-                            className={`${styles.optionButton} ${styles.active}`}
+                            className={`${styles.optionButton} ${
+                                option === "faqs" && styles.active
+                            }`}
                         >
                             {faqIcon}
                             <p className={styles.optionText}>FAQ&apos;s</p>
                         </Link>
                         <Link
                             href="/help-center?option=tutorials"
-                            className={`${styles.optionButton} `}
+                            className={`${styles.optionButton} ${
+                                option === "tutorials" && styles.active
+                            }`}
                         >
                             {videoIcon}
                             <p className={styles.optionText}>Tutorials</p>
@@ -39,8 +54,8 @@ const Home = async () => {
                 </section>
             </section>
             <section className={styles.contentSection}>
-                {<FaqComponent />}
-                {<Tutorials />}
+                {option === "faqs" && <FaqComponent />}
+                {option === "tutorials" && <Tutorials />}
             </section>
             <section className={styles.footerSection}>
                 <Footer />
