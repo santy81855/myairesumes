@@ -3,6 +3,9 @@ export const getSubstringEllipsis = (
     start: number,
     end: number
 ) => {
+    if (!str) {
+        return "";
+    }
     const len = str.length;
     if (len < end || len < start || start < 0 || end < 0 || start > end) {
         return str;
