@@ -89,6 +89,10 @@
     stroke-width: 0.1;
 }
 
+.activeColor {
+    outline: 2px solid black;
+}
+
 .active {
     font-size: var(--font-size-small);
     border-radius: 50%;
