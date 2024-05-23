@@ -171,7 +171,9 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
                                         <motion.a
                                             key={id}
                                             href={to}
-                                            whileHover={{ scale: 1.1 }}
+                                            whileHover={{
+                                                scale: 1.1,
+                                            }}
                                             variants={itemVariants}
                                             className={styles.menuItem}
                                         >
@@ -184,7 +186,7 @@ const Dropdown = ({ links, state, setState, session, user }: MenuProps) => {
                                 ) : (
                                     session && (
                                         <motion.button
-                                            whileHover={{ scale: 1.05 }}
+                                            whileHover={{ scale: 1.1 }}
                                             variants={itemVariants}
                                             className={styles.signOutButton}
                                             onClick={signoutPressed}

@@ -20,13 +20,15 @@ const Menu = ({ session, user, style, isAuth }: MenuProps) => {
         menuLinks.push(
             { name: "Home", to: "/", id: "home" },
             { name: "Dashboard", to: "/dashboard", id: "dashboard" },
-            { name: "Pricing", to: "/pricing", id: "pricing" }
+            { name: "Pricing", to: "/pricing", id: "pricing" },
+            { name: "Help Center", to: "/help-center", id: "help-center" }
         );
     } else if (!session && !isAuth) {
         menuLinks.push(
             { name: "Home", to: "/", id: "home" },
             { name: "Pricing", to: "/pricing", id: "pricing" },
-            { name: "Create a Resume", to: "/sign-up", id: "sign-up" }
+            { name: "Create a Resume", to: "/sign-up", id: "sign-up" },
+            { name: "Help Center", to: "/help-center", id: "help-center" }
         );
     } else if (!session && isAuth) {
         menuLinks.push({ name: "Home", to: "/", id: "home" });
