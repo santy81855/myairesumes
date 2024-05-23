@@ -4,7 +4,7 @@ import { Footer } from "@/features/footer";
 import { faqIcon, videoIcon } from "@/components/icons/iconSVG";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { FaqComponent } from "@/features/help-center";
+import { FaqComponent, Tutorials } from "@/features/help-center";
 
 const Home = async ({
     params,
@@ -57,6 +57,7 @@ const Home = async ({
             </section>
             <section className={styles.contentSection}>
                 {option === "faqs" && <FaqComponent />}
+                {option === "tutorials" && <Tutorials />}
             </section>
             <section className={styles.footerSection}>
                 <Footer />

@@ -3,7 +3,11 @@ import styles from "./VideoEmbed.module.css";
 import YouTube, { YouTubeProps } from "react-youtube";
 import { useEffect, useState } from "react";
 
-const VideoEmbed = () => {
+type VideoEmbedProps = {
+    link: string;
+};
+
+const VideoEmbed = ({ link }: VideoEmbedProps) => {
     const [opts, setOpts] = useState<YouTubeProps["opts"]>({});
 
     // use effect that detects the user's screen size
@@ -49,7 +53,7 @@ const VideoEmbed = () => {
 
     return (
         <section className={styles.videoContainer}>
-            <YouTube videoId={"kNsDdUjpoGo"} opts={opts} />
+            <YouTube videoId={link} opts={opts} />
         </section>
     );
 };

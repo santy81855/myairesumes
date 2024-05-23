@@ -37,7 +37,7 @@ export default async function Home() {
                     <div className={styles.circle2}></div>
                     <div className={styles.circle3}></div>
                 </section>
-                <VideoEmbed />
+                <VideoEmbed link={"kNsDdUjpoGo"} />
             </section>
             <section className={styles.featuresSection}>
                 <Features />
