@@ -4,22 +4,9 @@ import { Footer } from "@/features/footer";
 import { faqIcon, videoIcon } from "@/components/icons/iconSVG";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-//import { FaqComponent, Tutorials } from "@/features/help-center";
+import { FaqComponent, Tutorials } from "@/features/help-center";
 
-const Home = async ({
-    params,
-    searchParams,
-}: {
-    params: { slug: string };
-    searchParams?: { [key: string]: string | string[] | undefined };
-}) => {
-    // if there is no option query param, add it and set it to faqs
-    if (searchParams && !("option" in searchParams)) {
-        redirect("/help-center?option=faqs");
-    }
-
-    const option = searchParams?.option || "faqs";
-
+const Home = async () => {
     return (
         <main id="landingPage" className={styles.main}>
             <section className={styles.heroSection}>
@@ -36,18 +23,14 @@ const Home = async ({
                     <section className={styles.buttonContainer}>
                         <Link
                             href="/help-center?option=faqs"
-                            className={`${styles.optionButton} ${
-                                option === "faqs" && styles.active
-                            }`}
+                            className={`${styles.optionButton} ${styles.active}`}
                         >
                             {faqIcon}
                             <p className={styles.optionText}>FAQ&apos;s</p>
                         </Link>
                         <Link
                             href="/help-center?option=tutorials"
-                            className={`${styles.optionButton} ${
-                                option === "tutorials" && styles.active
-                            }`}
+                            className={`${styles.optionButton} `}
                         >
                             {videoIcon}
                             <p className={styles.optionText}>Tutorials</p>
@@ -55,7 +38,10 @@ const Home = async ({
                     </section>
                 </section>
             </section>
-            <section className={styles.contentSection}></section>
+            <section className={styles.contentSection}>
+                {<FaqComponent />}
+                {<Tutorials />}
+            </section>
             <section className={styles.footerSection}>
                 <Footer />
             </section>
