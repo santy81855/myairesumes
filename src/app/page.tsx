@@ -45,7 +45,9 @@ export default async function Home() {
             <section className={styles.testimonialsSection}>
                 <Testimonials />
             </section>
-            <Footer />
+            <section className={styles.footerSection}>
+                <Footer />
+            </section>
             {showModal && <BasicInfoModal currentUser={currentUser} />}
         </main>
     );
