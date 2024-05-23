@@ -15,12 +15,18 @@ const Tutorials = () => {
             <div className={styles.horizontalLine}></div>
             <section className={styles.tutorial}>
                 <section className={styles.titleContainer}>
-                    <p className={styles.tutorialTitle}>Introduction</p>
-                    <p className={styles.tutorialDescription}>
-                        Get an overview of the platform and its features.
-                    </p>
+                    <section className={styles.videoContainer}>
+                        <VideoEmbed link="miexUYMx4tM" />
+                    </section>
+                    <section className={styles.tutorialText}>
+                        <p className={styles.tutorialTitle}>Introduction</p>
+                        <p className={styles.tutorialDescription}>
+                            Get an overview of the platform and its features.
+                            Get an idea of how to navigate the platform in order
+                            to create and manage your job applications.
+                        </p>
+                    </section>
                 </section>
-                <VideoEmbed link="miexUYMx4tM" />
             </section>
         </section>
     );
