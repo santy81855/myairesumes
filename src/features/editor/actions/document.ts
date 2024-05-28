@@ -330,27 +330,44 @@ export const updateJob = async (jobId: string, data: any) => {
 
         // if the data includes jobDescription then update the resume and cover letter information
         if (data.information?.jobDescription) {
-            await prisma.resume.updateMany({
+            const resume = await prisma.resume.findUnique({
                 where: {
                     jobId,
                 },
-                data: {
-                    information: {
-                        jobDescription: data.information.jobDescription,
-                    },
-                },
             });
-
-            await prisma.coverLetter.updateMany({
+            if (resume) {
+                const updatedInformation = {
+                    ...(resume.information as any),
+                    jobDescription: data.information.jobDescription,
+                };
+                await prisma.resume.update({
+                    where: {
+                        id: resume.id,
+                    },
+                    data: {
+                        information: updatedInformation,
+                    },
+                });
+            }
+            const coverLetter = await prisma.coverLetter.findUnique({
                 where: {
                     jobId,
                 },
-                data: {
-                    information: {
-                        jobDescription: data.information.jobDescription,
-                    },
-                },
             });
+            if (coverLetter) {
+                const updatedInformation = {
+                    ...(coverLetter.information as any),
+                    jobDescription: data.information.jobDescription,
+                };
+                await prisma.coverLetter.update({
+                    where: {
+                        id: coverLetter.id,
+                    },
+                    data: {
+                        information: updatedInformation,
+                    },
+                });
+            }
         }
 
         revalidatePath("/dashboard");
