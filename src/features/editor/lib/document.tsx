@@ -1173,6 +1173,7 @@ export const initializeNewResume = (
     description: string
 ) => {
     const { basicInfo } = user;
+
     const imageUrl =
         basicInfo && basicInfo.imageUrl
             ? basicInfo.imageUrl
