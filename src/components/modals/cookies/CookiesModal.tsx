@@ -1,12 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./CookiesModal.module.css";
 
 const CookiesModal: React.FC = () => {
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const consent = localStorage.getItem("cookiesConsent");
+        if (!consent) {
+            setIsVisible(true);
+        }
+    }, []);
 
     const handleContinue = () => {
-        // Handle cookie consent logic here, e.g., set a cookie or local storage
+        localStorage.setItem("cookiesConsent", "true");
         setIsVisible(false);
     };
 
