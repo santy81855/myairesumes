@@ -9,6 +9,9 @@ import VideoEmbed from "@/components/landing-page/video-embed/VideoEmbed";
 import Features from "@/components/landing-page/features/Features";
 import Testimonials from "@/components/landing-page/testimonials/Testimonials";
 import { Footer } from "@/features/footer";
+import FaqComponentLandingPage from "@/components/landing-page/faq-section/FaqComponent";
+import PriceOptions from "@/components/pricing/price-options/PriceOptions";
+import CookiesModal from "@/components/modals/cookies/CookiesModal";
 
 export default async function Home() {
     const { user } = await validateRequest();
@@ -42,12 +45,23 @@ export default async function Home() {
             <section className={styles.featuresSection}>
                 <Features />
             </section>
+            <section className={styles.priceSection}>
+                <p className={styles.priceTitle}>Affordable Pricing</p>
+                <div className={styles.circle1}></div>
+                <div className={styles.circle2}></div>
+                <div className={styles.circle3}></div>
+                <PriceOptions />
+            </section>
+            <section className={styles.faqSection}>
+                <FaqComponentLandingPage />
+            </section>
             <section className={styles.testimonialsSection}>
                 <Testimonials />
             </section>
             <section className={styles.footerSection}>
                 <Footer />
             </section>
+            <CookiesModal />
             {showModal && <BasicInfoModal currentUser={currentUser} />}
         </main>
     );
