@@ -6,12 +6,11 @@ const Title = async () => {
     const { user } = await validateRequest();
     return (
         <section className={styles.textContainer}>
-            <h1 className={styles.title}>
-                Writing Resumes Just Got Easier - Apply To Jobs Faster
-            </h1>
+            <h1 className={styles.title}>Applying to Jobs Just Got Easier</h1>
             <p className={styles.subTitle}>
-                My Resume Hero is a resume builder that uses AI to help you
-                create a resume that stands out.
+                My Resume Hero is a job application manager that helps you keep
+                track of your job applications, and create and manage resumes
+                and cover letters with the help of an AI assistant.
             </p>
             <section className={styles.linkContainer}>
                 <Link

@@ -2,9 +2,13 @@ import React from "react";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
+    const currentYear = new Date().getFullYear();
     return (
         <footer className={styles.footer}>
             <div className={styles.footerList}>
+                <p className={styles.footerTitle}>
+                    © {currentYear} My Resume Hero
+                </p>
                 <a
                     href="https://s3.privyr.com/privacy/privacy-policy.html?d=eyJlbWFpbCI6Im15cmVzdW1laGVyb3RlYW1AZ21haWwuY29tIiwiY29tcGFueSI6Ik15IFJlc3VtZSBIZXJvIiwiZ2VuX2F0IjoiMjAyNC0wNS0yMlQwODo0Nzo0Mi40MTZaIn0="
                     target="_blank"
