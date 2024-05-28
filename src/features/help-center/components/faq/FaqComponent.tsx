@@ -14,6 +14,11 @@ const FaqComponent = () => {
                     "My Resume Hero is an application that helps you create, store, and manage your job applications in one place. It also assists you in generating personalized resumes and cover letters for each job application, greatly increasing your chances of getting hired.",
             },
             {
+                title: "Do I have to re-write my work experience and education every time I make a new resume?",
+                content:
+                    "To reduce having to re-write your work experience and education every time you make a new resume, you can save your work experience and education in the Profile section by going to Dashboard->Profile. This will allow you to easily add your work experience and education only once. You can do the same for your contact information.",
+            },
+            {
                 title: "Can I edit my job applications after I create them?",
                 content:
                     "Yes, you can edit your job applications at any time by going to Dashboard->Applications. You can then edit any of the job details and the resume and/or cover letter associated with the job application. You can also delete them if you no longer need them.",

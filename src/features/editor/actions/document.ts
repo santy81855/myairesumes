@@ -68,8 +68,15 @@ export const createJobResume = async (jobObject: any) => {
             return redirect("/sign-in");
         }
 
+        // get the current user
+        const currentUser = await prisma.user.findUnique({
+            where: {
+                id: user.id,
+            },
+        });
+
         const resumeInformation = initializeNewResume(
-            user,
+            currentUser,
             user.firstName + "-" + user.lastName + "-Resume",
             jobObject.jobName, // job
             "Resume for " +
@@ -119,6 +126,14 @@ export const createJob = async (formData: any) => {
         if (!user) {
             return redirect("/sign-in");
         }
+
+        // get the current user
+        const currentUser = await prisma.user.findUnique({
+            where: {
+                id: user.id,
+            },
+        });
+
         // get the formData information
         const color = formData.get("color") as string;
         const companyName = formData.get("companyName") as string;
@@ -144,7 +159,7 @@ export const createJob = async (formData: any) => {
         });
 
         const resumeInformation = initializeNewResume(
-            user,
+            currentUser,
             resumeName,
             job, // job
             "Resume for " + job + " application at " + companyName
@@ -269,6 +284,7 @@ export const createResume = async (formData: any) => {
     if (!user) {
         return redirect("/sign-in");
     }
+
     // get the formData information
     const name = formData.get("name") as string;
     const job = formData.get("job") as string;
