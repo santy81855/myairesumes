@@ -1,0 +1,12 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /password-reset
+Disallow: /email-verification
+Disallow: /editor
+
+# Host
+Host: https://myresumehero.com
+
+# Sitemaps
+Sitemap: https://myresumehero.com/sitemap.xml
