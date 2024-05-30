@@ -101,7 +101,6 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                                 defaultValue={
                                     workId ? workBeingEdited.summary : ""
                                 }
-                                required
                             />
                         </section>
                         <BulletInput
