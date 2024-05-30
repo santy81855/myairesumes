@@ -12,6 +12,7 @@ import { Footer } from "@/features/footer";
 import FaqComponentLandingPage from "@/components/landing-page/faq-section/FaqComponent";
 import PriceOptions from "@/components/pricing/price-options/PriceOptions";
 import CookiesModal from "@/components/modals/cookies/CookiesModal";
+import PageFlow from "@/components/landing-page/page-flow/PageFlow";
 
 export default async function Home() {
     const { user } = await validateRequest();
@@ -40,7 +41,9 @@ export default async function Home() {
                     <div className={styles.circle2}></div>
                     <div className={styles.circle3}></div>
                 </section>
-                <VideoEmbed link={"kNsDdUjpoGo"} />
+                <section className={styles.landingImage}>
+                    <PageFlow />
+                </section>
             </section>
             <section className={styles.featuresSection}>
                 <Features />
