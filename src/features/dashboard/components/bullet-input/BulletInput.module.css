@@ -1,0 +1,81 @@
+/* BulletInput.module.css */
+.bulletTitle {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--dashboard-text-color-rgb));
+    margin-block-end: var(--padding-block-small);
+}
+
+.bulletItemContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.bulletItem {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.removeButton {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: var(--padding-block-small);
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: var(--font-size-medium);
+    margin-left: auto;
+}
+
+.bulletRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--padding-block-small);
+}
+
+.bullet {
+    width: 8px;
+    height: 8px;
+    background-color: black;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    border-color: #007acc;
+}
+
+.addButton {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 16px;
+    text-align: center;
+}
+
+.addButton:hover {
+    background-color: #005f99;
+}

@@ -10,6 +10,7 @@ import {
 import FormLoading from "@/components/form-loading/FormLoading";
 import { formatDateMonthYear, sortObjectArrayByDateEnd } from "@/lib/date";
 import Card from "@/features/dashboard/components/cards/dashboard-cards/Card";
+import BulletInput from "../../bullet-input/BulletInput";
 
 type WorkProps = {
     currentUser: any;
@@ -46,37 +47,66 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                         <p className={styles.addTitle}>
                             {workId ? "Edit Job" : "Add a Job"}
                         </p>
-                        <section className={styles.workInfo}>
-                            <label htmlFor="company" className={styles.label}>
-                                Company
-                            </label>
-                            <input
-                                id="company"
-                                type="text"
-                                name="company"
-                                className={styles.input}
-                                defaultValue={
-                                    workId ? workBeingEdited.company : ""
-                                }
-                                required
-                                autoFocus
-                            />
+                        <section className={styles.dateInput}>
+                            <section className={styles.workInfo}>
+                                <label
+                                    htmlFor="company"
+                                    className={styles.label}
+                                >
+                                    Company
+                                </label>
+                                <input
+                                    id="company"
+                                    type="text"
+                                    name="company"
+                                    className={styles.input}
+                                    defaultValue={
+                                        workId ? workBeingEdited.company : ""
+                                    }
+                                    required
+                                    autoFocus
+                                />
+                            </section>
+                            <section className={styles.workInfo}>
+                                <label
+                                    htmlFor="position"
+                                    className={styles.label}
+                                >
+                                    Position
+                                </label>
+                                <input
+                                    id="position"
+                                    type="text"
+                                    name="position"
+                                    className={styles.input}
+                                    defaultValue={
+                                        workId ? workBeingEdited.position : ""
+                                    }
+                                    required
+                                />
+                            </section>
                         </section>
                         <section className={styles.workInfo}>
-                            <label htmlFor="position" className={styles.label}>
-                                Position
+                            <label
+                                htmlFor="jobSummary"
+                                className={styles.label}
+                            >
+                                Summary
                             </label>
-                            <input
-                                id="position"
-                                type="text"
-                                name="position"
-                                className={styles.input}
+                            <textarea
+                                rows={4}
+                                id="jobSummary"
+                                name="jobSummary"
+                                className={styles.textArea}
                                 defaultValue={
-                                    workId ? workBeingEdited.position : ""
+                                    workId ? workBeingEdited.summary : ""
                                 }
                                 required
                             />
                         </section>
+                        <BulletInput
+                            info={workId ? workBeingEdited.bullets : [""]}
+                        />
                         <section className={styles.workInfoHorizontal}>
                             <p className={styles.label}>Current Employer</p>
                             <div className={styles.toggleSwitch}>
@@ -187,19 +217,13 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                                     key={index}
                                 >
                                     <section className={styles.workItemInfo}>
-                                        <p className={styles.company}>
-                                            {job.company}
-                                        </p>
-                                        <p className={styles.position}>
-                                            {job.position}
-                                        </p>
                                         <section className={styles.dateRange}>
                                             <p className={styles.startDate}>
                                                 {formatDateMonthYear(
                                                     job.startDate
                                                 )}
-                                                {" - "}
                                             </p>
+                                            <p>{" - "}</p>
                                             {job.currentEmployer ? (
                                                 <p className={styles.endDate}>
                                                     {job.endDate}
@@ -212,6 +236,45 @@ const Work = ({ currentUser, searchParams }: WorkProps) => {
                                                 </p>
                                             )}
                                         </section>
+                                        <p className={styles.company}>
+                                            {job.company}
+                                        </p>
+                                        <p className={styles.position}>
+                                            {job.position}
+                                        </p>
+                                        <p className={styles.summary}>
+                                            {job.summary}
+                                        </p>
+                                        {job.bullets && (
+                                            <section className={styles.bullets}>
+                                                {job.bullets.map(
+                                                    (
+                                                        bullet: string,
+                                                        index: number
+                                                    ) => (
+                                                        <div
+                                                            key={index}
+                                                            className={
+                                                                styles.bulletItem
+                                                            }
+                                                        >
+                                                            <div
+                                                                className={
+                                                                    styles.bulletIcon
+                                                                }
+                                                            ></div>
+                                                            <p
+                                                                className={
+                                                                    styles.bulletText
+                                                                }
+                                                            >
+                                                                {bullet}
+                                                            </p>
+                                                        </div>
+                                                    )
+                                                )}
+                                            </section>
+                                        )}
                                     </section>
                                     <Link
                                         className={styles.editButton}

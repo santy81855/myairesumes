@@ -16,7 +16,7 @@
 .workItem {
     display: flex;
     border: 1px solid rgb(216, 216, 216, 0.5);
-    height: 160px;
+    height: 100%;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
@@ -37,7 +37,7 @@
 .company {
     font-size: var(--font-size-small);
     font-weight: bold;
-    color: rgb(var(--dashboard-text-color-rgb));
+    color: rgb(var(--dashboard-text-color-rgb), 0.5);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -50,18 +50,63 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-block-start: var(--padding-block-small);
     width: 100%;
 }
 
-.dateRange {
+.summary {
     font-size: var(--font-size-small);
     color: rgb(var(--dashboard-text-color-rgb), 0.5);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-block-start: var(--padding-block-medium);
     width: 100%;
+    margin-block-start: var(--padding-block-small);
+}
+
+.bullets {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+    margin-block: var(--padding-block-small);
+}
+
+.bulletItem {
+    display: flex;
+    flex-direction: row;
+    gap: var(--padding-block-small);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.bulletIcon {
+    width: 4px;
+    height: 4px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.bulletText {
+    font-size: var(--font-size-xsmall);
+    color: rgb(var(--dashboard-text-color-rgb));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.dateRange {
+    display: flex;
+    gap: var(--padding-block-small);
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb), 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    width: 100%;
+    margin-block-end: var(--padding-block-small);
 }
 
 .addWorkButton {
@@ -69,7 +114,7 @@
     justify-content: center;
     align-items: center;
     background-color: rgb(var(--dashboard-background-color-contrast-rgb));
-    height: 160px;
+    height: 100%;
     border: none;
     cursor: pointer;
     border-radius: var(--border-radius-xsmall);
@@ -147,6 +192,21 @@
     padding-inline-start: var(--padding-block-small);
     font-size: var(--font-size-small);
     color: rgb(var(--dashboard-text-color-rgb));
+}
+
+.textArea {
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    border-radius: var(--border-radius-xsmall);
+    padding-inline-start: var(--padding-block-small);
+    padding-block: var(--padding-block-small);
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
+}
+
+.textArea:focus {
+    outline: none;
+    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
 }
 
 .input:focus {
@@ -252,7 +312,7 @@
         grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     }
     .workItem {
-        height: 150px;
+        height: 100%;
     }
     .company {
         font-size: var(--font-size-xsmall);
@@ -261,7 +321,7 @@
         font-size: var(--font-size-xsmall);
     }
     .dateRange {
-        font-size: var(--font-size-xsmall);
+        font-size: var(--font-size-small);
     }
     .dateInput {
         flex-direction: column;
