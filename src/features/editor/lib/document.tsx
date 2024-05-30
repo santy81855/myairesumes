@@ -1218,12 +1218,6 @@ export const initializeNewResume = (
             : experienceArray.map((item) => {
                   return {
                       ...item,
-                      summary: "Example summary.",
-                      bullets: [
-                          "Example bullet 1.",
-                          "Example bullet 2.",
-                          "Example bullet 3.",
-                      ],
                   };
               });
     const educationArray = basicInfo

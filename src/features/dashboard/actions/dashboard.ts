@@ -305,6 +305,15 @@ export const updateUserWorkInfo = async (
     const currentEmployer = formData.get("currentEmployer");
     const endDate =
         currentEmployer === "on" ? "Present" : formData.get("endDate");
+    const summary = formData.get("jobSummary");
+    // get all 10 bullets
+    const bullets = [];
+    for (let i = 0; i < 10; i++) {
+        const bullet = formData.get(`bullet${i}`);
+        if (bullet) {
+            bullets.push(bullet);
+        }
+    }
     const work = user.basicInfo.work;
     const workToUpdate = work.find((w: any) => w.id === workId);
     if (!workToUpdate) {
@@ -316,6 +325,8 @@ export const updateUserWorkInfo = async (
     workToUpdate.position = position;
     workToUpdate.startDate = startDate;
     workToUpdate.endDate = endDate;
+    workToUpdate.bullets = bullets;
+    workToUpdate.summary = summary;
     workToUpdate.currentEmployer = currentEmployer === "on" ? true : false;
     const basicInfo = user.basicInfo;
     const data = {
@@ -346,6 +357,15 @@ export const addUserWorkInfo = async (user: any, formData: any) => {
     const currentEmployer = formData.get("currentEmployer");
     const endDate =
         currentEmployer === "on" ? "Present" : formData.get("endDate");
+    const summary = formData.get("jobSummary");
+    // get all 10 bullets
+    const bullets = [];
+    for (let i = 0; i < 10; i++) {
+        const bullet = formData.get(`bullet${i}`);
+        if (bullet) {
+            bullets.push(bullet);
+        }
+    }
     const work = user.basicInfo.work;
     const newWork = {
         id: work.length + 1,
@@ -353,6 +373,8 @@ export const addUserWorkInfo = async (user: any, formData: any) => {
         position,
         startDate,
         endDate,
+        bullets,
+        summary,
         currentEmployer: currentEmployer === "on" ? true : false,
     };
     work.push(newWork);
