@@ -115,3 +115,27 @@
     font-weight: bold;
     color: white;
 }
+
+@media (pointer: coarse) and (hover: none) {
+    .landingImage {
+        aspect-ratio: 16/9;
+        max-width: 1500px;
+        width: 140%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (pointer: fine) {
+    .landingImage {
+        aspect-ratio: 16/9;
+        max-width: 1500px;
+        width: 175%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
