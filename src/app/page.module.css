@@ -119,7 +119,7 @@
 @media (pointer: coarse) and (hover: none) {
     .landingImage {
         aspect-ratio: 16/9;
-        max-width: 1200px;
+        max-width: 1500px;
         width: 140%;
         height: auto;
         display: flex;
@@ -131,7 +131,7 @@
 @media (pointer: fine) {
     .landingImage {
         aspect-ratio: 16/9;
-        max-width: 1200px;
+        max-width: 1500px;
         width: 175%;
         height: auto;
         display: flex;
