@@ -72,8 +72,10 @@ const Page = async ({
                     style={{
                         backgroundColor: "white",
                         color: "black",
+                        justifyContent: "space-between",
                     }}
                 />
+
                 <main className={styles.main}>
                     <p
                         className={`${styles.topHeading} ${styles.largeHeading}`}
