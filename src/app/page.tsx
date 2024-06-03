@@ -5,7 +5,6 @@ import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 import BasicInfoModal from "@/components/landing-page/basic-info-modal/BasicInfoModal";
 import { redirect } from "next/navigation";
-import VideoEmbed from "@/components/landing-page/video-embed/VideoEmbed";
 import Features from "@/components/landing-page/features/Features";
 import Testimonials from "@/components/landing-page/testimonials/Testimonials";
 import { Footer } from "@/features/footer";
@@ -62,7 +61,7 @@ export default async function Home() {
                 <Testimonials />
             </section>
             <section className={styles.footerSection}>
-                <Footer />
+                <Footer style={{ backgroundColor: "white", color: "black" }} />
             </section>
             <CookiesModal />
             {showModal && <BasicInfoModal currentUser={currentUser} />}
