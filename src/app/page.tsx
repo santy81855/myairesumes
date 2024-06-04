@@ -12,6 +12,7 @@ import FaqComponentLandingPage from "@/components/landing-page/faq-section/FaqCo
 import PriceOptions from "@/components/pricing/price-options/PriceOptions";
 import CookiesModal from "@/components/modals/cookies/CookiesModal";
 import PageFlow from "@/components/landing-page/page-flow/PageFlow";
+import { ContactUs } from "@/features/contact-us";
 
 export default async function Home() {
     const { user } = await validateRequest();
@@ -60,6 +61,7 @@ export default async function Home() {
             <section className={styles.testimonialsSection}>
                 <Testimonials />
             </section>
+            <ContactUs user={user} />
             <section className={styles.footerSection}>
                 <Footer style={{ backgroundColor: "white", color: "black" }} />
             </section>
