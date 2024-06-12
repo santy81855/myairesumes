@@ -13,6 +13,9 @@ export async function GET(request: Request) {
             where: {
                 userId: userId,
             },
+            include: {
+                job: true,
+            },
         });
         return new Response(JSON.stringify(resumes), { status: 200 });
     } catch (error: unknown) {

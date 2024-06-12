@@ -4,6 +4,7 @@ import { EmailVerificationTemplate } from "@/components/email-templates/email-ve
 import { EmailVerificationCodeTemplate } from "@/components/email-templates/email-verification-code-template/EmailTemplate";
 import { PasswordResetTemplate } from "@/components/email-templates/password-reset-template/EmailTemplate";
 import { FailedPaymentTemplate } from "@/components/email-templates/payment-failed-template/EmailTemplate";
+import { GeneralMessageTemplate } from "@/components/email-templates/general-message-template/EmailTemplate";
 import { Resend } from "resend";
 
 export async function send(data: AuthEmailDataType) {
@@ -12,6 +13,15 @@ export async function send(data: AuthEmailDataType) {
     try {
         var template;
         var from = "";
+
+        if (type === "general-message") {
+            const content = data.content as string;
+            template = GeneralMessageTemplate({
+                email: email,
+                content: content,
+            });
+            from = "MyResumeHero <general-message@myresumehero.com>";
+        }
         if (type === "email-verification") {
             const url = data.url as string;
             template = EmailVerificationTemplate({
@@ -48,8 +58,8 @@ export async function send(data: AuthEmailDataType) {
         }
         const response = await resend.emails.send({
             from: from,
-            to: [email],
-            subject: subject,
+            to: ["myresumeheroteam@gmail.com"],
+            subject: "General Message - " + subject,
             react: template,
             text: "",
         });

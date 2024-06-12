@@ -20,12 +20,6 @@ type CardProps = {
 const Card = ({ title, number, url, gridArea }: CardProps) => {
     const [hover, setHover] = useState(false);
 
-    const initialText = (
-        <>
-            <h3 className={styles.title}>{title}</h3>
-            <p className={styles.number}>{number}</p>
-        </>
-    );
     return (
         <section
             className={styles.cardContainer}
@@ -34,7 +28,10 @@ const Card = ({ title, number, url, gridArea }: CardProps) => {
         >
             <section className={styles.titleTab}>
                 <p className={styles.tabNumber}>{number}</p>
-                <h3 className={styles.tabTitle}>{title}</h3>
+                <h3 className={styles.tabTitle}>
+                    {" "}
+                    {title === "Jobs" ? "Applications" : title}
+                </h3>
             </section>
             <Link
                 href={`/dashboard?menu=${title

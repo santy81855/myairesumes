@@ -5,7 +5,6 @@ import { validateRequest } from "@/features/authentication/lib/auth";
 import { getUser } from "@/lib/user";
 import BasicInfoModal from "@/components/landing-page/basic-info-modal/BasicInfoModal";
 import { redirect } from "next/navigation";
-import VideoEmbed from "@/components/landing-page/video-embed/VideoEmbed";
 import Features from "@/components/landing-page/features/Features";
 import Testimonials from "@/components/landing-page/testimonials/Testimonials";
 import { Footer } from "@/features/footer";
@@ -13,6 +12,7 @@ import FaqComponentLandingPage from "@/components/landing-page/faq-section/FaqCo
 import PriceOptions from "@/components/pricing/price-options/PriceOptions";
 import CookiesModal from "@/components/modals/cookies/CookiesModal";
 import PageFlow from "@/components/landing-page/page-flow/PageFlow";
+import { ContactUs } from "@/features/contact-us";
 
 export default async function Home() {
     const { user } = await validateRequest();
@@ -61,8 +61,9 @@ export default async function Home() {
             <section className={styles.testimonialsSection}>
                 <Testimonials />
             </section>
+            <ContactUs user={user} />
             <section className={styles.footerSection}>
-                <Footer />
+                <Footer style={{ backgroundColor: "white", color: "black" }} />
             </section>
             <CookiesModal />
             {showModal && <BasicInfoModal currentUser={currentUser} />}
