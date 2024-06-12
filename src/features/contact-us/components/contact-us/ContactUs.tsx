@@ -10,6 +10,10 @@ import {
 } from "@/components/icons/iconSVG";
 import { motion, AnimatePresence } from "framer-motion";
 import FaqComponentLandingPage from "@/components/landing-page/faq-section/FaqComponent";
+import { send } from "@/actions/email";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 
 const dropIn = {
     hidden: {
@@ -46,12 +50,20 @@ type ContactUsProps = {
 const ContactUs = ({ user }: ContactUsProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [page, setPage] = useState(0);
+    const [email, setEmail] = useState("");
+    const [subject, setSubject] = useState("");
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleOpen = () => {
         setIsOpen(true);
     };
 
     const handleClose = () => {
+        setPage(0);
+        setEmail("");
+        setSubject("");
+        setMessage("");
         setIsOpen(false);
     };
 
@@ -71,11 +83,29 @@ const ContactUs = ({ user }: ContactUsProps) => {
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle the form submission logic
-
-        handleClose();
+        setLoading(true);
+        try {
+            await send({
+                email,
+                firstName: "",
+                lastName: "",
+                subject,
+                type: "general-message",
+                content: message,
+            });
+            toast.success(
+                "Message sent! We will get back to you as soon as possible."
+            );
+        } catch (e) {
+            toast.error("Message failed to send");
+        }
+        setLoading(false);
+        setPage(0);
+        setEmail("");
+        setSubject("");
+        setMessage("");
     };
 
     return (
@@ -126,6 +156,7 @@ const ContactUs = ({ user }: ContactUsProps) => {
                                         className={styles.createButton}
                                         onMouseEnter={handleButtonHover}
                                         onMouseLeave={handleButtonLeave}
+                                        onClick={() => setPage(2)}
                                     >
                                         <section className={styles.buttonText}>
                                             <p
@@ -160,6 +191,86 @@ const ContactUs = ({ user }: ContactUsProps) => {
                                 <FaqComponentLandingPage />
                             </section>
                         )}
+                        {loading && <LoadingScreen />}
+                        {page === 2 && (
+                            <section className={styles.messageSection}>
+                                <button
+                                    title="Close"
+                                    className={styles.closeButton}
+                                    onClick={handleClose}
+                                >
+                                    {circledXIcon}
+                                </button>
+                                <h1>Send us a message</h1>
+                                <form onSubmit={handleSubmit}>
+                                    <section className={styles.inputGroup}>
+                                        <label htmlFor="email">Email</label>
+                                        <input
+                                            id="email"
+                                            title="email"
+                                            type="email"
+                                            placeholder="Your email"
+                                            value={email}
+                                            onChange={(e) =>
+                                                setEmail(e.target.value)
+                                            }
+                                            required
+                                            className={styles.input}
+                                        />
+                                    </section>
+                                    <section className={styles.inputGroup}>
+                                        <label htmlFor="subject">Subject</label>
+                                        <input
+                                            title="subject"
+                                            id="subject"
+                                            type="text"
+                                            placeholder="Subject"
+                                            value={subject}
+                                            onChange={(e) =>
+                                                setSubject(e.target.value)
+                                            }
+                                            required
+                                            className={styles.input}
+                                        />
+                                    </section>
+                                    <section className={styles.inputGroup}>
+                                        <label htmlFor="message">Message</label>
+                                        <textarea
+                                            title="message"
+                                            id="message"
+                                            placeholder="Your message"
+                                            value={message}
+                                            onChange={(e) =>
+                                                setMessage(e.target.value)
+                                            }
+                                            required
+                                            rows={4}
+                                            className={styles.textarea}
+                                        />
+                                    </section>
+                                    <div className={styles.buttonGroup}>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setPage(0);
+                                                setEmail("");
+                                                setSubject("");
+                                                setMessage("");
+                                            }}
+                                            className={styles.cancelButton}
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            type="submit"
+                                            className={styles.sendButton}
+                                        >
+                                            Send
+                                        </button>
+                                    </div>
+                                </form>
+                            </section>
+                        )}
                     </section>
                     <section className={styles.optionsMenu}>
                         <button
@@ -174,7 +285,7 @@ const ContactUs = ({ user }: ContactUsProps) => {
                             onClick={() => setPage(1)}
                         >
                             {faqIcon}
-                            <p>FAQ's</p>
+                            <p>FAQ&apos;s</p>
                         </button>
                     </section>
                 </motion.div>
