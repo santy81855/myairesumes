@@ -45,6 +45,12 @@ const DocumentCardDisplay = ({
                       .includes(searchQuery.toLowerCase()) ||
                   doc.information.position
                       .toLowerCase()
+                      .includes(searchQuery.toLowerCase()) ||
+                  doc.job.companyName
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase()) ||
+                  doc.job.jobName
+                      .toLowerCase()
                       .includes(searchQuery.toLowerCase());
 
         const matchesColor = selectedColor ? doc.color === selectedColor : true;

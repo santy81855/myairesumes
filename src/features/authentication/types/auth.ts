@@ -6,4 +6,5 @@ export type AuthEmailData = {
     url?: string;
     type: string;
     code?: string;
+    content?: string;
 };
