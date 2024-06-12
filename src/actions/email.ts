@@ -58,7 +58,10 @@ export async function send(data: AuthEmailDataType) {
         }
         const response = await resend.emails.send({
             from: from,
-            to: ["myresumeheroteam@gmail.com"],
+            to:
+                type === "general-message"
+                    ? "myresumeheroteam@gmail.com"
+                    : email,
             subject: "General Message - " + subject,
             react: template,
             text: "",
