@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ContactUs.module.css";
 import {
     messageIcon,
@@ -15,34 +15,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
 
-const dropIn = {
-    hidden: {
-        transform: "scaleY(0)",
-        opacity: 0,
-        transformOrigin: "bottom",
-        transition: {
-            duration: 0.2,
-        },
-    },
-    visible: {
-        transform: "scaleY(1)",
-        opacity: 1,
-        transition: {
-            duration: 0.2,
-        },
-        transformOrigin: "bottom",
-    },
-    exit: {
-        transform: "scaleY(0)",
-        height: 0,
-        opacity: 0,
-        transformOrigin: "bottom",
-        transition: {
-            duration: 0.2,
-        },
-    },
-};
-
 type ContactUsProps = {
     user: any;
 };
@@ -54,6 +26,46 @@ const ContactUs = ({ user }: ContactUsProps) => {
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const [initialLoad, setInitialLoad] = useState(true);
+
+    useEffect(() => {
+        // add a delay to the initial load to prevent the modal from appearing on page load for a split second
+        if (initialLoad) {
+            setTimeout(() => {
+                setInitialLoad(false);
+            }, 200);
+        }
+    }, [initialLoad]);
+
+    const dropIn = {
+        hidden: {
+            transform: "scaleY(0)",
+            opacity: 0,
+            transformOrigin: "bottom",
+            transition: {
+                duration: 0.2,
+            },
+        },
+        visible: {
+            display: initialLoad ? "none" : "block",
+            transform: "scaleY(1)",
+            opacity: 1,
+            transition: {
+                duration: 0.2,
+            },
+            transformOrigin: "bottom",
+        },
+        exit: {
+            transform: "scaleY(0)",
+            height: 0,
+            opacity: 0,
+            transformOrigin: "bottom",
+            transition: {
+                duration: 0.2,
+            },
+        },
+    };
 
     const handleOpen = () => {
         setIsOpen(true);
