@@ -32,9 +32,7 @@ const ContactUs = ({ user }: ContactUsProps) => {
     useEffect(() => {
         // add a delay to the initial load to prevent the modal from appearing on page load for a split second
         if (initialLoad) {
-            setTimeout(() => {
-                setInitialLoad(false);
-            }, 200);
+            setInitialLoad(false);
         }
     }, [initialLoad]);
 
@@ -121,7 +119,10 @@ const ContactUs = ({ user }: ContactUsProps) => {
     };
 
     return (
-        <div className={styles.contactUs}>
+        <div
+            className={styles.contactUs}
+            style={{ opacity: initialLoad ? 0 : 1 }}
+        >
             <AnimatePresence>
                 <motion.button
                     whileHover={{ scale: 1.1 }}
