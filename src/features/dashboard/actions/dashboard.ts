@@ -16,6 +16,9 @@ export const initializeUserBasicInfo = async (user: any) => {
     const education = [] as any;
     // from newest to oldest
     const educationOrder = -1;
+    const projects = [] as any;
+    // from newest to oldest
+    const projectOrder = -1;
     const updatedUser = await prisma.user.update({
         where: { id: user.id },
         data: {
@@ -31,6 +34,8 @@ export const initializeUserBasicInfo = async (user: any) => {
                 education,
                 workOrder,
                 educationOrder,
+                projects,
+                projectOrder,
                 imageUrl,
             },
         },
@@ -272,6 +277,148 @@ export const removeUserWorkInfo = async (user: any, workId: number) => {
         basicInfo: {
             ...basicInfo,
             work: newWork,
+        },
+    };
+    const response = await prisma.user.update({
+        where: { id },
+        data,
+    });
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return redirect("/dashboard?menu=profile");
+};
+
+export const addUserProjectInfo = async (user: any, formData: any) => {
+    "use server";
+    const { id } = user;
+    const title = formData.get("title");
+    const link = formData.get("link");
+    const summary = formData.get("projectSummary");
+    // get all 10 bullets
+    const bullets = [];
+    for (let i = 0; i < 10; i++) {
+        const bullet = formData.get(`bullet${i}`);
+        if (bullet) {
+            bullets.push(bullet);
+        }
+    }
+    if (user.basicInfo.projects) var projects = user.basicInfo.projects;
+    else var projects = [] as any;
+
+    const newProject = {
+        id: projects.length + 1,
+        title,
+        link,
+        bullets,
+        summary,
+    };
+    projects.push(newProject);
+    projects.forEach((p: any, i: number) => {
+        p.id = i + 1;
+    });
+    const basicInfo = user.basicInfo;
+    const data = {
+        basicInfo: {
+            ...basicInfo,
+            projects,
+        },
+    };
+    const response = await prisma.user.update({
+        where: { id },
+        data,
+    });
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return redirect("/dashboard?menu=profile");
+};
+
+export const updateUserProjectInfo = async (
+    user: any,
+    projectId: number,
+    formData: any
+) => {
+    "use server";
+    if (projectId < 0) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    const { id } = user;
+    const title = formData.get("title");
+    const link = formData.get("link");
+    const summary = formData.get("projectSummary");
+    // get all 10 bullets
+    const bullets = [];
+    for (let i = 0; i < 10; i++) {
+        const bullet = formData.get(`bullet${i}`);
+        if (bullet) {
+            bullets.push(bullet);
+        }
+    }
+    const projects = user.basicInfo.projects;
+    const projectToUpdate = projects.find((p: any) => p.id === projectId);
+    if (!projectToUpdate) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    projectToUpdate.title = title;
+    projectToUpdate.link = link;
+    projectToUpdate.bullets = bullets;
+    projectToUpdate.summary = summary;
+
+    const basicInfo = user.basicInfo;
+    const data = {
+        basicInfo: {
+            ...basicInfo,
+            projects,
+        },
+    };
+    const response = await prisma.user.update({
+        where: { id },
+        data,
+    });
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return redirect("/dashboard?menu=profile");
+};
+
+export const removeUserProjectInfo = async (user: any, projectId: number) => {
+    "use server";
+    if (projectId < 0) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    const { id } = user;
+    const projects = user.basicInfo.projects;
+    const projectToRemove = projects.find((p: any) => p.id === projectId);
+    if (!projectToRemove) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    const newProjects = projects.filter((p: any) => p.id !== projectId);
+    newProjects.forEach((p: any, i: number) => {
+        p.id = i + 1;
+    });
+    const basicInfo = user.basicInfo;
+    const data = {
+        basicInfo: {
+            ...basicInfo,
+            projects: newProjects,
         },
     };
     const response = await prisma.user.update({
