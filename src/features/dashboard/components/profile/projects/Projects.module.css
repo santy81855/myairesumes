@@ -1,0 +1,333 @@
+.formContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.workGrid {
+    width: 100%;
+    display: grid;
+    gap: var(--gap-medium);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.workItem {
+    display: flex;
+    border: 1px solid rgb(216, 216, 216, 0.5);
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-block-medium);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+    background-color: white;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.workItemInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.company {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--dashboard-text-color-rgb), 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.position {
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb), 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.summary {
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb), 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin-block-start: var(--padding-block-small);
+}
+
+.bullets {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+    margin-block: var(--padding-block-small);
+}
+
+.bulletItem {
+    display: flex;
+    flex-direction: row;
+    gap: var(--padding-block-small);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.bulletIcon {
+    width: 4px;
+    height: 4px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.bulletText {
+    font-size: var(--font-size-xsmall);
+    color: rgb(var(--dashboard-text-color-rgb));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.dateRange {
+    display: flex;
+    gap: var(--padding-block-small);
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb), 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    width: 100%;
+    margin-block-end: var(--padding-block-small);
+}
+
+.addWorkButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.svgContainer {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+}
+
+.svgContainer svg {
+    fill: rgb(var(--dashboard-accent-color-rgb));
+    width: 100%;
+    height: 100%;
+}
+
+.addTitle {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: rgb(var(--dashboard-text-color-rgb));
+    margin-block-start: var(--padding-block-small);
+}
+
+.workInfoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: var(--padding-block-medium);
+}
+
+.workInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.workInfoHorizontal {
+    display: flex;
+    width: 100%;
+    gap: var(--padding-block-small);
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.toggleSwitch {
+    position: relative;
+    width: 75px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.label {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--dashboard-text-color-rgb));
+    margin-block-end: var(--padding-block-small);
+}
+
+.dateInput {
+    width: 100%;
+    display: flex;
+    gap: var(--padding-block-small);
+}
+
+.input {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e1e1e1;
+    border-radius: var(--border-radius-xsmall);
+    padding-inline-start: var(--padding-block-small);
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
+}
+
+.textArea {
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    border-radius: var(--border-radius-xsmall);
+    padding-inline-start: var(--padding-block-small);
+    padding-block: var(--padding-block-small);
+    font-size: var(--font-size-small);
+    color: rgb(var(--dashboard-text-color-rgb));
+}
+
+.textArea:focus {
+    outline: none;
+    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
+}
+
+.input:focus {
+    outline: none;
+    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-block-small);
+}
+
+.cancelButton {
+    width: 100%;
+    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
+    color: rgb(var(--dashboard-text-color-rgb));
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.saveButton {
+    width: 100%;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    color: white;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.removeButton {
+    width: 100%;
+    background-color: #ffafaf;
+    color: white;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--border-radius-xsmall);
+}
+
+.endDateTitle {
+    display: flex;
+    width: 100%;
+    gap: var(--padding-block-small);
+}
+
+.horizontalButtonContainer {
+    width: 100%;
+    display: flex;
+    gap: var(--padding-block-small);
+}
+
+.editButton {
+    width: 100%;
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    height: 30px;
+    font-size: var(--font-size-small);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    border-radius: var(--border-radius-xsmall);
+}
+
+@media screen and (hover: hover) {
+    .editButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+
+    .removeButton:hover {
+        background-color: #dc8a8a;
+    }
+
+    .saveButton:hover {
+        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
+    }
+
+    .cancelButton:hover {
+        background-color: rgb(
+            var(--dashboard-background-color-contrast-rgb),
+            0.5
+        );
+    }
+
+    .addWorkButton:hover {
+        background-color: rgb(
+            var(--dashboard-background-color-contrast-rgb),
+            0.5
+        );
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .workGrid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    }
+    .workItem {
+        height: 100%;
+    }
+    .company {
+        font-size: var(--font-size-xsmall);
+    }
+    .position {
+        font-size: var(--font-size-xsmall);
+    }
+    .dateRange {
+        font-size: var(--font-size-small);
+    }
+    .dateInput {
+        flex-direction: column;
+        gap: var(--padding-block-medium);
+    }
+    .horizontalButtonContainer {
+        flex-direction: column;
+    }
+}

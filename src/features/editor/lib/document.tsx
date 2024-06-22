@@ -14,6 +14,7 @@ import {
 
 import { BasicL, FreshL } from "@/features/cover-letter";
 import { text } from "stream/consumers";
+import BulletList from "@/features/dashboard/components/bullet-input/BulletInput";
 
 export const updateDocument = (
     document: any,
@@ -1220,6 +1221,44 @@ export const initializeNewResume = (
                       ...item,
                   };
               });
+    const projectArray =
+        basicInfo && basicInfo.projects ? basicInfo.projects : [];
+    const newProjectArray =
+        projectArray.length === 0
+            ? [
+                  {
+                      name: "Example Project Name",
+                      demo: "https://example-demo-link.com",
+                      source: "https://example-source-link.com",
+                      summary: "Example summary.",
+                      bullets: [
+                          "Example bullet 1.",
+                          "Example bullet 2.",
+                          "Example bullet 3.",
+                      ],
+                  },
+                  {
+                      name: "Example Project Name 2",
+                      demo: "https://example-demo-link.com",
+                      source: "https://example-source-link.com",
+                      summary: "Example summary.",
+                      bullets: [
+                          "Example bullet 1.",
+                          "Example bullet 2.",
+                          "Example bullet 3.",
+                      ],
+                  },
+              ]
+            : projectArray.map((item: any) => {
+                  return {
+                      name: item.title,
+                      source: item.link,
+                      demo: item.link,
+                      summary: item.summary,
+                      bullets: item.bullets,
+                  };
+              });
+
     const educationArray = basicInfo
         ? sortObjectArrayByDateEnd(
               basicInfo.education,
@@ -1395,30 +1434,7 @@ export const initializeNewResume = (
             phone,
             website,
         },
-        projectArray: [
-            {
-                name: "Example Project Name",
-                demo: "https://example-demo-link.com",
-                source: "https://example-source-link.com",
-                summary: "Example summary.",
-                bullets: [
-                    "Example bullet 1.",
-                    "Example bullet 2.",
-                    "Example bullet 3.",
-                ],
-            },
-            {
-                name: "Example Project Name 2",
-                demo: "https://example-demo-link.com",
-                source: "https://example-source-link.com",
-                summary: "Example summary.",
-                bullets: [
-                    "Example bullet 1.",
-                    "Example bullet 2.",
-                    "Example bullet 3.",
-                ],
-            },
-        ],
+        projectArray: newProjectArray,
         customSectionArray: [],
     };
     return data;

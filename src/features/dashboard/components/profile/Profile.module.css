@@ -6,12 +6,12 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: var(--gap-medium);
-    grid-template-areas: "profilePic profilePic" "profile work" "education education";
+    grid-template-areas: "profilePic profilePic" "profile work" "education education" "projects projects";
 }
 
 @media screen and (max-width: 900px) {
     .container {
         grid-template-columns: 1fr;
-        grid-template-areas: "profilePic" "profile" "work" "education";
+        grid-template-areas: "profilePic" "profile" "work" "education" "projects";
     }
 }
