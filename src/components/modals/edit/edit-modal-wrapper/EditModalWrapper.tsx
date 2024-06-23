@@ -5231,6 +5231,7 @@ export default function EditModalWrapper({
             break;
         case (sectionId.includes("header") &&
             (sectionId.includes("basic") ||
+                sectionId.includes("row") ||
                 sectionId.includes("velocity") ||
                 sectionId.includes("triumph"))) ||
             sectionId.includes("nexus") ||

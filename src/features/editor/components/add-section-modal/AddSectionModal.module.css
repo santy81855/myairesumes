@@ -23,7 +23,6 @@
     flex-direction: column;
     gap: var(--padding-block-medium);
     padding-block: var(--padding-block-medium);
-    padding-inline: var(--padding-inline-medium);
     border-radius: var(--border-radius-small);
 }
 
@@ -32,6 +31,7 @@
     gap: var(--padding-block-small);
     align-items: center;
     justify-content: space-between;
+    padding-inline: var(--padding-inline-medium);
 }
 
 .cancelButton {
@@ -43,11 +43,11 @@
 .cancelButton svg {
     width: 20px;
     height: 20px;
-    stroke: #7367ff;
+    stroke: rgb(var(--accent-color-rgb));
 }
 
 .cancelButton svg:hover {
-    stroke: #5f52e6;
+    stroke: rgb(var(--accent-color-rgb), 0.5);
 }
 
 .title {
@@ -55,7 +55,7 @@
 }
 
 .searchBarContainer {
-    width: 100%;
+    width: calc(100% - 2 * var(--padding-inline-medium));
     display: flex;
     gap: var(--padding-block-small);
     align-items: center;
@@ -63,6 +63,7 @@
     border: 1px solid grey;
     border-radius: var(--border-radius-xsmall);
     padding-inline: var(--padding-inline-small);
+    align-self: center;
 }
 
 .searchBarContainer svg {
@@ -92,7 +93,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--padding-block-large);
     overflow-y: auto;
 }
 
@@ -103,6 +103,14 @@
     justify-content: center;
     align-items: flex-start;
     padding-inline: var(--padding-inline-small);
+    padding-block: var(--padding-block-medium);
+    padding-inline: var(--padding-inline-medium);
+}
+
+.odd {
+    background-color: #f5f5f5a6;
+    position: relative;
+    z-index: 1;
 }
 
 .colContainer {
@@ -128,12 +136,13 @@
 }
 
 .description {
+    margin-block-start: var(--padding-block-small);
     font-size: var(--font-size-small);
     color: grey;
 }
 
 .selectButton {
-    background-color: #7367ff;
+    background-color: rgb(var(--accent-color-rgb));
     color: white;
     border: none;
     padding-inline: var(--padding-inline-medium);
@@ -145,7 +154,7 @@
 }
 
 .selectButton:hover {
-    background-color: #5f52e6;
+    background-color: rgb(var(--accent-color-rgb), 0.5);
 }
 
 .exampleContainer {
