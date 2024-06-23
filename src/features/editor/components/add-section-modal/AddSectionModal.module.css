@@ -43,11 +43,11 @@
 .cancelButton svg {
     width: 20px;
     height: 20px;
-    stroke: #7367ff;
+    stroke: rgb(var(--accent-color-rgb));
 }
 
 .cancelButton svg:hover {
-    stroke: #5f52e6;
+    stroke: rgb(var(--accent-color-rgb), 0.5);
 }
 
 .title {
@@ -142,7 +142,7 @@
 }
 
 .selectButton {
-    background-color: #7367ff;
+    background-color: rgb(var(--accent-color-rgb));
     color: white;
     border: none;
     padding-inline: var(--padding-inline-medium);
@@ -154,7 +154,7 @@
 }
 
 .selectButton:hover {
-    background-color: #5f52e6;
+    background-color: rgb(var(--accent-color-rgb), 0.5);
 }
 
 .exampleContainer {

@@ -1421,32 +1421,38 @@ const getHeaderVariants = (data: {
                             >
                                 {document.information.contactInfo.email}
                             </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    fontSize:
-                                        fontSize *
-                                        0.8 *
-                                        document.information.sectionEdit.header
-                                            .fontRatio,
-                                    ...styles.textColor,
-                                }}
-                            >
-                                {document.information.contactInfo.phone}
-                            </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    fontSize:
-                                        fontSize *
-                                        0.8 *
-                                        document.information.sectionEdit.header
-                                            .fontRatio,
-                                    ...styles.textColor,
-                                }}
-                            >
-                                {document.information.contactInfo.website}
-                            </Text>
+                            {document.information.sectionEdit.contact
+                                .showPhone && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                        ...styles.textColor,
+                                    }}
+                                >
+                                    {document.information.contactInfo.phone}
+                                </Text>
+                            )}
+                            {document.information.sectionEdit.contact
+                                .showWebsite && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                        ...styles.textColor,
+                                    }}
+                                >
+                                    {document.information.contactInfo.website}
+                                </Text>
+                            )}
                         </View>
                     </View>
                 </View>
