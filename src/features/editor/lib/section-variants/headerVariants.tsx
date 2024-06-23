@@ -1368,9 +1368,9 @@ const getHeaderVariants = (data: {
             ) : null,
         },
         headerRow: {
-            name: "Impact Header",
+            name: "Basic Header - Horizontal",
             description:
-                "A header with your name, position, and contact information displayed as a row. Made to match the Impact template.",
+                "A header with your name, position, and contact information displayed horizontally to save space.",
             keyWords: ["header", "name", "position", "title", "contact", "row"],
             component: fontSize ? (
                 <View style={styles.sectionContainer}>
@@ -1379,26 +1379,44 @@ const getHeaderVariants = (data: {
                             <Text
                                 style={{
                                     ...styles.large,
-                                    fontSize: fontSize * 1.2,
+                                    fontSize:
+                                        fontSize *
+                                        1.2 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
+                                    ...styles.textColor,
                                 }}
                             >
                                 {document.information.firstName}{" "}
                                 {document.information.lastName}
                             </Text>
-                            <Text
-                                style={{
-                                    ...styles.small,
-                                    fontSize: fontSize * 0.8,
-                                }}
-                            >
-                                {document.information.position}
-                            </Text>
+                            {document.information.sectionEdit.header
+                                .showPosition && (
+                                <Text
+                                    style={{
+                                        ...styles.small,
+                                        fontSize:
+                                            fontSize *
+                                            0.8 *
+                                            document.information.sectionEdit
+                                                .header.fontRatio,
+                                        ...styles.textColor,
+                                    }}
+                                >
+                                    {document.information.position}
+                                </Text>
+                            )}
                         </View>
                         <View style={styles.columnGroupRight}>
                             <Text
                                 style={{
                                     ...styles.small,
-                                    fontSize: fontSize * 0.8,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
+                                    ...styles.textColor,
                                 }}
                             >
                                 {document.information.contactInfo.email}
@@ -1406,7 +1424,12 @@ const getHeaderVariants = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
-                                    fontSize: fontSize * 0.8,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
+                                    ...styles.textColor,
                                 }}
                             >
                                 {document.information.contactInfo.phone}
@@ -1414,7 +1437,12 @@ const getHeaderVariants = (data: {
                             <Text
                                 style={{
                                     ...styles.small,
-                                    fontSize: fontSize * 0.8,
+                                    fontSize:
+                                        fontSize *
+                                        0.8 *
+                                        document.information.sectionEdit.header
+                                            .fontRatio,
+                                    ...styles.textColor,
                                 }}
                             >
                                 {document.information.contactInfo.website}
