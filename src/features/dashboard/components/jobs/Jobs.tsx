@@ -29,6 +29,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
 import { jobCardColorArray } from "@/features/dashboard";
+import Tutorial from "@/components/modals/tutorial/Tutorial";
 
 type JobsProps = {
     currentUser: any;
@@ -74,6 +75,8 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
     const [newNote, setNewNote] = useState("");
     const [companyName, setCompanyName] = useState(job.companyName);
     const [jobName, setJobName] = useState(job.jobName);
+
+    const showTutorial = searchParams?.tutorial === "true";
 
     useEffect(() => {
         if (job.id !== "") {
@@ -246,7 +249,8 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
     };
 
     return (
-        <main className={styles.container}>
+        <main className={styles.container} id="applications-page">
+            {showTutorial && <Tutorial />}
             {job.id !== "" ? (
                 <DashboardCard key="job-manage-card" title="Manage Application">
                     {isLoading && <LoadingScreen />}

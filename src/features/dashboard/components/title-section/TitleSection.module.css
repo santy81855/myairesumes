@@ -1,11 +1,19 @@
 .titleSection {
     width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 1;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--padding-block-small);
 }
 
 .pageHeading {
@@ -26,6 +34,25 @@
 
 .cardContainer {
     width: 100%;
+}
+
+.tutorialButton {
+    background-color: rgb(var(--dashboard-accent-color-rgb));
+    color: white;
+    border-radius: var(--border-radius-xsmall);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    padding: var(--padding-block-small);
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    border: none;
+}
+
+.tutorialButton:hover {
+    background-color: rgb(var(--dashboard-accent-color-hover-rgb));
 }
 
 @media screen and (max-width: 768px) {

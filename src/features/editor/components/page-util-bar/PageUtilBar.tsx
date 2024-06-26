@@ -27,7 +27,6 @@ const PageUtilBar = ({ documentId }: PageUtilBarProps) => {
             {document && (
                 <>
                     <PageButtons documentId={documentId} />
-
                     <PageCounter documentId={documentId} />
                 </>
             )}

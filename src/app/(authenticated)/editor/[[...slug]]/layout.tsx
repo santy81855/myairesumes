@@ -22,6 +22,7 @@ import {
 import { redirect } from "next/navigation";
 import { ResumeContext } from "@/app/providers";
 import { getUser } from "@/lib/user";
+import Tutorial from "@/components/modals/tutorial/Tutorial";
 
 export const metadata: Metadata = {
     title: "My Resume Hero - Editor",
@@ -39,7 +40,17 @@ export default async function RootLayout({
     if (!user) {
         redirect("/sign-in");
     }
-    if (params.slug.length < 2 || params.slug.length > 2) {
+
+    var showTutorial = false;
+    if (params.slug.length === 3 && params.slug[2] === "tutorial") {
+        showTutorial = true;
+    }
+    if (
+        params.slug.length < 2 ||
+        (params.slug.length > 2 &&
+            params.slug.length >= 3 &&
+            params.slug[2] !== "tutorial")
+    ) {
         redirect("/");
     }
     const documentType = params.slug[0];
@@ -58,10 +69,14 @@ export default async function RootLayout({
                     />
                     <section className={styles.rowContainer}>
                         <SideMenu user={currentUser} />
-                        <section className={styles.columnContainer}>
+                        <section
+                            className={styles.columnContainer}
+                            id="editor-page"
+                        >
                             <TitleBar />
                             <SubTitleBar />
                             {children}
+                            {showTutorial && <Tutorial />}
                         </section>
                     </section>
                 </ResumeContext>

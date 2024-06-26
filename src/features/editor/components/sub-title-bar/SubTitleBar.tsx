@@ -205,7 +205,7 @@ const SubTitleBar = () => {
     };
 
     return (
-        <section className={styles.container}>
+        <section className={styles.container} id="subtitle-bar">
             {currentDocument && (
                 <>
                     <form title="delete" onSubmit={handleInitialDelete}>

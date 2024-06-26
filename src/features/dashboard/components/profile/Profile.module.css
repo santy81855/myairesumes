@@ -8,6 +8,7 @@
     row-gap: var(--gap-large);
     column-gap: var(--gap-large);
     grid-template-areas: "profilePic profilePic" "profile work" "education education" "skills skills" "projects projects";
+    position: relative;
 }
 
 @media screen and (max-width: 900px) {
