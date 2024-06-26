@@ -32,7 +32,7 @@ export const updateDocument = (
             "experience",
             "colBreak",
             "contactVertical",
-            "skillsCategory",
+            "skillsBullet",
             "educationShort",
             "languagesBullet",
         ];
@@ -82,7 +82,7 @@ export const updateDocument = (
             "experience",
             "colBreak",
             "contactVerticalIcons",
-            "skillsCategory",
+            "skillsBullet",
             "educationShort",
             "languagesBullet",
         ];
@@ -114,7 +114,7 @@ export const updateDocument = (
                                 .toUpperCase()}${template.slice(1)}`;
                         }
                         if (item.includes("skills")) {
-                            return "skillsCategory";
+                            return "skillsBullet";
                         }
                         return item;
                     })
@@ -1221,6 +1221,13 @@ export const initializeNewResume = (
                       ...item,
                   };
               });
+    const skillArray = basicInfo && basicInfo.skills ? basicInfo.skills : [];
+    const newSkillArray =
+        skillArray.length === 0
+            ? ["Example Skill 1.", "Example Skill 2.", "Example Skill 3."]
+            : skillArray.map((item: any) => {
+                  return item.skill;
+              });
     const projectArray =
         basicInfo && basicInfo.projects ? basicInfo.projects : [];
     const newProjectArray =
@@ -1402,11 +1409,7 @@ export const initializeNewResume = (
             textColor: "#000000",
             sectionTitle: "Summary",
         },
-        skillArray: [
-            "Example Skill 1.",
-            "Example Skill 2.",
-            "Example Skill 3.",
-        ],
+        skillArray: newSkillArray,
         skillCategoryArray: [
             {
                 category: "Example Category 1",

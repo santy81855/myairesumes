@@ -50,6 +50,7 @@ const Skills = ({ currentUser, searchParams }: SkillsProps) => {
                                 rows={4}
                                 id="skill"
                                 name="skill"
+                                placeholder="Enter a skill..."
                                 className={styles.textArea}
                                 defaultValue={
                                     workId ? workBeingEdited.skill : ""
