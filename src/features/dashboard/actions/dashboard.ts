@@ -292,6 +292,120 @@ export const removeUserWorkInfo = async (user: any, workId: number) => {
     return redirect("/dashboard?menu=profile");
 };
 
+export const addUserSkillInfo = async (user: any, formData: any) => {
+    "use server";
+    const { id } = user;
+    const skill = formData.get("skill");
+    if (user.basicInfo.skills) var skills = user.basicInfo.skills;
+    else var skills = [] as any;
+    const newSkill = {
+        id: skills.length + 1,
+        skill,
+    };
+    skills.push(newSkill);
+    skills.forEach((s: any, i: number) => {
+        s.id = i + 1;
+    });
+    const basicInfo = user.basicInfo;
+    const data = {
+        basicInfo: {
+            ...basicInfo,
+            skills,
+        },
+    };
+    const response = await prisma.user.update({
+        where: { id },
+        data,
+    });
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return redirect("/dashboard?menu=profile");
+};
+
+export const removeUserSkillInfo = async (user: any, skillId: number) => {
+    "use server";
+    if (skillId < 0) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    const { id } = user;
+    const skills = user.basicInfo.skills;
+    const skillToRemove = skills.find((s: any) => s.id === skillId);
+    if (!skillToRemove) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    const newSkills = skills.filter((s: any) => s.id !== skillId);
+    newSkills.forEach((s: any, i: number) => {
+        s.id = i + 1;
+    });
+    const basicInfo = user.basicInfo;
+    const data = {
+        basicInfo: {
+            ...basicInfo,
+            skills: newSkills,
+        },
+    };
+    const response = await prisma.user.update({
+        where: { id },
+        data,
+    });
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return redirect("/dashboard?menu=profile");
+};
+
+export const updateUserSkillInfo = async (
+    user: any,
+    skillId: number,
+    formData: any
+) => {
+    "use server";
+    if (skillId < 0) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    const { id } = user;
+    const skill = formData.get("skill");
+    const skills = user.basicInfo.skills;
+    const skillToUpdate = skills.find((s: any) => s.id === skillId);
+    if (!skillToUpdate) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    skillToUpdate.skill = skill;
+    const basicInfo = user.basicInfo;
+    const data = {
+        basicInfo: {
+            ...basicInfo,
+            skills,
+        },
+    };
+    const response = await prisma.user.update({
+        where: { id },
+        data,
+    });
+    if (!response) {
+        return {
+            error: "An unknown error occurred. Please try again.",
+        };
+    }
+    revalidateTag("currentUser");
+    return redirect("/dashboard?menu=profile");
+};
+
 export const addUserProjectInfo = async (user: any, formData: any) => {
     "use server";
     const { id } = user;
