@@ -5,13 +5,14 @@
     margin-inline-end: auto;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: var(--gap-medium);
-    grid-template-areas: "profilePic profilePic" "profile work" "education education" "projects projects";
+    row-gap: var(--gap-large);
+    column-gap: var(--gap-large);
+    grid-template-areas: "profilePic profilePic" "profile work" "education education" "skills skills" "projects projects";
 }
 
 @media screen and (max-width: 900px) {
     .container {
         grid-template-columns: 1fr;
-        grid-template-areas: "profilePic" "profile" "work" "education" "projects";
+        grid-template-areas: "profilePic" "profile" "work" "education" "skills" "projects";
     }
 }
