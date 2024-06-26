@@ -117,13 +117,23 @@ const AddSectionModal = () => {
     };
 
     const handleAddSectionClicked = (section: string) => {
-        const index = showComponentModal[id as string];
+        var index = showComponentModal[id as string];
         // add given section at given index in the sectionOrder array of the document and update the documentArray
         if (!document) return;
         const currentPageIndex = document.currentPage - 1;
         let newSectionOrder = [...document.information.sectionOrder];
-        // add section at index
-        newSectionOrder[currentPageIndex].splice(index, 0, section);
+        // if a negative index is given it means we need to replace the section at the positive index
+        // if 9999 is given it means we need to replace the item in index 0
+        if (index < 0 || index === 9999) {
+            // set the index back to positive
+            if (index < 0) index = -1 * index;
+            if (index === 9999) index = 0;
+            // add section at index while removing the current value at the index
+            newSectionOrder[currentPageIndex].splice(index, 1);
+            newSectionOrder[currentPageIndex].splice(index, 0, section);
+        } else {
+            newSectionOrder[currentPageIndex].splice(index, 0, section);
+        }
         const updatedDocument = {
             ...document,
             information: {

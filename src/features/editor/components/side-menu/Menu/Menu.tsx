@@ -64,6 +64,15 @@ const Menu = ({ user }: MenuProps) => {
         setIsStyleOpen(false);
     };
 
+    const handleClickTutorial = () => {
+        // close any open menus
+        setIsTemplateOpen(false);
+        setIsStyleOpen(false);
+        setIsSectionOpen(false);
+        // add the tutorial slug to the url
+        router.push(path + "/tutorial");
+    };
+
     return (
         <>
             <section className={styles.staticMenu}>
@@ -124,8 +133,8 @@ const Menu = ({ user }: MenuProps) => {
                     <p className={styles.staticItemName}>Styles</p>
                 </section>
                 {!path.includes("tutorial") && (
-                    <Link
-                        href={path + "/tutorial"}
+                    <section
+                        onClick={handleClickTutorial}
                         className={`${styles.staticMenuItem}  ${styles.backButton}`}
                         style={{ marginTop: "auto" }}
                     >
@@ -133,7 +142,7 @@ const Menu = ({ user }: MenuProps) => {
                             {questionMarkIcon}
                         </div>
                         <p className={styles.staticItemName}>Tutorial</p>
-                    </Link>
+                    </section>
                 )}
                 <section
                     className={`${styles.staticMenuItem}`}
