@@ -8,13 +8,15 @@ import {
     styleIcon,
     sectionIcon,
     backIcon,
+    questionMarkIcon,
 } from "@/components/icons/iconSVG";
 import ExpandedMenu from "../expanded-menu/ExpandedMenu";
 import TemplateMenu from "../template-menu/TemplateMenu";
 import StyleMenu from "../style-menu/StyleMenu";
 import SectionMenu from "../section-menu/SectionMenu";
 import { useAppContext } from "@/app/providers";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 
 type MenuProps = {
     user: any;
@@ -24,6 +26,7 @@ const Menu = ({ user }: MenuProps) => {
     const { documentArray, setDocumentArray } = useAppContext();
     const params = useParams();
     const router = useRouter();
+    const path = usePathname();
     const id = params.slug[1];
     const [document, setDocument] = useState<any>(null);
     const [isTemplateOpen, setIsTemplateOpen] = useState(false);
@@ -80,7 +83,9 @@ const Menu = ({ user }: MenuProps) => {
                     <div className={styles.staticIconContainer}>
                         {sectionIcon}
                     </div>
-                    <p className={styles.staticItemName}>Sections</p>
+                    <p className={styles.staticItemName} id="sections-button">
+                        Sections
+                    </p>
                 </section>
                 <section
                     className={styles.staticMenuItem}
@@ -118,8 +123,23 @@ const Menu = ({ user }: MenuProps) => {
                     </div>
                     <p className={styles.staticItemName}>Styles</p>
                 </section>
+                {!path.includes("tutorial") && (
+                    <Link
+                        href={path + "/tutorial"}
+                        className={`${styles.staticMenuItem}  ${styles.backButton}`}
+                        style={{ marginTop: "auto" }}
+                    >
+                        <div className={styles.staticIconContainer}>
+                            {questionMarkIcon}
+                        </div>
+                        <p className={styles.staticItemName}>Tutorial</p>
+                    </Link>
+                )}
                 <section
-                    className={`${styles.staticMenuItem} ${styles.backButton}`}
+                    className={`${styles.staticMenuItem}`}
+                    style={
+                        path.includes("tutorial") ? { marginTop: "auto" } : {}
+                    }
                     title="Back to dashboard"
                     onClick={() => backPressed()}
                 >

@@ -14,7 +14,9 @@ type MenuProps = {
 
 const Menu = ({ session, user, style, isAuth }: MenuProps) => {
     const [state, setState] = useState(false);
-    const extraStyle = style ? style : {};
+    const extraStyle = style
+        ? { ...style, backgroundColor: "transparent" }
+        : {};
     const menuLinks = [];
     if (session) {
         menuLinks.push(

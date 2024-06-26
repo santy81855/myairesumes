@@ -1,0 +1,74 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: auto;
+    padding: var(--padding-block-medium);
+    gap: var(--padding-block-small);
+    background-color: white;
+    border-radius: var(--border-radius-xsmall);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.title {
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    color: rgb(var(--accent-color-rgb));
+    width: 100%;
+    text-align: left;
+}
+
+.text {
+    font-size: calc(var(--font-size-small));
+    color: black;
+    width: 100%;
+    text-align: left;
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navigationButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--padding-block-small) / 2);
+}
+
+.button {
+    background-color: rgb(var(--accent-color-rgb));
+    color: white;
+    border-radius: var(--border-radius-xsmall);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+    font-size: var(--font-size-small);
+    width: 60px;
+    padding-block: var(--padding-block-small);
+}
+
+.button:hover {
+    background-color: rgb(var(--accent-color-hover-rgb));
+}
+
+.exitButton {
+    background-color: rgb(210, 88, 88);
+    margin-right: auto;
+}

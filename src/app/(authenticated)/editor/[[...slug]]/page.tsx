@@ -8,6 +8,7 @@ import {
     PageUtilBar,
     LastSavedDisplay,
 } from "@/features/editor";
+import Tutorial from "@/components/modals/tutorial/Tutorial";
 
 const Page = async ({
     params,
@@ -20,7 +21,12 @@ const Page = async ({
     if (!user) {
         redirect("/sign-in");
     }
-    if (params.slug.length < 2 || params.slug.length > 2) {
+    if (
+        params.slug.length < 2 ||
+        (params.slug.length > 2 &&
+            params.slug.length >= 3 &&
+            params.slug[2] !== "tutorial")
+    ) {
         redirect("/");
     }
     const documentType = params.slug[0];
