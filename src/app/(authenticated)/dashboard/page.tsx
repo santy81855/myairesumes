@@ -76,7 +76,7 @@ const Page = async ({
                     }}
                 />
 
-                <main className={styles.main}>
+                <main className={styles.main} id="dashboard-container">
                     <p
                         className={`${styles.topHeading} ${styles.largeHeading}`}
                     >
@@ -87,7 +87,10 @@ const Page = async ({
                     >
                         {currentUser?.lastName}
                     </p>
-                    <TitleSection currentUser={currentUser} />
+                    <TitleSection
+                        currentUser={currentUser}
+                        searchParams={searchParams}
+                    />
                     {menuSection === "profile" && (
                         <Profile
                             currentUser={currentUser}
