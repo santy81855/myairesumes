@@ -4,6 +4,7 @@ import {
     circledXIcon,
     circledXFilledIcon,
     sectionIcon,
+    replaceIcon,
 } from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -84,6 +85,16 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
         );
         setDocumentArray(newDocumentArray);
         return;
+    };
+
+    const handleReplaceSection = (index: number) => {
+        // send the index as a negative to indicate that we are replacing
+        // if the index is 0, pass in 9999
+        var replaceIndex = index > 0 ? index * -1 : 9999;
+        setShowComponentModal({
+            ...showComponentModal,
+            [id as string]: replaceIndex,
+        });
     };
 
     return (
@@ -196,6 +207,15 @@ const StyleMenu = ({ document }: SectionMenuProps) => {
                                             }}
                                         >
                                             {circledXFilledIcon}
+                                        </motion.button>
+                                        <motion.button
+                                            className={styles.replaceButton}
+                                            title="replace section"
+                                            onClick={() => {
+                                                handleReplaceSection(index);
+                                            }}
+                                        >
+                                            {replaceIcon}
                                         </motion.button>
                                         <motion.p
                                             className={styles.sectionText}
