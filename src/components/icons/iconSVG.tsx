@@ -2138,6 +2138,29 @@ export const questionMarkIcon = (
     </svg>
 );
 
+export const replaceIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <g strokeLinecap="round">
+            <path
+                strokeMiterlimit={10}
+                d="M18.024 16.957A8.373 8.373 0 0 1 3.74 11.045"
+            ></path>
+            <path
+                strokeLinejoin="round"
+                d="m17.35 21.25l.832-3.372a1.123 1.123 0 0 0-.854-1.382l-3.372-.843"
+            ></path>
+            <path
+                strokeMiterlimit={10}
+                d="M5.976 7.043a8.373 8.373 0 0 1 14.285 5.912"
+            ></path>
+            <path
+                strokeLinejoin="round"
+                d="m6.65 2.75l-.832 3.372a1.124 1.124 0 0 0 .855 1.382l3.371.843"
+            ></path>
+        </g>
+    </svg>
+);
+
 export const paletteIconColor = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
         <path
