@@ -28,4 +28,7 @@ export { initializeUserBasicInfo as initializeUserBasicInfoAction } from "./acti
 export { addUserProjectInfo as addUserProjectInfoAction } from "./actions/dashboard";
 export { updateUserProjectInfo as updateUserProjectInfoAction } from "./actions/dashboard";
 export { removeUserProjectInfo as removeUserProjectInfoAction } from "./actions/dashboard";
+export { addUserSkillInfo as addUserSkillInfoAction } from "./actions/dashboard";
+export { updateUserSkillInfo as updateUserSkillInfoAction } from "./actions/dashboard";
+export { removeUserSkillInfo as removeUserSkillInfoAction } from "./actions/dashboard";
 export { jobCardColorArray } from "./lib/document";
