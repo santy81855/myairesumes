@@ -161,7 +161,16 @@ const AddSectionModal = () => {
         showComponentModal.hasOwnProperty(id as string) &&
         document && (
             <section className={styles.background}>
-                <section className={styles.container}>
+                <section
+                    className={styles.container}
+                    style={
+                        results.length === 0
+                            ? {
+                                  paddingBlockEnd: "var(--padding-block-large)",
+                              }
+                            : {}
+                    }
+                >
                     <section className={styles.titleContainer}>
                         <h1 className={styles.title}>Find a section</h1>
                         <button
@@ -190,6 +199,9 @@ const AddSectionModal = () => {
                             autoComplete="off"
                         />
                     </section>
+                    {results.length > 0 && (
+                        <div className={styles.divider}></div>
+                    )}
                     <AnimatePresence>
                         {results.length > 0 && (
                             <motion.section
@@ -209,7 +221,7 @@ const AddSectionModal = () => {
                                         animate={{ opacity: 1 }}
                                         transition={{ duration: 0.5 }}
                                         className={`${styles.resultItem} ${
-                                            index % 2 === 0 && styles.even
+                                            index % 2 !== 0 && styles.odd
                                         }`}
                                         key={result.id}
                                     >
