@@ -6,26 +6,26 @@
 
 .icon {
     font-size: var(--font-size-x3large);
-    color: #a183cf;
+    color: rgb(var(--accent-color-rgb));
 }
 
 .title {
     font-size: var(--font-size-xlarge);
-    color: #a183cf;
+    color: rgb(var(--accent-color-rgb));
     margin-block-start: var(--margin-block-large);
     margin-block-end: var(--margin-block-large);
 }
 
 .text {
     font-size: var(--font-size-medium);
-    color: var(--color-text);
+    color: black;
     margin-block-start: var(--margin-block-large);
     margin-block-end: var(--margin-block-large);
 }
 
 .button {
     width: 100%;
-    background-color: #a183cf;
+    background-color: rgb(var(--accent-color-rgb));
     color: white;
     border-radius: var(--border-radius-small);
     height: 40px;
@@ -38,16 +38,17 @@
 }
 
 .button:hover {
-    background-color: #8a6fbf;
+    background-color: rgb(var(--accent-color-rgb), 0.6);
 }
 
 .logo {
+    background-image: url("/images/logos/logo1024.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     width: 8rem;
     height: 8rem;
-}
-
-.logo svg {
-    fill: #a183cf;
+    margin-inline: auto;
 }
 
 .form {

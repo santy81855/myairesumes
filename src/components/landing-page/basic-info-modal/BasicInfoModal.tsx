@@ -1,7 +1,6 @@
 import styles from "./BasicInfoModal.module.css";
 import StaticModal from "@/components/static-modal/StaticModal";
 import Link from "next/link";
-import { magicResumeLogo } from "@/components/icons/iconSVG";
 import { initializeUserBasicInfoAction } from "@/features/dashboard";
 
 type BasicInfoModalProps = {
@@ -16,15 +15,11 @@ const BasicInfoModal = async ({ currentUser }: BasicInfoModalProps) => {
     return (
         <StaticModal>
             <section className={styles.modalContent}>
-                <div className={styles.logo}>{magicResumeLogo}</div>
+                <div className={styles.logo}></div>
                 <h1 className={styles.title}>Welcome to My Resume Hero</h1>
                 <p className={styles.text}>
-                    To get started on your personalized resumes and cover
-                    letters, we&apos;d love to learn a bit more about you.
-                </p>
-                <p className={styles.text}>
-                    Click below to store some basic details to kickstart the
-                    process!
+                    Click below to go to your dashboard and learn how to use My
+                    Resume Hero!
                 </p>
                 <form className={styles.form} action={updateBasicInfo}>
                     <button type="submit" className={styles.button}>
