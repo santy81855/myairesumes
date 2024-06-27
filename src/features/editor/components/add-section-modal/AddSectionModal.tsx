@@ -3,7 +3,12 @@ import styles from "./AddSectionModal.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useAppContext } from "@/app/providers";
 import { useParams } from "next/navigation";
-import { circledXIcon, searchIcon } from "@/components/icons/iconSVG";
+import {
+    circledXIcon,
+    searchIcon,
+    basicLeftArrow,
+    basicRightArrow,
+} from "@/components/icons/iconSVG";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     updateDocumentArray,
@@ -30,6 +35,18 @@ const AddSectionModal = () => {
     const [fontSize, setFontSize] = useState(11);
     const [margin, setMargin] = useState(11);
     const [allSections, setAllSections] = useState<any>(null);
+    const keyWordContainerRef = useRef<HTMLDivElement>(null);
+    const allKeywords = [
+        "header",
+        "contact",
+        "summary",
+        "education",
+        "experience",
+        "skills",
+        "projects",
+        "languages",
+        "interests",
+    ];
 
     useEffect(() => {
         const template = templateRef.current as unknown as HTMLElement;
@@ -156,6 +173,22 @@ const AddSectionModal = () => {
         setShowComponentModal(newState);
     };
 
+    const scrollRight = () => {
+        const container = keyWordContainerRef.current;
+        if (container) {
+            // Scroll the container to the right by its full width
+            container.scrollLeft += container.offsetWidth;
+        }
+    };
+
+    const scrollLeft = () => {
+        const container = keyWordContainerRef.current;
+        if (container) {
+            // Scroll the container to the left by its full width
+            container.scrollLeft -= container.offsetWidth;
+        }
+    };
+
     return (
         showComponentModal &&
         showComponentModal.hasOwnProperty(id as string) &&
@@ -196,9 +229,61 @@ const AddSectionModal = () => {
                             onChange={(e) =>
                                 searchContentChanged(e.target.value)
                             }
+                            autoFocus
                             autoComplete="off"
                         />
                     </section>
+                    <motion.section className={styles.keywordFunctionContainer}>
+                        <motion.section className={styles.buttonContainer}>
+                            <motion.button
+                                className={styles.button}
+                                onClick={scrollLeft}
+                            >
+                                {basicLeftArrow}
+                            </motion.button>
+                            <motion.section
+                                className={styles.keywordContainer}
+                                ref={keyWordContainerRef}
+                            >
+                                {allKeywords.map(
+                                    (keyword: string, index: number) => {
+                                        return (
+                                            <motion.div
+                                                key={index}
+                                                className={
+                                                    searchContent
+                                                        .toLowerCase()
+                                                        .split(" ")
+                                                        .includes(
+                                                            keyword.toLowerCase()
+                                                        )
+                                                        ? styles.keywordItemActive
+                                                        : styles.keywordItem
+                                                }
+                                                onClick={() => {
+                                                    searchContentChanged(
+                                                        keyword.toLowerCase()
+                                                    );
+                                                }}
+                                            >
+                                                <motion.p
+                                                    className={styles.keyword}
+                                                >
+                                                    {keyword}
+                                                </motion.p>
+                                            </motion.div>
+                                        );
+                                    }
+                                )}
+                            </motion.section>
+                            <motion.button
+                                className={styles.button}
+                                onClick={scrollRight}
+                            >
+                                {basicRightArrow}
+                            </motion.button>
+                        </motion.section>
+                    </motion.section>
                     {results.length > 0 && (
                         <div className={styles.divider}></div>
                     )}
