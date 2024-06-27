@@ -47,7 +47,7 @@
     align-items: center;
 }
 
-@media screen and (min-width: 620px) {
+@media screen and (min-width: 619px) {
     .container {
         display: none;
     }
