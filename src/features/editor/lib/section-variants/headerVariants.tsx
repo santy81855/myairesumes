@@ -1043,7 +1043,7 @@ const getHeaderVariants = (data: {
         headerVivid: {
             name: "Vivid Header",
             description:
-                "A header with your name, a headshot, position, and a summary. Made to match the Vivid template.",
+                "A header with your name, position, and a summary. Made to match the Vivid template.",
             keyWords: [
                 "header",
                 "name",
