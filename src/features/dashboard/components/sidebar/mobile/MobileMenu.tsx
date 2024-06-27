@@ -2,7 +2,7 @@
 import styles from "./MobileMenu.module.css";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
@@ -48,6 +48,16 @@ const MobileMenu = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const menuSection = searchParams.get("menu") || "";
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    // useEffect to track the window width
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const handleMenuClick = (section: string) => {
         if (section === "account")
@@ -86,7 +96,13 @@ const MobileMenu = () => {
                     <Link
                         href="/"
                         className={styles.logo}
-                        style={state ? { opacity: 1 } : { opacity: 0 }}
+                        style={
+                            state
+                                ? { opacity: 1 }
+                                : window.innerWidth < 620
+                                ? { opacity: 1 }
+                                : { opacity: 0 }
+                        }
                     >
                         <div className={styles.logo}></div>
                     </Link>

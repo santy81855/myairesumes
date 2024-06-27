@@ -74,7 +74,7 @@
     background-position: center;
 }
 
-@media screen and (max-width: 620px) {
+@media (max-width: 619px) {
     .navContainer {
         padding-block: var(--padding-block-medium);
     }
