@@ -105,7 +105,7 @@ const Tutorial = ({}: TutorialProps) => {
             },
             {
                 content:
-                    "You can add or remove sections in your resume by clicking the 'Section' button on the sidebar.",
+                    "You can add or remove sections in your resume by clicking the 'Sections' button on the sidebar.",
                 elementId: "editor-page",
             },
             {
