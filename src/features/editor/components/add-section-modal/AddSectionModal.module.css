@@ -91,6 +91,7 @@
     height: 1px;
     background-color: rgba(129, 129, 129, 0.5);
     margin-block-start: var(--padding-block-medium);
+    margin-block-end: 1px;
 }
 
 .resultsContainer {
