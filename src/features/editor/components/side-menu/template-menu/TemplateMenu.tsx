@@ -225,23 +225,20 @@ const TemplateMenu = ({ document, user }: TemplateMenuProps) => {
                 </motion.section>
             </motion.section>
             <motion.section className={styles.row}>
-                <motion.div
-                    className={styles.template}
-                    onMouseEnter={() => setHoverIndex(0)}
-                    onMouseLeave={() => setHoverIndex(-1)}
-                >
+                <motion.div className={styles.template}>
                     <motion.div className={styles.templatePreview}>
                         {currentTemplate?.previewComponent}
-                        {hoverIndex === 0 && (
-                            <>
-                                <div
-                                    className={styles.templateDiagonalContainer}
-                                ></div>
-                                <p className={styles.templateDiagonal}>
-                                    {currentTemplate.name}
-                                </p>
-                            </>
-                        )}
+
+                        <>
+                            <div
+                                className={styles.templateDiagonalContainer}
+                            ></div>
+                            <p className={styles.templateDiagonal}>
+                                {currentTemplate.name}
+                                <br />
+                                (current)
+                            </p>
+                        </>
                     </motion.div>
                 </motion.div>
                 {results.map((template: any, index: number) => {
