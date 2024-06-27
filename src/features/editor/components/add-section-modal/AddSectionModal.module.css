@@ -85,10 +85,6 @@
     outline: none;
 }
 
-.searchbarContainerFocus {
-    border: 1px solid #7367ff;
-}
-
 .resultsContainer {
     width: 100%;
     display: flex;
@@ -107,8 +103,8 @@
     padding-inline: var(--padding-inline-medium);
 }
 
-.odd {
-    background-color: #f5f5f5a6;
+.even {
+    background-color: #e2e2e2;
     position: relative;
     z-index: 1;
 }
@@ -159,10 +155,11 @@
 
 .exampleContainer {
     width: 100%;
-    border: 1px solid grey;
+    border: 1px solid rgba(129, 129, 129, 0.5);
     margin-block-start: var(--padding-block-small);
     padding-inline: var(--padding-inline-medium);
     padding-block: var(--padding-block-small);
+    background-color: white;
 }
 
 .selectButtonMobile {

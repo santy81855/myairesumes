@@ -234,7 +234,7 @@ const TemplateMenu = ({ document, user }: TemplateMenuProps) => {
                                 className={styles.templateDiagonalContainer}
                             ></div>
                             <p className={styles.templateDiagonal}>
-                                {currentTemplate.name}
+                                {currentTemplate?.name}
                                 <br />
                                 (current)
                             </p>

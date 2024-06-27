@@ -209,7 +209,7 @@ const AddSectionModal = () => {
                                         animate={{ opacity: 1 }}
                                         transition={{ duration: 0.5 }}
                                         className={`${styles.resultItem} ${
-                                            index % 2 !== 0 && styles.odd
+                                            index % 2 === 0 && styles.even
                                         }`}
                                         key={result.id}
                                     >
