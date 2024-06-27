@@ -93,6 +93,15 @@
     fill: rgb(var(--dashboard-accent-color-contrast-rgb));
 }
 
+.logo {
+    width: 3rem;
+    height: 3rem;
+    background-image: url("/images/logos/logo1024.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 @media screen and (hover: hover) {
     .openMenuButton:hover {
         background-color: rgb(var(--dashboard-accent-color-hover-rgb));
