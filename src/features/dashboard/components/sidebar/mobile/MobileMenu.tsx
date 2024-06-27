@@ -14,7 +14,6 @@ import {
     resumeIcon,
     coverLetterIcon,
     logoutIcon,
-    magicResumeLogo,
     arrowRightIcon,
 } from "@/components/icons/iconSVG";
 import { motion } from "framer-motion";
@@ -84,8 +83,12 @@ const MobileMenu = () => {
                 }
             >
                 <section className={styles.mobileSidebar}>
-                    <Link href="/" className={styles.logo}>
-                        {magicResumeLogo}
+                    <Link
+                        href="/"
+                        className={styles.logo}
+                        style={state ? { opacity: 1 } : { opacity: 0 }}
+                    >
+                        <div className={styles.logo}></div>
                     </Link>
                     <section className={styles.buttonContainer}>
                         <Link

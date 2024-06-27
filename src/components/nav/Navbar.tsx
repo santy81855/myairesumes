@@ -22,14 +22,12 @@ const Navbar = async ({ style, isAuth }: NavbarProps) => {
                 isAuth={isAuth}
             />
             <section className={styles.textContainer}>
-                <div
-                    className={styles.navItem}
-                    style={{ alignItems: session ? "flex-end" : "center" }}
-                >
-                    <Link href="/">
+                <Link href="/" className={styles.logoContainer}>
+                    <div className={styles.logo}></div>
+                    <div>
                         <p className={styles.companyName}>My Resume Hero</p>
-                    </Link>
-                </div>
+                    </div>
+                </Link>
                 <div
                     className={styles.navItem}
                     style={{ alignItems: session ? "flex-end" : "center" }}

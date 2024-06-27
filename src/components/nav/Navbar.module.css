@@ -53,7 +53,28 @@
     border: none;
 }
 
-@media screen and (max-width: 580px) {
+.logoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-medium);
+    z-index: 1;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+.logo {
+    height: 40px;
+    width: 40px;
+    background-image: url("/images/logos/logo1024.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media screen and (max-width: 620px) {
     .navContainer {
         padding-block: var(--padding-block-medium);
     }
