@@ -89,6 +89,7 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
                                     id="degreeType"
                                     type="text"
                                     name="degreeType"
+                                    placeholder="e.g. Bachelor's Degree"
                                     className={styles.input}
                                     defaultValue={
                                         educationId
@@ -115,6 +116,7 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
                                             ? educationBeingEdited.degreeField
                                             : ""
                                     }
+                                    placeholder="e.g. Business"
                                 />
                             </section>
                         </section>
@@ -234,7 +236,8 @@ export const Education = ({ currentUser, searchParams }: EducationProps) => {
                                             {education.schoolName}
                                         </p>
                                         <p className={styles.degreeType}>
-                                            {education.degreeType}
+                                            {education.degreeType} in{" "}
+                                            {education.degreeField}
                                         </p>
                                         <section className={styles.dateRange}>
                                             <p className={styles.startDate}>
