@@ -3116,11 +3116,13 @@ const Experience = ({
                     );
                 })}
             </section>
-            <SaveButton
-                sectionId={sectionId}
-                document={document}
-                onClick={saveClicked}
-            />
+            {!addItemClicked && editSectionIndex < 0 && (
+                <SaveButton
+                    sectionId={sectionId}
+                    document={document}
+                    onClick={saveClicked}
+                />
+            )}
         </>
     );
 };
@@ -5271,11 +5273,7 @@ export default function EditModalWrapper({
             break;
     }
     return (
-        <section
-            id="modalContainer"
-            className={styles.container}
-            onClick={closeClicked}
-        >
+        <section id="modalContainer" className={styles.container}>
             <section id="modalContent" className={styles.modal}>
                 <TitleBar sectionId={sectionId} />
                 <OptionsBar sectionId={sectionId} document={document} />
