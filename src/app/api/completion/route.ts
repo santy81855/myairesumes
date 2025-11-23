@@ -31,7 +31,7 @@ export async function POST(request: Request) {
                     content: prompt,
                 },
             ],
-            model: "gpt-3.5-turbo",
+            model: "gpt-5-mini",
             stream: true,
         });
 
