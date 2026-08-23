@@ -15,7 +15,11 @@ import {
     brainIcon,
     magicIcon,
 } from "@/components/icons/iconSVG";
-import { updateDocumentArray, getResume, getPrompt } from "@/features/editor";
+import {
+    updateDocumentArray,
+    getResume,
+    createAICompletionRequest,
+} from "@/features/editor";
 import { useAppContext } from "@/app/providers";
 import { formatDateMonYear, formatDateMonthYear } from "@/lib/date";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen";
@@ -797,25 +801,21 @@ const AIButtons = ({
         e.preventDefault();
         const initialText = text;
         if (!setText) {
-            console.log(bulletPointList);
             const updatedBulletPoints = [...(bulletPointList as string[])];
             updatedBulletPoints[bulletIndex as number] = "";
             setBulletPointList(updatedBulletPoints);
         } else if (setText) {
             setText("");
         }
-        let data = {
+        const aiRequest = createAICompletionRequest({
+            documentId: document.id,
             promptId,
-            document,
-            generate: true,
-            enhance: false,
-            length: length,
+            operation: "generate",
+            desiredWords: length,
             currentText: initialText,
             positionTitle,
-            array,
-        };
-        const prompt = getPrompt(data);
-        console.log(prompt);
+            existingItems: array,
+        });
         setIsLoading(true);
         try {
             const response = await fetch("/api/completion", {
@@ -823,18 +823,16 @@ const AIButtons = ({
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ prompt }),
+                body: JSON.stringify(aiRequest),
             });
             if (!response.ok) {
-                toast.error(
-                    "An error occurred while generating a response. Please try again."
-                );
+                const result = await response.json().catch(() => null);
+                throw new Error(result?.error || "Unable to generate a response");
             }
-            setIsLoading(false);
             const reader = response.body?.getReader();
+            if (!reader) throw new Error("The AI response was empty");
             while (true) {
-                const { done, value } =
-                    (await reader?.read()) as ReadableStreamReadResult<Uint8Array>;
+                const { done, value } = await reader.read();
                 if (done) break;
                 let stringChunk = new TextDecoder().decode(value);
                 if (!setText) {
@@ -850,17 +848,22 @@ const AIButtons = ({
                 }
             }
         } catch (error) {
-            setIsLoading(false);
             if (!setText) {
                 setBulletPointList((prev: string[]) => {
-                    prev[bulletIndex as number] = initialText;
+                    const updatedBulletPoints = [...prev];
+                    updatedBulletPoints[bulletIndex as number] = initialText;
+                    return updatedBulletPoints;
                 });
             } else if (setText) {
                 setText(initialText);
             }
             toast.error(
-                "An error occurred while generating a response. Please try again."
+                error instanceof Error
+                    ? error.message
+                    : "An error occurred while generating a response."
             );
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -876,17 +879,15 @@ const AIButtons = ({
         } else if (setText) {
             setText("");
         }
-        let data = {
+        const aiRequest = createAICompletionRequest({
+            documentId: document.id,
             promptId,
-            document,
-            generate: false,
-            enhance: true,
-            length: length,
+            operation: "enhance",
+            desiredWords: length,
             currentText: initialText,
             positionTitle,
-            array,
-        };
-        const prompt = getPrompt(data);
+            existingItems: array,
+        });
         setIsLoading(true);
         try {
             const response = await fetch("/api/completion", {
@@ -894,18 +895,16 @@ const AIButtons = ({
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ prompt }),
+                body: JSON.stringify(aiRequest),
             });
             if (!response.ok) {
-                toast.error(
-                    "An error occurred while enhancing a response. Please try again."
-                );
+                const result = await response.json().catch(() => null);
+                throw new Error(result?.error || "Unable to enhance this text");
             }
-            setIsLoading(false);
             const reader = response.body?.getReader();
+            if (!reader) throw new Error("The AI response was empty");
             while (true) {
-                const { done, value } =
-                    (await reader?.read()) as ReadableStreamReadResult<Uint8Array>;
+                const { done, value } = await reader.read();
                 if (done) break;
                 let stringChunk = new TextDecoder().decode(value);
                 if (!setText) {
@@ -921,7 +920,6 @@ const AIButtons = ({
                 }
             }
         } catch (error) {
-            setIsLoading(false);
             if (!setText) {
                 setBulletPointList((prev: string[]) => {
                     const updatedBulletPoints = [...prev];
@@ -932,8 +930,12 @@ const AIButtons = ({
                 setText(initialText);
             }
             toast.error(
-                "An error occurred while generating a response. Please try again."
+                error instanceof Error
+                    ? error.message
+                    : "An error occurred while enhancing this text."
             );
+        } finally {
+            setIsLoading(false);
         }
     };
 
