@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Document, Page, StyleSheet, View } from "@react-pdf/renderer";
 import { DraggableContainer } from "@/features/editor";
 import { Section } from "@/features/resume";
@@ -50,6 +50,7 @@ const ResumeTemplateLayout = ({
     const styles = StyleSheet.create({
         page: { width: "100%", height: "100%", backgroundColor: "white" },
         single: {
+            backgroundColor: "white",
             width: "100%",
             height: "100%",
             paddingTop: measuredMargin,
@@ -66,6 +67,7 @@ const ResumeTemplateLayout = ({
             borderTopColor: accent,
         },
         columns: {
+            backgroundColor: "white",
             width: "100%",
             height: "100%",
             display: "flex",
@@ -87,6 +89,7 @@ const ResumeTemplateLayout = ({
             backgroundColor: accent,
         },
         main: {
+            backgroundColor: "white",
             width: "68%",
             height: "100%",
             paddingTop: measuredMargin,
@@ -100,6 +103,7 @@ const ResumeTemplateLayout = ({
             overflow: "hidden",
         },
         continuation: {
+            backgroundColor: "white",
             width: "100%",
             height: "100%",
             paddingTop: measuredMargin,
@@ -147,9 +151,7 @@ const ResumeTemplateLayout = ({
 
         if (!isEditor) {
             return (
-                <View key={`${section}-${index}`} style={{ width: "100%" }}>
-                    {content}
-                </View>
+                <Fragment key={`${section}-${index}`}>{content}</Fragment>
             );
         }
 

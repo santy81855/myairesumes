@@ -253,8 +253,9 @@ const getSectionTitleComponent = (data: {
                     <View
                         style={{
                             ...styles.flexGrow,
-                            height: fontSize * 0.12,
-                            backgroundColor:
+                            borderBottomWidth: fontSize / 12,
+                            borderBottomStyle: "solid",
+                            borderBottomColor:
                                 document.information.style
                                     .accentBackgroundColor,
                         }}
@@ -286,13 +287,13 @@ const getSectionTitleComponent = (data: {
                     <View
                         style={{
                             width: accentColumn ? "28%" : "100%",
-                            height: fontSize * 0.1,
                             marginTop: fontSize * 0.28,
-                            backgroundColor: accentColumn
+                            borderBottomWidth: fontSize / 12,
+                            borderBottomStyle: "solid",
+                            borderBottomColor: accentColumn
                                 ? document.information.style.accentTextColor
                                 : document.information.style
                                       .accentBackgroundColor,
-                            opacity: 0.72,
                         }}
                     />
                 </View>
