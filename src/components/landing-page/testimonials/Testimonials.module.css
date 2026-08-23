@@ -1,24 +1,24 @@
 .testimonials {
     width: 100%;
     text-align: center;
-    padding: 2rem 1rem;
-    background-color: transparent;
+    padding: 7rem max(1.5rem, calc((100% - 1180px) / 2));
+    background: #007acc;
     display: flex;
     flex-direction: column;
-    gap: var(--padding-block-medium);
+    gap: 3rem;
 }
-
-.title {
-    font-size: var(--font-size-xlarge);
-    margin-bottom: 1rem;
-}
+.heading { position: relative; z-index: 1; max-width: 680px; margin-inline: auto; }
+.eyebrow { margin-block-end: .7rem; color: #bde4ff; font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.title { color: white; font-size: clamp(2rem,4vw,3.25rem); line-height: 1.08; letter-spacing: -.045em; }
+.subtitle { max-width: 58ch; margin: 1rem auto 0; color: rgba(255,255,255,.75); font-size: .92rem; line-height: 1.7; }
 
 .testimonialsGrid {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.15rem;
     position: relative;
     z-index: 0;
 }
@@ -26,22 +26,27 @@
 .testimonialItem {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     background-color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    width: 300px;
-    text-align: center;
-    color: black;
-    font-size: var(--font-size-small);
-    height: 10rem;
+    padding: 1.7rem;
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 14px;
+    width: auto;
+    text-align: left;
+    color: #172034;
+    font-size: .78rem;
+    min-height: 230px;
     z-index: 1;
-    gap: var(--padding-block-small);
+    gap: 1rem;
+    box-shadow: 0 16px 35px rgba(17,44,66,.16);
 }
+.quote { line-height: 1.7; }
 
 .name {
-    font-weight: bold;
+    margin-block-start: auto;
+    color: #007acc;
+    font-weight: 800;
 }
 
 .circle1 {
@@ -83,9 +88,11 @@
 .starContainer {
     width: 100%;
     display: flex;
-    justify-content: center;
-    gap: var(--padding-block-small);
+    justify-content: flex-start;
+    gap: .25rem;
 }
+
+@media screen and (max-width: 800px) { .testimonials { padding-block: 5rem; } .testimonialsGrid { grid-template-columns: 1fr; } .testimonialItem { min-height: 0; } }
 
 .star {
     width: 1rem;

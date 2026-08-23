@@ -30,7 +30,7 @@ const Card = ({
     showButton,
 }: CardProps) => {
     return (
-        <main
+        <article
             id="priceCard"
             className={styles.container}
             style={style ? style : {}}
@@ -104,7 +104,7 @@ const Card = ({
                     </Link>
                 </section>
             )}
-        </main>
+        </article>
     );
 };
 

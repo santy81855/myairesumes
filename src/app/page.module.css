@@ -19,7 +19,7 @@
     align-items: center;
     background-color: transparent;
     position: relative;
-    padding-block-end: 2rem;
+    padding-block-end: 4rem;
 }
 
 .heroSectionText {
@@ -102,40 +102,42 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: var(--padding-block-small);
+    gap: 1rem;
     align-items: center;
-    padding-block-start: var(--padding-block-large);
-    padding-block-end: var(--padding-block-xlarge);
+    padding-block: 7rem;
     padding-inline: var(--padding-inline-large);
     position: relative;
 }
 
 .priceTitle {
-    font-size: var(--font-size-x2large);
-    font-weight: bold;
+    font-size: clamp(2rem,4vw,3.25rem);
+    line-height: 1.08;
+    letter-spacing: -.045em;
+    font-weight: 800;
     color: white;
 }
+.priceHeading { position: relative; z-index: 1; max-width: 700px; text-align: center; }
+.sectionEyebrow { margin-block-end: .7rem; color: #bde4ff; font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.priceSubtitle { max-width: 58ch; margin: 1rem auto 0; color: rgba(255,255,255,.75); font-size: .92rem; line-height: 1.7; }
 
-@media (pointer: coarse) and (hover: none) {
-    .landingImage {
-        aspect-ratio: 16/9;
-        max-width: 1500px;
-        width: 140%;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.landingImage {
+    width: min(1180px, calc(100% - 3rem));
+    margin-block-start: 1rem;
 }
 
-@media (pointer: fine) {
-    .landingImage {
-        aspect-ratio: 16/9;
-        max-width: 1500px;
-        width: 175%;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+@media screen and (max-width: 680px) {
+    .heroSection {
+        padding-block-end: 2.5rem;
     }
+
+    .heroSectionText {
+        padding-inline: 1.25rem;
+    }
+
+    .landingImage {
+        width: calc(100% - 1.5rem);
+        margin-block-start: 0;
+    }
+    .priceSection { padding-block: 5rem; padding-inline: 1.25rem; }
+    .faqSection { padding-block: 5rem; padding-inline: 1.25rem; }
 }

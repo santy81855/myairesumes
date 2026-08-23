@@ -38,7 +38,11 @@ const Testimonials: React.FC = () => {
 
     return (
         <section className={styles.testimonials}>
-            <h2 className={styles.title}>Don&apos;t take our word for it</h2>
+            <div className={styles.heading}>
+                <p className={styles.eyebrow}>From early users</p>
+                <h2 className={styles.title}>A calmer way to apply</h2>
+                <p className={styles.subtitle}>See what job seekers say about keeping their applications and documents together.</p>
+            </div>
             <div className={styles.testimonialsGrid}>
                 <div className={styles.circle1}></div>
                 <div className={styles.circle2}></div>
@@ -83,10 +87,10 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({
     const renderStars = (stars: number) => {
         const starArray = [];
         for (let i = 0; i < Math.floor(stars); i++) {
-            starArray.push(<div className={styles.star}>{star}</div>);
+            starArray.push(<div key={`star-${i}`} className={styles.star}>{star}</div>);
         }
         if (stars % 1 !== 0) {
-            starArray.push(<div className={styles.star}>{halfStar}</div>);
+            starArray.push(<div key="half-star" className={styles.star}>{halfStar}</div>);
         }
         return <section className={styles.starContainer}>{starArray}</section>;
     };
@@ -99,9 +103,9 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({
             variants={variants}
             className={styles.testimonialItem}
         >
-            <p>{testimonial.text}</p>
             {renderStars(testimonial.stars)}
-            <p className={styles.name}>- {testimonial.name}</p>
+            <p className={styles.quote}>&ldquo;{testimonial.text}&rdquo;</p>
+            <p className={styles.name}>{testimonial.name}</p>
         </motion.div>
     );
 };

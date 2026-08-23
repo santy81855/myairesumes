@@ -1,8 +1,13 @@
 .faqContainer {
-    width: 100%;
+    width: min(100%, 980px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 2.5rem;
     align-items: center;
-    gap: var(--padding-block-large);
 }
+.heading { width: 100%; max-width: 680px; text-align: center; }
+.heading p { margin-block-end: .7rem; color: #007acc; font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.heading h2 { color: #172034; font-size: clamp(2rem,4vw,3rem); line-height: 1.08; letter-spacing: -.045em; }
+.heading span { display: block; margin-block-start: 1rem; color: #6b7689; font-size: .85rem; line-height: 1.7; }
+.faq { width: 100%; min-width: 0; padding: .5rem 1.5rem 1rem; background: white; border: 1px solid #e5eaf0; border-radius: 14px; box-shadow: 0 12px 35px rgba(29,49,75,.07); }
+@media screen and (max-width: 720px) { .faqContainer { gap: 2rem; } .faq { padding-inline: 1rem; } }

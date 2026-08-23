@@ -6,6 +6,7 @@
     align-items: center;
     position: relative;
     z-index: 1;
+    max-width: 920px;
 }
 
 .description {
@@ -15,23 +16,24 @@
 }
 
 .title {
-    font-size: var(--font-size-x2large);
-    font-weight: bold;
-    letter-spacing: -0.1ch;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.055em;
     text-align: center;
     width: 100%;
-    line-height: 1.2;
+    line-height: 1.02;
     color: white;
 }
 
 .subTitle {
-    font-size: var(--font-size-small);
+    font-size: clamp(.85rem, 1.5vw, 1rem);
     text-align: center;
     color: white;
     width: 100%;
-    max-width: 60ch;
+    max-width: 64ch;
     margin-block-start: var(--padding-block-medium);
-    opacity: 0.8;
+    opacity: 0.82;
+    line-height: 1.7;
 }
 
 .linkContainer {
@@ -49,7 +51,7 @@
 .link {
     font-size: var(--font-size-small);
     font-weight: bold;
-    border: none;
+    border: 1px solid rgba(255,255,255,.75);
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -58,9 +60,12 @@
     padding-block: var(--padding-block-small);
     padding-inline: var(--padding-inline-medium);
     box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
-    width: 12rem;
-    height: 3rem;
+    width: 13rem;
+    height: 3.25rem;
+    border-radius: 999px;
+    transition: transform .2s ease, box-shadow .2s ease;
 }
+.link:hover { transform: translateY(-2px); box-shadow: 0 14px 24px rgba(0,0,0,.16); }
 
 .linkLeft {
     background-color: white;
@@ -84,9 +89,6 @@
 }
 
 @media screen and (min-width: 768px) {
-    .title {
-        font-size: var(--font-size-xlarge);
-    }
     .subtitle {
         font-size: var(--font-size-medium);
     }
