@@ -49,7 +49,11 @@ export default async function Home() {
                 <Features />
             </section>
             <section className={styles.priceSection}>
-                <p className={styles.priceTitle}>Affordable Pricing</p>
+                <div className={styles.priceHeading}>
+                    <p className={styles.sectionEyebrow}>Simple pricing</p>
+                    <h2 className={styles.priceTitle}>Start free. Upgrade when you&apos;re ready.</h2>
+                    <p className={styles.priceSubtitle}>Build your first application for free, with straightforward options when your job search grows.</p>
+                </div>
                 <div className={styles.circle1}></div>
                 <div className={styles.circle2}></div>
                 <div className={styles.circle3}></div>

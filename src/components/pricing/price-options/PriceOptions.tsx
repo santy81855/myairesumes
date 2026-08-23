@@ -49,7 +49,7 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
         subscription && subscription.cancel_at_period_end === true;
 
     return (
-        <main id="priceOptions" className={styles.container}>
+        <section id="priceOptions" className={styles.container}>
             <div className={styles.freeCard}>
                 <Card
                     key="freeCard"
@@ -102,7 +102,7 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
                     showButton={subscription === null} // show the upgrade button if the user is free tier
                 />
             </div>
-        </main>
+        </section>
     );
 };
 

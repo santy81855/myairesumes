@@ -16,7 +16,7 @@ const FaqComponentLandingPage = () => {
             {
                 title: "How do I upgrade my account?",
                 content:
-                    "To upgrade your account, go to the Dashboard->Account->Upgrate to Pro. Once you have upgraded your account, you will have access to all the premium features of My Resume Hero.",
+                    "To upgrade your account, go to Dashboard → Account → Upgrade to Pro. Once you have upgraded your account, you will have access to all the premium features of My Resume Hero.",
             },
             {
                 title: "Can I edit my job applications after I create them?",
@@ -57,7 +57,12 @@ const FaqComponentLandingPage = () => {
 
     return (
         <section className={styles.faqContainer}>
-            <Faq data={generalQuestions} styles={faqStyles} />
+            <div className={styles.heading}>
+                <p>Questions, answered</p>
+                <h2>Everything you need to know</h2>
+                <span>Quick answers about organizing applications and creating your documents.</span>
+            </div>
+            <div className={styles.faq}><Faq data={generalQuestions} styles={faqStyles} /></div>
         </section>
     );
 };

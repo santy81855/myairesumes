@@ -72,9 +72,16 @@ const Features: React.FC = () => {
 
     return (
         <section className={styles.features}>
-            <h2 className={styles.title}>
-                Level Up Your Applications With My Resume Hero
-            </h2>
+            <div className={styles.heading}>
+                <p className={styles.eyebrow}>Built for the whole job search</p>
+                <h2 className={styles.title}>
+                    Everything you need to apply with confidence
+                </h2>
+                <p className={styles.subtitle}>
+                    Replace scattered files, notes, and job links with one
+                    organized workspace made for your next opportunity.
+                </p>
+            </div>
             <div className={styles.featuresGrid}>
                 {features.map((feature, index) => (
                     <FeatureItem

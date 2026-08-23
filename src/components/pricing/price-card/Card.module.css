@@ -5,9 +5,12 @@
 
     padding-block-start: var(--padding-block-large);
     padding-block-end: var(--padding-block-small);
-    width: 250px;
-    min-height: 350px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    width: 280px;
+    min-height: 390px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(19,46,69,.18);
+    overflow: hidden;
 
     position: relative;
     z-index: 1;
@@ -19,25 +22,25 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: var(--border-radius);
+    border-radius: 16px;
     overflow: hidden;
     z-index: -1;
 }
 
 .angledRectangle {
-    width: 55%;
+    width: 48%;
     color: white;
     position: relative;
     font-size: var(--font-size-large);
     font-weight: 700;
     padding-inline-start: var(--padding-inline-medium);
     padding-block: var(--padding-block-small);
-    border-top-left-radius: var(--border-radius-xsmall);
-    margin-inline-start: -12px;
+    border-radius: 0 6px 6px 0;
+    margin-inline-start: 0;
     z-index: 1;
 }
 .angledRectangle::before {
-    content: "";
+    content: none;
     position: absolute;
     top: 0;
     left: 50%;
@@ -50,7 +53,7 @@
     z-index: -1;
 }
 .angledRectangle::after {
-    content: "";
+    content: none;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -79,8 +82,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding-inline: var(--padding-inline-large);
-    padding-block: var(--padding-block-small);
-    gap: var(--padding-block-small);
+    padding-block: 1.25rem;
+    gap: 1rem;
 }
 
 .priceContainer {
@@ -92,7 +95,7 @@
 }
 
 .price {
-    font-size: var(--font-size-xlarge);
+    font-size: 2rem;
     font-weight: 700;
 }
 
@@ -107,7 +110,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: var(--padding-block-small);
+    gap: .75rem;
 }
 
 .item {
@@ -141,7 +144,7 @@
 }
 
 .unlockedFeature {
-    font-size: var(--font-size-small);
+    font-size: .75rem;
 }
 
 .currentPlanContainer {
@@ -179,7 +182,7 @@
     padding-block: var(--padding-block-small);
     padding-inline: var(--padding-inline-large);
     border: none;
-    border-radius: var(--border-radius-xsmall);
+    border-radius: 999px;
     color: white;
     font-size: var(--font-size-small);
     font-weight: 700;
@@ -189,6 +192,7 @@
     justify-content: center;
     align-items: center;
 }
+@media screen and (max-width: 600px) { .container { width: 100%; } }
 
 .upgradeButton::after {
     content: "";

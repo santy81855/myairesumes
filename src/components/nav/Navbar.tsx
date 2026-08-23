@@ -51,7 +51,7 @@ const Navbar = async ({ style, isAuth }: NavbarProps) => {
                     {!session && authPage && (
                         <Link href="/sign-up">
                             <p className={styles.reportButton}>
-                                Create a Resume
+                                Get Started
                             </p>
                         </Link>
                     )}

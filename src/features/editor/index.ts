@@ -46,7 +46,8 @@ export {
     updateDocument,
     updateCoverLetter,
 } from "./lib/document";
-export { getPrompt } from "./lib/ai";
+export { createAICompletionRequest } from "./lib/ai";
+export type { AICompletionRequest, AIOperation, AIPromptId } from "./lib/ai";
 export { createResume as createResumeAction } from "./actions/document";
 export { updateResume as updateResumeAction } from "./actions/document";
 export { updateJob as updateJobAction } from "./actions/document";

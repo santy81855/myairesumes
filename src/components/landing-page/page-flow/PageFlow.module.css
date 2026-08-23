@@ -1,0 +1,133 @@
+.story { width: 100%; color: #434343; background: #fafafa; border: 1px solid rgba(255,255,255,.8); border-radius: 28px; box-shadow: 0 28px 80px rgba(11,43,69,.24); overflow: hidden; }
+.intro { max-width: 720px; padding: 3rem 3rem 2rem; }
+.intro h2 { margin-block: .35rem .65rem; font-size: clamp(1.75rem,4vw,3.4rem); line-height: 1.05; letter-spacing: -.045em; color: #202b3b; }
+.intro > p:last-child { max-width: 58ch; color: #647086; font-size: .95rem; line-height: 1.6; }
+.eyebrow { color: #007acc; font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.stepPicker { display: grid; grid-template-columns: repeat(3,1fr); padding-inline: 3rem; }
+.stepButton { display: flex; align-items: center; gap: .65rem; min-height: 58px; padding: 0 0 1rem; color: #8c96a8; background: transparent; border: 0; border-bottom: 2px solid #dfe5ed; font: inherit; font-size: .88rem; font-weight: 800; cursor: pointer; transition: color 180ms ease,border-color 180ms ease; }
+.stepButton:hover,.stepButton:focus-visible,.activeStep { color: #007acc; border-bottom-color: #007acc; outline: none; }
+.stepNumber { display: grid; width: 1.85rem; height: 1.85rem; place-items: center; color: inherit; background: #e9eef5; border-radius: 50%; font-size: .62rem; }
+.activeStep .stepNumber { color: white; background: #007acc; }
+.stage { display: grid; grid-template-columns: minmax(185px,.27fr) minmax(0,1fr); gap: 2rem; padding: 2rem 3rem 3rem; }
+.stageCopy { align-self: center; }
+.stageCopy h3 { margin-block-end: .8rem; color: #202b3b; font-size: clamp(1.25rem,2.2vw,1.8rem); line-height: 1.15; letter-spacing: -.035em; }
+.stageCopy p { color: #69758a; font-size: .83rem; line-height: 1.65; }
+.mobileStep { display: inline-block; margin-block-end: 1rem; color: #007acc; font-size: .65rem; font-weight: 800; letter-spacing: .12em; }
+.progress { height: 3px; margin-block-start: 1.5rem; overflow: hidden; background: #dfe5ed; border-radius: 999px; }
+.progress span { display: block; height: 100%; background: #007acc; transition: width 260ms ease; }
+
+.dashboardFrame { display: grid; grid-template-columns: 155px minmax(0,1fr); min-width: 0; min-height: 455px; overflow: hidden; background: #fafafa; border-radius: 10px; box-shadow: 0 7px 22px rgba(0,0,0,.2); }
+.dashboardSidebar { position: relative; z-index: 2; padding-block-start: 2.4rem; color: white; background: #007acc; box-shadow: 8px 0 12px -6px rgba(31,73,125,.8); }
+.brand { display: block; padding: .4rem .8rem 1.25rem; font-size: .72rem; }
+.sidebarMenu { display: grid; gap: .45rem; }
+.sidebarMenu span { display: flex; align-items: center; gap: .5rem; padding: .5rem .8rem; font-size: .56rem; font-weight: 400; }
+.sidebarMenu i { width: 13px; color: white; font-size: .55rem; font-style: normal; text-align: center; }
+.sidebarMenu b { font-weight: 400; }
+.sidebarMenu .activeMenu { background: rgba(255,255,255,.5); border-radius: 20px 0 0 20px; }
+.sidebarMenu .secondaryActive { background: rgba(255,255,255,.18); border-radius: 20px 0 0 20px; }
+.dashboardMain { position: relative; z-index: 0; min-width: 0; padding: 2rem 1.6rem; overflow: hidden; background: #fafafa; }
+.dashboardMain::before { content: ""; position: absolute; z-index: -1; width: 650px; height: 650px; top: -455px; left: -100px; background: rgba(67,67,67,.08); border-radius: 50%; }
+.backgroundName { position: absolute; z-index: -1; top: -10px; left: 0; color: #fafafa; font-size: 7rem; font-weight: 900; line-height: .85; }
+.dashboardHeading { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; margin-block-end: 1rem; }
+.dashboardHeading strong,.dashboardHeading span { display: block; }
+.dashboardHeading strong { font-size: 1.05rem; }
+.dashboardHeading div > span { margin-block-start: .2rem; font-size: .53rem; font-weight: 700; }
+.tutorial { padding: .35rem .6rem; color: white; background: #007acc; border-radius: 4px; font-size: .52rem; font-weight: 700; }
+.summaryCards { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3,1fr); gap: .7rem; margin-block-end: 1rem; }
+.summaryCards div { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: .6rem .75rem; overflow: hidden; color: white; background: #007acc; border-radius: 5px; box-shadow: 0 3px 5px rgba(0,0,0,.2); }
+.summaryCards div::after { content: ""; position: absolute; width: 70px; height: 70px; right: -18px; bottom: -35px; background: rgba(255,255,255,.18); border-radius: 50%; }
+.summaryCards span { font-size: .57rem; font-weight: 700; }
+.summaryCards strong { font-size: 1.1rem; }
+.dashboardSection { position: relative; z-index: 1; overflow: hidden; background: white; border-radius: 5px; box-shadow: 0 4px 5px rgba(0,0,0,.25); }
+.sectionTitle { padding: .45rem .8rem; color: white; background: #007acc; font-size: .7rem; font-weight: 700; }
+.sectionBody { padding: .8rem; }
+.createButton { display: flex; align-items: center; gap: .35rem; width: max-content; margin-block-end: .8rem; color: #007acc; font-size: .55rem; font-weight: 700; }
+.createButton b { display: grid; width: 16px; height: 16px; place-items: center; color: white; background: #007acc; border-radius: 50%; font-size: .7rem; }
+.applicationGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: .8rem; }
+.applicationCard { min-width: 0; overflow: hidden; background: white; border-radius: 4px 4px 0 0; box-shadow: 0 2px 4px rgba(0,0,0,.3); }
+.highlightedCard { box-shadow: 0 0 0 2px #8c75d6,0 3px 7px rgba(0,0,0,.25); }
+.paperPreview { position: relative; height: 92px; overflow: hidden; background: url("/images/dashboard/job-item-background.svg") center/cover; }
+.miniDocument { position: absolute; width: 62px; height: 80px; top: 14px; left: calc(50% - 47px); padding: 8px 6px; background: white; box-shadow: 0 0 6px rgba(70,70,70,.5); transform: rotate(-4deg); }
+.miniDocument.letter { left: calc(50% - 13px); transform: rotate(4deg); }
+.documentName { color: #30364a; font-size: 4px; font-weight: 800; }
+.documentRule { height: 1px; margin-block: 4px; background: #007acc; }
+.documentLine { height: 2px; margin-block: 4px; background: #d9dde4; }
+.documentLine.short { width: 65%; }
+.documentSubheading { width: 35%; height: 2px; margin-block: 7px 4px; background: #596174; }
+.colorBar { height: 7px; }
+.applicationInfo { display: grid; padding: .4rem .55rem; }
+.applicationInfo span { margin-block-start: .18rem; color: #434343; font-size: .38rem; font-weight: 700; }
+.applicationInfo strong { overflow: hidden; font-size: .52rem; font-weight: 400; text-overflow: ellipsis; white-space: nowrap; }
+.cardAction { display: flex; align-items: center; gap: .35rem; padding: 0 .55rem .55rem; }
+.cardAction > span { flex: 1; padding: .28rem; color: white; background: #007acc; border-radius: 999px; font-size: .45rem; text-align: center; }
+.cardAction small { color: #777; font-size: .35rem; }
+
+.manageBody { display: grid; gap: .75rem; padding: .9rem 1.2rem 1.2rem; }
+.backButton { width: max-content; color: #007acc; font-size: .52rem; }
+.jobDetails { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: .65rem; background: #fafafa; border-radius: 5px; }
+.jobDetails span,.manageLabel span,.connectedCard span { display: block; color: #555; font-size: .44rem; font-weight: 700; }
+.jobDetails strong { display: block; margin-block-start: .18rem; font-size: .58rem; font-weight: 400; }
+.jobDetails i { position: absolute; width: 17px; height: 17px; right: .65rem; top: .65rem; border-radius: 50%; }
+.manageLabel { display: flex; align-items: flex-end; justify-content: space-between; }
+.manageLabel strong { font-size: .65rem; }
+.manageLabel span { font-weight: 400; }
+.connectedDocuments { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.connectedCard { position: relative; display: grid; grid-template-columns: 50px minmax(0,1fr); align-items: center; gap: .7rem; min-width: 0; padding: .6rem; background: white; border: 1px solid #e2e2e2; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,.1); }
+.connectedCard .miniDocument { position: relative; inset: auto; width: 45px; height: 59px; padding: 5px; transform: none; background: #fff; border: 1px solid #ddd; box-shadow: none; }
+.connectedCard .documentLine { margin-block: 3px; }
+.connectedCard strong { display: block; margin-block-start: .2rem; overflow: hidden; font-size: .55rem; text-overflow: ellipsis; white-space: nowrap; }
+.connectedCard > b { grid-column: 1 / -1; justify-self: stretch; padding: .3rem .45rem; overflow: hidden; color: white; background: #007acc; border-radius: 999px; font-size: .45rem; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+.connectedCard > b.ready { color: #28725f; background: #dff3ec; }
+.statusRow { display: flex; align-items: center; justify-content: space-between; padding: .65rem; background: #eff8f5; border: 1px solid #cce8df; border-radius: 5px; }
+.statusRow > div { display: flex; align-items: center; gap: .55rem; }
+.statusRow strong,.statusRow small { display: block; }
+.statusRow strong { color: #28725f; font-size: .55rem; }
+.statusRow small { margin-block-start: .15rem; color: #64756f; font-size: .42rem; }
+.check { display: grid; width: 23px; height: 23px; place-items: center; color: white; background: #66a897; border-radius: 50%; font-size: .65rem; }
+
+@media screen and (max-width: 900px) {
+    .intro { padding: 2.25rem 2rem 1.5rem; }
+    .stepPicker { padding-inline: 2rem; }
+    .stage { grid-template-columns: 1fr; gap: 1.25rem; padding: 1.5rem 2rem 2rem; }
+    .stageCopy { display: grid; grid-template-columns: minmax(0,1fr) minmax(180px,.8fr); column-gap: 1.5rem; }
+    .mobileStep,.progress { display: none; }
+    .stageCopy p { grid-column: 2; grid-row: 1; }
+}
+
+@media screen and (max-width: 680px) {
+    .story { border-radius: 20px; }
+    .intro { padding: 1.75rem 1.25rem 1.25rem; }
+    .intro > p:last-child { font-size: .82rem; }
+    .stepPicker { gap: .35rem; padding-inline: 1.25rem; }
+    .stepButton { justify-content: center; min-width: 0; gap: .35rem; font-size: .72rem; }
+    .stepNumber { width: 1.5rem; height: 1.5rem; font-size: .52rem; }
+    .stage { padding: 1.25rem; }
+    .stageCopy { display: block; }
+    .stageCopy h3 { margin-block-end: .5rem; }
+    .stageCopy p { font-size: .78rem; }
+    .mobileStep,.progress { display: block; }
+    .dashboardFrame { grid-template-columns: 45px minmax(0,1fr); min-height: 430px; }
+    .dashboardSidebar { padding-block-start: 1.3rem; }
+    .brand { height: 20px; padding: 0; color: transparent; }
+    .brand::after { content: "MRH"; display: grid; width: 28px; height: 28px; margin-inline: auto; place-items: center; color: white; border: 1px solid rgba(255,255,255,.8); border-radius: 50%; font-size: .38rem; }
+    .sidebarMenu { margin-block-start: 1.2rem; gap: .65rem; }
+    .sidebarMenu span { justify-content: center; padding: .55rem 0; }
+    .sidebarMenu b { display: none; }
+    .sidebarMenu .activeMenu,.sidebarMenu .secondaryActive { border-radius: 12px 0 0 12px; }
+    .dashboardMain { padding: 1.25rem .75rem; }
+    .backgroundName { font-size: 4rem; }
+    .summaryCards { gap: .35rem; }
+    .summaryCards div { min-height: 48px; padding: .45rem; }
+    .summaryCards span { font-size: .45rem; }
+    .applicationGrid { grid-template-columns: 1fr 1fr; gap: .55rem; }
+    .applicationCard:nth-child(3) { display: none; }
+    .paperPreview { height: 82px; }
+    .connectedDocuments { grid-template-columns: 1fr; }
+    .connectedCard { grid-template-columns: 45px minmax(0,1fr); }
+    .manageBody { padding: .75rem; }
+    .manageLabel { display: block; }
+    .manageLabel span { margin-block-start: .25rem; }
+    .statusRow { align-items: flex-start; gap: .5rem; flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) { .stepButton,.progress span { transition: none; } }
