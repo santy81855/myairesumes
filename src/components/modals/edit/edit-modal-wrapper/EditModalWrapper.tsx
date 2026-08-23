@@ -57,6 +57,20 @@ type AIButtonsProps = {
     bulletIndex?: number;
 };
 
+const getAIErrorMessage = async (response: Response) => {
+    if (response.status === 504) {
+        return "AI generation timed out. Please try again.";
+    }
+
+    const responseText = await response.text();
+    try {
+        const result = JSON.parse(responseText);
+        return result?.error || "Unable to generate a response";
+    } catch {
+        return `Unable to generate a response (${response.status})`;
+    }
+};
+
 interface ListSectionProps {
     document: any;
     sectionId: string;
@@ -826,8 +840,7 @@ const AIButtons = ({
                 body: JSON.stringify(aiRequest),
             });
             if (!response.ok) {
-                const result = await response.json().catch(() => null);
-                throw new Error(result?.error || "Unable to generate a response");
+                throw new Error(await getAIErrorMessage(response));
             }
             const reader = response.body?.getReader();
             if (!reader) throw new Error("The AI response was empty");
@@ -898,8 +911,7 @@ const AIButtons = ({
                 body: JSON.stringify(aiRequest),
             });
             if (!response.ok) {
-                const result = await response.json().catch(() => null);
-                throw new Error(result?.error || "Unable to enhance this text");
+                throw new Error(await getAIErrorMessage(response));
             }
             const reader = response.body?.getReader();
             if (!reader) throw new Error("The AI response was empty");

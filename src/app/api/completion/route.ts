@@ -10,6 +10,7 @@ import { buildAIMessages } from "@/features/editor/lib/aiPrompt";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const errorResponse = (message: string, status: number) =>
     Response.json({ error: message }, { status });
@@ -74,7 +75,7 @@ export async function POST(request: Request) {
 
         const openai = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY });
         const response = await openai.chat.completions.create({
-            model: "gpt-5-mini",
+            model: "gpt-4.1-mini",
             messages,
             stream: true,
         });
