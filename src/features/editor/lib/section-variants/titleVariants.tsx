@@ -227,6 +227,76 @@ const getSectionTitleComponent = (data: {
                     </Text>
                 </>
             );
+        case "crest":
+            return (
+                <View
+                    style={{
+                        ...styles.row,
+                        ...styles.width100,
+                        ...styles.alignCenter,
+                        ...styles.gapMedium,
+                        ...styles.marginBottomMedium,
+                    }}
+                >
+                    <Text
+                        style={{
+                            ...styles.medium,
+                            ...styles.bold,
+                            ...styles.uppercase,
+                            ...styles.accentBackgroundText,
+                            fontSize: fontSize * 0.92,
+                            letterSpacing: fontSize * 0.05,
+                        }}
+                    >
+                        {title}
+                    </Text>
+                    <View
+                        style={{
+                            ...styles.flexGrow,
+                            height: fontSize * 0.12,
+                            backgroundColor:
+                                document.information.style
+                                    .accentBackgroundColor,
+                        }}
+                    />
+                </View>
+            );
+        case "harbor":
+            return (
+                <View
+                    style={{
+                        ...styles.width100,
+                        ...styles.marginBottomMedium,
+                    }}
+                >
+                    <Text
+                        style={{
+                            ...styles.medium,
+                            ...styles.bold,
+                            ...styles.uppercase,
+                            ...styles.accentBackgroundText,
+                            fontSize: accentColumn
+                                ? fontSize * 0.78
+                                : fontSize * 0.95,
+                            letterSpacing: fontSize * 0.04,
+                        }}
+                    >
+                        {title}
+                    </Text>
+                    <View
+                        style={{
+                            width: accentColumn ? "28%" : "100%",
+                            height: fontSize * 0.1,
+                            marginTop: fontSize * 0.28,
+                            backgroundColor: accentColumn
+                                ? document.information.style.accentTextColor
+                                : document.information.style
+                                      .accentBackgroundColor,
+                            opacity: 0.72,
+                        }}
+                    />
+                </View>
+            );
         case "luminary":
             return (
                 <>

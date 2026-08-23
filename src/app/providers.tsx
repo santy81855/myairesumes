@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 type Document = {
     id: string;
@@ -24,9 +24,8 @@ type AppContextType = {
 const AppContext = createContext({} as AppContextType);
 
 export const ResumeContext = ({ children }: { children: React.ReactNode }) => {
-    const [documentArray, setDocumentArray] = useState<Document[] | []>(
-        getLocalStorage("documentArray", [])
-    );
+    const [documentArray, setDocumentArray] = useState<Document[]>([]);
+    const hasMounted = useRef(false);
     const [isReordering, setIsReordering] = useState<boolean>(false);
     const [isDocumentLoading, setIsDocumentLoading] = useState<boolean>(false);
     const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -35,6 +34,14 @@ export const ResumeContext = ({ children }: { children: React.ReactNode }) => {
     >({});
 
     useEffect(() => {
+        setDocumentArray(getLocalStorage("documentArray", []));
+    }, []);
+
+    useEffect(() => {
+        if (!hasMounted.current) {
+            hasMounted.current = true;
+            return;
+        }
         setLocalStorage("documentArray", documentArray);
     }, [documentArray]);
 
