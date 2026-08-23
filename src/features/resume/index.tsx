@@ -8,5 +8,7 @@ export { default as Nova } from "./components/resume-templates/nova/Nova";
 export { default as Sharp } from "./components/resume-templates/sharp/Sharp";
 export { default as Vivid } from "./components/resume-templates/vivid/Vivid";
 export { default as Luminary } from "./components/resume-templates/luminary/Luminary";
+export { default as Crest } from "./components/resume-templates/crest/Crest";
+export { default as Harbor } from "./components/resume-templates/harbor/Harbor";
 export { default as Section } from "./components/section/Section";
 export { default as SectionContainerEditor } from "./components/section-container-editor/SectionContainerEditor";

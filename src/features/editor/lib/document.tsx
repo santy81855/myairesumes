@@ -10,6 +10,8 @@ import {
     Sharp,
     Vivid,
     Luminary,
+    Crest,
+    Harbor,
 } from "@/features/resume";
 
 import { BasicL, FreshL } from "@/features/cover-letter";
@@ -72,6 +74,24 @@ export const updateDocument = (
                 (array: any, index: number) => {
                     return index === 0 ? newArr : array;
                 }
+            );
+        }
+    } else if (template === "harbor") {
+        const newArr = [
+            "headerHarbor",
+            "summary",
+            "experience",
+            "colBreak",
+            "contactVerticalIcons",
+            "skillsBullet",
+            "educationShort",
+            "languagesBullet",
+        ];
+        if (!changedTemplate) {
+            newSectionOrder = document.information.sectionOrder;
+        } else {
+            newSectionOrder = document.information.sectionOrder.map(
+                (array: any, index: number) => (index === 0 ? newArr : array)
             );
         }
     } else if (template === "luminary") {
@@ -525,6 +545,92 @@ export const getAllResumeTemplates = (
                     document={updateDocument(
                         document,
                         "luminary",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        crest: {
+            name: "Crest",
+            description:
+                "An elegant, ATS-friendly template with an editorial hierarchy and restrained color.",
+            keywords: [
+                "crest",
+                "executive",
+                "editorial",
+                "clean",
+                "professional",
+                "ats",
+            ],
+            editorComponent: (
+                <Crest
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "crest",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Crest
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "crest",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Crest
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "crest",
+                        changedTemplate
+                    )}
+                />
+            ),
+        },
+        harbor: {
+            name: "Harbor",
+            description:
+                "A modern two-column template with a bold color sidebar and spacious main narrative.",
+            keywords: [
+                "harbor",
+                "sidebar",
+                "modern",
+                "creative",
+                "professional",
+                "color",
+            ],
+            editorComponent: (
+                <Harbor
+                    isEditor={true}
+                    document={updateDocument(
+                        document,
+                        "harbor",
+                        changedTemplate
+                    )}
+                />
+            ),
+            downloadComponent: (
+                <Harbor
+                    isDownload={true}
+                    document={updateDocument(
+                        document,
+                        "harbor",
+                        changedTemplate
+                    )}
+                />
+            ),
+            previewComponent: (
+                <Harbor
+                    isPreview={true}
+                    document={updateDocument(
+                        document,
+                        "harbor",
                         changedTemplate
                     )}
                 />

@@ -1295,6 +1295,136 @@ const getHeaderVariants = (data: {
                 </View>
             ) : null,
         },
+        headerCrest: {
+            name: "Crest Header",
+            description:
+                "A crisp editorial header with prominent typography and compact contact details.",
+            keyWords: ["header", "name", "contact", "crest", "editorial"],
+            component: fontSize ? (
+                <View
+                    style={{
+                        ...styles.width100,
+                        ...styles.col,
+                        ...styles.alignStart,
+                        ...styles.gapSmall,
+                    }}
+                >
+                    <Text
+                        style={{
+                            ...styles.x2Large,
+                            ...styles.bold,
+                            ...styles.uppercase,
+                            ...styles.textColor,
+                            fontSize:
+                                fontSize *
+                                2.35 *
+                                document.information.sectionEdit.header
+                                    .fontRatio,
+                            letterSpacing: fontSize * 0.08,
+                        }}
+                    >
+                        {document.information.firstName}{" "}
+                        {document.information.lastName}
+                    </Text>
+                    {document.information.sectionEdit.header.showPosition && (
+                        <Text
+                            style={{
+                                ...styles.medium,
+                                ...styles.uppercase,
+                                ...styles.accentBackgroundText,
+                                fontSize:
+                                    fontSize *
+                                    0.9 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
+                                letterSpacing: fontSize * 0.06,
+                            }}
+                        >
+                            {document.information.position}
+                        </Text>
+                    )}
+                    <View
+                        style={{
+                            ...styles.rowContainerWrap,
+                            ...styles.justifyStart,
+                            ...styles.marginTopMedium,
+                        }}
+                    >
+                        <Text style={{ ...styles.small, fontSize: fontSize * 0.72 }}>
+                            {document.information.contactInfo.email}
+                        </Text>
+                        {document.information.sectionEdit.contact.showPhone && (
+                            <Text style={{ ...styles.small, fontSize: fontSize * 0.72 }}>
+                                {document.information.contactInfo.phone}
+                            </Text>
+                        )}
+                        {document.information.sectionEdit.contact.showWebsite && (
+                            <Text style={{ ...styles.small, fontSize: fontSize * 0.72 }}>
+                                {document.information.contactInfo.website}
+                            </Text>
+                        )}
+                    </View>
+                </View>
+            ) : null,
+        },
+        headerHarbor: {
+            name: "Harbor Header",
+            description:
+                "A confident, left-aligned header designed for the Harbor sidebar layout.",
+            keyWords: ["header", "name", "position", "harbor", "modern"],
+            component: fontSize ? (
+                <View
+                    style={{
+                        ...styles.width100,
+                        ...styles.col,
+                        ...styles.alignStart,
+                        ...styles.gapSmall,
+                    }}
+                >
+                    <View
+                        style={{
+                            width: fontSize * 2.8,
+                            height: fontSize * 0.28,
+                            backgroundColor:
+                                document.information.style.accentBackgroundColor,
+                            marginBottom: fontSize * 0.35,
+                        }}
+                    />
+                    <Text
+                        style={{
+                            ...styles.x2Large,
+                            ...styles.bold,
+                            ...styles.uppercase,
+                            ...styles.textColor,
+                            fontSize:
+                                fontSize *
+                                2.25 *
+                                document.information.sectionEdit.header
+                                    .fontRatio,
+                            lineHeight: 1.02,
+                        }}
+                    >
+                        {document.information.firstName}{"\n"}
+                        {document.information.lastName}
+                    </Text>
+                    {document.information.sectionEdit.header.showPosition && (
+                        <Text
+                            style={{
+                                ...styles.medium,
+                                ...styles.accentBackgroundText,
+                                fontSize:
+                                    fontSize *
+                                    0.92 *
+                                    document.information.sectionEdit.header
+                                        .fontRatio,
+                            }}
+                        >
+                            {document.information.position}
+                        </Text>
+                    )}
+                </View>
+            ) : null,
+        },
         headerLuminary: {
             name: "Luminary Header",
             description:
