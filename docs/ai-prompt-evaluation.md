@@ -62,3 +62,12 @@ A response fails regardless of its average score if it invents a candidate fact.
 - Existing skills: Microsoft Excel
 - Expected: Exactly one distinct, supported skill name.
 - Must not: Return a sentence, Markdown, multiple options, or a duplicate.
+
+## 9. Resume summary voice
+
+- Candidate name: Santiago Garcia
+- Candidate evidence: Five years of software-development experience using Java and Spring.
+- Expected: Implied first-person resume voice, such as "Software developer with five years
+  of experience..."
+- Must not: Begin with the candidate's name, use third-person pronouns such as he or his,
+  or overuse explicit phrases such as "I am."
