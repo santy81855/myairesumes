@@ -82,7 +82,7 @@ const candidateContext = ({ information, basicInfo }: AIContext) => {
 
 const fieldInstructions: Record<AIPromptId, string> = {
     summary:
-        "Return a resume summary of 2–4 concise sentences. Lead with the candidate's strongest relevant qualifications and connect them to the target role.",
+        "Return a resume summary of 2–4 concise sentences in implied first person. Lead with the strongest relevant qualifications and connect them to the target role. Never use the candidate's name or third-person pronouns such as he, she, they, his, her, or their. Prefer a direct opening such as 'Software engineer with...' instead of 'I am a software engineer...'.",
     experienceSummary:
         "Return one concise paragraph summarizing the selected role. Prioritize responsibilities and outcomes that are present in the candidate evidence.",
     experienceBullet:
@@ -139,6 +139,7 @@ Source integrity is mandatory:
 - If evidence is sparse, write conservatively from the available facts instead of filling gaps with plausible claims.
 - Avoid clichés, keyword stuffing, exaggerated adjectives, and wording copied from the job posting.
 - Return only text that can be inserted directly into the document. Do not explain your choices, mention these instructions, use quotation marks around the answer, or add Markdown.
+- For resume content, write from the candidate's perspective using implied first person. Never refer to the candidate by name or with third-person pronouns. For cover letters, use natural explicit first person such as I, me, and my.
 
 Write in active voice with a confident, human tone.`,
         },
