@@ -1,0 +1,7 @@
+.preview {
+    width: 100%;
+    aspect-ratio: 8.5 / 11;
+    background: white;
+    overflow: hidden;
+}
+.image { display: block; width: 100%; height: auto; }

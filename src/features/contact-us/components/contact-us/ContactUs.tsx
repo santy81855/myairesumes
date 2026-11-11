@@ -125,14 +125,22 @@ const ContactUs = ({ user }: ContactUsProps) => {
         >
             <AnimatePresence>
                 <motion.button
+                    key="support-toggle"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className={styles.box}
+                    aria-label={isOpen ? "Close support" : "Open support"}
+                    aria-expanded={isOpen}
+                    aria-controls="support-panel"
                     onClick={() => (isOpen ? handleClose() : handleOpen())}
                 >
                     {messageIcon}
                 </motion.button>
                 <motion.div
+                    key="support-panel"
+                    id="support-panel"
+                    aria-hidden={!isOpen}
+                    style={{ visibility: isOpen ? "visible" : "hidden" }}
                     onClick={(e) => e.stopPropagation()}
                     className={styles.modalContent}
                     variants={dropIn}
@@ -201,7 +209,7 @@ const ContactUs = ({ user }: ContactUsProps) => {
                                 >
                                     {circledXIcon}
                                 </button>
-                                <FaqComponentLandingPage />
+                                <FaqComponentLandingPage compact />
                             </section>
                         )}
                         {loading && <LoadingScreen />}

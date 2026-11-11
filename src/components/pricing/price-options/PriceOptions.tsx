@@ -55,12 +55,14 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
                     key="freeCard"
                     title="FREE"
                     price="0"
-                    accentColor="#008DD5"
-                    isCurrentPlan={subscription === null}
+                    accentColor="#202520"
+                    isCurrentPlan={!!user && subscription === null}
                     unlockedFeatures={[]}
                     lockedFeatures={freemiumFeatures}
                     style={{ backgroundColor: "white", color: "black" }}
-                    showButton={false} // never show upgrade button for free tier
+                    url="/sign-up"
+                    buttonLabel="Get started free"
+                    showButton={!user}
                 />
             </div>
             <div className={styles.specialCard}>
@@ -69,11 +71,11 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
                     title="SPECIAL"
                     price="19.99"
                     rate="/6 months"
-                    accentColor="#FDCA40"
+                    accentColor="#ce4821"
                     isCurrentPlan={isSpecial}
                     unlockedFeatures={proAvailableFeatures}
                     lockedFeatures={[]}
-                    style={{ backgroundColor: "#1E3888", color: "white" }}
+                    style={{ backgroundColor: "#242d25", color: "white" }}
                     specialText="Normally $30"
                     url={UpdateUrl(
                         searchParams ? searchParams : {},
@@ -89,7 +91,7 @@ const PriceOptions = async ({ searchParams }: PriceOptionsProps) => {
                     title="PRO"
                     price="4.99"
                     rate="/month"
-                    accentColor="#D35269"
+                    accentColor="#202520"
                     isCurrentPlan={isPro}
                     unlockedFeatures={proAvailableFeatures}
                     lockedFeatures={[]}

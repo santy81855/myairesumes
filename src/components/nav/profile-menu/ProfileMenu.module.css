@@ -1,74 +1,9 @@
-.container {
-    display: flex;
-    position: absolute;
-    top: var(--nav-height);
-    right: 0;
-}
-
-.aside {
-    width: 100vw;
-    height: 100%;
-    position: fixed;
-    z-index: 10;
-    background-color: white;
-    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);
-}
-
-.menuContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-block-start: var(--padding-block-large);
-    padding-block-end: var(--padding-block-medium);
-    padding-inline: var(--padding-inline-medium);
-    height: 100%;
-}
-
-.menuItemContainer {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    gap: var(--gap-medium);
-}
-
-.menuItem {
-    color: black;
-    text-decoration: none;
-    font-size: var(--font-size-large);
-    width: 100%;
-    font-weight: bold;
-}
-
-.signOutButton {
-    color: black;
-    text-decoration: none;
-    font-size: var(--font-size-large);
-    background-color: transparent;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    color: rgb(219, 48, 77);
-}
-
-.greeting {
-    font-size: var(--font-size-large);
-    font-weight: bold;
-    color: black;
-}
-
-.bar {
-    background-color: rgb(173, 173, 173);
-    width: 100%;
-    height: 1px;
-    margin-block: var(--padding-block-small);
-}
-
-@media screen and (max-width: 450px) {
-    .container {
-        display: none;
-    }
-}
+.container { position: absolute; top: calc(100% + 12px); right: 0; width: 240px; background: #faf9f6; color: #202520; padding: 20px; border: 1px solid #dcded5; border-radius: 8px; box-shadow: 0 16px 40px #2025201a; }
+.greeting { font: 21px/1.35 Georgia, serif; overflow-wrap: anywhere; padding-bottom: 16px; border-bottom: 1px solid #dedfd6; margin-bottom: 8px; }
+.menuItem { display: flex; align-items: center; justify-content: space-between; padding: 12px 8px; font-size: 14px; border-radius: 4px; transition: background .2s ease; }
+.menuItem:hover { background: #eeeee7; }
+.menuItem span { color: #7b8076; font-size: 18px; }
+.signOutButton { display: block; width: 100%; background: transparent; border: 0; text-align: left; cursor: pointer; color: #b13c24; padding: 12px 8px; font: inherit; font-size: 14px; }
+.signOutButton:disabled { opacity: .5; cursor: wait; }
+.menuItem:focus-visible, .signOutButton:focus-visible { outline: 2px solid #ee643a; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .menuItem { transition: none; } }
