@@ -14,7 +14,7 @@ const Account = ({ currentUser, searchParams }: AccountProps) => {
     const { status } = currentUser;
     const showTutorial = searchParams?.tutorial === "true";
     return (
-        <main className={styles.container} id="account-page">
+        <section className={styles.container} id="account-page">
             <Plan currentUser={currentUser} searchParams={searchParams} />
             <Bill currentUser={currentUser} searchParams={searchParams} />
             {status === "free" && (
@@ -25,7 +25,7 @@ const Account = ({ currentUser, searchParams }: AccountProps) => {
             )}
             <Payments currentUser={currentUser} searchParams={searchParams} />
             {showTutorial && <Tutorial />}
-        </main>
+        </section>
     );
 };
 

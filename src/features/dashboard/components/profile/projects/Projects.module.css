@@ -1,333 +1,40 @@
-.formContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
 
-.workGrid {
-    width: 100%;
-    display: grid;
-    gap: var(--gap-medium);
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-}
-
-.workItem {
-    display: flex;
-    border: 1px solid rgb(216, 216, 216, 0.5);
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding-block: var(--padding-block-medium);
-    padding-inline: var(--padding-block-medium);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    position: relative;
-    background-color: white;
-    border-radius: var(--border-radius-xsmall);
-}
-
-.workItemInfo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.company {
-    font-size: var(--font-size-small);
-    font-weight: bold;
-    color: rgb(var(--dashboard-text-color-rgb), 0.5);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-}
-
-.position {
-    font-size: var(--font-size-small);
-    color: rgb(var(--dashboard-text-color-rgb), 0.5);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-}
-
-.summary {
-    font-size: var(--font-size-small);
-    color: rgb(var(--dashboard-text-color-rgb), 0.5);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    margin-block-start: var(--padding-block-small);
-}
-
-.bullets {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-block-small);
-    margin-block: var(--padding-block-small);
-}
-
-.bulletItem {
-    display: flex;
-    flex-direction: row;
-    gap: var(--padding-block-small);
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.bulletIcon {
-    width: 4px;
-    height: 4px;
-    background-color: black;
-    border-radius: 50%;
-}
-
-.bulletText {
-    font-size: var(--font-size-xsmall);
-    color: rgb(var(--dashboard-text-color-rgb));
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-}
-
-.dateRange {
-    display: flex;
-    gap: var(--padding-block-small);
-    font-size: var(--font-size-small);
-    color: rgb(var(--dashboard-text-color-rgb), 0.5);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    width: 100%;
-    margin-block-end: var(--padding-block-small);
-}
-
-.addWorkButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
-    height: 100%;
-    border: none;
-    cursor: pointer;
-    border-radius: var(--border-radius-xsmall);
-}
-
-.svgContainer {
-    width: 50%;
-    height: 50%;
-    margin: auto;
-}
-
-.svgContainer svg {
-    fill: rgb(var(--dashboard-accent-color-rgb));
-    width: 100%;
-    height: 100%;
-}
-
-.addTitle {
-    font-size: var(--font-size-medium);
-    font-weight: bold;
-    color: rgb(var(--dashboard-text-color-rgb));
-    margin-block-start: var(--padding-block-small);
-}
-
-.workInfoContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    gap: var(--padding-block-medium);
-}
-
-.workInfo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.workInfoHorizontal {
-    display: flex;
-    width: 100%;
-    gap: var(--padding-block-small);
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.toggleSwitch {
-    position: relative;
-    width: 75px;
-    display: inline-block;
-    vertical-align: middle;
-    text-align: left;
-}
-
-.label {
-    font-size: var(--font-size-small);
-    font-weight: bold;
-    color: rgb(var(--dashboard-text-color-rgb));
-    margin-block-end: var(--padding-block-small);
-}
-
-.dateInput {
-    width: 100%;
-    display: flex;
-    gap: var(--padding-block-small);
-}
-
-.input {
-    width: 100%;
-    height: 30px;
-    border: 1px solid #e1e1e1;
-    border-radius: var(--border-radius-xsmall);
-    padding-inline-start: var(--padding-block-small);
-    font-size: var(--font-size-small);
-    color: rgb(var(--dashboard-text-color-rgb));
-}
-
-.textArea {
-    width: 100%;
-    border: 1px solid #e1e1e1;
-    border-radius: var(--border-radius-xsmall);
-    padding-inline-start: var(--padding-block-small);
-    padding-block: var(--padding-block-small);
-    font-size: var(--font-size-small);
-    color: rgb(var(--dashboard-text-color-rgb));
-}
-
-.textArea:focus {
-    outline: none;
-    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
-}
-
-.input:focus {
-    outline: none;
-    border: 1px solid rgb(var(--dashboard-accent-color-rgb));
-}
-
-.buttonContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-block-small);
-}
-
-.cancelButton {
-    width: 100%;
-    background-color: rgb(var(--dashboard-background-color-contrast-rgb));
-    color: rgb(var(--dashboard-text-color-rgb));
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: var(--border-radius-xsmall);
-}
-
-.saveButton {
-    width: 100%;
-    background-color: rgb(var(--dashboard-accent-color-rgb));
-    color: white;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    border-radius: var(--border-radius-xsmall);
-}
-
-.removeButton {
-    width: 100%;
-    background-color: #ffafaf;
-    color: white;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    border-radius: var(--border-radius-xsmall);
-}
-
-.endDateTitle {
-    display: flex;
-    width: 100%;
-    gap: var(--padding-block-small);
-}
-
-.horizontalButtonContainer {
-    width: 100%;
-    display: flex;
-    gap: var(--padding-block-small);
-}
-
-.editButton {
-    width: 100%;
-    background-color: rgb(var(--dashboard-accent-color-rgb));
-    height: 30px;
-    font-size: var(--font-size-small);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    cursor: pointer;
-    border-radius: var(--border-radius-xsmall);
-}
-
-@media screen and (hover: hover) {
-    .editButton:hover {
-        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
-    }
-
-    .removeButton:hover {
-        background-color: #dc8a8a;
-    }
-
-    .saveButton:hover {
-        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
-    }
-
-    .cancelButton:hover {
-        background-color: rgb(
-            var(--dashboard-background-color-contrast-rgb),
-            0.5
-        );
-    }
-
-    .addWorkButton:hover {
-        background-color: rgb(
-            var(--dashboard-background-color-contrast-rgb),
-            0.5
-        );
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .workGrid {
-        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    }
-    .workItem {
-        height: 100%;
-    }
-    .company {
-        font-size: var(--font-size-xsmall);
-    }
-    .position {
-        font-size: var(--font-size-xsmall);
-    }
-    .dateRange {
-        font-size: var(--font-size-small);
-    }
-    .dateInput {
-        flex-direction: column;
-        gap: var(--padding-block-medium);
-    }
-    .horizontalButtonContainer {
-        flex-direction: column;
-    }
-}
+.formContainer { width:100%; display:flex; flex-direction:column; gap:20px; }
+.workGrid,.educationGrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr)); width:100%; gap:16px; }
+.workItem,.educationItem { min-width:0; display:flex; flex-direction:column; justify-content:space-between; gap:20px; padding:20px; border:1px solid #dfe4d5; border-radius:9px; background:#fafbf5; }
+.workItemInfo,.educationItemInfo { display:flex; flex-direction:column; min-width:0; width:100%; gap:7px; }
+.company,.schoolName { font-size:14px; font-weight:600; color:#35422d; overflow-wrap:anywhere; }
+.position,.degreeType { font-size:12px; color:#626d57; line-height:1.7; }
+.summary { color:#68705e; font-size:12px; line-height:1.8; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.dateRange { font-size:11px; color:#68735c; display:flex; flex-wrap:wrap; gap:7px; line-height:1.7; }
+.bullets { display:flex; flex-direction:column; gap:8px; margin-block:10px; }
+.bulletItem { display:flex; gap:8px; align-items:flex-start; }
+.bulletIcon { width:4px; height:4px; border-radius:50%; background:#8b987b; flex-shrink:0; margin-top:7px; }
+.bulletText { font-size:11px; color:#65705a; line-height:1.7; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.addWorkButton,.addEducationButton { min-height:150px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:15px; background:#f2f5eb; border:1px dashed #b5c2a6; border-radius:9px; cursor:pointer; color:#4b5d3b; font:inherit; }
+.addWorkButton:hover,.addEducationButton:hover { background:#e9efdf; }
+.svgContainer { width:30px; height:30px; }
+.svgContainer svg { width:100%; height:100%; fill:#7e906c; }
+.addTitle { font-size:12px; font-weight:500; }
+.workInfoContainer,.educationInfoContainer { width:100%; display:flex; flex-direction:column; gap:20px; }
+.workInfo,.educationInfo { width:100%; display:flex; flex-direction:column; gap:8px; }
+.workInfoHorizontal,.educationInfoHorizontal,.dateInput,.degreeInfoInput { width:100%; display:flex; gap:16px; min-width:0; }
+.startDate,.endDate { flex:1; min-width:0; }
+.label { display:block; font-size:12px; line-height:1.5; font-weight:500; color:#526047; margin-bottom:8px; }
+.input,.textArea { min-width:0; width:100%; min-height:44px; padding:11px 13px; border:1px solid #d8decd; border-radius:6px; background:#fffefa; color:#202520; font:inherit; font-size:13px; line-height:1.6; }
+.textArea { min-height:100px; resize:vertical; }
+.input:focus,.textArea:focus { outline:2px solid #b9c5a9; outline-offset:1px; border-color:#7e906b; }
+.buttonContainer { width:100%; display:flex; flex-direction:column; gap:10px; }
+.horizontalButtonContainer { display:flex; width:100%; gap:10px; margin-top:4px; }
+.saveButton,.cancelButton,.removeButton,.editButton { display:flex; align-items:center; justify-content:center; width:100%; min-height:40px; border:1px solid transparent; border-radius:6px; padding:10px 14px; font:inherit; font-size:12px; line-height:1.4; cursor:pointer; transition:background .2s; }
+.saveButton { color:white; background:#c2431d; }
+.saveButton:hover { background:#a23313; }
+.editButton { color:#4a5b3d; background:white; border-color:#cfd9c2; }
+.editButton:hover { background:#edf2e5; }
+.cancelButton { color:#56634a; background:#eef1e7; border-color:#dee5d4; }
+.cancelButton:hover { background:#e3ead9; }
+.removeButton { color:#a23825; background:#fbefea; border-color:#f0d6ca; }
+.removeButton:hover { background:#f5e1d7; }
+.toggleSwitch { position:relative; width:75px; flex-shrink:0; }
+@media(max-width:600px) { .workInfoHorizontal,.educationInfoHorizontal,.dateInput,.degreeInfoInput { flex-direction:column; gap:16px; } .horizontalButtonContainer { flex-wrap:wrap; } .workItem,.educationItem { padding:17px; } }
+@media(prefers-reduced-motion:reduce) { .saveButton,.cancelButton,.removeButton,.editButton { transition:none; } }

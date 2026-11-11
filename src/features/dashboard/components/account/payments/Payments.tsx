@@ -15,10 +15,10 @@ const Payments = async ({ currentUser, searchParams }: PaymentsProps) => {
     const { stripeCustomerId } = currentUser;
     const invoices = await getStripeCustomerInvoices(stripeCustomerId);
     const getColor = (status: string) => {
-        if (status === "paid") return "#00E200";
-        if (status === "open") return "#FFAF3D";
-        if (status === "draft") return "#64D9FF";
-        return "#FF2A04";
+        if (status === "paid") return "#6c8b52";
+        if (status === "open") return "#c89538";
+        if (status === "draft") return "#78929d";
+        return "#b44d35";
     };
     const maxInvoices = 5;
     const invoicePage = searchParams?.invoicePage || null;
@@ -122,6 +122,7 @@ const Payments = async ({ currentUser, searchParams }: PaymentsProps) => {
                             "/dashboard"
                         )}
                         className={styles.button}
+                        aria-label="Previous invoice page"
                     >
                         <div className={styles.iconContainer}>
                             {previousIcon}
@@ -130,6 +131,7 @@ const Payments = async ({ currentUser, searchParams }: PaymentsProps) => {
                     {pages.map((page: number) => (
                         <Link
                             key={page}
+                            aria-current={parseInt(invoicePage as string) === page ? "page" : undefined}
                             href={UpdateUrl(
                                 searchParams ? searchParams : {},
                                 [
@@ -165,6 +167,7 @@ const Payments = async ({ currentUser, searchParams }: PaymentsProps) => {
                             "/dashboard"
                         )}
                         className={styles.button}
+                        aria-label="Next invoice page"
                     >
                         <div className={styles.iconContainer}>{nextIcon}</div>
                     </Link>

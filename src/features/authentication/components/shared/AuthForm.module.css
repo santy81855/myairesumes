@@ -1,0 +1,47 @@
+.form, .container { position: relative; display: flex; flex-direction: column; width: 100%; gap: 20px; }
+.heading { display: flex; flex-direction: column; gap: 12px; margin-bottom: 7px; }
+.eyebrow { color: #7a846d; font-size: 10px; font-weight: 600; letter-spacing: 1.7px; text-transform: uppercase; }
+.heading h1, .container h1 { margin: 0; color: #202520; font-size: clamp(30px, 3vw, 39px); font-weight: 500; letter-spacing: -1.7px; line-height: 1.2; }
+.description { color: #6e7568; font-size: 14px; line-height: 1.85; }
+.socialButton { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 50px; padding: 12px 16px; border: 1px solid #dce0d4; border-radius: 5px; background: #fff; color: #30382c; font-size: 14px; font-weight: 500; transition: border-color 180ms, background 180ms; }
+.socialButton:hover { border-color: #8e9c7e; background: #f5f7ef; }
+.googleIcon { font-family: Arial, sans-serif; font-size: 19px; font-weight: 700; color: #4285f4; }
+.divider { display: flex; align-items: center; gap: 14px; width: 100%; color: #7c8374; font-size: 12px; white-space: nowrap; }
+.divider::before, .divider::after { content: ""; height: 1px; flex: 1; background: #e3e5dc; }
+.inputSection { display: flex; flex-direction: column; gap: 9px; width: 100%; }
+.inputSection label, .labelRow { color: #3f4838; font-size: 14px; font-weight: 500; }
+.labelRow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.labelRow a { padding: 3px 0; color: #786a56; font-size: 12px; font-weight: 400; }
+.labelRow a:hover { color: #ce4821; }
+.inputSection input { width: 100%; height: 50px; padding: 0 14px; border: 1px solid #dce0d3; border-radius: 5px; background: #fff; color: #202520; font-family: inherit; font-size: 14px; line-height: 1.5; transition: border-color 180ms, box-shadow 180ms; }
+.inputSection input::placeholder { color: #94998c; }
+.inputSection input:hover { border-color: #a7b298; }
+.inputSection input:focus-visible { outline: 2px solid #71855b; outline-offset: 2px; border-color: #71855b; }
+.nextButton, .submitButton { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 50px; padding: 12px 16px; border: 1px solid #ce4821; border-radius: 5px; background: #ce4821; color: white; font-family: inherit; font-size: 14px; line-height: 1.6; font-weight: 600; cursor: pointer; transition: background 180ms, transform 180ms; }
+.nextButton:hover, .submitButton:hover { background: #b63a18; transform: translateY(-1px); }
+.nextButton:disabled, .submitButton:disabled, .textButton:disabled { opacity: .7; cursor: wait; transform: none; }
+.switchAccount { color: #6f7667; font-size: 14px; line-height: 1.8; text-align: center; }
+.switchAccount a, .backLink { color: #3e4b34; font-size: 14px; font-weight: 600; }
+.switchAccount a { margin-left: 4px; text-decoration: underline; text-decoration-color: #bac4af; text-underline-offset: 4px; }
+.switchAccount a:hover, .backLink:hover { color: #ce4821; }
+.backLink { display: inline-flex; align-items: center; align-self: center; gap: 8px; min-height: 44px; }
+.stepRow { display: flex; align-items: center; gap: 7px; color: #748164; font-size: 11px; }
+.stepRow > span { width: 24px; height: 3px; border-radius: 2px; background: #dce3d2; }
+.stepRow > .activeStep { background: #778c62; }
+.stepRow > p { margin-left: auto; }
+.nameFields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.textButton { align-self: center; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 0; border: 0; background: transparent; color: #536448; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; text-underline-offset: 4px; }
+.textButton:hover { color: #ce4821; text-decoration: underline; }
+.notice { padding: 13px 14px; border: 1px solid #e5c9b7; border-radius: 5px; background: #fff3eb; color: #974424; font-size: 14px; line-height: 1.7; }
+.success { padding: 15px; border: 1px solid #d4dfc6; border-radius: 5px; background: #eff4e7; color: #526441; font-size: 14px; line-height: 1.8; }
+.statusIcon { display: grid; place-items: center; align-self: flex-start; width: 49px; height: 49px; margin-bottom: 5px; border: 1px solid #dce3d2; border-radius: 12px; background: #edf2e5; color: #70825c; font-size: 21px; }
+.resendContainer { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 3px; padding-top: 20px; border-top: 1px solid #e3e6dc; color: #717868; font-size: 14px; line-height: 1.8; }
+.verificationContainer { display: flex; gap: 10px; width: 100% !important; height: 56px !important; margin: 8px 0; }
+.character { display: flex; align-items: center; justify-content: center; border: 1px solid #d5dccb; border-radius: 5px; background: white; color: #313c27; font-size: 24px; line-height: 1; }
+.characterInactive { background: #fff; }
+.characterSelected { border-color: #7c9165; outline: 2px solid #7c9165; outline-offset: 2px; background: #f5f8ef; }
+.characterFilled { border-color: #acb99b; background: #f1f5e9; }
+.loadingText { color: #647654; font-size: 14px; line-height: 1.7; }
+.form a:focus-visible, .container a:focus-visible, .form button:focus-visible, .container button:focus-visible { outline: 3px solid #71855b; outline-offset: 4px; border-radius: 4px; }
+@media (max-width: 380px) { .nameFields { grid-template-columns: 1fr; } .heading h1, .container h1 { font-size: 30px; } .verificationContainer { gap: 7px; height: 50px !important; } }
+@media (prefers-reduced-motion: reduce) { .socialButton, .inputSection input, .nextButton, .submitButton { transition: none; } .nextButton:hover, .submitButton:hover { transform: none; } }

@@ -1,7 +1,7 @@
 "use client";
 import styles from "./JobCard.module.css";
 import { formatDateMonthDayYear } from "@/lib/date";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useState, useEffect } from "react";
 import {
     getAllResumeTemplates,
@@ -16,6 +16,7 @@ type JobCardProps = {
 
 const JobCard = ({ doc, type, setJob }: JobCardProps) => {
     const [hover, setHover] = useState(false);
+    const reduceMotion = useReducedMotion();
 
     const getUpdatedTime = (doc: any) => {
         // get the most recent update between the doc.resume and doc.coverLetter objects
@@ -83,8 +84,8 @@ const JobCard = ({ doc, type, setJob }: JobCardProps) => {
                             coverLetterTemplates ? styles.left : styles.resume
                         }`}
                         initial={{ y: 0 }}
-                        animate={{ y: hover ? "-3%" : 0 }}
-                        transition={{ duration: 0.2 }}
+                        animate={{ y: hover && !reduceMotion ? "-3%" : 0 }}
+                        transition={{ duration: reduceMotion ? 0 : 0.2 }}
                     >
                         {
                             resumeTemplates[
@@ -100,8 +101,8 @@ const JobCard = ({ doc, type, setJob }: JobCardProps) => {
                             resumeTemplates ? styles.right : styles.resume
                         }`}
                         initial={{ y: 0 }}
-                        animate={{ y: hover ? "-3%" : 0 }}
-                        transition={{ duration: 0.2 }}
+                        animate={{ y: hover && !reduceMotion ? "-3%" : 0 }}
+                        transition={{ duration: reduceMotion ? 0 : 0.2 }}
                     >
                         {
                             coverLetterTemplates[

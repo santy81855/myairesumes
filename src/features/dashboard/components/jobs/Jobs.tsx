@@ -27,7 +27,7 @@ import {
 } from "@/components/icons/iconSVG";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { jobCardColorArray } from "@/features/dashboard";
 import Tutorial from "@/components/modals/tutorial/Tutorial";
 
@@ -51,6 +51,7 @@ type Job = {
 };
 
 const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
+    const reduceMotion = useReducedMotion();
     const [job, setJob] = useState<Job>({
         id: "",
         companyName: "",
@@ -249,7 +250,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
     };
 
     return (
-        <main className={styles.container} id="applications-page">
+        <section className={styles.container} id="applications-page">
             {showTutorial && <Tutorial />}
             {job.id !== "" ? (
                 <DashboardCard key="job-manage-card" title="Manage Application">
@@ -521,6 +522,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                 />
                                 <button
                                     id="Add Job Note"
+                                    aria-label="Add job note"
                                     type="button"
                                     className={styles.addNoteButton}
                                     onClick={(e: any) => {
@@ -537,7 +539,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                             animate={{
                                 height: showDescription ? "auto" : "4rem",
                             }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: reduceMotion ? 0 : 0.2 }}
                         >
                             <section className={styles.jobDescriptionCheckbox}>
                                 <label
@@ -547,7 +549,10 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                     Job Description
                                 </label>
                                 {job.information?.jobDescription ? (
-                                    <section
+                                    <button
+                                        type="button"
+                                        aria-label={showDescription ? "Hide job description" : "Show job description"}
+                                        aria-expanded={showDescription}
                                         className={styles.checkboxContainer}
                                         onClick={() =>
                                             setShowDescription(!showDescription)
@@ -556,9 +561,12 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                         {showDescription
                                             ? upArrowIcon
                                             : downArrowIcon}
-                                    </section>
+                                    </button>
                                 ) : (
-                                    <section
+                                    <button
+                                        type="button"
+                                        aria-label="Add a job description"
+                                        aria-expanded={showDescription}
                                         title="Add a job description."
                                         className={styles.checkboxContainer}
                                         onClick={() => {
@@ -569,7 +577,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                                         }}
                                     >
                                         {showDescription ? minusIcon : plusIcon}
-                                    </section>
+                                    </button>
                                 )}
                             </section>
                             {job.information?.jobDescription &&
@@ -666,7 +674,7 @@ const Jobs = ({ currentUser, searchParams, documents }: JobsProps) => {
                     )}
                 </DashboardCard>
             )}
-        </main>
+        </section>
     );
 };
 

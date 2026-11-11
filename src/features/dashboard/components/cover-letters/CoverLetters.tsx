@@ -1,40 +1,11 @@
 import styles from "./CoverLetters.module.css";
 import Link from "next/link";
-import { UpdateUrl } from "@/lib/updateUrl";
-import { getAllUserCoverLetters } from "@/features/editor";
 import { DashboardCard, DocumentCardDisplay } from "@/features/dashboard";
-import LoadingScreen from "@/components/loading-screen/LoadingScreen";
-import { plusIconCircled } from "@/components/icons/iconSVG";
 
-type CoverLetterProps = {
-    currentUser: any;
-    searchParams?: { [key: string]: string | string[] | undefined };
-    documents: any[];
-};
-
-const CoverLetters = async ({
-    currentUser,
-    searchParams,
-    documents,
-}: CoverLetterProps) => {
-    return (
-        <main className={styles.container}>
-            <DashboardCard key="cover-letter-card" title="Cover Letters">
-                {!documents && <LoadingScreen />}
-                {documents.length > 0 ? (
-                    <DocumentCardDisplay
-                        searchParams={searchParams}
-                        documents={documents}
-                        type="cover-letter"
-                    />
-                ) : (
-                    <p className={styles.noJobs}>
-                        You don&apos;t have any cover letters yet.
-                    </p>
-                )}
-            </DashboardCard>
-        </main>
-    );
-};
-
+type CoverLetterProps = { currentUser:any; searchParams?: { [key:string]:string|string[]|undefined }; documents:any[]; };
+const CoverLetters = ({ documents, searchParams }: CoverLetterProps) => <section className={styles.container}>
+    <DashboardCard title="Your cover letters">
+        {documents.length > 0 ? <DocumentCardDisplay searchParams={searchParams} documents={documents} type="cover-letter" /> : <div className={styles.empty}><span className={styles.emptyIcon} aria-hidden="true">↗</span><h3>A more personal introduction.</h3><p>Connect your experience to the opportunity with a thoughtful cover letter.</p><Link href="/dashboard?menu=cover-letters&documentPage=1&createCoverLetter=true" className={styles.createButton}>Create your first cover letter <span aria-hidden="true">+</span></Link></div>}
+    </DashboardCard>
+</section>;
 export default CoverLetters;

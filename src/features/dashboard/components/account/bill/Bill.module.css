@@ -1,141 +1,16 @@
-.container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-block-medium);
-    padding-block: var(--padding-block-small);
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.noSubscriptionText {
-    font-size: var(--font-size-small);
-    color: var(--color-primary);
-    width: 100%;
-    text-align: left;
-}
-
-.title {
-    font-size: var(--font-size-medium);
-    font-weight: 600;
-    color: rgb(var(--dashboard-accent-color-rgb));
-}
-
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-block-medium);
-    width: 100%;
-}
-
-.itemContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: var(--padding-block-small);
-}
-
-.item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: var(--padding-block-small);
-}
-
-.iconContainer {
-    width: 20px;
-    height: 20px;
-}
-
-.iconContainer svg {
-    fill: transparent;
-    stroke: rgb(var(--dashboard-accent-color-rgb));
-    stroke-width: 1;
-}
-
-.text {
-    font-size: var(--font-size-medium);
-    font-weight: 600;
-    color: rgb(var(--dashboard-text-color-rgb));
-}
-
-.subText {
-    font-size: var(--font-size-medium);
-    width: 100%;
-    text-align: left;
-    color: rgb(var(--dashboard-text-color-rgb));
-}
-
-.paymentInfo {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: var(--padding-block-small);
-    width: 100%;
-}
-
-.paymentTextTitle {
-    font-size: var(--font-size-medium);
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: rgb(var(--dashboard-text-color-rgb));
-}
-
-.paymentText {
-    font-size: var(--font-size-medium);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: rgb(var(--dashboard-text-color-rgb));
-}
-
-.updateLink {
-    font-size: var(--font-size-small);
-    color: rgb(var(--dashboard-accent-color-rgb));
-    cursor: pointer;
-}
-
-.cancelledContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    height: 100%;
-    gap: var(--padding-block-medium);
-}
-
-.renewButton {
-    width: 100%;
-    background-color: rgb(var(--dashboard-accent-color-rgb));
-    color: rgb(var(--dashboard-accent-color-contrast-rgb));
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media screen and (hover: hover) {
-    .renewButton:hover {
-        background-color: rgb(var(--dashboard-accent-color-hover-rgb));
-    }
-
-    .updateLink:hover {
-        text-decoration: underline;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .paymentInfo {
-        flex-direction: column;
-        gap: var(--padding-block-small);
-        align-items: flex-start;
-        justify-content: center;
-    }
-}
+.container { display:flex; flex-direction:column; gap:24px; width:100%; }
+.noSubscriptionText { color:#67745a; font-size:13px; line-height:1.9; padding:20px; border:1px dashed #d7dfcb; border-radius:8px; background:#f6f8ef; }
+.list { width:100%; display:flex; flex-direction:column; gap:22px; }
+.itemContainer { display:flex; flex-direction:column; gap:8px; }
+.item { display:flex; align-items:center; gap:8px; }
+.iconContainer { width:17px; height:17px; }
+.iconContainer svg { width:100%; height:100%; fill:none; stroke:#7a8d65; stroke-width:1.4; }
+.title,.text { font-size:11px; color:#6d7a60; font-weight:500; }
+.subText { font-size:17px; color:#35422d; }
+.paymentInfo { display:flex; flex-wrap:wrap; align-items:center; gap:7px; }
+.paymentTextTitle,.paymentText { color:#526247; font-size:12px; overflow-wrap:anywhere; }
+.updateLink { color:#a33b1c; font-size:11px; line-height:1.6; }
+.updateLink:hover { text-decoration:underline; }
+.cancelledContainer { width:100%; display:flex; flex-direction:column; gap:24px; }
+.renewButton { display:flex; justify-content:center; align-items:center; min-height:42px; padding:11px 16px; background:#c2431d; color:white; border:0; border-radius:6px; font:inherit; font-size:12px; }
+.renewButton:hover { background:#a23313; }

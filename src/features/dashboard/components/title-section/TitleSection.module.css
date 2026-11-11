@@ -1,70 +1,17 @@
-.titleSection {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin-right: auto;
-}
-
-.column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: var(--padding-block-small);
-}
-
-.pageHeading {
-    font-size: var(--font-size-xlarge);
-    font-weight: bold;
-    width: 100%;
-    text-align: left;
-    color: rgb(var(--dashboard-text-color-rgb));
-}
-
-.subHeading {
-    font-size: var(--font-size-small);
-    width: 100%;
-    text-align: left;
-    color: rgb(var(--dashboard-text-color-rgb));
-    font-weight: bold;
-}
-
-.cardContainer {
-    width: 100%;
-}
-
-.tutorialButton {
-    background-color: rgb(var(--dashboard-accent-color-rgb));
-    color: white;
-    border-radius: var(--border-radius-xsmall);
-    cursor: pointer;
-    transition: background-color 0.2s;
-    padding: var(--padding-block-small);
-    font-size: var(--font-size-small);
-    font-weight: bold;
-    width: 70px;
-    height: 30px;
-    text-align: center;
-    border: none;
-}
-
-.tutorialButton:hover {
-    background-color: rgb(var(--dashboard-accent-color-hover-rgb));
-}
-
-@media screen and (max-width: 768px) {
-    .cardContainer {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .cardContainer {
-        display: none;
-    }
-}
+.titleSection { width:100%; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.column { min-width:0; }
+.eyebrow { font-size:9px; letter-spacing:.13em; font-weight:600; color:#6b745f; text-transform:uppercase; line-height:1.7; }
+.eyebrow span { margin:0 7px; color:#adb4a2; }
+.pageHeading { margin-top:14px; color:#202520; font-size:clamp(25px,3vw,38px); line-height:1.12; font-weight:500; letter-spacing:-1.4px; }
+.subHeading { margin-top:13px; color:#68715f; font-size:12px; line-height:1.8; max-width:510px; }
+.actions { flex-shrink:0; }
+.tutorialButton,.createButton { display:inline-flex; align-items:center; justify-content:center; gap:20px; padding:13px 16px; border:1px solid #d4dacb; color:#45523a; border-radius:6px; font-size:11px; font-weight:600; background:transparent; transition:background .2s,transform .2s; }
+.tutorialButton:hover { background:#edf0e6; }
+.createButton { background:#c2431d; color:#fff; border-color:#c2431d; }
+.createButton:hover { background:#a23313; transform:translateY(-2px); }
+.createButton span { font-size:19px; line-height:1; }
+.cardContainer { width:100%; }
+@media(max-width:800px) { .titleSection { flex-direction:column; align-items:flex-start; gap:20px; } .pageHeading { font-size:31px; } }
+@media(max-width:600px) { .pageHeading { font-size:30px; } .eyebrow { font-size:8px; } .subHeading { font-size:12px; } }
+@media(prefers-reduced-motion:reduce) { .tutorialButton,.createButton { transition:none; } .createButton:hover { transform:none; } }
+.actions { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }

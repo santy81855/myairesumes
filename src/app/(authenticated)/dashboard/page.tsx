@@ -70,23 +70,13 @@ const Page = async ({
             <section className={styles.rightSideContainer}>
                 <Navbar
                     style={{
-                        backgroundColor: "white",
-                        color: "black",
+                        backgroundColor: "#faf9f6",
+                        color: "#202520",
                         justifyContent: "space-between",
                     }}
                 />
 
                 <main className={styles.main} id="dashboard-container">
-                    <p
-                        className={`${styles.topHeading} ${styles.largeHeading}`}
-                    >
-                        {currentUser?.firstName}
-                    </p>
-                    <p
-                        className={`${styles.bottomHeading} ${styles.largeHeading}`}
-                    >
-                        {currentUser?.lastName}
-                    </p>
                     <TitleSection
                         currentUser={currentUser}
                         searchParams={searchParams}
@@ -129,7 +119,7 @@ const Page = async ({
                             documents={coverLetters}
                         />
                     )}
-                    <div className={styles.circle}></div>
+
                 </main>
             </section>
             {editPayment && (

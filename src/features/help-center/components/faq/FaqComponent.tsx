@@ -1,11 +1,10 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import styles from "./FaqComponent.module.css";
-import React, { useEffect, useState } from "react";
-import Faq from "react-faq-component";
 
-const FaqComponent = () => {
-    const generalQuestions = {
+const generalQuestions = {
         title: "General Questions",
         rows: [
             {
@@ -41,7 +40,7 @@ const FaqComponent = () => {
         ],
     };
 
-    const accountQuestions = {
+const accountQuestions = {
         title: "Account Questions",
         rows: [
             {
@@ -62,26 +61,40 @@ const FaqComponent = () => {
         ],
     };
 
-    const faqStyles = {
-        bgColor: "white",
-        titleTextColor: "#48482a",
-        rowTitleColor: "#78789a",
-        rowTitleTextSize: "16px",
-        rowContentColor: "#48484a",
-        rowContentTextSize: "12px",
-        rowContentPaddingTop: "10px",
-        rowContentPaddingBottom: "10px",
-        rowContentPaddingLeft: "0px",
-        rowContentPaddingRight: "20px",
-        arrowColor: "black",
-    };
+
+const groups = [
+    { id: "general", label: "Using My Resume Hero", ...generalQuestions },
+    { id: "account", label: "Account & billing", ...accountQuestions },
+];
+
+export default function FaqComponent() {
+    const [query, setQuery] = useState("");
+    const [category, setCategory] = useState("all");
+    const normalizedQuery = query.trim().toLowerCase();
+    const visibleGroups = groups
+        .filter((group) => category === "all" || category === group.id)
+        .map((group) => ({ ...group, rows: group.rows.filter((row) => `${row.title} ${row.content}`.toLowerCase().includes(normalizedQuery)) }));
+    const count = visibleGroups.reduce((total, group) => total + group.rows.length, 0);
 
     return (
-        <section className={styles.faqContainer}>
-            <Faq data={generalQuestions} styles={faqStyles} />
-            <Faq data={accountQuestions} styles={faqStyles} />
-        </section>
+        <div className={styles.container}>
+            <aside className={styles.sidebar}>
+                <p className={styles.eyebrow}>THE ANSWER DESK</p>
+                <h2>Find your<br />way forward.</h2>
+                <p>From your first resume to your account settings, start here.</p>
+                <div className={styles.categories} role="group" aria-label="Filter questions by topic">
+                    <button type="button" aria-pressed={category === "all"} onClick={() => setCategory("all")}>All questions <span>09</span></button>
+                    {groups.map((group) => <button key={group.id} type="button" aria-pressed={category === group.id} onClick={() => setCategory(group.id)}>{group.label}<span>{String(group.rows.length).padStart(2, "0")}</span></button>)}
+                </div>
+                <Link href="/help-center?option=tutorials" className={styles.tutorialLink}>Prefer to watch? <span aria-hidden="true">↗</span><small>Explore the video walkthrough</small></Link>
+            </aside>
+            <section className={styles.questions} aria-label="Frequently asked questions">
+                <label className={styles.searchLabel} htmlFor="help-search">Search the help center</label>
+                <div className={styles.searchBox}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg><input id="help-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try “download” or “membership”" /></div>
+                <p className={styles.results} role="status">{normalizedQuery ? `${count} ${count === 1 ? "answer" : "answers"} for “${query.trim()}”` : "A few helpful answers, all in one place."}</p>
+                {visibleGroups.map((group) => group.rows.length > 0 && <section className={styles.group} key={group.id} id={`${group.id}-faq`} aria-labelledby={`${group.id}-heading`}><div className={styles.groupHeading}><h3 id={`${group.id}-heading`}>{group.label}</h3><span>{String(group.rows.length).padStart(2, "0")}</span></div>{group.rows.map((row) => <details key={row.title} className={styles.question}><summary>{row.title}<span aria-hidden="true" className={styles.plus} /></summary><div className={styles.answer}><p>{row.content}</p></div></details>)}</section>)}
+                {count === 0 && <div className={styles.empty}><h3>Let&apos;s try another word.</h3><p>Search for a broader topic, like “resume,” “account,” or “payment.”</p><button type="button" onClick={() => { setQuery(""); setCategory("all"); }}>Show all questions <span aria-hidden="true">↗</span></button></div>}
+            </section>
+        </div>
     );
-};
-
-export default FaqComponent;
+}

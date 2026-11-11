@@ -1,0 +1,29 @@
+.layout { width: 100%; height: 100%; flex: 1; overflow-y: auto; overflow-x: hidden; background: #faf9f6; color: #202520; }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 88px; padding: 20px max(32px, calc((100vw - 1320px) / 2)); border-bottom: 1px solid #e5e7de; }
+.brand { display: inline-flex; align-items: center; gap: 11px; font-size: 17px; font-weight: 600; letter-spacing: -.8px; white-space: nowrap; }
+.brandMark { display: block; width: 37px; height: 37px; flex-shrink: 0; }
+.brandDot { color: #ce4821; }
+.backLink { display: inline-flex; align-items: center; gap: 8px; padding: 10px 0; color: #60685c; font-size: 13px; }
+.backLink:hover { color: #ce4821; }
+.content { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: calc(100dvh - 88px); max-width: 1600px; margin: 0 auto; }
+.story { position: relative; overflow: hidden; padding: 50px clamp(32px, 6vw, 96px) 28px; border-right: 1px solid #e4e7db; background: #edf0e5; }
+.eyebrow { display: flex; align-items: center; gap: 8px; color: #626f55; font-size: 9px; font-weight: 600; line-height: 1.7; letter-spacing: 1.4px; }
+.eyebrow > span { width: 5px; height: 5px; flex-shrink: 0; border-radius: 50%; background: #ce4821; }
+.story h2 { position: relative; z-index: 1; margin-top: 22px; font-size: clamp(40px, 4.4vw, 64px); line-height: 1.08; font-weight: 500; letter-spacing: -3px; }
+.story h2 em { color: #ce4821; font-family: Georgia, serif; font-weight: 400; }
+.storyDescription { margin-top: 18px; color: #68715f; font-size: 14px; line-height: 1.9; }
+.preview { position: relative; width: min(100%, 330px); margin: 40px auto 0; padding-bottom: 38px; }
+.backPaper { position: absolute; inset: 4px 0 40px; border: 1px solid #d7dccd; background: #f8f6ee; transform: rotate(6deg); }
+.resumePaper { position: relative; padding: 7px; border: 1px solid #dfe2d6; background: white; box-shadow: 0 15px 40px #28301b12; transform: rotate(-4deg); }
+.resumePaper img { display: block; width: 100%; height: auto; }
+.preview figcaption { position: relative; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 25px; color: #626f55; font-size: 10px; line-height: 1.7; text-align: center; }
+.previewDot { width: 4px; height: 4px; flex-shrink: 0; border-radius: 50%; background: #788b62; }
+.storyFooter { margin-top: 1px; color: #68715f; font-family: Georgia, serif; font-size: 14px; font-style: italic; text-align: center; }
+.formColumn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 44px 24px; }
+.formContent { width: min(100%, 420px); margin: auto 0; padding: 12px 0 48px; }
+.footer { display: flex; justify-content: space-between; gap: 20px; width: min(100%, 420px); padding-top: 24px; border-top: 1px solid #e4e6dd; color: #777d70; font-size: 11px; line-height: 1.7; }
+.brand:focus-visible, .backLink:focus-visible { outline: 3px solid #687b52; outline-offset: 6px; border-radius: 3px; }
+@media (min-width: 1600px) { .layout { background: #f6f5f0; } .header { background: #faf9f6; } .formColumn { background: #faf9f6; } }
+@media (max-width: 1100px) { .story { padding: 44px 32px 28px; } .formColumn { padding-inline: 36px; } .preview { width: min(85%, 300px); } .desktopBreak { display: none; } }
+@media (max-width: 760px) { .header { min-height: 76px; padding: 18px 24px; } .content { grid-template-columns: 1fr; min-height: calc(100dvh - 76px); } .story { display: none; } .formColumn { padding: 42px 28px 24px; } .formContent { padding-top: 0; padding-bottom: 48px; } .footer { margin-top: auto; } }
+@media (max-width: 380px) { .header { padding-inline: 20px; gap: 12px; } .brand { font-size: 14px; gap: 8px; } .brandMark { width: 28px; height: 31px; font-size: 24px; } .backLink { gap: 5px; font-size: 11px; } .formColumn { padding: 32px 22px 22px; } .footer { gap: 10px; font-size: 10px; } }

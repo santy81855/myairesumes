@@ -1,12 +1,12 @@
 .documentContainer {
     aspect-ratio: 8.5 / 11;
     width: 70%;
-    min-width: 300px;
+    min-width: min(300px, 100%);
     max-width: 800px;
     /*box shadow that goes down and to the left*/
-    -webkit-box-shadow: -15px 10px 21px -3px rgba(0, 0, 0, 0.54);
-    -moz-box-shadow: -15px 10px 21px -3px rgba(0, 0, 0, 0.54);
-    box-shadow: -15px 10px 21px -3px rgba(0, 0, 0, 0.54);
+    -webkit-box-shadow: 0 12px 40px rgba(32, 37, 32, 0.14);
+    -moz-box-shadow: 0 12px 40px rgba(32, 37, 32, 0.14);
+    box-shadow: 0 12px 40px rgba(32, 37, 32, 0.14);
     margin-inline: auto;
     position: relative;
 }

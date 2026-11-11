@@ -1,0 +1,17 @@
+.workspace {
+    width:100%; height:100%; min-height:0; color:#202520;
+    --editor-titlebar-height:52px;
+    --editor-subtitlebar-height:48px;
+    --editor-accent-color-rgb:206,72,33;
+    --editor-accent-color-hover-rgb:177,57,24;
+    --editor-background-color-rgb:36,45,37;
+    --editor-side-menu-background-rgb:36,45,37;
+    --editor-side-menu-text-rgb:232,235,225;
+    --editor-side-menu-low-contrast-text-rgb:181,190,171;
+    --editor-subtitlebar-background-color-rgb:250,249,246;
+    --editor-subtitlebar-background-background-color-rgb:250,249,246;
+    --editor-subtitlebar-button-hover-background-color-rgb:233,237,225;
+}
+.workspace button,.workspace input,.workspace select { font-family:inherit; }
+.workspace button:focus-visible,.workspace a:focus-visible { outline:2px solid #ce4821; outline-offset:3px; }
+@media(max-width:600px) { .workspace { --editor-titlebar-height:48px; --editor-subtitlebar-height:46px; } }

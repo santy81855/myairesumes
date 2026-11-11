@@ -1,42 +1,10 @@
-.container {
-    width: 100%;
-}
 
-.addItemButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--padding-block-small);
-}
-
-.addItemButton svg {
-    width: 30px;
-    height: 30px;
-    stroke: rgb(var(--dashboard-accent-color-rgb));
-    fill: rgb(var(--dashboard-accent-color-rgb));
-}
-
-.addItemButton p {
-    font-size: var(--font-size-small);
-    color: rgb(var(--dashboard-accent-color-rgb));
-}
-
-.noJobs {
-    width: 100%;
-    text-align: center;
-    padding-block: var(--padding-block-medium);
-    font-size: var(--font-size-small);
-    color: rgb(var(--dashboard-text-color-rgb));
-    font-weight: bold;
-}
-
-@media screen and (hover: hover) {
-    .addItemButton:hover svg {
-        stroke: rgb(var(--dashboard-accent-color-hover-rgb));
-        fill: rgb(var(--dashboard-accent-color-hover-rgb));
-    }
-
-    .addItemButton:hover p {
-        color: rgb(var(--dashboard-accent-color-hover-rgb));
-    }
-}
+.container { width:100%; min-width:0; }
+.empty { display:flex; flex-direction:column; align-items:center; text-align:center; padding:35px 20px 45px; color:#35462c; }
+.emptyIcon { display:grid; place-items:center; width:55px; height:60px; border:1px solid #d6e0c9; border-radius:10px; background:#eef4e5; color:#6e8756; font-size:28px; margin-bottom:25px; }
+.empty h3 { font:29px/1.25 Georgia,serif; letter-spacing:-.8px; }
+.empty p { max-width:360px; margin:16px auto 25px; font-size:13px; line-height:1.8; color:#697a5d; }
+.createButton { display:inline-flex; justify-content:center; align-items:center; gap:22px; padding:13px 18px; border-radius:6px; color:white; background:#c2431d; font-size:12px; line-height:1.5; font-weight:500; }
+.createButton:hover { background:#a23313; }
+.createButton span { font-size:18px; }
+@media(max-width:600px) { .empty { padding:25px 0 30px; } .empty h3 { font-size:26px; } .createButton { font-size:11px; padding-inline:14px; gap:14px; } }

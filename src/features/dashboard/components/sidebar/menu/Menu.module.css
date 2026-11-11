@@ -1,72 +1,20 @@
-.menu {
-    margin-block-start: var(--padding-block-x2large);
-    width: 100%;
-    max-width: 180px;
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-block-medium);
-}
-
-.name {
-    font-size: var(--font-size-medium);
-    font-weight: 700;
-    color: rgb(var(--dashboard-accent-color-contrast-rgb));
-    width: 100%;
-    text-align: left;
-    padding-block: var(--padding-block-small);
-    padding-inline-end: var(--padding-inline-small);
-    padding-inline-start: var(--padding-inline-medium);
-}
-
-.menuItem {
-    width: 100%;
-    cursor: pointer;
-    text-align: left;
-    color: rgb(var(--dashboard-accent-color-contrast-rgb));
-    padding-block: var(--padding-block-small);
-    padding-inline-end: var(--padding-inline-small);
-    padding-inline-start: var(--padding-inline-medium);
-    font-size: var(--font-size-small);
-    background-color: transparent;
-    border: none;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: var(--padding-block-small);
-}
-
-.active {
-    width: 100%;
-    cursor: pointer;
-    text-align: left;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: none;
-    color: rgb(var(--dashboard-accent-color-contrast-rgb));
-    padding-block: var(--padding-block-small);
-    padding-inline-end: var(--padding-inline-small);
-    padding-inline-start: var(--padding-inline-medium);
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    font-size: var(--font-size-small);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: var(--padding-block-small);
-}
-
-.iconContainer {
-    width: 15px;
-    height: 15px;
-    stroke: rgb(var(--dashboard-accent-color-contrast-rgb));
-    fill: transparent;
-    stroke-width: 1.5;
-}
-
-@media screen and (hover: hover) {
-    .menuItem:hover {
-        background-color: rgba(255, 255, 255, 0.5);
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        color: rgb(var(--dashboard-accent-color-contrast-rgb));
-    }
-}
+.menu { width:100%; height:100%; display:flex; flex-direction:column; padding:26px 18px 24px; color:#202520; }
+.brand { display:flex; align-items:center; gap:9px; font-size:14px; font-weight:700; letter-spacing:-.5px; white-space:nowrap; }
+.logo { width:32px; height:32px; border:1px solid currentColor; border-radius:8px; display:grid; grid-auto-flow:column; align-items:center; justify-content:center; font:italic 23px/1 Georgia,serif; letter-spacing:-4px; padding-right:4px; }
+.logo span,.dot { color:#ce4821; }
+.sectionLabel { margin:48px 12px 16px; color:#757d6c; font-size:9px; letter-spacing:.15em; font-weight:600; }
+.links { display:flex; flex-direction:column; gap:6px; }
+.menuItem { display:flex; align-items:center; gap:12px; width:100%; padding:13px 12px; border:1px solid transparent; border-radius:7px; color:#626b59; font:inherit; font-size:12px; line-height:1.4; background:transparent; text-align:left; cursor:pointer; transition:background .2s,color .2s; }
+.menuItem:hover { background:#e8ecdf; color:#202520; }
+.active { background:#e2e8d9; border-color:#d6decc; color:#35452d; font-weight:600; }
+.iconContainer { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; flex-shrink:0; }
+.iconContainer svg { width:100%; height:100%; stroke:currentColor; stroke-width:1.5; fill:none; }
+.activeDot { width:5px; height:5px; border-radius:50%; background:#788769; margin-left:auto; }
+.bottom { margin-top:auto; padding-top:40px; }
+.bottom > p { font:20px/1.4 Georgia,serif; letter-spacing:-.5px; padding:20px 12px; border-top:1px solid #dce1d3; }
+.bottom em { color:#78836a; }
+.helpLink { display:flex; justify-content:space-between; margin:4px 12px 24px; font-size:11px; color:#59634f; }
+.signOut { border-top:1px solid #dce1d3; border-radius:0; padding-top:20px; }
+.menuItem:disabled { cursor:wait; opacity:.6; }
+.brand:focus-visible,.menuItem:focus-visible,.helpLink:focus-visible { outline:2px solid #ce4821; outline-offset:3px; }
+@media(prefers-reduced-motion:reduce) { .menuItem { transition:none; } }
