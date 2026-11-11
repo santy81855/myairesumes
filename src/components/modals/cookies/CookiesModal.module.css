@@ -3,7 +3,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: #242d25;
     color: white;
     text-align: center;
     padding: 20px;
@@ -24,7 +24,7 @@
 }
 
 .button {
-    background-color: #007acc;
+    background-color: #c94d26;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -35,5 +35,5 @@
 }
 
 .button:hover {
-    background-color: #005f99;
+    background-color: #a63f1f;
 }

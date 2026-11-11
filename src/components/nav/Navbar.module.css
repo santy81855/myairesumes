@@ -1,87 +1,64 @@
 .navContainer {
-    height: var(--nav-height);
     width: 100%;
+    height: var(--nav-height);
+    flex-shrink: 0;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    padding-inline: var(--padding-inline-xlarge);
-    z-index: 10;
-    color: black;
+    justify-content: center;
+    padding-inline: clamp(20px, 4vw, 64px);
+    position: relative;
+    z-index: 30;
+    color: #202520;
+    background: #faf9f6;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
 }
 
 .textContainer {
-    height: var(--nav-height);
     width: 100%;
+    max-width: 1240px;
+    height: 100%;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-inline: var(--padding-inline-large);
-    max-width: var(--max-width);
-}
-
-.companyName {
-    font-size: var(--font-size-medium);
-    font-weight: bold;
-}
-
-.navItem {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: var(--gap-medium);
-    z-index: 1;
-    height: 30px;
-    position: relative;
-}
-
-.navLink {
-    font-size: var(--font-size-small);
-    font-weight: bold;
-}
-.navLink { position: relative; padding-block-end: .25rem; }
-.navLink::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: currentColor; transition: right .2s ease; }
-.navLink:hover::after { right: 0; }
-
-.reportButton {
-    background-color: white;
-    color: #007acc;
-    font-weight: bold;
-    border-radius: var(--border-radius);
-    padding-inline: var(--padding-inline-medium);
-    padding-block: var(--padding-block-small);
-    font-size: var(--font-size-small);
-    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
-    border: none;
+    gap: 24px;
 }
 
 .logoContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: inline-flex;
     align-items: center;
-    gap: var(--gap-medium);
-    z-index: 1;
-    height: 30px;
-    position: relative;
-    cursor: pointer;
+    gap: 10px;
+    flex-shrink: 0;
 }
 
 .logo {
-    height: 40px;
-    width: 40px;
-    background-image: url("/images/logos/logo1024.webp");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid currentColor;
+    border-radius: 8px;
+    font-family: Georgia, serif;
+    font-size: 23px;
+    line-height: 1;
+    letter-spacing: -4px;
+    padding-right: 4px;
+    font-style: italic;
 }
 
-@media (max-width: 619px) {
-    .navContainer {
-        padding-block: var(--padding-block-medium);
-    }
-    .textContainer {
-        display: none;
-    }
-}
+.logo span { color: #ee643a; }
+.companyName { font-size: 16px; font-weight: 700; letter-spacing: -0.7px; white-space: nowrap; }
+.brandDot { color: #ee643a; }
+.navItem, .actions { display: flex; align-items: center; gap: 28px; }
+.actions { gap: 22px; }
+.navLink, .signIn { font-size: 12px; font-weight: 500; white-space: nowrap; position: relative; padding-block: 10px; }
+.navLink::after, .signIn::after { content: ""; position: absolute; left: 0; bottom: 3px; height: 1px; width: 100%; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
+.navLink:hover::after, .signIn:hover::after { transform: scaleX(1); }
+.reportButton { display: inline-flex; align-items: center; justify-content: center; gap: 16px; padding: 11px 18px; color: #fff; background: #ce4821; border-radius: 5px; font-size: 12px; font-weight: 600; white-space: nowrap; transition: background .2s ease, transform .2s ease; }
+.reportButton:hover { background: #b93b18; transform: translateY(-2px); }
+.reportButton span { font-size: 17px; line-height: 1; }
+.logoContainer:focus-visible, .navLink:focus-visible, .signIn:focus-visible, .reportButton:focus-visible { outline: 2px solid #ee643a; outline-offset: 5px; }
+
+@media (max-width: 1050px) { .navItem { gap: 19px; } .textContainer { gap: 20px; } .actions { gap: 16px; } }
+@media (max-width: 900px) { .textContainer { display: none; } }
+@media (prefers-reduced-motion: reduce) { .navLink::after, .signIn::after, .reportButton { transition: none; } .reportButton:hover { transform: none; } }

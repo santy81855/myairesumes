@@ -20,7 +20,7 @@
 .box svg {
     width: 30px;
     height: 30px;
-    fill: #007acc;
+    fill: #ce4821;
     transform: scaleX(-1);
 }
 
@@ -37,7 +37,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     height: 60%;
     max-height: 500px;
-    width: 400px;
+    width: min(400px, calc(100vw - 32px));
     max-width: 500px;
     overflow-y: auto;
 }
@@ -53,7 +53,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    background: linear-gradient(135deg, #000000, #004b6e);
+    background: linear-gradient(135deg, #202520, #44543d);
     width: 100%;
     height: 250px;
     border-top-left-radius: var(--border-radius-small);
@@ -214,7 +214,7 @@
 .createButton svg {
     width: 20px;
     height: 20px;
-    fill: #007acc;
+    fill: #ce4821;
 }
 
 .optionsMenu {
@@ -246,7 +246,7 @@
 .option svg {
     width: 20px;
     height: 20px;
-    fill: #007acc;
+    fill: #ce4821;
 }
 
 .option p {

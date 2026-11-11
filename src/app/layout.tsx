@@ -3,12 +3,12 @@ import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { ToastContainer } from "react-toastify";
 
-import { Inter, Montserrat, Poppins } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
-const montserrat = Montserrat({ subsets: ["latin"] });
-const poppins = Poppins({
-    subsets: ["latin"],
-    weight: "300",
+import localFont from "next/font/local";
+const inter = localFont({
+    src: "../../public/fonts/inter.ttf",
+    display: "swap",
+    weight: "100 900",
+    variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={montserrat.className}>
+            <body className={`${inter.className} ${inter.variable}`}>
                 <ToastContainer />
                 {children}
             </body>

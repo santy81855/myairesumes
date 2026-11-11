@@ -14,6 +14,7 @@ type CardProps = {
     specialText?: string;
     url?: string;
     showButton?: boolean;
+    buttonLabel?: string;
 };
 
 const Card = ({
@@ -28,10 +29,10 @@ const Card = ({
     specialText,
     url,
     showButton,
+    buttonLabel = "Choose plan",
 }: CardProps) => {
     return (
         <article
-            id="priceCard"
             className={styles.container}
             style={style ? style : {}}
         >
@@ -89,7 +90,7 @@ const Card = ({
             {isCurrentPlan && (
                 <section className={styles.currentPlanContainer}>
                     <p className={styles.currentPlan}>
-                        *You are currently subscribed to this plan.
+                        Your current plan
                     </p>
                 </section>
             )}
@@ -100,7 +101,7 @@ const Card = ({
                         className={styles.upgradeButton}
                         style={{ backgroundColor: accentColor }}
                     >
-                        Upgrade
+                        {buttonLabel} <span aria-hidden="true">↗</span>
                     </Link>
                 </section>
             )}

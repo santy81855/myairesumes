@@ -1,70 +1,26 @@
-"use client";
-
+import Link from "next/link";
 import styles from "./FaqComponent.module.css";
-import React, { useEffect, useState } from "react";
-import Faq from "react-faq-component";
 
-const FaqComponentLandingPage = () => {
-    const generalQuestions = {
-        title: "General Questions",
-        rows: [
-            {
-                title: "What is My Resume Hero?",
-                content:
-                    "My Resume Hero is an application that helps you create, store, and manage your job applications in one place. It also assists you in generating personalized resumes and cover letters for each job application, greatly increasing your chances of getting hired.",
-            },
-            {
-                title: "How do I upgrade my account?",
-                content:
-                    "To upgrade your account, go to Dashboard → Account → Upgrade to Pro. Once you have upgraded your account, you will have access to all the premium features of My Resume Hero.",
-            },
-            {
-                title: "Can I edit my job applications after I create them?",
-                content:
-                    "Yes, you can edit your job applications at any time by going to Dashboard->Applications. You can then edit any of the job details and the resume and/or cover letter associated with the job application. You can also delete them if you no longer need them.",
-            },
-            {
-                title: "Can I add the job post information to my job applications?",
-                content:
-                    "Yes, you can add the job listing information to your job applications. This will help you keep track of the job listings you have applied to and the status of each application. It will also allow the Artificial Intelligence helper to generate better personalized resumes and cover letters for each job application.",
-            },
-            {
-                title: "How can I keep my applications organized?",
-                content:
-                    "You can keep your applications organized by using the Dashboard->Applications page. You can choose to color code the applications based on your organization system, and you can search for specific applications using the search bar.",
-            },
-            {
-                title: "How do I download my resume from a job application?",
-                content:
-                    "You can download your resume from a job application by going to Dashboard->Applications->Manage on the specific application. You can then open the resume and download it as a PDF. You can also download the cover letter associated with the job application.",
-            },
-        ],
-    };
-
-    const faqStyles = {
-        bgColor: "white",
-        titleTextColor: "#48482a",
-        rowTitleColor: "#78789a",
-        rowTitleTextSize: "16px",
-        rowContentColor: "#48484a",
-        rowContentTextSize: "12px",
-        rowContentPaddingTop: "10px",
-        rowContentPaddingBottom: "10px",
-        rowContentPaddingLeft: "0px",
-        rowContentPaddingRight: "20px",
-        arrowColor: "black",
-    };
-
-    return (
-        <section className={styles.faqContainer}>
-            <div className={styles.heading}>
-                <p>Questions, answered</p>
-                <h2>Everything you need to know</h2>
-                <span>Quick answers about organizing applications and creating your documents.</span>
-            </div>
-            <div className={styles.faq}><Faq data={generalQuestions} styles={faqStyles} /></div>
-        </section>
-    );
-};
-
-export default FaqComponentLandingPage;
+const questions = [
+    ["Can I get started for free?", "Yes. The free plan includes one job, one resume, one cover letter, basic templates, and the AI writing helper. You can upgrade when you need more space for your job search."],
+    ["How does the AI writing helper work?", "Use your experience and the details of a job listing to get help writing your resume and cover letter. Review and edit the suggestions so your documents accurately reflect your skills and sound like you."],
+    ["Can I customize my resume?", "Yes. Choose a template, edit your content, and customize your document in the editor. Keep separate versions for different opportunities so each application feels relevant."],
+    ["Can I download my documents as a PDF?", "Yes. Open your resume or cover letter in the editor to download it as a PDF, ready to share with your application."],
+    ["How do I keep my applications organized?", "Save job listing details alongside your resumes and cover letters in your dashboard. Search your applications and use color coding to keep your job search organized."],
+];
+export default function FaqComponentLandingPage({ compact = false }: { compact?: boolean }) {
+    return <div className={`${styles.container} ${compact ? styles.compact : ""}`}>
+        <div className={styles.heading}>
+            <p>GOOD QUESTIONS. CLEAR ANSWERS.</p>
+            <h2>A little clarity<br />before you begin.</h2>
+            <span>Still curious about something?</span>
+            <Link href="/help-center?option=faqs">Visit the help center <span aria-hidden="true">↗</span></Link>
+        </div>
+        <div className={styles.questions}>
+            {questions.map(([question, answer]) => <details key={question} className={styles.question}>
+                <summary>{question}<span aria-hidden="true">+</span></summary>
+                <p>{answer}</p>
+            </details>)}
+        </div>
+    </div>;
+}

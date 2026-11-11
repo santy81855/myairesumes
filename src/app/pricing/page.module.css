@@ -79,3 +79,9 @@
         gap: var(--padding-block-medium);
     }
 }
+
+@media (max-width: 600px) {
+    .content { width:calc(100% - 24px); margin-inline:12px; padding-inline:12px; }
+    .priceSection { padding-inline:0; }
+    .titleContainer h1,.titleContainer p { padding-inline:8px; }
+}
