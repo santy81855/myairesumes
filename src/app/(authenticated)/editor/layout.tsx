@@ -1,27 +1,11 @@
 import type { Metadata } from "next";
-import "@/app/globals.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Inter, Montserrat, Poppins } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
-const montserrat = Montserrat({ subsets: ["latin"] });
-const poppins = Poppins({
-    subsets: ["latin"],
-    weight: "300",
-});
+import styles from "./layout.module.css";
 
 export const metadata: Metadata = {
-    title: "My Resume Hero - Editor",
-    description: "Create and edit your resume with our AI-powered editor",
+    title: "My Resume Hero — Editor",
+    description: "Create and refine your resume and cover letter.",
 };
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    return (
-        <html lang="en">
-            <body className={poppins.className}>{children}</body>
-        </html>
-    );
+export default function EditorLayout({ children }: { children: React.ReactNode }) {
+    return <div className={styles.workspace}>{children}</div>;
 }

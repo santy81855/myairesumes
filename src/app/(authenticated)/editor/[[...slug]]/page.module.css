@@ -3,7 +3,7 @@
     height: calc(
         100% - var(--editor-titlebar-height) - var(--editor-subtitlebar-height)
     );
-    background-color: #f2f2f2;
+    background-color: #eceee7;
     overflow-x: auto;
     overflow-y: auto;
     padding-block: var(--padding-block-large);

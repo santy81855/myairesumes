@@ -1,7 +1,7 @@
 "use client";
 import styles from "./DocumentCard.module.css";
 import { formatDateMonthDayYear } from "@/lib/date";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 type DocumentCardProps = {
@@ -12,6 +12,7 @@ type DocumentCardProps = {
 
 const DocumentCard = ({ templates, doc, type }: DocumentCardProps) => {
     const [hover, setHover] = useState(false);
+    const reduceMotion = useReducedMotion();
 
     const timeAgo = (timestamp: string) => {
         const currentDate = new Date();
@@ -47,8 +48,8 @@ const DocumentCard = ({ templates, doc, type }: DocumentCardProps) => {
                 <motion.div
                     className={styles.resume}
                     initial={{ y: 0 }}
-                    animate={{ y: hover ? "-3%" : 0 }}
-                    transition={{ duration: 0.2 }}
+                    animate={{ y: hover && !reduceMotion ? "-3%" : 0 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.2 }}
                 >
                     {
                         templates[

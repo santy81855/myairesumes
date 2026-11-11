@@ -1,81 +1,9 @@
-/* BulletInput.module.css */
-.bulletTitle {
-    font-size: var(--font-size-small);
-    font-weight: bold;
-    color: rgb(var(--dashboard-text-color-rgb));
-    margin-block-end: var(--padding-block-small);
-}
-
-.bulletItemContainer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.bulletItem {
-    display: flex;
-    flex-direction: column;
-    gap: var(--padding-block-small);
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-}
-
-.removeButton {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    gap: var(--padding-block-small);
-    background: none;
-    border: none;
-    color: red;
-    cursor: pointer;
-    font-size: var(--font-size-medium);
-    margin-left: auto;
-}
-
-.bulletRow {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: var(--padding-block-small);
-}
-
-.bullet {
-    width: 8px;
-    height: 8px;
-    background-color: black;
-    border-radius: 50%;
-    margin-right: 8px;
-}
-
-.input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-.input:focus {
-    border-color: #007acc;
-}
-
-.addButton {
-    display: block;
-    width: 100%;
-    padding: 10px 0;
-    background-color: #007acc;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 16px;
-    text-align: center;
-}
-
-.addButton:hover {
-    background-color: #005f99;
-}
+.bulletTitle { color:#526047; font-size:12px; font-weight:500; margin-bottom:10px; }
+.bulletItemContainer,.bulletItem { width:100%; display:flex; flex-direction:column; gap:10px; }
+.bulletRow { display:flex; gap:10px; align-items:center; width:100%; }
+.bullet { width:4px; height:4px; flex-shrink:0; background:#8b987b; border-radius:50%; }
+.input { min-width:0; flex:1; padding:11px 13px; min-height:44px; border:1px solid #d8decd; border-radius:6px; font:inherit; font-size:13px; background:#fffefa; color:#202520; }
+.input:focus { outline:2px solid #b9c5a9; outline-offset:1px; border-color:#7e906b; }
+.removeButton { display:flex; align-items:center; justify-content:flex-end; margin-left:auto; color:#a23825; border:0; background:transparent; cursor:pointer; padding:8px 0; font:inherit; font-size:12px; }
+.addButton { width:100%; padding:12px 16px; border:1px dashed #b5c2a6; border-radius:6px; color:#4b5d3b; background:#f2f5eb; font:inherit; font-size:12px; cursor:pointer; margin-top:12px; }
+.addButton:hover { background:#e4edda; }

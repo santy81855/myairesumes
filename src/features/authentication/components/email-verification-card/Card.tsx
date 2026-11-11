@@ -1,47 +1,31 @@
 "use client";
-import styles from "./Card.module.css";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import React, { useState } from "react";
-import Spincube from "@/components/loaders/Spincube/Spincube";
+import styles from "../shared/AuthForm.module.css";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { resendEmailVerificationAction } from "@/features/authentication";
 
-const Card = () => {
+export default function Card() {
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [message, setMessage] = useState("");
     const resendClicked = async () => {
-        setIsLoading(true);
-        const response = await resendEmailVerificationAction();
-        if (response.success) {
-            toast.success("Email verification link sent.");
-            setIsLoading(false);
-        } else if (response.error) {
-            toast.warning(response.error);
-            setIsLoading(false);
-        }
+        setIsLoading(true); setError(""); setMessage("");
+        try {
+            const response = await resendEmailVerificationAction();
+            if (response.success) { setMessage("A new verification link is on its way. Check your inbox and spam folder."); }
+            else if (response.error) { setError(response.error); }
+        } catch { setError("We couldn’t send the link. Please try again."); }
+        setIsLoading(false);
     };
     return (
-        <section className={styles.container}>
-            {isLoading && (
-                <section className={styles.loadingBackground}>
-                    <div className={styles.loaderContainer}>
-                        <Spincube />
-                    </div>
-                </section>
-            )}
-            <i className="fa-solid fa-envelope"></i>
-            <h1>Email Verification</h1>
-            <p>Your email verification link was sent to your email inbox.</p>
-            <p>Click the link in the email to verify your account.</p>
-            <p>
-                Refresh the page if you have already clicked the verification
-                link.
-            </p>
-            <section className={styles.resendContainer}>
-                <p>Didn&apos;t receive an email?</p>
-                <button onClick={resendClicked}>Resend Email</button>
-            </section>
+        <section className={styles.container} aria-busy={isLoading}>
+            <span className={styles.statusIcon} aria-hidden="true"><i className="fa-regular fa-envelope" /></span>
+            <div className={styles.heading}><p className={styles.eyebrow}>ONE LAST LITTLE STEP</p><h1>You’ve got mail.</h1><p className={styles.description}>Follow the verification link in your inbox to finish setting up your account. Then come back here to continue.</p></div>
+            {error && <p className={styles.notice} role="alert">{error}</p>}
+            {message && <p className={styles.success} role="status">{message}</p>}
+            <button type="button" className={styles.submitButton} onClick={() => router.refresh()}>I’ve verified my email <span aria-hidden="true">↗</span></button>
+            <div className={styles.resendContainer}><p>No email yet? Check your spam folder.</p><button type="button" className={styles.textButton} onClick={resendClicked} disabled={isLoading}>{isLoading ? "Sending your link…" : "Send a new verification link"}</button></div>
         </section>
     );
-};
-
-export default Card;
+}

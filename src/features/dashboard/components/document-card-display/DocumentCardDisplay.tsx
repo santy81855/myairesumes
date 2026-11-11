@@ -30,28 +30,12 @@ const DocumentCardDisplay = ({
     const maxDocuments = 20;
 
     const filteredDocuments = documents.filter((doc) => {
-        const matchesSearchQuery =
-            // filter jobs by the company name and job name and filter resumes and cover letters by the document name, job title, and position
-            type === "job"
-                ? doc.companyName
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase()) ||
-                  doc.jobName.toLowerCase().includes(searchQuery.toLowerCase())
-                : doc.information.documentName
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase()) ||
-                  doc.information.jobTitle
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase()) ||
-                  doc.information.position
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase()) ||
-                  doc.job.companyName
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase()) ||
-                  doc.job.jobName
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase());
+        const searchableFields = type === "job"
+            ? [doc.companyName, doc.jobName]
+            : [doc.information?.documentName, doc.information?.jobTitle, doc.information?.position, doc.job?.companyName, doc.job?.jobName];
+        const matchesSearchQuery = searchableFields.some((value) =>
+            String(value ?? "").toLowerCase().includes(searchQuery.toLowerCase())
+        );
 
         const matchesColor = selectedColor ? doc.color === selectedColor : true;
 
@@ -85,7 +69,8 @@ const DocumentCardDisplay = ({
         <section className={styles.container}>
             <input
                 type="text"
-                placeholder="Search..."
+                placeholder={type === "job" ? "Search applications by role or company…" : "Search your documents…"}
+                aria-label={type === "job" ? "Search applications" : "Search documents"}
                 className={styles.searchBar}
                 value={searchQuery}
                 onChange={(e) => {
@@ -99,6 +84,7 @@ const DocumentCardDisplay = ({
                 <motion.section className={styles.buttonOptions}>
                     <button
                         type="button"
+                        aria-pressed={selectedColor === ""}
                         className={`${styles.allButton} ${
                             selectedColor === "" && styles.activeColor
                         }`}
@@ -113,6 +99,8 @@ const DocumentCardDisplay = ({
                         <motion.button
                             key={color}
                             type="button"
+                            aria-label={`Filter applications by color ${color}`}
+                            aria-pressed={color === selectedColor}
                             style={{ backgroundColor: color }}
                             className={`${styles.colorButton} ${
                                 color === selectedColor && styles.activeColor
@@ -124,6 +112,8 @@ const DocumentCardDisplay = ({
                     ))}
                 </motion.section>
             )}
+            <p className={styles.resultCount} aria-live="polite">{filteredDocuments.length} {filteredDocuments.length === 1 ? "result" : "results"}</p>
+            {filteredDocuments.length === 0 && <p className={styles.empty}>No matches yet. Try a different search or choose another color.</p>}
             <section className={styles.resultsContainer}>
                 {type === "job" ? (
                     <section className={styles.resumesContainer}>
@@ -172,6 +162,7 @@ const DocumentCardDisplay = ({
                     </button>
                     <button
                         type="button"
+                        aria-label="Previous page"
                         onClick={() =>
                             setCurrentPage(
                                 prevPage > 0 ? prevPage : pages.length
@@ -187,6 +178,8 @@ const DocumentCardDisplay = ({
                         <button
                             key={page}
                             type="button"
+                            aria-label={`Page ${page}`}
+                            aria-current={currentPage === page ? "page" : undefined}
                             onClick={() => setCurrentPage(page)}
                             className={`${
                                 currentPage === page
@@ -199,6 +192,7 @@ const DocumentCardDisplay = ({
                     ))}
                     <button
                         type="button"
+                        aria-label="Next page"
                         onClick={() =>
                             setCurrentPage(
                                 nextPage <= pages.length ? nextPage : 1

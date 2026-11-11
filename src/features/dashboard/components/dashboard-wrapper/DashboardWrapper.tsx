@@ -5,7 +5,7 @@ type DashboardWrapperProps = {
 };
 
 const DashboardWrapper = ({ children }: DashboardWrapperProps) => {
-    return <main className={styles.container}>{children}</main>;
+    return <div className={styles.container}>{children}</div>;
 };
 
 export default DashboardWrapper;

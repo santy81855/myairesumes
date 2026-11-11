@@ -116,7 +116,7 @@ const ProfilePic = ({ currentUser }: ProfilePicProps) => {
                         <section className={styles.profileImage}>
                             <Image
                                 src={url || ""}
-                                alt="profile image"
+                                alt={`${first} ${last}`}
                                 width={200}
                                 height={200}
                                 className={styles.image}
@@ -124,6 +124,7 @@ const ProfilePic = ({ currentUser }: ProfilePicProps) => {
                             <Link
                                 href="/dashboard?menu=profile&nameEdit=true"
                                 className={styles.iconContainer}
+                                aria-label="Edit name and profile photo"
                             >
                                 {editIcon}
                             </Link>

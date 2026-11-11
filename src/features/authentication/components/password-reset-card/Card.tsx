@@ -1,81 +1,36 @@
 "use client";
-import styles from "./Card.module.css";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import Spincube from "@/components/loaders/Spincube/Spincube";
+import styles from "../shared/AuthForm.module.css";
+import Link from "next/link";
+import { isRedirectError } from "next/dist/client/components/redirect";
+import { useState, type FormEvent } from "react";
 import { resetPasswordAction } from "@/features/authentication";
 
-type CardProps = {
-    token: string;
-};
-
-const Card = ({ token }: CardProps) => {
-    const router = useRouter();
+export default function Card({ token }: { token: string }) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-
-    const submitPressed = async (event: any) => {
+    const [error, setError] = useState("");
+    const submitPressed = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (password !== confirmPassword) {
-            toast.warning("Passwords do not match.");
-            return;
-        }
+        setError("");
+        if (!password || password !== confirmPassword) { setError("Please enter matching passwords."); return; }
         setIsLoading(true);
         const formData = new FormData();
         formData.append("password", password);
-        const response = await resetPasswordAction(formData, token);
-        if (response.error) {
-            toast.warning(response.error);
-            setIsLoading(false);
-            return;
-        }
+        try {
+            const response = await resetPasswordAction(formData, token);
+            if (response?.error) { setError(response.error); setIsLoading(false); }
+        } catch (error) { if (isRedirectError(error)) throw error; setError("We couldn’t reset your password. Please try again."); setIsLoading(false); }
     };
     return (
-        <>
-            <form className={styles.container} onSubmit={submitPressed}>
-                {isLoading && (
-                    <section className={styles.loadingBackground}>
-                        <div className={styles.loaderContainer}>
-                            <Spincube />
-                        </div>
-                    </section>
-                )}
-                <i className="fa-solid fa-lock"></i>
-                <h1>Reset Password</h1>
-                <section className={styles.inputSection}>
-                    <label htmlFor="password">New Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Password"
-                        required
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </section>
-                <section className={styles.inputSection}>
-                    <label htmlFor="confirmPassword">
-                        Confirm New Password
-                    </label>
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        placeholder="Confirm Password"
-                        required
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                </section>
-
-                <button type="submit" className={styles.submitButton}>
-                    Continue
-                </button>
-            </form>
-        </>
+        <form className={styles.form} onSubmit={submitPressed} aria-busy={isLoading}>
+            <span className={styles.statusIcon} aria-hidden="true"><i className="fa-solid fa-lock" /></span>
+            <div className={styles.heading}><p className={styles.eyebrow}>A FRESH START</p><h1>Set a new password.</h1><p className={styles.description}>Choose a new password for your account, and get back to what’s next.</p></div>
+            <div className={styles.inputSection}><label htmlFor="password">New password</label><input type="password" name="password" id="password" placeholder="Create a new password" autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)} required /></div>
+            <div className={styles.inputSection}><label htmlFor="confirmPassword">Confirm new password</label><input type="password" name="confirmPassword" id="confirmPassword" placeholder="Enter your new password again" autoComplete="new-password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} required /></div>
+            {error && <p className={styles.notice} role="alert">{error}</p>}
+            <button type="submit" className={styles.submitButton} disabled={isLoading}>{isLoading ? "Updating your password…" : "Update password"}<span aria-hidden="true">↗</span></button>
+            <Link href="/sign-in" className={styles.backLink}><span aria-hidden="true">←</span> Back to sign in</Link>
+        </form>
     );
-};
-
-export default Card;
+}

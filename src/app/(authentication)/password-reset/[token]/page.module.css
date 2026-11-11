@@ -1,15 +1,1 @@
-.pageContainer {
-    width: 100%;
-    height: calc(100% - var(--nav-height));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-block: var(--padding-block-large);
-    padding-inline: var(--padding-inline-large);
-    background-image: url("/images/auth/sign-up-background-desktop.webp");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    overflow-y: auto;
-    position: relative;
-}
+.pageContainer { width: 100%; }

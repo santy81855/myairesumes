@@ -13,7 +13,7 @@ const Card = ({ children, gridArea, title }: CardProps) => {
     return (
         <section className={styles.container} style={style} id={title}>
             <section className={styles.titleRow}>
-                <p className={styles.title}>{title}</p>
+                <h2 className={styles.title}>{title}</h2>
             </section>
             <section
                 className={styles.childrenContainer}

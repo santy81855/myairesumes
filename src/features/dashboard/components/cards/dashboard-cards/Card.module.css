@@ -1,49 +1,5 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: white;
-    border-radius: var(--border-radius-xsmall);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    padding-block-end: var(--padding-block-medium);
-    gap: var(--padding-block-medium);
-    position: relative;
-    border-radius: var(--border-radius-xsmall);
-    z-index: 1;
-    max-width: 1200px;
-}
-
-.childrenContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: white;
-    padding-inline: var(--padding-block-medium);
-    gap: var(--padding-block-medium);
-    position: relative;
-    z-index: 1;
-    /*overflow: hidden*/
-}
-
-.title {
-    font-size: var(--font-size-medium);
-    font-weight: bold;
-    z-index: 1;
-    color: rgb(var(--dashboard-accent-color-contrast-rgb));
-}
-
-.titleRow {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    z-index: 1;
-    background-color: rgb(var(--dashboard-accent-color-rgb));
-    padding-inline: var(--padding-block-medium);
-    padding-block: var(--padding-block-small);
-    border-top-right-radius: var(--border-radius-xsmall);
-    border-top-left-radius: var(--border-radius-xsmall);
-}
+.container { display:flex; flex-direction:column; align-items:stretch; min-width:0; width:100%; background:#fffefa; border:1px solid #dde2d3; border-radius:12px; padding-bottom:24px; position:relative; }
+.titleRow { display:flex; align-items:center; min-height:61px; padding:20px 24px; border-bottom:1px solid #e6e9df; margin-bottom:24px; }
+.title { color:#35422d; font-size:14px; line-height:1.5; font-weight:600; letter-spacing:-.2px; }
+.childrenContainer { width:100%; min-width:0; display:flex; flex-direction:column; align-items:stretch; padding-inline:24px; gap:20px; position:relative; }
+@media(max-width:600px) { .titleRow { padding:18px; margin-bottom:20px; } .childrenContainer { padding-inline:18px; } }

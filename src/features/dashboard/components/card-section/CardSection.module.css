@@ -1,9 +1,2 @@
-.container {
-    z-index: 1;
-    width: 100%;
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: var(--gap-medium);
-    grid-template-areas: "jobs resumes cover-letters";
-}
+.container { width:100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+@media(max-width:600px) { .container { gap:8px; } }

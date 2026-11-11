@@ -1,13 +1,4 @@
 import type { Metadata } from "next";
-import "@/app/globals.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Inter, Montserrat, Poppins } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
-const montserrat = Montserrat({ subsets: ["latin"] });
-const poppins = Poppins({
-    subsets: ["latin"],
-    weight: "300",
-});
 import styles from "./layout.module.css";
 import Navbar from "@/components/nav/Navbar";
 import { validateRequest } from "@/features/authentication/lib/auth";
@@ -41,6 +32,8 @@ export default async function RootLayout({
         redirect("/sign-in");
     }
 
+    if (!params.slug) redirect("/dashboard");
+
     var showTutorial = false;
     if (params.slug.length === 3 && params.slug[2] === "tutorial") {
         showTutorial = true;
@@ -60,12 +53,11 @@ export default async function RootLayout({
     const currentUser = user ? await getUser(user.id) : null;
 
     return (
-        <html lang="en">
-            <body className={poppins.className}>
+        <>
                 <ResumeContext>
                     <AddSectionModal />
                     <Navbar
-                        style={{ backgroundColor: "black", color: "white" }}
+                        style={{ backgroundColor: "#faf9f6", color: "#202520" }}
                     />
                     <section className={styles.rowContainer}>
                         <SideMenu user={currentUser} />
@@ -80,7 +72,6 @@ export default async function RootLayout({
                         </section>
                     </section>
                 </ResumeContext>
-            </body>
-        </html>
+        </>
     );
 }
