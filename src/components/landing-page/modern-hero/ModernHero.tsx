@@ -25,8 +25,10 @@ function Sparkle({ className }: { className?: string }) {
 const originalBullet = "Worked with the design and engineering teams to improve the onboarding experience.";
 const improvedBullet = "Partnered with design and engineering to simplify onboarding, turning customer insights into a clearer first-use experience.";
 
-export default function ModernHero() {
+export default function ModernHero({ isSignedIn = false }: { isSignedIn?: boolean }) {
     const [isImproved, setIsImproved] = useState(false);
+    const primaryHref = isSignedIn ? "/dashboard" : "/sign-up";
+    const primaryLabel = isSignedIn ? "Open dashboard" : "Build my résumé";
 
     return (
         <section className={styles.hero} aria-labelledby="hero-heading">
@@ -41,8 +43,8 @@ export default function ModernHero() {
                     and keep your job search moving in one place.
                 </p>
                 <div className={styles.actions}>
-                    <Link className={styles.primaryAction} href="/sign-up">
-                        Build my résumé <Arrow />
+                    <Link className={styles.primaryAction} href={primaryHref}>
+                        {primaryLabel} <Arrow />
                     </Link>
                     <a className={styles.secondaryAction} href="#how-it-works">
                         See how it works <span className={styles.playIcon} aria-hidden="true">↗</span>

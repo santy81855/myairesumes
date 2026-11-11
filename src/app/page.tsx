@@ -30,8 +30,8 @@ export default async function Home() {
             <a className={styles.skipLink} href="#main-content">Skip to content</a>
             <Navbar style={{ backgroundColor: "#faf9f6", color: "#202520" }} />
             <div id="main-content" tabIndex={-1} className={styles.content}>
-                <ModernHero />
-                <ModernSections />
+                <ModernHero isSignedIn={Boolean(user)} />
+                <ModernSections isSignedIn={Boolean(user)} />
                 <section id="pricing" className={styles.priceSection} aria-labelledby="pricing-heading">
                     <div className={styles.priceHeading}>
                         <p className={styles.sectionEyebrow}>A SMALL INVESTMENT. A NEW POSSIBILITY.</p>
@@ -49,8 +49,8 @@ export default async function Home() {
                     <p className={styles.sectionEyebrow}>YOUR EXPERIENCE. YOUR POTENTIAL.</p>
                     <h2 id="cta-heading">Your next chapter<br />deserves a <em>strong start.</em></h2>
                     <p>Bring your story. We’ll help you put it on paper.</p>
-                    <Link href="/sign-up" className={styles.ctaButton}>Create my free resume <span aria-hidden="true">↗</span></Link>
-                    <span className={styles.ctaNote}>Free to start · No credit card required</span>
+                    <Link href={user ? "/dashboard" : "/sign-up"} className={styles.ctaButton}>{user ? "Open my dashboard" : "Create my free resume"} <span aria-hidden="true">↗</span></Link>
+                    <span className={styles.ctaNote}>{user ? "Pick up right where you left off" : "Free to start · No credit card required"}</span>
                 </section>
             </div>
             <Footer style={{ backgroundColor: "#faf9f6", color: "#202520" }} />

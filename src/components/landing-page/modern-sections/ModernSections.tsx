@@ -27,10 +27,11 @@ const templates = [
 
 type TemplateId = (typeof templates)[number]["id"];
 
-export default function ModernSections() {
+export default function ModernSections({ isSignedIn = false }: { isSignedIn?: boolean }) {
     const rootRef = useRef<HTMLDivElement>(null);
     const [selectedTemplate, setSelectedTemplate] = useState<TemplateId>("basic");
     const currentTemplate = templates.find((template) => template.id === selectedTemplate) ?? templates[0];
+    const ctaHref = isSignedIn ? "/dashboard" : "/sign-up";
 
     useEffect(() => {
         const root = rootRef.current;
@@ -84,7 +85,7 @@ export default function ModernSections() {
             </section>
 
             <section id="how-it-works" className={styles.workflow} aria-labelledby="workflow-heading">
-                <div className={styles.workflowHeading} data-reveal><p className={styles.eyebrow}><span /> A CLEAR WAY FORWARD</p><h2 id="workflow-heading">From a blank page<br /> to your next <em>hello.</em></h2><Link href="/sign-up" className={styles.textLink}>Let&apos;s get started <Icon name="arrow" /></Link></div>
+                <div className={styles.workflowHeading} data-reveal><p className={styles.eyebrow}><span /> A CLEAR WAY FORWARD</p><h2 id="workflow-heading">From a blank page<br /> to your next <em>hello.</em></h2><Link href={ctaHref} className={styles.textLink}>{isSignedIn ? "Open dashboard" : "Let\u2019s get started"} <Icon name="arrow" /></Link></div>
                 <div className={styles.steps}>
                     <article className={styles.step} data-reveal><span className={styles.stepNumber}>01</span><div><h3>Start with your story.</h3><p>Add your experience, skills, and education. This is the foundation we&apos;ll build on together.</p></div><Icon name="document" /></article>
                     <article className={styles.step} data-reveal><span className={styles.stepNumber}>02</span><div><h3>Make it fit the opportunity.</h3><p>Add the job details, get help with the words, and choose a template that feels like you.</p></div><Icon name="spark" /></article>
@@ -93,7 +94,7 @@ export default function ModernSections() {
             </section>
 
             <section id="templates" className={styles.templates} aria-labelledby="templates-heading">
-                <div className={styles.templateIntro} data-reveal><p className={styles.eyebrow}><span /> A GOOD FIRST IMPRESSION</p><h2 id="templates-heading">Your story.<br /> Your style.</h2><p>Considered layouts. Clear typography.<br />A little personality, in all the right places.</p><div className={styles.templateOptions} role="group" aria-label="Choose a resume template preview">{templates.map((template, index) => <button key={template.id} type="button" aria-pressed={selectedTemplate === template.id} aria-controls="resume-template-preview" onClick={() => setSelectedTemplate(template.id)} className={`${styles.templateOption} ${selectedTemplate === template.id ? styles.templateSelected : ""}`}><span className={styles.templateIndex}>0{index + 1}</span><span><strong>{template.name}</strong><small>{template.label}</small></span><span className={styles.templateRadio}>{selectedTemplate === template.id && <Icon name="check" />}</span></button>)}</div><Link href="/sign-up" className={styles.primaryLink}>Find your style <Icon name="arrow" /></Link></div>
+                <div className={styles.templateIntro} data-reveal><p className={styles.eyebrow}><span /> A GOOD FIRST IMPRESSION</p><h2 id="templates-heading">Your story.<br /> Your style.</h2><p>Considered layouts. Clear typography.<br />A little personality, in all the right places.</p><div className={styles.templateOptions} role="group" aria-label="Choose a resume template preview">{templates.map((template, index) => <button key={template.id} type="button" aria-pressed={selectedTemplate === template.id} aria-controls="resume-template-preview" onClick={() => setSelectedTemplate(template.id)} className={`${styles.templateOption} ${selectedTemplate === template.id ? styles.templateSelected : ""}`}><span className={styles.templateIndex}>0{index + 1}</span><span><strong>{template.name}</strong><small>{template.label}</small></span><span className={styles.templateRadio}>{selectedTemplate === template.id && <Icon name="check" />}</span></button>)}</div><Link href={isSignedIn ? "/dashboard?menu=resumes" : "/sign-up"} className={styles.primaryLink}>{isSignedIn ? "Open your resumes" : "Find your style"} <Icon name="arrow" /></Link></div>
                 <div className={styles.templateStage} data-reveal><div className={styles.stageTop}><span>THE TEMPLATE EDIT</span><span>Made for your next chapter ↗</span></div><div className={styles.previewFrame} id="resume-template-preview"><div className={styles.shadowPaper} aria-hidden="true" /><div key={selectedTemplate} className={styles.activePaper}><ActualTemplatePreview template={selectedTemplate} /></div><span className={styles.previewTag}><span /> {currentTemplate.name} / Resume</span></div><div className={styles.stageCaption}><p aria-live="polite"><strong>{currentTemplate.name}.</strong> {currentTemplate.description}</p><span>Actual template · sample content</span></div></div>
             </section>
         </div>

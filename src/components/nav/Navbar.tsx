@@ -29,7 +29,10 @@ const Navbar = async ({ style, isAuth }: NavbarProps) => {
                 </div>
                 <div className={styles.actions}>
                     {session ? (
-                        <ProfileButton session={session} user={user} />
+                        <>
+                            <Link href="/dashboard" className={styles.signIn}>Dashboard</Link>
+                            <ProfileButton session={session} user={user} />
+                        </>
                     ) : !isAuth ? (
                         <>
                             <Link href="/sign-in" className={styles.signIn}>Sign in</Link>
